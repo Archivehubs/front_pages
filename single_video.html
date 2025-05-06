@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Post View</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .side-nav {
+            width: 30%;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            /* Placeholder for side navigation */
+        }
+
+        .content {
+            width: 70%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .video-post {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .post-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-author {
+            flex: 1;
+        }
+
+        .post-author h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .post-author p {
+            margin: 4px 0 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .follow-btn {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .follow-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .post-content {
+            padding: 16px;
+        }
+
+        .post-narration {
+            font-size: 1rem;
+            color: #1f2937;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .video-container {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-engagement {
+            padding: 12px 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .engagement-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+
+        .engagement-stats span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .engagement-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .engagement-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 8px;
+            font-size: 0.875rem;
+            color: #6b7280;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 4px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .engagement-btn:hover {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .engagement-btn i {
+            font-size: 1rem;
+        }
+
+        .engagement-btn.active {
+            color: #2563eb;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .side-nav {
+                width: 100%;
+                height: 60px;
+                border-right: none;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .content {
+                width: 100%;
+                padding: 16px;
+            }
+
+            .video-post {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Side Navigation (Placeholder) -->
+        <div class="side-nav"></div>
+
+        <!-- Video Post Content -->
+        <div class="content">
+            <div class="video-post">
+                <div class="post-header">
+                    <div class="profile-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop" alt="Sarah Johnson">
+                    </div>
+                    <div class="post-author">
+                        <h3>Sarah Johnson</h3>
+                        <p>UI/UX Designer</p>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                <div class="post-content">
+                    <p class="post-narration">
+                        Sharing my amazing experience with this platform! The tools and community have transformed my workflow.
+                    </p>
+                    <div class="video-container">
+                        <video controls>
+                            <source src="https://example.com/video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="post-engagement">
+                    <div class="engagement-stats">
+                        <span><i class="fa-solid fa-thumbs-up"></i> 1.2K</span>
+                        <span><i class="fa-solid fa-comment"></i> 245</span>
+                        <span><i class="fa-solid fa-retweet"></i> 180</span>
+                        <span><i class="fa-solid fa-share"></i> 92</span>
+                    </div>
+                    <div class="engagement-buttons">
+                        <button class="engagement-btn" data-action="like">
+                            <i class="fa-solid fa-thumbs-up"></i> Like
+                        </button>
+                        <button class="engagement-btn" data-action="comment">
+                            <i class="fa-solid fa-comment"></i> Comment
+                        </button>
+                        <button class="engagement-btn" data-action="repost">
+                            <i class="fa-solid fa-retweet"></i> Repost
+                        </button>
+                        <button class="engagement-btn" data-action="share">
+                            <i class="fa-solid fa-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Engagement Button Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const engagementButtons = document.querySelectorAll('.engagement-btn');
+
+            engagementButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const action = button.dataset.action;
+                    // Toggle active state for demonstration
+                    button.classList.toggle('active');
+                    console.log(`${action} button clicked`);
+                    // Add actual functionality here (e.g., API calls for liking, commenting, etc.)
+                });
+            });
+
+            // Follow Button Functionality
+            const followButton = document.querySelector('.follow-btn');
+            followButton.addEventListener('click', () => {
+                followButton.textContent = followButton.textContent === 'Follow' ? 'Following' : 'Follow';
+                followButton.style.background = followButton.textContent === 'Following' ? '#6b7280' : '#2563eb';
+                console.log('Follow button clicked');
+            });
+        });
+    </script>
+</body>
+</html>
