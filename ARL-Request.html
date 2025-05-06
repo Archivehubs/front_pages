@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ARL.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="#" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+      <div class="arl-container">
+        <div class="arl-header">
+            <h2>Create an ARL Request</h2>
+            <span class="close-button" onclick="window.location.href='planner-aps.html'">×</span>
+        </div>
+
+        <div class="arl-description">
+            ARL on Archivehubs allow you to request for a specific document to archive. Your destination will receive a push notification and email after each edition of ARL.
+        </div>
+
+        <form>
+            <div class="form-section">
+                <h3>Archive Reference Locator (ARL)</h3>
+                <div class="form-group">
+                    <select class="form-control">
+                        <option>Add Date</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label required">ARL Title</label>
+                    <input type="text" class="form-control" placeholder="Add a title to your ARL">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Sub Title</label>
+                    <input type="text" class="form-control" placeholder="Add a sub title to your ARL">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label required">ARL Description</label>
+                <textarea class="form-control" placeholder="Add a description to your ARL"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label required">Add Name to ARL</label>
+                    <input type="text" class="form-control" placeholder="Add your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label required">Add your Signature</label>
+                    <input type="text" class="form-control" placeholder="Add your full name">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label required">Add Contact</label>
+                    <input type="text" class="form-control" placeholder="Add your contact">
+                </div>
+                <div class="form-group">
+                    <label class="form-label required">Add Email</label>
+                    <input type="email" class="form-control" placeholder="Add your email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="attach-file">
+                    <i class="fas fa-paperclip"></i>
+                    Attach a file
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-view">View</button>
+                <button type="button" class="btn btn-done">Done</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
