@@ -1,425 +1,875 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video and Games</title>
-    <style>
-        body {
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #ffffff, #f8fafc);
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home | ArchiveHubs</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/insight-analysis.css">
+        <link rel="stylesheet" href="css/general-terms.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
 
-        .container {
-            max-width: 70%;
-            margin: 0 auto;
-            padding: 48px 16px;
-        }
-
-        .header {          
-            margin-bottom: 48px;
-        }
-
-        .header h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #1f2937;
-        }
-
-        .header p {
-            font-size: 1rem;
-            color: #6b7280;
-        }
-
-        .video-grid, .game-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .video-card, .game-card {
-            background: #ffffff;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .video-card:hover, .game-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .active-card {
-            outline: 2px solid #111827;
-            outline-offset: 2px;
-        }
-
-        .thumbnail {
-            position: relative;
-            aspect-ratio: 16 / 9;
-        }
-
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .video-card:hover .overlay, .game-card:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay-text {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-            color: #ffffff;
-            font-size: 0.875rem;
-            font-weight: 500;
-            padding: 12px;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .info {
-            padding: 16px;
-        }
-
-        .author-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .author-image {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid #dbeafe;
-        }
-
-        .author-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .author-details h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin: 0;
-        }
-
-        .author-details p {
-            font-size: 0.875rem;
-            color: #6b7280;
-            margin: 0;
-        }
-
-        .view-more {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .view-more button {
-            padding: 12px 24px;
-            background: #2563eb;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .view-more button:hover {
-            background: #1d4ed8;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 1024px) {
-            .video-grid, .game-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .video-grid, .game-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header h2 {
-                font-size: 1.5rem;
-            }
-
-            .header p {
-                font-size: 0.875rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Video Testimonial Section -->
-    <div class="container">
-        <div class="header">
-            <h2>Live videos for you</h2>        
+        <nav class="navbar">
+          <div class="nav-left">
+              <a href="index.html" class="logo">
+                <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+              </a>
+              <div class="search-box">
+                <div class="search-trigger">
+                  <i class="fas fa-search search-icon"></i>
+                  <div class="search-text">Search</div>
+                </div>
+                <input type="text" placeholder="Search..." class="search-input">
+              </div>
+          </div>
+              
+      <div class="nav-middle">
+          <a href="index.html" class="nav-link">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+          </a>
+          <a href="#" class="nav-link">
+              <i class="fas fa-user-friends"></i>
+              <span>MyConnections</span>
+          </a>
+          <a href="#" class="nav-link">
+              <i class="fas fa-video"></i>
+              <span>Video</span>
+          </a>
+          <a href="#" class="nav-link">
+              <i class="fas fa-comment-dots"></i>
+              <span>Messages</span>
+          </a>
+          <a href="notification.html" class="nav-link">
+              <i class="fas fa-bell"></i>
+              <span>Notifications</span>
+          </a>
+          <a href="#" class="nav-link profile-nav-link">
+            <i class="fas fa-user-circle"></i>
+            <span>Account</span>
+          </a>
         </div>
 
-        <div id="videoCardsContainer" class="video-grid"></div>
+              <div class="nav-right">
 
-        <!-- View More Button for Videos -->
-        <div class="view-more">
-            <button id="viewMoreVideosBtn">View More Videos</button>
-        </div>
+                <a href="#" class="nav-link">
+                  <i class="fas fa-briefcase"></i>
+                  <span>Jobs</span>
+                </a>
+                <a href="business.html" class="nav-link">
+                    <i class="fas fa-building"></i>
+                    <span>Business</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cloud-arrow-up"></i>
+                    <span>Drive</span>
+                </a>
+                <a href="menu.html" class="nav-link">
+                    <i class="fas fa-bars"></i>
+                    <span>Menu</span>
+                </a>
+            </div>
+          </nav>
 
-        <!-- Live Games Section -->
-        <div class="header">
-            <h2>Live Gameing</h2> 
-        </div>
+          <!-- Replace your existing mobile-upper-nav section -->
+          <div class="mobile-header">
+            <!-- Mobile Upper Nav -->
+            <nav class="mobile-upper-nav">
+              <a href="index.html" class="mobile-logo">
+                  <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+              </a>
+              <div class="upper-nav-right">
+                  <button class="upper-nav-btn">
+                      <i class="fas fa-plus"></i>
+                  </button>
+                  <button class="upper-nav-btn" id="searchTriggerBtn">
+                      <i class="fas fa-search"></i>
+                  </button>
+                  <button class="upper-nav-btn">
+                      <i class="fas fa-ellipsis-v"></i>
+                  </button>
+              </div>
+            </nav>
 
-        <div id="gameCardsContainer" class="game-grid"></div>
+           <!-- Update the search-view to be a dropdown -->
+          <div class="search-overlay" id="searchView">
+              <div class="search-container">
+                  <div class="search-header">
+                      <button class="back-btn" id="searchBackBtn">
+                          <i class="fas fa-arrow-left"></i>
+                      </button>
+                      <div class="search-bar">
+                          <div class="search-input-wrapper">
+                              <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                              <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                          </div>
+                      </div>
+                  </div>
 
-        <!-- View More Button for Games -->
-        <div class="view-more">
-            <button id="viewMoreGamesBtn">View More Games</button>
-        </div>
-    </div>
+                  <div class="search-content">
+                      <!-- Rest of your search content remains the same -->
+                  </div>
+              </div>
+          </div>
 
-    <script>
-        // Video Testimonials Data
-        const videoTestimonials = [
-            {
-                id: 1,
-                title: "Sarah's Experience",
-                videoUrl: "https://example.com/video1.mp4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop",
-                name: "Sarah Johnson",
-                portfolio: "UI/UX Designer",
-                authorImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
-            },
-            {
-                id: 2,
-                title: "John's Journey",
-                videoUrl: "https://example.com/video2.mp4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?q=80&w=2146&auto=format&fit=crop",
-                name: "John Michael",
-                portfolio: "Software Engineer",
-                authorImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
-            },
-            {
-                id: 3,
-                title: "Emily's Story",
-                videoUrl: "https://example.com/video3.mp4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1496559249665-c7e2874707ea?q=80&w=2070&auto=format&fit=crop",
-                name: "Emily Williams",
-                portfolio: "Product Manager",
-                authorImage: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop"
-            },
-            {
-                id: 4,
-                title: "David's Success",
-                videoUrl: "https://example.com/video4.mp4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1516321318423-5312b16a1576?q=80&w=2070&auto=format&fit=crop",
-                name: "David Martinez",
-                portfolio: "Marketing Director",
-                authorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop"
-            }
-        ];
+          <!-- Add this after the existing navbar -->
+        <nav class="mobile-top-nav">
+          <a href="#" class="mobile-nav-item">
+              <i class="fas fa-video"></i>
+          </a>
+          <a href="#" class="mobile-nav-item">
+              <i class="fas fa-briefcase"></i>
+          </a>
+          <a href="business.html" class="mobile-nav-item">
+              <i class="fas fa-building"></i>
+          </a>
+          <a href="#" class="mobile-nav-item">
+              <i class="fas fa-cloud-arrow-up"></i>
+          </a>
+          <a href="#" class="mobile-nav-item">
+              <i class="fas fa-user-circle"></i>
+          </a>
+        </nav>
 
-        // Game Data
-        const games = [
-            {
-                id: 1,
-                title: "Space Adventure",
-                gameUrl: "https://example.com/game1",
-                thumbnailUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2070&auto=format&fit=crop",
-                name: "Lisa Zhang",
-                role: "Game Developer",
-                authorImage: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop"
-            },
-            {
-                id: 2,
-                title: "Mystic Quest",
-                gameUrl: "https://example.com/game2",
-                thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
-                name: "James Wilson",
-                role: "Game Designer",
-                authorImage: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=1887&auto=format&fit=crop"
-            },
-            {
-                id: 3,
-                title: "Cyber Rush",
-                gameUrl: "https://example.com/game3",
-                thumbnailUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
-                name: "Anna Brown",
-                role: "Lead Developer",
-                authorImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop"
-            },
-            {
-                id: 4,
-                title: "Puzzle Mania",
-                gameUrl: "https://example.com/game4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=2070&auto=format&fit=crop",
-                name: "Robert Kim",
-                role: "Creative Director",
-                authorImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop"
-            }
-        ];
+        <!-- Main Content -->
+        <main class="main-content">
+          <!-- Left Sidebar -->
+          <section class="left-sidebar">
+            <div class="profile-card">
+              <div class="profile-header">
+                <div class="profile-bg">
+                  <img src="images/profile.jpg" alt="Cover Photo" class="cover-photo">
+                </div>
+                <div class="profile-info">
+                  <img src="images/profile.jpg" alt="Picture" class="profile-pic">
+                  <h2>John Doe</h2>
+                  <p class="profile-bio">Softtware Developer | AI Enthusiast | Full stack Developer | Open Source Contributor</p>
+                  <div class="profile-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Lagos, Nigeria</span>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-analytics">
 
-        let activeVideoId = videoTestimonials[0].id;
-        let activeGameId = games[0].id;
+                <a href="#">
+                  <div class="stat-item"> 
+                    <span>Profile Visitors</span>
+                  </div>
+                </a>
 
-        // Create Video Cards
-        function createVideoCards() {
-            const container = document.getElementById('videoCardsContainer');
-            container.innerHTML = '';
+                <a href="insight-analysis.html">
+                  <div class="stat-item">
+                    <span>Insight and Analysis</span>
+                  </div>
+                </a>
 
-            videoTestimonials.forEach(testimonial => {
-                const card = document.createElement('div');
-                card.className = `video-card ${testimonial.id === activeVideoId ? 'active-card' : ''}`;
-                card.dataset.id = testimonial.id;
+                <a href="#">
+                  <div class="stat-item">
+                    <span>Archive Explorer</span>
+                  </div>
+                </a>
 
-                card.innerHTML = `
-                    <div class="thumbnail">
-                        <img src="${testimonial.thumbnailUrl}" alt="${testimonial.title}">
-                        <div class="overlay">
-                            <div class="overlay-text">${testimonial.title}</div>
-                        </div>
+                <a href="#">
+                  <div class="stat-item">
+                    <span>Archive Lite</span>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="stat-item">
+                    <span>Archive Learning</span>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+
+            <div class="quick-links">
+              <a href="planner-aps.html">
+              <div class="link-item">
+                <i class="fa-regular fa-calendar"></i>
+                <span>Planner (APS)</span>
+              </div>
+              </a>
+              <div class="link-item">
+                <img src="images/community-logo.jpeg" alt="Archive Community" class="link-icon">
+                <span>Archive Community</span>
+              </div>
+              <div class="link-item">
+                <i class="fa-solid fa-user-group"></i>
+                <span>Groups</span>
+              </div>
+              <div class="link-item">
+                <i class="fa-regular fa-newspaper"></i>
+                <span>Newsletters</span>
+              </div>
+              <div class="link-item">
+                <i class="fa-solid fa-pen"></i>
+                <span>Write Articles</span>
+              </div>
+            </div>
+            <div class="general-terms">
+              <a href="general-terms.html" class="terms-link">General Terms</a>
+          </div>
+          </section>
+
+          <!-- Middle Section -->
+          <section class="middle-section">
+            <!-- Post Creation Area -->
+            <div class="create-post">
+              <div class="company-header">
+                <img src="images/company-chat.jpg" alt="ArchiveHubs" class="company-logo">
+              </div>
+              <div class="post-input-container">
+                <img src="images/profile.jpg" alt="User Profile" class="user-profile-pic">
+                <div class="post-input-wrapper">
+                  <input type="text" placeholder="Start a post" class="post-input">
+                </div>
+              </div>
+              
+              <!-- Post Actions -->
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="fas fa-video"></i>
+                  <span>Live Video</span>
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-image"></i>
+                  <span>Media</span>
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-gamepad"></i>
+                  <span>Game</span>
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-robot"></i>
+                  <span>AI</span>
+                </button>
+              </div>
+            </div>
+            
+
+                  <!-- After create-post div -->
+          <div class="stories-section">
+            <div class="stories-container">
+
+              <!-- Create Story Card -->
+              <div class="story-card create-story">
+                <div class="story-content">
+                  <div class="create-story-top">
+                    <img src="images/profile.jpg" alt="Your Profile" class="story-avatar">
+                    <label for="story-upload" class="create-story-plus">
+                      <i class="fas fa-plus"></i>
+                    </label>
+                    <input type="file" id="story-upload" class="file-input" accept="image/*,video/*">
+                    <span class="story-username">Create Story</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Story Cards - 6 cards as shown in mockup -->
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <!-- Repeat story-card div 5 more times for other stories -->
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <!-- ... more story cards ... -->
+            </div>
+          </div>
+
+          <!-- Posts Section -->
+          <div class="posts-section">
+            <div class="post">
+              <!-- Post Header -->
+              <div class="post-header">
+                <div class="post-author-info">
+                    <img src="images/profile.jpg" alt="Profile" class="post-profile-pic">
+                    <div class="post-author-details">
+                        <h4 class="post-author-name">Sarah Johnson</h4>
+                        <p class="post-meta">Software Engineer at Tech Corp • 2h ago</p>
                     </div>
-                    <div class="info">
-                        <div class="author-container">
-                            <div class="author-image">
-                                <img src="${testimonial.authorImage}" alt="${testimonial.name}">
-                            </div>
-                            <div class="author-details">
-                                <h3>${testimonial.name}</h3>
-                                <p>${testimonial.portfolio}</p>
-                            </div>
-                        </div>
+                </div>
+              </div>
+
+              <!-- Post Content -->
+              <div class="post-content">
+                <p class="post-text">
+                  Just finished implementing a new feature using AI! Really excited about how machine learning 
+                  is transforming the way we build software. What are your thoughts on AI in modern development? 
+                  #Programming #AI #Innovation
+                </p>
+                <!-- Optional: Add post image if needed -->
+                <img src="images/post-example.jpg" alt="Post Image" class="post-image">
+              </div>
+
+              <!-- Post Metrics -->
+              <div class="post-metrics">
+                <span class="metric">
+                  <i class="fas fa-thumbs-up"></i>
+                  <span class="metric-count">142</span>
+                </span>
+                <span class="metric">
+                  <span class="metric-count">28 comments</span>
+                </span>
+              </div>
+
+              <!-- Post Actions -->
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="far fa-thumbs-up"></i>
+                  <span>Like</span>
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-comment"></i>
+                  <span>Comment</span>
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-retweet"></i>
+                  <span>Repost</span>
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-paper-plane"></i>
+                  <span>Share</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+                <!-- Add this after the posts-section -->
+          <div class="connections-section">
+            <div class="connections-header">
+                <h3>Connections you may want</h3>
+                <button class="see-all-btn">See All</button>
+            </div>
+            
+            <div class="connections-container">
+                <!-- Connection Cards -->
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>David Chen</h4>
+                        <p>Software Engineer at Google</p>
                     </div>
-                `;
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
 
-                card.addEventListener('click', () => {
-                    activeVideoId = testimonial.id;
-                    updateVideoCardStates();
-                });
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>Sarah Williams</h4>
+                        <p>Data Scientist at Microsoft</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
 
-                container.appendChild(card);
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>Michael Rodriguez</h4>
+                        <p>AI Researcher at OpenAI</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
+
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>Michael Rodriguez</h4>
+                        <p>AI Researcher at OpenAI</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
+
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>Michael Rodriguez</h4>
+                        <p>AI Researcher at OpenAI</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
+
+                <!-- Add more connection cards as needed -->
+            </div>
+          </div>
+
+          <!-- Posts Section -->
+          <div class="posts-section">
+            <div class="post">
+              <!-- Post Header -->
+              <div class="post-header">
+                <div class="post-author-info">
+                    <img src="images/profile.jpg" alt="Profile" class="post-profile-pic">
+                    <div class="post-author-details">
+                        <h4 class="post-author-name">Michael Rodriguez</h4>
+                        <p class="post-meta">Software Engineer at Meta • 30min ago</p>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Post Content -->
+              <div class="post-content">
+                <p class="post-text">
+                  Rebuilding the next generation of technology with the new META Virtual Reality Devices. Can't wait for what the future holds #Innovation #Programming #MachineLearning
+                </p>
+                <!-- Optional: Add post image if needed -->
+                <img src="images/post-example2.jpg" alt="Post Image" class="post-image">
+              </div>
+
+              <!-- Post Metrics -->
+              <div class="post-metrics">
+                <span class="metric">
+                  <i class="fas fa-thumbs-up"></i>
+                  <span class="metric-count">3k</span>
+                </span>
+                <span class="metric">
+                  <span class="metric-count">400 comments</span>
+                </span>
+              </div>
+
+              <!-- Post Actions -->
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="far fa-thumbs-up"></i>
+                  <span>Like</span>
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-comment"></i>
+                  <span>Comment</span>
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-retweet"></i>
+                  <span>Repost</span>
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-paper-plane"></i>
+                  <span>Share</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+                <!-- Add this after the posts-section -->
+                <div class="connections-section">
+                  <div class="connections-header">
+                      <h3>Connections Requests</h3>
+                      <button class="see-all-btn">See All</button>
+                  </div>
+                  
+                  <div class="connections-container">
+                      <!-- Connection Cards -->
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>David Chen</h4>
+                              <p>Software Engineer at Google</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>Sarah Williams</h4>
+                              <p>Data Scientist at Microsoft</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>Michael Rodriguez</h4>
+                              <p>AI Researcher at OpenAI</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>Michael Rodriguez</h4>
+                              <p>AI Researcher at OpenAI</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>Michael Rodriguez</h4>
+                              <p>AI Researcher at OpenAI</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <!-- Add more connection cards as needed -->
+                  </div>
+                </div>
+
+                            <!-- Business Page Post Section -->
+                <div class="business-post-section">
+                  <!-- Post Header -->
+                  <div class="post-header">
+                      <div class="post-author-info">
+                          <img src="images/profile.jpg" alt="Tesla" class="post-profile-pic">
+                          <div class="post-author-details">
+                              <h4 class="post-author-name">Tesla Motors</h4>
+                              <p class="post-meta">
+                                  Sponsored • <i class="fas fa-globe-americas"></i>
+                              </p>
+                          </div>
+                      </div>
+                      <button class="more-options">
+                          <i class="fas fa-ellipsis-h"></i>
+                      </button>
+                  </div>
+
+                  <!-- Post Content -->
+                  <div class="post-content">
+                      <p>Introducing the next generation of electric vehicles. Experience the future of sustainable transportation. 
+                        #Tesla #Innovation #Sustainability</p>
+                      <img src="images/tesla-post.jpg" alt="Tesla Car" class="post-image">
+                  </div>
+
+                  <!-- Post Metrics -->
+                  <div class="post-metrics">
+                      <div class="metrics-left">
+                          <span class="metric">
+                              <i class="fas fa-thumbs-up"></i>
+                              <span class="metric-count">15.4K</span>
+                          </span>
+                      </div>
+                      <div class="metrics-right">
+                          <span class="metric">2.8K comments</span>
+                          <span class="metric-dot">•</span>
+                          <span class="metric">4.2K shares</span>
+                          <span class="metric-dot">•</span>
+                          <span class="metric">1.6K reposts</span>
+                      </div>
+                  </div>
+
+                  <!-- Post Actions -->
+                  <div class="post-actions">
+                      <button class="action-btn">
+                          <i class="far fa-thumbs-up"></i>
+                          <span>Like</span>
+                      </button>
+                      <button class="action-btn">
+                          <i class="far fa-comment"></i>
+                          <span>Comment</span>
+                      </button>
+                      <button class="action-btn">
+                        <i class="fas fa-retweet"></i>
+                        <span>Repost</span>
+                    </button>
+                      <button class="action-btn">
+                          <i class="fas fa-paper-plane"></i>
+                          <span>Share</span>
+                      </button>
+                  </div>
+                </div>
+
+          </section>
+
+                  <!-- Right Sidebar -->
+            <div class="right-sidebar">
+              <!-- Network Section -->
+              <div class="sidebar-section">
+                <div class="section-header">
+                  <h3 class="section-title">Add to your network</h3>
+                  <a href="#" class="see-all">See all</a>
+                </div>
+                  
+                  <!-- Connection Suggestions -->
+                  <div class="connection-suggestions">
+                          <div class="suggestion-item">
+                            <div class="suggestion-header">
+                              <img src="images/profile.jpg" alt="Profile" class="suggestion-avatar">
+                              <div class="suggestion-info">
+                                <h4>Emma Watson</h4>
+                                <p>Senior UI/UX Designer at Apple</p>
+                              </div>
+                            </div>
+                            <div class="suggestion-actions">
+                              <button class="connect-btn">Connect</button>
+                              <button class="decline-btn">Decline</button>
+                            </div>
+                          </div>
+
+                      <div class="suggestion-item">
+                          <div class="suggestion-header">
+                              <img src="images/profile.jpg" alt="Profile" class="suggestion-avatar">
+                              <div class="suggestion-info">
+                                  <h4>James Rodriguez</h4>
+                                  <p>Backend Developer at Microsoft</p>
+                              </div>
+                          </div>
+                          <div class="suggestion-actions">
+                              <button class="connect-btn">Connect</button>
+                              <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Trending News Section -->
+              <div class="sidebar-section">
+                <div class="section-header">
+                  <h3 class="section-title">Trending News</h3>
+                  <a href="#" class="see-all">See all</a>
+                </div>
+                  
+                  <div class="trending-news">
+                      <div class="news-item">
+                          <img src="images/profile.jpg" alt="News" class="news-image">
+                          <div class="news-content">
+                              <span class="news-source">TechCrunch • 2h ago</span>
+                              <h4>AI Breakthrough: New Model Surpasses Human Performance</h4>
+                          </div>
+                      </div>
+
+                      <div class="news-item">
+                          <img src="images/profile.jpg" alt="News" class="news-image">
+                          <div class="news-content">
+                              <span class="news-source">Bloomberg • 4h ago</span>
+                              <h4>Global Markets See Record High in Tech Sector</h4>
+                          </div>
+                      </div>
+
+                      <div class="news-item">
+                          <img src="images/profile.jpg" alt="News" class="news-image">
+                          <div class="news-content">
+                              <span class="news-source">Forbes • 6h ago</span>
+                              <h4>Top 10 Startups to Watch in 2024</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Pages Suggestions -->
+              <div class="sidebar-section">
+                <div class="section-header">
+                  <h3 class="section-title">Suggested Pages</h3>
+                  <a href="#" class="see-all">See all</a>
+                </div>
+                  
+                  <div class="page-suggestions">
+                      <div class="page-item">
+                          <img src="images/profile.jpg" alt="Page" class="page-image">
+                          <div class="page-info">
+                              <h4>Tesla Motors</h4>
+                              <p>Automotive Company • 2.5M followers</p>
+                          </div>
+                          <button class="follow-btn">Follow</button>
+                      </div>
+
+                      <div class="page-item">
+                          <img src="images/profile.jpg" alt="Page" class="page-image">
+                          <div class="page-info">
+                              <h4>Google</h4>
+                              <p>Technology Company • 5.8M followers</p>
+                          </div>
+                          <button class="follow-btn">Follow</button>
+                      </div>
+
+                      <div class="page-item">
+                          <img src="images/profile.jpg" alt="Page" class="page-image">
+                          <div class="page-info">
+                              <h4>NASA</h4>
+                              <p>Space Agency • 4.2M followers</p>
+                          </div>
+                          <button class="follow-btn">Follow</button>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="app-promotion">
+                <h3>Get the Archive App</h3>
+                <img src="images/hubs.jpg" alt="ArchiveHubs App" class="app-banner">
+                <div class="copyright">
+                    <p>ENINK Investment Limited © 2025</p>
+                    <img src="images/company-name.jpg" alt="Company Logo" class="company-logo">
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Bottom Navigation -->
+          <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link active">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="business.html" class="mobile-nav-link">
+                <i class="fas fa-user-friends"></i>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-comment-dots"></i>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-bell"></i>
+            </a>
+            <a href="account-mobile.html" class="mobile-nav-link">
+                <i class="fas fa-bars"></i>
+            </a>
+          </nav>
+
+              <!-- Messaging Box -->
+        <div class="messaging-box">
+          <div class="messaging-header" onclick="toggleMessagingBox()">
+              <div class="messaging-left">
+                  <img src="images/profile.jpg" alt="Profile" class="messaging-profile">
+                  <span>Messaging</span>
+              </div>
+              <div class="messaging-actions">
+                  <i class="fas fa-pen-to-square"></i>
+                  <i class="fas fa-ellipsis"></i>
+              </div>
+          </div>
+
+          <div class="messaging-content">
+              <!-- Add messaging content -->
+              <div class="messaging-search">
+                  <i class="fas fa-search"></i>
+                  <input type="text" placeholder="Search messages">
+              </div>
+              <div class="messages-list">
+                  <div class="no-messages">
+                      <i class="fas fa-comment-dots"></i>
+                      <p>No messages yet</p>
+                      <span>Connect with people to start messaging</span>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+          
+        </main>
+
+      
+
+        <script src="js/script.js"></script>
+
+        <script>
+          // Theme Toggle
+          const themeToggle = document.getElementById('theme-toggle');
+          themeToggle.addEventListener('click', () => {
+              document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+          });
+  
+          // Mobile Menu Toggle
+          const menuToggle = document.querySelector('.menu-toggle');
+          const dropdownMenu = document.querySelector('.dropdown-menu');
+          menuToggle.addEventListener('click', () => {
+              dropdownMenu.classList.toggle('show');
+          });
+
+          document.addEventListener('DOMContentLoaded', function() {
+        const searchTriggerBtn = document.getElementById('searchTriggerBtn');
+        const searchView = document.getElementById('searchView');
+        const searchBackBtn = document.getElementById('searchBackBtn');
+        const searchInput = document.getElementById('searchInput');
+
+        if (searchTriggerBtn && searchView && searchBackBtn && searchInput) {
+            // Open search
+            searchTriggerBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                searchView.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 50);
             });
-        }
 
-        // Create Game Cards
-        function createGameCards() {
-            const container = document.getElementById('gameCardsContainer');
-            container.innerHTML = '';
-
-            games.forEach(game => {
-                const card = document.createElement('div');
-                card.className = `game-card ${game.id === activeGameId ? 'active-card' : ''}`;
-                card.dataset.id = game.id;
-
-                card.innerHTML = `
-                    <div class="thumbnail">
-                        <img src="${game.thumbnailUrl}" alt="${game.title}">
-                        <div class="overlay">
-                            <div class="overlay-text">${game.title}</div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="author-container">
-                            <div class="author-image">
-                                <img src="${game.authorImage}" alt="${game.name}">
-                            </div>
-                            <div class="author-details">
-                                <h3>${game.name}</h3>
-                                <p>${game.role}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                card.addEventListener('click', () => {
-                    activeGameId = game.id;
-                    updateGameCardStates();
-                });
-
-                container.appendChild(card);
+            // Close search
+            searchBackBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                searchView.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scroll
             });
-        }
 
-        function updateVideoCardStates() {
-            document.querySelectorAll('.video-card').forEach(card => {
-                const id = parseInt(card.dataset.id);
-                if (id === activeVideoId) {
-                    card.classList.add('active-card');
-                } else {
-                    card.classList.remove('active-card');
+            // Close on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchView.classList.contains('active')) {
+                    searchView.classList.remove('active');
+                    document.body.style.overflow = '';
                 }
             });
         }
+    });
+         
 
-        function updateGameCardStates() {
-            document.querySelectorAll('.game-card').forEach(card => {
-                const id = parseInt(card.dataset.id);
-                if (id === activeGameId) {
-                    card.classList.add('active-card');
-                } else {
-                    card.classList.remove('active-card');
-                }
-            });
-        }
-
-        // View More Button Functionality
-        function handleViewMoreVideos() {
-            console.log('View More Videos clicked');
-        }
-
-        function handleViewMoreGames() {
-            console.log('View More Games clicked');
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createVideoCards();
-            createGameCards();
-            document.getElementById('viewMoreVideosBtn').addEventListener('click', handleViewMoreVideos);
-            document.getElementById('viewMoreGamesBtn').addEventListener('click', handleViewMoreGames);
-        });
-    </script>
-</body>
-</html>
+      </script>
+      </body>
+    </html>
