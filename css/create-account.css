@@ -1,0 +1,333 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 432px;
+    margin: 0 auto;
+}
+
+.signup-box {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.name-group {
+    display: flex;
+    gap: 10px;
+}
+
+.name-group input {
+    width: 50%;
+}
+
+input, select {
+    padding: 11px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f5f6f7;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #1877f2;
+}
+
+.phone-input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.country-select {
+    min-width: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 14px;
+}
+
+.country-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px;
+}
+
+.country-flag {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+}
+
+.phone-number-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+.directory-group {
+    display: flex;
+    gap: 10px;
+}
+
+.directory-group select {
+    width: 50%;
+    color: #606770;
+}
+
+/* Terms Checkbox */
+.terms-container {
+    margin: 10px 0;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    position: relative;
+}
+
+.terms-checkbox input:checked + .checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    left: 4px;
+    top: 0;
+    color: #1877f2;
+}
+
+.terms-text {
+    font-size: 12px;
+    color: #606770;
+}
+
+/* Sign Up Button */
+.signup-button {
+    background: #333;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.signup-button:hover {
+    background: #818f00;
+}
+
+/* Login Link */
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.login-link a {
+    color: #1877f2;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .signup-container {
+        padding: 0 10px;
+    }
+    
+    .name-group, .directory-group {
+        flex-direction: column;
+    }
+    
+    .name-group input, 
+    .directory-group select {
+        width: 100%;
+    }
+}
+
+/* Add these styles to your existing CSS */
+
+/* Phone Input Container */
+.phone-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+/* Country Select */
+.country-select {
+    position: relative;
+    min-width: 100px;
+}
+
+.selected-code {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f5f6f7;
+    cursor: pointer;
+    user-select: none;
+}
+
+.selected-code:hover {
+    background-color: #e4e6eb;
+}
+
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+}
+
+/* Country List Dropdown */
+.country-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 300px;
+    max-height: 300px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    margin-top: 5px;
+}
+
+.country-list.active {
+    display: block;
+}
+
+/* Country Search */
+.country-search {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.country-search input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Countries Container */
+.countries {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.country-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.country-option:hover {
+    background-color: #f5f6f7;
+}
+
+.country-name {
+    flex: 1;
+    font-size: 14px;
+}
+
+.country-code {
+    color: #606770;
+    font-size: 14px;
+}
+
+/* Phone Input */
+.phone-input {
+    flex: 1;
+}
+
+/* Scrollbar Styles */
+.countries::-webkit-scrollbar {
+    width: 8px;
+}
+
+.countries::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.countries::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.countries::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
