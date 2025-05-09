@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video and Games</title>
+    <title>Document</title>
+
     <style>
-        body {
+
+    body {
             min-height: 100vh;
-            background: linear-gradient(to bottom, #ffffff, #f8fafc);
+            background: #D9D9D9;
             font-family: Arial, sans-serif;
             margin: 0;
         }
@@ -53,12 +55,7 @@
             transform: scale(1.02);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-
-        .active-card {
-            outline: 2px solid #111827;
-            outline-offset: 2px;
-        }
-
+        
         .thumbnail {
             position: relative;
             aspect-ratio: 16 / 9;
@@ -70,35 +67,7 @@
             object-fit: cover;
         }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        .video-card:hover .overlay, .game-card:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay-text {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-            color: #ffffff;
-            font-size: 0.875rem;
-            font-weight: 500;
-            padding: 12px;
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
+       
         .info {
             padding: 16px;
         }
@@ -124,14 +93,14 @@
         }
 
         .author-details h3 {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #1f2937;
             margin: 0;
         }
 
         .author-details p {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             color: #6b7280;
             margin: 0;
         }
@@ -191,235 +160,173 @@
                 font-size: 0.875rem;
             }
         }
+    
     </style>
+  
 </head>
 <body>
-    <!-- Video Testimonial Section -->
-    <div class="container">
-        <div class="header">
-            <h2>Live videos for you</h2>        
-        </div>
-
-        <div id="videoCardsContainer" class="video-grid"></div>
-
-        <!-- View More Button for Videos -->
-        <div class="view-more">
-            <button id="viewMoreVideosBtn">View More Videos</button>
-        </div>
-
-        <!-- Live Games Section -->
-        <div class="header">
-            <h2>Live Gameing</h2> 
-        </div>
-
-        <div id="gameCardsContainer" class="game-grid"></div>
-
-        <!-- View More Button for Games -->
-        <div class="view-more">
-            <button id="viewMoreGamesBtn">View More Games</button>
-        </div>
+  <div class="container">
+    <!-- Video Section -->
+    <div class="header">
+      <h2>Live videos for you</h2>
     </div>
 
-    <script>
-        // Video Testimonials Data
-        const videoTestimonials = [
-            {
-                id: 1,
-                title: "Sarah's Experience",
-                videoUrl: "https://example.com/video1.mp4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop",
-                name: "Sarah Johnson",
-                portfolio: "UI/UX Designer",
-                authorImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
-            },
-            {
-                id: 2,
-                title: "John's Journey",
-                videoUrl: "https://example.com/video2.mp4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?q=80&w=2146&auto=format&fit=crop",
-                name: "John Michael",
-                portfolio: "Software Engineer",
-                authorImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
-            },
-            {
-                id: 3,
-                title: "Emily's Story",
-                videoUrl: "https://example.com/video3.mp4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1496559249665-c7e2874707ea?q=80&w=2070&auto=format&fit=crop",
-                name: "Emily Williams",
-                portfolio: "Product Manager",
-                authorImage: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop"
-            },
-            {
-                id: 4,
-                title: "David's Success",
-                videoUrl: "https://example.com/video4.mp4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1516321318423-5312b16a1576?q=80&w=2070&auto=format&fit=crop",
-                name: "David Martinez",
-                portfolio: "Marketing Director",
-                authorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop"
-            }
-        ];
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="thumbnail">
+          <img src="img/vid-1.jpg" alt="">         
+        </div>
+        <div class="info">
+          <div class="author-container">
+            <div class="author-image">
+              <img src="img/profile-1.jpg" alt="">
+            </div>
+            <div class="author-details">
+              <h3>Title</h3>
+              <p>Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        // Game Data
-        const games = [
-            {
-                id: 1,
-                title: "Space Adventure",
-                gameUrl: "https://example.com/game1",
-                thumbnailUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2070&auto=format&fit=crop",
-                name: "Lisa Zhang",
-                role: "Game Developer",
-                authorImage: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop"
-            },
-            {
-                id: 2,
-                title: "Mystic Quest",
-                gameUrl: "https://example.com/game2",
-                thumbnailUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
-                name: "James Wilson",
-                role: "Game Designer",
-                authorImage: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=1887&auto=format&fit=crop"
-            },
-            {
-                id: 3,
-                title: "Cyber Rush",
-                gameUrl: "https://example.com/game3",
-                thumbnailUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
-                name: "Anna Brown",
-                role: "Lead Developer",
-                authorImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop"
-            },
-            {
-                id: 4,
-                title: "Puzzle Mania",
-                gameUrl: "https://example.com/game4",
-                thumbnailUrl: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=2070&auto=format&fit=crop",
-                name: "Robert Kim",
-                role: "Creative Director",
-                authorImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop"
-            }
-        ];
+      <div class="video-card">
+        <div class="thumbnail">
+          <img src="img/vid-2.jpg" alt="">          
+        </div>
+        <div class="info">
+          <div class="author-container">
+            <div class="author-image">
+              <img src="img/profile-2.jpg" alt="">
+            </div>
+            <div class="author-details">
+              <h3>Title</h3>
+              <p>Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        let activeVideoId = videoTestimonials[0].id;
-        let activeGameId = games[0].id;
+      <div class="video-card">
+        <div class="thumbnail">
+          <img src="img/vid-3.jpg" alt="">
+          
+        </div>
+        <div class="info">
+          <div class="author-container">
+            <div class="author-image">
+              <img src="img/profile-3.jpg" alt="">
+            </div>
+            <div class="author-details">
+              <h3>Title</h3>
+              <p>Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        // Create Video Cards
-        function createVideoCards() {
-            const container = document.getElementById('videoCardsContainer');
-            container.innerHTML = '';
+      <div class="video-card">
+        <div class="thumbnail">
+          <img src="img/vid-4.jpg" alt="">
+         
+        </div>
+        <div class="info">
+          <div class="author-container">
+            <div class="author-image">
+              <img src="img/profile-2.jpg" alt="">
+            </div>
+            <div class="author-details">
+              <h3>Title</h3>
+              <p>Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            videoTestimonials.forEach(testimonial => {
-                const card = document.createElement('div');
-                card.className = `video-card ${testimonial.id === activeVideoId ? 'active-card' : ''}`;
-                card.dataset.id = testimonial.id;
+    <div class="view-more">
+      <button>View More Videos</button>
+    </div>
 
-                card.innerHTML = `
-                    <div class="thumbnail">
-                        <img src="${testimonial.thumbnailUrl}" alt="${testimonial.title}">
-                        <div class="overlay">
-                            <div class="overlay-text">${testimonial.title}</div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="author-container">
-                            <div class="author-image">
-                                <img src="${testimonial.authorImage}" alt="${testimonial.name}">
-                            </div>
-                            <div class="author-details">
-                                <h3>${testimonial.name}</h3>
-                                <p>${testimonial.portfolio}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
+    <!-- Games Section -->
+    <div class="header">
+      <h2>Live Gaming</h2>
+    </div>
 
-                card.addEventListener('click', () => {
-                    activeVideoId = testimonial.id;
-                    updateVideoCardStates();
-                });
+    <div class="game-grid">
+      <div class="game-card">
+        <div class="thumbnail">
+          <img src="img/game-1.jpg" alt="">          
+        </div>
+        <div class="info">
+          <div class="author-container">
+            <div class="author-image">
+              <img src="img/profile-2.jpg" alt="">
+            </div>
+            <div class="author-details">
+              <h3>Title</h3>
+              <p>Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-                container.appendChild(card);
-            });
-        }
+      <div class="game-card">
+        <div class="thumbnail">
+          <img src="img/game-3.jpg" alt="">         
+        </div>
+        <div class="info">
+          <div class="author-container">
+            <div class="author-image">
+              <img src="img/profile-3.jpg" alt="">
+            </div>
+            <div class="author-details">
+              <h3>Title</h3>
+              <p>Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        // Create Game Cards
-        function createGameCards() {
-            const container = document.getElementById('gameCardsContainer');
-            container.innerHTML = '';
+      <div class="game-card">
+        <div class="thumbnail">
+          <img src="img/game-1.jpg" alt="">          
+        </div>
+        <div class="info">
+          <div class="author-container">
+            <div class="author-image">
+              <img src="img/profile-1.jpg" alt="">
+            </div>
+            <div class="author-details">
+              <h3>Title</h3>
+              <p>Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            games.forEach(game => {
-                const card = document.createElement('div');
-                card.className = `game-card ${game.id === activeGameId ? 'active-card' : ''}`;
-                card.dataset.id = game.id;
+      <div class="game-card">
+        <div class="thumbnail">
+          <img src="img/game-2.jpg" alt="">          
+        </div>
+        <div class="info">
+          <div class="author-container">
+            <div class="author-image">
+              <img src="img/profile-3.jpg" alt="">
+            </div>
+            <div class="author-details">
+              <h3>Title</h3>
+              <p>Name</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                card.innerHTML = `
-                    <div class="thumbnail">
-                        <img src="${game.thumbnailUrl}" alt="${game.title}">
-                        <div class="overlay">
-                            <div class="overlay-text">${game.title}</div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="author-container">
-                            <div class="author-image">
-                                <img src="${game.authorImage}" alt="${game.name}">
-                            </div>
-                            <div class="author-details">
-                                <h3>${game.name}</h3>
-                                <p>${game.role}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
+    <div class="view-more">
+      <button>View More Games</button>
+    </div>
+  </div>
 
-                card.addEventListener('click', () => {
-                    activeGameId = game.id;
-                    updateGameCardStates();
-                });
 
-                container.appendChild(card);
-            });
-        }
-
-        function updateVideoCardStates() {
-            document.querySelectorAll('.video-card').forEach(card => {
-                const id = parseInt(card.dataset.id);
-                if (id === activeVideoId) {
-                    card.classList.add('active-card');
-                } else {
-                    card.classList.remove('active-card');
-                }
-            });
-        }
-
-        function updateGameCardStates() {
-            document.querySelectorAll('.game-card').forEach(card => {
-                const id = parseInt(card.dataset.id);
-                if (id === activeGameId) {
-                    card.classList.add('active-card');
-                } else {
-                    card.classList.remove('active-card');
-                }
-            });
-        }
-
-        // View More Button Functionality
-        function handleViewMoreVideos() {
-            console.log('View More Videos clicked');
-        }
-
-        function handleViewMoreGames() {
-            console.log('View More Games clicked');
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createVideoCards();
-            createGameCards();
-            document.getElementById('viewMoreVideosBtn').addEventListener('click', handleViewMoreVideos);
-            document.getElementById('viewMoreGamesBtn').addEventListener('click', handleViewMoreGames);
-        });
-    </script>
 </body>
 </html>
