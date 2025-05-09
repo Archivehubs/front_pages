@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="#" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+
+      <div class="calendar-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>My Schedule</h2>
+            </div>
+            
+            <div class="calendar-navigation">
+                <button class="nav-btn active">
+                    <i class="fas fa-calendar-day"></i>
+                    Day
+                </button>
+                <button class="nav-btn">
+                    <i class="fas fa-calendar-week"></i>
+                    Week
+                </button>
+                <button class="nav-btn">
+                    <i class="fas fa-calendar-alt"></i>
+                    Month
+                </button>
+            </div>
+
+            <div class="upcoming-events">
+                <h3>Upcoming Events</h3>
+                <!-- Placeholder for upcoming events -->
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="calendar-header">
+                <h1>Smart Calendar Integration</h1>
+                <p>Seamlessly manage your schedule and stay organized</p>
+            </div>
+
+            <div class="calendar-grid">
+                <!-- Calendar content will be dynamically populated -->
+                <div class="placeholder-text">
+                    Select a date to view or create events
+                </div>
+            </div>
+
+            <div class="international-days">
+                <div class="section-header">
+                    <h3>International Days</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <!-- International days content -->
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <div class="action-buttons">
+                <button class="create-schedule-btn primary" onclick="window.location.href='calendar_schedule.html'">
+                    <i class="fas fa-clock"></i>
+                    Create a Schedule
+                </button>
+
+                <div class="support-section">
+                    <h3>
+                        <i class="fas fa-headset"></i>
+                        Create Schedule with support
+                    </h3>
+                    <button class="start-schedule-btn">
+                        Start a Schedule
+                    </button>
+                </div>
+
+                <div class="help-section">
+                    <a href="#" class="help-link">
+                        <i class="fas fa-question-circle"></i>
+                        Help Center
+                    </a>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <button class="quick-action-btn">
+                    <i class="fas fa-plus"></i>
+                    New Event
+                </button>
+                <button class="quick-action-btn">
+                    <i class="fas fa-share-alt"></i>
+                    Share Calendar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messaging Box -->
+    <div class="messaging-box">
+        <div class="messaging-header" onclick="toggleMessagingBox()">
+            <div class="messaging-left">
+                <img src="images/profile.jpg" alt="Profile" class="messaging-profile">
+                <span>Messaging</span>
+            </div>
+            <div class="messaging-actions">
+                <i class="fas fa-pen-to-square"></i>
+                <i class="fas fa-ellipsis"></i>
+            </div>
+        </div>
+
+        <div class="messaging-content">
+            <!-- Add messaging content -->
+            <div class="messaging-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search messages">
+            </div>
+            <div class="messages-list">
+                <div class="no-messages">
+                    <i class="fas fa-comment-dots"></i>
+                    <p>No messages yet</p>
+                    <span>Connect with people to start messaging</span>
+                </div>
+            </div>
+        </div>
+      </div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/new_campaign.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="#" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+      <div class="campaign-modal">
+        <div class="modal-header">
+            <h2>Create a New Campaign</h2>
+            <button class="close-btn">&times;</button>
+        </div>
+
+        <div class="modal-content">
+            <div class="account-info-box">
+                <div class="info-header">
+                    <h3>Account info needed</h3>
+                </div>
+                <p>We need to confirm a few details about your account before you can publish an ad. You can either go to Account Overview to confirm this info before you start creating, or do this later.</p>
+                <button class="overview-btn">Go to Account Overview</button>
+            </div>
+
+            <div class="campaign-form">
+                <div class="form-group">
+                    <label>Buying type</label>
+                    <div class="select-wrapper">
+                        <select class="form-control">
+                            <option>Auction</option>
+                            <option>Reservation</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="campaign-objective">
+                    <h3>Choose a campaign objective</h3>
+                    
+                    <div class="objectives-grid">
+                        <div class="objective-item">
+                            <div class="radio-wrapper">
+                                <input type="radio" name="objective" id="awareness">
+                                <i class="fas fa-bullhorn"></i>
+                                <label for="awareness">Awareness</label>
+                            </div>
+                        </div>
+
+                        <div class="objective-item">
+                            <div class="radio-wrapper">
+                                <input type="radio" name="objective" id="traffic">
+                                <i class="fas fa-chart-line"></i>
+                                <label for="traffic">Traffic</label>
+                            </div>
+                        </div>
+
+                        <div class="objective-item">
+                            <div class="radio-wrapper">
+                                <input type="radio" name="objective" id="engagement">
+                                <i class="fas fa-comments"></i>
+                                <label for="engagement">Engagement</label>
+                            </div>
+                        </div>
+
+                        <div class="objective-item">
+                            <div class="radio-wrapper">
+                                <input type="radio" name="objective" id="leads">
+                                <i class="fas fa-user-plus"></i>
+                                <label for="leads">Leads</label>
+                            </div>
+                        </div>
+
+                        <div class="objective-item">
+                            <div class="radio-wrapper">
+                                <input type="radio" name="objective" id="app-promotion">
+                                <i class="fas fa-mobile-alt"></i>
+                                <label for="app-promotion">App Promotion</label>
+                            </div>
+                        </div>
+
+                        <div class="objective-item">
+                            <div class="radio-wrapper">
+                                <input type="radio" name="objective" id="sales">
+                                <i class="fas fa-shopping-cart"></i>
+                                <label for="sales">Sales</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="animated-section">
+                        <h3>Animated Images</h3>
+                        <h3>According to the Campaigns</h3>
+                        <p>Your campaign objective is the business goal you hope to achieve by running your ads. Hover over each one for more information.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="about-link">About Campaign Objectives</a>
+                <div class="action-buttons">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="continue-btn" onclick="window.location.href='campaign_account1.html'">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/corporate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="#" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="#" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+
+        <div class="company-setup-container">
+            <div class="back-navigation">
+                <a href="corporate_page.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Go back</span>
+                </a>
+            </div>
+            <div class="setup-header">
+                <div class="company-icon">
+                    <img src="images/corporate_showcase.png" alt="Company">
+                </div>
+                <h1>Let's get started by associating with your existing page:</h1>
+                <p class="required-note">* Indicates required</p>
+            </div>
+
+            <div class="setup-content">
+                <div class="form-section">
+                    <!-- Company Details Form -->
+                    <form class="company-form">
+                        <div class="form-group">
+                            <label for="companyName">Associated Organization Page *</label>
+                            <input type="text" id="companyName" placeholder="Find the page you will associate your organization with">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="companyName">Organization Name *</label>
+                            <input type="text" id="companyName" placeholder="Add your organization name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="companyName">Add Sub Name *</label>
+                            <input type="text" id="companyName" placeholder="Additional Sub-names">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="archiveUrl">Archivehub.com/Institution</label>
+                            <input type="text" id="archiveUrl" placeholder="Add your unique Archivehub address">
+                            <a href="#" class="help-link">Learn more about the page public URL</a>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">Website / blog</label>
+                            <input type="text" id="website" placeholder="Begin with http://https//or www.">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="industry">Industry / Sector *</label>
+                            <input type="text" id="industry" placeholder="ex: Insurance Services">
+                        </div>
+                    </form>
+
+                    <!-- Add this section after your existing form fields -->
+                    <div class="upload-section">
+                        <div class="upload-container">
+                            <div class="upload-box" onclick="document.getElementById('companyLogo').click()">
+                                <div class="preview-container" style="display: none;">
+                                    <img id="logoPreview" src="#" alt="Logo preview">
+                                </div>
+                                <div class="upload-content">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Choose file</span>
+                                    <p>Upload to see preview</p>
+                                </div>
+                                <input type="file" id="companyLogo" accept=".jpg, .jpeg, .png, .pdf" style="display: none;">
+                            </div>
+                            <p class="upload-hint">300 x 300px recommended. JPGs, JPEGs and PNGs supported.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="tagline-section">
+                        <h3>Tagline</h3>
+                        <div class="tagline-input">
+                            <input type="text" 
+                                placeholder="ex: An insurance company that provides premium services on risk protection">
+                            <p class="input-hint">Use your tagline to briefly describe what your 0/120 organization does. This can be changed later.</p>
+                        </div>
+                    </div>
+
+                    <div class="terms-section">
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="termsAgreement">
+                            <label for="termsAgreement">
+                                I verify that I am an authorized representative of this organization and have the right to act on its behalf in the creation and management of this page. The organization and I agree to the additional terms for Pages.
+                            </label>
+                        </div>
+                        <a href="#" class="terms-link">Read the Archivehubs Pages Terms</a>
+                    </div>
+
+                    <button class="create-page-btn" disabled>Create Page</button>
+                    
+                </div>
+
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <div class="preview-header">
+                        <h2>Page Preview</h2>
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="preview-card">
+                        <div class="preview-logo">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="preview-info">
+                            <h3>Showcase Page name</h3>
+                            <p class="tagline">Tagline</p>
+                            <p class="industry">Industry</p>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <!-- Mobile Bottom Navigation -->
+          <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link active">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="business.html" class="mobile-nav-link">
+                <i class="fas fa-building"></i>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-cloud-arrow-up"></i>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-user-circle"></i>
+            </a>
+            <a href="account-mobile.html" class="mobile-nav-link">
+                <i class="fas fa-bars"></i>
+            </a>
+          </nav>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        document.getElementById('companyLogo').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewContainer = document.querySelector('.preview-container');
+                    const uploadContent = document.querySelector('.upload-content');
+                    const logoPreview = document.getElementById('logoPreview');
+                    
+                    logoPreview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    uploadContent.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('termsAgreement').addEventListener('change', function() {
+            const createPageBtn = document.querySelector('.create-page-btn');
+            createPageBtn.disabled = !this.checked;
+        });
+        </script>
+ 
+</body>
+</html>
+    
