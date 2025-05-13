@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archivehubs Lite</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+     <style>
+    body,
+    html {
+      margin: 0;
+      height: 100%;
+      font-family: sans-serif;
+      color: #333;
+    }
+
+    .container {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #main-view {
+      display: block;
+    }
+
+    .video-player-container {
+      position: relative;
+      width: 500px;
+      height: 400px;
+      border: 1px solid #ccc;
+    }
+
+    .video-controls-top {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .video-controls-top button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    .video-player {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .play-icon {
+      font-size: 4em;
+      color: #aaa;
+      cursor: pointer;
+    }
+
+    .video-controls-bottom {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+
+    .video-controls-bottom button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    .video-description {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 10px;
+      flex: 1;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .user-info i {
+      font-size: 1.5em;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-icons i {
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+
+    .video-description-text {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .create-lite-button {
+      background-color: #ddd;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+    }
+
+    footer .edit-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      padding: 20px;
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .popup-header h2 {
+      margin: 0 auto;
+      font-size: 1.5em;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: none;
+      border: none;
+      color: #6c757d;
+      font-size: 1.5em;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .close-button:hover {
+      color: #343a40;
+    }
+
+    .upload-box {
+      border: 2px dashed #ccc;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .preview-box {
+      border: 1px solid #ccc;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #777;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .popup-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .popup-button {
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .popup-button.primary {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+
+    .trim-video-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .timeline-placeholder {
+      background-color: #f8f9fa;
+      border: 1px solid #ccc;
+      height: 80px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #777;
+    }
+
+    .input-label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-size: 0.9em;
+    }
+
+    .input-textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9em;
+      min-height: 80px;
+      margin-bottom: 15px;
+    }
+
+    .section-label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    .visibility-options {
+      background-color: #f8f9fa;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .visibility-options .description {
+      font-size: 0.9em;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.9em;
+    }
+
+    .radio-label input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 0.9em;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .popup-description {
+      font-size: 0.9em;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <main>
+      <section id="main-view">
+        <div class="video-player-container">
+          <div class="video-controls-top">
+            <button class="play-button"><i class="fas fa-play"></i></button>
+            <button class="volume-button"><i class="fas fa-volume-up"></i></button>
+            <button class="more-options"><i class="fas fa-ellipsis-h"></i></button>
+          </div>
+          <div class="video-player">
+            <div class="play-icon"><i class="fas fa-play-circle"></i></div>
+          </div>
+          <div class="video-controls-bottom">
+            <button class="arrow-left"><i class="fas fa-chevron-left"></i></button>
+            <div class="video-description">
+              <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span class="name">Name</span>
+                <span class="description">Description</span>
+              </div>
+              <button class="follow-button">Follow</button>
+            </div>
+            <button class="arrow-right"><i class="fas fa-chevron-right"></i></button>
+            <div class="social-icons">
+              <i class="far fa-thumbs-up"></i>
+              <i class="far fa-comment-dots"></i>
+              <i class="far fa-bookmark"></i>
+              <i class="fas fa-share"></i>
+            </div>
+          </div>
+          <p class="video-description-text">Video Description</p>
+        </div>
+
+        <button class="create-lite-button" onclick="showUploadVideoPopup()">Create Lite</button>
+      </section>
+
+      <section class="popup-overlay" id="uploadVideoPopup">
+        <div class="popup-container">
+          <div class="popup-header">
+            <button class="close-button" onclick="hideUploadVideoPopup()">&times;</button>
+            <h2>Create a Lite</h2>
+          </div>
+          <h3>Upload Video</h3>
+          <div class="upload-box">
+            <i class="fas fa-camera" style="font-size: 2em; color: #777; margin-bottom: 10px;"></i>
+            <p>Add Video</p>
+            <p>Or drag and drop</p>
+          </div>
+          <div class="preview-box">
+            <p>Your Video Preview</p>
+            <p>Upload your video in order to see a preview here.</p>
+          </div>
+          <div class="popup-buttons">
+            <button class="popup-button primary" onclick="showEditLitePopup(); hideUploadVideoPopup();">Next</button>
+            <button class="popup-button">Preview</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="popup-overlay" id="editLitePopup">
+        <div class="popup-container">
+          <div class="popup-header">
+            <button class="close-button" onclick="hideEditLitePopup()">&times;</button>
+            <h2>Create a Lite</h2>
+          </div>
+          <h3>Edit your lite</h3>
+          <div class="trim-video-section">
+            <i class="fas fa-cut" style="font-size: 1.2em;"></i>
+            <span>Trim Video</span>
+          </div>
+          <div class="timeline-placeholder">
+            <span>[Video Timeline/Controls Placeholder]</span>
+          </div>
+          <div class="popup-buttons">
+            <button class="popup-button" onclick="showUploadVideoPopup(); hideEditLitePopup();">Previous</button>
+            <button class="popup-button primary" onclick="showAddDetailsPopup(); hideEditLitePopup();">Next</button>
+            <button class="popup-button">Preview</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="popup-overlay" id="addDetailsPopup">
+        <div class="popup-container">
+          <div class="popup-header">
+            <button class="close-button" onclick="hideAddDetailsPopup()">&times;</button>
+            <h2>Create a Lite</h2>
+          </div>
+          <h3>Add details</h3>
+          <label for="lite-description" class="input-label">Describe your lite</label>
+          <textarea id="lite-description" placeholder="Enter a description" class="input-textarea"></textarea>
+
+          <label class="section-label">Who can see this?</label>
+          <div class="visibility-options">
+            <p class="description">ArchiveLite can appear across Archivehubs in places like Home and Video.</p>
+            <label class="radio-label">
+              <input type="radio" name="visibility" value="public" checked>
+              <span><strong>Public</strong><br><small>Anyone on or off Archivehubs. This lets anyone create Lite with your original
+                  audio.</small></span>
+            </label>
+          </div>
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="enable-remixing">
+            <span><strong>Enable remixing</strong><br><small>Allow others to create Lites that play your video with theirs. <a
+                  href="#">Learn more</a></small></span>
+          </label>
+
+          <div class="popup-buttons">
+            <button class="popup-button" onclick="showEditLitePopup(); hideAddDetailsPopup();">Previous</button>
+            <button class="popup-button primary" onclick="hideAddDetailsPopup();">Publish</button>
+            <button class="popup-button">Preview</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="popup-overlay" id="selectAudiencePopup">
+        <div class="popup-container">
+          <div class="popup-header">
+            <button class="close-button" onclick="hideSelectAudiencePopup()">&times;</button>
+            <h2>Select Audience</h2>
+          </div>
+          <p class="popup-description">Your default audience for Lite is set to Public, but you can always change the
+            audience of this specific Lite.</p>
+
+          <label class="radio-label">
+            <input type="radio" name="audience" value="public" checked>
+            <span><strong>Public</strong><br><small>Anyone on or off Archivehubs. This lets anyone create lites with your
+                original audio.</small></span>
+          </label>
+
+          <label class="radio-label">
+            <input type="radio" name="audience" value="connections">
+            <span><strong>MyConnections</strong><br><small>Your networks on Archivehubs</small></span>
+          </label>
+
+          <label class="radio-label">
+            <input type="radio" name="audience" value="selected">
+            <span><strong>Selected Connections</strong><br><small>Hide from certain connections</small></span>
+          </label>
+
+          <label class="radio-label">
+            <input type="radio" name="audience" value="only-me">
+            <span><strong>Only me</strong></span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="set-default-audience">
+            <span>Set as default audience for Lite</span>
+          </label>
+
+          <div class="popup-buttons">
+            <button class="popup-button">Cancel</button>
+            <button class="popup-button primary">Done</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Function to show/hide popups
+    function showPopup(id) {
+      document.getElementById(id).style.display = 'flex';
+      document.getElementById('main-view').style.display = 'none'; // Hide main view
+    }
+
+    function hidePopup(id) {
+      document.getElementById(id).style.display = 'none';
+      document.getElementById('main-view').style.display = 'block'; // Show main view
+    }
+
+    function showUploadVideoPopup() {
+      showPopup('uploadVideoPopup');
+    }
+
+    function hideUploadVideoPopup() {
+      hidePopup('uploadVideoPopup');
+    }
+
+    function showEditLitePopup() {
+      showPopup('editLitePopup');
+    }
+
+    function hideEditLitePopup() {
+      hidePopup('editLitePopup');
+    }
+
+    function showAddDetailsPopup() {
+      showPopup('addDetailsPopup');
+    }
+
+    function hideAddDetailsPopup() {
+      hidePopup('addDetailsPopup');
+    }
+
+    function showSelectAudiencePopup() {
+      showPopup('selectAudiencePopup');
+    }
+
+    function hideSelectAudiencePopup() {
+      hidePopup('selectAudiencePopup');
+    }
+
+    // Show the select audience popup on page load for testing
+    //window.onload = showSelectAudiencePopup;
+  </script>
+
