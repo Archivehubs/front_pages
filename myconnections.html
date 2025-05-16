@@ -1,646 +1,1647 @@
 <!DOCTYPE html>
- <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyConnections</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyConnections - Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 
-  <style>
-    /* style.css */
- body {
-  font-family: sans-serif;
-  margin: 0;
-  background-color: #f0f2f5;
-  color: #333;
- }
- 
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
- .container {
-  width: 90%;
-  max-width: 900px;
-  margin: 20px auto;
- }
- 
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+        }
 
- .connections-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
- }
- 
+        .container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+        }
 
- .connections-header h1,
- .connections-header h2 {
-  font-size: 1.2em;
-  margin: 0;
- }
- 
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
 
- .card {
-  background-color: #fff;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  padding: 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
- }
- 
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
- .card h2 {
-  font-size: 1.1em;
-  margin-top: 0;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
- }
- 
+        .logo-img {
+            height: 40px;
+        }
 
- /* Grid Layout */
- .request-grid,
- .suggestion-grid,
- .activity-grid,
- .suggestion-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
- }
- 
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 20px;
+            padding: 5px 10px;
+            transition: border-color 0.2s;
+        }
 
- .request-item,
- .suggestion-item,
- .activity-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
- }
- 
+        .search-box:focus-within {
+            border-color: #007bff;
+        }
 
- .user-photo {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-bottom: 10px;
- }
- 
+        .search-icon {
+            color: #6c757d;
+            margin-right: 5px;
+        }
 
- .user-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
- }
- 
+        .search-input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 0.9rem;
+            width: 150px;
+        }
 
- .user-info {
-  margin-bottom: 10px;
- }
- 
+        .nav-middle, .nav-right {
+            display: flex;
+            gap: 15px;
+        }
 
- .user-info strong {
-  display: block;
-  font-weight: bold;
-  font-size: 0.95em;
- }
- 
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #495057;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.2s, color 0.2s;
+        }
 
- .user-info p {
-  font-size: 0.85em;
-  color: #555;
-  margin-top: 2px;
- }
- 
+        .nav-link:hover {
+            background-color: #e9ecef;
+            color: #007bff;
+        }
 
- .request-actions,
- .suggestion-actions,
- .activity-actions {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
- }
- 
+        .nav-link i {
+            font-size: 1.1rem;
+        }
 
- .request-actions button,
- .suggestion-actions button,
- .activity-actions button,
- .connect,
- .delete {
-  padding: 8px 12px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9em;
- }
- 
+        /* Main Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
- .accept {
-  background-color: #007bff;
-  color: #fff;
- }
- 
+        /* Sidebar */
+        .sidebar {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
 
- .decline {
-  background-color: #f0f0f0;
-  color: #333;
- }
- 
+        .sidebar-section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
 
- .connect {
-  background-color: #28a745;
-  color: #fff;
- }
- 
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
 
- .delete {
-  background-color: #dc3545;
-  color: #fff;
- }
- 
+        .sidebar-section h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #343a40;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
 
- .discover-link {
-  font-size: 0.8em;
-  color: #007bff;
-  margin-top: 5px;
- }
- 
+        .sidebar-section ul {
+            list-style: none;
+            padding: 0;
+        }
 
- .insight-list,
- .management-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
- }
- 
+        .sidebar-section li {
+            margin-bottom: 10px;
+        }
 
- .insight-list li a,
- .management-list li a {
-  display: block;
-  padding: 8px 0;
-  text-decoration: none;
-  color: #333;
-  font-size: 0.9em;
-  border-bottom: 1px solid #eee;
- }
- 
+        .sidebar-section a {
+            text-decoration: none;
+            color: #495057;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            transition: color 0.2s;
+        }
 
- .insight-list li a:last-child,
- .management-list li a:last-child {
-  border-bottom: none;
- }
- 
+        .sidebar-section a:hover {
+            color: #007bff;
+        }
 
- .management-list li a i {
-  margin-left: 5px;
- }
- 
+        .sidebar-section a i {
+            font-size: 1em;
+        }
 
- .messaging-placeholder {
-  background-color: #f9f9f9;
-  border: 1px solid #eee;
-  padding: 15px;
-  border-radius: 5px;
-  color: #777;
-  font-size: 0.8em;
-  text-align: center;
- }
- 
+        .profile-card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
 
- .footer-links {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 0.8em;
-  color: #555;
- }
- 
+        .profile-card .user-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 10px;
+        }
 
- .footer-links a {
-  color: #007bff;
-  text-decoration: none;
-  margin: 0 10px;
- }
- 
+        .profile-card .user-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
- .footer-links a:hover {
-  text-decoration: underline;
- }
- 
+        .profile-card .user-info strong {
+            font-weight: 600;
+            font-size: 0.95em;
+            display: block;
+            margin-bottom: 5px;
+        }
 
- .footer-links .copyright {
-  margin-top: 10px;
- }
-  
-  
+        .profile-card .user-info p {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin: 5px 0;
+        }
+
+        .profile-card .discover-link {
+            font-size: 0.85em;
+            color: #007bff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .profile-card .discover-link:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar-footer {
+            font-size: 0.8em;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .sidebar-footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .sidebar-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar-footer p {
+            margin-top: 5px;
+        }
+
+        .collapsible-content ul ul {
+            padding-left: 20px;
+        }
+
+        /* Content Area */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .connections-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .connections-header h1, .connections-header h2 {
+            font-size: 1.3em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .request-grid, .suggestion-grid, .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        .request-item, .suggestion-item, .activity-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #f8f9fa;
+            transition: transform 0.2s;
+            min-width: 180px;
+            max-width: 100%;
+        }
+
+        .request-item:hover, .suggestion-item:hover, .activity-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .user-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .user-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-info strong {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .user-info p {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin: 5px 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .accept, .decline, .connect, .delete, .follow, .apply, .write-profile {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .accept {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .decline {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .connect {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .delete {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .follow {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        .apply {
+            background-color: #f0ad4e;
+            color: #fff;
+        }
+
+        .write-profile {
+            background-color: #6610f2;
+            color: #fff;
+        }
+
+        .accept:hover, .decline:hover, .connect:hover, .delete:hover, .follow:hover, .apply:hover, .write-profile:hover {
+            filter: brightness(90%);
+            transform: translateY(-2px);
+        }
+
+        .discover-link {
+            font-size: 0.85em;
+            color: #007bff;
+            text-decoration: none;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        .discover-link:hover {
+            text-decoration: underline;
+        }
+
+        .connection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .connection-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .connection-item:last-child {
+            border-bottom: none;
+        }
+
+        .connection-item .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .connection-item .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .connection-item .user-info .text-info strong {
+            font-size: 0.9em;
+        }
+
+        .connection-item .user-info .text-info p {
+            font-size: 0.8em;
+        }
+
+        .show-more {
+            display: block;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+            padding: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .show-more:hover {
+            text-decoration: underline;
+        }
+
+        .anniversary-types {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+        }
+
+        .anniversary-types a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .anniversary-types a:hover {
+            text-decoration: underline;
+        }
+
+        .premium-btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            display: block;
+            margin: 15px auto;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .premium-btn:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .messaging-placeholder {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        /* Collapsible Sections */
+        .collapsible-content {
+            display: none;
+        }
+
+        .collapsible-content.active {
+            display: block;
+        }
+
+        .toggle-icon {
+            transition: transform 0.2s;
+        }
+
+        .toggle-icon.active {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-top: 1px solid #dee2e6;
+            background-color: #fff;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        /* Feedback Popup */
+        .feedback-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .feedback-popup {
+            background-color: #fff;
+            width: 400px;
+            max-width: 90%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .feedback-popup-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #343a40;
+            font-weight: 500;
+        }
+
+        .feedback-popup-header i {
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: #495057;
+            transition: color 0.2s;
+        }
+
+        .feedback-popup-header i:hover {
+            color: #007bff;
+        }
+
+        .feedback-popup-content {
+            padding: 20px;
+        }
+
+        .feedback-section {
+            margin-bottom: 20px;
+        }
+
+        .feedback-section h4 {
+            font-size: 1.1rem;
+            color: #343a40;
+            margin: 0 0 10px;
+            font-weight: 500;
+        }
+
+        .feedback-section p {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin: 0 0 10px;
+        }
+
+        .feedback-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.2s;
+        }
+
+        .feedback-section textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .feedback-popup-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .feedback-popup-actions button {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .feedback-popup-actions .cancel-button {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .feedback-popup-actions .cancel-button:hover {
+            background-color: #dee2e6;
+            transform: translateY(-2px);
+        }
+
+        .feedback-popup-actions .submit-button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .feedback-popup-actions .submit-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .request-grid, .suggestion-grid, .activity-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .nav-middle, .nav-right {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .search-input {
+                width: 100px;
+            }
+
+            .request-grid, .suggestion-grid, .activity-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .connection-item .user-info img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .accept, .decline, .connect, .delete, .follow, .apply, .write-profile {
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+
+            .connections-header h1, .connections-header h2 {
+                font-size: 1.1em;
+            }
+
+            .profile-card .user-photo {
+                width: 60px;
+                height: 60px;
+            }
+        }
     </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="#" class="logo">
+                    <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+                </a>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search..." class="search-input" aria-label="Search">
+                </div>
+            </div>
+            <div class="nav-middle">
+                <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="#" class="nav-link active"><i class="fas fa-user-friends"></i> MyConnections</a>
+                <a href="#" class="nav-link"><i class="fas fa-video"></i> Video</a>
+                <a href="#" class="nav-link"><i class="fas fa-comment-dots"></i> Messages</a>
+                <a href="#" class="nav-link"><i class="fas fa-bell"></i> Notifications</a>
+                <a href="#" class="nav-link"><i class="fas fa-user-circle"></i> Account</a>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-link"><i class="fas fa-briefcase"></i> Jobs</a>
+                <a href="#" class="nav-link"><i class="fas fa-building"></i> Business</a>
+                <a href="#" class="nav-link"><i class="fas fa-cloud-arrow-up"></i> Drive</a>
+                <a href="#" class="nav-link"><i class="fas fa-bars"></i> Menu</a>
+            </div>
+        </nav>
 
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Profile Card Section -->
+                <div class="sidebar-section">
+                    <div class="profile-card">
+                        <div class="user-photo">
+                            <img src="/img/avatar.jpg" alt="User Profile">
+                        </div>
+                        <div class="user-info">
+                            <strong>Name</strong>
+                            <p>Owners Profile</p>
+                            <p>Live Video, Photo, Artificial Intel</p>
+                            <p>Connect with Professionals, Jobs, and Global Opportunities</p>
+                            <a href="#" class="discover-link">Discover how <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="sidebar-footer">
+                        <a href="#" class="general-terms">General Terms</a> |
+                        <a href="#" class="app-link">Get the Archivehubs App</a>
+                        <p>ARCHIVEHUBS: ENINK Investment Limited © 2025</p>
+                    </div>
+                </div>
 
- </head>
- <body>
-  <div class="container">
-   <header class="connections-header">
-    <div class="header-left">
-     <h1>MyConnections <i class="fas fa-chevron-down"></i></h1>
+                <!-- My Connections Insight Section -->
+                <div class="sidebar-section">
+                    <h3>My Connections Insight <i class="fas fa-caret-up toggle-icon active" data-target="insight-content"></i></h3>
+                    <div class="collapsible-content active" id="insight-content">
+                        <ul>
+                            <li><a href="#"><i class="fas fa-users"></i> Connections</a></li>
+                            <li><a href="#"><i class="fas fa-address-book"></i> Contacts</a></li>
+                            <li><a href="#"><i class="fas fa-link"></i> Connecting</a></li>
+                            <li><a href="#"><i class="fas fa-check-circle"></i> Connected</a></li>
+                            <li><a href="#"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                            <li><a href="#"><i class="fas fa-file-alt"></i> Pages</a></li>
+                            <li><a href="#"><i class="fas fa-newspaper"></i> Newsletter</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Network Management Section -->
+                <div class="sidebar-section">
+                    <h3>Network Management <i class="fas fa-caret-up toggle-icon active" data-target="management-content"></i></h3>
+                    <div class="collapsible-content active" id="management-content">
+                        <ul>
+                            <li><a href="#">Activity Connections <i class="fas fa-arrow-right"></i></a></li>
+                            <li><a href="#">Groups Connections <i class="fas fa-arrow-right"></i></a></li>
+                            <li><a href="#">Popular Connections <i class="fas fa-arrow-right"></i></a></li>
+                            <li><a href="#">Organizations Connections <i class="fas fa-arrow-right"></i></a></li>
+                            <li><a href="#">Messaging <i class="fas fa-ellipsis-h"></i></a></li>
+                            <li>
+                                <h4>Connection Updates <i class="fas fa-chevron-down toggle-icon" data-target="updates-content-sidebar"></i></h4>
+                                <div class="collapsible-content" id="updates-content-sidebar">
+                                    <ul>
+                                        <li><a href="#">Recent Interactions <i class="fas fa-arrow-right"></i></a></li>
+                                        <li><a href="#">Job Opportunities <i class="fas fa-arrow-right"></i></a></li>
+                                        <li><a href="#">Birthdays <i class="fas fa-arrow-right"></i></a></li>
+                                        <li><a href="#">Anniversaries <i class="fas fa-arrow-right"></i></a></li>
+                                        <li><a href="#">Grow your Connections <i class="fas fa-arrow-right"></i></a></li>
+                                        <li><a href="#">Networking Events <i class="fas fa-arrow-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Content -->
+            <div class="content">
+                <header class="connections-header">
+                    <h1>MyConnections <i class="fas fa-chevron-down toggle-icon" data-target="main-content"></i></h1>
+                    <h2>Connections Updates <i class="fas fa-chevron-down toggle-icon" data-target="updates-content"></i></h2>
+                </header>
+
+                <div class="collapsible-content active" id="main-content">
+                    <!-- Connection Requests -->
+                    <section id="connection-requests" class="card">
+                        <h2>Connection Requests <i class="fas fa-caret-up toggle-icon active" data-target="requests-content"></i></h2>
+                        <div class="collapsible-content active" id="requests-content">
+                            <div class="request-grid">
+                                <div class="request-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>                                        
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="request-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="request-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="request-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="request-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="request-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('requests-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- Connections You May Want -->
+                    <section id="suggestions" class="card">
+                        <h2>Connections You May Want <i class="fas fa-caret-up toggle-icon active" data-target="suggestions-content"></i></h2>
+                        <div class="collapsible-content active" id="suggestions-content">
+                            <div class="suggestion-grid">
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'suggestion')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'suggestion')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'suggestion')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'suggestion')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'suggestion')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'suggestion')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'suggestion')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'suggestion')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'suggestion')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'suggestion')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'suggestion')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'suggestion')">Decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('suggestions-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- Connections Based on Recent Activity -->
+                    <section id="activity-based" class="card">
+                        <h2>Connections Based on Your Recent Activity <i class="fas fa-caret-up toggle-icon active" data-target="activity-content"></i></h2>
+                        <div class="collapsible-content active" id="activity-content">
+                            <div class="activity-grid">
+                                <div class="activity-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'activity')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'activity')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'activity')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'activity')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'activity')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'activity')">Decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('activity-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- People to Connect Based on Similar Roles -->
+                    <section id="similar-roles" class="card">
+                        <h2>People to Connect Based on Similar Roles <i class="fas fa-caret-up toggle-icon active" data-target="similar-roles-content"></i></h2>
+                        <div class="collapsible-content active" id="similar-roles-content">
+                            <div class="suggestion-grid">
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="connect" onclick="handleAction('connect', 'similar-role')">Connect</button>
+                                        <button class="delete" onclick="handleAction('delete', 'similar-role')">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="connect" onclick="handleAction('connect', 'similar-role')">Connect</button>
+                                        <button class="delete" onclick="handleAction('delete', 'similar-role')">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="connect" onclick="handleAction('connect', 'similar-role')">Connect</button>
+                                        <button class="delete" onclick="handleAction('delete', 'similar-role')">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="connect" onclick="handleAction('connect', 'similar-role')">Connect</button>
+                                        <button class="delete" onclick="handleAction('delete', 'similar-role')">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="connect" onclick="handleAction('connect', 'similar-role')">Connect</button>
+                                        <button class="delete" onclick="handleAction('delete', 'similar-role')">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item">
+                                    <div class="user-photo">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Name</strong>
+                                        <p>Owners Profile</p>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="connect" onclick="handleAction('connect', 'similar-role')">Connect</button>
+                                        <button class="delete" onclick="handleAction('delete', 'similar-role')">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('similar-roles-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- Messaging -->
+                    <section id="messaging" class="card">
+                        <h2>Messaging <i class="fas fa-ellipsis-h"></i> <i class="fas fa-caret-up toggle-icon active" data-target="messaging-content"></i></h2>
+                        <div class="collapsible-content active" id="messaging-content">
+                            <div class="messaging-placeholder">
+                                Messaging functionality coming soon...
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="collapsible-content active" id="updates-content">
+                    <!-- People to Connect Based on Your Activity -->
+                    <section id="activity-connections" class="card">
+                        <h2>People to Connect Based on Your Activity <i class="fas fa-arrow-right"></i></h2>
+                        <div class="connection-list">
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="User Profile">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="connect" onclick="handleAction('connect', 'activity-connection')">Connect</button>
+                            </div>
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="User Profile">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="connect" onclick="handleAction('connect', 'activity-connection')">Connect</button>
+                            </div>
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="User Profile">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="connect" onclick="handleAction('connect', 'activity-connection')">Connect</button>
+                            </div>
+                        </div>
+                        <a href="#" class="show-more" onclick="toggleShowMore('activity-connections')">Show More →</a>
+                    </section>
+
+                    <!-- Popular Connections in Your Domain -->
+                    <section id="popular-connections" class="card">
+                        <h2>Popular Connections in Your Domain <i class="fas fa-arrow-right"></i></h2>
+                        <div class="connection-list">
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="User Profile">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="follow" onclick="handleAction('follow', 'popular-connection')">Follow</button>
+                            </div>
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="User Profile">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="follow" onclick="handleAction('follow', 'popular-connection')">Follow</button>
+                            </div>
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="User Profile">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="follow" onclick="handleAction('follow', 'popular-connection')">Follow</button>
+                            </div>
+                        </div>
+                        <a href="#" class="show-more" onclick="toggleShowMore('popular-connections')">Show More →</a>
+                    </section>
+
+                    <!-- Connections Based on Your Recent Activities -->
+                    <section id="recent-activities" class="card">
+                        <h2>Connections Based on Your Recent Activities <i class="fas fa-caret-up toggle-icon active" data-target="recent-activities-content"></i></h2>
+                        <div class="collapsible-content active" id="recent-activities-content">
+                            <div class="connection-list">
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'recent-activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'recent-activity')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'recent-activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'recent-activity')">Decline</button>
+                                    </div>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button class="accept" onclick="handleAction('accept', 'recent-activity')">Accept</button>
+                                        <button class="decline" onclick="handleAction('decline', 'recent-activity')">Decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('recent-activities-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- Connect to Recent Job Opportunities -->
+                    <section id="job-opportunities" class="card">
+                        <h2>Connect to Recent Job Opportunities <i class="fas fa-caret-up toggle-icon active" data-target="jobs-content"></i></h2>
+                        <div class="collapsible-content active" id="jobs-content">
+                            <div class="connection-list">
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="Job Icon">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Description</p>
+                                        </div>
+                                    </div>
+                                    <button class="apply" onclick="handleAction('apply', 'job')">Apply</button>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="Job Icon">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Description</p>
+                                        </div>
+                                    </div>
+                                    <button class="apply" onclick="handleAction('apply', 'job')">Apply</button>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="Job Icon">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Description</p>
+                                        </div>
+                                    </div>
+                                    <button class="apply" onclick="handleAction('apply', 'job')">Apply</button>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('jobs-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- Organizations You Might Be Interested In -->
+                    <section id="organizations" class="card">
+                        <h2>Organizations You Might Be Interested In <i class="fas fa-arrow-right"></i></h2>
+                        <div class="connection-list">
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="Organization Logo">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="connect" onclick="handleAction('connect', 'organization')">Connect</button>
+                            </div>
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="Organization Logo">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="connect" onclick="handleAction('connect', 'organization')">Connect</button>
+                            </div>
+                            <div class="connection-item">
+                                <div class="user-info">
+                                    <img src="/img/avatar.jpg" alt="Organization Logo">
+                                    <div class="text-info">
+                                        <strong>Name</strong>
+                                        <p>Profile</p>
+                                    </div>
+                                </div>
+                                <button class="connect" onclick="handleAction('connect', 'organization')">Connect</button>
+                            </div>
+                        </div>
+                        <a href="#" class="show-more" onclick="toggleShowMore('organizations')">Show More →</a>
+                    </section>
+
+                    <!-- Birthday Wishes: Today's Birthday -->
+                    <section id="today-birthday" class="card">
+                        <h2>Birthday Wishes - Today's Birthdays <i class="fas fa-caret-up toggle-icon active" data-target="today-birthday-content"></i></h2>
+                        <div class="collapsible-content active" id="today-birthday-content">
+                            <div class="connection-list">
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-today')">Write on his profile</button>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-today')">Write on his profile</button>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-today')">Write on his profile</button>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('today-birthday-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- Recent Birthdays -->
+                    <section id="recent-birthdays" class="card">
+                        <h2>Recent Birthdays <i class="fas fa-caret-up toggle-icon active" data-target="recent-birthdays-content"></i></h2>
+                        <div class="collapsible-content active" id="recent-birthdays-content">
+                            <div class="connection-list">
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-recent')">Write on his profile</button>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-recent')">Write on his profile</button>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-recent')">Write on his profile</button>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('recent-birthdays-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- Upcoming Birthdays -->
+                    <section id="upcoming-birthdays" class="card">
+                        <h2>Upcoming Birthdays <i class="fas fa-caret-up toggle-icon active" data-target="upcoming-birthdays-content"></i></h2>
+                        <div class="collapsible-content active" id="upcoming-birthdays-content">
+                            <div class="connection-list">
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-upcoming')">Write on his profile</button>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-upcoming')">Write on his profile</button>
+                                </div>
+                                <div class="connection-item">
+                                    <div class="user-info">
+                                        <img src="/img/avatar.jpg" alt="User Profile">
+                                        <div class="text-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                    </div>
+                                    <button class="write-profile" onclick="handleAction('write', 'birthday-upcoming')">Write on his profile</button>
+                                </div>
+                            </div>
+                            <a href="#" class="show-more" onclick="toggleShowMore('upcoming-birthdays-content')">Show More →</a>
+                        </div>
+                    </section>
+
+                    <!-- Anniversaries Celebrations -->
+                    <section id="anniversaries" class="card">
+                        <h2>Anniversaries Celebrations <i class="fas fa-caret-up toggle-icon active" data-target="anniversaries-content"></i></h2>
+                        <div class="collapsible-content active" id="anniversaries-content">
+                            <p>Update your Anniversaries</p>
+                            <div class="anniversary-types">
+                                <a href="#">Work Anniversaries</a>
+                                <a href="#">Wedding Anniversaries</a>
+                                <a href="#">Other Anniversaries</a>
+                            </div>
+                            <!-- Connection Request (Nested) -->
+                            <h3>Connection Request <i class="fas fa-caret-up toggle-icon active" data-target="nested-requests-content"></i></h3>
+                            <div class="collapsible-content active" id="nested-requests-content">
+                                <div class="request-grid">
+                                    <div class="request-item">
+                                        <div class="user-photo">
+                                            <img src="/img/avatar.jpg" alt="User Profile">
+                                        </div>
+                                        <div class="user-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                            <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                        </div>
+                                    </div>
+                                    <div class="request-item">
+                                        <div class="user-photo">
+                                            <img src="/img/avatar.jpg" alt="User Profile">
+                                        </div>
+                                        <div class="user-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                            <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                        </div>
+                                    </div>
+                                    <div class="request-item">
+                                        <div class="user-photo">
+                                            <img src="/img/avatar.jpg" alt="User Profile">
+                                        </div>
+                                        <div class="user-info">
+                                            <strong>Name</strong>
+                                            <p>Profile</p>
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button class="accept" onclick="handleAction('accept', 'connection-request')">Accept</button>
+                                            <button class="decline" onclick="handleAction('decline', 'connection-request')">Decline</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="show-more" onclick="toggleShowMore('nested-requests-content')">Show More →</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Premium Promotion -->
+                    <section id="premium-promotion" class="card">
+                        <h2>Grow Your Connections with Premium <i class="fas fa-caret-up toggle-icon active" data-target="premium-content"></i></h2>
+                        <div class="collapsible-content active" id="premium-content">
+                            <button class="premium-btn" onclick="handleAction('try-premium', 'premium')">Try Premium for NGN0</button>
+                            <p>One-month free trial. You will be notified 7 days before the end of the trial.</p>
+                        </div>
+                    </section>
+
+                    <!-- Messaging -->
+                    <section id="messaging-updates" class="card">
+                        <h2>Messaging <i class="fas fa-ellipsis-h"></i> <i class="fas fa-caret-up toggle-icon active" data-target="messaging-updates-content"></i></h2>
+                        <div class="collapsible-content active" id="messaging-updates-content">
+                            <div class="messaging-placeholder">
+                                Messaging functionality coming soon...
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div>
+                <a href="#" class="general-terms">General Terms</a> |
+                <a href="#" class="app-link">Get the Archivehubs App</a>
+                <p>ARCHIVEHUBS: ENINK Investment Limited © 2025</p>
+            </div>
+            <a href="#" onclick="showFeedbackPopup()" aria-label="Give Feedback">Give Feedback</a>
+        </footer>
+
+        <!-- Feedback Popup -->
+        <div id="feedbackPopupOverlay" class="feedback-popup-overlay">
+            <div class="feedback-popup">
+                <div class="feedback-popup-header">
+                    <h3>Give Feedback to Archivehubs</h3>
+                    <i id="closeFeedbackPopup" class="fas fa-times" aria-label="Close Feedback"></i>
+                </div>
+                <div class="feedback-popup-content">
+                    <div class="feedback-section">
+                        <h4>Help us improve Archivehubs</h4>
+                        <p>Give feedback about your Archivehubs experience</p>
+                        <textarea id="generalFeedback" placeholder="Type your feedback here..." rows="4" aria-label="General Feedback"></textarea>
+                    </div>
+                    <div class="feedback-section">
+                        <h4>Something went wrong</h4>
+                        <p>Let us know about a broken feature</p>
+                        <textarea id="issueFeedback" placeholder="Describe the issue..." rows="4" aria-label="Issue Report"></textarea>
+                    </div>
+                    <div class="feedback-popup-actions">
+                        <button class="cancel-button" aria-label="Cancel Feedback">Cancel</button>
+                        <button class="submit-button" aria-label="Submit Feedback">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="header-right">
-     <h2>Connections Updates <i class="fas fa-chevron-down"></i></h2>
-    </div>
-   </header>
- 
 
-   <section id="connection-requests" class="card">
-    <h2>Connection Request</h2>
-    <div class="request-grid">
-     <div class="request-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <p>Live Video Photo Artificial Intel</p>
-      <p>Connect with Professionals, Jobs, and Global Opportunities</p>
-      <p class="discover-link">Discover how <i class="fas fa-arrow-right"></i></p>
-      <div class="request-actions">
-       <button class="accept">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="request-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="request-actions">
-       <button class="accept">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="request-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="request-actions">
-       <button class="accept">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="request-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="request-actions">
-       <button class="accept">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="request-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="request-actions">
-       <button class="accept">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="request-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="request-actions">
-       <button class="accept">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-    </div>
-   </section>
- 
-
-   <section id="messaging" class="card">
-    <h2>Messaging <i class="fas fa-ellipsis-h"></i> <i class="fas fa-caret-up"></i></h2>
-    <div class="message-placeholder">
-     </div>
-   </section>
- 
-
-   <section id="suggestions" class="card">
-    <h2>Connections you may want</h2>
-    <div class="suggestion-grid">
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-    </div>
-   </section>
- 
-
-   <section id="activity-based" class="card">
-    <h2>Connections base on your recent activity</h2>
-    <div class="activity-grid">
-     <div class="activity-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="activity-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="activity-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="activity-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="activity-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="activity-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="activity-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="activity-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="activity-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="activity-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-     <div class="activity-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="activity-actions">
-       <button class="connect">Accept</button>
-       <button class="decline">Decline</button>
-      </div>
-     </div>
-    </div>
-   </section>
- 
-
-   <section id="my-connections-insight" class="card">
-    <h2>My Connections Insight <i class="fas fa-caret-up"></i></h2>
-    <ul class="insight-list">
-     <li><a href="#">Connections</a></li>
-     <li><a href="#">Contacts</a></li>
-     <li><a href="#">Connecting</a></li>
-     <li><a href="#">Connected</a></li>
-     <li><a href="#">Events</a></li>
-     <li><a href="#">Pages</a></li>
-     <li><a href="#">Newsletter</a></li>
-    </ul>
-   </section>
- 
-
-   <section id="network-management" class="card">
-    <h2>Network Management <i class="fas fa-caret-up"></i></h2>
-    <ul class="management-list">
-     <li><a href="#">Activity Connections <i class="fas fa-arrow-right"></i></a></li>
-     <li><a href="#">Groups Connections <i class="fas fa-arrow-right"></i></a></li>
-     <li><a href="#">Popular Connections <i class="fas fa-arrow-right"></i></a></li>
-     <li><a href="#">Organizations Connections <i class="fas fa-arrow-right"></i></a></li>
-    </ul>
-   </section>
- 
-
-   <section id="messaging-bottom" class="card">
-    <h2>Messaging <i class="fas fa-ellipsis-h"></i> <i class="fas fa-caret-up"></i></h2>
-    <div class="message-placeholder">
-     </div>
-   </section>
- 
-
-   <section id="similar-roles" class="card">
-    <h2>People to Connect base on similar roles <i class="fas fa-arrow-right"></i></h2>
-    <div class="suggestion-grid">
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Connect</button>
-       <button class="delete">Delete</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Connect</button>
-       <button class="delete">Delete</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Connect</button>
-       <button class="delete">Delete</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Connect</button>
-       <button class="delete">Delete</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Connect</button>
-       <button class="delete">Delete</button>
-      </div>
-     </div>
-     <div class="suggestion-item">
-      <div class="user-photo">
-       <img src="user-placeholder.png" alt="User Profile">
-      </div>
-      <div class="user-info">
-       <strong>Name</strong>
-       <p>Owners Profile</p>
-      </div>
-      <div class="suggestion-actions">
-       <button class="connect">Connect</button>
-       <button class="delete">Delete</button>
-      </div>
-     </div>
-    </div>
-   </section>
- 
-
-   <div class="footer-links">
-    <a href="#" class="general-terms">General Terms</a>
-    <a href="#" class="app-link">Get the Archivehubs App</a>
-    <p class="copyright">ARCHIVEHUBS: ENINK Investment Limited © 20225</p>
-   </div>
-  </div>
- </body>
- </html>
+    <script src="script.js"></script>
+</body>
+</html>
