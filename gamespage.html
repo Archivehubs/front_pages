@@ -4,595 +4,805 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games - Archivehubs</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-
-
-    <style>
-        * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body, html {
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-    background-color: #f4f4f4;
-}
-
-.container {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
-}
-
-/* Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #dee2e6;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo-img {
-    height: 40px;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 20px;
-    padding: 5px 10px;
-    transition: border-color 0.2s;
-}
-
-.search-box:focus-within {
-    border-color: #007bff;
-}
-
-.search-icon {
-    color: #6c757d;
-    margin-right: 5px;
-}
-
-.search-input {
-    border: none;
-    background: none;
-    outline: none;
-    font-size: 0.9rem;
-    width: 150px;
-}
-
-.nav-middle, .nav-right {
-    display: flex;
-    gap: 15px;
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #495057;
-    text-decoration: none;
-    font-size: 0.9rem;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.nav-link:hover {
-    background-color: #e9ecef;
-    color: #007bff;
-}
-
-.nav-link.active {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.nav-link.active:hover {
-    background-color: #0056b3;
-}
-
-.nav-link i {
-    font-size: 1.1rem;
-}
-
-/* Main Layout */
-.main-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* Content Area */
-.content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-}
-
-.connections-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.connections-header h1 {
-    font-size: 1.3em;
-    margin: 0;
-}
-
-.card {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.card h2 {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.game-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    width: 100%;
-}
-
-.game-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 12px;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    text-align: center;
-    background-color: #f8f9fa;
-    transition: transform 0.2s;
-    min-width: 180px;
-    max-width: 100%;
-}
-
-.game-item:hover {
-    transform: translateY(-3px);
-}
-
-.game-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 10px;
-}
-
-.game-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.game-info strong {
-    font-weight: 600;
-    font-size: 0.95em;
-}
-
-.game-info p {
-    font-size: 0.85em;
-    color: #6c757d;
-    margin: 5px 0;
-}
-
-.game-placeholder {
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    text-align: center;
-    color: #6c757d;
-    font-size: 0.9em;
-    margin-bottom: 15px;
-}
-
-.see-all {
-    font-size: 0.9em;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.see-all:hover {
-    text-decoration: underline;
-}
-
-.tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.tab-button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #e9ecef;
-    color: #495057;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s;
-}
-
-.tab-button.active {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.tab-button:hover {
-    background-color: #dee2e6;
-}
-
-.tab-button.active:hover {
-    background-color: #0056b3;
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-.exit-btn {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    display: block;
-    margin: 15px auto;
-    transition: background-color 0.2s, transform 0.2s;
-}
-
-.exit-btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-.popup-triggers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-.popup-trigger {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #28a745;
-    color: #fff;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s, transform 0.2s;
-}
-
-.popup-trigger:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-}
-
-.popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
-}
-
-.popup-card {
-    background-color: #fff;
-    width: 600px;
-    max-width: 90%;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.popup-header h2 {
-    font-size: 1.2em;
-    margin: 0;
-}
-
-.close-popup {
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: #495057;
-    transition: color 0.2s;
-}
-
-.close-popup:hover {
-    color: #007bff;
-}
-
-/* Collapsible Sections */
-.collapsible-content {
-    display: none;
-}
-
-.collapsible-content.active {
-    display: block;
-}
-
-.toggle-icon {
-    transition: transform 0.2s;
-}
-
-.toggle-icon.active {
-    transform: rotate(180deg);
-}
-
-/* Footer */
-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-top: 1px solid #dee2e6;
-    background-color: #fff;
-    font-size: 0.9rem;
-    color: #6c757d;
-}
-
-footer a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-footer a:hover {
-    text-decoration: underline;
-    color: #0056b3;
-}
-
-/* Feedback Popup */
-.feedback-popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.feedback-popup {
-    background-color: #fff;
-    width: 400px;
-    max-width: 90%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.feedback-popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.feedback-popup-header h3 {
-    margin: 0;
-    font-size: 1.3rem;
-    color: #343a40;
-    font-weight: 500;
-}
-
-.feedback-popup-header i {
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: #495057;
-    transition: color 0.2s;
-}
-
-.feedback-popup-header i:hover {
-    color: #007bff;
-}
-
-.feedback-popup-content {
-    padding: 20px;
-}
-
-.feedback-section {
-    margin-bottom: 20px;
-}
-
-.feedback-section h4 {
-    font-size: 1.1rem;
-    color: #343a40;
-    margin: 0 0 10px;
-    font-weight: 500;
-}
-
-.feedback-section p {
-    font-size: 0.9rem;
-    color: #6c757d;
-    margin: 0 0 10px;
-}
-
-.feedback-section textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    resize: vertical;
-    min-height: 100px;
-    transition: border-color 0.2s;
-}
-
-.feedback-section textarea:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.feedback-popup-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-}
-
-.feedback-popup-actions button {
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.2s, transform 0.2s;
-}
-
-.feedback-popup-actions .cancel-button {
-    background-color: #e9ecef;
-    color: #495057;
-}
-
-.feedback-popup-actions .cancel-button:hover {
-    background-color: #dee2e6;
-    transform: translateY(-2px);
-}
-
-.feedback-popup-actions .submit-button {
-    background-color: #007bff;
-    color: white;
-}
-
-.feedback-popup-actions .submit-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-/* Responsive Design */
-@media (max-width: 1199px) {
-    .game-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 767px) {
-    .game-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .navbar {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .nav-middle, .nav-right {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .search-input {
-        width: 100px;
-    }
-}
-
-@media (max-width: 480px) {
-    .game-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .game-photo {
-        width: 60px;
-        height: 60px;
-    }
-
-    .game-item {
-        padding: 8px;
-    }
-
-    .game-info strong {
-        font-size: 0.85em;
-    }
-
-    .game-info p {
-        font-size: 0.75em;
-    }
-
-    .tab-button {
-        padding: 6px 10px;
-        font-size: 0.8em;
-    }
-
-    .exit-btn, .popup-trigger {
-        padding: 8px 15px;
-        font-size: 0.9em;
-    }
-
-    .popup-card {
-        width: 90%;
-        padding: 15px;
-    }
-}
+    <style>     
+          * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body, html {
+                height: 100%;
+                font-family: 'Poppins', sans-serif;
+                color: #333;
+                background-color: #f4f4f4;
+            }
+
+            .container {
+                display: grid;
+                grid-template-rows: auto 1fr auto;
+                min-height: 100vh;
+            }
+
+            /* Navbar */
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+                background-color: #fff;
+                border-bottom: 1px solid #dee2e6;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-left {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .search-box {
+                display: flex;
+                align-items: center;
+                background-color: #f8f9fa;
+                border: 1px solid #ced4da;
+                border-radius: 20px;
+                padding: 5px 10px;
+                transition: border-color 0.2s;
+            }
+
+            .search-box:focus-within {
+                border-color: #007bff;
+            }
+
+            .search-icon {
+                color: #6c757d;
+                margin-right: 5px;
+            }
+
+            .search-input {
+                border: none;
+                background: none;
+                outline: none;
+                font-size: 0.9rem;
+                width: 150px;
+            }
+
+            .nav-middle, .nav-right {
+                display: flex;
+                gap: 15px;
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                color: #495057;
+                text-decoration: none;
+                font-size: 0.9rem;
+                padding: 5px 10px;
+                border-radius: 5px;
+                transition: background-color 0.2s, color 0.2s;
+            }
+
+            .nav-link:hover {
+                background-color: #e9ecef;
+                color: #007bff;
+            }
+
+            .nav-link.active {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .nav-link.active:hover {
+                background-color: #0056b3;
+            }
+
+            .nav-link i {
+                font-size: 1.1rem;
+            }
+
+            /* Main Layout */
+            .main-content {
+                display: grid;
+                grid-template-columns: 1fr;
+                padding: 20px;
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            /* Content Area */
+            .content {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+            }
+
+            .connections-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .connections-header h1 {
+                font-size: 1.3em;
+                margin: 0;
+            }
+
+            .card {
+                background-color: #fff;
+                border-radius: 8px;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .card h2 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .game-grid {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 20px;
+                width: 100%;
+            }
+
+            .game-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 12px;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                text-align: center;
+                background-color: #f8f9fa;
+                transition: transform 0.2s;
+                min-width: 180px;
+                max-width: 100%;
+            }
+
+            .game-item:hover {
+                transform: translateY(-3px);
+            }
+
+            .game-photo {
+                width: 80px;
+                height: 80px;
+                border-radius: 8px;
+                overflow: hidden;
+                margin-bottom: 10px;
+            }
+
+            .game-photo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .game-info strong {
+                font-weight: 600;
+                font-size: 0.95em;
+            }
+
+            .game-info p {
+                font-size: 0.85em;
+                color: #6c757d;
+                margin: 5px 0;
+            }
+
+            .game-placeholder {
+                padding: 15px;
+                background-color: #f9f9f9;
+                border-radius: 5px;
+                text-align: center;
+                color: #6c757d;
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+
+            .see-all {
+                font-size: 0.9em;
+                color: #007bff;
+                text-decoration: none;
+            }
+
+            .see-all:hover {
+                text-decoration: underline;
+            }
+
+            .tabs {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+
+            .tab-button {
+                padding: 8px 15px;
+                border: none;
+                border-radius: 5px;
+                background-color: #e9ecef;
+                color: #495057;
+                cursor: pointer;
+                font-size: 0.9em;
+                transition: background-color 0.2s;
+            }
+
+            .tab-button.active {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .tab-button:hover {
+                background-color: #dee2e6;
+            }
+
+            .tab-button.active:hover {
+                background-color: #0056b3;
+            }
+
+            .tab-content {
+                display: none;
+            }
+
+            .tab-content.active {
+                display: block;
+            }
+
+            .exit-btn {
+                background-color: #007bff;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1em;
+                display: block;
+                margin: 15px auto;
+                transition: background-color 0.2s, transform 0.2s;
+            }
+
+            .exit-btn:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+            }
+
+            .popup-triggers {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .popup-trigger {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: #28a745;
+                color: #fff;
+                cursor: pointer;
+                font-size: 0.9em;
+                transition: background-color 0.2s, transform 0.2s;
+            }
+
+            .popup-trigger:hover {
+                background-color: #218838;
+                transform: translateY(-2px);
+            }
+
+            .popup-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                animation: fadeIn 0.3s ease;
+            }
+
+            .popup-card {
+                background-color: #fff;
+                width: 600px;
+                max-width: 90%;
+                border-radius: 8px;
+                padding: 20px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .popup-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+            }
+
+            .popup-header h2 {
+                font-size: 1.2em;
+                margin: 0;
+            }
+
+            .close-popup {
+                cursor: pointer;
+                font-size: 1.3rem;
+                color: #495057;
+                transition: color 0.2s;
+            }
+
+            .close-popup:hover {
+                color: #007bff;
+            }
+
+            /* Collapsible Sections */
+            .collapsible-content {
+                display: none;
+            }
+
+            .collapsible-content.active {
+                display: block;
+            }
+
+            .toggle-icon {
+                transition: transform 0.2s;
+            }
+
+            .toggle-icon.active {
+                transform: rotate(180deg);
+            }
+
+            /* Footer */
+            footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+                border-top: 1px solid #dee2e6;
+                background-color: #fff;
+                font-size: 0.9rem;
+                color: #6c757d;
+            }
+
+            footer a {
+                color: #007bff;
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+            footer a:hover {
+                text-decoration: underline;
+                color: #0056b3;
+            }
+
+            /* Feedback Popup */
+            .feedback-popup-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                animation: fadeIn 0.3s ease;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            .feedback-popup {
+                background-color: #fff;
+                width: 400px;
+                max-width: 90%;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .feedback-popup-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+                background-color: #f8f9fa;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .feedback-popup-header h3 {
+                margin: 0;
+                font-size: 1.3rem;
+                color: #343a40;
+                font-weight: 500;
+            }
+
+            .feedback-popup-header i {
+                cursor: pointer;
+                font-size: 1.3rem;
+                color: #495057;
+                transition: color 0.2s;
+            }
+
+            .feedback-popup-header i:hover {
+                color: #007bff;
+            }
+
+            .feedback-popup-content {
+                padding: 20px;
+            }
+
+            .feedback-section {
+                margin-bottom: 20px;
+            }
+
+            .feedback-section h4 {
+                font-size: 1.1rem;
+                color: #343a40;
+                margin: 0 0 10px;
+                font-weight: 500;
+            }
+
+            .feedback-section p {
+                font-size: 0.9rem;
+                color: #6c757d;
+                margin: 0 0 10px;
+            }
+
+            .feedback-section textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ced4da;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                resize: vertical;
+                min-height: 100px;
+                transition: border-color 0.2s;
+            }
+
+            .feedback-section textarea:focus {
+                border-color: #007bff;
+                outline: none;
+            }
+
+            .feedback-popup-actions {
+                display: flex;
+                justify-content: flex-end;
+                gap: 12px;
+            }
+
+            .feedback-popup-actions button {
+                padding: 10px 20px;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                cursor: pointer;
+                border: none;
+                transition: background-color 0.2s, transform 0.2s;
+            }
+
+            .feedback-popup-actions .cancel-button {
+                background-color: #e9ecef;
+                color: #495057;
+            }
+
+            .feedback-popup-actions .cancel-button:hover {
+                background-color: #dee2e6;
+                transform: translateY(-2px);
+            }
+
+            .feedback-popup-actions .submit-button {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .feedback-popup-actions .submit-button:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+            }
+
+            /* Responsive Design */
+            @media (max-width: 1199px) {
+                .game-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
+            @media (max-width: 767px) {
+                .game-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .navbar {
+                    flex-direction: column;
+                    gap: 10px;
+                    padding: 15px;
+                }
+
+                .nav-middle, .nav-right {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 10px;
+                }
+
+                .search-input {
+                    width: 100px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .game-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .game-photo {
+                    width: 60px;
+                    height: 60px;
+                }
+
+                .game-item {
+                    padding: 8px;
+                }
+
+                .game-info strong {
+                    font-size: 0.85em;
+                }
+
+                .game-info p {
+                    font-size: 0.75em;
+                }
+
+                .tab-button {
+                    padding: 6px 10px;
+                    font-size: 0.8em;
+                }
+
+                .exit-btn, .popup-trigger {
+                    padding: 8px 15px;
+                    font-size: 0.9em;
+                }
+
+                .popup-card {
+                    width: 90%;
+                    padding: 15px;
+                }
+            }
+
+        /* Enhanced Popup Styles */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup-card {
+            background-color: #fff;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .popup-overlay.active .popup-card {
+            transform: translateY(0);
+        }
+
+        .popup-header {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .popup-header h2 {
+            font-size: 1.3rem;
+            margin: 0;
+            color: #333;
+        }
+
+        .close-popup {
+            font-size: 1.5rem;
+            color: #6c757d;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.2s;
+        }
+
+        .close-popup:hover {
+            color: #dc3545;
+        }
+
+        .popup-content {
+            padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        /* Specific Popup Styles */
+        .live-stream-popup .popup-content {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .live-stream-popup h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .play-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .play-button:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .currently-playing-popup .game-display {
+            height: 250px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .currently-playing-popup .game-display::before {
+            content: "Game Display";
+            position: absolute;
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+
+        .follow-button {
+            background-color: #e9ecef;
+            color: #333;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .follow-button:hover {
+            background-color: #dee2e6;
+        }
+
+        .related-games-popup .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .related-games-popup .game-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .related-games-popup .game-photo {
+            width: 100%;
+            height: 100px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+        }
+
+        .community-popup .popup-content {
+            text-align: center;
+        }
+
+        .community-popup p {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .community-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .community-feature {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .community-feature i {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .popup-card {
+                width: 95%;
+                max-width: none;
+            }
+            
+            .related-games-popup .game-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .community-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Navbar -->
+      
+          <!-- Navbar -->
         <nav class="navbar">
             <div class="nav-left">
                 <a href="#" class="logo">
@@ -994,7 +1204,7 @@ footer a:hover {
                     </div>
                 </section>
 
-                <!-- Popup Triggers -->
+            <!-- Popup Triggers -->
                 <section class="card">
                     <h2>More Gaming Options</h2>
                     <div class="popup-triggers">
@@ -1007,290 +1217,255 @@ footer a:hover {
                 </section>
             </div>
 
-            <!-- Popups -->
-            <div id="play-on-archivehubs" class="popup-overlay">
-                <div class="popup-card">
-                    <div class="popup-header">
-                        <h2>Play on Archivehubs</h2>
-                        <i class="fas fa-times close-popup" onclick="hidePopup('play-on-archivehubs')" aria-label="Close Popup"></i>
-                    </div>
-                    <p>Play live stream games on Archivehubs</p>
-                    <button class="exit-btn" onclick="handleAction('exit', 'archivehubs-gaming')">Exit to Archivehubs Gaming</button>
+        <!-- Enhanced Popups -->
+        <!-- Play on Archivehubs Popup -->
+        <div id="play-on-archivehubs" class="popup-overlay live-stream-popup">
+            <div class="popup-card">
+                <div class="popup-header">
+                    <h2>Play Live Stream Games</h2>
+                    <button class="close-popup" onclick="hidePopup('play-on-archivehubs')">&times;</button>
+                </div>
+                <div class="popup-content">
+                    <h3>Play live stream games on Archivehubs</h3>
+                    <button class="play-button" onclick="handleAction('play', 'archivehubs')">Play on Archivehubs</button>
                 </div>
             </div>
+        </div>
 
-            <div id="currently-playing" class="popup-overlay">
-                <div class="popup-card">
-                    <div class="popup-header">
-                        <h2>Currently Playing</h2>
-                        <i class="fas fa-times close-popup" onclick="hidePopup('currently-playing')" aria-label="Close Popup"></i>
-                    </div>
-                    <div class="game-item">
-                        <div class="game-photo">
-                            <img src="/img/games.jpg" alt="Game Image">
-                        </div>
-                        <div class="game-info">
-                            <strong>Type</strong>
-                            <p>Category</p>
-                        </div>
-                    </div>
+        <!-- Currently Playing Popup -->
+        <div id="currently-playing" class="popup-overlay currently-playing-popup">
+            <div class="popup-card">
+                <div class="popup-header">
+                    <h2>Currently Playing</h2>
+                    <button class="close-popup" onclick="hidePopup('currently-playing')">&times;</button>
                 </div>
-            </div>
-
-            <div id="related-games-1" class="popup-overlay">
-                <div class="popup-card">
-                    <div class="popup-header">
-                        <h2>Related Games <a href="#" class="see-all" onclick="handleAction('see-more', 'related-games-1')">See more</a></h2>
-                        <i class="fas fa-times close-popup" onclick="hidePopup('related-games-1')" aria-label="Close Popup"></i>
+                <div class="popup-content">
+                    <div class="game-display"></div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="margin: 0;">Game Title</h3>
+                            <p style="margin: 5px 0 0; color: #6c757d;">Action Adventure</p>
+                        </div>
+                        <button class="follow-button">Follow</button>
                     </div>
-                    <div class="game-grid">
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Game</strong>
-                                <p>Design</p>
-                                <p>Name</p>
-                            </div>
+                    
+                    <div style="margin-top: 25px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h4 style="margin: 0;">Related Games</h4>
+                            <a href="#" style="color: #007bff; text-decoration: none; font-size: 0.9rem;">See more</a>
                         </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
+                        
+                        <div class="game-grid">
+                            <div class="game-item">
+                                <div class="game-photo">Game</div>
+                                <div class="game-info">
+                                    <strong>Design</strong>
+                                    <p>Name</p>
+                                </div>
                             </div>
-                            <div class="game-info">
-                                <strong>Game</strong>
-                                <p>Design</p>
-                                <p>Name</p>
+                            <div class="game-item">
+                                <div class="game-photo">Game</div>
+                                <div class="game-info">
+                                    <strong>Design</strong>
+                                    <p>Name</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
+                            <div class="game-item">
+                                <div class="game-photo">Game</div>
+                                <div class="game-info">
+                                    <strong>Design</strong>
+                                    <p>Name</p>
+                                </div>
                             </div>
-                            <div class="game-info">
-                                <strong>Game</strong>
-                                <p>Design</p>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Game</strong>
-                                <p>Design</p>
-                                <p>Name</p>
+                            <div class="game-item">
+                                <div class="game-photo">Game</div>
+                                <div class="game-info">
+                                    <strong>Design</strong>
+                                    <p>Name</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div id="community" class="popup-overlay">
-                <div class="popup-card">
-                    <div class="popup-header">
-                        <h2>Community</h2>
-                        <i class="fas fa-times close-popup" onclick="hidePopup('community')" aria-label="Close Popup"></i>
-                    </div>
-                    <p>View featured group and page content</p>
-                </div>
-            </div>
-
-            <div id="related-games-2" class="popup-overlay">
-                <div class="popup-card">
-                    <div class="popup-header">
-                        <h2>Related Games <a href="#" class="see-all" onclick="handleAction('see-more', 'related-games-2')">See more</a></h2>
-                        <i class="fas fa-times close-popup" onclick="hidePopup('related-games-2')" aria-label="Close Popup"></i>
-                    </div>
-                    <div class="game-grid">
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Game</strong>
-                                <p>Design</p>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Game</strong>
-                                <p>Design</p>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Game</strong>
-                                <p>Design</p>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Game</strong>
-                                <p>Design</p>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Footer -->
-        <footer>
-            <div>
-                <a href="#" class="general-terms">General Terms</a> |
-                <a href="#" class="app-link">Get the Archivehubs App</a>
-                <p>ARCHIVEHUBS: ENINK Investment Limited © 2025</p>
-            </div>
-            <a href="#" onclick="showFeedbackPopup()" aria-label="Give Feedback">Give Feedback</a>
-        </footer>
-
-        <!-- Feedback Popup -->
-        <div id="feedbackPopupOverlay" class="feedback-popup-overlay">
-            <div class="feedback-popup">
-                <div class="feedback-popup-header">
-                    <h3>Give Feedback to Archivehubs</h3>
-                    <i id="closeFeedbackPopup" class="fas fa-times" aria-label="Close Feedback"></i>
-                </div>
-                <div class="feedback-popup-content">
-                    <div class="feedback-section">
-                        <h4>Help us improve Archivehubs</h4>
-                        <p>Give feedback about your Archivehubs experience</p>
-                        <textarea id="generalFeedback" placeholder="Type your feedback here..." rows="4" aria-label="General Feedback"></textarea>
-                    </div>
-                    <div class="feedback-section">
-                        <h4>Something went wrong</h4>
-                        <p>Let us know about a broken feature</p>
-                        <textarea id="issueFeedback" placeholder="Describe the issue..." rows="4" aria-label="Issue Report"></textarea>
-                    </div>
-                    <div class="feedback-popup-actions">
-                        <button class="cancel-button" aria-label="Cancel Feedback">Cancel</button>
-                        <button class="submit-button" aria-label="Submit Feedback">Submit</button>
+                    
+                    <div style="margin-top: 25px;">
+                        <h4 style="margin-bottom: 10px;">Community</h4>
+                        <p style="color: #6c757d; margin-top: 0;">View featured group and page content</p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Related Games Popup 1 -->
+        <div id="related-games-1" class="popup-overlay related-games-popup">
+            <div class="popup-card">
+                <div class="popup-header">
+                    <h2>Related Games</h2>
+                    <button class="close-popup" onclick="hidePopup('related-games-1')">&times;</button>
+                </div>
+                <div class="popup-content">
+                    <div class="game-grid">
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="#" class="see-all" style="color: #007bff; text-decoration: none;">See more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Popup -->
+        <div id="community" class="popup-overlay community-popup">
+            <div class="popup-card">
+                <div class="popup-header">
+                    <h2>Community</h2>
+                    <button class="close-popup" onclick="hidePopup('community')">&times;</button>
+                </div>
+                <div class="popup-content">
+                    <p>View featured group and page content</p>
+                    <div class="community-features">
+                        <div class="community-feature">
+                            <i class="fas fa-users"></i>
+                            <h4>Groups</h4>
+                            <p>Join gaming communities</p>
+                        </div>
+                        <div class="community-feature">
+                            <i class="fas fa-newspaper"></i>
+                            <h4>Pages</h4>
+                            <p>Follow game publishers</p>
+                        </div>
+                        <div class="community-feature">
+                            <i class="fas fa-comments"></i>
+                            <h4>Discussions</h4>
+                            <p>Share your thoughts</p>
+                        </div>
+                        <div class="community-feature">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h4>Events</h4>
+                            <p>Join gaming events</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related Games Popup 2 -->
+        <div id="related-games-2" class="popup-overlay related-games-popup">
+            <div class="popup-card">
+                <div class="popup-header">
+                    <h2>Related Games</h2>
+                    <button class="close-popup" onclick="hidePopup('related-games-2')">&times;</button>
+                </div>
+                <div class="popup-content">
+                    <div class="game-grid">
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="#" class="see-all" style="color: #007bff; text-decoration: none;">See more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      
     </div>
 
-    <script src="script.js"></script>
-
-
     <script>
-        function handleAction(action, type) {
-    console.log(`Action: ${action}, Type: ${type}`);
-    alert(`${action.charAt(0).toUpperCase() + action.slice(1)} action triggered for ${type}`);
-}
-
-function toggleShowMore(contentId) {
-    const content = document.getElementById(contentId);
-    const grid = content.querySelector('.request-grid, .suggestion-grid, .activity-grid, .connection-list, .game-grid');
-    if (grid) {
-        const newItem = grid.cloneNode(true);
-        grid.appendChild(newItem);
-    }
-    alert('More items loaded (placeholder)');
-}
-
-function toggleSection(event) {
-    const targetId = event.currentTarget.querySelector('.toggle-icon').getAttribute('data-target');
-    const content = document.getElementById(targetId);
-    const icon = event.currentTarget.querySelector('.toggle-icon');
-    content.classList.toggle('active');
-    icon.classList.toggle('active');
-}
-
-function showFeedbackPopup() {
-    document.getElementById('feedbackPopupOverlay').style.display = 'flex';
-    document.getElementById('generalFeedback').focus();
-}
-
-function hideFeedbackPopup() {
-    document.getElementById('feedbackPopupOverlay').style.display = 'none';
-    document.getElementById('generalFeedback').value = '';
-    document.getElementById('issueFeedback').value = '';
-}
-
-function switchTab(tabId) {
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    document.querySelectorAll('.tab-button').forEach(button => {
-        button.classList.remove('active');
-    });
-    document.getElementById(tabId).classList.add('active');
-    document.querySelector(`.tab-button[onclick="switchTab('${tabId}')"]`).classList.add('active');
-}
-
-function showPopup(popupId) {
-    document.getElementById(popupId).style.display = 'flex';
-}
-
-function hidePopup(popupId) {
-    document.getElementById(popupId).style.display = 'none';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.toggle-icon').forEach(icon => {
-        icon.parentElement.addEventListener('click', toggleSection);
-    });
-
-    const closeFeedbackPopup = document.getElementById('closeFeedbackPopup');
-    const cancelFeedbackButton = document.querySelector('.feedback-popup-actions .cancel-button');
-    const submitFeedbackButton = document.querySelector('.feedback-popup-actions .submit-button');
-
-    if (closeFeedbackPopup) {
-        closeFeedbackPopup.addEventListener('click', hideFeedbackPopup);
-    }
-    if (cancelFeedbackButton) {
-        cancelFeedbackButton.addEventListener('click', hideFeedbackPopup);
-    }
-    if (submitFeedbackButton) {
-        submitFeedbackButton.addEventListener('click', () => {
-            const generalFeedback = document.getElementById('generalFeedback').value;
-            const issueFeedback = document.getElementById('issueFeedback').value;
-            if (!generalFeedback && !issueFeedback) {
-                alert('Please provide feedback before submitting.');
-                return;
-            }
-            console.log('Feedback Submitted:', { generalFeedback, issueFeedback });
-            alert('Thank you for your feedback!');
-            hideFeedbackPopup();
-        });
-    }
-
-    window.addEventListener('click', (event) => {
-        if (event.target.classList.contains('popup-overlay')) {
-            event.target.style.display = 'none';
+        // Enhanced Popup Functions
+        function showPopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.style.display = 'flex';
+            setTimeout(() => {
+                popup.classList.add('active');
+            }, 10);
+            
+            // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         }
-        if (event.target === document.getElementById('feedbackPopupOverlay')) {
-            hideFeedbackPopup();
-        }
-    });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            document.querySelectorAll('.popup-overlay').forEach(popup => {
+        function hidePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.classList.remove('active');
+            setTimeout(() => {
                 popup.style.display = 'none';
-            });
-            hideFeedbackPopup();
+            }, 300);
+            
+            // Restore background scrolling
+            document.body.style.overflow = '';
         }
-    });
-});
+
+        // Close popup when clicking outside content
+        window.addEventListener('click', (event) => {
+            if (event.target.classList.contains('popup-overlay')) {
+                hidePopup(event.target.id);
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.popup-overlay').forEach(popup => {
+                    if (popup.style.display === 'flex') {
+                        hidePopup(popup.id);
+                    }
+                });
+            }
+        });
+
+    
     </script>
 </body>
 </html>

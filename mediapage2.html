@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .upload-section {
+            border: 2px dashed #ccc;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .upload-section:hover {
+            border-color: #999;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0069d9;
+        }
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .editor-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .settings-option {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .group-list {
+            margin-top: 20px;
+        }
+        .group-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page 1: File Selection -->
+        <div id="page1">
+            <h1>Editor</h1>
+            <p>Select files to begin</p>
+            <p>Share images in your post.</p>
+            
+            <div class="upload-section">
+                <p>Upload from device</p>
+                <input type="file" id="file-upload" style="display: none;">
+                <button class="btn" onclick="document.getElementById('file-upload').click()">Select Files</button>
+            </div>
+        </div>
+
+        <!-- Page 2: Editor -->
+        <div id="page2" style="display: none;">
+            <div class="editor-header">
+                <h1>Editor</h1>
+                <div>Edit | 1 of 1</div>
+            </div>
+            
+            <div>
+                <div>Edit | 01</div>
+                <!-- Image preview would go here -->
+            </div>
+            
+            <div class="editor-nav">
+                <button class="btn" onclick="showPage(1)">Back</button>
+                <button class="btn" onclick="showPage(3)">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 3: Post Content -->
+        <div id="page3" style="display: none;">
+            <input type="text" placeholder="Name" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+            <p>Post to anyone</p>
+            
+            <textarea placeholder="What do you want to talk about?"></textarea>
+            
+            <div class="editor-nav">
+                <button class="btn" onclick="showPage(2)">Back</button>
+                <button class="btn" onclick="showPage(4)">Next</button>
+            </div>
+        </div>
+
+        <!-- Page 4: Post Settings -->
+        <div id="page4" style="display: none;">
+            <h1>Post Settings</h1>
+            <p>Who can see your post?</p>
+            <p><small>Your selection will be saved</small></p>
+            
+            <div class="settings-option">
+                <input type="radio" id="anyone" name="visibility" checked>
+                <label for="anyone">Anyone<br><small>Anyone on or off Archivehubs</small></label>
+            </div>
+            
+            <div class="settings-option">
+                <input type="radio" id="connections" name="visibility">
+                <label for="connections">Connections only</label>
+            </div>
+            
+            <div class="settings-option">
+                <input type="radio" id="group" name="visibility">
+                <label for="group">Group ▼ (Select a group)</label>
+            </div>
+            
+            <div class="settings-option">
+                <p>Comment Control</p>
+            </div>
+            
+            <div class="settings-option">
+                <input type="checkbox" id="brand-partnership" checked>
+                <label for="brand-partnership">Brand Partnership</label>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn" onclick="showPage(3)">Back</button>
+                <button class="btn" onclick="showPage(5)">Done</button>
+            </div>
+        </div>
+
+        <!-- Page 5: Group Selection -->
+        <div id="page5" style="display: none;">
+            <h1>Select a group</h1>
+            
+            <div class="group-list">
+                <div class="group-item">
+                    <h3>Name (e.g private or public)</h3>
+                    <p>Description</p>
+                </div>
+                
+                <div class="group-item">
+                    <h3>Name (e.g private or public)</h3>
+                    <p>Description</p>
+                </div>
+                
+                <div class="group-item">
+                    <h3>Name (e.g private or public)</h3>
+                    <p>Description</p>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn" onclick="showPage(4)">Back</button>
+                <button class="btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageNumber) {
+            // Hide all pages
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('page' + i).style.display = 'none';
+            }
+            // Show selected page
+            document.getElementById('page' + pageNumber).style.display = 'block';
+        }
+        
+        // Initialize by showing page 1
+        showPage(1);
+    </script>
+</body>
+</html>
