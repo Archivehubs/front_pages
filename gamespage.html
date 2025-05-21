@@ -49,12 +49,14 @@
 
             .search-box {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 background-color: #f8f9fa;
                 border: 1px solid #ced4da;
                 border-radius: 20px;
-                padding: 5px 10px;
+                padding: 8px 10px;
                 transition: border-color 0.2s;
+                width: 120px;
             }
 
             .search-box:focus-within {
@@ -63,7 +65,14 @@
 
             .search-icon {
                 color: #6c757d;
-                margin-right: 5px;
+                font-size: 1.2rem;
+                margin-bottom: 3px;
+            }
+
+            .search-text {
+                font-size: 0.8rem;
+                color: #6c757d;
+                margin-bottom: 5px;
             }
 
             .search-input {
@@ -71,22 +80,22 @@
                 background: none;
                 outline: none;
                 font-size: 0.9rem;
-                width: 150px;
+                width: 100%;
+                text-align: center;
             }
 
             .nav-middle, .nav-right {
                 display: flex;
-                gap: 15px;
+                gap: 10px;
             }
 
             .nav-link {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                gap: 5px;
                 color: #495057;
                 text-decoration: none;
-                font-size: 0.9rem;
-                padding: 5px 10px;
+                padding: 8px;
                 border-radius: 5px;
                 transition: background-color 0.2s, color 0.2s;
             }
@@ -105,10 +114,21 @@
                 background-color: #0056b3;
             }
 
-            .nav-link i {
-                font-size: 1.1rem;
+            .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 3px;
             }
 
+            .nav-link i {
+                font-size: 1.2rem;
+            }
+
+            .nav-text {
+                font-size: 0.8rem;
+                text-align: center;
+            }
             /* Main Layout */
             .main-content {
                 display: grid;
@@ -531,21 +551,26 @@
                     grid-template-columns: repeat(2, 1fr);
                 }
 
-                .navbar {
+                 .navbar {
                     flex-direction: column;
-                    gap: 10px;
+                    gap: 15px;
                     padding: 15px;
                 }
 
                 .nav-middle, .nav-right {
                     flex-wrap: wrap;
                     justify-content: center;
-                    gap: 10px;
+                    gap: 8px;
+                }
+
+                .search-box {
+                    width: 100px;
                 }
 
                 .search-input {
-                    width: 100px;
+                    font-size: 0.85rem;
                 }
+
             }
 
             @media (max-width: 480px) {
