@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-icons i {
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background-color: #f0f2f5;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            gap: 20px;
+        }
+
+        .sidebar {
+            width: 60%;
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .main-content {
+            width: 40%;
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .tab-nav button {
+            padding: 10px 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .tab-nav button.active {
+            color: #0a66c2;
+            border-bottom: 2px solid #0a66c2;
+        }
+
+        .group-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .group-card {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .group-card:hover {
+            background-color: #f5f5f5;
+        }
+
+        .group-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #e1e1e1;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #666;
+        }
+
+        .group-info {
+            flex-grow: 1;
+        }
+
+        .group-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .group-members {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .group-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: #0a66c2;
+            color: white;
+            border: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #0a66c2;
+            color: #0a66c2;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .discover-section {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .discover-icon {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        .discover-text {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .info-text {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .info-text a {
+            color: #0a66c2;
+            text-decoration: none;
+        }
+
+        .see-more {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .see-more a {
+            color: #0a66c2;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 600px;
+            max-width: 90%;
+            border-radius: 8px;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .radio-group {
+            margin-top: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .radio-option input {
+            margin-right: 10px;
+        }
+
+        .radio-option .radio-label {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .radio-option .radio-description {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-option input {
+            margin-right: 10px;
+        }
+
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-create {
+            background-color: #0a66c2;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-create:hover {
+            background-color: #084d94;
+        }
+
+        .add-industry {
+            display: flex;
+            align-items: center;
+            color: #0a66c2;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .add-industry i {
+            margin-right: 5px;
+        }
+
+        .required-field::after {
+            content: "*";
+            color: red;
+            margin-left: 3px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="header-icons">
+            <i class="fas fa-home"></i>
+            <i class="fas fa-users"></i>
+            <i class="fas fa-video"></i>
+            <i class="fas fa-comment-dots"></i>
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+            <i class="fas fa-briefcase"></i>
+            <i class="fas fa-building"></i>
+            <i class="fas fa-folder"></i>
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Left Sidebar (60%) -->
+        <div class="sidebar">
+            <div class="tab-nav">
+                <button class="active">Your groups</button>
+                <button>Requested</button>
+                <button id="createGroupBtn">Create group</button>
+            </div>
+
+            <div class="group-list">
+                <div class="group-card">
+                    <div class="group-icon">G1</div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership size</div>
+                    </div>
+                    <div class="group-actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon">G2</div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership size</div>
+                    </div>
+                    <div class="group-actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon">G3</div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership size</div>
+                    </div>
+                    <div class="group-actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>                  
+                </div>
+                  <p>Search other trusted communities that share and support your goals. </p>
+            </div>
+
+            <div class="section-title">Find out Group</div>
+            <p class="info-text">
+                To help you focus on the best communities for you, we limit your total number of pending requests to join. <a href="#">Learn More</a>
+            </p>
+            
+            <div class="discover-section">
+                <div class="discover-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="section-title">Discover groups</div>
+                <p class="discover-text">
+                    Find other trusted communities that share and support your goals.
+                </p>
+                <button class="btn btn-primary">Find Out</button>
+            </div>
+        </div>
+
+        <!-- Right Main Content (40%) -->
+        <div class="main-content">
+            <div class="section-title">Groups you might be interested in</div>
+            <div class="group-list">
+                <div class="group-card">
+                    <div class="group-icon"></div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership Size</div>
+                    </div>
+                    <button class="btn btn-outline">Join</button>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon"></div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership Size</div>
+                    </div>
+                    <button class="btn btn-outline">Join</button>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon"></div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership Size</div>
+                    </div>
+                    <button class="btn btn-outline">Join</button>
+                </div>
+            </div>
+            <div class="see-more">
+                <a href="#">See More →</a>
+            </div>
+
+            <div class="group-list">
+                <div class="group-card">
+                    <div class="group-icon"></div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership Narration</div>
+                    </div>
+                    <button class="btn btn-outline">View Post</button>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon"></div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership Narration</div>
+                    </div>
+                    <button class="btn btn-outline">View Post</button>
+                </div>
+                <div class="group-card">
+                    <div class="group-icon"></div>
+                    <div class="group-info">
+                        <div class="group-name">Name</div>
+                        <div class="group-members">Membership Narration</div>
+                    </div>
+                    <button class="btn btn-primary">Join</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Group Modal -->
+    <div class="modal" id="createGroupModal">
+        <div class="modal-content">
+            <div class="modal-header">Create group</div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="required-field">Group name</label>
+                    <input type="text" placeholder="Motivational Team">
+                </div>
+
+                <div class="form-group">
+                    <label class="required-field">Description</label>
+                    <textarea placeholder="What is the purpose of your group"></textarea>
+                    <div class="char-count">0/2000</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Industry (up to 3)</label>
+                    <div class="add-industry">
+                        <i class="fas fa-plus"></i> Add industry
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Location</label>
+                    <div class="add-industry">
+                        <i class="fas fa-plus"></i> Add a location of your group
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="required-field">Group type</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="groupType" id="public" checked>
+                            <div class="radio-label">
+                                <label for="public">Public</label>
+                                <span class="radio-description">Anyone, on or off Archive can see posts in the group. The group appears in search results and is visible to others on members' profiles.</span>
+                            </div>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="groupType" id="private">
+                            <div class="radio-label">
+                                <label for="private">Private</label>
+                                <span class="radio-description">Only group members can see posts in the group.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12px; color: #666; margin-top: 10px;">Group type can't be changed once it's created. <a href="#" style="color: #0a66c2;">Learn more</a></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Discoverability</label>
+                    <p style="font-size: 14px; color: #666;">Public groups appear in search results and are visible to others on members' profiles.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Permissions</label>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="allowInvites">
+                        <label for="allowInvites">Allow members to invite their connections</label>
+                    </div>
+                    <p style="font-size: 12px; color: #666; margin-left: 25px;">Group members can invite 1st degree connections to the group. All requests to join will still require admin approval.</p>
+                    
+                    <div class="checkbox-option" style="margin-top: 15px;">
+                        <input type="checkbox" id="requireApproval">
+                        <label for="requireApproval">Require new posts to be reviewed by admins</label>
+                    </div>
+                    <p style="font-size: 12px; color: #666; margin-left: 25px;">Members' posts will require admin approval within 14 days before they become visible to others.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-create">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Open modal when Create Group button is clicked
+            const createGroupBtn = document.getElementById('createGroupBtn');
+            const modal = document.getElementById('createGroupModal');
+            
+            createGroupBtn.addEventListener('click', function() {
+                modal.style.display = 'flex';
+            });
+
+            // Close modal when clicking outside of it
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Character count for description textarea
+            const descriptionTextarea = document.querySelector('.form-group textarea');
+            const charCount = document.querySelector('.char-count');
+            
+            descriptionTextarea.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                charCount.textContent = `${currentLength}/2000`;
+            });
+        });
+    </script>
+</body>
+</html>
