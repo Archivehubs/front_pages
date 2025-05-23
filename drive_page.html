@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/drive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Drive Page Styles */
+        .drive-container {
+            display: flex;
+            min-height: calc(100vh - 60px);
+            background-color: #f5f7fa;
+        }
+
+        .left-panel {
+            width: 280px;
+            background-color: #fff;
+            border-right: 1px solid #e0e0e0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .drive-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .drive-header h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .drive-header i {
+            font-size: 20px;
+            color: #666;
+        }
+
+        .left-panel .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .left-panel .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .left-panel .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .files-list {
+            margin-bottom: 25px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        .file-item:hover {
+            background-color: #f0f2f5;
+        }
+
+        .file-item i {
+            margin-right: 10px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .file-item span {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .categories {
+            margin-bottom: 25px;
+        }
+
+        .categories h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .category-item input {
+            margin-right: 10px;
+        }
+
+        .category-item label {
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .additional-links {
+            margin-bottom: 25px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        .link-item:hover {
+            background-color: #f0f2f5;
+        }
+
+        .link-item i {
+            margin-right: 10px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .link-item span {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-links a {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #0a66c2;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+        }
+
+        .company-info {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .enink-logo {
+            margin-left: 5px;
+            height: 15px;
+        }
+
+        .right-panel {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .content-section h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .file-category, .app-category, .business-section, .legal-section {
+            margin-bottom: 30px;
+        }
+
+        .file-category h3, .app-category h3, .business-section h3, .legal-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .file-grid, .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .file-card, .app-card {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-card:hover, .app-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .file-icon, .app-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f0f2f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .file-icon i, .app-icon i {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .file-info, .app-info {
+            margin-top: 10px;
+        }
+
+        .file-type, .app-type {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .file-desc, .app-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .file-list {
+            margin-bottom: 15px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .file-item i {
+            margin-right: 10px;
+            color: #666;
+        }
+
+        .file-details {
+            flex: 1;
+        }
+
+        .file-desc {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .doc-list {
+            margin-bottom: 15px;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .doc-type {
+            width: 60px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .doc-desc {
+            flex: 1;
+            font-size: 14px;
+            color: #666;
+            padding: 0 15px;
+        }
+
+        .view-btn {
+            padding: 6px 12px;
+            background-color: #0a66c2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .view-btn:hover {
+            background-color: #084d94;
+        }
+
+        .file-table {
+            margin-bottom: 15px;
+        }
+
+        .file-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .file-table th, .file-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .file-table th {
+            font-weight: 600;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .file-table tr:hover {
+            background-color: #f5f7fa;
+        }
+
+        .see-more {
+            text-align: right;
+        }
+
+        .see-more a {
+            color: #0a66c2;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .see-more a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .drive-container {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            
+            .right-panel {
+                padding: 15px;
+            }
+            
+            .file-grid, .app-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .file-grid, .app-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .doc-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .doc-desc {
+                padding: 10px 0;
+            }
+            
+            .view-btn {
+                align-self: flex-end;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+        <div class="nav-middle">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-user-friends"></i>
+                <span>MyConnections</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-video"></i>
+                <span>Video</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>Messages</span>
+            </a>
+            <a href="notification.html" class="nav-link">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+            <a href="#" class="nav-link profile-nav-link">
+              <i class="fas fa-user-circle"></i>
+              <span>Account</span>
+            </a>
+        </div>
+
+        <div class="nav-right">
+            <a href="#" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+            </a>
+            <a href="business.html" class="nav-link">
+                <i class="fas fa-building"></i>
+                <span>Business</span>
+            </a>
+            <a href="#" class="nav-link active">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span>Drive</span>
+            </a>
+            <a href="menu.html" class="nav-link">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="drive-container">
+        <div class="left-panel">
+            <div class="drive-header">
+                <h2>Archived</h2>
+                <i class="fas fa-archive"></i>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Drive">
+            </div>
+
+            <div class="files-list">
+                <div class="file-item">
+                    <i class="fas fa-music"></i>
+                    <span>Audio</span>
+                </div>
+                <div class="file-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Documents</span>
+                </div>
+                <div class="file-item">
+                    <i class="fas fa-image"></i>
+                    <span>Images</span>
+                </div>
+                <div class="file-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </div>
+            </div>
+
+            <div class="categories">
+                <h3>Categories</h3>
+                <div class="category-item">
+                    <input type="checkbox" id="app-store">
+                    <label for="app-store">App Store</label>
+                </div>
+                <div class="category-item">
+                    <input type="checkbox" id="backup" checked>
+                    <label for="backup">Backup & Recovery</label>
+                </div>
+                <div class="category-item">
+                    <input type="checkbox" id="corporate">
+                    <label for="corporate">Corporate Records</label>
+                </div>
+                <div class="category-item">
+                    <input type="checkbox" id="diary" checked>
+                    <label for="diary">Diary</label>
+                </div>
+                <div class="category-item">
+                    <input type="checkbox" id="files">
+                    <label for="files">Files</label>
+                </div>
+                <div class="category-item">
+                    <input type="checkbox" id="folder">
+                    <label for="folder">Folder</label>
+                </div>
+                <div class="category-item">
+                    <input type="checkbox" id="gallery">
+                    <label for="gallery">Gallery</label>
+                </div>
+                <div class="category-item">
+                    <input type="checkbox" id="idea-bank" checked>
+                    <label for="idea-bank">Idea Bank</label>
+                </div>
+            </div>
+
+            <div class="additional-links">
+                <div class="link-item">
+                    <i class="fas fa-inbox"></i>
+                    <span>Inbox</span>
+                </div>
+                <div class="link-item">
+                    <i class="fas fa-address-book"></i>
+                    <span>Contacts</span>
+                </div>
+                <div class="link-item">
+                    <i class="fas fa-book"></i>
+                    <span>Library</span>
+                </div>
+                <div class="link-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Portfolio</span>
+                </div>
+                <div class="link-item">
+                    <i class="fas fa-headset"></i>
+                    <span>Service Centre</span>
+                </div>
+                <div class="link-item">
+                    <i class="fas fa-store"></i>
+                    <span>Store</span>
+                </div>
+                <div class="link-item">
+                    <i class="fas fa-microchip"></i>
+                    <span>Tec hub</span>
+                </div>
+                <div class="link-item">
+                    <i class="fas fa-lock"></i>
+                    <span>Vault</span>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <a href="#" class="general-terms">General Terms</a>
+                <a href="#" class="app-link">Get the Archivehubs App</a>
+                <div class="copyright">
+                    ARCHIVEHUBS: ENINK Investment
+                    <div class="company-info">
+                        Limited © 2025 <img src="images/company-name.jpg" alt="ENINK" class="enink-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="content-section">
+                <h2>All Files</h2>
+                
+                <div class="file-category">
+                    <h3>Audios</h3>
+                    <div class="file-grid">
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Audio Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Audio Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Audio Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Audio Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Audio Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-category">
+                    <h3>Documents</h3>
+                    <div class="file-grid">
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Document Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Document Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Document Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Document Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="file-info">
+                                <div class="file-type">Document Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="see-more">
+                        <a href="#">See More →</a>
+                    </div>
+                </div>
+
+                <div class="file-category">
+                    <h3>Images</h3>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <i class="fas fa-image"></i>
+                            <div class="file-details">
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-image"></i>
+                            <div class="file-details">
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-image"></i>
+                            <div class="file-details">
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-image"></i>
+                            <div class="file-details">
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="see-more">
+                        <a href="#">See More →</a>
+                    </div>
+                </div>
+
+                <div class="file-category">
+                    <h3>Videos</h3>
+                    <div class="file-list">
+                        <div class="file-item">
+                            <i class="fas fa-video"></i>
+                            <div class="file-details">
+                                <div class="file-type">Video Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-video"></i>
+                            <div class="file-details">
+                                <div class="file-type">Video Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-video"></i>
+                            <div class="file-details">
+                                <div class="file-type">Video Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-video"></i>
+                            <div class="file-details">
+                                <div class="file-type">Video Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-video"></i>
+                            <div class="file-details">
+                                <div class="file-type">Video Type</div>
+                                <div class="file-desc">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="see-more">
+                        <a href="#">See More →</a>
+                    </div>
+                </div>
+
+                <div class="app-category">
+                    <h3>Social Media Apps</h3>
+                    <div class="app-grid">
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-type">App Type</div>
+                                <div class="app-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-type">App Type</div>
+                                <div class="app-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-type">App Type</div>
+                                <div class="app-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-type">App Type</div>
+                                <div class="app-desc">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="see-more">
+                        <a href="#">See More →</a>
+                    </div>
+                </div>
+
+                <div class="app-category">
+                    <h3>Productivity Apps</h3>
+                    <div class="app-grid">
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-type">App Type</div>
+                                <div class="app-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-type">App Type</div>
+                                <div class="app-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-type">App Type</div>
+                                <div class="app-desc">Description</div>
+                            </div>
+                        </div>
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-type">App Type</div>
+                                <div class="app-desc">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="see-more">
+                        <a href="#">See More →</a>
+                    </div>
+                </div>
+
+                <div class="business-section">
+                    <h3>Business Documents</h3>
+                    <div class="doc-list">
+                        <div class="doc-item">
+                            <div class="doc-type">BD 1</div>
+                            <div class="doc-desc">Description</div>
+                            <button class="view-btn">View</button>
+                        </div>
+                        <div class="doc-item">
+                            <div class="doc-type">BD 2</div>
+                            <div class="doc-desc">Description</div>
+                            <button class="view-btn">View</button>
+                        </div>
+                        <div class="doc-item">
+                            <div class="doc-type">BD 3</div>
+                            <div class="doc-desc">Description</div>
+                            <button class="view-btn">View</button>
+                        </div>
+                        <div class="doc-item">
+                            <div class="doc-type">BD 4</div>
+                            <div class="doc-desc">Description</div>
+                            <button class="view-btn">View</button>
+                        </div>
+                    </div>
+                    <div class="see-more">
+                        <a href="#">See More →</a>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h3>Legal Files</h3>
+                    <div class="file-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>Description</td>
+                                    <td><button class="view-btn">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>Description</td>
+                                    <td><button class="view-btn">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>Description</td>
+                                    <td><button class="view-btn">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more">
+                        <a href="#">See More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/drive.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle active state for file items
+            const fileItems = document.querySelectorAll('.file-item');
+            fileItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    fileItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Toggle active state for link items
+            const linkItems = document.querySelectorAll('.link-item');
+            linkItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    linkItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // File card click handler
+            const fileCards = document.querySelectorAll('.file-card, .app-card');
+            fileCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Add functionality for when a file card is clicked
+                    console.log('File card clicked:', this);
+                });
+            });
+
+            // View button click handler
+            const viewButtons = document.querySelectorAll('.view-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Add functionality for when view button is clicked
+                    console.log('View button clicked:', this);
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('.left-panel .search-box input');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const items = document.querySelectorAll('.file-item, .link-item');
+                
+                items.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

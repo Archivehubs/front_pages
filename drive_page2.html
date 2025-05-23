@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiveHubs - Digital Archiving Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --light-text: #6c757d;
+            --border-color: #e0e0e0;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-left, .nav-middle, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            margin-right: 20px;
+        }
+        
+        .logo-img {
+            height: 40px;
+        }
+        
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: var(--secondary-color);
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        
+        .search-icon {
+            margin-right: 10px;
+            color: var(--light-text);
+        }
+        
+        .search-text {
+            color: var(--light-text);
+            font-size: 14px;
+        }
+        
+        .search-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            padding-left: 40px;
+            outline: none;
+            display: none;
+        }
+        
+        .search-box.active .search-input {
+            display: block;
+        }
+        
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 12px;
+        }
+        
+        .nav-link i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .container {
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+        
+        .left-panel {
+            width: 250px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            overflow-y: auto;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .right-panel {
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.05);
+            overflow-y: auto;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .file-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        
+        .file-item:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .file-item i {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .category-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        
+        .category-item:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .category-item i {
+            margin-right: 10px;
+            font-size: 14px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-top: 30px;
+            font-size: 12px;
+            color: var(--light-text);
+        }
+        
+        .footer-links a {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 11px;
+        }
+        
+        /* Archive content styles */
+        .archive-section {
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .archive-section h1 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .archive-section h2 {
+            font-size: 18px;
+            margin: 15px 0 10px;
+        }
+        
+        .archive-section h3 {
+            font-size: 16px;
+            margin: 12px 0 8px;
+        }
+        
+        .file-type-list {
+            list-style: none;
+        }
+        
+        .file-type-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .file-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .file-table th, .file-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .file-table th {
+            background-color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        .see-more {
+            display: block;
+            margin-top: 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .see-more:hover {
+            text-decoration: underline;
+        }
+        
+        .gallery-offers {
+            margin: 20px 0;
+        }
+        
+        .offer-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .offer-table th, .offer-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        
+        .offer-table th {
+            background-color: var(--secondary-color);
+        }
+        
+        .checkbox-list {
+            list-style: none;
+        }
+        
+        .checkbox-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-list input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        /* Right panel styles */
+        .portfolio-section {
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .portfolio-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .portfolio-info h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .portfolio-info p {
+            font-size: 12px;
+            color: var(--light-text);
+            margin-bottom: 5px;
+        }
+        
+        .portfolio-info .price {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .right-panel {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-panel, .main-content, .right-panel {
+                width: 100%;
+            }
+            
+            .left-panel {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+            
+            .navbar {
+                flex-wrap: wrap;
+            }
+            
+            .nav-middle {
+                order: 3;
+                width: 100%;
+                justify-content: space-around;
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1px solid var(--border-color);
+            }
+        }
+        
+        /* Utility classes */
+        .text-success {
+            color: var(--success-color);
+        }
+        
+        .text-warning {
+            color: var(--warning-color);
+        }
+        
+        .text-dark {
+            color: var(--text-color);
+        }
+        
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+        
+        .mt-3 {
+            margin-top: 15px;
+        }
+        
+        .d-flex {
+            display: flex;
+        }
+        
+        .align-items-center {
+            align-items: center;
+        }
+        
+        .justify-content-between {
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+                <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+                <div class="search-trigger">
+                    <i class="fas fa-search search-icon"></i>
+                    <div class="search-text">Search</div>
+                </div>
+                <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+        <div class="nav-middle">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-user-friends"></i>
+                <span>MyConnections</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-video"></i>
+                <span>Video</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>Messages</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-user-circle"></i>
+                <span>Account</span>
+            </a>
+        </div>
+
+        <div class="nav-right">
+            <a href="#" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-building"></i>
+                <span>Business</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span>Drive</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="left-panel">
+            <div class="section-header">
+                <h2>Archived</h2>
+                <i class="fas fa-archive"></i>
+            </div>
+            
+            <ul class="file-list">
+                <li class="file-item">
+                    <i class="fas fa-search"></i>
+                    <span>Search Drive</span>
+                </li>
+                <li class="file-item">
+                    <i class="fas fa-music"></i>
+                    <span>Audio</span>
+                </li>
+                <li class="file-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Documents</span>
+                </li>
+                <li class="file-item">
+                    <i class="fas fa-image"></i>
+                    <span>Images</span>
+                </li>
+                <li class="file-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </li>
+            </ul>
+            
+            <div class="section-header">
+                <h2>Categories</h2>
+                <i class="fas fa-tags"></i>
+            </div>
+            
+            <ul class="category-list">
+                <li class="category-item">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>App Store</span>
+                </li>
+                <li class="category-item">
+                    <i class="fas fa-hdd"></i>
+                    <span>Backup & Recovery</span>
+                </li>
+                <li class="category-item">
+                    <i class="fas fa-building"></i>
+                    <span>Corporate Records</span>
+                </li>
+                <li class="category-item">
+                    <i class="fas fa-book"></i>
+                    <span>Diary</span>
+                </li>
+                <li class="category-item">
+                    <i class="fas fa-file"></i>
+                    <span>Files</span>
+                </li>
+                <li class="category-item">
+                    <i class="fas fa-folder"></i>
+                    <span>Folder</span>
+                </li>
+                <li class="category-item">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span>
+                </li>
+                <li class="category-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Idea Bank</span>
+                </li>
+            </ul>
+            
+            <div class="footer-links">
+                <a href="#">General Terms</a>
+                <a href="#">Get the Archivehubs App</a>
+                <div class="copyright">
+                    ARCHIVEHUBS: ENINK Investment Limited © 2025
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="archive-section">
+                <h1>Archived</h1>
+                <ul class="file-type-list">
+                    <li>Search Drive</li>
+                    <li>Audio</li>
+                    <li>Documents</li>
+                    <li>Images</li>
+                    <li>Video</li>
+                </ul>
+                
+                <h2>Categories</h2>
+                <ul class="checkbox-list">
+                    <li><input type="checkbox"> App Store</li>
+                    <li><input type="checkbox" checked> Backup & Recovery</li>
+                    <li><input type="checkbox"> Corporate Records</li>
+                    <li><input type="checkbox"> Diary</li>
+                    <li><input type="checkbox"> Files</li>
+                    <li><input type="checkbox"> Folder</li>
+                    <li><input type="checkbox"> Gallery</li>
+                    <li><input type="checkbox"> Idea Bank</li>
+                </ul>
+                
+                <h2>Received</h2>
+                <h3>All Files</h3>
+                
+                <h3>Audios</h3>
+                <table class="file-table">
+                    <tr>
+                        <th>Audio Type</th>
+                        <th>Audio Type</th>
+                        <th>Audio Type</th>
+                        <th>Audio Type</th>
+                        <th>Audio Type</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Description</td>
+                        <td>Description</td>
+                        <td>Description</td>
+                        <td>Description</td>
+                    </tr>
+                </table>
+                
+                <h3>Documents</h3>
+                <table class="file-table">
+                    <tr>
+                        <th>Document Type</th>
+                        <th>Document Type</th>
+                        <th>Document Type</th>
+                        <th>Document Type</th>
+                        <th>Document Type</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Description</td>
+                        <td>Description</td>
+                        <td>Description</td>
+                        <td>Description</td>
+                    </tr>
+                </table>
+                
+                <a href="#" class="see-more">See More →</a>
+                <ul>
+                    <li><strong>Description</strong></li>
+                    <li><strong>Description</strong></li>
+                    <li><strong>Description</strong></li>
+                    <li><strong>Description</strong></li>
+                </ul>
+            </div>
+            
+            <div class="archive-section">
+                <h1>General Terms</h1>
+                <p>Get the Archivehubs App ARCHIVEHUBS: ENINK Investment Limited © 2025</p>
+                
+                <h2>Images</h2>
+                <ul>
+                    <li>Description</li>
+                    <li>Description</li>
+                    <li>Description</li>
+                    <li>Description</li>
+                    <li>Description</li>
+                </ul>
+                
+                <h2>Videos</h2>
+                <ul>
+                    <li>Video Type</li>
+                    <li>Video Type</li>
+                    <li>Video Type</li>
+                    <li>Video Type</li>
+                    <li>Video Type</li>
+                </ul>
+                
+                <h2>Description</h2>
+                <ul>
+                    <li>Description</li>
+                    <li>Description</li>
+                    <li>Description</li>
+                    <li>Description</li>
+                </ul>
+                
+                <h2>See More</h2>
+                <ul>
+                    <li>Messaging</li>
+                    <li>...</li>
+                </ul>
+            </div>
+            
+            <div class="archive-section">
+                <h2>Gallery Offers</h2>
+                <table class="offer-table">
+                    <tr>
+                        <th>Item</th>
+                        <th>Item</th>
+                        <th>Item</th>
+                        <th>Item</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Price:</strong> $XX</td>
+                        <td><strong>Price:</strong> $XX</td>
+                        <td><strong>Price:</strong> $XX</td>
+                        <td><strong>Price:</strong> $XX</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Description:</strong> Text</td>
+                        <td><strong>Description:</strong> Text</td>
+                        <td><strong>Description:</strong> Text</td>
+                        <td><strong>Description:</strong> Text</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location:</strong> Text</td>
+                        <td><strong>Location:</strong> Text</td>
+                        <td><strong>Location:</strong> Text</td>
+                        <td><strong>Location:</strong> Text</td>
+                    </tr>
+                </table>
+                <a href="#" class="see-more">See More →</a>
+            </div>
+            
+            <div class="archive-section">
+                <h2>To Do List</h2>
+                <div class="todo-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                </div>
+                <div class="todo-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                </div>
+                <div class="todo-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                </div>
+                <button class="edit-btn">Edit Post</button>
+                <button class="edit-btn">Edit Post</button>
+                <a href="#" class="see-more">See More →</a>
+            </div>
+            
+            <div class="archive-section">
+                <h2>Portfolio Customization</h2>
+                <ul>
+                    <li>Name</li>
+                    <li>Resume</li>
+                    <li>Testimonials & Reviews</li>
+                    <li>Enclosures</li>
+                    <li>Generate Profile</li>
+                </ul>
+            </div>
+            
+            <div class="archive-section">
+                <h2>Services Offer</h2>
+                <table class="offer-table">
+                    <tr>
+                        <th>Item</th>
+                        <th>Item</th>
+                        <th>Item</th>
+                        <th>Item</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Price:</strong> $XX</td>
+                        <td><strong>Price:</strong> $XX</td>
+                        <td><strong>Price:</strong> $XX</td>
+                        <td><strong>Price:</strong> $XX</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Description:</strong> Text</td>
+                        <td><strong>Description:</strong> Text</td>
+                        <td><strong>Description:</strong> Text</td>
+                        <td><strong>Description:</strong> Text</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location:</strong> Text</td>
+                        <td><strong>Location:</strong> Text</td>
+                        <td><strong>Location:</strong> Text</td>
+                        <td><strong>Location:</strong> Text</td>
+                    </tr>
+                </table>
+                <a href="#" class="see-more">See More →</a>
+            </div>
+            
+            <div class="archive-section">
+                <h2>Logo</h2>
+                <p><strong>Logo</strong></p>
+                
+                <h3>Available Picks</h3>
+                <table class="offer-table">
+                    <tr>
+                        <th>Item</th>
+                        <th>Item</th>
+                        <th>Item</th>
+                        <th>Item</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Price:</strong> XX<br>Description: Text<br>Location: Text</td>
+                        <td><strong>Price:</strong> XX<br>Description: Text<br>Location: Text</td>
+                        <td><strong>Price:</strong> XX<br>Description: Text<br>Location: Text</td>
+                        <td><strong>Price:</strong> XX<br>Description: Text<br>Location: Text</td>
+                    </tr>
+                </table>
+                <a href="#" class="see-more">See More →</a>
+            </div>
+            
+            <div class="archive-section">
+                <h2>Application (Apps) Picks</h2>
+                <ul>
+                    <li>Order</li>
+                    <li>Order</li>
+                    <li>Order</li>
+                </ul>
+                
+                <h2>Product Requirement Documents (PRD) Picks</h2>
+                <div class="pick-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                    <button class="order-btn">Order</button>
+                </div>
+                <div class="pick-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                    <button class="order-btn">Order</button>
+                </div>
+                <div class="pick-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                    <button class="order-btn">Order</button>
+                </div>
+                <a href="#" class="see-more">See More →</a>
+                
+                <h2>Domain Name (DN) Picks</h2>
+                <div class="pick-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                </div>
+                <div class="pick-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                    <button class="order-btn">Order</button>
+                </div>
+                <div class="pick-item">
+                    <p><strong>Name</strong></p>
+                    <p>Description</p>
+                    <p>Date</p>
+                    <button class="order-btn">Order</button>
+                </div>
+                <a href="#" class="see-more">See More →</a>
+            </div>
+            
+            <div class="archive-section">
+                <h2>Software Picks</h2>
+                <div class="pick-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <p><strong>Name</strong></p>
+                        <p>Description</p>
+                        <p>Date</p>
+                    </div>
+                    <button class="order-btn">Order</button>
+                </div>
+                <div class="pick-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <p><strong>Name</strong></p>
+                        <p>Description</p>
+                        <p>Date</p>
+                    </div>
+                    <button class="order-btn">Order</button>
+                </div>
+                <div class="pick-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <p><strong>Name</strong></p>
+                        <p>Description</p>
+                        <p>Date</p>
+                    </div>
+                    <button class="order-btn">Order</button>
+                </div>
+                <a href="#" class="see-more">See More →</a>
+                
+                <h2>Other Tools</h2>
+                <div class="pick-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <p><strong>Name</strong></p>
+                        <p>Description</p>
+                        <p>Date</p>
+                    </div>
+                    <button class="order-btn">Order</button>
+                </div>
+                <div class="pick-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <p><strong>Name</strong></p>
+                        <p>Description</p>
+                        <p>Date</p>
+                    </div>
+                    <button class="order-btn">Order</button>
+                </div>
+                <div class="pick-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <p><strong>Name</strong></p>
+                        <p>Description</p>
+                        <p>Date</p>
+                    </div>
+                    <button class="order-btn">Order</button>
+                </div>
+                <a href="#" class="see-more">See More →</a>
+                
+                <h2>Messaging ... ▼</h2>
+            </div>
+            
+            <div class="archive-section">
+                <h2>Restricted Files</h2>
+                <h3>Audios</h3>
+                <table class="file-table">
+                    <tr>
+                        <th>Audio Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Audio</td>
+                        <td>Type Description</td>
+                    </tr>
+                    <tr>
+                        <td>Audio</td>
+                        <td>Type Description</td>
+                    </tr>
+                    <tr>
+                        <td>Audio</td>
+                        <td>Type Description</td>
+                    </tr>
+                    <tr>
+                        <td>Audio</td>
+                        <td>Type Description</td>
+                    </tr>
+                    <tr>
+                        <td>Audio</td>
+                        <td>Type Description</td>
+                    </tr>
+                </table>
+                <a href="#" class="see-more">See More →</a>
+                
+                <h3>Documents</h3>
+                <table class="file-table">
+                    <tr>
+                        <th>Document Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Document</td>
+                        <td>Type Description</td>
+                    </tr>
+                    <tr>
+                        <td>Document</td>
+                        <td>Type Description</td>
+                    </tr>
+                    <tr>
+                        <td>Document</td>
+                        <td>Type Description</td>
+                    </tr>
+                    <tr>
+                        <td>Document</td>
+                        <td>Type Description</td>
+                    </tr>
+                    <tr>
+                        <td>Document</td>
+                        <td>Type Description</td>
+                    </tr>
+                </table>
+                <a href="#" class="see-more">See More →</a>
+            </div>
+            
+            <div class="archive-section">
+                <h1>Impacts</h1>
+                <ul>
+                    <li><strong>Description</strong></li>
+                    <li>Description</li>
+                    <li>Description</li>
+                    <li>Description</li>
+                </ul>
+                <a href="#" class="see-more">See More →</a>
+                
+                <h3>Videos</h3>
+                <ul>
+                    <li>Video Type</li>
+                    <li>Video Type</li>
+                    <li>Video Type</li>
+                    <li>Video Type</li>
+                    <li>Video Type</li>
+                </ul>
+                
+                <h3>Description</h3>
+                <ul>
+                    <li>Description</li>
+                    <li>Description</li>
+                    <li>Description</li>
+                    <li>Description</li>
+                </ul>
+                <a href="#" class="see-more">See More →</a>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="section-header">
+                <h2>Library</h2>
+                <i class="fas fa-book"></i>
+            </div>
+            
+            <div class="section-header">
+                <h2>Portfolio</h2>
+                <i class="fas fa-briefcase"></i>
+            </div>
+            
+            <div class="section-header">
+                <h2>Service Centre</h2>
+                <i class="fas fa-headset"></i>
+            </div>
+            
+            <div class="section-header">
+                <h2>Store</h2>
+                <i class="fas fa-store"></i>
+            </div>
+            
+            <div class="section-header">
+                <h2>Tec hub</h2>
+                <i class="fas fa-microchip"></i>
+            </div>
+            
+            <div class="section-header">
+                <h2>Vault</h2>
+                <i class="fas fa-lock"></i>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">General Terms</a>
+                <a href="#">Get the Archivehubs App</a>
+                <div class="copyright">
+                    ARCHIVEHUBS: ENINK Investment Limited © 2025
+                </div>
+            </div>
+            
+            <div class="portfolio-section">
+                <h3>Items</h3>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/60" alt="Item">
+                    <div class="portfolio-info">
+                        <h4>Item Name</h4>
+                        <p class="price">Price: $XX</p>
+                        <p>Description: Text</p>
+                        <p>Location: Text</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/60" alt="Item">
+                    <div class="portfolio-info">
+                        <h4>Item Name</h4>
+                        <p class="price">Price: $XX</p>
+                        <p>Description: Text</p>
+                        <p>Location: Text</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/60" alt="Item">
+                    <div class="portfolio-info">
+                        <h4>Item Name</h4>
+                        <p class="price">Price: $XX</p>
+                        <p>Description: Text</p>
+                        <p>Location: Text</p>
+                    </div>
+                </div>
+                <a href="#" class="see-more">See More →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle search input
+        document.querySelector('.search-trigger').addEventListener('click', function() {
+            const searchBox = this.parentElement;
+            searchBox.classList.toggle('active');
+            if (searchBox.classList.contains('active')) {
+                searchBox.querySelector('.search-input').focus();
+            }
+        });
+        
+        // Close search when clicking outside
+        document.addEventListener('click', function(e) {
+            const searchBox = document.querySelector('.search-box');
+            if (!searchBox.contains(e.target) && searchBox.classList.contains('active')) {
+                searchBox.classList.remove('active');
+            }
+        });
+        
+        // File item selection
+        document.querySelectorAll('.file-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.file-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Category item selection
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
