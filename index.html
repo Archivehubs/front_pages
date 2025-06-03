@@ -3,384 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>ArchiveHubs - Welcome</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-
-    body {
-            min-height: 100vh;
-            background: #D9D9D9;
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
-
-        .container {
-            max-width: 70%;
-            margin: 0 auto;
-            padding: 48px 16px;
-        }
-
-        .header {          
-            margin-bottom: 48px;
-        }
-
-        .header h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #1f2937;
-        }
-
-        .header p {
-            font-size: 1rem;
-            color: #6b7280;
-        }
-
-        .video-grid, .game-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .video-card, .game-card {
-            background: #ffffff;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .video-card:hover, .game-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .thumbnail {
-            position: relative;
-            aspect-ratio: 16 / 9;
-        }
-
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-       
-        .info {
-            padding: 16px;
-        }
-
-        .author-container {
+        .boarding-container {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            padding: 20px;
         }
 
-        .author-image {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid #dbeafe;
-        }
-
-        .author-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .author-details h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin: 0;
-        }
-
-        .author-details p {
-            font-size: 0.8rem;
-            color: #6b7280;
-            margin: 0;
-        }
-
-        .view-more {
+        .logo-container {
+            margin-bottom: 40px;
             text-align: center;
-            margin-bottom: 48px;
         }
 
-        .view-more button {
-            padding: 12px 24px;
-            background: #2563eb;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
         }
 
-        .view-more button:hover {
-            background: #1d4ed8;
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ffc107;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-in forwards;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .welcome-text {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
         }
-
-        /* Responsive Styles */
-        @media (max-width: 1024px) {
-            .video-grid, .game-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .video-grid, .game-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header h2 {
-                font-size: 1.5rem;
-            }
-
-            .header p {
-                font-size: 0.875rem;
-            }
-        }
-    
     </style>
-  
 </head>
 <body>
-  <div class="container">
-    <!-- Video Section -->
-    <div class="header">
-      <h2>Live videos for you</h2>
+    <div class="boarding-container">
+        <div class="logo-container">
+            <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+        </div>
+        <div class="loader"></div>
+        <div class="welcome-text">Welcome to ArchiveHubs</div>
+        <p style="font-style: italic;">Your Global Diary</p>
     </div>
 
-    <div class="video-grid">
-      <div class="video-card">
-        <div class="thumbnail">
-          <img src="img/vid-1.jpg" alt="">         
-        </div>
-        <div class="info">
-          <div class="author-container">
-            <div class="author-image">
-              <img src="img/profile-1.jpg" alt="">
-            </div>
-            <div class="author-details">
-              <h3>Title</h3>
-              <p>Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="video-card">
-        <div class="thumbnail">
-          <img src="img/vid-2.jpg" alt="">          
-        </div>
-        <div class="info">
-          <div class="author-container">
-            <div class="author-image">
-              <img src="img/profile-2.jpg" alt="">
-            </div>
-            <div class="author-details">
-              <h3>Title</h3>
-              <p>Name</p>
-            </div>
-          </div>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home | ArchiveHubs</title>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/insight-analysis.css">
-        <link rel="stylesheet" href="css/general-terms.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    </head>
-    <body>
-
-        <nav class="navbar">
-          <div class="nav-left">
-              <a href="index.html" class="logo">
-                <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
-              </a>
-              <div class="search-box">
-                <div class="search-trigger">
-                  <i class="fas fa-search search-icon"></i>
-                  <div class="search-text">Search</div>
-                </div>
-                <input type="text" placeholder="Search..." class="search-input">
-              </div>
-          </div>
-              
-      <div class="nav-middle">
-          <a href="index.html" class="nav-link">
-              <i class="fas fa-home"></i>
-              <span>Home</span>
-          </a>
-          <a href="#" class="nav-link">
-              <i class="fas fa-user-friends"></i>
-              <span>MyConnections</span>
-          </a>
-          <a href="#" class="nav-link">
-              <i class="fas fa-video"></i>
-              <span>Video</span>
-          </a>
-          <a href="#" class="nav-link">
-              <i class="fas fa-comment-dots"></i>
-              <span>Messages</span>
-          </a>
-          <a href="notification.html" class="nav-link">
-              <i class="fas fa-bell"></i>
-              <span>Notifications</span>
-          </a>
-          <a href="#" class="nav-link profile-nav-link">
-            <i class="fas fa-user-circle"></i>
-            <span>Account</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="video-card">
-        <div class="thumbnail">
-          <img src="img/vid-3.jpg" alt="">
-          
-        </div>
-        <div class="info">
-          <div class="author-container">
-            <div class="author-image">
-              <img src="img/profile-3.jpg" alt="">
-            </div>
-            <div class="author-details">
-              <h3>Title</h3>
-              <p>Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="video-card">
-        <div class="thumbnail">
-          <img src="img/vid-4.jpg" alt="">
-         
-        </div>
-        <div class="info">
-          <div class="author-container">
-            <div class="author-image">
-              <img src="img/profile-2.jpg" alt="">
-            </div>
-            <div class="author-details">
-              <h3>Title</h3>
-              <p>Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="view-more">
-      <button>View More Videos</button>
-    </div>
-
-    <!-- Games Section -->
-    <div class="header">
-      <h2>Live Gaming</h2>
-    </div>
-
-    <div class="game-grid">
-      <div class="game-card">
-        <div class="thumbnail">
-          <img src="img/game-1.jpg" alt="">          
-        </div>
-        <div class="info">
-          <div class="author-container">
-            <div class="author-image">
-              <img src="img/profile-2.jpg" alt="">
-            </div>
-            <div class="author-details">
-              <h3>Title</h3>
-              <p>Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <div class="thumbnail">
-          <img src="img/game-3.jpg" alt="">         
-        </div>
-        <div class="info">
-          <div class="author-container">
-            <div class="author-image">
-              <img src="img/profile-3.jpg" alt="">
-            </div>
-            <div class="author-details">
-              <h3>Title</h3>
-              <p>Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <div class="thumbnail">
-          <img src="img/game-1.jpg" alt="">          
-        </div>
-        <div class="info">
-          <div class="author-container">
-            <div class="author-image">
-              <img src="img/profile-1.jpg" alt="">
-            </div>
-            <div class="author-details">
-              <h3>Title</h3>
-              <p>Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="game-card">
-        <div class="thumbnail">
-          <img src="img/game-2.jpg" alt="">          
-        </div>
-        <div class="info">
-          <div class="author-container">
-            <div class="author-image">
-              <img src="img/profile-3.jpg" alt="">
-            </div>
-            <div class="author-details">
-              <h3>Title</h3>
-              <p>Name</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="view-more">
-      <button>View More Games</button>
-    </div>
-  </div>
-
-
+    <script>
+        // Redirect to create-account.html after 5 seconds
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 5000);
+    </script>
 </body>
 </html>
