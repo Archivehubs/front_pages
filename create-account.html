@@ -5,7 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account - ArchiveHubs</title>
     <link rel="stylesheet" href="css/create-account.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/libphonenumber-js@1.10.55/bundle/libphonenumber-js.min.js"></script>
+    <style>
+       
+        .signup-box {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+            padding: 40px 32px 32px 32px;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .logo-container img.logo {
+            width: 150px;
+            border-radius: 8px;
+        }
+        .signup-form {
+            position: relative;
+            min-height: 420px;
+            overflow: hidden;
+        }
+        .form-part {
+            display: none; /* Hide by default */
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background: #fff;
+            transition: transform 0.5s cubic-bezier(.77,0,.18,1), opacity 0.5s;
+            opacity: 0;
+            z-index: 1;
+        }
+        .form-part.active {
+            display: block; /* Only active part is displayed */
+            opacity: 1;
+            position: relative;
+            transform: translateX(0);
+            z-index: 2;
+        }
+        .form-part.left {
+            /* display: block; Remove display block from here */
+            opacity: 0.5;
+            transform: translateX(-100%);
+            z-index: 1;
+        }
+        .form-part.right {
+            /* display: block; Remove display block from here */
+            opacity: 0.5;
+            transform: translateX(100%);
+            z-index: 1;
+        }
+        /* Ensure non-active parts are not displayed */
+        .form-part:not(.active) {
+             display: none;
+        }
+        /* Override for left and right during transition */
+        /* .form-part.left, .form-part.right {
+            display: block;
+        } Remove this override */
+        .name-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .signup-form input[type="text"],
+        .signup-form input[type="email"],
+        .signup-form input[type="password"],
+        .signup-form input[type="tel"],
+        .signup-form select {
+            width: 100%;
+            padding: 12px 10px;
+            margin-bottom: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #f8fafc;
+            transition: border 0.2s;
+        }
+        .signup-form input:focus,
+        .signup-form select:focus {
+            border: 1.5px solid #007bff;
+            outline: none;
+        }
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .phone-input-container {
+            display: flex;
+            gap: 8px;
+        }
+        .country-select {
+            min-width: 120px;
+        }
+        .directory-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .terms-container {
+            margin: 24px 0 16px 0;
+        }
+        .terms-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .terms-text {
+            font-size: 0.97rem;
+        }
+        .form-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            margin-right: 10px;
+        }
+        .next-btn, .back-btn, .signup-button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            background: #FFD700;
+            color: #000000;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 2px solid #000000;
+            font-weight: 600;
+        }
+        .back-btn {
+            background: #888;
+            color: #fff;
+            border: none;
+        }
+        .next-btn:focus, .back-btn:focus, .signup-button:focus {
+            outline: 2px solid #007bff;
+        }
+        .signup-button {
+            background: #FFD700;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+        .signup-button:hover {
+            background: #FFE44D;
+        }
+        .signup-button:disabled {
+            background: #e4e6eb;
+            color: #b0b3b8;
+            border: none;
+            cursor: not-allowed;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 18px;
+        }
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.95rem;
+            min-height: 18px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div class="signup-container">
@@ -16,62 +187,242 @@
                 </div>
             </div>
 
-            <form class="signup-form">
-                <div class="name-group">
-                    <input type="text" placeholder="First Name" required>
-                    <input type="text" placeholder="Surname" required>
-                </div>
-
-                <input type="text" placeholder="Other Name" optional>
-                <input type="email" placeholder="Your Email" required>
-                <input type="password" placeholder="Your Password" required>
-                <input type="password" placeholder="Confirm Password" required>
-                
-                <!-- Replace your existing phone input with this -->
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <div class="phone-input-container">
-                        <select class="country-select" id="countrySelect">
-                            <!-- Options will be populated by JavaScript -->
-                        </select>
-                        <input type="tel" id="phone" name="phone" class="phone-number-input" placeholder="Phone number" required>
+            <form class="signup-form" id="multiStepForm">
+                <!-- PART 1: Personal Details -->
+                <div class="form-part" id="part1">
+                    <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Personal Details</h3>
+                    <div class="name-group">
+                        <input type="text" placeholder="First Name" required>
+                        <input type="text" placeholder="Surname" required>
                     </div>
-                    <span class="error-message" id="phoneError"></span>
+                    <input type="text" placeholder="Other Name (optional)">
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="password" placeholder="Your Password" required>
+                    <input type="password" placeholder="Confirm Password" required>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <div class="phone-input-container">
+                            <select class="country-select" id="countrySelect">
+                                <option value="AU">Australia (+61)</option>
+                                <option value="US">United States (+1)</option>
+                                <option value="GB">United Kingdom (+44)</option>
+                                <!-- Add more as needed -->
+                            </select>
+                        </div>
+                        <input type="tel" id="phone" name="phone" class="phone-number-input" placeholder="Phone number" required>
+                        <span class="error-message" id="phoneError"></span>
+                    </div>
+                    <div class="directory-group">
+                        <select required>
+                            <option value="" disabled selected>Sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <select required>
+                            <option value="" disabled selected>Country</option>
+                            <option value="AU">Australia</option>
+                            <option value="US">United States</option>
+                            <option value="GB">United Kingdom</option>
+                            <!-- Add more countries as needed -->
+                        </select>
+                    </div>
+                    <div class="directory-group">
+                        <select required>
+                            <option value="" disabled selected>State/Province</option>
+                            <option value="NSW">New South Wales</option>
+                            <option value="VIC">Victoria</option>
+                            <option value="CA">California</option>
+                            <option value="TX">Texas</option>
+                            <!-- Add more states/provinces as needed -->
+                        </select>
+                    </div>
+                    <div class="terms-container">
+                        <label class="terms-checkbox">
+                            <input type="checkbox" required>
+                            <span class="terms-text">I agree to the Terms & Conditions and Privacy Policy</span>
+                        </label>
+                    </div>
+                    <div class="form-nav">
+                        <button type="button" class="signup-button">Next</button>
+                    </div>
                 </div>
 
-                <!-- Directory Information -->
-                <div class="directory-group">
-                    <select required>
-                        <option value="" disabled selected>Sex</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-
-                    <select required>
-                        <option value="" disabled selected>Country</option>
-                        <!-- Add countries here -->
-                    </select>
+                <!-- PART 2: Account Type Selection -->
+                <div class="form-part" id="part2">
+                    <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Choose Account Type</h3>
+                    <div class="account-type-container">
+                        <div class="account-type-option" data-type="corporate">
+                            <div class="account-type-content">
+                                <div class="account-type-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="account-type-info">
+                                    <h3>Corporate Account</h3>
+                                    <p>Perfect for businesses and organizations. Includes team management, advanced analytics, and priority support.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account-type-option" data-type="individual">
+                            <div class="account-type-content">
+                                <div class="account-type-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="account-type-info">
+                                    <h3>Individual Account</h3>
+                                    <p>Ideal for personal use. Simple and straightforward with all essential features.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-nav">
+                        <button type="button" class="back-btn">Back</button>
+                        <button type="submit" class="signup-button" disabled>Create Account</button>
+                    </div>
                 </div>
 
-                <div class="directory-group">
-                    
-
-                    <select required>
-                        <option value="" disabled selected>State/Province</option>
-                        <!-- Add states here -->
-                    </select>
+                <!-- PART 3: Corporate Account Confirmation -->
+                <div class="form-part" id="part3">
+                    <div class="confirmation-box" style="padding: 30px;">
+                         <div class="confirmation-logo" style="text-align:center; margin-bottom:20px;">
+                            <img src="images/Logo.jpg" alt="Archivehubs Logo" style="width:80px; height:80px; object-fit:contain; display:block; margin:0 auto;">
+                        </div>
+                        <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:15px; text-align:center;">Account Confirmation</h2>
+                        <p style="margin-bottom:20px; color:#444; font-size:1rem; line-height:1.5;">Welcome to Archivehubs.com. Thank you for creating an Archivehubs account. To start exploiting and to discover the benefits of Archivehubs.com, please complete the information as provided below and confirm your account.<br><br>Welcome to the Archivehubs community!<br><br>The Archivehubs Team</p>
+                        <form id="confirmationForm">
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Account Type</label>
+                                <div style="padding: 12px 10px; background: #f8fafc; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; color: #555;">Corporate Account</div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Corporate Account Type</label>
+                                <select id="corporateAccountType" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                    <option value="" disabled selected>Select your account type</option>
+                                    <option value="private">Private Corporation</option>
+                                    <option value="public">Public Corporation</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                <input type="text" id="otherCorporateAccountTypeInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Private Corporation</label>
+                                <select id="organizationSelect" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                    <option value="" disabled selected>Select your organization</option>
+                                    <option value="self-employed">Self-employed</option>
+                                    <option value="sole-proprietorship">Sole Proprietorship</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="private-ltd">Private Limited Liability Company</option>
+                                    <option value="public-ltd">Public Limited Liability Company</option>
+                                    <option value="ngo">Non-Profit Organization (NGO)</option>
+                                    <option value="social-enterprise">Social Enterprise</option>
+                                    <option value="civil-society">Civil Society Organization</option>
+                                    <option value="cooperative-society">Cooperative Society</option>
+                                    <option value="community-initiative">Community Initiative Group</option>
+                                    <option value="faith-based">Faith Based Organization</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                <input type="text" id="otherOrganizationInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                            </div>
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Sector</label>
+                                <select id="sectorSelect" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                    <option value="" disabled selected>Select your sector of operation</option>
+                                    <option value="manufacturing">Manufacturing & Industrial</option>
+                                    <option value="retail">Retail & Wholesale</option>
+                                    <option value="professional-service">Professional Service</option>
+                                    <option value="ict">Information & Communication Technology (ICT)</option>
+                                    <option value="financial">Financial Services</option>
+                                    <option value="transport">Transport & Logistics</option>
+                                    <option value="real-estate">Real Estate & Construction</option>
+                                    <option value="healthcare">Healthcare & Life Sciences</option>
+                                    <option value="agriculture">Agriculture & Agribusiness</option>
+                                    <option value="media">Media, Entertainment & Creative Arts</option>
+                                    <option value="education">Education & Training</option>
+                                    <option value="energy">Energy & Environment</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                <input type="text" id="otherSectorInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                            </div>
+                            <div class="form-nav" style="display:flex; flex-direction: column; gap: 10px; margin-top:20px; margin-right:0;">
+                                <button type="button" class="back-btn" id="backToStep2Btn">Back</button>
+                                <button type="button" class="confirm-account-btn" id="confirmCorporateAccountBtn" onclick="window.location.href='loading.html'" disabled>Confirm Account</button>
+                            </div>
+                        </form>
+                        <div style="margin-top:20px; text-align:center; font-size:0.9rem;">
+                            <a href="#" style="color:#007bff; text-decoration:none; margin-right: 10px;">Get the Archivehubs App</a>
+                            <span style="color:#222;"> <b>General Terms</b></span>
+                        </div>
+                        <div style="margin-top:8px; text-align:center; font-size:0.85rem; color:#222;">
+                            ARCHIVEHUBS: ENINK Investment Limited &copy; 2025 <b>RC 1741345</b>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Terms Checkbox -->
-                <div class="terms-container">
-                    <label class="terms-checkbox">
-                        <input type="checkbox" required>
-                        <span class="terms-text">Agree To "Terms & Conditions"</span>
-                    </label>
+                <!-- PART 4: Individual Account Confirmation -->
+                <div class="form-part" id="part4">
+                    <div class="confirmation-box" style="padding: 20px; margin-top: -400px;">
+                         <div class="confirmation-logo" style="text-align:center; margin-bottom:20px;">
+                            <img src="images/Logo.jpg" alt="Archivehubs Logo" style="width:80px; height:80px; object-fit:contain; display:block; margin:0 auto;">
+                        </div>
+                        <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:15px; text-align:center;">Account Confirmation</h2>
+                        <p style="margin-bottom:20px; color:#444; font-size:1rem; line-height:1.5;">Welcome to Archivehubs.com. Thank you for creating an Archivehubs account. To start exploiting and to discover the benefits of Archivehubs.com, please complete the information as provided below and confirm your account.<br><br>Welcome to the Archivehubs community!<br><br>The Archivehubs Team</p>
+                        <form id="individualConfirmationForm">
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Account Type</label>
+                                <div style="padding: 12px 10px; background: #f8fafc; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; color: #555;">Individual Account</div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Professional Status</label>
+                                <select id="professionalStatus" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                    <option value="" disabled selected>Select your professional status</option>
+                                    <option value="employed">Employed</option>
+                                    <option value="self-employed">Self-employed</option>
+                                    <option value="unemployed">Unemployed</option>
+                                    <option value="student">Student</option>
+                                    <option value="retired">Retired</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                <input type="text" id="otherProfessionalStatusInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Student</label>
+                                <select id="studentBackground" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                    <option value="" disabled selected>Select your student background</option>
+                                    <option value="highschool">High School</option>
+                                    <option value="undergraduate">Undergraduate</option>
+                                    <option value="postgraduate">Postgraduate</option>
+                                    <option value="none">Not a student</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                <input type="text" id="otherStudentBackgroundInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                            </div>
+                             <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Interest</label>
+                                <select id="interest" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                    <option value="" disabled selected>Select your Interest</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="business">Business</option>
+                                    <option value="education">Education</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="others">Others</option>
+                                </select>
+                                <input type="text" id="otherInterestInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                            </div>
+                             <div class="form-nav" style="display:flex; flex-direction: column; gap: 10px; margin-top:20px; margin-right:0;">
+                                <button type="button" class="back-btn" id="backToStep2BtnIndividual">Back</button>
+                                <button type="button" class="confirm-account-btn" id="confirmIndividualAccountBtn" disabled>Confirm Account</button>
+                             </div>
+                        </form>
+                        <div style="margin-top:20px; text-align:center; font-size:0.9rem;">
+                            <a href="#" style="color:#007bff; text-decoration:none; margin-right: 10px;">Get the Archivehubs App</a>
+                            <span style="color:#222;"> <b>General Terms</b></span>
+                        </div>
+                        <div style="margin-top:8px; text-align:center; font-size:0.85rem; color:#222;">
+                            ARCHIVEHUBS: ENINK Investment Limited &copy; 2025 <b>RC 1741345</b>
+                        </div>
+                    </div>
                 </div>
-
-                <button type="submit" class="signup-button">Create</button>
             </form>
 
             <div class="login-link">
@@ -81,6 +432,367 @@
     </div>
 
     <script src="js/country-code.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Multi-step form logic
+            const parts = document.querySelectorAll('.form-part');
+            let currentPart = 0;
 
+            function showPart(index) {
+                console.log('Showing part index:', index);
+                parts.forEach((part, i) => {
+                    part.classList.toggle('active', i === index);
+                    part.classList.toggle('left', i < index);
+                    part.classList.toggle('right', i > index);
+
+                    // Explicitly manage display based on active class
+                    if (part.classList.contains('active')) {
+                        part.style.display = 'block';
+                        console.log('Part', i, 'set to display: block');
+                    } else {
+                        part.style.display = 'none';
+                         console.log('Part', i, 'set to display: none');
+                    }
+
+                });
+                // updateSignupButtonState(); // This might not be needed here anymore
+
+                // Attach listeners and update confirm button state based on current part
+                if (index === 2) { // Corporate Account Confirmation
+                    setTimeout(() => {
+                        const corporateConfirmationForm = document.getElementById('confirmationForm');
+                        if (corporateConfirmationForm) {
+                            attachCorporateConfirmAccountListeners(corporateConfirmationForm);
+                            updateCorporateConfirmAccountBtnState(corporateConfirmationForm); // Explicitly update state when showing part 3
+                        }
+                    }, 500); // Increased delay again
+                } else if (index === 3) { // Individual Account Confirmation
+                     setTimeout(() => {
+                        const individualConfirmationForm = document.getElementById('individualConfirmationForm');
+                        if (individualConfirmationForm) {
+                            attachIndividualConfirmAccountListeners(individualConfirmationForm);
+                            updateIndividualConfirmAccountBtnState(individualConfirmationForm);
+                        }
+                    }, 200); // Increased delay
+                }
+            }
+
+            // Account type selection
+            document.querySelectorAll('.account-type-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    document.querySelectorAll('.account-type-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    // Enable the create account button (on part2)
+                    document.querySelector('#part2 .signup-button').disabled = false;
+
+                    // Transition to the next part based on selected type
+                    if (this.dataset.type === 'corporate') {
+                        setTimeout(() => {
+                            currentPart = 2; // part3 is index 2
+                            showPart(currentPart);
+                        }, 350); // allow a short delay for animation
+                    } else if (this.dataset.type === 'individual') {
+                         setTimeout(() => {
+                            currentPart = 3; // part4 is index 3
+                            showPart(currentPart);
+                        }, 350); // allow a short delay for animation
+                    }
+                });
+            });
+
+            // Next button click handler (on part1)
+            document.querySelector('#part1 .signup-button').addEventListener('click', () => {
+                // Check if part1 is valid before moving
+                const part1RequiredFields = document.querySelectorAll('#part1 input[required], #part1 select[required]');
+                let part1Valid = true;
+                part1RequiredFields.forEach(field => {
+                    if (field.type === 'checkbox') {
+                        if (!field.checked) part1Valid = false;
+                    } else if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
+                        part1Valid = false;
+                    }
+                });
+
+                if (part1Valid) {
+                     if (currentPart < parts.length - 1) {
+                        currentPart++;
+                        showPart(currentPart);
+                    }
+                }
+            });
+
+            // Back button click handler (on part2)
+            document.querySelector('#part2 .back-btn').addEventListener('click', () => {
+                if (currentPart > 0) {
+                    currentPart--;
+                    showPart(currentPart);
+                }
+            });
+
+            // Enable/disable signup button logic (for part1 and part2)
+            // This function is primarily for the 'Next' button on part1 and 'Create Account' on part2
+            function updateSignupButtonState() {
+                const activePart = document.querySelector('.form-part.active');
+                if (!activePart || activePart.id === 'part3' || activePart.id === 'part4') return; // Only applies to part1 and part2
+
+                const signupBtn = activePart.querySelector('.signup-button');
+                if (!signupBtn) return;
+
+                // Find all required inputs/selects/checkboxes in the active part
+                const requiredFields = activePart.querySelectorAll('input[required], select[required], textarea[required]');
+                const termsCheckbox = activePart.querySelector('input[type="checkbox"][required]');
+
+                let allFilled = true;
+                requiredFields.forEach(field => {
+                    if (field.type === 'checkbox') {
+                        if (!field.checked) allFilled = false;
+                    } else if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
+                        allFilled = false;
+                    }
+                });
+
+                // Check if terms checkbox is checked
+                const termsChecked = termsCheckbox ? termsCheckbox.checked : true;
+
+                signupBtn.disabled = !allFilled || !termsChecked;
+                signupBtn.style.cursor = (allFilled && termsChecked) ? 'pointer' : 'not-allowed';
+                
+                if (allFilled && termsChecked) {
+                    signupBtn.style.background = '#FFD700'; // Yellow background
+                    signupBtn.style.color = '#000000'; // Black text
+                    signupBtn.style.border = '2px solid #000000'; // Black border
+                } else {
+                    signupBtn.style.background = '#e4e6eb'; // Gray background
+                    signupBtn.style.color = '#b0b3b8'; // Gray text
+                    signupBtn.style.border = 'none';
+                }
+            }
+
+             // Listen for input changes in part1
+            document.querySelectorAll('#part1 input, #part1 select, #part1 textarea').forEach(field => {
+                field.addEventListener('input', updateSignupButtonState);
+                field.addEventListener('change', updateSignupButtonState);
+            });
+
+            // Initialize
+            showPart(currentPart); // Call showPart for initial display
+
+            // Show textbox if 'Others' is selected in Corporate Account Type
+            const corporateAccountType = document.getElementById('corporateAccountType');
+            const otherCorporateAccountTypeInput = document.getElementById('otherCorporateAccountTypeInput');
+            if (corporateAccountType) {
+                corporateAccountType.addEventListener('change', function() {
+                    if (this.value === 'others') {
+                        otherCorporateAccountTypeInput.style.display = 'block';
+                        otherCorporateAccountTypeInput.setAttribute('required', 'required');
+                    } else {
+                        otherCorporateAccountTypeInput.style.display = 'none';
+                         otherCorporateAccountTypeInput.removeAttribute('required');
+                         otherCorporateAccountTypeInput.value = ''; // Clear the value when hidden
+                    }
+                     // Get the form reference here before updating the state
+                     const corporateConfirmationForm = document.getElementById('confirmationForm');
+                     if (corporateConfirmationForm) {
+                        updateCorporateConfirmAccountBtnState(corporateConfirmationForm); // Update state when this changes
+                     }
+                });
+            }
+
+            // Show textbox if 'Others' is selected in Organization
+            const organizationSelect = document.getElementById('organizationSelect');
+            const otherOrganizationInput = document.getElementById('otherOrganizationInput');
+            if (organizationSelect) {
+                organizationSelect.addEventListener('change', function() {
+                    if (this.value === 'others') {
+                        otherOrganizationInput.style.display = 'block';
+                         otherOrganizationInput.setAttribute('required', 'required');
+                    } else {
+                        otherOrganizationInput.style.display = 'none';
+                        otherOrganizationInput.removeAttribute('required');
+                        otherOrganizationInput.value = ''; // Clear the value when hidden
+                    }
+                    // Get the form reference here before updating the state
+                     const corporateConfirmationForm = document.getElementById('confirmationForm');
+                     if (corporateConfirmationForm) {
+                        updateCorporateConfirmAccountBtnState(corporateConfirmationForm); // Update state when this changes
+                     }
+                });
+            }
+
+            // Show textbox if 'Others' is selected in Sector
+            const sectorSelect = document.getElementById('sectorSelect');
+            const otherSectorInput = document.getElementById('otherSectorInput');
+            if (sectorSelect) {
+                sectorSelect.addEventListener('change', function() {
+                    if (this.value === 'others') {
+                        otherSectorInput.style.display = 'block';
+                         otherSectorInput.setAttribute('required', 'required');
+                    } else {
+                        otherSectorInput.style.display = 'none';
+                         otherSectorInput.removeAttribute('required');
+                         otherSectorInput.value = ''; // Clear the value when hidden
+                    }
+                    // Get the form reference here before updating the state
+                     const corporateConfirmationForm = document.getElementById('confirmationForm');
+                     if (corporateConfirmationForm) {
+                        updateCorporateConfirmAccountBtnState(corporateConfirmationForm); // Update state when this changes
+                     }
+                });
+            }
+
+            // Back button for corporate confirmation step (part3)
+            const backToStep2BtnCorporate = document.getElementById('backToStep2Btn');
+            if (backToStep2BtnCorporate) {
+                backToStep2BtnCorporate.addEventListener('click', function() {
+                    currentPart = 1; // Go back to part2
+                    showPart(currentPart);
+                });
+            }
+
+            // Confirm Account button validation for Corporate Account (part3)
+            const confirmCorporateAccountBtn = document.getElementById('confirmCorporateAccountBtn');
+            // const corporateConfirmationForm = document.getElementById('confirmationForm'); // Removed global declaration
+            function updateCorporateConfirmAccountBtnState(corporateConfirmationForm) {
+                console.log('updateCorporateConfirmAccountBtnState called');
+                let allFilled = true;
+                
+                const corporateAccountTypeSelect = corporateConfirmationForm.querySelector('#corporateAccountType');
+                const otherCorporateAccountTypeInput = corporateConfirmationForm.querySelector('#otherCorporateAccountTypeInput');
+                const organizationSelect = corporateConfirmationForm.querySelector('#organizationSelect');
+                const otherOrganizationInput = corporateConfirmationForm.querySelector('#otherOrganizationInput');
+                const sectorSelect = corporateConfirmationForm.querySelector('#sectorSelect');
+                const otherSectorInput = corporateConfirmationForm.querySelector('#otherSectorInput');
+
+                console.log('Corporate Account Type value:', corporateAccountTypeSelect?.value);
+                console.log('Other Corporate Account Type Input value:', otherCorporateAccountTypeInput?.value);
+                console.log('Organization Select value:', organizationSelect?.value);
+                console.log('Other Organization Input value:', otherOrganizationInput?.value);
+                console.log('Sector Select value:', sectorSelect?.value);
+                console.log('Other Sector Input value:', otherSectorInput?.value);
+
+                // Check Corporate Account Type
+                if (corporateAccountTypeSelect) {
+                    if (corporateAccountTypeSelect.value === 'others') {
+                        if (!otherCorporateAccountTypeInput || !otherCorporateAccountTypeInput.value.trim()) {
+                            allFilled = false;
+                        }
+                    } else if (!corporateAccountTypeSelect.value || corporateAccountTypeSelect.value === corporateAccountTypeSelect.querySelector('option[disabled][selected]')?.value) {
+                        allFilled = false;
+                    }
+                }
+
+                // Check Organization Select
+                if (allFilled && organizationSelect) {
+                     if (organizationSelect.value === 'others') {
+                        if (!otherOrganizationInput || !otherOrganizationInput.value.trim()) {
+                            allFilled = false;
+                        }
+                    } else if (!organizationSelect.value || organizationSelect.value === organizationSelect.querySelector('option[disabled][selected]')?.value) {
+                        allFilled = false;
+                    }
+                }
+
+                // Check Sector Select
+                if (allFilled && sectorSelect) {
+                     if (sectorSelect.value === 'others') {
+                        if (!otherSectorInput || !otherSectorInput.value.trim()) {
+                            allFilled = false;
+                        }
+                    } else if (!sectorSelect.value || sectorSelect.value === sectorSelect.querySelector('option[disabled][selected]')?.value) {
+                        allFilled = false;
+                    }
+                }
+
+                console.log('allFilled status:', allFilled);
+
+                confirmCorporateAccountBtn.disabled = !allFilled;
+                confirmCorporateAccountBtn.style.cursor = allFilled ? 'pointer' : 'not-allowed';
+                confirmCorporateAccountBtn.style.background = allFilled ? '#43b04a' : '#b0b3b8';
+                confirmCorporateAccountBtn.style.color = allFilled ? '#fff' : '#fff';
+            }
+            // Listen for changes in corporate confirmation form fields
+            function attachCorporateConfirmAccountListeners(corporateConfirmationForm) {
+                 const corporateConfirmationFormFields = corporateConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
+                corporateConfirmationFormFields.forEach(field => {
+                    if (!field.hasListener) {
+                        field.addEventListener('input', () => {
+                            updateCorporateConfirmAccountBtnState(corporateConfirmationForm);
+                        });
+                        field.addEventListener('change', () => {
+                            updateCorporateConfirmAccountBtnState(corporateConfirmationForm);
+                        });
+                        field.hasListener = true;
+                    }
+                });
+            }
+
+             // Back button for individual confirmation step (part4)
+            const backToStep2BtnIndividual = document.getElementById('backToStep2BtnIndividual');
+            if (backToStep2BtnIndividual) {
+                backToStep2BtnIndividual.addEventListener('click', function() {
+                    currentPart = 1; // Go back to part2
+                    showPart(currentPart);
+                });
+            }
+
+            // Confirm Account button validation for Individual Account (part4)
+            const confirmIndividualAccountBtn = document.getElementById('confirmIndividualAccountBtn');
+            // const individualConfirmationForm = document.getElementById('individualConfirmationForm'); // Removed global declaration
+            function updateIndividualConfirmAccountBtnState(individualConfirmationForm) {
+                let allFilled = true;
+                // Check all required fields in the individual confirmation form
+                const requiredFields = individualConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
+                 requiredFields.forEach(field => {
+                     if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
+                         allFilled = false;
+                     }
+                 });
+                confirmIndividualAccountBtn.disabled = !allFilled;
+                confirmIndividualAccountBtn.style.cursor = allFilled ? 'pointer' : 'not-allowed';
+                confirmIndividualAccountBtn.style.background = allFilled ? '#43b04a' : '#b0b3b8';
+                confirmIndividualAccountBtn.style.color = allFilled ? '#fff' : '#fff';
+            }
+
+            // Listen for changes in individual confirmation form fields
+            function attachIndividualConfirmAccountListeners(individualConfirmationForm) {
+                 const individualConfirmationFormFields = individualConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
+                individualConfirmationFormFields.forEach(field => {
+                    if (!field.hasListener) {
+                        field.addEventListener('input', () => updateIndividualConfirmAccountBtnState(individualConfirmationForm));
+                        field.addEventListener('change', () => updateIndividualConfirmAccountBtnState(individualConfirmationForm));
+                        field.hasListener = true;
+                    }
+                });
+            }
+
+            // Handle form submission for part3 (Confirm Account) - Corporate
+             // if (corporateConfirmationForm) { // Condition no longer needed here
+                confirmCorporateAccountBtn.addEventListener('click', function() {
+                     const corporateConfirmationForm = document.getElementById('confirmationForm'); // Get reference before using
+                    // Only redirect if the button is enabled and form is valid (additional check)
+                     if (!this.disabled && corporateConfirmationForm && corporateConfirmationForm.checkValidity()) {
+                        window.location.href = 'home.html';
+                    }
+                });
+            // }
+
+            // Handle form submission for part4 (Confirm Account) - Individual
+             // if (individualConfirmationForm) { // Condition no longer needed here
+                confirmIndividualAccountBtn.addEventListener('click', function() {
+                     const individualConfirmationForm = document.getElementById('individualConfirmationForm'); // Get reference before using
+                    // Only redirect if the button is enabled and form is valid (additional check)
+                     if (!this.disabled && individualConfirmationForm && individualConfirmationForm.checkValidity()) {
+                        window.location.href = 'loading.html';
+                    }
+                });
+            // }
+
+        }); // End of DOMContentLoaded listener
+
+    </script>
 </body>
 </html>
