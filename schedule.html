@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+      <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+          </a>
+          <div class="search-box">
+            <div class="search-trigger">
+              <i class="fas fa-search search-icon"></i>
+              <div class="search-text">Search</div>
+            </div>
+            <input type="text" placeholder="Search..." class="search-input">
+          </div>
+      </div>
+          
+  <div class="nav-middle">
+      <a href="home.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+      </a>
+      <a href="myconnections.html" class="nav-link">
+          <i class="fas fa-user-friends"></i>
+          <span>MyConnections</span>
+      </a>
+      <a href="video1.html" class="nav-link">
+          <i class="fas fa-video"></i>
+          <span>Video</span>
+      </a>
+      <a href="messaging_page.html" class="nav-link">
+          <i class="fas fa-comment-dots"></i>
+          <span>Messages</span>
+      </a>
+      <a href="notification.html" class="nav-link">
+          <i class="fas fa-bell"></i>
+          <span>Notifications</span>
+      </a>
+      <a href="#" class="nav-link profile-nav-link">
+        <i class="fas fa-user-circle"></i>
+        <span>Account</span>
+      </a>
+    </div>
+
+          <div class="nav-right">
+
+            <a href="#" class="nav-link">
+              <i class="fas fa-briefcase"></i>
+              <span>Jobs</span>
+            </a>
+            <a href="business.html" class="nav-link">
+                <i class="fas fa-building"></i>
+                <span>Business</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span>Drive</span>
+            </a>
+            <a href="menu.html" class="nav-link">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+      </nav>
+
+      <div class="schedule-modal">
+        <div class="schedule-modal-header">
+          <span><b>Create a Schedule</b></span>
+          <button onclick="window.location.href='calendar.html'" class="schedule-modal-close">&times;</button>
+        </div>
+        <div class="schedule-modal-body">
+          <div class="schedule-modal-instructions">
+            To create a schedule on Archivehubs, follow the steps and provide the required information.
+          </div>
+      
+          <div class="schedule-form-group">
+            <label class="schedule-label">Schedule Title</label>
+            <input type="text" class="schedule-input" placeholder="Add a title to your schedule">
+          </div>
+      
+          <div class="schedule-form-group schedule-goals-row">
+            <label class="schedule-label">Schedule Goals and Objectives</label>
+            <div class="schedule-goals-flex">
+              <input type="text" class="schedule-input" placeholder="Define your goals and objectives">
+              <button class="schedule-plus-btn">+</button>
+            </div>
+          </div>
+      
+          <div class="schedule-form-row">
+            <div class="schedule-form-group">
+              <label class="schedule-label">Tasks and Activities</label>
+              <div class="schedule-flex">
+                <span class="schedule-sn">SN</span>
+                <input type="text" class="schedule-input" placeholder="Add your tasks and activities">
+                <button class="schedule-plus-btn">+</button>
+              </div>
+            </div>
+            <div class="schedule-form-group">
+              <label class="schedule-label">Time Line</label>
+              <div class="schedule-flex">
+                <button class="schedule-dropdown-btn">Start Date ▼</button>
+                <button class="schedule-dropdown-btn">End Date ▼</button>
+              </div>
+            </div>
+          </div>
+      
+          <div class="schedule-form-row">
+            <div class="schedule-form-group">
+              <label class="schedule-label">Availability</label>
+              <div class="schedule-flex">
+                <span class="schedule-sn">SN</span>
+                <button class="schedule-dropdown-btn">Add time slot i.e work hours ▼</button>
+                <button class="schedule-plus-btn">+</button>
+              </div>
+            </div>
+            <div class="schedule-form-group">
+              <div class="schedule-flex">
+                <button class="schedule-dropdown-btn">Add Breaks ▼</button>
+                <button class="schedule-dropdown-btn">Add Personal time ▼</button>
+              </div>
+            </div>
+          </div>
+      
+          <div class="schedule-form-group">
+            <label class="schedule-label">Priorities</label>
+            <div class="schedule-flex">
+              <span class="schedule-sn">SN</span>
+              <input type="text" class="schedule-input" placeholder="Allocate priorities for your tasks and activities">
+              <button class="schedule-plus-btn">+</button>
+            </div>
+          </div>
+      
+          <div class="schedule-form-group">
+            <label class="schedule-label">Time Block</label>
+            <div class="schedule-flex">
+              <span class="schedule-sn">SN</span>
+              <input type="text" class="schedule-input" placeholder="Decide on your time block or interval e.g 30min, 1 hour etc.">
+              <button class="schedule-plus-btn">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-modal-section">
+            <div class="schedule-form-group">
+              <label class="schedule-label">Recurring Events</label>
+              <div class="schedule-flex">
+                <span class="schedule-sn">SN</span>
+                <input type="text" class="schedule-input" placeholder="Add any recurring events such as meetings, appointment  etc.">
+                <button class="schedule-plus-btn">+</button>
+              </div>
+            </div>
+          
+            <div class="schedule-form-group" style="margin-top: 32px;">
+              <label class="schedule-label">Time Constraint Time Line</label>
+              <div class="schedule-flex">
+                <button class="schedule-dropdown-btn">Date ▼</button>
+                <button class="schedule-dropdown-btn">Time ▼</button>
+              </div>
+            </div>
+          
+            <div class="schedule-actions-row">
+              <button class="schedule-create-btn">Create Schedule</button>
+            </div>
+          
+            <div class="schedule-upgrade-row">
+              <button class="schedule-upgrade-btn">Upgrade to Premium</button>
+            </div>
+          </div>
+      </div>    
+
+             <!-- Messaging Box -->
+             <div class="messaging-box">
+                <div class="messaging-header" onclick="toggleMessagingBox()">
+                    <div class="messaging-left">
+                        <img src="images/profile.jpg" alt="Profile" class="messaging-profile">
+                        <span>Messaging</span>
+                    </div>
+                    <div class="messaging-actions">
+                        <i class="fas fa-pen-to-square"></i>
+                        <i class="fas fa-ellipsis"></i>
+                    </div>
+                </div>
+      
+                <div class="messaging-content">
+                    <!-- Add messaging content -->
+                    <div class="messaging-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search messages">
+                    </div>
+                    <div class="messages-list">
+                        <div class="no-messages">
+                            <i class="fas fa-comment-dots"></i>
+                            <p>No messages yet</p>
+                            <span>Connect with people to start messaging</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+              <script src="js/script.js"></script>
+</body>
+</html>
