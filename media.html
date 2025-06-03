@@ -3,160 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Editor</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            overflow: hidden;
-        }
-        h1 {
-            font-size: 24px;
-            margin: 0 0 20px;
-            font-weight: 600;
-            color: #333;
-        }
-        .page {
-            padding: 25px;
-            display: none;
-        }
-        .upload-section {
-            border: 2px dashed #ccc;
-            padding: 40px 20px;
-            text-align: center;
-            border-radius: 8px;
-            margin: 20px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .upload-section:hover {
-            border-color: #999;
-            background-color: #f9f9f9;
-        }
-        .btn {
-            background-color: #1877f2;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        .btn:hover {
-            background-color: #166fe5;
-        }
-        .btn-secondary {
-            background-color: #e4e6eb;
-            color: #333;
-        }
-        .btn-secondary:hover {
-            background-color: #d8dadf;
-        }
-        .editor-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-        }
-        .editor-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 15px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        .settings-option {
-            margin-bottom: 15px;
-            padding: 12px;
-            border: 1px solid #eee;
-            border-radius: 6px;
-            background-color: #f9f9f9;
-        }
-        .group-list {
-            margin-top: 15px;
-        }
-        .group-item {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-        }
-        .group-item:hover {
-            background-color: #f5f5f5;
-        }
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .image-preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .image-preview {
-            width: 80px;
-            height: 80px;
-            border-radius: 6px;
-            object-fit: cover;
-            border: 1px solid #eee;
-        }
-        .current-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin: 15px 0;
-            border: 1px solid #eee;
-        }
-        .editor-status {
-            color: #65676b;
-            font-size: 14px;
-        }
-        .radio-group {
-            margin: 8px 0;
-        }
-        input[type="radio"], input[type="checkbox"] {
-            margin-right: 8px;
-        }
-        label {
-            cursor: pointer;
-        }
-        .small-text {
-            font-size: 13px;
-            color: #65676b;
-            display: block;
-            margin-top: 3px;
-        }
-    </style>
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <nav class="navbar">
+      <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+          </a>
+          <div class="search-box">
+            <div class="search-trigger">
+              <i class="fas fa-search search-icon"></i>
+              <div class="search-text">Search</div>
+            </div>
+            <input type="text" placeholder="Search..." class="search-input">
+          </div>
+      </div>
+          
+  <div class="nav-middle">
+      <a href="home.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+      </a>
+      <a href="myconnections.html" class="nav-link">
+          <i class="fas fa-user-friends"></i>
+          <span>MyConnections</span>
+      </a>
+      <a href="video1.html" class="nav-link">
+          <i class="fas fa-video"></i>
+          <span>Video</span>
+      </a>
+      <a href="messaging_page.html" class="nav-link">
+          <i class="fas fa-comment-dots"></i>
+          <span>Messages</span>
+      </a>
+      <a href="notification.html" class="nav-link">
+          <i class="fas fa-bell"></i>
+          <span>Notifications</span>
+      </a>
+      <a href="#" class="nav-link profile-nav-link">
+        <i class="fas fa-user-circle"></i>
+        <span>Account</span>
+      </a>
+    </div>
+
+          <div class="nav-right">
+
+            <a href="#" class="nav-link">
+              <i class="fas fa-briefcase"></i>
+              <span>Jobs</span>
+            </a>
+            <a href="business.html" class="nav-link">
+                <i class="fas fa-building"></i>
+                <span>Business</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span>Drive</span>
+            </a>
+            <a href="menu.html" class="nav-link">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+      </nav>
+
+      <!-- Replace your existing mobile-upper-nav section -->
+      <div class="mobile-header">
+        <!-- Mobile Upper Nav -->
+        <nav class="mobile-upper-nav">
+          <a href="home.html" class="mobile-logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+          </a>
+          <div class="upper-nav-right">
+              <button class="upper-nav-btn">
+                  <i class="fas fa-plus"></i>
+              </button>
+              <button class="upper-nav-btn" id="searchTriggerBtn">
+                  <i class="fas fa-search"></i>
+              </button>
+              <button class="upper-nav-btn">
+                  <i class="fas fa-ellipsis-v"></i>
+              </button>
+          </div>
+        </nav>
+
+       <!-- Update the search-view to be a dropdown -->
+      <div class="search-overlay" id="searchView">
+          <div class="search-container">
+              <div class="search-header">
+                  <button class="back-btn" id="searchBackBtn">
+                      <i class="fas fa-arrow-left"></i>
+                  </button>
+                  <div class="search-bar">
+                      <div class="search-input-wrapper">
+                          <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                          <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="search-content">
+                  <!-- Rest of your search content remains the same -->
+              </div>
+          </div>
+      </div>
+
+      <!-- Add this after the existing navbar -->
+    <nav class="mobile-top-nav">
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-video"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-briefcase"></i>
+      </a>
+      <a href="business.html" class="mobile-nav-item">
+          <i class="fas fa-building"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-cloud-arrow-up"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-user-circle"></i>
+      </a>
+    </nav>
+
     <div class="container">
-        <!-- Page 1: File Selection -->
+        <!-- File Selection -->
         <div id="page1" class="page">
             <h1>Editor</h1>          
             
@@ -168,7 +147,7 @@
             </div>
         </div>
 
-        <!-- Page 2: Editor -->
+        <!-- Editor -->
         <div id="page2" class="page">
             <div class="editor-header">
                 <h1>Editor</h1>
@@ -180,7 +159,7 @@
                 <img id="current-image" class="current-image" src="" alt="Selected image">
                 
                 <div class="image-preview-container" id="thumbnail-container">
-                    <!-- Thumbnails will be added here -->
+                
                 </div>
             </div>
             
@@ -190,7 +169,7 @@
             </div>
         </div>
 
-        <!-- Page 3: Post Content -->
+        <!-- Post Content -->
         <div id="page3" class="page">
             <input type="text" id="post-name" placeholder="Name">
             <p>Post to anyone</p>
@@ -203,7 +182,7 @@
             </div>
         </div>
 
-        <!-- Page 4: Post Settings -->
+        <!-- Post Settings -->
         <div id="page4" class="page">
             <h1>Post Settings</h1>
             <p>Who can see your post?</p>
@@ -239,7 +218,7 @@
             </div>
         </div>
 
-        <!-- Page 5: Group Selection -->
+        <!-- Group Selection -->
         <div id="page5" class="page">
             <h1>Select a group</h1>
             
@@ -272,14 +251,14 @@
         let currentFileIndex = 0;
         let selectedGroup = null;
 
-        // Initialize the page
+        
         document.addEventListener('DOMContentLoaded', function() {
             showPage(1);
             
-            // Set up file upload
+            
             document.getElementById('file-upload').addEventListener('change', handleFileSelect);
             
-            // Set up drag and drop
+            
             const uploadArea = document.getElementById('upload-area');
             uploadArea.addEventListener('dragover', (e) => {
                 e.preventDefault();
@@ -311,12 +290,12 @@
             uploadedFiles = Array.from(files);
             currentFileIndex = 0;
             
-            // Update UI
+            
             document.getElementById('total-images').textContent = uploadedFiles.length;
             updateImageDisplay();
             createThumbnails();
             
-            // Move to editor page
+            
             showPage(2);
         }
 
@@ -371,12 +350,12 @@
         }
 
         function selectGroup(element) {
-            // Remove selection from all groups
+            
             document.querySelectorAll('.group-item').forEach(item => {
                 item.style.backgroundColor = '';
             });
             
-            // Highlight selected group
+            
             element.style.backgroundColor = '#f0f7ff';
             selectedGroup = {
                 name: element.querySelector('h3').textContent,
@@ -393,15 +372,15 @@
         }
 
         function showPage(pageNumber) {
-            // Hide all pages
+        
             document.querySelectorAll('.page').forEach(page => {
                 page.style.display = 'none';
             });
             
-            // Show selected page
+            
             document.getElementById('page' + pageNumber).style.display = 'block';
             
-            // Scroll to top
+            
             window.scrollTo(0, 0);
         }
     </script>
