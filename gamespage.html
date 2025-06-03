@@ -3,1080 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games - Archivehubs</title>
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gamespage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>     
-          * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
-
-            body, html {
-                height: 100%;
-                font-family: 'Poppins', sans-serif;
-                color: #333;
-                background-color: #f4f4f4;
-            }
-
-            .container {
-                display: grid;
-                grid-template-rows: auto 1fr auto;
-                min-height: 100vh;
-            }
-
-            /* Navbar */
-            .navbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 10px 20px;
-                background-color: #fff;
-                border-bottom: 1px solid #dee2e6;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            }
-
-            .nav-left {
-                display: flex;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .logo-img {
-                height: 40px;
-            }
-
-            .search-box {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background-color: #f8f9fa;
-                border: 1px solid #ced4da;
-                border-radius: 20px;
-                padding: 8px 10px;
-                transition: border-color 0.2s;
-                width: 120px;
-            }
-
-            .search-box:focus-within {
-                border-color: #007bff;
-            }
-
-            .search-icon {
-                color: #6c757d;
-                font-size: 1.2rem;
-                margin-bottom: 3px;
-            }
-
-            .search-text {
-                font-size: 0.8rem;
-                color: #6c757d;
-                margin-bottom: 5px;
-            }
-
-            .search-input {
-                border: none;
-                background: none;
-                outline: none;
-                font-size: 0.9rem;
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-middle, .nav-right {
-                display: flex;
-                gap: 10px;
-            }
-
-            .nav-link {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                color: #495057;
-                text-decoration: none;
-                padding: 8px;
-                border-radius: 5px;
-                transition: background-color 0.2s, color 0.2s;
-            }
-
-            .nav-link:hover {
-                background-color: #e9ecef;
-                color: #007bff;
-            }
-
-            .nav-link.active {
-                background-color: #007bff;
-                color: #fff;
-            }
-
-            .nav-link.active:hover {
-                background-color: #0056b3;
-            }
-
-            .nav-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 3px;
-            }
-
-            .nav-link i {
-                font-size: 1.2rem;
-            }
-
-            .nav-text {
-                font-size: 0.8rem;
-                text-align: center;
-            }
-            /* Main Layout */
-            .main-content {
-                display: grid;
-                grid-template-columns: 1fr;
-                padding: 20px;
-                max-width: 1400px;
-                margin: 0 auto;
-            }
-
-            /* Content Area */
-            .content {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                width: 100%;
-            }
-
-            .connections-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px;
-                background-color: #fff;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-
-            .connections-header h1 {
-                font-size: 1.3em;
-                margin: 0;
-            }
-
-            .card {
-                background-color: #fff;
-                border-radius: 8px;
-                padding: 20px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-
-            .card h2 {
-                font-size: 1.2em;
-                margin-bottom: 15px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .game-grid {
-                display: grid;
-                grid-template-columns: repeat(5, 1fr);
-                gap: 20px;
-                width: 100%;
-            }
-
-            .game-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 12px;
-                border: 1px solid #dee2e6;
-                border-radius: 8px;
-                text-align: center;
-                background-color: #f8f9fa;
-                transition: transform 0.2s;
-                min-width: 180px;
-                max-width: 100%;
-            }
-
-            .game-item:hover {
-                transform: translateY(-3px);
-            }
-
-            .game-photo {
-                width: 80px;
-                height: 80px;
-                border-radius: 8px;
-                overflow: hidden;
-                margin-bottom: 10px;
-            }
-
-            .game-photo img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .game-info strong {
-                font-weight: 600;
-                font-size: 0.95em;
-            }
-
-            .game-info p {
-                font-size: 0.85em;
-                color: #6c757d;
-                margin: 5px 0;
-            }
-
-            .game-placeholder {
-                padding: 15px;
-                background-color: #f9f9f9;
-                border-radius: 5px;
-                text-align: center;
-                color: #6c757d;
-                font-size: 0.9em;
-                margin-bottom: 15px;
-            }
-
-            .see-all {
-                font-size: 0.9em;
-                color: #007bff;
-                text-decoration: none;
-            }
-
-            .see-all:hover {
-                text-decoration: underline;
-            }
-
-            .tabs {
-                display: flex;
-                gap: 10px;
-                margin-bottom: 15px;
-            }
-
-            .tab-button {
-                padding: 8px 15px;
-                border: none;
-                border-radius: 5px;
-                background-color: #e9ecef;
-                color: #495057;
-                cursor: pointer;
-                font-size: 0.9em;
-                transition: background-color 0.2s;
-            }
-
-            .tab-button.active {
-                background-color: #007bff;
-                color: #fff;
-            }
-
-            .tab-button:hover {
-                background-color: #dee2e6;
-            }
-
-            .tab-button.active:hover {
-                background-color: #0056b3;
-            }
-
-            .tab-content {
-                display: none;
-            }
-
-            .tab-content.active {
-                display: block;
-            }
-
-            .exit-btn {
-                background-color: #007bff;
-                color: #fff;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 1em;
-                display: block;
-                margin: 15px auto;
-                transition: background-color 0.2s, transform 0.2s;
-            }
-
-            .exit-btn:hover {
-                background-color: #0056b3;
-                transform: translateY(-2px);
-            }
-
-            .popup-triggers {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                justify-content: center;
-            }
-
-            .popup-trigger {
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                background-color: #28a745;
-                color: #fff;
-                cursor: pointer;
-                font-size: 0.9em;
-                transition: background-color 0.2s, transform 0.2s;
-            }
-
-            .popup-trigger:hover {
-                background-color: #218838;
-                transform: translateY(-2px);
-            }
-
-            .popup-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-                animation: fadeIn 0.3s ease;
-            }
-
-            .popup-card {
-                background-color: #fff;
-                width: 600px;
-                max-width: 90%;
-                border-radius: 8px;
-                padding: 20px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            }
-
-            .popup-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 15px;
-            }
-
-            .popup-header h2 {
-                font-size: 1.2em;
-                margin: 0;
-            }
-
-            .close-popup {
-                cursor: pointer;
-                font-size: 1.3rem;
-                color: #495057;
-                transition: color 0.2s;
-            }
-
-            .close-popup:hover {
-                color: #007bff;
-            }
-
-            /* Collapsible Sections */
-            .collapsible-content {
-                display: none;
-            }
-
-            .collapsible-content.active {
-                display: block;
-            }
-
-            .toggle-icon {
-                transition: transform 0.2s;
-            }
-
-            .toggle-icon.active {
-                transform: rotate(180deg);
-            }
-
-            /* Footer */
-            footer {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px 20px;
-                border-top: 1px solid #dee2e6;
-                background-color: #fff;
-                font-size: 0.9rem;
-                color: #6c757d;
-            }
-
-            footer a {
-                color: #007bff;
-                text-decoration: none;
-                font-weight: 500;
-            }
-
-            footer a:hover {
-                text-decoration: underline;
-                color: #0056b3;
-            }
-
-            /* Feedback Popup */
-            .feedback-popup-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-                animation: fadeIn 0.3s ease;
-            }
-
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-
-            .feedback-popup {
-                background-color: #fff;
-                width: 400px;
-                max-width: 90%;
-                border-radius: 12px;
-                overflow: hidden;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            }
-
-            .feedback-popup-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px 20px;
-                background-color: #f8f9fa;
-                border-bottom: 1px solid #dee2e6;
-            }
-
-            .feedback-popup-header h3 {
-                margin: 0;
-                font-size: 1.3rem;
-                color: #343a40;
-                font-weight: 500;
-            }
-
-            .feedback-popup-header i {
-                cursor: pointer;
-                font-size: 1.3rem;
-                color: #495057;
-                transition: color 0.2s;
-            }
-
-            .feedback-popup-header i:hover {
-                color: #007bff;
-            }
-
-            .feedback-popup-content {
-                padding: 20px;
-            }
-
-            .feedback-section {
-                margin-bottom: 20px;
-            }
-
-            .feedback-section h4 {
-                font-size: 1.1rem;
-                color: #343a40;
-                margin: 0 0 10px;
-                font-weight: 500;
-            }
-
-            .feedback-section p {
-                font-size: 0.9rem;
-                color: #6c757d;
-                margin: 0 0 10px;
-            }
-
-            .feedback-section textarea {
-                width: 100%;
-                padding: 12px;
-                border: 1px solid #ced4da;
-                border-radius: 6px;
-                font-size: 0.9rem;
-                resize: vertical;
-                min-height: 100px;
-                transition: border-color 0.2s;
-            }
-
-            .feedback-section textarea:focus {
-                border-color: #007bff;
-                outline: none;
-            }
-
-            .feedback-popup-actions {
-                display: flex;
-                justify-content: flex-end;
-                gap: 12px;
-            }
-
-            .feedback-popup-actions button {
-                padding: 10px 20px;
-                border-radius: 6px;
-                font-size: 0.9rem;
-                cursor: pointer;
-                border: none;
-                transition: background-color 0.2s, transform 0.2s;
-            }
-
-            .feedback-popup-actions .cancel-button {
-                background-color: #e9ecef;
-                color: #495057;
-            }
-
-            .feedback-popup-actions .cancel-button:hover {
-                background-color: #dee2e6;
-                transform: translateY(-2px);
-            }
-
-            .feedback-popup-actions .submit-button {
-                background-color: #007bff;
-                color: white;
-            }
-
-            .feedback-popup-actions .submit-button:hover {
-                background-color: #0056b3;
-                transform: translateY(-2px);
-            }
-
-            /* Responsive Design */
-            @media (max-width: 1199px) {
-                .game-grid {
-                    grid-template-columns: repeat(3, 1fr);
-                }
-            }
-
-            @media (max-width: 767px) {
-                .game-grid {
-                    grid-template-columns: repeat(2, 1fr);
-                }
-
-                 .navbar {
-                    flex-direction: column;
-                    gap: 15px;
-                    padding: 15px;
-                }
-
-                .nav-middle, .nav-right {
-                    flex-wrap: wrap;
-                    justify-content: center;
-                    gap: 8px;
-                }
-
-                .search-box {
-                    width: 100px;
-                }
-
-                .search-input {
-                    font-size: 0.85rem;
-                }
-
-            }
-
-            @media (max-width: 480px) {
-                .game-grid {
-                    grid-template-columns: 1fr;
-                }
-
-                .game-photo {
-                    width: 60px;
-                    height: 60px;
-                }
-
-                .game-item {
-                    padding: 8px;
-                }
-
-                .game-info strong {
-                    font-size: 0.85em;
-                }
-
-                .game-info p {
-                    font-size: 0.75em;
-                }
-
-                .tab-button {
-                    padding: 6px 10px;
-                    font-size: 0.8em;
-                }
-
-                .exit-btn, .popup-trigger {
-                    padding: 8px 15px;
-                    font-size: 0.9em;
-                }
-
-                .popup-card {
-                    width: 90%;
-                    padding: 15px;
-                }
-            }
-
-        /* Enhanced Popup Styles */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .popup-card {
-            background-color: #fff;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 12px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-
-        .popup-overlay.active .popup-card {
-            transform: translateY(0);
-        }
-
-        .popup-header {
-            padding: 15px 20px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .popup-header h2 {
-            font-size: 1.3rem;
-            margin: 0;
-            color: #333;
-        }
-
-        .close-popup {
-            font-size: 1.5rem;
-            color: #6c757d;
-            cursor: pointer;
-            background: none;
-            border: none;
-            transition: color 0.2s;
-        }
-
-        .close-popup:hover {
-            color: #dc3545;
-        }
-
-        .popup-content {
-            padding: 20px;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        /* Specific Popup Styles */
-        .live-stream-popup .popup-content {
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        .live-stream-popup h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .play-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 15px;
-        }
-
-        .play-button:hover {
-            background-color: #0069d9;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-        }
-
-        .currently-playing-popup .game-display {
-            height: 250px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .currently-playing-popup .game-display::before {
-            content: "Game Display";
-            position: absolute;
-            color: #6c757d;
-            font-size: 1.2rem;
-        }
-
-        .follow-button {
-            background-color: #e9ecef;
-            color: #333;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .follow-button:hover {
-            background-color: #dee2e6;
-        }
-
-        .related-games-popup .game-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .related-games-popup .game-item {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .related-games-popup .game-photo {
-            width: 100%;
-            height: 100px;
-            background-color: #e9ecef;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-        }
-
-        .community-popup .popup-content {
-            text-align: center;
-        }
-
-        .community-popup p {
-            font-size: 1rem;
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-
-        .community-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .community-feature {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .community-feature i {
-            font-size: 1.5rem;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .popup-card {
-                width: 95%;
-                max-width: none;
-            }
-            
-            .related-games-popup .game-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .community-features {
-                grid-template-columns: 1fr;
-            }
-        }
-
-    </style>
 </head>
 <body>
-    <div class="container">
-      
-          <!-- Navbar -->
-        <nav class="navbar">
-            <div class="nav-left">
-                <a href="#" class="logo">
-                    <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
-                </a>
-                <div class="search-box">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" placeholder="Search..." class="search-input" aria-label="Search">
-                </div>
+
+    <nav class="navbar">
+      <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+          </a>
+          <div class="search-box">
+            <div class="search-trigger">
+              <i class="fas fa-search search-icon"></i>
+              <div class="search-text">Search</div>
             </div>
-            <div class="nav-middle">
-                <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="#" class="nav-link"><i class="fas fa-user-friends"></i> MyConnections</a>
-                <a href="#" class="nav-link active"><i class="fas fa-video"></i> Video</a>
-                <a href="#" class="nav-link"><i class="fas fa-comment-dots"></i> Messages</a>
-                <a href="#" class="nav-link"><i class="fas fa-bell"></i> Notifications</a>
-                <a href="#" class="nav-link"><i class="fas fa-user-circle"></i> Account</a>
-            </div>
-            <div class="nav-right">
-                <a href="#" class="nav-link"><i class="fas fa-briefcase"></i> Jobs</a>
-                <a href="#" class="nav-link"><i class="fas fa-building"></i> Business</a>
-                <a href="#" class="nav-link"><i class="fas fa-cloud-arrow-up"></i> Drive</a>
-                <a href="#" class="nav-link"><i class="fas fa-bars"></i> Menu</a>
-            </div>
+            <input type="text" placeholder="Search..." class="search-input">
+          </div>
+      </div>
+          
+  <div class="nav-middle">
+      <a href="home.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+      </a>
+      <a href="myconnections.html" class="nav-link">
+          <i class="fas fa-user-friends"></i>
+          <span>MyConnections</span>
+      </a>
+      <a href="video1.html" class="nav-link">
+          <i class="fas fa-video"></i>
+          <span>Video</span>
+      </a>
+      <a href="messaging_page.html" class="nav-link">
+          <i class="fas fa-comment-dots"></i>
+          <span>Messages</span>
+      </a>
+      <a href="notification.html" class="nav-link">
+          <i class="fas fa-bell"></i>
+          <span>Notifications</span>
+      </a>
+      <a href="#" class="nav-link profile-nav-link">
+        <i class="fas fa-user-circle"></i>
+        <span>Account</span>
+      </a>
+    </div>
+
+          <div class="nav-right">
+
+            <a href="#" class="nav-link">
+              <i class="fas fa-briefcase"></i>
+              <span>Jobs</span>
+            </a>
+            <a href="business.html" class="nav-link">
+                <i class="fas fa-building"></i>
+                <span>Business</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span>Drive</span>
+            </a>
+            <a href="menu.html" class="nav-link">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+      </nav>
+
+      <!-- Replace your existing mobile-upper-nav section -->
+      <div class="mobile-header">
+        <!-- Mobile Upper Nav -->
+        <nav class="mobile-upper-nav">
+          <a href="index.html" class="mobile-logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+          </a>
+          <div class="upper-nav-right">
+              <button class="upper-nav-btn">
+                  <i class="fas fa-plus"></i>
+              </button>
+              <button class="upper-nav-btn" id="searchTriggerBtn">
+                  <i class="fas fa-search"></i>
+              </button>
+              <button class="upper-nav-btn">
+                  <i class="fas fa-ellipsis-v"></i>
+              </button>
+          </div>
         </nav>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="content">
-                <header class="connections-header">
-                    <h1>Gaming</h1>
-                </header>
+       <!-- Update the search-view to be a dropdown -->
+      <div class="search-overlay" id="searchView">
+          <div class="search-container">
+              <div class="search-header">
+                  <button class="back-btn" id="searchBackBtn">
+                      <i class="fas fa-arrow-left"></i>
+                  </button>
+                  <div class="search-bar">
+                      <div class="search-input-wrapper">
+                          <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                          <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                      </div>
+                  </div>
+              </div>
 
-                <!-- Your Games -->
-                <section class="card">
-                    <h2>Your Games <a href="#" class="see-all" onclick="handleAction('see-all', 'your-games')">See all</a></h2>
-                    <div class="game-placeholder">Save a game to your games to create a shortcut for it here.</div>
-                    <div class="game-grid">
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
+              <div class="search-content">
+                  <!-- Rest of your search content remains the same -->
+              </div>
+          </div>
+      </div>
+
+      <!-- Add this after the existing navbar -->
+    <nav class="mobile-top-nav">
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-video"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-briefcase"></i>
+      </a>
+      <a href="business.html" class="mobile-nav-item">
+          <i class="fas fa-building"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-cloud-arrow-up"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-user-circle"></i>
+      </a>
+    </nav>
+
+    <div class="container">
+              
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <header class="connections-header">
+                <h1>Gaming</h1>
+            </header>
+
+            <!-- Your Games -->
+            <section class="card">
+                <h2>Your Games <a href="#" class="see-all" onclick="handleAction('see-all', 'your-games')">See all</a></h2>
+                <div class="game-placeholder">Save a game to your games to create a shortcut for it here.</div>
+                <div class="game-grid">
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
                         </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
                         </div>
                     </div>
-                </section>
-
-                <!-- Game Categories -->
-                <section class="card">
-                    <h2>Game Categories <a href="#" class="see-all" onclick="handleAction('see-all', 'game-categories')">See all</a></h2>
-                    <div class="game-grid">
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
                         </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>Category</p>
-                            </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
                         </div>
                     </div>
-                </section>
-
-                <!-- Games We Love -->
-                <section class="card">
-                    <h2>Games We Love <a href="#" class="see-all" onclick="handleAction('see-all', 'games-we-love')">See all</a></h2>
-                    <div class="game-grid">
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
                         </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
                         </div>
                     </div>
-                </section>
-
-                <!-- Most Played Games -->
-                <section class="card">
-                    <h2>Most Played Games <a href="#" class="see-all" onclick="handleAction('see-all', 'most-played')">See all</a></h2>
-                    <div class="game-grid">
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
                         </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
-                            </div>
-                            <div class="game-info">
-                                <strong>Type</strong>
-                                <p>No of players</p>
-                            </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
                         </div>
                     </div>
-                </section>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                <!-- Featured Games -->
-                <section class="card">
-                    <h2>Featured Games <a href="#" class="see-all" onclick="handleAction('see-all', 'featured-games')">See all</a></h2>
+            <!-- Game Categories -->
+            <section class="card">
+                <h2>Game Categories <a href="#" class="see-all" onclick="handleAction('see-all', 'game-categories')">See all</a></h2>
+                <div class="game-grid">
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Category</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Games We Love -->
+            <section class="card">
+                <h2>Games We Love <a href="#" class="see-all" onclick="handleAction('see-all', 'games-we-love')">See all</a></h2>
+                <div class="game-grid">
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Most Played Games -->
+            <section class="card">
+                <h2>Most Played Games <a href="#" class="see-all" onclick="handleAction('see-all', 'most-played')">See all</a></h2>
+                <div class="game-grid">
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>No of players</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Games -->
+            <section class="card">
+                <h2>Featured Games <a href="#" class="see-all" onclick="handleAction('see-all', 'featured-games')">See all</a></h2>
+                <div class="game-grid">
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Action</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Battle</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Card</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Adventure</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">
+                            <img src="images/games.jpg" alt="Game Image">
+                        </div>
+                        <div class="game-info">
+                            <strong>Type</strong>
+                            <p>Puzzle</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- All Games Category -->
+            <section class="card">
+                <h2>All Games Category <a href="#" class="see-all" onclick="handleAction('see-all', 'all-games')">All games</a></h2>
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab('recommended')">Recommended</button>
+                    <button class="tab-button" onclick="switchTab('browse')">Browse</button>
+                </div>
+                <div class="tab-content active" id="recommended">
                     <div class="game-grid">
                         <div class="game-item">
                             <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
+                                <img src="images/games.jpg" alt="Game Image">
                             </div>
                             <div class="game-info">
                                 <strong>Type</strong>
@@ -1085,7 +425,7 @@
                         </div>
                         <div class="game-item">
                             <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
+                                <img src="images/games.jpg" alt="Game Image">
                             </div>
                             <div class="game-info">
                                 <strong>Type</strong>
@@ -1094,7 +434,7 @@
                         </div>
                         <div class="game-item">
                             <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
+                                <img src="images/games.jpg" alt="Game Image">
                             </div>
                             <div class="game-info">
                                 <strong>Type</strong>
@@ -1103,7 +443,7 @@
                         </div>
                         <div class="game-item">
                             <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
+                                <img src="images/games.jpg" alt="Game Image">
                             </div>
                             <div class="game-info">
                                 <strong>Type</strong>
@@ -1112,7 +452,7 @@
                         </div>
                         <div class="game-item">
                             <div class="game-photo">
-                                <img src="/img/games.jpg" alt="Game Image">
+                                <img src="images/games.jpg" alt="Game Image">
                             </div>
                             <div class="game-info">
                                 <strong>Type</strong>
@@ -1120,377 +460,319 @@
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <!-- All Games Category -->
-                <section class="card">
-                    <h2>All Games Category <a href="#" class="see-all" onclick="handleAction('see-all', 'all-games')">All games</a></h2>
-                    <div class="tabs">
-                        <button class="tab-button active" onclick="switchTab('recommended')">Recommended</button>
-                        <button class="tab-button" onclick="switchTab('browse')">Browse</button>
-                    </div>
-                    <div class="tab-content active" id="recommended">
-                        <div class="game-grid">
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Action</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Battle</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Card</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Adventure</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Puzzle</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-content" id="browse">
-                        <div class="game-grid">
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Action</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Battle</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Card</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Adventure</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">
-                                    <img src="/img/games.jpg" alt="Game Image">
-                                </div>
-                                <div class="game-info">
-                                    <strong>Type</strong>
-                                    <p>Puzzle</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            <!-- Popup Triggers -->
-                <section class="card">
-                    <h2>More Gaming Options</h2>
-                    <div class="popup-triggers">
-                        <button class="popup-trigger" onclick="showPopup('play-on-archivehubs')">Play on Archivehubs</button>
-                        <button class="popup-trigger" onclick="showPopup('currently-playing')">Currently Playing</button>
-                        <button class="popup-trigger" onclick="showPopup('related-games-1')">Related Games (1)</button>
-                        <button class="popup-trigger" onclick="showPopup('community')">Community</button>
-                        <button class="popup-trigger" onclick="showPopup('related-games-2')">Related Games (2)</button>
-                    </div>
-                </section>
-            </div>
-
-        <!-- Enhanced Popups -->
-        <!-- Play on Archivehubs Popup -->
-        <div id="play-on-archivehubs" class="popup-overlay live-stream-popup">
-            <div class="popup-card">
-                <div class="popup-header">
-                    <h2>Play Live Stream Games</h2>
-                    <button class="close-popup" onclick="hidePopup('play-on-archivehubs')">&times;</button>
                 </div>
-                <div class="popup-content">
-                    <h3>Play live stream games on Archivehubs</h3>
-                    <button class="play-button" onclick="handleAction('play', 'archivehubs')">Play on Archivehubs</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Currently Playing Popup -->
-        <div id="currently-playing" class="popup-overlay currently-playing-popup">
-            <div class="popup-card">
-                <div class="popup-header">
-                    <h2>Currently Playing</h2>
-                    <button class="close-popup" onclick="hidePopup('currently-playing')">&times;</button>
-                </div>
-                <div class="popup-content">
-                    <div class="game-display"></div>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <h3 style="margin: 0;">Game Title</h3>
-                            <p style="margin: 5px 0 0; color: #6c757d;">Action Adventure</p>
-                        </div>
-                        <button class="follow-button">Follow</button>
-                    </div>
-                    
-                    <div style="margin-top: 25px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <h4 style="margin: 0;">Related Games</h4>
-                            <a href="#" style="color: #007bff; text-decoration: none; font-size: 0.9rem;">See more</a>
-                        </div>
-                        
-                        <div class="game-grid">
-                            <div class="game-item">
-                                <div class="game-photo">Game</div>
-                                <div class="game-info">
-                                    <strong>Design</strong>
-                                    <p>Name</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">Game</div>
-                                <div class="game-info">
-                                    <strong>Design</strong>
-                                    <p>Name</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">Game</div>
-                                <div class="game-info">
-                                    <strong>Design</strong>
-                                    <p>Name</p>
-                                </div>
-                            </div>
-                            <div class="game-item">
-                                <div class="game-photo">Game</div>
-                                <div class="game-info">
-                                    <strong>Design</strong>
-                                    <p>Name</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 25px;">
-                        <h4 style="margin-bottom: 10px;">Community</h4>
-                        <p style="color: #6c757d; margin-top: 0;">View featured group and page content</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Related Games Popup 1 -->
-        <div id="related-games-1" class="popup-overlay related-games-popup">
-            <div class="popup-card">
-                <div class="popup-header">
-                    <h2>Related Games</h2>
-                    <button class="close-popup" onclick="hidePopup('related-games-1')">&times;</button>
-                </div>
-                <div class="popup-content">
+                <div class="tab-content" id="browse">
                     <div class="game-grid">
                         <div class="game-item">
-                            <div class="game-photo">Game</div>
+                            <div class="game-photo">
+                                <img src="imagesgames.jpg" alt="Game Image">
+                            </div>
                             <div class="game-info">
-                                <strong>Design</strong>
-                                <p>Name</p>
+                                <strong>Type</strong>
+                                <p>Action</p>
                             </div>
                         </div>
                         <div class="game-item">
-                            <div class="game-photo">Game</div>
+                            <div class="game-photo">
+                                <img src="images/games.jpg" alt="Game Image">
+                            </div>
                             <div class="game-info">
-                                <strong>Design</strong>
-                                <p>Name</p>
+                                <strong>Type</strong>
+                                <p>Battle</p>
                             </div>
                         </div>
                         <div class="game-item">
-                            <div class="game-photo">Game</div>
+                            <div class="game-photo">
+                                <img src="images/games.jpg" alt="Game Image">
+                            </div>
                             <div class="game-info">
-                                <strong>Design</strong>
-                                <p>Name</p>
+                                <strong>Type</strong>
+                                <p>Card</p>
                             </div>
                         </div>
                         <div class="game-item">
-                            <div class="game-photo">Game</div>
+                            <div class="game-photo">
+                                <img src="images/games.jpg" alt="Game Image">
+                            </div>
                             <div class="game-info">
-                                <strong>Design</strong>
-                                <p>Name</p>
+                                <strong>Type</strong>
+                                <p>Adventure</p>
                             </div>
                         </div>
-                    </div>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <a href="#" class="see-all" style="color: #007bff; text-decoration: none;">See more</a>
+                        <div class="game-item">
+                            <div class="game-photo">
+                                <img src="images/games.jpg" alt="Game Image">
+                            </div>
+                            <div class="game-info">
+                                <strong>Type</strong>
+                                <p>Puzzle</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+        <!-- Popup Triggers -->
+            <section class="card">
+                <h2>More Gaming Options</h2>
+                <div class="popup-triggers">
+                    <button class="popup-trigger" onclick="showPopup('play-on-archivehubs')">Play on Archivehubs</button>
+                    <button class="popup-trigger" onclick="showPopup('currently-playing')">Currently Playing</button>
+                    <button class="popup-trigger" onclick="showPopup('related-games-1')">Related Games (1)</button>
+                    <button class="popup-trigger" onclick="showPopup('community')">Community</button>
+                    <button class="popup-trigger" onclick="showPopup('related-games-2')">Related Games (2)</button>
+                </div>
+            </section>
         </div>
 
-        <!-- Community Popup -->
-        <div id="community" class="popup-overlay community-popup">
-            <div class="popup-card">
-                <div class="popup-header">
-                    <h2>Community</h2>
-                    <button class="close-popup" onclick="hidePopup('community')">&times;</button>
-                </div>
-                <div class="popup-content">
-                    <p>View featured group and page content</p>
-                    <div class="community-features">
-                        <div class="community-feature">
-                            <i class="fas fa-users"></i>
-                            <h4>Groups</h4>
-                            <p>Join gaming communities</p>
-                        </div>
-                        <div class="community-feature">
-                            <i class="fas fa-newspaper"></i>
-                            <h4>Pages</h4>
-                            <p>Follow game publishers</p>
-                        </div>
-                        <div class="community-feature">
-                            <i class="fas fa-comments"></i>
-                            <h4>Discussions</h4>
-                            <p>Share your thoughts</p>
-                        </div>
-                        <div class="community-feature">
-                            <i class="fas fa-calendar-alt"></i>
-                            <h4>Events</h4>
-                            <p>Join gaming events</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- Enhanced Popups -->
+    <!-- Play on Archivehubs Popup -->
+    <div id="play-on-archivehubs" class="popup-overlay live-stream-popup">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h2>Play Live Stream Games</h2>
+                <button class="close-popup" onclick="hidePopup('play-on-archivehubs')">&times;</button>
+            </div>
+            <div class="popup-content">
+                <h3>Play live stream games on Archivehubs</h3>
+                <button class="play-button" onclick="handleAction('play', 'archivehubs')">Play on Archivehubs</button>
             </div>
         </div>
-
-        <!-- Related Games Popup 2 -->
-        <div id="related-games-2" class="popup-overlay related-games-popup">
-            <div class="popup-card">
-                <div class="popup-header">
-                    <h2>Related Games</h2>
-                    <button class="close-popup" onclick="hidePopup('related-games-2')">&times;</button>
-                </div>
-                <div class="popup-content">
-                    <div class="game-grid">
-                        <div class="game-item">
-                            <div class="game-photo">Game</div>
-                            <div class="game-info">
-                                <strong>Design</strong>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">Game</div>
-                            <div class="game-info">
-                                <strong>Design</strong>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">Game</div>
-                            <div class="game-info">
-                                <strong>Design</strong>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-photo">Game</div>
-                            <div class="game-info">
-                                <strong>Design</strong>
-                                <p>Name</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="text-align: center; margin-top: 20px;">
-                        <a href="#" class="see-all" style="color: #007bff; text-decoration: none;">See more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-      
     </div>
 
-    <script>
-        // Enhanced Popup Functions
-        function showPopup(popupId) {
-            const popup = document.getElementById(popupId);
-            popup.style.display = 'flex';
-            setTimeout(() => {
-                popup.classList.add('active');
-            }, 10);
-            
-            // Prevent background scrolling
-            document.body.style.overflow = 'hidden';
-        }
+    <!-- Currently Playing Popup -->
+    <div id="currently-playing" class="popup-overlay currently-playing-popup">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h2>Currently Playing</h2>
+                <button class="close-popup" onclick="hidePopup('currently-playing')">&times;</button>
+            </div>
+            <div class="popup-content">
+                <div class="game-display"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="margin: 0;">Game Title</h3>
+                        <p style="margin: 5px 0 0; color: #6c757d;">Action Adventure</p>
+                    </div>
+                    <button class="follow-button">Follow</button>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h4 style="margin: 0;">Related Games</h4>
+                        <a href="#" style="color: #007bff; text-decoration: none; font-size: 0.9rem;">See more</a>
+                    </div>
+                    
+                    <div class="game-grid">
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-photo">Game</div>
+                            <div class="game-info">
+                                <strong>Design</strong>
+                                <p>Name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <h4 style="margin-bottom: 10px;">Community</h4>
+                    <p style="color: #6c757d; margin-top: 0;">View featured group and page content</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        function hidePopup(popupId) {
-            const popup = document.getElementById(popupId);
-            popup.classList.remove('active');
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 300);
-            
-            // Restore background scrolling
-            document.body.style.overflow = '';
-        }
+    <!-- Related Games Popup 1 -->
+    <div id="related-games-1" class="popup-overlay related-games-popup">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h2>Related Games</h2>
+                <button class="close-popup" onclick="hidePopup('related-games-1')">&times;</button>
+            </div>
+            <div class="popup-content">
+                <div class="game-grid">
+                    <div class="game-item">
+                        <div class="game-photo">Game</div>
+                        <div class="game-info">
+                            <strong>Design</strong>
+                            <p>Name</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">Game</div>
+                        <div class="game-info">
+                            <strong>Design</strong>
+                            <p>Name</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">Game</div>
+                        <div class="game-info">
+                            <strong>Design</strong>
+                            <p>Name</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">Game</div>
+                        <div class="game-info">
+                            <strong>Design</strong>
+                            <p>Name</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" class="see-all" style="color: #007bff; text-decoration: none;">See more</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Close popup when clicking outside content
-        window.addEventListener('click', (event) => {
-            if (event.target.classList.contains('popup-overlay')) {
-                hidePopup(event.target.id);
-            }
-        });
+    <!-- Community Popup -->
+    <div id="community" class="popup-overlay community-popup">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h2>Community</h2>
+                <button class="close-popup" onclick="hidePopup('community')">&times;</button>
+            </div>
+            <div class="popup-content">
+                <p>View featured group and page content</p>
+                <div class="community-features">
+                    <div class="community-feature">
+                        <i class="fas fa-users"></i>
+                        <h4>Groups</h4>
+                        <p>Join gaming communities</p>
+                    </div>
+                    <div class="community-feature">
+                        <i class="fas fa-newspaper"></i>
+                        <h4>Pages</h4>
+                        <p>Follow game publishers</p>
+                    </div>
+                    <div class="community-feature">
+                        <i class="fas fa-comments"></i>
+                        <h4>Discussions</h4>
+                        <p>Share your thoughts</p>
+                    </div>
+                    <div class="community-feature">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Events</h4>
+                        <p>Join gaming events</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Close popup with Escape key
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                document.querySelectorAll('.popup-overlay').forEach(popup => {
-                    if (popup.style.display === 'flex') {
-                        hidePopup(popup.id);
-                    }
-                });
-            }
-        });
+    <!-- Related Games Popup 2 -->
+    <div id="related-games-2" class="popup-overlay related-games-popup">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h2>Related Games</h2>
+                <button class="close-popup" onclick="hidePopup('related-games-2')">&times;</button>
+            </div>
+            <div class="popup-content">
+                <div class="game-grid">
+                    <div class="game-item">
+                        <div class="game-photo">Game</div>
+                        <div class="game-info">
+                            <strong>Design</strong>
+                            <p>Name</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">Game</div>
+                        <div class="game-info">
+                            <strong>Design</strong>
+                            <p>Name</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">Game</div>
+                        <div class="game-info">
+                            <strong>Design</strong>
+                            <p>Name</p>
+                        </div>
+                    </div>
+                    <div class="game-item">
+                        <div class="game-photo">Game</div>
+                        <div class="game-info">
+                            <strong>Design</strong>
+                            <p>Name</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" class="see-all" style="color: #007bff; text-decoration: none;">See more</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
+  
+</div>
+
+<script>
+   
+    function showPopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.style.display = 'flex';
+        setTimeout(() => {
+            popup.classList.add('active');
+        }, 10);
+        
     
-    </script>
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hidePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.classList.remove('active');
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 300);
+        
+   
+        document.body.style.overflow = '';
+    }
+
+ 
+    window.addEventListener('click', (event) => {
+        if (event.target.classList.contains('popup-overlay')) {
+            hidePopup(event.target.id);
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            document.querySelectorAll('.popup-overlay').forEach(popup => {
+                if (popup.style.display === 'flex') {
+                    hidePopup(popup.id);
+                }
+            });
+        }
+    });
+
+
+</script>
 </body>
 </html>
