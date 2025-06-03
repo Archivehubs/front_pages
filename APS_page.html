@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+      <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+          </a>
+          <div class="search-box">
+            <div class="search-trigger">
+              <i class="fas fa-search search-icon"></i>
+              <div class="search-text">Search</div>
+            </div>
+            <input type="text" placeholder="Search..." class="search-input">
+          </div>
+      </div>
+          
+  <div class="nav-middle">
+      <a href="home.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+      </a>
+      <a href="myconnections.html" class="nav-link">
+          <i class="fas fa-user-friends"></i>
+          <span>MyConnections</span>
+      </a>
+      <a href="video1.html" class="nav-link">
+          <i class="fas fa-video"></i>
+          <span>Video</span>
+      </a>
+      <a href="messaging_page.html" class="nav-link">
+          <i class="fas fa-comment-dots"></i>
+          <span>Messages</span>
+      </a>
+      <a href="notification.html" class="nav-link">
+          <i class="fas fa-bell"></i>
+          <span>Notifications</span>
+      </a>
+      <a href="#" class="nav-link profile-nav-link">
+        <i class="fas fa-user-circle"></i>
+        <span>Account</span>
+      </a>
+    </div>
+
+          <div class="nav-right">
+
+            <a href="#" class="nav-link">
+              <i class="fas fa-briefcase"></i>
+              <span>Jobs</span>
+            </a>
+            <a href="business.html" class="nav-link">
+                <i class="fas fa-building"></i>
+                <span>Business</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span>Drive</span>
+            </a>
+            <a href="menu.html" class="nav-link">
+                <i class="fas fa-bars"></i>
+                <span>Menu</span>
+            </a>
+        </div>
+      </nav>
+
+      <!-- Replace your existing mobile-upper-nav section -->
+      <div class="mobile-header">
+        <!-- Mobile Upper Nav -->
+        <nav class="mobile-upper-nav">
+          <a href="index.html" class="mobile-logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+          </a>
+          <div class="upper-nav-right">
+              <button class="upper-nav-btn">
+                  <i class="fas fa-plus"></i>
+              </button>
+              <button class="upper-nav-btn" id="searchTriggerBtn">
+                  <i class="fas fa-search"></i>
+              </button>
+              <button class="upper-nav-btn">
+                  <i class="fas fa-ellipsis-v"></i>
+              </button>
+          </div>
+        </nav>
+
+       <!-- Update the search-view to be a dropdown -->
+      <div class="search-overlay" id="searchView">
+          <div class="search-container">
+              <div class="search-header">
+                  <button class="back-btn" id="searchBackBtn">
+                      <i class="fas fa-arrow-left"></i>
+                  </button>
+                  <div class="search-bar">
+                      <div class="search-input-wrapper">
+                          <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                          <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="search-content">
+                  <!-- Rest of your search content remains the same -->
+              </div>
+          </div>
+      </div>
+
+      <!-- Add this after the existing navbar -->
+    <nav class="mobile-top-nav">
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-video"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-briefcase"></i>
+      </a>
+      <a href="business.html" class="mobile-nav-item">
+          <i class="fas fa-building"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-cloud-arrow-up"></i>
+      </a>
+      <a href="#" class="mobile-nav-item">
+          <i class="fas fa-user-circle"></i>
+      </a>
+    </nav>
+
+    <!-- Archivehubs Page Type Selection Section -->
+<section class="archivehubs-page-section">
+    <h2 class="section-title">Create an Archivehubs Page</h2>
+    <p class="section-subtitle">
+      Connect with Professionals, Jobs, Employees and Global Opportunities. To get started, choose a page type.
+    </p>
+    <div class="page-type-grid">
+      <!-- Company -->
+        <a href="corporate_company.html">
+            <div class="page-type-card">
+                <img src="images/corporate_company.png" alt="Company" class="page-type-icon">
+                <h3>Company</h3>
+                <p>Micro, Small, Medium, and Large Businesses</p>
+            </div>
+        </a>
+      <!-- Organizations -->
+      <a href="corporate_organization.html">
+        <div class="page-type-card">
+            <img src="images/corporate_organizations.png" alt="Organizations" class="page-type-icon">
+            <h3>Organizations</h3>
+            <p>Government, NGO, NFO, Civil Society, International, Faith base....</p>
+        </div>
+      </a>
+      <!-- Educational Institutions -->
+      <a href="corporate_education.html">
+        <div class="page-type-card">
+            <img src="images/corporate_education.png" alt="Educational Institutions" class="page-type-icon">
+            <h3>Educational Institutions</h3>
+            <p>Schools and Universities</p>
+        </div>
+      </a>
+      <!-- Fan Page -->
+      <a href="corporate_fans.html">
+        <div class="page-type-card">
+            <img src="images/corporate_fans.png" alt="Fan Page" class="page-type-icon">
+            <h3>Fan Page</h3>
+            <p>Influencers, Coaches, Trainers, Content Creators....</p>
+        </div>
+      </a>
+      <!-- Showcase Page -->
+      <a href="corporate_showcase.html">
+        <div class="page-type-card">
+            <img src="images/corporate_showcase.png" alt="Showcase Page" class="page-type-icon">
+            <h3>Showcase Page</h3>
+            <p>Sub-Pages associated with and existing page</p>
+        </div>
+      </a>
+      <!-- Affiliate Page -->
+      <a href="corporat_affiliate.html">
+        <div class="page-type-card">
+            <img src="images/corporate_affiliate.png" alt="Affiliate Page" class="page-type-icon">
+            <h3>Affiliate Page</h3>
+            <p>Become an Affiliate Marketing Partner to Archivehubs</p>
+        </div>
+      </a> 
+    </div>
+  </section>
+
+</body>
+</html>
