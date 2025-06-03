@@ -1,0 +1,883 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home | ArchiveHubs</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/insight-analysis.css">
+        <link rel="stylesheet" href="css/general-terms.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+
+        <nav class="navbar">
+          <div class="nav-left">
+              <a href="home.html" class="logo">
+                <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+              </a>
+              <div class="search-box">
+                <div class="search-trigger">
+                  <i class="fas fa-search search-icon"></i>
+                  <div class="search-text">Search</div>
+                </div>
+                <input type="text" placeholder="Search..." class="search-input">
+              </div>
+          </div>
+              
+      <div class="nav-middle">
+          <a href="home.html" class="nav-link">
+              <i class="fas fa-home"></i>
+              <span>Home</span>
+          </a>
+          <a href="myconnections.html" class="nav-link">
+              <i class="fas fa-user-friends"></i>
+              <span>MyConnections</span>
+          </a>
+          <a href="video1.html" class="nav-link">
+              <i class="fas fa-video"></i>
+              <span>Video</span>
+          </a>
+          <a href="messaging_page.html" class="nav-link">
+              <i class="fas fa-comment-dots"></i>
+              <span>Messages</span>
+          </a>
+          <a href="notification.html" class="nav-link">
+              <i class="fas fa-bell"></i>
+              <span>Notifications</span>
+          </a>
+          <a href="#" class="nav-link profile-nav-link">
+            <i class="fas fa-user-circle"></i>
+            <span>Account</span>
+          </a>
+        </div>
+
+              <div class="nav-right">
+
+                <a href="#" class="nav-link">
+                  <i class="fas fa-briefcase"></i>
+                  <span>Jobs</span>
+                </a>
+                <a href="business.html" class="nav-link">
+                    <i class="fas fa-building"></i>
+                    <span>Business</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cloud-arrow-up"></i>
+                    <span>Drive</span>
+                </a>
+                <a href="menu.html" class="nav-link">
+                    <i class="fas fa-bars"></i>
+                    <span>Menu</span>
+                </a>
+            </div>
+          </nav>
+
+          <!-- Replace your existing mobile-upper-nav section -->
+          <div class="mobile-header">
+            <!-- Mobile Upper Nav -->
+            <nav class="mobile-upper-nav">
+              <a href="home.html" class="mobile-logo">
+                  <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+              </a>
+              <div class="upper-nav-right">
+                  <button class="upper-nav-btn">
+                      <i class="fas fa-plus"></i>
+                  </button>
+                  <button class="upper-nav-btn" id="searchTriggerBtn">
+                      <i class="fas fa-search"></i>
+                  </button>
+                  <button class="upper-nav-btn">
+                      <i class="fas fa-ellipsis-v"></i>
+                  </button>
+              </div>
+            </nav>
+
+           <!-- Update the search-view to be a dropdown -->
+          <div class="search-overlay" id="searchView">
+              <div class="search-container">
+                  <div class="search-header">
+                      <button class="back-btn" id="searchBackBtn">
+                          <i class="fas fa-arrow-left"></i>
+                      </button>
+                      <div class="search-bar">
+                          <div class="search-input-wrapper">
+                              <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                              <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="search-content">
+                      <!-- Rest of your search content remains the same -->
+                  </div>
+              </div>
+          </div>
+
+          <!-- Add this after the existing navbar -->
+        <nav class="mobile-top-nav">
+          <a href="#" class="mobile-nav-item">
+              <i class="fas fa-video"></i>
+          </a>
+          <a href="#" class="mobile-nav-item">
+              <i class="fas fa-briefcase"></i>
+          </a>
+          <a href="business.html" class="mobile-nav-item">
+              <i class="fas fa-building"></i>
+          </a>
+          <a href="#" class="mobile-nav-item">
+              <i class="fas fa-cloud-arrow-up"></i>
+          </a>
+          <a href="#" class="mobile-nav-item">
+              <i class="fas fa-user-circle"></i>
+          </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+          <!-- Left Sidebar -->
+          <section class="left-sidebar">
+            <div class="profile-card">
+              <div class="profile-header">
+                <div class="profile-bg">
+                  <img src="images/profile.jpg" alt="Cover Photo" class="cover-photo">
+                </div>
+                <div class="profile-info">
+                  <img src="images/profile.jpg" alt="Picture" class="profile-pic">
+                  <h2>John Doe</h2>
+                  <p class="profile-bio">Softtware Developer | AI Enthusiast | Full stack Developer | Open Source Contributor</p>
+                  <div class="profile-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Lagos, Nigeria</span>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-analytics">
+
+                <a href="#">
+                  <div class="stat-item"> 
+                    <span>Profile Visitors</span>
+                  </div>
+                </a>
+
+                <a href="insight-analysis.html">
+                  <div class="stat-item">
+                    <span>Insight and Analysis</span>
+                  </div>
+                </a>
+
+                <a href="archive_explorer.html">
+                  <div class="stat-item">
+                    <span>Archive Explorer</span>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="stat-item">
+                    <span>Archive Lite</span>
+                  </div>
+                </a>
+
+                <a href="#">
+                  <div class="stat-item">
+                    <span>Archive Learning</span>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+
+            <div class="quick-links">
+              <a href="planner-aps.html">
+              <div class="link-item">
+                <i class="fa-regular fa-calendar"></i>
+                <span>Planner (APS)</span>
+              </div>
+              </a>
+              <a href="archive_community.html">
+                <div class="link-item">
+                  <img src="images/community-logo.jpeg" alt="Archive Community" class="link-icon">
+                  <span>Archive Community</span>
+                </div>
+              </a>
+              <div class="link-item">
+                <i class="fa-solid fa-user-group"></i>
+                <span>Groups</span>
+              </div>
+              <div class="link-item">
+                <i class="fa-regular fa-newspaper"></i>
+                <span>Newsletters</span>
+              </div>
+              <div class="link-item">
+                <i class="fa-solid fa-pen"></i>
+                <span>Write Articles</span>
+              </div>
+            </div>
+            <div class="general-terms">
+              <a href="general-terms.html" class="terms-link">General Terms</a>
+          </div>
+          </section>
+
+          <!-- Middle Section -->
+          <section class="middle-section">
+            <!-- Post Creation Area -->
+            <div class="create-post">
+              <div class="company-header">
+                <img src="images/company-chat.jpg" alt="ArchiveHubs" class="company-logo">
+              </div>
+              <div class="post-input-container">
+                <img src="images/profile.jpg" alt="User Profile" class="user-profile-pic">
+                <div class="post-input-wrapper">
+                  <input type="text" placeholder="Start a post" class="post-input">
+                </div>
+              </div>
+              
+              <!-- Post Actions -->
+              <div class="post-actions">
+              <a href="video2-live.html">
+                <button class="action-btn">
+                  <i class="fas fa-video"></i>
+                  <span>Live Video</span>
+                </button>
+              </a>
+                <a href="media.html">
+                  <button class="action-btn">
+                    <i class="fas fa-image"></i>
+                    <span>Media</span>
+                  </button>
+                </a>
+                <a href="gamespage.html">
+                  <button class="action-btn">
+                  <i class="fas fa-gamepad"></i>
+                  <span>Game</span>
+                </button>
+                </a>
+                <button class="action-btn">
+                  <i class="fas fa-robot"></i>
+                  <span>AI</span>
+                </button>
+              </div>
+            </div>
+            
+
+                  <!-- After create-post div -->
+          <div class="stories-section">
+            <div class="stories-container">
+
+              <!-- Create Story Card -->
+              <div class="story-card create-story">
+                <div class="story-content">
+                  <div class="create-story-top">
+                    <img src="images/profile.jpg" alt="Your Profile" class="story-avatar">
+                    <label for="story-upload" class="create-story-plus">
+                      <i class="fas fa-plus"></i>
+                    </label>
+                    <input type="file" id="story-upload" class="file-input" accept="image/*,video/*">
+                    <span class="story-username">Create Story</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Story Cards - 6 cards as shown in mockup -->
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <!-- Repeat story-card div 5 more times for other stories -->
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <div class="story-card">
+                <div class="story-content">
+                  <img src="images/profile.jpg" alt="User" class="story-avatar">
+                  <span class="story-username">John Doe</span>
+                </div>
+              </div>
+              <!-- ... more story cards ... -->
+            </div>
+          </div>
+
+          <!-- Posts Section -->
+          <div class="posts-section">
+            <div class="post">
+              <!-- Post Header -->
+              <div class="post-header">
+                <div class="post-author-info">
+                    <img src="images/profile.jpg" alt="Profile" class="post-profile-pic">
+                    <div class="post-author-details">
+                        <h4 class="post-author-name">Sarah Johnson</h4>
+                        <p class="post-meta">Software Engineer at Tech Corp • 2h ago</p>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Post Content -->
+              <div class="post-content">
+                <p class="post-text">
+                  Just finished implementing a new feature using AI! Really excited about how machine learning 
+                  is transforming the way we build software. What are your thoughts on AI in modern development? 
+                  #Programming #AI #Innovation
+                </p>
+                <!-- Optional: Add post image if needed -->
+                <img src="images/post-example.jpg" alt="Post Image" class="post-image">
+              </div>
+
+              <!-- Post Metrics -->
+              <div class="post-metrics">
+                <span class="metric">
+                  <i class="fas fa-thumbs-up"></i>
+                  <span class="metric-count">142</span>
+                </span>
+                <span class="metric">
+                  <span class="metric-count">28 comments</span>
+                </span>
+              </div>
+
+              <!-- Post Actions -->
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="far fa-thumbs-up"></i>
+                  <span>Like</span>
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-comment"></i>
+                  <span>Comment</span>
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-retweet"></i>
+                  <span>Repost</span>
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-paper-plane"></i>
+                  <span>Share</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+                <!-- Add this after the posts-section -->
+          <div class="connections-section">
+            <div class="connections-header">
+                <h3>Connections you may want</h3>
+                <button class="see-all-btn">See All</button>
+            </div>
+            
+            <div class="connections-container">
+                <!-- Connection Cards -->
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>David Chen</h4>
+                        <p>Software Engineer at Google</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
+
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>Sarah Williams</h4>
+                        <p>Data Scientist at Microsoft</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
+
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>Michael Rodriguez</h4>
+                        <p>AI Researcher at OpenAI</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
+
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>Michael Rodriguez</h4>
+                        <p>AI Researcher at OpenAI</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
+
+                <div class="connection-card">
+                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                    <div class="connection-info">
+                        <h4>Michael Rodriguez</h4>
+                        <p>AI Researcher at OpenAI</p>
+                    </div>
+                    <div class="connection-actions">
+                      <button class="connect-btn">Connect</button>
+                      <button class="decline-btn">Decline</button>
+                    </div>
+                </div>
+
+                <!-- Add more connection cards as needed -->
+            </div>
+          </div>
+
+          <!-- Posts Section -->
+          <div class="posts-section">
+            <div class="post">
+              <!-- Post Header -->
+              <div class="post-header">
+                <div class="post-author-info">
+                    <img src="images/profile.jpg" alt="Profile" class="post-profile-pic">
+                    <div class="post-author-details">
+                        <h4 class="post-author-name">Michael Rodriguez</h4>
+                        <p class="post-meta">Software Engineer at Meta • 30min ago</p>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Post Content -->
+              <div class="post-content">
+                <p class="post-text">
+                  Rebuilding the next generation of technology with the new META Virtual Reality Devices. Can't wait for what the future holds #Innovation #Programming #MachineLearning
+                </p>
+                <!-- Optional: Add post image if needed -->
+                <img src="images/post-example2.jpg" alt="Post Image" class="post-image">
+              </div>
+
+              <!-- Post Metrics -->
+              <div class="post-metrics">
+                <span class="metric">
+                  <i class="fas fa-thumbs-up"></i>
+                  <span class="metric-count">3k</span>
+                </span>
+                <span class="metric">
+                  <span class="metric-count">400 comments</span>
+                </span>
+              </div>
+
+              <!-- Post Actions -->
+              <div class="post-actions">
+                <button class="action-btn">
+                  <i class="far fa-thumbs-up"></i>
+                  <span>Like</span>
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-comment"></i>
+                  <span>Comment</span>
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-retweet"></i>
+                  <span>Repost</span>
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-paper-plane"></i>
+                  <span>Share</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+                <!-- Add this after the posts-section -->
+                <div class="connections-section">
+                  <div class="connections-header">
+                      <h3>Connections Requests</h3>
+                      <button class="see-all-btn">See All</button>
+                  </div>
+                  
+                  <div class="connections-container">
+                      <!-- Connection Cards -->
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>David Chen</h4>
+                              <p>Software Engineer at Google</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>Sarah Williams</h4>
+                              <p>Data Scientist at Microsoft</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>Michael Rodriguez</h4>
+                              <p>AI Researcher at OpenAI</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>Michael Rodriguez</h4>
+                              <p>AI Researcher at OpenAI</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <div class="connection-card">
+                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
+                          <div class="connection-info">
+                              <h4>Michael Rodriguez</h4>
+                              <p>AI Researcher at OpenAI</p>
+                          </div>
+                          <div class="connection-actions">
+                            <button class="connect-btn">Connect</button>
+                            <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+          
+                      <!-- Add more connection cards as needed -->
+                  </div>
+                </div>
+
+                            <!-- Business Page Post Section -->
+                <div class="business-post-section">
+                  <!-- Post Header -->
+                  <div class="post-header">
+                      <div class="post-author-info">
+                          <img src="images/profile.jpg" alt="Tesla" class="post-profile-pic">
+                          <div class="post-author-details">
+                              <h4 class="post-author-name">Tesla Motors</h4>
+                              <p class="post-meta">
+                                  Sponsored • <i class="fas fa-globe-americas"></i>
+                              </p>
+                          </div>
+                      </div>
+                      <button class="more-options">
+                          <i class="fas fa-ellipsis-h"></i>
+                      </button>
+                  </div>
+
+                  <!-- Post Content -->
+                  <div class="post-content">
+                      <p>Introducing the next generation of electric vehicles. Experience the future of sustainable transportation. 
+                        #Tesla #Innovation #Sustainability</p>
+                      <img src="images/tesla-post.jpg" alt="Tesla Car" class="post-image">
+                  </div>
+
+                  <!-- Post Metrics -->
+                  <div class="post-metrics">
+                      <div class="metrics-left">
+                          <span class="metric">
+                              <i class="fas fa-thumbs-up"></i>
+                              <span class="metric-count">15.4K</span>
+                          </span>
+                      </div>
+                      <div class="metrics-right">
+                          <span class="metric">2.8K comments</span>
+                          <span class="metric-dot">•</span>
+                          <span class="metric">4.2K shares</span>
+                          <span class="metric-dot">•</span>
+                          <span class="metric">1.6K reposts</span>
+                      </div>
+                  </div>
+
+                  <!-- Post Actions -->
+                  <div class="post-actions">
+                      <button class="action-btn">
+                          <i class="far fa-thumbs-up"></i>
+                          <span>Like</span>
+                      </button>
+                      <button class="action-btn">
+                          <i class="far fa-comment"></i>
+                          <span>Comment</span>
+                      </button>
+                      <button class="action-btn">
+                        <i class="fas fa-retweet"></i>
+                        <span>Repost</span>
+                    </button>
+                      <button class="action-btn">
+                          <i class="fas fa-paper-plane"></i>
+                          <span>Share</span>
+                      </button>
+                  </div>
+                </div>
+
+          </section>
+
+                  <!-- Right Sidebar -->
+            <div class="right-sidebar">
+              <!-- Network Section -->
+              <div class="sidebar-section">
+                <div class="section-header">
+                  <h3 class="section-title">Add to your network</h3>
+                  <a href="#" class="see-all">See all</a>
+                </div>
+                  
+                  <!-- Connection Suggestions -->
+                  <div class="connection-suggestions">
+                          <div class="suggestion-item">
+                            <div class="suggestion-header">
+                              <img src="images/profile.jpg" alt="Profile" class="suggestion-avatar">
+                              <div class="suggestion-info">
+                                <h4>Emma Watson</h4>
+                                <p>Senior UI/UX Designer at Apple</p>
+                              </div>
+                            </div>
+                            <div class="suggestion-actions">
+                              <button class="connect-btn">Connect</button>
+                              <button class="decline-btn">Decline</button>
+                            </div>
+                          </div>
+
+                      <div class="suggestion-item">
+                          <div class="suggestion-header">
+                              <img src="images/profile.jpg" alt="Profile" class="suggestion-avatar">
+                              <div class="suggestion-info">
+                                  <h4>James Rodriguez</h4>
+                                  <p>Backend Developer at Microsoft</p>
+                              </div>
+                          </div>
+                          <div class="suggestion-actions">
+                              <button class="connect-btn">Connect</button>
+                              <button class="decline-btn">Decline</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Trending News Section -->
+              <div class="sidebar-section">
+                <div class="section-header">
+                  <h3 class="section-title">Trending News</h3>
+                  <a href="#" class="see-all">See all</a>
+                </div>
+                  
+                  <div class="trending-news">
+                      <div class="news-item">
+                          <img src="images/profile.jpg" alt="News" class="news-image">
+                          <div class="news-content">
+                              <span class="news-source">TechCrunch • 2h ago</span>
+                              <h4>AI Breakthrough: New Model Surpasses Human Performance</h4>
+                          </div>
+                      </div>
+
+                      <div class="news-item">
+                          <img src="images/profile.jpg" alt="News" class="news-image">
+                          <div class="news-content">
+                              <span class="news-source">Bloomberg • 4h ago</span>
+                              <h4>Global Markets See Record High in Tech Sector</h4>
+                          </div>
+                      </div>
+
+                      <div class="news-item">
+                          <img src="images/profile.jpg" alt="News" class="news-image">
+                          <div class="news-content">
+                              <span class="news-source">Forbes • 6h ago</span>
+                              <h4>Top 10 Startups to Watch in 2024</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Pages Suggestions -->
+              <div class="sidebar-section">
+                <div class="section-header">
+                  <h3 class="section-title">Suggested Pages</h3>
+                  <a href="#" class="see-all">See all</a>
+                </div>
+                  
+                  <div class="page-suggestions">
+                      <div class="page-item">
+                          <img src="images/profile.jpg" alt="Page" class="page-image">
+                          <div class="page-info">
+                              <h4>Tesla Motors</h4>
+                              <p>Automotive Company • 2.5M followers</p>
+                          </div>
+                          <button class="follow-btn">Follow</button>
+                      </div>
+
+                      <div class="page-item">
+                          <img src="images/profile.jpg" alt="Page" class="page-image">
+                          <div class="page-info">
+                              <h4>Google</h4>
+                              <p>Technology Company • 5.8M followers</p>
+                          </div>
+                          <button class="follow-btn">Follow</button>
+                      </div>
+
+                      <div class="page-item">
+                          <img src="images/profile.jpg" alt="Page" class="page-image">
+                          <div class="page-info">
+                              <h4>NASA</h4>
+                              <p>Space Agency • 4.2M followers</p>
+                          </div>
+                          <button class="follow-btn">Follow</button>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="app-promotion">
+                <h3>Get the Archive App</h3>
+                <img src="images/hubs.jpg" alt="ArchiveHubs App" class="app-banner">
+                <div class="copyright">
+                    <p>ENINK Investment Limited © 2025</p>
+                    <img src="images/company-name.jpg" alt="Company Logo" class="company-logo">
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Bottom Navigation -->
+          <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link active">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="business.html" class="mobile-nav-link">
+                <i class="fas fa-user-friends"></i>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-comment-dots"></i>
+            </a>
+            <a href="#" class="mobile-nav-link">
+                <i class="fas fa-bell"></i>
+            </a>
+            <a href="account-mobile.html" class="mobile-nav-link">
+                <i class="fas fa-bars"></i>
+            </a>
+          </nav>
+
+              <!-- Messaging Box -->
+        <div class="messaging-box">
+          <div class="messaging-header" onclick="toggleMessagingBox()">
+              <div class="messaging-left">
+                  <img src="images/profile.jpg" alt="Profile" class="messaging-profile">
+                  <span>Messaging</span>
+              </div>
+              <div class="messaging-actions">
+                  <i class="fas fa-pen-to-square"></i>
+                  <i class="fas fa-ellipsis"></i>
+              </div>
+          </div>
+
+          <div class="messaging-content">
+              <!-- Add messaging content -->
+              <div class="messaging-search">
+                  <i class="fas fa-search"></i>
+                  <input type="text" placeholder="Search messages">
+              </div>
+              <div class="messages-list">
+                  <div class="no-messages">
+                      <i class="fas fa-comment-dots"></i>
+                      <p>No messages yet</p>
+                      <span>Connect with people to start messaging</span>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+          
+        </main>
+
+      
+
+        <script src="js/script.js"></script>
+
+        <script>
+          // Theme Toggle
+          const themeToggle = document.getElementById('theme-toggle');
+          themeToggle.addEventListener('click', () => {
+              document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+          });
+  
+          // Mobile Menu Toggle
+          const menuToggle = document.querySelector('.menu-toggle');
+          const dropdownMenu = document.querySelector('.dropdown-menu');
+          menuToggle.addEventListener('click', () => {
+              dropdownMenu.classList.toggle('show');
+          });
+
+          document.addEventListener('DOMContentLoaded', function() {
+        const searchTriggerBtn = document.getElementById('searchTriggerBtn');
+        const searchView = document.getElementById('searchView');
+        const searchBackBtn = document.getElementById('searchBackBtn');
+        const searchInput = document.getElementById('searchInput');
+
+        if (searchTriggerBtn && searchView && searchBackBtn && searchInput) {
+            // Open search
+            searchTriggerBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                searchView.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 50);
+            });
+
+            // Close search
+            searchBackBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                searchView.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scroll
+            });
+
+            // Close on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchView.classList.contains('active')) {
+                    searchView.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+    });
+         
+
+      </script>
+      </body>
+    </html>
