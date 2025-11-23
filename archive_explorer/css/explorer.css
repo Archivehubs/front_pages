@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Archive Navbar */
+.archive-navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.archive-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.archive-nav-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+.nav-btn i {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Adjust body margin to account for fixed navbar */
+body {
+    margin-top: 70px;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 800px;
+    display: flex;
+    max-width: 100%;
+    position: relative;
+    padding-bottom: 60px;
+    margin: 40px auto;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+    min-width: 0;
+}
+
+h2, h3 {
+    margin: 15px 0 10px 0;
+    color: #333;
+}
+
+/* Link styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.app-item {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    padding: 8px 0;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.app-item:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.app-item i {
+    margin-right: 12px;
+    color: #007bff;
+    min-width: 20px;
+}
+
+.app-item:not(:has(i)) {
+    padding-left: 32px;
+    color: #666;
+}
+
+.app-item strong {
+    color: #333;
+}
+
+.footer-button {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.create-page-btn {
+    background-color: transparent;
+    color: #0073b1;
+    border: 1px solid #0073b1;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.create-page-btn:hover {
+    background-color: rgba(0, 115, 177, 0.1);
+    box-shadow: 0 0 0 1px #0073b1;
+}
+
+.create-page-btn i {
+    font-size: 14px;
+}
