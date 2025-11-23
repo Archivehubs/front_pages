@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Features of the Portfolio - Content and Portfolio Management Labs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/archive-learning.css">
+    <style>
+        /* Accordion styles */
+        .accordion-item {
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .accordion-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: #2c3e50;
+            color: white;
+            text-align: left;
+        }
+        .accordion-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+        .accordion-icon {
+            margin-left: auto;
+            font-size: 14px;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        .accordion-content {
+            transition: max-height 0.3s ease-out;
+            overflow: hidden;
+            max-height: 0;
+        }
+        .accordion-content-inner {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .accordion-content-inner ul {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            padding-left: 20px;
+        }
+        .accordion-content-inner li {
+            margin-bottom: 8px;
+        }
+        .sub-feature {
+            list-style-type: circle;
+            padding-left: 20px;
+        }
+        .lesson-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+    <script src="js/archive-learning.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/Archivehubs Logo.jpeg" alt="Archivehubs Logo">
+                </div>
+                <span class="brand-text">Content and Portfolio Management Labs</span>
+            </div>
+            <div class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        <div class="lesson-page-content">
+            <aside class="lesson-sidebar">
+                <div class="sidebar-header">
+                    <h2>Lesson</h2>
+                    <i class="fas fa-times sidebar-close"></i>
+                </div>
+                <div class="sidebar-lesson-details">
+                    <h3>Content and Portfolio Management</h3>
+                    <div class="sidebar-lesson-info">
+                        <div class="info-item">
+                            <i class="far fa-clock info-icon"></i>
+                            <span>60-90 mins</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-star info-icon" style="color: #f59e0b;"></i>
+                            <span class="badge badge-portfolio">Portfolio</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-chart-bar info-icon" style="color: #10b981;"></i>
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="lesson-progress-bar" style="margin: 18px 0 6px 0;">
+                        <div style="background: #eee; border-radius: 8px; height: 10px; width: 100%;">
+                            <div style="background: #4267B2; width: 17%; height: 10px; border-radius: 8px;"></div>
+                        </div>
+                        <div style="font-size: 13px; color: #333; margin-top: 4px; text-align: left;">17% Complete 2 of 12 Lessons</div>
+                    </div>
+                    <button class="sidebar-lesson-start-btn" onclick="window.location.href='portfolio_use_cases.html'">Start</button>
+                </div>
+                <ul class="lesson-list">
+                    <li class="lesson-list-item"><a href="content_portfolio_intro.html"><span class="lesson-title">Introduction</span> <i class="fas fa-check-circle lesson-status-icon"></i></a></li>
+                    <li class="lesson-list-item"><a href="content_portfolio_assessment.html"><span class="lesson-title">Pre-Course Self-Assessment (Optional)</span></a></li>
+                    <li class="lesson-list-item has-submenu">
+                        <a href="" class="submenu-toggle">
+                            <span class="lesson-title">Secure Storage & Organization</span> 
+                            <i class="fas fa-chevron-down submenu-icon"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="submenu-item"><a href="upload_managing_assets.html"><span class="lesson-title">Uploaded & Managing Digital Assets on Archivehubs.com</span></a></li>
+                            <li class="submenu-item"><a href="ai_powered_tagging.html"><span class="lesson-title">AI – Powered Tagging & Categorization on Archivehubs.com</span></a></li>
+                            <li class="submenu-item"><a href="searching_retrieving_files.html"><span class="lesson-title">Searching & Retrieving Files Efficiently on Archivehubs.com</span></a></li>
+                            <li class="submenu-item"><a href="secure_storage_knowledge_check.html"><span class="lesson-title">Knowledge Check</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="lesson-list-item has-submenu">
+                        <a href="" class="submenu-toggle">
+                            <span class="lesson-title">Collaboration & Networking</span> 
+                            <i class="fas fa-chevron-down submenu-icon"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="submenu-item"><a href="connecting_professionals.html"><span class="lesson-title">Connecting with Professionals & Teams on Archivehubs.com</span></a></li>
+                            <li class="submenu-item"><a href="sharing_files_permissions.html"><span class="lesson-title">Sharing Files & Setting Permissions on Archivehubs</span></a></li>
+                            <li class="submenu-item"><a href="engaging_community.html"><span class="lesson-title">Engaging with Archivehubs Community</span></a></li>
+                            <li class="submenu-item"><a href="collaboration_knowledge_check.html"><span class="lesson-title">Knowledge Check</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="lesson-list-item has-submenu expanded">
+                        <a href="" class="submenu-toggle">
+                            <span class="lesson-title">Portfolio: Showcase Work and Achievements</span> 
+                            <i class="fas fa-chevron-down submenu-icon"></i>
+                        </a>
+                        <ul class="submenu" style="max-height: 200px;">
+                            <li class="submenu-item"><a href="showcase_work_achievements.html"><span class="lesson-title">Showcase Work and Achievements</span></a></li>
+                            <li class="submenu-item active"><a href="portfolio_key_features.html"><span class="lesson-title">Key Features of the Portfolio</span></a></li>
+                            <li class="submenu-item"><a href="portfolio_use_cases.html"><span class="lesson-title">Potential use cases</span></a></li>
+                            <li class="submenu-item"><a href="portfolio_knowledge_check.html"><span class="lesson-title">Knowledge Check</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="lesson-list-item"><a href="content_portfolio_review.html"><span class="lesson-title">Course Review</span></a></li>
+                </ul>
+            </aside>
+            <main class="lesson-main-content">
+                <div class="main-content-header">                   
+                    <span class="lesson-label"><i class="fas fa-book"></i>Lesson</span>
+                </div>
+                <div class="lesson-content-section">
+                    <h2 class="lesson-title-main">Key Features of the Portfolio</h2>
+                    <h3 class="lesson-title-sub">Key Features of the Portfolio: Showcase Work and Achievements</h3>
+                    
+                    <img src="images/learning_3.jpg" alt="Portfolio Key Features" class="lesson-image">
+                    
+                    <div class="accordion-container">
+                        <!-- Portfolio Creation and Customization -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>1. Portfolio Creation and Customization</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Personalized Portfolio Page:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Create a unique, customizable portfolio page that can include an introduction, professional bio, and contact information.</li>
+                                                <li>Select from various templates and themes to customize the layout, colors, and fonts to align with personal or brand identity.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Custom Domain:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Option to use a custom URL (e.g., Archive.com/YourName or Archive.com/BrandName) for professional branding.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Portfolio Sections:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Organize work into various sections such as Projects, Case Studies, Resume, Skills, Awards, and Testimonials.</li>
+                                                <li>Each section can have distinct visual elements such as grids, carousels, or tiles for a clean, modern presentation.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Management -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>2. Content Management</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Add Work Samples:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Upload images, videos, PDFs, documents, and audio files to showcase specific projects, designs, or achievements.</li>
+                                                <li>Provide detailed descriptions for each project, explaining the context, tools used, and the outcome.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Project Highlights:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Highlight key projects or works that best demonstrate your skills and expertise.</li>
+                                                <li>Option to feature these works at the top of the portfolio for increased visibility.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Interactive Portfolio:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Create interactive elements such as clickable prototypes, live demos, or videos that allow visitors to engage directly with the work.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Downloadable Documents:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Allow visitors to download resumes, presentations, case studies, or other portfolio-related documents.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Showcase Achievements and Skills -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>3. Showcase Achievements and Skills</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Achievements Section:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Highlight notable achievements, certifications, awards, and recognitions.</li>
+                                                <li>Include a timeline or list format for easy readability.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Skills and Expertise:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Display a list of professional skills, with proficiency levels and years of experience.</li>
+                                                <li>Showcase endorsements or recommendations from colleagues, clients, or mentors.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Personal Branding:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Include a personal brand statement or mission to explain who you are, your vision, and your goals.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Professional Certifications:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Display relevant certifications or courses completed, including badges or logos from accrediting bodies.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonials and Reviews -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>4. Testimonials and Reviews</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Client and Peer Testimonials:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Showcase testimonials from past clients, collaborators, or mentors who can vouch for your work and character.</li>
+                                                <li>Include quotes, videos, or star ratings to enhance the credibility of the testimonials.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Review and Rating System:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Enable clients or colleagues to leave reviews or ratings on specific projects or overall portfolio performance.</li>
+                                                <li>Aggregate ratings and feedback to build trust and attract potential clients.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Analytics and Insights -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>5. Portfolio Analytics and Insights</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Visitor Analytics:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Track how many people visit your portfolio, which projects they interact with, and where they come from (location, referral sources).</li>
+                                                <li>View which sections of the portfolio are getting the most attention (e.g., project details, testimonials).</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Engagement Metrics:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Measure how often portfolio items (like videos, images, documents) are viewed, liked, shared, or downloaded.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Lead Generation Tracking:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Monitor leads or inquiries that come directly from the portfolio, such as contact form submissions or consultation requests.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Collaboration and Networking -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>6. Collaboration and Networking</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Direct Contact Forms:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Include a built-in contact form for potential clients or employers to get in touch with you easily.</li>
+                                                <li>Integrate social media links to allow visitors to connect with you on platforms like LinkedIn, Twitter, Instagram, etc.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Collaborative Features:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Enable collaboration features such as shared project folders or feedback mechanisms for team-based projects.</li>
+                                                <li>Allow clients or collaborators to leave comments or suggestions on specific portfolio pieces for further interaction.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Monetization Features -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>7. Monetization Features</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Paid Portfolio Access:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Set up a subscription or membership fee to access exclusive content or premium portfolio features.</li>
+                                                <li>Offer tiered access, with basic content freely available and advanced work or case studies accessible through a paid plan.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Freelance Opportunities:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Include a section for freelance or contract work availability, with an integrated booking or inquiry system.</li>
+                                                <li>Showcase any available consulting services, speaking opportunities, or freelance projects.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Affiliate Links:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Add affiliate links to relevant products, tools, or services that are featured in your portfolio or used in your work.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Portfolio Features -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>8. Interactive Portfolio Features</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Portfolio Slideshow/Carousel:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Display projects or works in an interactive slideshow or carousel format for easy browsing.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>360° Viewing:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Include 360° images or videos for creative work like product design, architecture, or visual arts, allowing users to explore work from different angles.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Embedded Media:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Allow embedding of videos, podcasts, or presentations from platforms like YouTube, Vimeo, or SlideShare directly into portfolio sections.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Searchable Portfolio and Tagging -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>9. Searchable Portfolio and Tagging</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Search Functionality:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Allow visitors to search for specific projects, skills, or achievements within your portfolio.</li>
+                                                <li>Enable filtering by categories, date, skill level, or project type for easy navigation.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Tagging and Categorization:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Tag projects with relevant keywords to improve searchability, such as "web design," "branding," "social media campaigns," or "photography."</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security and Privacy Features -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>10. Security and Privacy Features</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Password Protection:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Secure certain sections of the portfolio, such as premium content or client-specific work, with password protection.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Content Watermarking:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Option to watermark images or videos to prevent unauthorized use or redistribution.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Data Encryption:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Ensure that personal contact information and any confidential work are securely encrypted and protected.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Portfolio Promotion and Social Sharing -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <h3>11. Portfolio Promotion and Social Sharing</h3>
+                                <i class="fas fa-plus accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner">
+                                    <ul>
+                                        <li><strong>Social Media Sharing:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Enable easy sharing of portfolio items or entire portfolios via social media platforms like Facebook, Twitter, LinkedIn, and Instagram.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Email Newsletter Integration:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Add an email subscription option for visitors to receive portfolio updates, new projects, and industry insights.</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Referral Links:</strong>
+                                            <ul class="sub-feature">
+                                                <li>Create custom referral links to share your portfolio with potential clients or partners via email or messaging platforms.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-navigation-footer">
+                        <a href="portfolio_use_cases.html" class="next-lesson-link">Next > Potential use cases</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <footer class="lesson-footer">
+        <p>Get the Archivehubs App General Terms</p>
+        <p>ARCHIVEHUBS: ENINK Investment Limited &copy; 2025</p>
+        <div class="social-icons">
+            <a href="#" aria-label="Archivehubs"><img src="images/Logo.jpg" alt="A" style="width: 20px; height: 20px;"></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+        <p class="enink-learning">Power by ENINK Learning</p>
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all accordion headers
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        
+        // Add click event to each header
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                // Get the associated content and icon
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.accordion-icon');
+                
+                // Check if this accordion is currently open
+                const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                
+                // Close all accordions first
+                document.querySelectorAll('.accordion-content').forEach(item => {
+                    item.style.maxHeight = '0px';
+                });
+                
+                // Reset all icons
+                document.querySelectorAll('.accordion-icon').forEach(item => {
+                    item.classList.remove('fa-minus');
+                    item.classList.add('fa-plus');
+                });
+                
+                // If this accordion wasn't open, open it
+                if (!isOpen) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                }
+            });
+        });
+        
+        // Initialize all accordions as closed
+        document.querySelectorAll('.accordion-content').forEach(item => {
+            item.style.maxHeight = '0px';
+        });
+    });
+    </script>
+</body>
+</html>
