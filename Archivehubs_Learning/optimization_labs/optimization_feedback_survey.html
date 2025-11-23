@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Feedback Survey - Archivehubs Optimization Labs</title>
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="css/archive-learning.css">
+    <!-- Shared JavaScript -->
+    <script src="js/archive-learning.js"></script>
+</head>
+<body>
+    <!-- Survey Content -->
+    <div class="survey-page-content">
+        <div class="survey-header">
+            <h1><i class="fas fa-clipboard-list"></i> Course Feedback Survey</h1>
+            <p class="survey-subtitle">What did you think? Let us know by filling out this survey:</p>
+            <h2 class="course-name">Archivehubs Optimization Labs</h2>
+            <p class="survey-duration">This survey should take 2-3 minutes. For additional language options, use the drop down above.</p>
+            <p class="required-note"><span class="required-mark">*</span> Required</p>
+        </div>
+
+        <form class="survey-form" id="feedbackForm">
+            <!-- Question 1: Net Promoter Score -->
+            <div class="survey-question">
+                <label class="question-label">
+                    1. How likely are you to recommend this course to a colleague? <span class="required-mark">*</span>
+                </label>
+                <div class="rating-scale">
+                    <div class="scale-labels">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                    </div>
+                    <div class="scale-options">
+                        <input type="radio" name="nps" value="1" id="nps1" required>
+                        <label for="nps1">1</label>
+                        <input type="radio" name="nps" value="2" id="nps2" required>
+                        <label for="nps2">2</label>
+                        <input type="radio" name="nps" value="3" id="nps3" required>
+                        <label for="nps3">3</label>
+                        <input type="radio" name="nps" value="4" id="nps4" required>
+                        <label for="nps4">4</label>
+                        <input type="radio" name="nps" value="5" id="nps5" required>
+                        <label for="nps5">5</label>
+                        <input type="radio" name="nps" value="6" id="nps6" required>
+                        <label for="nps6">6</label>
+                        <input type="radio" name="nps" value="7" id="nps7" required>
+                        <label for="nps7">7</label>
+                        <input type="radio" name="nps" value="8" id="nps8" required>
+                        <label for="nps8">8</label>
+                        <input type="radio" name="nps" value="9" id="nps9" required>
+                        <label for="nps9">9</label>
+                        <input type="radio" name="nps" value="10" id="nps10" required>
+                        <label for="nps10">10</label>
+                    </div>
+                    <div class="scale-descriptions">
+                        <span>Not at all likely</span>
+                        <span>Extremely likely</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2: Most valuable learning -->
+            <div class="survey-question">
+                <label class="question-label">
+                    2. What was most valuable to your learning in this course? <span class="optional-mark">(optional)</span>
+                </label>
+                <textarea name="mostValuable" rows="4" placeholder="Please share what you found most valuable..."></textarea>
+            </div>
+
+            <!-- Question 3: Suggestions for improvement -->
+            <div class="survey-question">
+                <label class="question-label">
+                    3. What would you suggest we improve in this course? <span class="optional-mark">(optional)</span>
+                </label>
+                <textarea name="improvements" rows="4" placeholder="Please share your suggestions for improvement..."></textarea>
+            </div>
+
+            <!-- Question 4: Prior familiarity -->
+            <div class="survey-question">
+                <label class="question-label">
+                    4. What was your familiarity with Archivehubs optimization prior to taking this course?
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="familiarity" value="1" id="familiarity1">
+                        <label for="familiarity1">1: None, it's all new.</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="familiarity" value="2" id="familiarity2">
+                        <label for="familiarity2">2: I'm an expert, I could teach it.</label>
+                    </div>
+                </div>
+                <div class="language-selector">
+                    <select name="language">
+                        <option value="en">English (United States)</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
+                <div class="rating-scale-small">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
+            </div>
+
+            <!-- Question 5: Learning application -->
+            <div class="survey-question">
+                <label class="question-label">
+                    5. I learned something from this course that will help me in my current role or career pursuits.
+                </label>
+                <div class="rating-scale-small">
+                    <input type="radio" name="learningApplication" value="1" id="la1">
+                    <label for="la1">1</label>
+                    <input type="radio" name="learningApplication" value="2" id="la2">
+                    <label for="la2">2</label>
+                    <input type="radio" name="learningApplication" value="3" id="la3">
+                    <label for="la3">3</label>
+                    <input type="radio" name="learningApplication" value="4" id="la4">
+                    <label for="la4">4</label>
+                    <input type="radio" name="learningApplication" value="5" id="la5">
+                    <label for="la5">5</label>
+                </div>
+                <div class="scale-descriptions-small">
+                    <span>1: strongly disagree</span>
+                    <span>5: strongly agree</span>
+                </div>
+            </div>
+
+            <!-- Question 6: Confidence level -->
+            <div class="survey-question">
+                <label class="question-label">
+                    6. How confident are you in your Archivehubs optimization knowledge after this course?
+                </label>
+                <div class="rating-scale-small">
+                    <input type="radio" name="confidence" value="1" id="conf1">
+                    <label for="conf1">1</label>
+                    <input type="radio" name="confidence" value="2" id="conf2">
+                    <label for="conf2">2</label>
+                    <input type="radio" name="confidence" value="3" id="conf3">
+                    <label for="conf3">3</label>
+                    <input type="radio" name="confidence" value="4" id="conf4">
+                    <label for="conf4">4</label>
+                    <input type="radio" name="confidence" value="5" id="conf5">
+                    <label for="conf5">5</label>
+                </div>
+                <div class="scale-descriptions-small">
+                    <span>1: extremely unconfident</span>
+                    <span>5: extremely confident</span>
+                </div>
+            </div>
+
+            <!-- Question 7: Content quality satisfaction -->
+            <div class="survey-question">
+                <label class="question-label">
+                    7. How satisfied are you with the content quality?
+                </label>
+                <div class="rating-scale-small">
+                    <input type="radio" name="contentQuality" value="1" id="cq1">
+                    <label for="cq1">1</label>
+                    <input type="radio" name="contentQuality" value="2" id="cq2">
+                    <label for="cq2">2</label>
+                    <input type="radio" name="contentQuality" value="3" id="cq3">
+                    <label for="cq3">3</label>
+                    <input type="radio" name="contentQuality" value="4" id="cq4">
+                    <label for="cq4">4</label>
+                    <input type="radio" name="contentQuality" value="5" id="cq5">
+                    <label for="cq5">5</label>
+                </div>
+                <div class="scale-descriptions-small">
+                    <span>1: extremely unsatisfied</span>
+                    <span>5: extremely satisfied</span>
+                </div>
+            </div>
+
+            <!-- Question 8: Application timeline -->
+            <div class="survey-question">
+                <label class="question-label">
+                    8. How soon will you be able to apply the course concept(s)?
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="applicationTimeline" value="immediately" id="timeline1">
+                        <label for="timeline1">Immediately</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="applicationTimeline" value="within_month" id="timeline2">
+                        <label for="timeline2">Within a month</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="applicationTimeline" value="within_quarter" id="timeline3">
+                        <label for="timeline3">Within a quarter</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="applicationTimeline" value="within_year" id="timeline4">
+                        <label for="timeline4">Within a year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="applicationTimeline" value="not_applicable" id="timeline5">
+                        <label for="timeline5">Not applicable</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <p><i class="fas fa-shield-alt"></i> Your responses are secure and will be used to improve our courses. We respect your privacy and will not share your personal information.</p>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="survey-actions">
+                <button type="submit" class="btn btn-submit-survey">
+                    Submit Survey
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('feedbackForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Here you would typically send the form data to your server
+                // For now, we'll just show a success message
+                alert('Thank you for your feedback! Your responses have been submitted successfully.');
+                
+                // Optionally redirect to a thank you page or back to the main course
+                // window.location.href = 'optimization_congratulations.html';
+            });
+        });
+    </script>
+</body>
+</html> 
