@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+      <link rel="stylesheet" href="css/menu.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="../Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="../Archivehubs-Notifications/notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="../Archivehubs-Business/business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+
+    <div class="container">
+        <div class="columns-wrapper">
+            <!-- Left Column (Central Navigation and stacked cards) -->
+            <div class="left-column">
+                <!-- Central Navigation Card -->
+                <div class="box">
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search Menu">
+                    </div>
+        
+                    <h3>Central Navigation</h3>
+        
+                    <div class="menu-item">
+                        <div class="icon">🏠</div>
+                        <div class="content">
+                            <h4>Home</h4>
+                            <p>Directs users to their personalized feed with posts, updates, and recommended content.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">🧭</div>
+                        <div class="content">
+                            <h4>Explore</h4>
+                            <p>Discover trending topics, communities, and featured content.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">🔔</div>
+                        <div class="content">
+                            <h4>Notifications</h4>
+                            <p>View all recent notifications, including likes, comments, tags, and system updates.</p>
+                        </div>
+                    </div>
+        
+                    <h3>Archived</h3>
+        
+                    <div class="menu-item">
+                        <div class="icon">🗂️</div>
+                        <div class="content">
+                            <h4>Drive</h4>
+                            <p>Quick access to stored files, folders, and document management tools.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">👥</div>
+                        <div class="content">
+                            <h4>Forum</h4>
+                            <p>Navigate to discussion groups, forums, and community networks.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Diary Card -->
+                <div class="box diary-box">
+                    <div class="menu-item">
+                        <div class="icon">📔</div>
+                        <div class="content">
+                            <h4>Diary</h4>
+                            <p>Open personal journals, logs, or activity records for reflection and planning.</p>
+                        </div>
+                    </div>
+        
+                    <div class="planner-section">
+                        <div class="menu-item">
+                            <div class="icon">📅</div>
+                            <div class="content">
+                                <h4>Planner</h4>
+                                <p>Manage tasks, schedules, and deadlines.</p>
+                            </div>
+                        </div>
+        
+                        <div class="connection-section">
+                            <h5>Connection & Communication</h5>
+                            <div class="connection-item checked">
+                                <div class="connection-content">
+                                    <div class="connection-icon">👥</div>
+                                    <a href="myconnections.html">
+                                        <div>
+                                            <strong>Myconnection</strong>
+                                            <p>Manage personal and professional networks.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="connection-item">
+                                <div class="connection-content">
+                                    <div class="connection-icon">💬</div>
+                                    <div>
+                                        <strong>Messaging</strong>
+                                        <p>Open chat, group discussions, or video call interfaces.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="connection-item checked">
+                                <div class="connection-content">
+                                    <div class="connection-icon">💼</div>
+                                    <div>
+                                        <strong>Jobs</strong>
+                                        <p>Browse job listings, apply for opportunities, and manage job-related activities.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="event-organizer">
+                            <div class="menu-item">
+                                <div class="icon">🎪</div>
+                                <div class="content">
+                                    <h4>Event Organizer</h4>
+                                    <p>Connect clients with services like event planning, catering, or venue booking, schedule events.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Content & Media Card -->
+                <div class="box content-media-box">
+                    <h3>Content & Media</h3>
+        
+                    <div class="menu-item">
+                        <div class="icon">🎬</div>
+                        <div class="content">
+                            <h4>Video Streaming</h4>
+                            <p>Access streaming services for educational, professional, or entertainment content.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">🌟</div>
+                        <div class="content">
+                            <h4>Fans Pages</h4>
+                            <p>Follow or interact with influencers, brands, and thought leaders.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">🏢</div>
+                        <div class="content">
+                            <h4>Corporate Pages</h4>
+                            <p>Follow or interact with businesses, organizations, brands, and global opportunities.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">📂</div>
+                        <div class="content">
+                            <h4>Portfolio</h4>
+                            <p>Showcase personal or professional achievements and work samples.</p>
+                        </div>
+                    </div>
+        
+                    <h3>Customization & Personalization</h3>
+        
+                    <div class="menu-item">
+                        <div class="icon">🎨</div>
+                        <div class="content">
+                            <h4>Theme Settings</h4>
+                            <p>Switch between light, dark, or custom themes.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">🔄</div>
+                        <div class="content">
+                            <h4>Menu Customization</h4>
+                            <p>Rearrange menu items based on user preferences or frequently used tools.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">⚡</div>
+                        <div class="content">
+                            <h4>Quick Links</h4>
+                            <p>Add shortcuts for specific groups, forums, or tools directly in the menu.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Profile & Account Management Card -->
+                <div class="box profile-account-box">
+                    <h3>Profile & Account Management</h3>
+        
+                    <div class="menu-item">
+                        <div class="icon">👤</div>
+                        <div class="content">
+                            <h4>Profile</h4>
+                            <p>Edit personal information, display achievements, and manage privacy settings.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">⚙️</div>
+                        <div class="content">
+                            <h4>Settings</h4>
+                            <p>Access account settings, notifications preferences, and privacy controls.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">💎</div>
+                        <div class="content">
+                            <h4>Subscriptions</h4>
+                            <p>Manage subscription tiers, billing, and premium features.</p>
+                        </div>
+                    </div>
+        
+                    <div class="ai-section">
+                        <h4>AI – Enhance Assistance</h4>
+                        
+                        <div class="menu-item">
+                            <div class="icon">🤖</div>
+                            <div class="content">
+                                <h5>AI Suggestions</h5>
+                                <p>Display shortcuts or recommendations based on user behavior or current activities.</p>
+                            </div>
+                        </div>
+        
+                        <div class="menu-item">
+                            <div class="icon">🔍</div>
+                            <div class="content">
+                                <h5>Smart Search Integration</h5>
+                                <p>Directly type into the menu for immediate search results or command execution.</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">❓</div>
+                        <div class="content">
+                            <h4>Help Center</h4>
+                            <p>Access support articles, FAQs, and contact options.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security & Privacy Card -->
+                <div class="box security-privacy-box">
+                    <h3>Security & Privacy</h3>
+        
+                    <div class="menu-item">
+                        <div class="icon">🚪</div>
+                        <div class="content">
+                            <h4>Logout</h4>
+                            <p>Securely sign out of the platform.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">🔄</div>
+                        <div class="content">
+                            <h4>Switch Accounts</h4>
+                            <p>Seamlessly toggle between personal and professional accounts.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">🔒</div>
+                        <div class="content">
+                            <h4>Two-Factor Authentication (2FA)</h4>
+                            <p>Quick access to security verification settings.</p>
+                        </div>
+                    </div>
+        
+                    <div class="notification-section">
+                        <h4>Notification & Updates</h4>
+                        
+                        <div class="menu-item">
+                            <div class="icon">🟢</div>
+                            <div class="content">
+                                <h5>Badge Indicators</h5>
+                                <p>Real-time visual indicators for new messages, notifications, or updates.</p>
+                            </div>
+                        </div>
+        
+                        <div class="menu-item">
+                            <div class="icon">⚠️</div>
+                            <div class="content">
+                                <h5>System Alerts</h5>
+                                <p>Highlight important announcements, such as maintenance schedules or feature rollouts.</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">♿</div>
+                        <div class="content">
+                            <h4>Accessibility</h4>
+                            <p>Keyboard Shortcuts: Enable quick navigation through keyboard combinations.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Voice Command Activation Card -->
+                <div class="box voice-command-box">
+                    <h3>Voice Command Activation</h3>
+        
+                    <div class="menu-item">
+                        <div class="icon">🎤</div>
+                        <div class="content">
+                            <p>Allow users to navigate the menu hands-free using voice commands.</p>
+                        </div>
+                    </div>
+        
+                    <div class="menu-item">
+                        <div class="icon">👁️</div>
+                        <div class="content">
+                            <h4>High-Contrast Mode</h4>
+                            <p>Enhance visibility for visually impaired users.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column (Create Card) -->
+            <div class="right-column">
+                <div class="box">
+                    <h3>Create</h3>
+        
+                    <div class="menu-simple">
+                        <div><span>📅</span> Event</div>
+                        <div><span>📝</span> Post</div>
+                        <div><span>📖</span> Story</div>
+                        <div><span>📷</span> Lite</div>
+                        <div><span>🎥</span> Live Events</div>
+                    </div>
+        
+                    <hr>
+        
+                    <div class="menu-simple">
+                        <div><span>👨‍👩‍👧‍👦</span> Family</div>
+                        <div><span>👥</span> Forum</div>
+                        <div><span>👤</span> Group</div>
+                        <div><span>🏘️</span> Community</div>
+                        <div><span>🏴</span> Page</div>
+                        <div><span>🛒</span> Marketplace listing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Account Pop-up (ArchiveHubs-style) -->
+     <div id="accountPopupPanel" class="account-popup" style="display:none;">
+        <!-- Banner Cover Photo -->
+        <div class="account-popup-banner">
+          <img src="images/header.jpg" alt="Cover Photo" class="account-banner-img">
+        </div>
+        <!-- User Info -->
+        <div class="account-popup-userinfo underline clickable">
+          <div class="account-popup-avatar">
+            <img src="images/profile.jpg" alt="User Profile Picture">
+          </div>
+          <div class="account-popup-username">User</div>
+        </div>
+        
+                <!-- Account Switcher Section -->
+          <div class="account-popup-switcher underline">
+            <div class="account-switcher-item">
+              <div class="account-switcher-avatar-container">
+                <img src="images/profile.jpg" alt="User Profile Picture" class="account-switcher-avatar">
+                <div class="switch-roller"></div>
+              </div>
+              <div class="account-switcher-info">
+                <div class="account-switcher-name">User Page</div>
+              </div>
+            </div>
+          </div>
+        <!-- View Profile Button -->
+        <div class="account-popup-view-profile-row">
+          <button class="account-popup-view-profile">See all profiles</button>
+        </div>
+        <!-- Account Section -->
+        <div class="account-popup-section account-popup-account">
+          <div class="account-popup-account-row highlight">
+            <img src="images/profile.jpg" alt="Company Logo" class="account-popup-account-icon">
+            <div class="account-popup-account-info">
+              <div class="account-popup-account-name">Archivehubs Explorer</div>
+              <div class="account-popup-premium"><a href="#">Try free Premium for 1 month</a></div>
+            </div>
+          </div>
+          <!-- New: More popup links with icons -->
+          <div class="account-popup-link">
+            <i class="fa fa-gear"></i>
+            <span>Settings & privacy</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-question-circle"></i>
+            <span>Help & Support</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-moon"></i>
+            <span>Display & Accessibility</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-calendar"></i>
+            <span>Planner (APS)</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-folder-open"></i>
+            <span>Archive Explorer</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-hdd"></i>
+            <span>Archive Drive</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+          <div class="account-popup-link">
+            <i class="fa fa-file-alt"></i>
+            <span>General Terms</span>
+            <i class="fa fa-angle-right right-arrow"></i>
+          </div>
+        </div>
+        <hr class="account-popup-divider">
+        <!-- Sign Out -->
+        <div class="account-popup-signout-row">
+          <button class="account-popup-signout">Sign Out</button>
+        </div>
+      </div>
+
+      <script>
+        window.addEventListener('DOMContentLoaded', function() {
+        const accountNavLink = document.getElementById('accountPopup');
+        const accountPopupPanel = document.getElementById('accountPopupPanel');
+
+        if (accountNavLink && accountPopupPanel) {
+            accountNavLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Position the popup under the nav-link
+            const rect = accountNavLink.getBoundingClientRect();
+            accountPopupPanel.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+            accountPopupPanel.style.right = (window.innerWidth - rect.right - 8) + 'px';
+            accountPopupPanel.style.display = (accountPopupPanel.style.display === 'none' || accountPopupPanel.style.display === '') ? 'block' : 'none';
+            });
+            // Hide popup when clicking outside
+            document.addEventListener('mousedown', function(e) {
+            if (accountPopupPanel.style.display !== 'none' && !accountPopupPanel.contains(e.target) && !accountNavLink.contains(e.target)) {
+                accountPopupPanel.style.display = 'none';
+            }
+            });
+        }
+        });
+      </script>
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Submission Confirmation | Your Platform Name</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/business_service_process.css">
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-header">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1 class="confirmation-title">Service Submitted Successfully!</h1>
+            <p class="confirmation-subtitle">Your service listing has been received and is being processed.</p>
+        </div>
+
+        <div class="confirmation-section">
+            <h2 class="section-title">Service Details</h2>
+            <div class="detail-row">
+                <div class="detail-label">Title:</div>
+                <div class="detail-value" id="confirmation-title"></div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Description:</div>
+                <div class="detail-value" id="confirmation-description"></div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Visibility:</div>
+                <div class="detail-value" id="confirmation-visibility"></div>
+            </div>
+        </div>
+
+        <div class="confirmation-section">
+            <h2 class="section-title">Pricing & Category</h2>
+            <div class="detail-row">
+                <div class="detail-label">Price Option:</div>
+                <div class="detail-value" id="confirmation-price"></div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Licensing:</div>
+                <div class="detail-value" id="confirmation-license"></div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Category:</div>
+                <div class="detail-value" id="confirmation-category"></div>
+            </div>
+        </div>
+
+        <div class="confirmation-section">
+            <h2 class="section-title">Location</h2>
+            <div class="detail-row">
+                <div class="detail-label">City/Country:</div>
+                <div class="detail-value" id="confirmation-location"></div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Address:</div>
+                <div class="detail-value" id="confirmation-address"></div>
+            </div>
+        </div>
+
+        <div class="confirmation-section">
+            <h2 class="section-title">Photos</h2>
+            <div class="detail-row">
+                <div class="detail-label">Photos Uploaded:</div>
+                <div class="detail-value" id="confirmation-photo-count"></div>
+            </div>
+            <div class="photos-grid" id="confirmation-photos"></div>
+        </div>
+
+        <div class="confirmation-section">
+            <h2 class="section-title">Additional Information</h2>
+            <div class="detail-row">
+                <div class="detail-label">Product Tags:</div>
+                <div class="detail-value">
+                    <div class="tags-container" id="confirmation-tags"></div>
+                </div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Renewal Option:</div>
+                <div class="detail-value" id="confirmation-renewal"></div>
+            </div>
+            <div id="renewal-details" style="display: none;">
+                <div class="detail-row">
+                    <div class="detail-label">Expiration Date:</div>
+                    <div class="detail-value" id="confirmation-expiration"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Renewal Date:</div>
+                    <div class="detail-value" id="confirmation-renewal-date"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Reminders:</div>
+                    <div class="detail-value" id="confirmation-reminders"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="business_service_process.html" class="action-btn edit-btn">Edit Service</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve form data from session storage
+            const formData = JSON.parse(sessionStorage.getItem('serviceFormData'));
+            
+            if (!formData) {
+                // No form data found, redirect back to form
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Populate confirmation page with the data
+            document.getElementById('confirmation-title').textContent = formData.title || 'Not provided';
+            document.getElementById('confirmation-description').textContent = formData.description || 'Not provided';
+            document.getElementById('confirmation-visibility').textContent = formData.visibility || 'Public';
+            document.getElementById('confirmation-price').textContent = formData.priceOption || 'Not provided';
+            document.getElementById('confirmation-license').textContent = formData.licenseOption || 'Not provided';
+            document.getElementById('confirmation-category').textContent = formData.category || 'Not provided';
+            document.getElementById('confirmation-location').textContent = formData.location || 'Not provided';
+            document.getElementById('confirmation-address').textContent = formData.address || 'Not provided';
+            document.getElementById('confirmation-photo-count').textContent = formData.photoCount || '0';
+            document.getElementById('confirmation-renewal').textContent = formData.renewalOption || 'No';
+            
+            // Display uploaded photos
+            const photosContainer = document.getElementById('confirmation-photos');
+            if (formData.imageDataUrls && formData.imageDataUrls.length > 0) {
+                formData.imageDataUrls.forEach(dataUrl => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = dataUrl;
+                    img.alt = 'Service photo';
+                    
+                    photoItem.appendChild(img);
+                    photosContainer.appendChild(photoItem);
+                });
+            } else {
+                photosContainer.innerHTML = '<p>No photos uploaded</p>';
+            }
+            
+            // Handle tags
+            if (formData.tagsHidden) {
+                try {
+                    const tags = JSON.parse(formData.tagsHidden);
+                    const tagsContainer = document.getElementById('confirmation-tags');
+                    
+                    if (tags && tags.length > 0) {
+                        tags.forEach(tag => {
+                            const tagElement = document.createElement('span');
+                            tagElement.className = 'tag';
+                            tagElement.textContent = tag;
+                            tagsContainer.appendChild(tagElement);
+                        });
+                    } else {
+                        tagsContainer.parentElement.textContent = 'No tags added';
+                    }
+                } catch (e) {
+                    console.error('Error parsing tags:', e);
+                    document.getElementById('confirmation-tags').parentElement.textContent = 'No tags added';
+                }
+            } else {
+                document.getElementById('confirmation-tags').parentElement.textContent = 'No tags added';
+            }
+            
+            // Handle renewal details if applicable
+            if (formData.renewalOption === 'Yes') {
+                document.getElementById('renewal-details').style.display = 'block';
+                document.getElementById('confirmation-expiration').textContent = formData.expirationDate || 'Not provided';
+                document.getElementById('confirmation-renewal-date').textContent = formData.renewalDate || 'Not provided';
+                
+                // Handle reminders
+                if (formData.reminders) {
+                    try {
+                        const reminders = JSON.parse(formData.reminders);
+                        const remindersContainer = document.getElementById('confirmation-reminders');
+                        
+                        if (reminders && reminders.length > 0) {
+                            const reminderList = document.createElement('ul');
+                            reminderList.style.marginLeft = '20px';
+                            
+                            reminders.forEach(reminder => {
+                                const item = document.createElement('li');
+                                item.innerHTML = `<strong>${reminder.option}</strong>: ${reminder.description || 'No description'}`;
+                                reminderList.appendChild(item);
+                            });
+                            
+                            remindersContainer.appendChild(reminderList);
+                        } else {
+                            remindersContainer.textContent = 'No reminders set';
+                        }
+                    } catch (e) {
+                        console.error('Error parsing reminders:', e);
+                        document.getElementById('confirmation-reminders').textContent = 'No reminders set';
+                    }
+                } else {
+                    document.getElementById('confirmation-reminders').textContent = 'No reminders set';
+                }
+            }
+            
+            // Clear the stored data if needed
+            sessionStorage.removeItem('serviceFormData');
+        });
+    </script>
+</body>
+</html>

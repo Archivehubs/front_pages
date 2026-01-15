@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand+Pre:wght@300..600&family=Playfair+Display:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@1,300;1,400&family=Roboto:ital,wght@0,100..800;1,100..800&display=swap');
+
+* {
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    align-items: center;
+    background: #fcfcfc;
+}
+
+.familyCentre {
+    margin-top: 30px;
+    align-items: center;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    width: clamp(300px, 50vw, 720px);
+    max-height: clamp(400px, 80vh, 700px);
+    height: auto;
+    position: relative;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+    border-radius: 10px;
+}
+
+.cancel-btn {
+    position: absolute;
+    right: 1%;
+    top: 2%;
+    font-size: 24px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.familyCentre-header {
+    margin-top: 10px;
+    height: clamp(100px, 20vh, 200px);
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 0;
+    border: none;
+}
+
+.familyCentre-header img {
+    height: auto;
+    max-height: 30px;
+    width: 60%;
+    object-fit: contain;
+}
+
+.familyCentre-header h3 {
+    margin: 0;
+}
+
+.familyCentre-header h4 {
+    margin: 0;
+    font-size: clamp(1rem, 2vw 1.2rem);
+}
+
+.familyCentre-header .familyCentre-headerBanner {
+    height: 80px;
+    width: 80%;
+    background: greenyellow;
+    display: flex;
+    align-items: center;
+}
+
+.familyCentre-header .familyCentre-headerBanner img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.familyCentre .familyCentre-content {
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+    margin: 2px 15px;
+}
+
+.familyCentre .familyCentre-content #lastParagraph {
+    color: #888;
+}
+
+.familyCentre .familyCentre-content a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.familyCentre .familyCentre-button {
+    width: min(60%, 400px, 80vw);
+    height: clamp(2vh, 2rem, 2.5rem);
+    background: blue;
+}
+
+.familyCentre .familyCentre-button a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: clamp(0.5rem, 3vw, 1rem);
+    font-weight: bold;
+}
+
+.familyCentre .familyCentre-button a:hover {
+    background: #87a5f8;
+}
+
+.familyCentre .familyCentre-last {
+    align-self: flex-start;
+    margin: 2px 15px;
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+}
+
+.familyCentre .familyCentre-last a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/*invite link style*/
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: none;
+    align-items: center;
+    width: clamp(400px, 80vw, 700px);
+    height: clamp(300px, 70vh, 700px);
+    position: relative;
+    background: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    margin-top: 10px;
+}
+
+.leftGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 90%;
+    height: 95%;
+    border: none;
+}
+
+.leftGrid-contents {
+    border: 1px solid #888;
+    border-radius: 5px;
+    flex-shrink: 0;
+    margin-left: 15px;
+    height: clamp(300px, 5vh, 350px);
+}
+
+.leftGrid .leftGrid-contents .archiveLogo {
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.leftGrid .leftGrid-contents .archiveLogo img {
+    height: auto;
+    max-height: 30px;
+    width: 60%;
+    object-fit: contain;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content {
+    margin: 0 5px;
+    font-size: clamp(0.8rem, 3vw, 1rem);
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content a {
+    text-decoration: none;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content ul {
+    list-style: none;
+    padding-left: 5px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content li {
+    cursor: pointer;
+    margin-bottom: 8px;
+    padding: 3px;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content li:hover {
+    background: #f0f0f0;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content #accountSuper {
+    padding-left: 5px;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content .iconLinked {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 18px;
+}
+
+.iconLinked span {
+    height: 20px;
+    width: 20px;
+    margin: 0;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content .inviteBox {
+    border: 1px solid #888;
+    height: 45px;
+    width: 95%;
+    margin-left: 5px;
+    display: flex;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content .inviteBox  #messageImage {
+    height: 20px;
+    width: 20px;
+    margin:5px 5px 0;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content .inviteBox .inviteBox-text {
+    display: flex;
+    margin-top: 5px;
+    gap: 4px;
+    align-items: center;
+}
+
+.leftGrid .leftGrid-contents .leftGrid-content .inviteBox .inviteBox-paragraph p{
+    margin: 0;
+    gap: 0;
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+}
+
+.leftGrid-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-top: auto;
+    padding-bottom: 5px;
+}
+
+.leftGrid-footer h3 {
+    margin: 0;
+    font-size: clamp(0.6rem, 2vw, 1rem);
+    color: #0000EE;
+}
+
+.leftGrid-footer #emphasisP {
+    color: #0000EE;
+}
+
+.leftGrid-footer p {
+    margin: 0;
+    font-size: clamp(0.5rem, 2vw, 0.8rem);
+}
+
+.leftGrid-footer img {
+    height: 25px;
+    width: 80px;
+    object-fit: cover;
+}
+
+.rightGrid {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    top: -14%;
+    width: 95%;
+    height: 55%;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+.rightGrid-content {
+    position: relative;
+    margin-top: 0;
+}
+
+.rightGrid-content h3 {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    margin: 10px;
+}
+
+.rightGrid-content .cancel-btn {
+    top: 8%;
+}
+
+.rightGrid-content p {
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+    margin: 10px;
+}
+
+.rightGrid-links{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    margin: 0 10px;
+    height: 70px;
+}
+
+.rightGrid-link {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #ccc;
+    flex: 1;
+    margin: 3px 3px 0;
+    align-items: center;
+    font-size: clamp(0.5rem, 2vw, 0.8rem);
+}
+
+.rightGrid-link a {
+    overflow-x: auto;
+    border-right: 2px solid #ccc;
+}
+
+.rightGrid-link  #copyInvite-btn {
+    margin: 1px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+}
+
+.rightGrid-link  #copyInvite-btn img {
+    height: 25px;
+    width: 25px;
+}
+
+.rightGrid-link  #copyInvite-btn img:hover {
+    background: #ccc;
+}
+
+#copyStatus {
+    opacity: 0;
+    transition: opacity 0.3 ease;
+    color: #87a5f8;
+    margin-left: 5px;
+}
+
+#copyStatus.show {
+    opacity: 1;
+}
+
+#cancelInvite-btn {
+    flex: 1;
+    text-align: left;
+    font-size: clamp(0.6rem, 2vw, 0.9rem);
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 3px 0;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+#cancelInvite-btn:hover {
+    background: #f0f0f0;
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm Company Email</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Overlay background */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Modal */
+    .modal {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px 25px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    /* Close button */
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.3rem;
+      color: #666;
+      cursor: pointer;
+    }
+
+    .modal h2 {
+      margin: 0 0 15px;
+      font-size: 1.3rem;
+      color: #222;
+    }
+
+    .company-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .company-info img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 12px;
+      background: #ddd;
+    }
+
+    .modal p {
+      font-size: 0.95rem;
+      color: #444;
+      margin: 10px 0 15px;
+      line-height: 1.4;
+    }
+
+    .input-box {
+      margin-bottom: 10px;
+    }
+
+    .input-box label {
+      font-size: 0.9rem;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+
+    .info-list {
+      font-size: 0.85rem;
+      color: #555;
+      margin: 10px 0;
+      padding-left: 18px;
+    }
+
+    .info-list li {
+      margin-bottom: 6px;
+    }
+
+    .modal-footer {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .btn {
+      background: #0a66c2;
+      color: #fff;
+      padding: 10px 22px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #004182;
+    }
+
+    .toggle-text {
+      font-size: 0.85rem;
+      color: #0a66c2;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay -->
+  <div class="overlay">
+    <div class="modal">
+      <span class="close-btn">&times;</span>
+      <h2>Confirm your company email address</h2>
+
+      <div class="company-info">
+        <img src="ArchiveHubLogo.jpg" alt="Company Logo">
+        <img src="profile.png" alt="Profile Photo">
+      </div>
+
+      <p>
+        To confirm you work with <strong>OSoft Integrated Resources</strong> we’ll need to send a verification code to your company email address. Enter your company email address to continue.
+      </p>
+
+      <div class="input-box">
+        <label for="email">Email address*</label>
+        <input type="email" id="email" placeholder="Enter email address (example@example.com)">
+      </div>
+
+      <ul class="info-list">
+        <li>This email address will be added to your account</li>
+        <li>Your organization will see your email address is confirmed</li>
+        <li>We’ll ask permission before sharing any other information with your organization</li>
+      </ul>
+
+      <div class="toggle-text">Read more about how we’ll use your email address</div>
+
+      <div class="modal-footer">
+        <button class="btn">Send code</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Close modal functionality
+    document.querySelector(".close-btn").addEventListener("click", function() {
+      document.querySelector(".overlay").style.display = "none";
+    });
+  </script>
+</body>
+</html>

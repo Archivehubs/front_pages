@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard | Business Marketplace</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/listing_seller_dashboard.css">
+    <link rel="stylesheet" href="css/listing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="../Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="../Archivehubs-Notifications/notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="../Archivehubs-Menu/menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+        <div class="container">
+            <aside class="sidebar">
+                <div class="sidebar-top">
+                    <div class="sidebar-back">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span class="sidebar-marketplace">Archivehubs Business</span>
+                    </div>
+                    <div class="sidebar-title">Selling</div>
+                    <button class="sidebar-create-btn">
+                        <i class="fa-solid fa-plus"></i> Create new listing
+                    </button>
+                </div>
+                <nav class="sidebar-menu">
+                    <ul>
+                        <a href="business_seller_dashboard.html">
+                            <li class="menu-item active">
+                                <span class="menu-icon"><i class="fa-solid fa-chart-bar"></i></span>
+                                <span class="menu-text">Seller dashboard</span>
+                            </li>
+                        </a>
+    
+                        <a href="business_your_listings.html">
+                            <li class="menu-item">
+                                <span class="menu-icon"><i class="fa-solid fa-location-arrow"></i></span>
+                                <span class="menu-text">Your listings</span>
+                            </li>
+                        </a>
+    
+                        <a href="business_listing_announcements.html">
+                            <li class="menu-item">
+                                <span class="menu-icon"><i class="fa-solid fa-bullhorn"></i></span>
+                                <span class="menu-text">Announcements</span>
+                            </li>
+                        </a>
+
+                        <a href="business_marketplace_insights.html">
+                            <li class="menu-item">
+                                <span class="menu-icon"><i class="fa-solid fa-signal"></i></span>
+                                <span class="menu-text">Insights</span>
+                            </li>
+                        </a>
+    
+                        <a href="#" id="marketplaceProfileLink">
+                            <li class="menu-item">
+                                <span class="menu-icon"><i class="fa-regular fa-user"></i></span>
+                                <span class="menu-text">Marketplace profile</span>
+                            </li>
+                        </a>
+                    </ul>
+                </nav>
+            </aside>
+            <main class="main-content">
+                <section class="dashboard-section">
+                    <div class="section-header">Overview</div>
+                    <div class="dashboard-overview">
+                        <div class="overview-card overview-chats">
+                            <div class="overview-value">0</div>
+                            <div class="overview-label"><i class="fa-regular fa-comments"></i> Chats to answer</div>
+                        </div>
+                        <div class="overview-card overview-rating">
+                            <div class="overview-value">0 <i class="fa-solid fa-star"></i></div>
+                            <div class="overview-label">Seller rating</div>
+                            <div class="overview-reviews">0 reviews</div>
+                        </div>
+                    </div>
+                </section>
+                <section class="dashboard-section">
+                    <div class="section-header">Your listings</div>
+                    <div class="dashboard-listings">
+                        <div class="listings-header">
+                            <span class="listings-title">Your listings</span>
+                            <div class="listings-actions">
+                                <button class="listings-btn listings-boost"><i class="fa-solid fa-rocket"></i> Boost listings</button>
+                                <button class="listings-btn listings-create"><i class="fa-regular fa-square-plus"></i> Create New Listing</button>
+                            </div>
+                        </div>
+                        <div class="listings-stats">
+                            <div class="stat-card">
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">Needs attention</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">Active and pending</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">Sold and out of stock</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">Drafts</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">To renew</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">0</div>
+                                <div class="stat-label">To delete and relist</div>
+                            </div>
+                        </div>
+                        <a href="#" class="listings-see-all">See all listings</a>
+                    </div>
+                </section>
+                <section class="dashboard-section">
+                    <div class="section-header insights-header-row">
+                        <span>Marketplace insights</span>
+                        <button class="insights-range-btn">Last 7 days <i class="fa-solid fa-chevron-down"></i></button>
+                    </div>
+                    <div class="dashboard-insights">
+                        <div class="insights-stats">
+                            <div class="insight-card">
+                                <span class="insight-icon"><i class="fa-regular fa-eye"></i></span>
+                                <span class="insight-value">0</span>
+                                <span class="insight-label">Clicks on listings</span>
+                            </div>
+                            <div class="insight-card">
+                                <span class="insight-icon"><i class="fa-regular fa-bookmark"></i></span>
+                                <span class="insight-value">0</span>
+                                <span class="insight-label">Listing saves</span>
+                            </div>
+                            <div class="insight-card">
+                                <span class="insight-icon"><i class="fa-solid fa-share"></i></span>
+                                <span class="insight-value">0</span>
+                                <span class="insight-label">Listing shares</span>
+                            </div>
+                            <div class="insight-card">
+                                <span class="insight-icon"><i class="fa-regular fa-square-check"></i></span>
+                                <span class="insight-value">0</span>
+                                <span class="insight-label">Marketplace followers</span>
+                            </div>
+                        </div>
+                        <a href="#" class="insights-see-more">See more insights</a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    
+        <div id="profileModal" class="modal-overlay" style="display:none;">
+            <div class="modal-content">
+                <button class="close-btn" id="closeProfileModal">&times;</button>
+                <div class="profile-cover-container">
+                <div class="profile-cover"></div>
+                <div class="profile-pic-wrapper">
+                    <div class="profile-pic"></div>
+                </div>
+                </div>
+                <div class="profile-info profile-info-centered">
+                <h2>Joshua Mide</h2>
+                <p class="join-date">Joined Archivehubs in 2024</p>
+                </div>
+                <button class="message-btn message-btn-full" disabled>
+                <span>&#128172;</span> Message
+                </button>
+                <hr>
+                <div class="seller-ratings-section">
+                <strong>Seller ratings</strong>
+                <div class="stars-row">
+                    <span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                </div>
+                <div class="no-ratings">No ratings</div>
+                <div class="ratings-note">(Visible to the public after 5 ratings. <a href="#" class="learn-more">Learn more</a>)</div>
+                </div>
+                <hr>
+                <div class="listings-section">
+                <div class="listings-header">
+                    <strong>Joshua's listings</strong>
+                    <div class="listings-desc">You can manage listings from <a href="#" class="your-listings-link">Your listings</a> page. Your listings in private groups may not be visible to buyers.</div>
+                </div>
+                <div class="listings-controls">
+                    <input type="text" class="search-listings" placeholder="Search listings">
+                    <button class="filter-btn">Available and in stock <span class="chevron">&#9662;</span></button>
+                    <button class="filter-btn">Sort by <span class="chevron">&#9662;</span></button>
+                </div>
+                <div class="no-listings">
+                    <div class="no-listings-illustration">
+                    <!-- Simple SVG illustration -->
+                    <svg width="120" height="100" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="60" cy="90" rx="40" ry="8" fill="#e4e6eb"/>
+                        <rect x="50" y="40" width="20" height="30" rx="4" fill="#b0b8c1"/>
+                        <rect x="65" y="60" width="10" height="20" rx="2" fill="#1877f2"/>
+                        <rect x="45" y="60" width="10" height="20" rx="2" fill="#1877f2"/>
+                        <circle cx="60" cy="35" r="12" fill="#e4e6eb"/>
+                        <rect x="80" y="60" width="6" height="18" rx="2" fill="#1877f2"/>
+                        <rect x="34" y="60" width="6" height="18" rx="2" fill="#1877f2"/>
+                    </svg>
+                    </div>
+                    <div class="no-listings-text">No listings found</div>
+                </div>
+                </div>
+            </div>
+            </div>
+    
+            <script>
+                document.getElementById('marketplaceProfileLink').onclick = function(e) {
+                e.preventDefault();
+                document.getElementById('profileModal').style.display = 'flex';
+                };
+                document.getElementById('closeProfileModal').onclick = function() {
+                document.getElementById('profileModal').style.display = 'none';
+                };
+                window.onclick = function(event) {
+                var modal = document.getElementById('profileModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+                };
+            </script>
+    </body>
+    </html>

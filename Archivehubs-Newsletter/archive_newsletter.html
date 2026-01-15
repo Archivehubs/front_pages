@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Newsletter Page - Archivehub</title>
+  <!-- Link to the external CSS file -->
+  <link rel="stylesheet" href="css/newsletter.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="../Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="../Archivehubs-Notifications/notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="../Archivehubs-Business/business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="../Archivehubs-Menu/menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+        <!-- Replace your existing mobile-upper-nav section -->
+        <div class="mobile-header">
+          <!-- Mobile Upper Nav -->
+          <nav class="mobile-upper-nav">
+            <a href="../home.html" class="mobile-logo">
+                <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+            </a>
+            <div class="upper-nav-right">
+                <button class="upper-nav-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="upper-nav-btn" id="searchTriggerBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="upper-nav-btn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+          </nav>
+
+         <!-- Update the search-view to be a dropdown -->
+        <div class="search-overlay" id="searchView">
+            <div class="search-container">
+                <div class="search-header">
+                    <button class="back-btn" id="searchBackBtn">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="search-bar">
+                        <div class="search-input-wrapper">
+                            <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                            <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-content">
+                    <!-- Rest of your search content remains the same -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Add this after the existing navbar -->
+      <nav class="mobile-top-nav">
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-video"></i>
+        </a>
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-briefcase"></i>
+        </a>
+        <a href="../Archivehubs-Business/business.html" class="mobile-nav-item">
+            <i class="fas fa-building"></i>
+        </a>
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-cloud-arrow-up"></i>
+        </a>
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-user-circle"></i>
+        </a>
+      </nav>
+
+  <div class="container">
+    <!-- Left Section: Newsletter Accounts -->
+    <div class="left-section">
+      <header class="newsletter-header">
+        <h2>Newsletters</h2>
+        <button id="createNewsletterBtn" title="Create Newsletter">Create Newsletter <span class="plus-icon">+</span></button>
+      </header>
+      <h2 id="account_header">Newsletter Accounts</h2>
+      <section class="newsletter-accounts">
+        <!-- Account Entry 1 -->
+        <article class="account">
+          <input type="checkbox" id="account1">
+          <div class="account-details">
+            <h3 class="account-name">Name</h3>
+            <p class="account-description">Description</p>
+          </div>
+          <button class="options-btn" title="More Options">&#x2026;</button>
+        </article>
+        <!-- Account Entry 2 -->
+        <article class="account">
+          <input type="checkbox" id="account2">
+          <div class="account-details">
+            <h3 class="account-name">Name</h3>
+            <p class="account-description">Description</p>
+          </div>
+          <button class="options-btn" title="More Options">&#x2026;</button>
+        </article>
+        <!-- Account Entry 3 -->
+        <article class="account">
+          <input type="checkbox" id="account3">
+          <div class="account-details">
+            <h3 class="account-name">Name</h3>
+            <p class="account-description">Description</p>
+          </div>
+          <button class="options-btn" title="More Options">&#x2026;</button>
+        </article>
+      </section>
+    </div>
+
+    <!-- Right Section: Profile & Ads Info -->
+    <div class="right-section">
+      <header class="profile-header">
+        <div class="user_profile">
+          <h4>Name</h4>
+      
+          <img src="images/profile.jpg" alt="User Profile" class="profile-img">
+          
+        </div>
+        <button id="adsBtn">Ads</button>
+      </header>
+      <div class="rightSectionItems">
+        <button class="archive-ads-btn" id="archiveAdsBtn">Archive Ads</button>
+        <p class="promo-text">Earn up to 3 certifications with our free courses</p>
+        <button class="certified-btn" id="certifiedBtn">Get Certified <strong>NOW</strong></button>
+      </div>
+    </div>
+  </div>
+
+  <section class="left-footer">
+    <p>Get the Archive App</p>
+    <p class="company-info">
+      ARCHIVE <span class="highlight">ENINK</span> Investment Limited &copy; 2025
+    </p>
+  </section>
+
+  
+  <!-- Create Newsletter Modal Popup -->
+  <div id="createNewsletterModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-btn" id="modalCloseBtn" title="Close">&times;</button>
+        <h2>Create a Newsletter</h2>
+        <p class="modal-description">
+            Newsletters on Archivehub allow you to share your perspective regularly by publishing articles at the cadence you choose. Your subscribers will receive a push notification and email after each new edition of your newsletter. Limit 5 newsletters per member.
+        <a href="#">Learn More</a>
+        </p>
+        <h2>Newsletter Details</h2>
+
+        <form id="createNewsletterForm"><!-- Newsletter Title -->
+            <div class="form-row">
+                <section class="form-section title-section">
+                    <label for="newsletterTitle">Newsletter Title</label>
+                    <input type="text" id="newsletterTitle" placeholder="Add a title to your newsletter" required>
+                </section>
+                <section class="form-section frequency-section">
+                    <label for="publicationFrequency">Publication Frequency</label>
+                    <select id="publicationFrequency" required>
+                        <option value="" disabled selected>Select one</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </section>
+            </div> <!--form row div end-->
+
+            <!-- Newsletter Description -->
+            <div class="form-section">
+                <label for="newsletterDescription">Newsletter Description</label>
+                <input type="text" id="newsletterDescription" placeholder="Add a description to your newsletter" required></textarea>
+                <small>This description appears alongside your newsletter title</small>
+            </div> <!--newsletter div end-->
+        </form>
+        
+        <section class="newsletter-info"> <!--newsletter extra info section-->
+            <div class="image-upload"> <!-- Image Upload Section -->
+                <div class="image-uploadSubclass">
+                    <img src="images/image.png" alt="Add an image" style="width: 30px; height: 30px;">
+                    <p>Add an image or logo for your newsletter to increase engagement. <br> Recommended image size is 300x300 pixels.</p>
+                </div> <!--subclass div ends-->
+                <button type="button" id="uploadImageButton">Upload Image</button>
+            </div>
+            
+            <div class="feature-options"> <!-- Features/Notifications Checkboxes -->
+                <div class="feature-item" data-feature="invite">
+                    <img src="images/subcribe.png" alt="Invite Icon" style="width: 30px; height: 30px;">
+                    <h4>Your connections and followers will be invited to subscribe </h4>
+                </div>
+                <span>We'll notify your network when you publish the first edition of your newsletter and invite new followers to subscribe. </span>
+            </div>
+
+            <div class="feature-options"> <!-- Features/Notifications Checkboxes -->
+                <div class="feature-item" data-feature="self">
+                    <img src="images/subscription.png" alt="Subscribe Icon" style="width: 30px; height: 30px;">
+                    <h4>You will be subscribed to your newsletter</h4>
+                </div>
+                <span>We'll send you a copy of the notification and email that we send to your subscribers.</span>
+            </div>
+
+            <div class="feature-options"> <!-- Features/Notifications Checkboxes -->
+                <div class="feature-item" data-feature="profile">
+                    <img src="images/badge.png" alt="Featured Icon" style="width: 30px; height: 30px;">
+                    <h4>Your newsletter will be featured on your profile</h4>
+                </div>
+                <span>We'll add your newsletter to the Featured section on your profile when you publish your 
+                    first edition. You can always remove it from the Featured section at any time. <a href="#">Learn More</a></span>
+            </div>
+            
+        </section>
+        
+        <!-- Form Action Buttons -->
+        <section class="form-actions">
+          <button type="button" id="cancelButton" class="secondary">Cancel</button>
+          <button type="submit" id="doneButton" class="primary">Done</button>
+        </section>
+      
+    </div>
+  </div>
+
+        <!-- Account Pop-up (ArchiveHubs-style) -->
+    <div id="accountPopupPanel" class="account-popup" style="display:none;">
+      <!-- Banner Cover Photo -->
+      <div class="account-popup-banner">
+        <img src="images/header.jpg" alt="Cover Photo" class="account-banner-img">
+      </div>
+      <!-- User Info -->
+      <div class="account-popup-userinfo underline clickable">
+        <div class="account-popup-avatar">
+          <img src="images/profile.jpg" alt="User Profile Picture">
+        </div>
+        <div class="account-popup-username">User</div>
+      </div>
+      
+              <!-- Account Switcher Section -->
+        <div class="account-popup-switcher underline">
+          <div class="account-switcher-item">
+            <div class="account-switcher-avatar-container">
+              <img src="images/profile.jpg" alt="User Profile Picture" class="account-switcher-avatar">
+              <div class="switch-roller"></div>
+            </div>
+            <div class="account-switcher-info">
+              <div class="account-switcher-name">User Page</div>
+            </div>
+          </div>
+        </div>
+      <!-- View Profile Button -->
+      <div class="account-popup-view-profile-row">
+        <button class="account-popup-view-profile">See all profiles</button>
+      </div>
+      <!-- Account Section -->
+      <div class="account-popup-section account-popup-account">
+        <div class="account-popup-account-row highlight">
+          <img src="images/profile.jpg" alt="Company Logo" class="account-popup-account-icon">
+          <div class="account-popup-account-info">
+            <div class="account-popup-account-name">Archivehubs Explorer</div>
+            <div class="account-popup-premium"><a href="#">Try free Premium for 1 month</a></div>
+          </div>
+        </div>
+        <!-- New: More popup links with icons -->
+        <div class="account-popup-link">
+          <i class="fa fa-gear"></i>
+          <span>Settings & privacy</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-question-circle"></i>
+          <span>Help & Support</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-moon"></i>
+          <span>Display & Accessibility</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-calendar"></i>
+          <span>Planner (APS)</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-folder-open"></i>
+          <span>Archive Explorer</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-hdd"></i>
+          <span>Archive Drive</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-file-alt"></i>
+          <span>General Terms</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+      </div>
+      <hr class="account-popup-divider">
+      <!-- Sign Out -->
+      <div class="account-popup-signout-row">
+        <button class="account-popup-signout">Sign Out</button>
+      </div>
+    </div>
+
+  
+  <!-- Link to the external JavaScript file -->
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+  const accountNavLink = document.getElementById('accountPopup');
+  const accountPopupPanel = document.getElementById('accountPopupPanel');
+
+  if (accountNavLink && accountPopupPanel) {
+    accountNavLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Position the popup under the nav-link
+      const rect = accountNavLink.getBoundingClientRect();
+      accountPopupPanel.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+      accountPopupPanel.style.right = (window.innerWidth - rect.right - 8) + 'px';
+      accountPopupPanel.style.display = (accountPopupPanel.style.display === 'none' || accountPopupPanel.style.display === '') ? 'block' : 'none';
+    });
+    // Hide popup when clicking outside
+    document.addEventListener('mousedown', function(e) {
+      if (accountPopupPanel.style.display !== 'none' && !accountPopupPanel.contains(e.target) && !accountNavLink.contains(e.target)) {
+        accountPopupPanel.style.display = 'none';
+      }
+    });
+  }
+});
+  </script>
+
+  <script src="js/script.js">
+    // script.js
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // ----- Modal Functionality for 'Create Newsletter' Popup -----
+    const createNewsletterBtn = document.getElementById("createNewsletterBtn");
+    const modalOverlay = document.getElementById("createNewsletterModal");
+    const modalCloseBtn = document.getElementById("modalCloseBtn");
+    const cancelButton = document.getElementById("cancelButton");
+    const newsletterForm = document.getElementById("createNewsletterForm");
+  
+    // Function to open the modal popup.
+    const openModal = () => {
+      modalOverlay.classList.add("active");
+    };
+  
+    // Function to close the modal popup.
+    const closeModal = () => {
+      modalOverlay.classList.remove("active");
+    };
+  
+    // Open modal when the "Create Newsletter" button is clicked.
+    if (createNewsletterBtn) {
+      createNewsletterBtn.addEventListener("click", openModal);
+    }
+  
+    // Close modal when the close icon (×) is clicked.
+    if (modalCloseBtn) {
+      modalCloseBtn.addEventListener("click", closeModal);
+    }
+  
+    // Close modal when the Cancel button is clicked.
+    if (cancelButton) {
+      cancelButton.addEventListener("click", closeModal);
+    }
+  
+    // Handle form submission for creating a newsletter.
+    if (newsletterForm) {
+      newsletterForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        // Process form data here or make an AJAX request.
+        alert("Newsletter Created!");
+        newsletterForm.reset();
+        closeModal();
+      });
+    }
+
+  
+    // ----- Dummy Image Upload Functionality -----
+    const uploadImageButton = document.getElementById("uploadImageButton");
+  
+    if (uploadImageButton) {
+      uploadImageButton.addEventListener("click", function () {
+        // Here you could integrate a file input or trigger a custom uploader.
+        alert("Upload image functionality goes here.");
+      });
+    }
+  });
+  
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const createNewsletterBtn = document.getElementById('createNewsletterBtn');
+        const modalOverlay = document.getElementById('createNewsletterModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const cancelButton = document.getElementById('cancelButton');
+        const newsletterForm = document.getElementById('createNewsletterForm');
+
+        // Function to open the modal popup
+        const openModal = () => {
+            if (modalOverlay) {
+                modalOverlay.style.display = 'flex';
+                setTimeout(() => {
+                    modalOverlay.classList.add('active');
+                }, 10);
+            }
+        };
+
+        // Function to close the modal popup
+        const closeModal = () => {
+            if (modalOverlay) {
+                modalOverlay.classList.remove('active');
+                setTimeout(() => {
+                    modalOverlay.style.display = 'none';
+                }, 300); // Match the CSS transition duration
+            }
+        };
+
+        // Open modal when the "Create Newsletter" button is clicked
+        if (createNewsletterBtn) {
+            createNewsletterBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        }
+
+        // Close modal when the close icon (×) is clicked
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeModal);
+        }
+
+        // Close modal when the Cancel button is clicked
+        if (cancelButton) {
+            cancelButton.addEventListener('click', closeModal);
+        }
+
+        // Handle form submission for creating a newsletter
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Newsletter Created!');
+                newsletterForm.reset();
+                closeModal();
+            });
+        }
+
+        // Close modal when clicking outside the modal content
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+        }
+    });
+  </script>
+</body>
+</html>

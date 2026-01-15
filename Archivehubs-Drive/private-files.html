@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Files - File Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4267B2;
+            --border-color: #ddd;
+            --text-color: #333;
+            --hover-bg: #f5f5f5;
+            --tab-active-bg: #f0f4f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f7f9;
+            color: var(--text-color);
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            width: 95%;
+            max-width: 1400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 20%;
+            background: white;
+            padding: 20px;
+            border-right: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .sidebar-heading {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #666;
+            padding-left: 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--hover-bg);
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            width: 100%;
+            padding: 5px;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: #999;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .menu-item:hover {
+            background: var(--hover-bg);
+        }
+
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .storage-bar-container {
+            background: var(--hover-bg);
+            height: 6px;
+            border-radius: 3px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .storage-bar {
+            height: 100%;
+            width: 25%;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .storage-info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .get-storage-btn {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .get-storage-btn:hover {
+            background: rgba(66, 103, 178, 0.1);
+        }
+
+        .sub-menu {
+            padding-left: 30px;
+            display: none;
+        }
+
+        .sub-menu.active {
+            display: block;
+        }
+
+        .has-dropdown {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-icon {
+            transition: transform 0.3s;
+        }
+
+        .dropdown-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            width: 70%;
+            padding: 25px 30px;
+            overflow-y: auto;
+        }
+
+        .section-heading {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: var(--text-color);
+        }
+
+        /* Horizontal Tabs */
+        .content-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .content-tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #666;
+            text-align: center;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .content-tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            background: var(--tab-active-bg);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .file-section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .see-more {
+            font-size: 14px;
+            color: var(--primary-color);
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            margin: 10px auto;
+            width: 100px;
+            padding: 5px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .see-more:hover {
+            background: var(--hover-bg);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-content {
+            padding: 12px;
+        }
+
+        .card-type {
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .card-description {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Responsive Styles */
+        .sidebar-tabs {
+            display: none;
+            background: white;
+            padding: 0;
+            list-style: none;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #666;
+            text-align: center;
+            flex: 1;
+            border-bottom: 2px solid transparent;
+        }
+
+        .sidebar-tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        @media (max-width: 1200px) {
+            .cards-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .sidebar {
+                width: 100%;
+                display: none;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .sidebar.active {
+                display: block;
+            }
+
+            .main-content {
+                width: 100%;
+            }
+
+            .sidebar-tabs {
+                display: flex;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Hide all sidebar sections by default on mobile */
+            .sidebar-section {
+                display: none;
+            }
+            
+            /* Show only the active section */
+            .sidebar-section.active {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+
+            .content-tabs {
+                flex-direction: column;
+            }
+
+            .content-tab {
+                margin-bottom: 5px;
+                border-radius: 4px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .content-tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Tabs for Mobile -->
+        <ul class="sidebar-tabs">
+            <li class="sidebar-tab active" data-target="archived">Archived</li>
+            <li class="sidebar-tab" data-target="categories">Categories</li>
+        </ul>
+
+        <!-- Sidebar -->
+        <div class="sidebar active" id="archived-sidebar">
+            <div class="sidebar-section active" id="archived-section">
+                <h3 class="sidebar-heading">Archived</h3>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search drive">
+                </div>
+                
+                <a href="audio.html" class="menu-item">
+                    <i class="fas fa-music"></i>
+                    <span>Audio</span>
+                </a>
+                
+                <a href="documents.html" class="menu-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Documents</span>
+                </a>
+                
+                <a href="images.html" class="menu-item">
+                    <i class="fas fa-image"></i>
+                    <span>Images</span>
+                </a>
+                
+                <a href="video.html" class="menu-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </a>
+                
+                <a href="storage.html" class="menu-item">
+                    <i class="fas fa-database"></i>
+                    <span>Storage</span>
+                </a>
+                
+                <div class="storage-bar-container">
+                    <div class="storage-bar"></div>
+                </div>
+                
+                <div class="storage-info">2.5GB of 10GB used</div>
+                
+                <button class="get-storage-btn">Get More Storage</button>
+            </div>
+            
+            <div class="sidebar-section" id="categories-section">
+                <h3 class="sidebar-heading">Categories</h3>
+                
+                <a href="appstore.html" class="menu-item">
+                    <i class="fab fa-app-store"></i>
+                    <span>App Store</span>
+                </a>
+                
+                <a href="backup.html" class="menu-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Backup & Recovery</span>
+                </a>
+                
+                <a href="corporate.html" class="menu-item">
+                    <i class="fas fa-building"></i>
+                    <span>Corporate Records</span>
+                </a>
+                
+                <a href="diary.html" class="menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>Diary</span>
+                </a>
+                
+                <div class="menu-item has-dropdown" id="files-dropdown">
+                    <div>
+                        <i class="fas fa-folder"></i>
+                        <span>Files</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                </div>
+                
+                <div class="sub-menu" id="files-submenu">
+                    <a href="family-files.html" class="menu-item">
+                        <i class="fas fa-users"></i>
+                        <span>Family files</span>
+                    </a>
+                    <a href="private-files.html" class="menu-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Private Files</span>
+                    </a>
+                </div>
+                <a href="folder.html" class="menu-item current">
+                    <i class="fas fa-folder"></i>
+                    <span>Folder</span>
+                </a>
+                
+                <a href="gallery.html" class="menu-item">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span>
+                </a>
+                
+                <a href="idea-bank.html" class="menu-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Idea Bank</span>
+                </a>
+                
+                <a href="library.html" class="menu-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Library</span>
+                </a>
+                
+                <a href="portfolio.html" class="menu-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Portfolio</span>
+                </a>
+                
+                <a href="service-centre.html" class="menu-item">
+                    <i class="fas fa-tools"></i>
+                    <span>Service Centre</span>
+                </a>
+                
+                <a href="store.html" class="menu-item">
+                    <i class="fas fa-store"></i>
+                    <span>Store</span>
+                </a>
+                
+                <a href="tech-hub.html" class="menu-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Tech Hub</span>
+                </a>
+                
+                <a href="vault.html" class="menu-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Vault</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="section-heading">Private Files</h1>
+            
+            <!-- Horizontal Tabs for Folder Content -->
+            <div class="content-tabs">
+                <div class="content-tab active" data-target="received">Public Opinion</div>
+                <!-- <div class="content-tab" data-target="uploaded">Uploaded</div> -->
+            </div>
+            
+            <!-- Received Files Content -->
+            <div class="tab-content active" id="received-content">
+                <div class="file-section">
+                    <div class="section-title">
+                        <h2>Good Book</h2>
+                        <span>Recommendations</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+                
+                <div class="file-section">
+                    <div class="section-title">
+                        <span>References</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+                
+                <div class="file-section">
+                    <div class="section-title">
+                        <span>Testimonials</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+                
+                <div class="file-section">
+                    <div class="section-title">
+                        <span>Appointment</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+                               <div class="file-section">
+                    <div class="section-title">
+                        <span>Promotion</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+                               <div class="file-section">
+                    <div class="section-title">
+                        <h2>Black Book</h2>
+                        <span>Queres</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+                               <div class="file-section">
+                    <div class="section-title">
+                        <span>Dismisals</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+
+                               <div class="file-section">
+                    <div class="section-title">
+                        <span>Legal Fines</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+                               <div class="file-section">
+                    <div class="section-title">
+                        <span>Suspension</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+                               <div class="file-section">
+                    <div class="section-title">
+                        <span>Jail Sentence</span>
+                    </div>
+                    <div class="cards-container">
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                        <div class="card audio-card">
+                            <div class="card-content">
+                                <div class="card-type">Type</div>
+                                <div class="card-description">Description</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="see-more">See More</a>
+                </div>
+            </div>
+            
+            <!-- Uploaded Files Content -->
+            <div class="tab-content" id="uploaded-content">
+                            
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle sidebar tabs for mobile
+            const sidebarTabs = document.querySelectorAll('.sidebar-tab');
+            const sidebarSections = document.querySelectorAll('.sidebar-section');
+            
+            // Function to show a specific section and hide others
+            function showSidebarSection(sectionId) {
+                sidebarSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+            }
+            
+            sidebarTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-target');
+                    
+                    // Update active tab
+                    sidebarTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show the corresponding section
+                    showSidebarSection(target + '-section');
+                });
+            });
+            
+            // Handle dropdown for Files menu item
+            const filesDropdown = document.getElementById('files-dropdown');
+            const filesSubmenu = document.getElementById('files-submenu');
+            const dropdownIcon = filesDropdown.querySelector('.dropdown-icon');
+            
+            filesDropdown.addEventListener('click', () => {
+                filesSubmenu.classList.toggle('active');
+                dropdownIcon.classList.toggle('rotated');
+            });
+            
+            // Handle content tabs for folder page
+            const contentTabs = document.querySelectorAll('.content-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            function showTabContent(tabId) {
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(tabId + '-content').classList.add('active');
+            }
+            
+            contentTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-target');
+                    
+                    // Update active tab
+                    contentTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show the corresponding content
+                    showTabContent(target);
+                });
+            });
+            
+            // Adjust layout on window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 992) {
+                    // Reset sidebar display on large screens - show all sections
+                    sidebarSections.forEach(section => {
+                        section.classList.add('active');
+                    });
+                } else {
+                    // Apply mobile view adjustments
+                    const activeTab = document.querySelector('.sidebar-tab.active');
+                    if (activeTab) {
+                        const target = activeTab.getAttribute('data-target');
+                        showSidebarSection(target + '-section');
+                    }
+                }
+            });
+            
+            // Initialize mobile view if needed
+            if (window.innerWidth <= 992) {
+                // Start with only the archived section visible on mobile
+                showSidebarSection('archived-section');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Listing</title>
+    <link rel="stylesheet" href="css/business_item_listing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <button class="close-btn" title="Close">&times;</button>
+    <img class="fb-logo" src="images/Logo.jpg" alt="Facebook Logo">
+  </div>
+  <div class="sidebar-row">
+    <div class="sidebar-title">Marketplace</div>
+  </div>
+  <div class="sidebar-row">
+    <div class="sidebar-subtitle">Item for sale</div>
+    <button class="save-draft-btn" disabled>Save Draft</button>
+  </div>
+  <div class="user-info">
+    <img class="user-avatar" src="images/profile.jpg" alt="User Profile">
+    <div class="user-details">
+      <span class="user-name">Joshua Mide</span>
+      <span class="user-listing">
+        Listing to Marketplace &bull; <span class="public-icon">&#127760;</span> Public
+      </span>
+    </div>
+  </div>
+  
+  <div class="photo-upload-section">
+    <div class="photo-upload-label">Photos</div>
+    <div class="photo-upload-desc">Photos · 0/10 – You can add up to 10 photos.</div>
+    <div class="photo-upload-box">
+      <div class="photo-upload-icon">
+        <i class="fas fa-camera"></i>
+        <span class="plus-icon">+</span>
+      </div>
+      <div class="photo-upload-text">Add photos<br><span class="photo-upload-sub">or drag and drop</span></div>
+    </div>
+    <div class="phone-upload-row">
+      <div class="phone-upload-icon">📱</div>
+      <div class="phone-upload-text">Upload photos directly from your phone. <a href="#" class="learn-more">Learn more</a></div>
+      <button class="try-it-btn" type="button">Try It</button>
+    </div>
+  </div>
+  
+  <div class="about-section">
+    <div class="about-title">Required</div>
+    <div class="about-desc">Be as descriptive as possible</div>
+    <div class="form-group">
+      <input class="vehicle-input" type="text" name="title" placeholder="Title" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <input class="vehicle-input" type="text" name="price" placeholder="Price" autocomplete="off">
+    </div>
+
+         <div class="price-label">Selling Method</div>
+     <div class="price-helper">Choose a specific selling method of your interest</div>
+     <div class="form-group">
+         <select class="year-select" name="selling-method">
+           <option value="" disabled selected>Selling Method</option>
+           <option value="direct-sales">Direct Sales</option>
+           <option value="third-party">Third - Party Sales Only</option>
+           <option value="inclusive-sales">All Inclusive Sales</option>
+         </select>
+       </div>
+     <div class="form-group">
+       <div class="custom-dropdown" id="categoryDropdown">
+         <div class="dropdown-selected" id="categorySelected">
+           Category <span class="dropdown-arrow">▼</span>
+         </div>
+         <ul class="dropdown-list" id="categoryList">
+           <li class="dropdown-main-option" data-category="home-garden">
+             <div class="dropdown-option-content">
+               <i class="fas fa-home dropdown-icon"></i>
+               <span class="dropdown-main-text">Home & garden</span>
+               <ul class="dropdown-sub-list">
+                 <li data-value="tools">Tools</li>
+                 <li data-value="furniture">Furniture</li>
+                 <li data-value="garden">Garden</li>
+                 <li data-value="household">Household</li>
+                 <li data-value="appliances">Appliances</li>
+               </ul>
+             </div>
+             <span class="dropdown-arrow">▶</span>
+           </li>
+           <li class="dropdown-main-option" data-category="entertainment">
+             <div class="dropdown-option-content">
+               <i class="fas fa-mobile-alt dropdown-icon"></i>
+               <span class="dropdown-main-text">Entertainment</span>
+               <ul class="dropdown-sub-list">
+                 <li data-value="phones">Tools</li>
+                 <li data-value="computers">Furniture</li>
+                 <li data-value="tv-audio">Garden</li>
+                 <li data-value="cameras">Household</li>
+                 <li data-value="gaming">Appliances</li>
+               </ul>
+             </div>
+             <span class="dropdown-arrow">▶</span>
+           </li>
+           <li class="dropdown-main-option" data-category="clothing">
+             <div class="dropdown-option-content">
+               <i class="fas fa-tshirt dropdown-icon"></i>
+               <span class="dropdown-main-text">Clothing & Accessories</span>
+               <ul class="dropdown-sub-list">
+                 <li data-value="bags-&-luggages">Bags & Luggage</li>
+                 <li data-value="womens-clothing">Women's Clothing & Shoes</li>
+                 <li data-value="mens-clothing">Men's Clothing & Shoes</li>
+                 <li data-value="jewely">Jewelry</li>
+                 <li data-value="accessories">Accessories</li>
+               </ul>
+             </div>
+             <span class="dropdown-arrow">▶</span>
+           </li>
+           <li class="dropdown-main-option" data-category="family">
+             <div class="dropdown-option-content">
+               <i class="fas fa-futbol dropdown-icon"></i>
+               <span class="dropdown-main-text">Family</span>
+               <ul class="dropdown-sub-list">
+                 <li data-value="health-beauty">Health & Beauty</li>
+                 <li data-value="pet-supplies">Pet Supplies</li>
+                 <li data-value="baby-toys">Baby & Kids Toys</li>
+                 <li data-value="games">Games</li>
+               </ul>
+             </div>
+             <span class="dropdown-arrow">▶</span>
+           </li>
+           <li class="dropdown-main-option" data-category="electronics">
+             <div class="dropdown-option-content">
+               <i class="fas fa-car dropdown-icon"></i>
+               <span class="dropdown-main-text">Electronics</span>
+               <ul class="dropdown-sub-list">
+                 <li data-value="electronics-computers">Electronics & Computers</li>
+                 <li data-value="mobile-phones">Mobile Phones</li>
+               </ul>
+             </div>
+             <span class="dropdown-arrow">▶</span>
+           </li>
+           <li class="dropdown-main-option" data-category="hobbies">
+             <div class="dropdown-option-content">
+               <i class="fas fa-car dropdown-icon"></i>
+               <span class="dropdown-main-text">Hobbies</span>
+               <ul class="dropdown-sub-list">
+                 <li data-value="bicycles">Bicycles</li>
+                 <li data-value="arts-craft">Arts & Craft</li>
+                 <li data-value="sports">Sports</li>
+                 <li data-value="outdoors">Outdoors</li>
+               </ul>
+             </div>
+             <span class="dropdown-arrow">▶</span>
+           </li>
+           <li class="dropdown-main-option" data-category="classified">
+             <div class="dropdown-option-content">
+               <i class="fas fa-car dropdown-icon"></i>
+               <span class="dropdown-main-text">Classified</span>
+             </div>
+           </li>
+           <li class="dropdown-main-option" data-category="vehicles">
+             <div class="dropdown-option-content">
+               <i class="fas fa-car dropdown-icon"></i>
+               <span class="dropdown-main-text">Vehicles</span>
+             </div>
+           </li>
+         </ul>
+         <input type="hidden" name="category" id="categoryInput">
+       </div>
+     </div>
+     <div class="form-group">
+       <select class="year-select" name="condition">
+         <option value="" disabled selected>Condition</option>
+         <option value="new">New</option>
+         <option value="like-new">Used - Like New</option>
+         <option value="good">Used - Good</option>
+         <option value="fair">Used - Fair</option>
+         <option value="poor">Used - Poor</option>
+       </select>
+     </div>
+
+     <!-- More Details Dropdown -->
+     <div class="more-details-dropdown">
+       <div class="more-details-header" onclick="toggleMoreDetails()">
+         <div class="more-details-text">
+           <div class="more-details-title">More details</div>
+           <div class="more-details-helper">Attract more interest by including more details</div>
+         </div>
+         <div class="more-details-chevron">▼</div>
+       </div>
+       <div class="more-details-content" id="moreDetailsContent">
+         <div class="form-group">
+           <textarea class="description-input" name="description" placeholder="Description" rows="4"></textarea>
+         </div>
+         <div class="form-group">
+           <div class="availability-dropdown" id="availabilityDropdown">
+             <div class="availability-selected" id="availabilitySelected">
+               Availability <span class="availability-arrow">▼</span>
+             </div>
+             <ul class="availability-list" id="availabilityList">
+               <li data-value="available">Available</li>
+               <li data-value="pending">Pending</li>
+               <li data-value="sold">Sold</li>
+               <li data-value="reserved">Reserved</li>
+             </ul>
+             <input type="hidden" name="availability" id="availabilityInput">
+           </div>
+         </div>
+         <div class="form-group">
+           <input class="vehicle-input" type="text" name="product-tags" placeholder="Product tags" autocomplete="off">
+           <div class="optional-text">optional. Limit: 20</div>
+         </div>
+         <div class="form-group">
+           <input class="vehicle-input" type="text" name="sku" placeholder="SKU" autocomplete="off">
+           <div class="optional-text">optional. Only visible to you</div>
+         </div>
+         <div class="form-group">
+           <div class="location-input-container">
+             <i class="fas fa-map-marker-alt location-icon"></i>
+             <input class="location-input" type="text" name="location" placeholder="Location" autocomplete="off">
+           </div>
+         </div>
+         <div class="form-group">
+           <div class="meetup-options">
+             <div class="meetup-option">
+               <div class="meetup-option-left">
+                 <i class="fas fa-users meetup-icon"></i>
+                 <span class="meetup-text">Public meetup</span>
+               </div>
+               <input type="checkbox" name="public-meetup" id="publicMeetup">
+             </div>
+             <div class="meetup-option">
+               <div class="meetup-option-left">
+                 <i class="fas fa-home meetup-icon"></i>
+                 <span class="meetup-text">Door pick-up</span>
+               </div>
+               <input type="checkbox" name="door-pickup" id="doorPickup">
+             </div>
+             <div class="meetup-option">
+               <div class="meetup-option-left">
+                 <i class="fas fa-truck meetup-icon"></i>
+                 <span class="meetup-text">Door drop-off</span>
+               </div>
+               <input type="checkbox" name="door-dropoff" id="doorDropoff">
+             </div>
+           </div>
+           <div class="safety-tips-link">
+             <a href="#" class="safety-tips">see safety tips</a>
+           </div>
+         </div>
+       </div>
+     </div>
+
+     <!-- Hide from Friends Section -->
+     <div class="hide-friends-section">
+       <div class="hide-friends-content">
+         <div class="hide-friends-icon">
+           <i class="fas fa-lock"></i>
+         </div>
+         <div class="hide-friends-text">
+           <div class="hide-friends-title">Hide from friends</div>
+           <div class="hide-friends-desc">This listing is still public. If you hide this listing from friends, they won't see it in most cases. <a href="#" class="learn-more">Learn more</a></div>
+         </div>
+         <label class="toggle-switch">
+           <input type="checkbox" id="hideFromFriends">
+           <span class="toggle-slider"></span>
+         </label>
+       </div>
+     </div>
+
+     <!-- Policy Disclaimer -->
+     <div class="policy-disclaimer">
+       Marketplace items are public and can be seen by anyone on or off Facebook. Items such as animals, drugs, weapons, counterfeits and other items that infringe intellectual property aren't allowed on Marketplace. See our <a href="#" class="commerce-policy-link">Commerce Policies</a>.
+     </div>
+
+     <!-- Progress Bar -->
+     <div class="progress-section">
+       <div class="progress-bar">
+         <div class="progress-bar-filled"></div>
+         <div class="progress-bar-disabled"></div>
+       </div>
+     </div>
+
+     <!-- Next Button -->
+     <button class="next-btn" id="nextBtn" disabled>Next</button>
+   </div>
+ </div>
+
+<div class="main-content">
+  <div class="preview-container">
+    <div class="preview-left">
+      <div class="preview-title">Preview</div>
+      <div class="listing-preview-box">
+        <div class="listing-preview-message">
+          <div class="listing-preview-main">Your listing preview</div>
+          <div class="listing-preview-sub">As you create your listing, you can preview how it will appear to others on Marketplace.</div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-right">
+      <div class="preview-summary">
+        <div class="preview-summary-title">Title</div>
+        <div class="preview-summary-price">Price</div>
+        <div class="preview-summary-meta">Listed a few seconds ago in <span class="preview-summary-location">Lushnje</span></div>
+        <hr class="preview-divider">
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Details</div>
+          <div class="preview-summary-description">Description will appear here.</div>
+        </div>
+        <div class="preview-summary-map">
+          <div id="previewMap" class="preview-map-container"></div>
+        </div>
+        <div class="preview-summary-location-label">Lushnje</div>
+        <div class="preview-summary-location-note">Location is approximate</div>
+        <hr class="preview-divider">
+        <div class="preview-summary-section preview-seller-info">
+          <div class="preview-summary-label">Seller information</div>
+          <div class="preview-seller-row">
+            <img src="images/profile.jpg" alt="Seller profile" class="preview-seller-avatar">
+            <span class="preview-seller-name">Joshua Mide</span>
+            <span class="preview-seller-details">Seller details</span>
+          </div>
+        </div>
+        <button class="preview-message-btn" disabled>Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+<script>
+// More Details Dropdown Function
+function toggleMoreDetails() {
+  const content = document.getElementById('moreDetailsContent');
+  const chevron = document.querySelector('.more-details-chevron');
+  const header = document.querySelector('.more-details-header');
+  
+  if (content.style.display === 'none' || content.style.display === '') {
+    content.style.display = 'block';
+    chevron.style.transform = 'rotate(180deg)';
+    header.classList.add('expanded');
+  } else {
+    content.style.display = 'none';
+    chevron.style.transform = 'rotate(0deg)';
+    header.classList.remove('expanded');
+  }
+}
+
+// Form Validation and Next Button Logic
+function validateForm() {
+  const requiredFields = [
+    'input[name="title"]',
+    'input[name="price"]',
+    'select[name="selling-method"]',
+    'input[name="category"]',
+    'select[name="condition"]'
+  ];
+  
+  let filledFields = 0;
+  const totalFields = requiredFields.length;
+  
+  requiredFields.forEach(selector => {
+    const field = document.querySelector(selector);
+    if (field && field.value && field.value.trim() !== '') {
+      filledFields++;
+    }
+  });
+  
+  const nextBtn = document.getElementById('nextBtn');
+  const progressFilled = document.querySelector('.progress-bar-filled');
+  const progressDisabled = document.querySelector('.progress-bar-disabled');
+  
+  const progressPercentage = (filledFields / totalFields) * 100;
+  
+  // Update progress bar
+  progressFilled.style.width = progressPercentage + '%';
+  progressDisabled.style.width = (100 - progressPercentage) + '%';
+  
+  // Enable/disable Next button
+  if (filledFields === totalFields) {
+    nextBtn.disabled = false;
+  } else {
+    nextBtn.disabled = true;
+  }
+}
+
+// Add event listeners to form fields
+document.addEventListener('DOMContentLoaded', function() {
+  const formFields = document.querySelectorAll('input, select');
+  formFields.forEach(field => {
+    field.addEventListener('input', validateForm);
+    field.addEventListener('change', validateForm);
+  });
+  
+  // Initial validation
+  validateForm();
+});
+
+// Category Dropdown Logic
+const categoryDropdown = document.getElementById('categoryDropdown');
+const categorySelected = document.getElementById('categorySelected');
+const categoryList = document.getElementById('categoryList');
+const categoryMainOptions = categoryDropdown.querySelectorAll('.dropdown-main-option');
+const categoryInput = document.getElementById('categoryInput');
+
+// Category dropdown functionality
+categorySelected.addEventListener('click', () => {
+  categoryDropdown.classList.toggle('open');
+});
+
+categorySelected.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    categoryDropdown.classList.toggle('open');
+    e.preventDefault();
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if (!categoryDropdown.contains(e.target)) {
+    categoryDropdown.classList.remove('open');
+    categoryMainOptions.forEach(opt => opt.classList.remove('expanded'));
+  }
+});
+
+categoryMainOptions.forEach(option => {
+  option.addEventListener('click', function(e) {
+    // Only expand/collapse, don't select
+    e.stopPropagation();
+    // Collapse others
+    categoryMainOptions.forEach(opt => {
+      if (opt !== option) opt.classList.remove('expanded');
+    });
+    option.classList.toggle('expanded');
+  });
+  
+  // Sub-option selection
+  const subOptions = option.querySelectorAll('.dropdown-sub-list li');
+  subOptions.forEach(sub => {
+    sub.addEventListener('click', function(ev) {
+      ev.stopPropagation();
+      const selectedText = sub.textContent;
+      const selectedValue = sub.getAttribute('data-value');
+      
+      // Update selected display
+      categorySelected.innerHTML = selectedText + ' <span class="dropdown-arrow">▼</span>';
+      categorySelected.classList.add('selected');
+      
+      // Update hidden input
+      categoryInput.value = selectedValue;
+      
+      // Remove selected class from all sub-options
+      subOptions.forEach(s => s.classList.remove('selected'));
+      // Add selected class to clicked option
+      sub.classList.add('selected');
+      
+      // Close dropdown
+      categoryDropdown.classList.remove('open');
+      categoryMainOptions.forEach(opt => opt.classList.remove('expanded'));
+      
+      // Trigger form validation
+      validateForm();
+    });
+  });
+});
+
+// Availability Dropdown Logic
+const availabilityDropdown = document.getElementById('availabilityDropdown');
+const availabilitySelected = document.getElementById('availabilitySelected');
+const availabilityList = document.getElementById('availabilityList');
+const availabilityInput = document.getElementById('availabilityInput');
+
+if (availabilitySelected && availabilityList) {
+  availabilitySelected.addEventListener('click', () => {
+    availabilityDropdown.classList.toggle('open');
+  });
+
+  availabilitySelected.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      availabilityDropdown.classList.toggle('open');
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!availabilityDropdown.contains(e.target)) {
+      availabilityDropdown.classList.remove('open');
+    }
+  });
+
+  const availabilityOptions = availabilityList.querySelectorAll('li');
+  availabilityOptions.forEach(option => {
+    option.addEventListener('click', function() {
+      const selectedText = option.textContent;
+      const selectedValue = option.getAttribute('data-value');
+      
+      // Update selected display
+      availabilitySelected.innerHTML = selectedText + ' <span class="availability-arrow">▼</span>';
+      availabilitySelected.classList.add('selected');
+      
+      // Update hidden input
+      availabilityInput.value = selectedValue;
+      
+      // Remove selected class from all options
+      availabilityOptions.forEach(opt => opt.classList.remove('selected'));
+      // Add selected class to clicked option
+      option.classList.add('selected');
+      
+      // Close dropdown
+      availabilityDropdown.classList.remove('open');
+    });
+  });
+}
+
+// Custom Dropdown Logic
+const dropdown = document.getElementById('vehicleDropdown');
+const selected = dropdown.querySelector('.dropdown-selected');
+const list = dropdown.querySelector('.dropdown-list');
+const mainOptions = dropdown.querySelectorAll('.dropdown-main-option');
+const subLists = dropdown.querySelectorAll('.dropdown-sub-list');
+const hiddenInput = document.getElementById('vehicleTypeInput');
+
+selected.addEventListener('click', () => {
+  dropdown.classList.toggle('open');
+});
+selected.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    dropdown.classList.toggle('open');
+    e.preventDefault();
+  }
+});
+document.addEventListener('click', (e) => {
+  if (!dropdown.contains(e.target)) {
+    dropdown.classList.remove('open');
+    mainOptions.forEach(opt => opt.classList.remove('expanded'));
+  }
+});
+mainOptions.forEach(option => {
+  option.addEventListener('click', function(e) {
+    // Only expand/collapse, don't select
+    e.stopPropagation();
+    // Collapse others
+    mainOptions.forEach(opt => {
+      if (opt !== option) opt.classList.remove('expanded');
+    });
+    option.classList.toggle('expanded');
+  });
+  // Sub-option selection
+  const subOptions = option.querySelectorAll('ul > li');
+  subOptions.forEach(sub => {
+    sub.addEventListener('click', function(ev) {
+      ev.stopPropagation();
+      selected.innerHTML = sub.textContent + ' <span class="dropdown-arrow">▼</span>';
+      hiddenInput.value = sub.textContent;
+      dropdown.classList.remove('open');
+      mainOptions.forEach(opt => opt.classList.remove('expanded'));
+    });
+  });
+});
+
+// Google Maps integration for preview
+let map, marker, geocoder;
+function initPreviewMap() {
+  geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('previewMap'), {
+    center: { lat: 40.9412, lng: 19.7056 }, // Default to Lushnje
+    zoom: 12,
+    disableDefaultUI: true,
+  });
+  marker = new google.maps.Marker({
+    map: map,
+    position: { lat: 40.9412, lng: 19.7056 },
+  });
+}
+function updatePreviewMap(location) {
+  if (!geocoder || !map || !marker) return;
+  geocoder.geocode({ address: location }, function(results, status) {
+    if (status === 'OK' && results[0]) {
+      const loc = results[0].geometry.location;
+      map.setCenter(loc);
+      marker.setPosition(loc);
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.google && window.google.maps) {
+    initPreviewMap();
+  } else {
+    window.initPreviewMap = initPreviewMap;
+  }
+  const locationInput = document.getElementById('locationInput');
+  if (locationInput) {
+    locationInput.addEventListener('change', function() {
+      updatePreviewMap(locationInput.value);
+      // Optionally update location label in preview
+      const label = document.querySelector('.preview-summary-location-label');
+      if (label) label.textContent = locationInput.value;
+    });
+  }
+});
+window.initPreviewMap = initPreviewMap;
+</script>
+
+<script>
+    // Business Item Listing - Title Sync Functionality
+window.addEventListener('DOMContentLoaded', function() {
+  const titleInput = document.querySelector('input[name="title"]');
+  const previewTitle = document.querySelector('.preview-summary-title');
+
+  if (titleInput && previewTitle) {
+    // Update preview title when user types in the title input
+    titleInput.addEventListener('input', function() {
+      const titleValue = this.value.trim();
+      if (titleValue) {
+        previewTitle.textContent = titleValue;
+      } else {
+        previewTitle.textContent = 'Title';
+      }
+    });
+
+    // Also update on focus to handle any edge cases
+    titleInput.addEventListener('focus', function() {
+      const titleValue = this.value.trim();
+      if (titleValue) {
+        previewTitle.textContent = titleValue;
+      }
+    });
+  }
+});
+
+// Business Item Listing - Price Input Functionality
+window.addEventListener('DOMContentLoaded', function() {
+  const priceInput = document.querySelector('input[name="price"]');
+  const previewPrice = document.querySelector('.preview-summary-price');
+
+  if (priceInput && previewPrice) {
+    // Function to format number with commas
+    function formatNumber(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // Function to format price with naira symbol
+    function formatPrice(price) {
+      if (!price || price === '0') return '';
+      const formatted = formatNumber(price);
+      return `₦${formatted}`;
+    }
+
+    // Function to update preview price
+    function updatePreviewPrice() {
+      const priceValue = priceInput.value.replace(/[^\d]/g, ''); // Remove non-digits
+      if (priceValue) {
+        previewPrice.textContent = formatPrice(priceValue);
+      } else {
+        previewPrice.textContent = 'Price';
+      }
+    }
+
+    // Handle input events
+    priceInput.addEventListener('input', function(e) {
+      // Remove any non-numeric characters except for the naira symbol
+      let value = this.value.replace(/[^\d]/g, '');
+      
+      // Limit to reasonable length (e.g., 10 digits)
+      if (value.length > 10) {
+        value = value.substring(0, 10);
+      }
+      
+      // Update the input value
+      this.value = value;
+      
+      // Update preview
+      updatePreviewPrice();
+    });
+
+    // Handle keydown to prevent non-numeric input
+    priceInput.addEventListener('keydown', function(e) {
+      // Allow: backspace, delete, tab, escape, enter, and navigation keys
+      if ([8, 9, 27, 13, 46, 37, 38, 39, 40].indexOf(e.keyCode) !== -1) {
+        return;
+      }
+      
+      // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+      if ((e.keyCode === 65 || e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 88) && 
+          (e.ctrlKey === true || e.metaKey === true)) {
+        return;
+      }
+      
+      // Allow: numbers 0-9
+      if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
+        return;
+      }
+      
+      // Prevent all other keys
+      e.preventDefault();
+    });
+
+    // Handle paste event to clean pasted content
+    priceInput.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+      const numericValue = pastedText.replace(/[^\d]/g, '');
+      
+      if (numericValue.length <= 10) {
+        this.value = numericValue;
+        updatePreviewPrice();
+      }
+    });
+
+    // Handle focus to show naira symbol in input if there's a value
+    priceInput.addEventListener('focus', function() {
+      if (this.value) {
+        updatePreviewPrice();
+      }
+    });
+
+    // Handle blur to clean up display
+    priceInput.addEventListener('blur', function() {
+      if (!this.value) {
+        updatePreviewPrice();
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

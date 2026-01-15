@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Page | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* style.css */
+
+/* Basic styles for the entire page */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5; /* Light grey background */
+    color: #050505; /* Dark grey for text */
+}
+
+
+
+/* Corporate Page Layout */
+.corporate-container {
+    display: flex;
+    max-width: 1200px; /* Max width for the content area */
+    margin: 90px auto; /* Center the container */
+    gap: 20px; /* Space between columns */
+    padding: 0 15px; /* Padding on sides for smaller screens */
+}
+
+/* Left Panel (Sidebar) */
+.left-panel {
+    flex: 0 0 280px; /* Fixed width for left panel */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    padding: 15px;
+    height: fit-content; /* Adjust height based on content */
+}
+
+.left-panel .corporate-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.left-panel h1 {
+    font-size: 24px;
+    color: #050505;
+    margin: 0; /* Reset margin */
+}
+
+.left-panel .corporate-title-icon {
+    color: #1877f2; /* A shade of blue */
+    font-size: 24px;
+}
+/* Add this to your style.css */
+
+.pages-list li a {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit color from parent li */
+    display: flex; /* Make the anchor tag a flex container to align icon and text */
+    align-items: center;
+    width: 100%; /* Make the link fill the entire list item */
+    padding: 8px 10px; /* Add padding to the link for better click area */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+/* Style for the active page */
+.pages-list li.active {   
+    color: #000; 
+    font-weight: 600; 
+}
+
+.pages-list li.active i {
+    color: #000; /* Blue icon color for active item */
+}
+
+/* Ensure hover effect still works on the li */
+.pages-list li:hover {
+    background-color: #f0f2f5;
+}
+
+/* To override the active background on hover for active link */
+.pages-list li.active:hover {
+    background-color: #e6f2ff; /* Keep the active background on hover */
+}
+
+.pages-section h2 {
+    font-size: 17px;
+    color: #65676b;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.pages-section h2 i {
+    margin-right: 8px;
+    color: #1877f2; /* Blue for the flag icon */
+}
+
+.pages-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pages-list li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    padding-left: 10px; /* Indent text slightly */
+    color: #050505;
+    font-size: 15px;
+}
+
+.pages-list li:hover {
+    background-color: #f0f2f5; /* Light grey on hover */
+}
+
+.pages-list li i {
+    margin-right: 10px;
+    color: #65676b; /* Default icon color for menu items */
+    width: 20px; /* Fixed width for icons */
+    text-align: center;
+}
+
+/* Specific icon colors if desired */
+.pages-list li .fa-image-portrait { color: #f08226; } /* Orange */
+.pages-list li .fa-ad { color: #22a6b3; } /* Teal */
+.pages-list li .fa-handshake { color: #f7b731; } /* Yellow */
+.pages-list li .fa-chevron-down { color: #65676b; } /* Grey for dropdown */
+
+
+/* Middle Panel (Main Content Area) */
+.middle-panel {
+    flex: 1; /* Takes up remaining space */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between content blocks */
+}
+
+.post-creator,
+.story-creator,
+.corporate-post {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.post-prompt {
+    background-color: #f0f2f5;
+    border-radius: 20px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    cursor: text; /* Indicates it's an input area */
+    color: #65676b;
+}
+
+.post-prompt:hover {
+    background-color: #e4e6e9;
+}
+
+.post-options {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    border-top: 1px solid #f0f2f5; /* Light border */
+}
+
+.post-option {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #65676b;
+}
+
+.post-option:hover {
+    background-color: #f0f2f5;
+}
+
+.post-option i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.live-option i {
+    color: #f3425f; /* Red for Live Video */
+}
+
+.photo-option i {
+    color: #45bd62; /* Green for Photo/Video */
+}
+
+/* Story Creator */
+.story-creator {
+    text-align: center;
+    cursor: pointer;
+}
+
+.story-prompt {
+    border: 1px dashed #ddd; /* Dashed border for prompt */
+    border-radius: 8px;
+    padding: 30px 15px;
+    text-align: center;
+    background-color: #fcfcfc; /* Slightly different background */
+}
+
+.story-prompt i {
+    font-size: 24px;
+    background-color: lightyellow;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.story-prompt h3 {
+    font-size: 18px;
+    color: #050505;
+    margin-bottom: 5px;
+}
+
+.story-prompt p {
+    font-size: 14px;
+    color: #65676b;
+}
+
+/* Corporate Post */
+.corporate-post {
+    padding: 15px;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.poster-info {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.poster-name {
+    font-weight: 600;
+    margin-right: 8px;
+    color: #050505;
+}
+
+.follow-badge {
+    background-color: #e4e6eb;
+    color: #65676b;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.post-date {
+    color: #65676b;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.post-date i {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.post-header .post-actions {
+    display: flex;
+    gap: 15px; /* Space between ellipsis and close */
+    font-size: 18px;
+    color: #65676b;
+    cursor: pointer;
+}
+
+.post-header .post-actions i:hover {
+    color: #050505;
+}
+
+
+.post-content {
+    margin-bottom: 15px;
+}
+
+.post-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #050505;
+}
+
+.post-media {
+    margin: 15px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 500px; /* Ensure images don't stretch too much */
+    border: 1px solid #e4e6eb; /* Border around media */
+}
+
+.post-media-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.post-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #65676b;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f2f5;
+    margin-bottom: 10px;
+}
+
+.post-actions-bottom { /* Renamed to differentiate from header actions */
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+
+.post-action {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #65676b;
+}
+
+.post-action:hover {
+    background-color: #f0f2f5;
+}
+
+.post-action i {
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+/* Right Panel */
+.right-panel {
+    flex: 0 0 300px; /* Fixed width for right panel */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    padding: 15px;
+    height: fit-content; /* Adjust height based on content */
+}
+
+/* Right panel - Sponsored post, Connect card and footer */
+.sponsored-post {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.sponsored-text {
+    font-weight: bold;
+    font-size: 16px;
+    color: #050505;
+}
+
+.connect-card {
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    padding: 12px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.connect-card p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #050505;
+    margin-bottom: 10px;
+}
+
+.connect-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.connect-row .connect-icon {
+    font-size: 26px;
+    color: #050505;
+}
+
+.connect-btn {
+    background: #fff;
+    border: 1px solid #cfcfcf;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.connect-btn:hover {
+    background: #f0f2f5;
+}
+
+.rhs-footer {
+    text-align: center;
+}
+
+.rhs-footer .footer-title {
+    color: #3b6fc4; /* blue heading */
+    font-weight: 800;
+    margin: 8px 0 2px;
+}
+
+.rhs-footer .footer-link {
+    color: #3b6fc4;
+    font-weight: 600;
+    margin: 2px 0 8px;
+    display: inline-block;
+}
+
+.rhs-footer .company-line {
+    font-size: 14px;
+    color: #050505;
+}
+
+.rhs-footer .company-line .rc {
+    font-weight: 800;
+}
+
+.rhs-footer .footer-logo {
+    width: 46px;
+    height: auto;
+    margin: 6px auto 0;
+    display: block;
+}
+
+/* Left panel lists */
+.metrics-list, .features-list {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    padding: 10px 12px;
+    margin: 14px 0; /* space above and below each box */
+}
+
+.metrics-list .list-item, .features-list .list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    width: 100%;
+    color: #050505;
+    font-size: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.metrics-list .list-item:hover, .features-list .list-item:hover {
+    background: #f0f2f5;
+}
+
+.features-list .list-item i {
+    color: #65676b;
+    width: 22px;
+    text-align: center;
+}
+
+.features-list .list-icon-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #cfcfcf;
+    border-radius: 4px;
+    font-weight: 700;
+    color: #65676b;
+    font-size: 13px;
+}
+
+/* Extra separation between the two boxes */
+.features-list { margin-top: 20px; }
+
+/* Generic hover for left-panel list items */
+.left-panel .list-item {
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.left-panel .list-item:hover {
+    background: #f0f2f5;
+}
+
+.sponsored-section {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fcfcfc;
+}
+
+.sponsored-section h3 {
+    color: #65676b;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .corporate-container {
+        flex-direction: column; /* Stack columns on smaller screens */
+        align-items: center;
+    }
+
+    .left-panel,
+    .middle-panel,
+    .right-panel {
+        flex: 1 1 100%; /* Allow them to take full width */
+        max-width: 600px; /* Limit max width for better readability on smaller screens */
+        width: 100%;
+    }
+
+    .left-panel {
+        order: 2; /* Move left panel below middle on small screens */
+    }
+
+    .right-panel {
+        order: 3; /* Move right panel last on small screens */
+    }
+
+    .middle-panel {
+        order: 1; /* Keep middle panel first */
+    }
+
+    .navbar .nav-middle,
+    .navbar .nav-right {
+        display: none; /* Hide middle and right nav links on small screens */
+    }
+
+    .navbar .nav-left {
+        width: 100%;
+        justify-content: center; /* Center logo and search */
+    }
+
+.navbar .search-box {
+        flex-grow: 1; /* Allow search box to expand */
+        max-width: 300px;
+    }
+}
+/* Account popup */
+.account-popup {
+    position: absolute;
+    display: none;
+    width: 320px;
+    background: #fff;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.account-popup .popup-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.account-popup .popup-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #050505;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 6px;
+    border-radius: 4px;
+    cursor: default;
+}
+
+.account-popup .popup-item i {
+    color: #65676b;
+    width: 20px;
+    text-align: center;
+}
+
+.account-popup .popup-item:hover {
+    background: #f0f2f5;
+}
+
+.account-popup .see-all {
+    background: #e6e6e6;
+    border-radius: 4px;
+    margin-top: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.account-popup .see-all:hover {
+    background: #dcdcdc;
+}
+
+.account-popup .other-items {
+    font-weight: 600;
+    color: #222;
+    padding: 8px 6px;
+    border-radius: 4px;
+}
+
+.account-popup .other-items:hover {
+    background: #f0f2f5;
+    cursor: pointer;
+}
+    </style>
+    </head>
+<body>
+
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="../Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="../Archivehubs-Notifications/notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="../Archivehubs-Business/business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="../Archivehubs-Drive/drive.html" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="../Archivehubs-Menu/menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+        <!-- Account Popup -->
+        <div id="accountPopupMenu" class="account-popup" role="dialog" aria-hidden="true">
+            <div class="popup-section">
+                <div class="popup-item"><i class="fas fa-user-circle"></i><span>Account Name</span></div>
+            </div>
+            <div class="popup-section">
+                <div class="popup-item"><i class="fas fa-sync-alt"></i><span>Corporate Name</span></div>
+                <div class="popup-item" style="margin-top:8px"><i class="fas fa-sync-alt"></i><span>Affiliate Name</span></div>
+                <div class="see-all popup-item" style="justify-content:flex-start;">
+                    <i class="fas fa-sync-alt"></i><span>See all Profile</span>
+                </div>
+            </div>
+            <div class="popup-section" style="border-bottom:none;">
+                <div class="other-items">Other Account Items....</div>
+            </div>
+        </div>
+
+    <div class="corporate-container">
+        <div class="left-panel">
+            <div class="corporate-title-wrapper">
+                <h1>Corporate Page</h1>
+                <i class="fas fa-building corporate-title-icon"></i> </div>
+            
+            <div class="pages-section">
+            <ul class="pages-list">
+                <li class="active"> <a href="corporate_yourpages.html"> <i class="fas fa-flag"></i>Pages
+                    </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fa-solid fa-image-portrait"></i> Manage Corporate Page
+                    </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fas fa-ad"></i> Ad Center
+                    </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="fas fa-handshake"></i> Collabs<i class="fas fa-chevron-down"></i>
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="#"> <i class="fas fa-chevron-down"></i> See More
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+
+            <!-- Left-panel additional lists -->
+            <div class="metrics-list">
+                <div class="list-item">Page Visitors</div>
+               <a href="../insights_analysis/insight-analysis.html"><div class="list-item">Page Analytics</div></a>
+               <a href="../archive_explorer/archive_explorer.html"> <div class="list-item">Archivehubs Explorer</div></a>
+                <a href="../Archivehubs_lite/archive_lite.html"> <div class="list-item">Archivehubs Lite</div></a>
+                <a href="../Archivehubs_Learning/archive_learning_1.html"><div class="list-item">Archivehubs Learning</div></a>
+            </div>
+
+            <div class="features-list">
+                <a href="../PlannerAPS/planner-aps.html"><div class="list-item"><i class="far fa-calendar-alt"></i><span>Planner (APS)</span></div></a>
+                <a href="../Archivehubs-Community/archive_community.html"><div class="list-item"><span class="list-icon-letter">A</span><span>Archivehubs Community</span></div></a>
+                <a href="../PlannerAPS/groups.html"><div class="list-item"><i class="fas fa-users"></i><span>Groups</span></div></a>
+                <a href="../Archivehubs-Newsletter/archive_newsletter.html"><div class="list-item"><i class="far fa-envelope"></i><span>Newsletters</span></div></a>
+                <a href="../Archivehubs-Articles/Archive_article.html"><div class="list-item"><i class="far fa-newspaper"></i><span>Write Articles</span></div></a>
+            </div>
+        </div>
+        
+        <div class="middle-panel">
+            <div class="post-creator">
+                <div class="post-prompt">
+                    What's on your mind, corporate name?
+                </div>
+                <div class="post-options">
+                    <a href="../Archivehubs-Video/video1.html">
+                        <div class="post-option live-option">
+                            <i class="fas fa-video"></i>
+                            <span>Live Video</span>
+                        </div>
+                    </a>
+                    <div class="post-option photo-option">
+                        <i class="fas fa-photo-video"></i>
+                        <span>Photo/Video</span>
+                    </div>
+                    <div class="post-option live-option"> <i class="fas fa-video"></i>
+                        <span>Lite</span>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="../Archivehubs-Create-Story/story.html">   
+                <div class="story-creator">
+                    <div class="story-prompt">
+                        <i class="fas fa-plus-circle"></i>
+                        <h3>Create Story</h3>
+                        <p>Share a photo or write something</p>
+                    </div>
+                </div>
+            </a> 
+            <div class="corporate-post">
+                <div class="post-header">
+                    <div class="poster-info">
+                        <span class="poster-name">Name</span>
+                        <span class="follow-badge">Follow</span>
+                        <span class="post-date">Date <i class="fas fa-globe-americas"></i></span> </div>
+                    <div class="post-actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                
+                <div class="post-content">
+                    <p>Description <strong></strong></p>
+                </div>
+                
+                <div class="post-media">
+                    <img src="img/vid-3.jpg" alt="Corporate post media" class="post-media-image">
+                </div>
+                
+                <div class="post-stats">
+                    <span>8k</span> <span>325</span>
+                    <span>94</span>
+                    <span>92</span>
+                </div>
+                
+                <div class="post-actions-bottom"> <div class="post-action">
+                        <i class="far fa-thumbs-up"></i>
+                        <span>Like</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-comment"></i>
+                        <span>Comment</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fas fa-retweet"></i>
+                        <span>Repost</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fas fa-share"></i>
+                        <span>Share</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="sponsored-post">
+                <div class="sponsored-text">Sponsored Post</div>
+            </div>
+            
+            <div class="connect-card">
+                <p>Get Connected with<br>Professionals, Jobs and<br>Global Opportunities</p>
+                <div class="connect-row">
+                    <i class="far fa-user-circle connect-icon"></i>
+                    <button class="connect-btn">Start Connecting</button>
+                </div>
+            </div>
+
+            <div class="rhs-footer">
+                <div class="footer-title">General Terms</div>
+                <div class="footer-link">Get the Archivehubs App</div>
+                <div class="company-line">ARCHIVEHUBS: ENINK Investment<br>Limited © 2025 <span class="rc">RC 1741345</span></div>
+                <img src="images/company-name.jpg" alt="enink" class="footer-logo">
+            </div>
+        </div>
+    </div>
+<script>
+(function(){
+    var trigger = document.getElementById('accountPopup');
+    var menu = document.getElementById('accountPopupMenu');
+
+    function openMenu(){
+        if(!menu || !trigger) return;
+        var rect = trigger.getBoundingClientRect();
+        var top = rect.bottom + window.scrollY + 8;
+        var left = rect.left + window.scrollX;
+        var menuWidth = 320;
+        var maxLeft = window.scrollX + window.innerWidth - menuWidth - 8;
+        if(left > maxLeft) left = maxLeft;
+        if(left < window.scrollX + 8) left = window.scrollX + 8;
+        menu.style.top = top + 'px';
+        menu.style.left = left + 'px';
+        menu.style.display = 'block';
+        menu.setAttribute('aria-hidden','false');
+    }
+
+    function hideMenu(){
+        if(!menu) return;
+        menu.style.display = 'none';
+        menu.setAttribute('aria-hidden','true');
+    }
+
+    if(trigger){
+        trigger.addEventListener('click', function(e){
+            e.preventDefault();
+            if(menu.style.display === 'block'){
+                hideMenu();
+            } else {
+                openMenu();
+            }
+        });
+    }
+
+    document.addEventListener('click', function(e){
+        if(!menu || !trigger) return;
+        if(menu.style.display !== 'block') return;
+        if(!menu.contains(e.target) && !trigger.contains(e.target)){
+            hideMenu();
+        }
+    });
+
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape') hideMenu();
+    });
+
+    window.addEventListener('resize', function(){
+        if(menu && menu.style.display === 'block') openMenu();
+    });
+    window.addEventListener('scroll', function(){
+        if(menu && menu.style.display === 'block') openMenu();
+    }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In & Security - ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/general-settings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="../Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="../Archivehubs-Business/business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="../Archivehubs-Menu/menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+
+      <!-- Keep your existing navbar here -->
+
+    <div class="settings-container">
+        <div class="settings-card">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <div class="profile-image">
+                    <img src="images/profile.jpg" alt="Profile">
+                </div>
+            </div>
+
+            <div class="settings-content">
+                <!-- Left Sidebar -->
+                <div class="settings-sidebar">
+                    <a href="preference.html" class="sidebar-item">
+                        <i class="fas fa-user-cog"></i>
+                        <span>Account Preference</span>
+                    </a>
+                    <a href="sign-in.html" class="sidebar-item active">
+                        <i class="fas fa-lock" style="color: #92c83e;"></i>
+                        <span>Sign In & Security</span>
+                    </a>
+                    <a href="visibility.html" class="sidebar-item">
+                        <i class="fas fa-eye"></i>
+                        <span>Visibility</span>
+                    </a>
+                    <a href="data-privacy.html" class="sidebar-item">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Data Privacy</span>
+                    </a>
+                    <a href="advertising-data.html" class="sidebar-item">
+                        <i class="fas fa-ad"></i>
+                        <span>Advertising data</span>
+                    </a>
+                    <a href="settings.html" class="sidebar-item">
+                        <i class="fas fa-bell"></i>
+                        <span>Notification</span>
+                    </a>
+                </div>
+
+                <!-- Right Content Area -->
+                <div class="settings-main">
+                    <section class="settings-section">
+                        <h3>Account access</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span>Email addresses owners email</span>
+                            </div>
+                            <div class="setting-action">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span>Phone numbers</span>
+                            </div>
+                            <div class="setting-action">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span>Passkeys</span>
+                            </div>
+                            <div class="setting-action">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span>Change password</span>
+                            </div>
+                            <div class="setting-action">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span>Where you're signed in</span>
+                            </div>
+                            <div class="setting-action">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span>Devices that remember your password</span>
+                            </div>
+                            <div class="setting-action">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span>Two – step verification</span>
+                            </div>
+                            <div class="setting-action">
+                                <span>off</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+         <!-- Account Pop-up (ArchiveHubs-style) -->
+    <div id="accountPopupPanel" class="account-popup" style="display:none;">
+        <!-- Banner Cover Photo -->
+        <div class="account-popup-banner">
+          <img src="images/header.jpg" alt="Cover Photo" class="account-banner-img">
+        </div>
+        <!-- User Info -->
+        <div class="account-popup-userinfo">
+          <div class="account-popup-avatar">
+            <img src="images/profile.jpg" alt="User Profile Picture">
+          </div>
+          <div class="account-popup-username">User</div>
+          <button class="account-popup-dropdown"><i class="fa fa-chevron-down"></i></button>
+        </div>
+        <!-- View Profile Button -->
+        <div class="account-popup-view-profile-row">
+          <button class="account-popup-view-profile">View Profile</button>
+        </div>
+        <!-- Account Section -->
+        <div class="account-popup-section account-popup-account">
+          <div class="account-popup-account-title">Account</div>
+          <div class="account-popup-account-row highlight">
+            <div class="account-popup-account-icon">A</div>
+            <div class="account-popup-account-info">
+              <div class="account-popup-account-name">Archivehubs Explorer</div>
+              <div class="account-popup-premium"><a href="#">Try free Premium for 1 month</a></div>
+            </div>
+          </div>
+          <div class="account-popup-link">Planner (APS)</div>
+          <div class="account-popup-link">Archive Explorer</div>
+          <div class="account-popup-link">Archive Drive</div>
+          <div class="account-popup-link">General Terms</div>
+        </div>
+        <hr class="account-popup-divider">
+        <!-- Sign Out -->
+        <div class="account-popup-signout-row">
+          <button class="account-popup-signout">Sign Out</button>
+        </div>
+      </div>
+
+
+        <!-- Footer -->
+        <div class="settings-footer">
+            <div class="footer-links">
+                <a href="#">Get the Archive app</a>
+                <a href="#">General Terms</a>
+            </div>
+            <div class="footer-copyright">
+                <img src="images/hubs.jpg" alt="Logo" class="footer-logo">
+                <span class="copyright-text">ENINK Investment Limited © 2025</span>
+                <img src="images/company-name.jpg" alt="Verified" class="verified-badge">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+      const accountNavLink = document.getElementById('accountPopup');
+      const accountPopupPanel = document.getElementById('accountPopupPanel');
+    
+      if (accountNavLink && accountPopupPanel) {
+        accountNavLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Position the popup under the nav-link
+          const rect = accountNavLink.getBoundingClientRect();
+          accountPopupPanel.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+          accountPopupPanel.style.right = (window.innerWidth - rect.right - 8) + 'px';
+          accountPopupPanel.style.display = (accountPopupPanel.style.display === 'none' || accountPopupPanel.style.display === '') ? 'block' : 'none';
+        });
+        // Hide popup when clicking outside
+        document.addEventListener('mousedown', function(e) {
+          if (accountPopupPanel.style.display !== 'none' && !accountPopupPanel.contains(e.target) && !accountNavLink.contains(e.target)) {
+            accountPopupPanel.style.display = 'none';
+          }
+        });
+      }
+    });
+      </script>
+
+
+</body>
+</html>

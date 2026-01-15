@@ -1,0 +1,70 @@
+/* Additional styles for data privacy page */
+.settings-section {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.settings-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.9);
+    margin-bottom: 12px;
+    padding: 8px 0;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.setting-item:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.setting-info {
+    flex: 1;
+}
+
+.setting-info span {
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 14px;
+}
+
+.setting-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.setting-action span {
+    font-size: 14px;
+}
+
+.setting-action i {
+    font-size: 12px;
+}
+
+/* Active sidebar item */
+.sidebar-item.active {
+    color: #0a66c2;
+    background-color: rgba(10, 102, 194, 0.08);
+}
+
+/* Responsive container */
+.settings-container {
+    max-width: 1128px;
+    margin: 80px auto 24px;
+    padding: 0 20px;
+}
+
+.settings-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}

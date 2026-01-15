@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Listing | Business Marketplace</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/listing.css">
+    <link rel="stylesheet" href="css/business_insights.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="../Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="../Archivehubs-Notifications/notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="../Archivehubs-Menu/menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+        <div class="container">
+            <aside class="sidebar">
+                <div class="sidebar-top">
+                    <div class="sidebar-back">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span class="sidebar-marketplace">Archivehubs Business</span>
+                    </div>
+                    <div class="sidebar-title">Selling</div>
+                    <button class="sidebar-create-btn">
+                        <i class="fa-solid fa-plus"></i> Create new listing
+                    </button>
+                </div>
+                <nav class="sidebar-menu">
+                    <ul>
+                        <a href="business_seller_dashboard.html">
+                            <li class="menu-item">
+                                <span class="menu-icon"><i class="fa-solid fa-chart-bar"></i></span>
+                                <span class="menu-text">Seller dashboard</span>
+                            </li>
+                        </a>
+    
+                        <a href="your_listings.html">
+                            <li class="menu-item">
+                                <span class="menu-icon"><i class="fa-solid fa-location-arrow"></i></span>
+                                <span class="menu-text">Your listings</span>
+                            </li>
+                        </a>
+    
+                        <a href="business_listing_announcements.html">
+                            <li class="menu-item">
+                                <span class="menu-icon"><i class="fa-solid fa-bullhorn"></i></span>
+                                <span class="menu-text">Announcements</span>
+                            </li>
+                        </a>
+    
+                        <a href="insights.html">
+                            <li class="menu-item active">
+                                <span class="menu-icon"><i class="fa-solid fa-signal"></i></span>
+                                <span class="menu-text">Insights</span>
+                            </li>
+                        </a>
+    
+                        <a href="#" id="marketplaceProfileLink">
+                            <li class="menu-item">
+                                <span class="menu-icon"><i class="fa-regular fa-user"></i></span>
+                                <span class="menu-text">Marketplace profile</span>
+                            </li>
+                        </a>
+                    </ul>
+                </nav>
+                <button class="sidebar-manage-btn">Manage Listings</button>
+                <hr class="sidebar-divider">
+                <div class="sidebar-filters">
+                    <div class="filters-header">
+                        <span class="filters-title">Filters</span>
+                        <a href="#" class="filters-clear">Clear</a>
+                    </div>
+                    <div class="filters-group">
+                        <div class="filter-item filter-sortby">
+                            <span>Sort by</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                            <div class="filter-dropdown">
+                                <label class="dropdown-option active">
+                                    <span>Date listed: newest first</span>
+                                    <span class="custom-radio checked"></span>
+                                </label>
+                                <label class="dropdown-option">
+                                    <span>Date listed: Oldest first</span>
+                                    <span class="custom-radio"></span>
+                                </label>
+                                <label class="dropdown-option">
+                                    <span>Title (A – Z)</span>
+                                    <span class="custom-radio"></span>
+                                </label>
+                                <label class="dropdown-option">
+                                    <span>Title (Z – A)</span>
+                                    <span class="custom-radio"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="filter-item filter-statusby">
+                            <span>Status</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                            <div class="filter-dropdown">
+                                <label class="dropdown-option active">
+                                    <span>All</span>
+                                    <span class="custom-checkbox checked"></span>
+                                </label>
+                                <label class="dropdown-option">
+                                    <span>available and in stock</span>
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                                <label class="dropdown-option">
+                                    <span>sold and out of stock</span>
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                                <label class="dropdown-option">
+                                    <span>pending</span>
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                                <label class="dropdown-option">
+                                    <span>draft</span>
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <main class="main-content">
+                <div class="insights-card">
+                    <div class="insights-header-row">
+                        <span class="insights-header">Marketplace insights</span>
+                        <div class="insights-range-dropdown-wrapper">
+                            <button class="insights-range-btn">Last 7 days <i class="fa-solid fa-chevron-down"></i></button>
+                            <div class="insights-range-dropdown">
+                                <div class="dropdown-option active">7 days</div>
+                                <div class="dropdown-option">14 days</div>
+                                <div class="dropdown-option">30 days</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insights-stats">
+                        <div class="insight-card">
+                            <span class="insight-icon"><i class="fa-regular fa-eye"></i></span>
+                            <span class="insight-value">0</span>
+                            <span class="insight-label">Clicks on listings</span>
+                        </div>
+                        <div class="insight-card">
+                            <span class="insight-icon"><i class="fa-regular fa-bookmark"></i></span>
+                            <span class="insight-value">0</span>
+                            <span class="insight-label">Listing saves</span>
+                        </div>
+                        <div class="insight-card">
+                            <span class="insight-icon"><i class="fa-solid fa-share"></i></span>
+                            <span class="insight-value">0</span>
+                            <span class="insight-label">Listing shares</span>
+                        </div>
+                        <div class="insight-card">
+                            <span class="insight-icon"><i class="fa-regular fa-square-check"></i></span>
+                            <span class="insight-value">0</span>
+                            <span class="insight-label">Marketplace followers</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+    
+            <div id="profileModal" class="modal-overlay" style="display:none;">
+            <div class="modal-content">
+                <button class="close-btn" id="closeProfileModal">&times;</button>
+                <div class="profile-cover-container">
+                <div class="profile-cover"></div>
+                <div class="profile-pic-wrapper">
+                    <div class="profile-pic"></div>
+                </div>
+                </div>
+                <div class="profile-info profile-info-centered">
+                <h2>Joshua Mide</h2>
+                <p class="join-date">Joined Archivehubs in 2024</p>
+                </div>
+                <button class="message-btn message-btn-full" disabled>
+                <span>&#128172;</span> Message
+                </button>
+                <hr>
+                <div class="seller-ratings-section">
+                <strong>Seller ratings</strong>
+                <div class="stars-row">
+                    <span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span><span class="star">&#9734;</span>
+                </div>
+                <div class="no-ratings">No ratings</div>
+                <div class="ratings-note">(Visible to the public after 5 ratings. <a href="#" class="learn-more">Learn more</a>)</div>
+                </div>
+                <hr>
+                <div class="listings-section">
+                <div class="listings-header">
+                    <strong>Joshua's listings</strong>
+                    <div class="listings-desc">You can manage listings from <a href="#" class="your-listings-link">Your listings</a> page. Your listings in private groups may not be visible to buyers.</div>
+                </div>
+                <div class="listings-controls">
+                    <input type="text" class="search-listings" placeholder="Search listings">
+                    <button class="filter-btn">Available and in stock <span class="chevron">&#9662;</span></button>
+                    <button class="filter-btn">Sort by <span class="chevron">&#9662;</span></button>
+                </div>
+                <div class="no-listings">
+                    <div class="no-listings-illustration">
+                    <!-- Simple SVG illustration -->
+                    <svg width="120" height="100" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="60" cy="90" rx="40" ry="8" fill="#e4e6eb"/>
+                        <rect x="50" y="40" width="20" height="30" rx="4" fill="#b0b8c1"/>
+                        <rect x="65" y="60" width="10" height="20" rx="2" fill="#1877f2"/>
+                        <rect x="45" y="60" width="10" height="20" rx="2" fill="#1877f2"/>
+                        <circle cx="60" cy="35" r="12" fill="#e4e6eb"/>
+                        <rect x="80" y="60" width="6" height="18" rx="2" fill="#1877f2"/>
+                        <rect x="34" y="60" width="6" height="18" rx="2" fill="#1877f2"/>
+                    </svg>
+                    </div>
+                    <div class="no-listings-text">No listings found</div>
+                </div>
+                </div>
+            </div>
+            </div>
+    
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const dropdownWrapper = document.querySelector('.insights-range-dropdown-wrapper');
+                const dropdownBtn = dropdownWrapper.querySelector('.insights-range-btn');
+                const dropdown = dropdownWrapper.querySelector('.insights-range-dropdown');
+                const options = dropdown.querySelectorAll('.dropdown-option');
+    
+                // Toggle dropdown
+                dropdownBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownWrapper.classList.toggle('open');
+                });
+    
+                // Option click
+                options.forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        options.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        dropdownWrapper.classList.remove('open');
+                        // Optionally update button text here
+                        dropdownBtn.innerHTML = `Last ${option.textContent} <i class='fa-solid fa-chevron-down'></i>`;
+                    });
+                });
+    
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!dropdownWrapper.contains(e.target)) {
+                        dropdownWrapper.classList.remove('open');
+                    }
+                });
+            });
+            </script>
+        </div>
+    
+        <script>
+            // Dropdown interaction for 'Sort by' and 'Status'
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortByItem = document.querySelector('.filter-sortby');
+            const sortDropdown = sortByItem.querySelector('.filter-dropdown');
+            const sortChevron = sortByItem.querySelector('.fa-chevron-down');
+            const sortOptions = sortDropdown.querySelectorAll('.dropdown-option');
+    
+            const statusByItem = document.querySelector('.filter-statusby');
+            const statusDropdown = statusByItem.querySelector('.filter-dropdown');
+            const statusChevron = statusByItem.querySelector('.fa-chevron-down');
+            const statusOptions = statusDropdown.querySelectorAll('.dropdown-option');
+    
+            // Hide dropdowns by default
+            sortDropdown.style.display = 'none';
+            statusDropdown.style.display = 'none';
+    
+            // Toggle sort dropdown only on chevron click
+            sortChevron.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isOpen = sortByItem.classList.contains('open');
+                document.querySelectorAll('.filter-sortby.open, .filter-statusby.open').forEach(el => {
+                    el.classList.remove('open');
+                    el.querySelector('.filter-dropdown').style.display = 'none';
+                });
+                if (!isOpen) {
+                    sortByItem.classList.add('open');
+                    sortDropdown.style.display = 'block';
+                }
+            });
+    
+            // Toggle status dropdown only on chevron click
+            statusChevron.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isOpen = statusByItem.classList.contains('open');
+                document.querySelectorAll('.filter-sortby.open, .filter-statusby.open').forEach(el => {
+                    el.classList.remove('open');
+                    el.querySelector('.filter-dropdown').style.display = 'none';
+                });
+                if (!isOpen) {
+                    statusByItem.classList.add('open');
+                    statusDropdown.style.display = 'block';
+                }
+            });
+    
+            // Sort option click: update checked/active, do not close dropdown
+            sortDropdown.addEventListener('click', function(e) {
+                const option = e.target.closest('.dropdown-option');
+                if (option) {
+                    sortOptions.forEach(opt => {
+                        opt.classList.remove('active');
+                        opt.querySelector('.custom-radio').classList.remove('checked');
+                    });
+                    option.classList.add('active');
+                    option.querySelector('.custom-radio').classList.add('checked');
+                }
+            });
+    
+            // Status option click: update checked, allow multiple selections
+            statusDropdown.addEventListener('click', function(e) {
+                const option = e.target.closest('.dropdown-option');
+                if (option) {
+                    const checkbox = option.querySelector('.custom-checkbox');
+                    checkbox.classList.toggle('checked');
+                    option.classList.toggle('active');
+                }
+            });
+    
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!sortByItem.contains(e.target)) {
+                    sortByItem.classList.remove('open');
+                    sortDropdown.style.display = 'none';
+                }
+                if (!statusByItem.contains(e.target)) {
+                    statusByItem.classList.remove('open');
+                    statusDropdown.style.display = 'none';
+                }
+            });
+        });
+        </script>
+    
+        <script>
+            document.getElementById('marketplaceProfileLink').onclick = function(e) {
+            e.preventDefault();
+            document.getElementById('profileModal').style.display = 'flex';
+            };
+            document.getElementById('closeProfileModal').onclick = function() {
+            document.getElementById('profileModal').style.display = 'none';
+            };
+            window.onclick = function(event) {
+            var modal = document.getElementById('profileModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+            };
+        </script>
+    
+    </body>
+    </html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | ArchiveHubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .background-section {
+            background-color: #1877f2;
+            padding: 40px 0;
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .feedback-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .feedback-form {
+            max-width: 700px;
+            width: 100%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-header {
+            margin-bottom: 20px;
+        }
+        
+        .form-header p {
+            color: #333;
+            line-height: 1.5;
+            font-size: 18px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #fff;
+        }
+        
+        .form-control.select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2365676b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+        }
+        
+        .file-upload {
+            border: 1px dashed #ddd;
+            border-radius: 6px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .file-upload i {
+            font-size: 40px;
+            color: #1877f2;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload p {
+            color: #65676b;
+            margin-bottom: 0;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn-cancel {
+            background: #fff;
+            border: 1px solid #ddd;
+            color: #333;
+        }
+        
+        .btn-submit {
+            background: #1877f2;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-section"></div>
+    
+    <div class="feedback-container">
+        <div class="feedback-form">
+            <div class="form-header">
+                <p><strong>How can we improve?</strong><br>
+                Please give us feedback on how we can improve. If you need help solving a specific problem, please visit the Help Center.</p>
+            </div>
+            
+            <div class="form-group">
+                <label>Select a Topic</label>
+                <select class="form-control select">
+                    <option value="" selected disabled>Select a topic</option>
+                    <option value="ad-account">Ad Account Setting</option>
+                    <option value="ad-delivery">Ad Delivery</option>
+                    <option value="ad-type">Ad Type or Objectives</option>
+                    <option value="ads-manager">Ads Manager</option>
+                    <option value="ads-reporting">Ads Reporting</option>
+                    <option value="advertising-policies">Advertising Policies</option>
+                    <option value="billing">Billings & Payments</option>
+                    <option value="business-ai">Business AI</option>
+                    <option value="business-admin">Business Admin Center</option>
+                    <option value="business-manager">Business Manager & Home Page</option>
+                    <option value="creating-ads">Creating Ads</option>
+                    <option value="creative-hub">Creative Hub</option>
+                    <option value="editing-ads">Editing Ads</option>
+                    <option value="ads">Ads</option>
+                    <option value="creating-posts">Creating Posts</option>
+                    <option value="home">Home</option>
+                    <option value="inbox">Inbox</option>
+                    <option value="insights">Insights</option>
+                    <option value="viewing-posts">Viewing Posts</option>
+                    <option value="rights-manager">Rights Manager</option>
+                    <option value="measurement">Measurement Tools</option>
+                    <option value="media-library">Media Library</option>
+                    <option value="verifications">Archivehubs Verifications</option>
+                    <option value="verified">Archivehubs Verified for Buz</option>
+                    <option value="drive">Archivehubs Drive</option>
+                    <option value="notifications">Notifications</option>
+                    <option value="placements">Placements</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Select Topic Details</label>
+                <select class="form-control select">
+                    <option value="">Select topic details</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Please include as much info as possible</label>
+                <textarea class="form-control" rows="5" placeholder="Describe your feedback in detail"></textarea>
+            </div>
+            
+            <div class="file-upload">
+                <i class="fas fa-camera"></i>
+                <p>Add a screenshot or video (Recommended)</p>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-cancel">Cancel</button>
+                <button class="btn btn-submit">Send Feedback</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const topicDetails = {
+            'ad-account': ['Ad Account', 'Pages', 'Other'],
+            'ad-delivery': ['Delivery Changes', 'No Delivery', 'Over Spend', 'Under Delivery', 'Others'],
+            'ad-type': ['Catalog Sales', 'Advantage + Catalog Ads', 'Travel Campaigns', 
+                       'Instant Experience', 'Lead Ad', 'Offline Conversation', 'Reservation Buying'],
+            'ads-manager': ['Loading and Performance', 'Navigation and Functionality', 'Other'],
+            'ads-reporting': ['Advantage + Shopping Campaign Report', 'Benchmark Report', 
+                            'Breakdown Selector', 'Charts and Graph', 'Column Selector',
+                            'Messaging Ads Report', 'Exporting', 'Filters and Date Selector',
+                            'Loading', 'Metrics and Data', 'Scheduled and Saved Reports',
+                            'A/B Testing', 'Other'],
+            'advertising-policies': ['Disabled Account', 'Disapproved Ad', 'Fraudulent Activity', 'Other'],
+            'billing': ['Charges, Invoicing or Balance', 'Payments Methods', 'Spending Limits', 'Other'],
+            'business-ai': ['Landing Page', 'Import Knowledge', 'Review', 'Customization', 
+                          'Settings', 'Sandbox', 'Others'],
+            'business-admin': ['Claiming Business Account', 'Migrating People', 'IT setup tasks',
+                             'Creating work accounts', 'Third – Party Apps', 'Work account activation'],
+            'business-manager': ['Alerts', 'Ad account performance', 'Pages', 'Requests Received',
+                               'Invitations Sent', 'Recommendations'],
+            'creating-ads': ['Ad or Campaign Level', 'Audience and Targeting', 'Audience Insight',
+                           'Budget', 'Bulk Import', 'Create Button Dialogue', 'Creative',
+                           'Creative Hub', 'Editing', 'Objective', 'Placement Options',
+                           'Preview', 'Publishing', 'Schedule', 'Other'],
+            'creative-hub': ['Creating and saving New Mockups', 'Using Existing Mockups in Ads Manager',
+                            'Editing Existing Mockups', 'Old Version of Creative Hub', 'Other'],
+            'editing-ads': ['Audience and Targeting', 'Budget', 'Bulk Import', 'Creative',
+                           'Objective', 'Placement Options', 'Preview', 'Publishing',
+                           'Schedule', 'Other'],
+            'ads': ['Create an Ad', 'Ad delivery', 'Other'],
+            'creating-posts': ['Placement', 'Adding Media', 'Preview', 'Scheduling Posts', 'Other'],
+            'home': ['Insights', 'Updates', 'Recent ads', 'Recent posts', 'Activity', 'Other'],
+            'inbox': ['Messaging', 'Email', 'Comments', 'Chat Plugins Setup', 'Automated Response',
+                     'Corporate Manger Chat', 'Other'],
+            'insights': ['Overview', 'Trends', 'Content', 'Audience', 'Other'],
+            'viewing-posts': ['Published Posts', 'Scheduled Posts', 'Boost Post', 
+                             'Post Details and Performance', 'Other'],
+            'rights-manager': ['Pixel', 'Measurement Tools', 'A/B Testing', 'Other'],
+            'media-library': ['Adding Media', 'Removing Media', 'Other'],
+            'verifications': ['Other'],
+            'verified': ['Verification', 'Payment', 'Benefits', 'Subscription Management', 'Other'],
+            'drive': ['Other'],
+            'notifications': ['Ads Notification', 'Business Notifications', 'Jobs Notifications',
+                             'Notification Settings', 'Pages Notifications', 'Other Notifications'],
+            'placements': ['Archivehubs Ads', 'Other'],
+            'other': ['Subscription Management', 'Other']
+        };
+
+        document.querySelector('select').addEventListener('change', function() {
+            const topicDetailsSelect = document.querySelectorAll('select')[1];
+            topicDetailsSelect.innerHTML = '<option value="">Select topic details</option>';
+            
+            if (this.value && topicDetails[this.value]) {
+                topicDetails[this.value].forEach(detail => {
+                    const option = document.createElement('option');
+                    option.value = detail.toLowerCase().replace(/\s+/g, '-');
+                    option.textContent = detail;
+                    topicDetailsSelect.appendChild(option);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

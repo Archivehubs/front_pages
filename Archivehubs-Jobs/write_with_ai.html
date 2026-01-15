@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archivehubs - Job Posting</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .top-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .logo-box img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .review-box {
+      border: 1px solid #000;
+      padding: 10px;
+      width: 280px;
+      text-align: center;
+    }
+
+    .animated-text {
+      font-size: 14px;
+      color: #444;
+      animation: fadeIn 3s infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .content {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .content-text {
+      flex: 2;
+      min-width: 250px;
+    }
+
+    .content-text h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .content-text p {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    .illustration {
+      flex: 1;
+      text-align: right;
+      min-width: 200px;
+    }
+
+    .illustration img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .highlight {
+      margin-top: 20px;
+    }
+
+    .highlight h3 {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .footer a {
+      color: #0066cc;
+      margin: 0 5px;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .company {
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    /* 📱 Mobile responsiveness */
+    @media (max-width: 768px) {
+      .top-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .review-box {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .content {
+        flex-direction: column;
+      }
+
+      .illustration {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+      .content-text h2 {
+        font-size: 18px;
+      }
+
+      .highlight h3 {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px;
+      }
+
+      .content-text h2 {
+        font-size: 16px;
+      }
+
+      .footer {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Section -->
+    <div class="top-section">
+      <div class="logo-box">
+        <img src="images/Logo.jpg" width="50" height="50">
+        <!-- <img src="https://img.icons8.com/color/96/teamwork--v1.png" alt="logo"> -->
+      </div>
+      <div class="review-box">
+        <p><strong><a href="#">Review job Description</a></strong></p>
+        <p class="animated-text">Review job Description<br>And<br>Post a job now<br>Also Write with AI</p>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="content-text">
+        <h2>Posting a job just became easier</h2>
+        <p>Draft your job description in one click using skills insights from ArchiveHub’s member base.</p>
+        <p>Target qualified applicants for your role using recommended must-have qualifications.</p>
+        <p>Get 3x more qualified applicants when you promote your job.</p>
+      </div>
+      <div class="illustration">
+        <img src="images/team work.jpeg" alt="team illustration">
+      </div>
+    </div>
+
+    <!-- Highlight -->
+    <div class="highlight">
+      <h3>Rated #1 in increasing quality of hire<sup>1</sup></h3>
+      <p>Post your job on the world’s largest professional network and use simple tools to prioritize the most qualified candidates so you can find the people you want to interview, faster.</p>
+      <small><sup>1</sup>Versus leading competitors.</small>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <a href="#">Get the Archivehubs App</a> | 
+      <a href="#">General Terms</a>
+      <div class="company">
+        ARCHIVEHUBS: ENINK Investment Limited © 2025 <strong>RC1741345</strong>
+        <img src="images/enink.png" width="50" height="20">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Animated text cycle
+    const texts = [
+      "Review job Description",
+      "Post a job now",
+      "Also Write with AI"
+    ];
+
+    let index = 0;
+    const animatedText = document.querySelector(".animated-text");
+
+    setInterval(() => {
+      animatedText.textContent = texts[index];
+      index = (index + 1) % texts.length;
+    }, 2500);
+  </script>
+</body>
+</html>

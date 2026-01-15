@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Corporate Portfolio | archivehubs </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/profile_view.css">
+  
+
+</head>
+<body>
+    <div class="profile-container">
+        <div class="main-content">
+            <!-- Profile Header Section -->
+            <div class="card profile-header">
+                <div class="profile-banner">
+                    <img id="bannerImage" src="images/post-example.jpg" alt="Profile Banner">
+                    
+                    <div class="banner-upload-icon" onclick="document.getElementById('bannerUpload').click();">
+                        <i class="fas fa-camera"></i>
+                    </div>
+
+                    <!-- Hidden file input -->
+                    <input type="file" id="bannerUpload" accept="image/*" style="display: none;" onchange="previewBanner(this)">
+                </div>
+                <div class="profile-info-top">
+                    <img src="images/corporate_education.png" alt="David James" class="profile-picture">                    
+                </div>
+                <div class="profile-details">
+                    <h1>Maven International School</h1>
+                    <p class="title">Educational Institution</p>
+                    <p class="location-connections">Kaduna, State · <a href="#">Contact info</a></p>
+                    <p class="connections">2500+ connections</p>
+                    <div class="header-buttons">
+                        <button class="primary-button" id="openToMainBtn">Open to</button>
+                        <button class="secondary-button">Add portfolio section</button>
+                        <button class="secondary-button">Enhance portfolio</button>
+                        <button class="secondary-button">Resources</button>
+                    </div>
+                    
+                    <!-- Open To Dropdown -->
+                    <div class="open-to-dropdown" id="openToDropdown">
+                        <div class="dropdown-item">
+                            <h4>Show recruiters you're open to work</h4>
+                            <p>You control who sees this</p>
+                            <button class="get-started-btn">Get Started</button>
+                        </div>
+                        <div class="dropdown-item">
+                            <h4>Share that you're hiring</h4>
+                            <p>Attract qualified candidates</p>
+                            <button class="get-started-btn">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggested for You Section -->
+            <div class="card suggested-section">
+                <h2>Suggested for you</h2>
+                <p class="private-to-you"><i class="fas fa-eye"></i> Private to you</p>
+                <div class="suggested-cards">
+                    <div class="suggested-card">
+                        <p>Suggestions based on owner's profile and activities including premium suggestions</p>
+                    </div>
+                    <div class="suggested-card">
+                        <p>Suggestions based on owners profile and activities including premium suggestions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div class="card analytics-section">
+                <div class="section-header">
+                    <h2>Analytics</h2>
+                    <p class="private-to-you"><i class="fas fa-eye"></i> Private to you</p>
+                </div>
+                <div class="analytics-grid">
+                    <div class="analytic-item">
+                        <i class="fas fa-users"></i>
+                        <h3>No. of Profile view</h3>
+                        <p>Discover who's viewed your profile</p>
+                    </div>
+                    <div class="analytic-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>No. of Post impressions</h3>
+                        <p>Start a post to increase engagement duration</p>
+                    </div>
+                    <div class="analytic-item">
+                        <i class="fas fa-search"></i>
+                        <h3>Search appearance</h3>
+                        <p>See how often you appear in search results</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all analytics <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- About Section -->
+            <div class="card about-section">
+                <div class="section-header">
+                    <h2>About</h2>
+                    <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                </div>
+                <p class="about-text">Portfolio Narration</p>
+            </div>
+
+            <!-- Activity Section -->
+            <div class="card activity-section">
+                <div class="section-header">
+                    <h2>Activity</h2>
+                    <div class="header-actions">
+                        <button class="create-post-btn"><i class="fas fa-pencil-alt"></i> Create a post</button>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="activity-tabs">
+                    <button class="active">Posts</button>
+                    <button>Comments</button>
+                </div>
+                <p class="activity-text">Owner's post and shares</p>
+                <a href="#" class="show-all">Show all posts <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+
+            <!-- Corporate Snapshot Section -->
+<div class="card corporate-snapshot-section">
+    <div class="section-header">
+        <h2>Corporate Snapshot</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="corporate-snapshot-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Company" class="org-image-small">
+        <div class="corporate-snapshot-details">
+            <h3>Company Overview</h3>
+            <p class="vision-mission">Vision, Mission & Core Competencies</p>
+            <p class="quick-facts">Quick facts: Founding Year, Staff size, HQ, etc</p>
+        </div>
+    </div>
+</div>
+
+<!-- Core Services / Capability Section -->
+<div class="card core-services-section">
+    <div class="section-header">
+        <h2>Core Services / Capability</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="core-services-content flex-org-image">
+        <img src="images/Company Logo.png" alt="Core Services" class="org-image-small">
+        <div>
+            <p>Description of main services or areas of expertise</p>
+            <p>Technical or specialized skills</p>
+            <p>Tools, platforms, or methodologies used</p>
+            <p>Industry focus or sector-specific capabilities</p>
+        </div>
+    </div>
+</div>
+
+<!-- Portfolio of Work / Project Section -->
+<div class="card portfolio-section">
+    <div class="section-header">
+        <h2>Portfolio of Work / Project</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="portfolio-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Project" class="org-image-small">
+        <div class="portfolio-details">
+            <h3>Project Title</h3>
+            <p class="client">Client Name</p>
+            <p class="industry">Industry / Sector</p>
+            <p class="date">Date / Duration</p>
+            <p class="objectives">Objectives / Client Brief, etc</p>
+        </div>
+    </div>
+</div>
+
+<!-- Team / Expertise Highlights Section -->
+<div class="card team-expertise-section">
+    <div class="section-header">
+        <h2>Team / Expertise Highlights</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="team-expertise-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Team" class="org-image-small">
+        <div class="team-expertise-details">
+            <h3>Profile of Key Personnel</h3>
+            <p class="certifications">Certifications and qualifications</p>
+            <p class="capabilities">Team capabilities or departmental strengths</p>
+        </div>
+    </div>
+</div>
+
+<!-- Key Clients / Partners Section -->
+<div class="card key-clients-section">
+    <div class="section-header">
+        <h2>Key Clients / Partners</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="client-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Client" class="org-image-small">
+        <div class="client-details">
+            <h3>Name of Notable client</h3>
+            <p class="testimonials">Testimonials</p>
+            <p class="partnership">Repeat clients or long-term partnership</p>
+            <button class="show-testimonials-btn"><i class="fas fa-comment"></i> Show Testimonials</button>
+        </div>
+    </div>
+    <div class="client-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Client" class="org-image-small">
+        <div class="client-details">
+            <h3>Name of Notable client</h3>
+            <p class="testimonials">Testimonials</p>
+            <p class="partnership">Repeat clients or long-term partnership</p>
+            <button class="show-testimonials-btn"><i class="fas fa-comment"></i> Show Testimonials</button>
+        </div>
+    </div>
+    <a href="#" class="show-all">Show all Market and Client Base <i class="fas fa-arrow-right"></i></a>
+</div>
+
+<!-- Awards, Certifications, and Recognitions Section -->
+<div class="card awards-section">
+    <div class="section-header">
+        <h2>Awards, Certifications, and Recognitions</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="award-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Award" class="org-image-small">
+        <div class="award-details">
+            <h3>Key Accomplishments / Major Project Completed</h3>
+            <p class="awards">Awards & Certifications</p>
+            <p class="organization">Name of organization</p>
+            <p class="date">Issued date</p>
+            <p class="credential">Credential ID</p>
+            <button class="show-credential-btn"><i class="fas fa-certificate"></i> Show credential</button>
+        </div>
+    </div>
+    <div class="award-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Award" class="org-image-small">
+        <div class="award-details">
+            <h3>Key Accomplishments / Major Project Completed</h3>
+            <p class="awards">Awards & Certifications</p>
+            <p class="organization">Name of organization</p>
+            <p class="date">Issued date</p>
+            <p class="credential">Credential ID</p>
+            <button class="show-credential-btn"><i class="fas fa-certificate"></i> Show credential</button>
+        </div>
+    </div>
+    <a href="#" class="show-all">Show all Achievements and Milestones <i class="fas fa-arrow-right"></i></a>
+</div>
+
+<!-- Tools, Technologies and Methodologies Section -->
+<div class="card tools-section">
+    <div class="section-header">
+        <h2>Tools, Technologies and Methodologies</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="tools-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Tools" class="org-image-small">
+        <div class="tools-details">
+            <h3>Software / tools regularly used</h3>
+            <p class="processes">Proprietary processes or innovation approaches</p>
+            <p class="stacks">Tech stacks, design frameworks, or logistic systems</p>
+        </div>
+    </div>
+    <a href="#" class="show-all">Show all Tools <i class="fas fa-arrow-right"></i></a>
+</div>
+
+<!-- Financial Highlights Section -->
+<div class="card financial-section">
+    <div class="section-header">
+        <h2>Financial Highlights</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="financial-content">
+        <p>Revenue trends</p>
+        <p>Profitability</p>
+        <p>Key financial ratios or performance indicators</p>
+    </div>
+    <a href="#" class="show-all">Show all Financial Highlights <i class="fas fa-arrow-right"></i></a>
+</div>
+
+<!-- Future plans / Strategic Goals Section -->
+<div class="card future-plans-section">
+    <div class="section-header">
+        <h2>Future plans / Strategic Goals</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="future-plans-content">
+        <p>Short and long-term growth strategies</p>
+        <p>Innovation plans or expansion goals</p>
+    </div>
+</div>
+
+<!-- Case Studies or Deep Dives Section -->
+<div class="card case-studies-section">
+    <div class="section-header">
+        <h2>Case Studies or Deep Dives</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="case-studies-content">
+        <p>More detailed breakdown of 1-3 landmark projects</p>
+        <p>Success metrics, timelines, budgets</p>
+    </div>
+</div>
+
+<!-- Client Testimonials Section -->
+<div class="card testimonials-section">
+    <div class="section-header">
+        <h2>Client Testimonials</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="testimonial-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Testimonial" class="org-image-small">
+        <div class="testimonial-details">
+            <p class="quote">"Quotes from satisfied clients"</p>
+            <p class="reference">Content or reference to the project they relate to</p>
+        </div>
+    </div>
+    <a href="#" class="show-all">Show all Testimonials <i class="fas fa-arrow-right"></i></a>
+</div>
+
+<!-- Publications Section -->
+<div class="card publications-section">
+    <div class="section-header">
+        <h2>Publications</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="publication-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Publication" class="org-image-small">
+        <div class="publication-details">
+            <h3>Title</h3>
+            <p class="author">Author</p>
+            <p class="description">Description of Topic</p>
+            <p class="status">Status</p>
+            <p class="date">Date of Publication</p>
+        </div>
+    </div>
+</div>
+
+<!-- Contact & Links Section -->
+<div class="card contact-links-section">
+    <div class="section-header">
+        <h2>Contact & Links</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="contact-links-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Contact" class="org-image-small">
+        <div class="contact-links-details">
+            <h3>Corporate Data</h3>
+            <p class="name">Name</p>
+            <p class="email">Professional Email</p>
+            <p class="phone">Phone</p>
+            <p class="profile">Archivehubs Profile Link</p>
+            <p class="other-links">Other Links and more</p>
+        </div>
+    </div>
+</div>
+
+<!-- Appendices Section -->
+<div class="card appendices-section">
+    <div class="section-header">
+        <h2>Appendices</h2>
+        <div class="header-actions">
+            <i class="fas fa-plus icon-button"></i>
+            <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+        </div>
+    </div>
+    <div class="appendices-item flex-org-image">
+        <img src="images/Company Logo.png" alt="Appendices" class="org-image-small">
+        <div class="appendices-details">
+            <p class="item">Press Mentions</p>
+            <p class="item">Whitepapers or Brochures</p>
+            <p class="item">Legal documents or compliance data</p>
+        </div>
+    </div>
+    <a href="#" class="show-all">Show all Appendices <i class="fas fa-arrow-right"></i></a>
+</div>
+
+
+         
+            <!-- Interests Section -->
+            <div class="card interests-section">
+                <div class="section-header">
+                    <h2>Interests</h2>
+                </div>
+                <div class="interest-tabs">
+                    <button class="active">Top voices</button>
+                    <button>Companies</button>
+                    <button>Group</button>
+                    <button>Newsletters</button>
+                    <button>Schools</button>
+                </div>
+                <div class="interest-items">
+                    <div class="interest-item flex-org-image">
+                        <img src="images/Company Logo.png" alt="Top Voice" class="org-image-small">
+                        <div class="interest-details">
+                            <h3>David J. Malan</h3>
+                            <p class="description">Professor of Computer Science at Harvard</p>
+                            <p class="followers">1.2M followers</p>
+                            <button class="following-btn"><i class="fas fa-check"></i> Following</button>
+                        </div>
+                    </div>
+                    <div class="interest-item flex-org-image">
+                        <img src="images/Company Logo.png" alt="Top Voice" class="org-image-small">
+                        <div class="interest-details">
+                            <h3>Satya Nadella</h3>
+                            <p class="description">CEO at Microsoft</p>
+                            <p class="followers">5.7M followers</p>
+                            <button class="following-btn"><i class="fas fa-check"></i> Following</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all Top Voices <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <p class="copyright">Get the Archivehubs App General Terms
+                    ARCHIVEHUBS: ENINK Investment Limited © 2025</p>
+        </div>
+
+        <!-- Right Sidebar -->
+         <div class="right-sidebar">
+            <div class="card sidebar-card profile-language">
+                <h2>Profile language</h2>
+                <p>English</p>
+            </div>
+
+            <div class="card sidebar-card public-profile-url">
+                <h2>Public Profile & URL</h2>
+                <a href="#">www.Archivehubs.com/in/name-0000000/</a>
+                <i class="fas fa-pencil-alt icon-button"></i>
+            </div>
+
+            <div class="card sidebar-card target-audiences">
+                <!-- <img src="https://i.ibb.co/q5kY3mJ/profile-pic.png" alt="Profile" class="ad-profile-pic"> -->
+                <!-- <i class="fas fa-star premium-star"></i> -->
+                <h3> Maximize business growth on Archivehubs Ads a platform built for B2B      </h3>
+                <button class="get-started-btn">Get started</button>
+            </div>
+
+            <div class="card sidebar-card who-viewed">
+                <h2>Add to your network</h2>
+                <div class="viewer-item">
+                    <img src="images/profile-2.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Gabriel Danladi<span class="dot">·</span> <span class="follow-status">2nd</span></h3>
+                        <p class="viewer-title">Software Engineer | AI, SE Akemi | Co-founding...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <div class="viewer-item">
+                    <img src="images/profile-3.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Sarah Essan</h3>
+                        <p class="viewer-title">Executive Assistant | Expert in Elaborat...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <div class="viewer-item">
+                    <img src="images/profile-1.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Julie Daniel</h3>
+                        <p class="viewer-title">Executive Assistant | Expert in Elaborat...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card sidebar-card people-you-may-know">
+                <h2>Connections you may want</h2>
+                <div class="person-item">
+                    <img src="images/profile-2.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Kingsley Mokena</h3>
+                        <p class="person-title">Data Science Student at ALX</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-1.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Melvin A.</h3>
+                        <p class="person-title">Aspiring Backend | Cloud Architect | Passionate abou...</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-3.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Felix Alabama</h3>
+                        <p class="person-title">Bio economics | Data Scientist | AWS Certified | Cloud...</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                 <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+             <div class="card sidebar-card people-you-may-know">
+                <h2>Your viewers also viewed</h2>
+                <div class="person-item">
+                    <img src="images/profile-2.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Kingsley Mokena</h3>
+                        <p class="person-title">Data Science Student at ALX</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-1.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Melvin A.</h3>
+                        <p class="person-title">Aspiring Backend | Cloud Architect | Passionate abou...</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-3.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Felix Alabama</h3>
+                        <p class="person-title">Bio economics | Data Scientist | AWS Certified | Cloud...</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                 <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>          
+
+        </div>
+    </div>
+
+    <!-- Modals will be inserted here by JavaScript -->
+    <script src="js/private_corporate_portfolio.js"></script>
+    
+
+   
+</body>
+</html>

@@ -1,0 +1,538 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.left-column {
+    flex: 2;
+    position: relative;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card Styles */
+.card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 16px;
+    position: relative;
+}
+
+/* First Card Styles */
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 15px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #000000; /* Black brand color */
+}
+
+.search-containers{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.search-box-wrapped {
+    position: relative;
+    flex-grow: 1;
+}
+
+.search-icons {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    z-index: 1;
+}
+
+.search-boxx {
+    flex-grow: 1;
+    padding: 8px 12px;
+    padding-left: 40px; 
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    min-width: 150px;
+}
+
+.icons {
+    display: flex;
+    gap: 12px;
+}
+
+.icon {
+    font-size: 20px;
+    color: #000000; /* Black brand color */
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.icon:hover {
+    color: #333;
+}
+
+.divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 12px 0;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+/* Filter Tags */
+.filter-tag {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #000000; /* Black brand color */
+    border: 1px solid #ddd;  /* Gray border for all */
+
+}
+
+.filter-tag:hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-tag.active {
+    background-color: #000000; /* Black brand color */
+    color: #ffd700; /* Yellow brand color */
+    border-color: #000000;
+    font-weight: 600;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Active states */
+.message-row.active {
+    background-color: #f0f8ff;
+    border-radius: 8px;
+}
+
+/* Dropdown styles */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px;
+    padding: 8px 0;
+}
+
+.dropdown-content div {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+/* Dropdown icon rotation */
+.dropdown-icon {
+    transition: transform 0.2s ease;
+}
+
+.dropdown-content div:hover {
+    background-color: #f5f5f5;
+}
+
+.filter-vertical {
+    display: flex; 
+    flex-direction: column;
+    position: relative;
+    background-color: white;
+    z-index: 1;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 8px 0;
+}
+
+/* Hover states */
+.messaging-management-item:hover, 
+.promo-actions-item:hover,
+.filter-vertical-item:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+.message-row:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.action-button, .start-button {
+    background-color: #ffd700; /* Yellow brand color */
+    color: #000000; /* Black brand color */
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.action-button:hover, .start-button:hover {
+    background-color: #e6c300;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Second Card Styles */
+.card-container {
+    display: flex;
+}
+
+.messages-column {
+    flex: 1;
+    padding-right: 16px;
+}
+
+.promo-column {
+    flex: 1;
+    padding-left: 16px;
+    border-left: 1px solid #eee;
+    position: relative;
+}
+
+.message-row {
+    display: flex;
+    position: relative;
+    padding: 12px 0;
+    align-items: flex-start;
+    transition: all 0.2s ease;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.message-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #000000; /* Black brand color */
+}
+
+.message-subtext {
+    font-size: 14px;
+    color: #666;
+}
+
+.message-date {
+    font-size: 13px;
+    color: #ffd700; /* Yellow brand color */
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.promo-content {
+    position: relative;
+}
+
+.promo-icons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.promo-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #000000; /* Black brand color */
+}
+
+.sponsor-apply-button {
+    position: absolute;
+    right: 0;
+    margin-right: 230px;
+    margin-top: 210px;
+}
+
+.write-up {
+    text-align: center;
+    margin: 20px 0;
+    font-style: italic;
+    color: #666;
+    margin-right: 40px;
+    margin-top: 90px;
+
+}
+
+.message-divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 12px 0;
+}
+
+/* Ad Card Styles */
+.ad-card {
+    text-align: center;
+    padding: 20px;
+}
+
+.ad-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+.ad-title-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ad-title {
+    font-weight: 600;
+    color: #000000; /* Black brand color */
+}
+
+.ad-content {
+    margin-bottom: 16px;
+}
+
+.ad-profile-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px auto;
+}
+
+/* Footer Styles */
+.footer-text {
+    text-align: center;
+    font-size: 15px;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 5px;
+    padding: 0 16px;
+}
+
+/* Bottom Card Styles */
+.bottom-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-top: 100px;
+    position: relative;
+}
+
+.bottom-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.bottom-card-profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.bottom-card-title {
+    font-weight: 600;
+    flex-grow: 1;
+    color: #000000; /* Black brand color */
+}
+
+.bottom-card-icons {
+    display: flex;
+    gap: 12px;
+}
+
+/* Horizontal Cards Container */
+.horizontal-cards-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.filter-card, .messaging-management-card, .promo-actions-card {
+    flex: 1;
+}
+
+/* Focused Card Styles */
+.filter-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.filter-dropdown-icon {
+    margin-left: auto;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.filter-vertical-item {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #000000; /* Black brand color */
+}
+
+.filter-vertical-item:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown-icon {
+    color: #000000; /* Black brand color */
+}
+
+/* Messaging Management Card Styles */
+.messaging-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.messaging-management-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000; /* Black brand color */
+}
+
+.messaging-management-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.messaging-management-item {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Promotional Actions Card Styles */
+.promo-actions-card {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 250px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.promo-actions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.promo-actions-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000; /* Black brand color */
+}
+
+.promo-actions-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.promo-actions-item {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.promo-actions-item:hover {
+    background-color: #f0f0f0;
+}
+
+/* Focused card dropdown styles */
+.focused-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 100;
+    margin-top: 8px;
+    width: 200px;
+    display: none;
+}
+
+.filter-vertical-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.filter-vertical-item:hover {
+    background-color: #f0f0f0;
+}

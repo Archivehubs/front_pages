@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write Job Description - ArchiveHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .profile img {
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .content-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .job-description-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card-subheader {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .formatting-tools {
+            display: flex;
+            gap: 15px;
+            margin-right: 40px;
+        }
+
+        .format-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        .format-button:hover {
+            color: #0a66c2;
+        }
+
+        .template-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-icon {
+            color: #0a66c2;
+            font-size: 16px;
+        }
+
+        .clear-template {
+            color: #0a66c2;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .clear-template:hover {
+            text-decoration: underline;
+        }
+
+        .description-textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            line-height: 1.6;
+            resize: vertical;
+            white-space: pre-wrap;
+        }
+
+        .description-textarea:focus {
+            outline: none;
+            border-color: #0a66c2;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #0a66c2;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #084d94;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #0a66c2;
+            border: 1px solid #0a66c2;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f7ff;
+        }
+
+        /* Remove text decoration from links inside buttons */
+        .btn a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Footer Styles */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-item {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer-item.blue-text {
+            color: #0a66c2;
+            font-weight: 600;
+        }
+
+        .footer-item strong {
+            color: #333;
+        }
+
+        .sup-logo {
+            vertical-align: middle;
+            margin-left: 5px;
+            height: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="menu-container">
+        <div class="logo">
+            <img src="images/Logo.jpg" alt="ArchiveHub Logo">
+        </div>
+        
+        <div class="profile">
+            <img src="images/profile.png" alt="User Profile">
+        </div>
+    </nav>
+
+    <div class="content-container">
+        <h1>Enter your job description</h1>
+        
+        <div class="job-description-card">
+            <div class="card-header">Job description</div>
+            <div class="card-subheader">This will be visible to anyone who views your job post.</div>
+            
+            <div class="toolbar">
+                <div class="formatting-tools">
+                    <button class="format-button" title="Bold"><i class="fas fa-bold"></i></button>
+                    <button class="format-button" title="Italic"><i class="fas fa-italic"></i></button>
+                    <button class="format-button" title="Bullet List"><i class="fas fa-list-ul"></i></button>
+                    <button class="format-button" title="Numbered List"><i class="fas fa-list-ol"></i></button>
+                </div>
+                
+                <div class="template-info">
+                    <i class="fas fa-info-circle info-icon"></i>
+                    <span>We added a template to help you.</span>
+                    <span class="clear-template">Clear</span>
+                </div>
+            </div>
+            
+            <textarea class="description-textarea" id="job-description">The ideal candidate will excel in both strategic and executional areas in order to implement initiatives to better the organization. In order to succeed, this candidate should feel comfortable taking on a range of responsibilities including hiring and training, implementing programs, and acting as the leader for the organization.
+
+Responsibilities
+• Help lead efforts to launch new programs and grow the organization
+• Ensure that an annual budget is created and followed
+• Ability to lead the career development of self and others by attracting and retaining high performing talent
+• Communicate and direct organization's conversations around priorities, goals, and organization improvement areas
+
+Qualifications
+• Bachelor's degree or equivalent in related area
+• 5+ years' of management experience
+• Ability to travel</textarea>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="confirm_job_post.html" class="btn btn-primary">Continue</a>
+            <a href="job_posting.html" class="btn btn-secondary">Go Back</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-item"><strong>General Terms</strong></div>
+            <div class="footer-item blue-text">Get the Archivehubs App</div>
+            <div class="footer-item"><strong>ARCHIVEHUBS: ENINK Investment</strong></div>
+            <div class="footer-item"><strong>Limited © 2025</strong><sup><img src="images/enink.png" alt="Logo" class="sup-logo"></sup></div>
+        </div>
+    </footer>
+
+    <script>
+        // Formatting tools functionality
+        document.querySelectorAll('.format-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Add actual formatting functionality here
+                alert('Formatting feature would be implemented here');
+            });
+        });
+
+        // Clear template functionality
+        document.querySelector('.clear-template').addEventListener('click', function() {
+            document.querySelector('.description-textarea').value = '';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Reader Guide</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        body {
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .purpose {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .purpose h2 {
+            margin: 0 auto 5px;
+        }
+
+        .purpose p {
+            margin: 0 auto 5px;
+            padding: 0;
+        }
+
+        /*Hero Section*/
+        .hero {
+            background: #f8f9fa;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero img {
+            height: 60px;
+            width: 60px;
+            object-fit: cover;
+            padding: 0;
+            margin: 0;
+        }
+
+        .hero h1 {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+            margin-top: 3px;
+            font-weight: 700;
+        }
+
+        /*feature section*/
+        .featureSection {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .featureSection h2 {
+            color: black;
+            opacity: 0.9;
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .featureSection h2 .material-symbols-outlined {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .featureSection.active h2 .material-symbols-outlined {
+            transform: rotate(90deg);
+        }
+
+        .featureList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 20px;
+            transition: max-height 0.5s ease-out, opacity 0.4;
+
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .featureSection.active .featureList {
+            max-height: 1000px;
+            opacity: 1;
+            padding-top: 10px;
+        }
+
+        .featureItem {
+            display: flex;
+            align-items: flex-start;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e0f0ff;
+        }
+
+        .featureItem .material-symbols-outlined {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            line-height: 1;
+        }
+
+        .featureItem h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.2em;
+            color: #222;
+        }
+
+        .featureItem p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .featureItem a{
+            text-decoration: none;
+            transition: font-weight 0.2s ease;
+        }
+
+        .featureItem a:hover {
+            font-weight: bold;
+        }
+
+        /*table*/
+        .shortcutsTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        .shortcutsTable th, .shortcutsTable td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .shortcutsTable thead {
+            background-color: blue;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .shortcutsTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .shortcutsTable tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .shortcutsTable td:first-child {
+            font-weight: bold;
+        }
+
+        .shortcut-mono {
+            background-color: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /*fade*/
+        .grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+            grid-template-columns: repeat(2, minmax(300px, 1fr)); 
+        }
+
+        .gridLink {
+            height: 20rem;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .gridLink img {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            padding: 0;
+        }
+
+        .gridLink h3 {
+            margin: 5px;
+            padding: 0;
+        }
+
+        .gridLink p {
+            padding: 0 10px;
+            margin: 0 auto;
+        }
+
+        .gridLink a {
+            text-decoration: none;
+        }
+
+        .gridLink a:hover {
+            font-weight: bold;
+        }
+
+        /*footer*/
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            margin-top: auto;
+            padding-bottom: 5px;
+            background: #e9ecef;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            height: 70px;
+        }
+
+        .footerContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .containerTop {
+            display: flex;
+            color: #0000EE;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .containerTop p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .containerBottom {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .containerBottom p {
+            margin: 0;
+            font-size: clamp(0.6rem, 2vw, 1rem);
+        }
+
+        footer img {
+            height: 25px;
+            width: 80px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <a href="../home.html"><img src="images/Logo.jpg" alt="Archivehubs Logo" class="logo"></a>
+            <h1>Screen Reader Guide</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="purpose">
+            <h2>Purpose of this Guide</h2>
+            <p>
+                This guide helps visually impaired users to navigate Archivehubs.com 
+                using screen readers such as <strong>NVDA, JAWS, VoiceOver(macOS/iOS), TalkBack(Android)</strong>.
+            </p>
+        </div>
+
+        <section class="featureSection" id="GeneralNavigationTips">
+            <h2>
+                General Navigation Tips
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">keyboard_tab</span>
+                    <p>Use <span class="shortcut-mono">Tab</span> 
+                        to move between interactive elements (links, buttons, forms).
+                    </p>
+                </li>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">shift</span>
+                    <p>Use <span class="shortcut-mono">Shift + Tab</span> 
+                        to move backwards.
+                    </p>
+                </li>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">arrow_right_alt</span>
+                    <p>Use <span class="shortcut-mono">Arrow keys</span> 
+                        to navigate through text or menu lists.
+                    </p>
+                </li>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">space_bar</span>
+                    <p>Use <span class="shortcut-mono">Enter or Spacebar</span> 
+                        to activate buttons or open links.
+                    </p>
+                </li>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">h_mobiledata</span>
+                    <p>Use <span class="shortcut-mono">Heading Navigation  (H key)</span> 
+                        to jump between sections or page headings.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="mainSectionLandmarkRegion">
+            <h2>
+                Main Section & Landmark Regions
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                <p>
+                    Each major part of the site is labeled with 
+                    <strong>ARIA landmarks</strong> to improve 
+                    navigation:
+                </p>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">panorama</span>
+                    <div>
+                        <h3>Banner</h3>
+                        <p>
+                            Contains the logo, search bar, and navigation toggle.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">navigation</span>
+                    <div>
+                        <h3>Navigation</h3>
+                        <p>
+                            Main menu including Home, Drive, MyConnections, 
+                            Monetization Hub, and Settings
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">content_paste</span>
+                    <div>
+                        <h3>Main Content</h3>
+                        <p>
+                            Displays page-specific content (feeds, 
+                            files, messages etc.).
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">view_sidebar</span>
+                    <div>
+                        <h3>Complementary (Sidebar)</h3>
+                        <p>
+                            Suggestions, notifications, or additional 
+                            features.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <span class="material-symbols-outlined">page_footer</span>
+                    <div>
+                        <h3>Footer</h3>
+                        <p>
+                            Includes help, terms, privacy links, and social media.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="keyboardShortcuts">
+            <h2>
+                Common Keyboard Shortcuts (with Screen Readers)
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <div class="featureList">
+                <table class="shortcutsTable">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Shortcut (JAWS/NVDA)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td data-label="Action">Next Heading</td>
+                            <td data-label="Shortcut (JAWS/NVDA)">
+                                <span class="shortcut-mono">H</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td data-label="Action">Next Button</td>
+                            <td data-label="Shortcut (JAWS/NVDA)">
+                                <span class="shortcut-mono">B</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td data-label="Action">Next Link</td>
+                            <td data-label="Shortcut (JAWS/NVDA)">
+                                <span class="shortcut-mono">K/L</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td data-label="Action">Next List</td>
+                            <td data-label="Shortcut (JAWS/NVDA)">
+                                <span class="shortcut-mono">L</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td data-label="Action">Form Field</td>
+                            <td data-label="Shortcut (JAWS/NVDA)">
+                                <span class="shortcut-mono">F</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td data-label="Action">Table</td>
+                            <td data-label="Shortcut (JAWS/NVDA)">
+                                <span class="shortcut-mono">T</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td data-label="Action">Region/Landmark</td>
+                            <td data-label="Shortcut (JAWS/NVDA)">
+                                <span class="shortcut-mono">R</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td data-label="Action">Navigate by ARIA Landmark</td>
+                            <td data-label="Shortcut (JAWS/NVDA)">
+                                <span class="shortcut-mono">D</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="featureSection" id="homepage">
+            <h2>
+                Homepage
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Use <span class="shortcut-mono">Heading (H)</span> 
+                            to skip through recent uploads, recommendations, 
+                            and news.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Use <span class="shortcut-mono">Link (K or L)</span> 
+                            to explore file previews, user profiles, or CTA buttons 
+                            like "Upload" or "Share".
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="driveFileManagement">
+            <h2>
+                Drive & File Management
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Use <span class="shortcut-mono">Form (F)</span> 
+                            to access search input and filter tools.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Use <span class="shortcut-mono">Button (B)</span> 
+                            to locate actions like "Upload", "New folder", "Share", or 
+                            "Download".
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            File items are marked with 
+                            <span class="shortcut-mono">ARIA labels</span> 
+                            indicating type, size and last modified info.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="myConnections">
+            <h2>
+                MyConnections
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Navigate to team activity feeds, 
+                            messages, and shared files.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Voice prompts announce new messages, 
+                            mentions, or collaboration updates.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="monetizationHub">
+            <h2>
+                Monetization Hub
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Listen fro summaries of recent sales 
+                            downloads, or earnings.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Tables with <span class="shortcut-mono">sortable headers</span> 
+                            (e.g. "File", "Earnings", "Date") are screen reader-accessible.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="interactiveFeatures">
+            <h2>
+                Interactive Features
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Interctive charts, progress bars, and 
+                            notifications are labeled with 
+                             <span class="shortcut-mono">ARIA roles & descriptive text</span>.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            AI tagging and file categorization feedback are 
+                            announced during uploads.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="settingsProfile">
+            <h2>
+                Settings & Profile
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Navigate forms using 
+                            <span class="shortcut-mono">F</span> 
+                            and fill out personal, security, and affiliate settings.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            <span class="shortcut-mono">Dropdowns</span> 
+                            are accessible with keyboard arrows and Enter key.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="notificationActivity">
+            <h2>
+                Notifications & Activity
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Notifications are grouped with 
+                             <span class="shortcut-mono">list roles</span> 
+                            and described by type, sender, and timestamp.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Real-time updates are announced with 
+                            <span class="shortcut-mono">live region ARIA tags</span>.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="helpSupport">
+            <h2>
+                Help & Support
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Navigate to the 
+                             <span class="shortcut-mono">Help Center</span> 
+                            via the main footer or Settings.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Use <span class="shortcut-mono">Heading (H)</span> 
+                            to move through FAQ topics and <span class="shortcut-mono">Link (L)</span> 
+                            to open relevant answers.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="featureSection" id="accessibilitySupport">
+            <h2>
+                Accessibility Support
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </h2>
+            <ul class="featureList">
+                
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Report issues or request assistance at:  
+                             <a href="#">archivehubs.com/accessibility</a>.
+                        </p>
+                    </div>
+                </li>
+                <li class="featureItem">
+                    <div>
+                        <p>
+                            Toggle <span class="shortcut-mono">Hight Contrast Mode</span> 
+                            and <span class="shortcut-mono">Font Adjustments</span> via 
+                            <span class="shortcut-mono">Settings > Accessibility</span>.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="fadeIn">
+        <h2>For more information about our platform</h2>
+        <div class="grid">
+            <div class="gridLink">
+                <img src="Images/ArchiveHubsLogo.jpeg" alt="Banner">
+                <h3>Archivehubs Community</h3>
+                <p>The Archivehubs Community is a Centralized 
+                    Discussion Forums designed to facilitate 
+                    meaningful conversations, collaboration, 
+                    and knowledge sharing among users.
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="gridLink">
+                <img src="Images/ArchiveHubsLogo.jpeg" alt="Banner">
+                <h3>Corporate Page</h3>
+                <p>Corporate Page Archivehubs Corporate Pages 
+                    are for businesses, affiliates, brands, 
+                    organizations and public figures to 
+                    share updates and connect with people.
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="gridLink">
+                <img src="Images/ArchiveHubsLogo.jpeg" alt="Banner">
+                <h3>Pressroom</h3>
+                <p>Explore the latest Archivehubs news, updates, 
+                    and reports 
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="gridLink">
+                <img src="Images/ArchiveHubsLogo.jpeg" alt="Banner">
+                <h3>Partnering Models</h3>
+                <p>Find up - to - date guideline on Archivehubs 
+                    partnering models. 
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            
+        </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footerContainer">
+            <div class="containerTop">
+                <p>Get the Archivehubs App</p>
+                <strong>General Terms</strong>
+            </div>
+            <div class="containerBottom">
+                <p>ARCHIVEHUBS: ENINK Investment Limited 2025 <strong>RC 1741345</strong></p>
+                <img src="Images/enninkBlack.jpeg" alt="Enink Trademark">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureSections = document.querySelectorAll('.featureSection h2');
+
+            featureSections.forEach(header => {
+                header.addEventListener('click', function() {
+                    const section = this.closest('.featureSection');
+                    section.classList.toggle('active');
+                });
+            });
+
+            
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started | Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 60px;
+            --sidebar-expanded-width: 240px;
+            --sidebar-bg: #000;
+            --main-bg: #f5f5f5;
+            --blue: #1877f2;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --primary-color: #4267B2;
+            --secondary-color: #E4E6EB;
+            --border-color: #CED0D4;
+            --background-light: #F0F2F5;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--main-bg);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px 0;
+            gap: 20px;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .sidebar:hover {
+            width: var(--sidebar-expanded-width);
+        }
+
+        .nav-item {
+            width: 100%;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            color: #b0b3b8;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .nav-text {
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            color: #b0b3b8;
+            font-weight: 500;
+        }
+
+        .sidebar:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sidebar .nav-item.active {
+            background-color: #ffd700;
+            color: #000000;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .sidebar .nav-item.active .nav-text {
+            color: #000000;
+        }
+
+        .sidebar .nav-item:hover {
+            background-color: #3a3b3c;
+            color: #ffffff;
+        }
+
+        .sidebar .nav-item:hover .nav-text {
+            color: #ffffff;
+        }
+
+        .sidebar .nav-item.active:hover {
+            background-color: #ffed4a;
+        }
+
+        .nav-item img {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            object-fit: cover;
+            filter: brightness(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item i {
+            width: 24px;
+            font-size: 14px;
+            margin-right: 12px;
+            text-align: center;
+        }
+
+        .nav-item:hover img {
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        .nav-item.active img {
+            filter: brightness(1);
+        }
+
+        .nav-item:first-child {
+            margin-bottom: 10px;
+        }
+
+        .nav-divider {
+            color: #b0b3b8;
+            font-size: 12px;
+            padding: 0 16px;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar:hover .nav-divider {
+            opacity: 1;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 30px; /* Increased padding for more space */
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+            width: calc(100% - var(--sidebar-width));
+        }
+
+        .sidebar:hover ~ .main-content {
+            margin-left: var(--sidebar-expanded-width);
+            width: calc(100% - var(--sidebar-expanded-width));
+        }
+
+        .welcome-section {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+            padding: 40px; /* Increased padding */
+            margin-bottom: 30px; /* Increased margin */
+        }
+
+        h1 {
+            font-size: 28px; /* Increased font size */
+            font-weight: 700; /* Slightly bolder */
+            color: var(--text-primary);
+            margin-bottom: 25px; /* Increased margin */
+        }
+
+        h2 {
+            font-size: 22px; /* Increased font size */
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px; /* Increased margin */
+        }
+
+        h3 {
+            font-size: 20px; /* Increased font size */
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 30px 0 20px; /* Increased margin */
+        }
+
+        p {
+            font-size: 15px; /* Slightly increased font size */
+            color: var(--text-secondary);
+            line-height: 1.6; /* Improved line height */
+            margin-bottom: 20px; /* Increased margin */
+        }
+
+        .connect-btn {
+            display: inline-block;
+            padding: 12px 24px; /* Increased padding */
+            background: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 15px; /* Increased margin */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .connect-btn:hover {
+            background-color: #335599; /* Darker shade on hover */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .recommended-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Two columns on wider screens */
+            gap: 25px; /* Increased gap */
+            margin: 30px 0; /* Increased margin */
+        }
+
+        .action-card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+            padding: 25px; /* Increased padding */
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden; 
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--background-light);
+            position: relative;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card-image:hover {
+            transform: scale(1.02);
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            font-size: 18px; /* Increased font size */
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px; /* Increased margin */
+        }
+
+        .card-btn {
+            align-self: flex-start;
+            padding: 10px 20px; /* Increased padding */
+            background: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 18px; /* Increased margin */
+            transition: background-color 0.3s ease;
+        }
+
+        .card-btn:hover {
+            background-color: #335599; /* Darker shade on hover */
+        }
+
+        .best-practices-section {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+            padding: 30px; /* Increased padding */
+            margin-bottom: 30px; /* Increased margin */
+        }
+
+        .practice-item {
+            display: flex;
+            align-items: center;
+            padding: 25px 0; /* Increased padding */
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .practice-item:last-child {
+            border-bottom: none;
+        }
+
+        .practice-icon {
+            font-size: 28px; /* Increased font size */
+            color: var(--primary-color);
+            margin-right: 20px; /* Increased margin */
+            flex-shrink: 0;
+        }
+
+        .practice-content {
+            flex: 1;
+        }
+
+        .practice-title {
+            font-size: 17px; /* Slightly increased font size */
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px; /* Increased margin */
+        }
+
+        .practice-btn {
+            padding: 10px 20px; /* Increased padding */
+            background: var(--primary-color);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: auto;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .practice-btn:hover {
+            background-color: #335599; /* Darker shade on hover */
+        }
+
+        /* Removed .continue-section and its associated styles as its content is integrated into action-card */
+
+        .popup {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .popup.active {
+            display: flex;
+        }
+
+        .popup-content {
+            background-color: var(--white);
+            padding: 24px;
+            border-radius: 8px;
+            width: 384px;
+            max-width: 90%;
+        }
+
+        .all-tools-content {
+            width: 900px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .all-tools-content .tools-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .search-popup {
+            width: 600px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .popup-close, .close-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .popup-close:hover, .close-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .tools-section {
+            margin-bottom: 16px;
+        }
+
+        .tools-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 8px;
+            grid-column: span 2;
+        }
+
+        .tools-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tools-list li a {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .tools-list li a i {
+            margin-right: 8px;
+        }
+
+        .tools-list li a:hover {
+            background-color: var(--background-light);
+            border-radius: 4px;
+        }
+
+        .tools-list li.hidden {
+            display: none;
+        }
+
+        .input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .search-input-container {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 16px;
+            padding-left: 45px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2365676b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 15px center;
+        }
+
+        .search-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            min-height: 300px;
+        }
+
+        .search-icon {
+            font-size: 60px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .search-caption {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 50px;
+            }
+
+            .sidebar:hover {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 50px;
+                width: calc(100% - 50px);
+                padding: 20px;
+            }
+
+            .sidebar:hover ~ .main-content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+
+            .nav-item {
+                width: 35px;
+                height: 35px;
+            }
+
+            .nav-item img {
+                width: 20px;
+                height: 20px;
+            }
+
+            .recommended-actions {
+                grid-template-columns: 1fr; /* Single column on smaller screens */
+            }
+
+            .practice-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .practice-btn {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .search-popup {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a href="home.html" class="nav-item">
+            <img src="images/Logo.jpg" alt="">
+            <span class="nav-text">Archivehubs</span>
+        </a>
+        <div class="nav-divider">Corporate Manager</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-building"></i>
+            <span class="nav-text">Corporate Name</span>
+        </a>
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">Home</span>
+        </a>
+        <a href="ads_manager.html" class="nav-item">
+            <i class="fas fa-table"></i>
+            <span class="nav-text">Ads Manager</span>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="corporate_notification.html" class="nav-item">
+            <i class="fas fa-bell"></i>
+            <span class="nav-text">Notifications</span>
+        </a>
+        <a href="corporate_inbox.html" class="nav-item">
+            <i class="fas fa-inbox"></i>
+            <span class="nav-text">Inbox</span>
+        </a>
+        <a href="corporate_content.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            <span class="nav-text">Content</span>
+        </a>
+        <a href="corporate_planner.html" class="nav-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span class="nav-text">Planner</span>
+        </a>
+        <a href="corporate_ads.html" class="nav-item">
+            <i class="fas fa-bullhorn"></i>
+            <span class="nav-text">Ads</span>
+        </a>
+        <a href="corporate_insights.html" class="nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span class="nav-text">Insights</span>
+        </a>
+        <a onclick="openAllTools()" class="nav-item all-tools-link">
+            <i class="fas fa-bars"></i>
+            <span class="nav-text">All Tools</span>
+        </a>
+        <div class="nav-divider">Edit</div>
+        <a href="#" class="nav-item" onclick="openSearchPopup()">
+            <i class="fas fa-search"></i>
+            <span class="nav-text">Search</span>
+        </a>
+        <a href="corporate_getstarted.html" class="nav-item active">
+            <i class="fas fa-rocket"></i>
+            <span class="nav-text">Get Started</span>
+        </a>
+        <a href="corporate_settings.html" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span class="nav-text">Settings</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-question-circle"></i>
+            <span class="nav-text">Help</span>
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <div class="welcome-section">
+            <h1>Welcome, Corporate Name</h1>
+            <h2>Get Started with Archivehubs Corporate</h2>
+            <p>Archivehubs Corporate Manager helps you to manage your Corporate Page or profile, account, and messaging tools in one place. Get the most out of Archivehubs Corporate Manager by connecting your accounts.</p>
+            <a href="#" class="connect-btn">Connect Archivehubs Account</a>
+            <h3>Recommended Actions</h3>
+            <p>Discovering a new product can be overwhelming. These recommended actions and best practices will help you to get started:</p>
+            <div class="recommended-actions">
+                <div class="action-card">
+                    <div class="card-image">
+                        <img src="images/Activity Icon 2.png" alt="Create Post">
+                    </div>
+                    <div class="card-title">Create a Post</div>
+                    <p>Share updates about your business on Archivehubs.</p>
+                    <a href="#" class="card-btn">Get Started</a>
+                </div>
+                <div class="action-card">
+                    <div class="card-image">
+                        <img src="images/Add Messages 2.png" alt="Reply to Messages">
+                    </div>
+                    <div class="card-title">Reply to Messages</div>
+                    <p>Save time by replying to all messages in one place.</p>
+                    <a href="#" class="card-btn">Get Started</a>
+                </div>
+                <div class="action-card">
+                    <div class="card-image">
+                        <img src="images/Scheduled Images.png" alt="Schedule Post">
+                    </div>
+                    <div class="card-title">Schedule a Post</div>
+                    <p>Connect regularly with your audience by scheduling posts.</p>
+                    <a href="#" class="card-btn">Get Started</a>
+                </div>
+                <div class="action-card">
+                    <div class="card-image">
+                        <img src="images/Grow Audience Icon.png" alt="Grow Audience">
+                    </div>
+                    <div class="card-title">Grow Your Audience</div>
+                    <p>Allow Archivehubs Corporate Manager to access your connections list.</p>
+                    <a href="#" class="card-btn">Get Started</a>
+                </div>
+                <div class="action-card">
+                    <div class="card-title">Continue your journey on Home</div>
+                    <p>See important updates, manage your marketing content and learn about the latest features in Archivehubs Corporate Manager.</p>
+                    <a href="home.html" class="card-btn">Go to Home</a>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="best-practices-section">
+            <h2>Best Practices</h2>
+            <div class="practice-item">
+                <i class="fas fa-exchange-alt practice-icon"></i>
+                <div class="practice-content">
+                    <div class="practice-title">Learn How to Switch Between Accounts</div>
+                    <p>You can select to work on Corporate Pages or profile and Affiliate accounts that you help manage.</p>
+                </div>
+                <a href="#" class="practice-btn">Take a Tour</a>
+            </div>
+            <div class="practice-item">
+                <i class="fas fa-briefcase practice-icon"></i>
+                <div class="practice-content">
+                    <div class="practice-title">Create a Business Portfolio</div>
+                    <p>Manage all of your collaborators and profiles like Corporate Pages and Archivehubs accounts in one place, when you create a business portfolio.</p>
+                </div>
+                <a href="#" class="practice-btn">Create Portfolio</a>
+            </div>
+            <div class="practice-item">
+                <i class="fas fa-mobile-alt practice-icon"></i>
+                <div class="practice-content">
+                    <div class="practice-title">Download Mobile App</div>
+                    <p>Stay up to date wherever you are with the Archivehubs mobile app.</p>
+                </div>
+                <a href="#" class="practice-btn">Download</a>
+            </div>
+        </div>
+    </main>
+
+    <div id="all-tools-popup" class="popup">
+        <div class="popup-content all-tools-content">
+            <div class="popup-header">
+                <h3>All Tools</h3>
+                <button id="all-tools-close" class="popup-close"><i class="fas fa-times"></i></button>
+            </div>
+            <input type="text" id="tools-search" class="input" placeholder="Search all tools for keywords">
+            <div class="tools-section">
+                <h4>Recently Used</h4>
+                <ul id="recently-used-tools" class="tools-list"></ul>
+            </div>
+            <div class="row" style="display: flex;">
+                <div class="col">
+                    <div class="tools-section">
+                        <h4>Engage Audience</h4>
+                        <ul class="tools-list">
+                            <li><a href="#"><i class="fas fa-inbox"></i> Inbox</a></li>
+                            <li><a href="#"><i class="fas fa-file-alt"></i> Content</a></li>
+                            <li><a href="#"><i class="fas fa-calendar-alt"></i> Planner</a></li>
+                            <li><a href="#"><i class="fas fa-users"></i> Leads Center</a></li>
+                            <li><a href="#"><i class="fas fa-video"></i> Live Dashboard</a></li>
+                            <li><a href="#"><i class="fas fa-file"></i> Page Posts</a></li>
+                            <li><a href="#"><i class="fas fa-music"></i> Sound Collection</a></li>
+                        </ul>
+                    </div>
+                    <div class="tools-section">
+                        <h4>Analyze and Report</h4>
+                        <ul class="tools-list">
+                            <li><a href="#"><i class="fas fa-chart-line"></i> Insights</a></li>
+                            <li><a href="#"><i class="fas fa-chart-bar"></i> Creative Reporting</a></li>
+                            <li><a href="#"><i class="fas fa-flask"></i> Experiments</a></li>
+                            <li><a href="#"><i class="fas fa-handshake"></i> Archivehubs Collabs Manager</a></li>
+                            <li><a href="#"><i class="fas fa-traffic-light"></i> Traffic Analysis Report</a></li>
+                        </ul>
+                    </div>
+                    <div class="tools-section">
+                        <h4>Manage</h4>
+                        <ul class="tools-list">
+                            <li><a href="#"><i class="fas fa-shield-alt"></i> Brand Right Protection</a></li>
+                            <li><a href="#"><i class="fas fa-check-circle"></i> Brand Safety & Suitability</a></li>
+                            <li><a href="#"><i class="fas fa-store"></i> Market Place</a></li>
+                            <li><a href="#"><i class="fas fa-headset"></i> Business Support Home</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Store Locations</a></li>
+                            <li><a href="#"><i class="fas fa-cloud"></i> Archivehubs Drive</a></li>
+                            <li><a href="#"><i class="fas fa-envelope"></i> Archivehubs Messages</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="tools-section">
+                        <h4>Sell Goods and Services</h4>
+                        <ul class="tools-list">
+                            <li><a href="#"><i class="fas fa-calendar"></i> Appointments</a></li>
+                            <li><a href="#"><i class="fas fa-shopping-cart"></i> Commerce</a></li>
+                            <li><a href="#"><i class="fas fa-dollar-sign"></i> Monetization</a></li>
+                            <li><a href="#"><i class="fas fa-clipboard-list"></i> Orders Manager</a></li>
+                            <li><a href="#"><i class="fas fa-credit-card"></i> Billings & Payments</a></li>
+                        </ul>
+                    </div>
+                    <div class="tools-section">
+                        <h4>Advertise</h4>
+                        <ul class="tools-list">
+                            <li><a href="#"><i class="fas fa-ad"></i> Compare Advertising Tools</a></li>
+                            <li><a href="#"><i class="fas fa-bullhorn"></i> Ads</a></li>
+                            <li><a href="#"><i class="fas fa-link"></i> Ad Limits</a></li>
+                            <li><a href="#"><i class="fas fa-ad"></i> Ads Manager</a></li>
+                            <li><a href="#"><i class="fas fa-users"></i> Audiences</a></li>
+                            <li><a href="#"><i class="fas fa-cogs"></i> Automated Rules</a></li>
+                            <li><a href="#"><i class="fas fa-paint-brush"></i> Creative Hub</a></li>
+                            <li><a href="#"><i class="fas fa-calendar-check"></i> Events Manager</a></li>
+                            <li><a href="#"><i class="fas fa-file-alt"></i> Instant Forms</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-popup" class="popup">
+        <div class="search-popup">
+            <div class="search-header">
+                <div class="search-title">Search</div>
+                <button class="close-btn" onclick="closeSearchPopup()">×</button>
+            </div>
+            <div class="search-input-container">
+                <input type="text" class="search-input" placeholder="Find ad accounts, pages, people, tools and help articles">
+            </div>
+            <div class="search-content">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#e4e6eb" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </div>
+                <div class="search-caption">Get Started with Search</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openAllTools() {
+            document.getElementById('all-tools-popup').classList.add('active');
+        }
+
+        function closeAllTools() {
+            document.getElementById('all-tools-popup').classList.remove('active');
+            document.getElementById('tools-search').value = '';
+            filterTools('');
+        }
+
+        function openSearchPopup() {
+            document.getElementById('search-popup').classList.add('active');
+        }
+
+        function closeSearchPopup() {
+            document.getElementById('search-popup').classList.remove('active');
+            document.querySelector('.search-input').value = '';
+        }
+
+        function filterTools(searchTerm) {
+            const toolLinks = document.querySelectorAll('.tools-list li');
+            toolLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (searchTerm === '' || text.includes(searchTerm)) {
+                    link.classList.remove('hidden');
+                } else {
+                    link.classList.add('hidden');
+                }
+            });
+        }
+
+        document.getElementById('all-tools-popup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAllTools();
+            }
+        });
+
+        document.getElementById('tools-search').addEventListener('input', () => {
+            const searchTerm = document.getElementById('tools-search').value.toLowerCase();
+            filterTools(searchTerm);
+        });
+
+        document.getElementById('all-tools-close').addEventListener('click', closeAllTools);
+    </script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Order Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/business_shopping_display.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="../home.html">
+                    <img src="images/Logo.jpg" alt="Purchase Order Services Logo">
+                </a>
+            </div>
+            
+            <div class="navbar-icons">
+                <a href="#" class="icon-link" id="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <a href="#" class="icon-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="#" class="icon-link">
+                    <i class="fas fa-bell"></i>
+                </a>
+                <a href="#" class="icon-link">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <!-- Shopping Details Page -->
+        <div id="shopping-details-page" class="page active">
+            <div class="breadcrumb">
+                <a href="#">Services</a>
+                <span class="breadcrumb-separator">></span>
+                <a href="#">Secure Checkout</a>
+                <span class="breadcrumb-separator">></span>
+                <span>Shopping Details</span>
+            </div>
+
+            <div class="main-container">
+                <div class="card details-card">
+                    <div class="details-header">
+                        <h2 class="details-title">Shopping Details</h2>
+                        <button class="btn-add-details" id="add-details-btn">Add Shopping Details</button>
+                    </div>
+                    
+                    <div class="details-list">
+                        <div class="detail-item">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value" id="display-email">archivehubs@gmail.com</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Name:</span>
+                            <span class="detail-value" id="display-name">Archive Hubs</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Phone:</span>
+                            <span class="detail-value" id="display-phone">08069443551</span>
+                        </div>
+
+                        <div class="shopping-method">
+                            <h3 class="method-title">Shopping Method</h3>
+                            
+                            <div class="method-option">
+                                <i class="fas fa-shopping-cart"></i>
+                                <div class="method-info">
+                                    <div class="method-name">Standard Shopping</div>
+                                    <div class="method-details">Within 24 hours - NGN0</div>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-methods">
+                                <h4>Payment Method</h4>
+                                
+                                <div class="payment-option" onclick="selectPaymentMethod(1)">
+                                    <div class="payment-icon">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="payment-info">
+                                        <div class="payment-name">Paystack</div>
+                                        <div class="payment-guarantee">100% Delivery Guarantee</div>
+                                    </div>
+                                    <div class="radio-check" id="payment-1"></div>
+                                </div>
+                                
+                                <div class="payment-option" onclick="selectPaymentMethod(2)">
+                                    <div class="payment-icon">
+                                        <i class="far fa-credit-card"></i>
+                                    </div>
+                                    <div class="payment-info">
+                                        <div class="payment-name">Payment with your card</div>
+                                        <div class="payment-guarantee">100% Delivery Guarantee</div>
+                                    </div>
+                                    <div class="radio-check" id="payment-2"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="edit-container">
+                            <button class="edit-btn" onclick="navigateToEditPage()">
+                                <i class="fas fa-edit"></i>
+                                <span>Edit Details</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card order-card">
+                    <h2 class="card-title">My Order</h2>
+                    
+                    <div class="order-item">
+                        <div class="order-item-image">
+                            <i class="fas fa-image" style="color: #999;"></i>
+                        </div>
+                        <div class="order-item-details">
+                            <div class="order-item-title">Graphic Design</div>
+                            <div class="order-item-qty">Qty: 1 University Certificates</div>
+                            <div class="order-item-price">NGN 5,000</div>
+                        </div>
+                        <div class="order-item-edit">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="sponsored-label">Sponsored</div>
+                    <div class="deal-title">Grab & Go Deal Change</div>
+                    
+                    <div class="deal-item">
+                        <div class="deal-item-image">
+                            <i class="fas fa-image" style="color: #999;"></i>
+                        </div>
+                        <div class="deal-item-details">
+                            <div class="deal-item-category">Standard Graphic Designs</div>
+                            <div class="deal-item-category">Licenses & Certificates</div>
+                            <div class="deal-item-price">NGN 3,500</div>
+                        </div>
+                        <div class="deal-item-edit">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="order-total">
+                        <div class="order-total-row">
+                            <span class="order-total-label">Cart Total</span>
+                            <span class="order-total-value">NGN 5,000</span>
+                        </div>
+                        <div class="order-total-row order-total-final">
+                            <span class="order-total-label">Total</span>
+                            <span class="order-total-value">NGN 5,000</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-place-order">PLACE ORDER</button>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms-agree" required>
+                        <label for="terms-agree" class="terms-text">
+                            I have read and agree to the <a href="#">Aechivehubs.com Terms of Use</a> and
+                            <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Complete Page -->
+        <div id="order-complete-page" class="page">
+            <div class="breadcrumb">
+                <a href="#">Services</a>
+                <span class="breadcrumb-separator">></span>
+                <a href="#">Secure Checkout</a>
+                <span class="breadcrumb-separator">></span>
+                <span>Order Complete</span>
+            </div>
+
+            <div class="main-container">
+                <div class="card">
+                    <h2 class="card-title">Shopping Details</h2>
+                    
+                    <form id="shopping-details-form">
+                        <div class="form-group">
+                            <label for="email" class="required">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                            
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="set-default" name="set-default">
+                                <label for="set-default">Set as Default</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="first-name" class="required">First Name</label>
+                                    <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="last-name" class="required">Last Name</label>
+                                    <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="other-name">Other Name</label>
+                            <input type="text" id="other-name" name="other-name" placeholder="Enter your other name (if any)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="username" class="required">User Name</label>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col area-code-col">
+                                <div class="form-group">
+                                    <label for="area-code" class="required">Area Code</label>
+                                    <input type="tel" id="area-code" name="area-code" placeholder="+234" required>
+                                </div>
+                            </div>
+                            <div class="form-col phone-col">
+                                <div class="form-group">
+                                    <label for="phone" class="required">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp Number</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number">
+                            <p class="form-note">For backup contact number in logistics delivery</p>
+                        </div>
+                        
+                        <div class="button-container">
+                            <button type="submit" class="btn-continue">Continue</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card order-card">
+                    <h2 class="card-title">My Order</h2>
+                    
+                    <div class="order-item">
+                        <div class="order-item-image">
+                            <i class="fas fa-image" style="color: #999;"></i>
+                        </div>
+                        <div class="order-item-details">
+                            <div class="order-item-title">Graphic Design</div>
+                            <div class="order-item-qty">Qty: 1 University Certificates</div>
+                            <div class="order-item-price">NGN 5,000</div>
+                        </div>
+                        <div class="order-item-edit">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="sponsored-label">Sponsored</div>
+                    <div class="deal-title">Grab & Go Deal Change</div>
+                    
+                    <div class="deal-item">
+                        <div class="deal-item-image">
+                            <i class="fas fa-image" style="color: #999;"></i>
+                        </div>
+                        <div class="deal-item-details">
+                            <div class="deal-item-category">Standard Graphic Designs</div>
+                            <div class="deal-item-category">Licenses & Certificates</div>
+                            <div class="deal-item-price">NGN 3,500</div>
+                        </div>
+                        <div class="deal-item-edit">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="order-total">
+                        <div class="order-total-row">
+                            <span class="order-total-label">Cart Total</span>
+                            <span class="order-total-value">NGN 5,000</span>
+                        </div>
+                        <div class="order-total-row order-total-final">
+                            <span class="order-total-label">Total</span>
+                            <span class="order-total-value">NGN 5,000</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-place-order">PLACE ORDER</button>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms-agree-2" required>
+                        <label for="terms-agree-2" class="terms-text">
+                            I have read and agree to the <a href="#">Aechivehubs.com Terms of Use</a> and
+                            <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu icon functionality
+            document.getElementById('menu-icon').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Mobile menu would open here');
+            });
+            
+            // Other icon functionality
+            document.querySelectorAll('.icon-link').forEach(icon => {
+                if (icon.id !== 'menu-icon') {
+                    icon.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert(icon.querySelector('i').className.split(' ')[1].replace('fa-', '') + ' clicked');
+                    });
+                }
+            });
+
+            // Add Shopping Details button
+            document.getElementById('add-details-btn').addEventListener('click', navigateToEditPage);
+
+            // Form submission
+            document.getElementById('shopping-details-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveShoppingDetails();
+            });
+        });
+
+        function navigateToEditPage() {
+            document.getElementById('shopping-details-page').classList.remove('active');
+            document.getElementById('order-complete-page').classList.add('active');
+            
+            // Pre-populate form with existing data
+            const email = document.getElementById('display-email').textContent;
+            const name = document.getElementById('display-name').textContent;
+            const phone = document.getElementById('display-phone').textContent;
+            
+            const nameParts = name.split(' ');
+            document.getElementById('email').value = email;
+            document.getElementById('first-name').value = nameParts[0] || '';
+            document.getElementById('last-name').value = nameParts.slice(1).join(' ') || '';
+            document.getElementById('phone').value = phone;
+        }
+
+        function saveShoppingDetails() {
+            // Get form values
+            const email = document.getElementById('email').value;
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Update display
+            document.getElementById('display-email').textContent = email;
+            document.getElementById('display-name').textContent = `${firstName} ${lastName}`.trim();
+            document.getElementById('display-phone').textContent = phone;
+            
+            // Return to display view
+            document.getElementById('order-complete-page').classList.remove('active');
+            document.getElementById('shopping-details-page').classList.add('active');
+            
+            alert('Shopping details saved successfully!');
+        }
+
+        function selectPaymentMethod(paymentId) {
+            // Remove selected class from all radio checks
+            document.querySelectorAll('.radio-check').forEach(check => {
+                check.classList.remove('selected');
+            });
+            
+            // Add selected class to the clicked one
+            document.getElementById(`payment-${paymentId}`).classList.add('selected');
+        }
+    </script>
+</body>
+</html>

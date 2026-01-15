@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!--landing page-->
+    <div class="page" id="landingPage">
+        <div class="landingHeader">
+            <div class="pageHeader">
+                <h3>Your story</h3>
+                <button class="pageSettings">
+                    <img src="images/settings.png" alt="Settings">
+                </button>
+            </div>
+            <div class="pageHeader-user">
+                <img src="images/profile.png" alt="User profile picture">
+                <p>Name</p>
+            </div>
+        </div>
+
+        <div class="btn" id="btn1">
+            <button id="photoStory-btn">
+                <img height="60px" width="60px" src="images/gallery.png" alt="Photo story">
+                <h3>Create a photo story</h3>
+            </button>
+        </div>
+        <div class="btn" id="btn2">
+            <button id="textStory-btn">
+                <img src="images/text.png" alt="">
+                <h3>Create a text story</h3>
+            </button>
+        </div>
+        
+    </div>
+
+    <!--photo story page-->
+    <div class="page hidden" id="photoStory-page">
+        <div class="landingHeader" id="photoStory-header">
+            <div class="pageHeader" id="photoStory-head">
+                <h3>Your Photo story</h3>
+                <button class="pageSettings">
+                    <img src="images/settings.png" alt="Settings">
+                </button>
+            </div>
+            <div class="pageHeader-user">
+                <img src="images/profile.png" alt="User profile picture">
+                <p>Name</p>
+            </div>
+        </div>
+        <div class="imageUploadArea" id="imageUploadArea">
+            <input type="file" accept="image/*" id="imageInput" style="display: none;">
+
+            <div class="dropZone" id="dropZone">
+                <button id="uploadImage-btn">Choose Image</button>
+            </div>
+
+            <img id="imagepreview" alt="Your selected photo">
+
+            <div class="imageControls" id="imageControls">
+                <button id="changeImage-btn">Change</button>
+                <button id="deleteImage-btn">Delete</button>
+            </div>
+        </div>
+
+        <div class="photoStory-btns">
+            <button class="discard-btn1" id="discard-btn1">Discard</button>
+            <button class="share-btn1">Share to Story</button>
+        </div>  
+    </div>
+
+    <!--Text story page-->
+    <div class="page hidden" id="textStory-page">
+        <div class="editorContainer">
+            <div class="leftPane">
+                <div class="pageHeader">
+                    <h3>Your story</h3>
+                    <button class="pageSettings">
+                        <img src="images/settings.png" alt="Settings">
+                    </button>
+                </div>
+                <div class="pageHeader-user">
+                    <img src="images/profile.png" alt="User profile picture">
+                    <p>Name</p>
+                </div> 
+
+                <div class="editor">
+                    <div id="editor" contenteditable="true" data-placeholder="Start typing..."></div>
+                </div>
+
+                <div id="wordCounter" style="text-align: right; font-size: 0.9em; color: gray; margin-top: 0;">
+                    0/100
+                </div>
+
+                <div class="fontStyle">
+                    <select name="" id="">
+                        <option value="" selected="" hidden="" disabled="">Aa Clean</option>
+                        <option value="Clean">Clean</option>
+                        <option value="Casual">Casual</option>
+                        <option value="Fancy">Fancy</option>
+                        <option value="Headline">Headline</option>
+                    </select>
+                </div>
+
+                <div class="backgroundSection">
+                    <p class="backgroundLabel">Background</p>
+                    <div class="colorGrid">
+                        <button class="colorBtn" data-color="#000000">
+                            <span class="colorCircle" style="background: #000000;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#001F3F">
+                            <span class="colorCircle" style="background: #001F3F;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#191970">
+                            <span class="colorCircle" style="background: #191970;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#013220">
+                            <span class="colorCircle" style="background: #013220;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#2F4F4F">
+                            <span class="colorCircle" style="background: #2F4F4F;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#333333">
+                            <span class="colorCircle" style="background: #333333;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#2C003E">
+                            <span class="colorCircle" style="background: #2C003E;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#800000">
+                            <span class="colorCircle" style="background: #800000;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#8B0000">
+                            <span class="colorCircle" style="background: #8B0000;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#556B2F">
+                            <span class="colorCircle" style="background: #556B2F;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#003333">
+                            <span class="colorCircle" style="background: #003333;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#4E342E">
+                            <span class="colorCircle" style="background: #4E342E;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#483D8B">
+                            <span class="colorCircle" style="background: #483D8B;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#1D2951">
+                            <span class="colorCircle" style="background: #1D2951;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#8B008B">
+                            <span class="colorCircle" style="background: #8B008B;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#9400D3">
+                            <span class="colorCircle" style="background: #9400D3;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#4B0082">
+                            <span class="colorCircle" style="background: #4B0082;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#4A646C">
+                            <span class="colorCircle" style="background: #4E342E;"></span>
+                        </button>
+                        <button class="colorBtn" data-color="#42A3439">
+                            <span class="colorCircle" style="background: #4E342E;"></span>
+                        </button>
+                    </div>
+                    
+                </div>
+
+
+                <div class="textStory-btns">
+                    <button class="discard-btn" id="discard-btn">Discard</button>
+                    <button class="share-btn" id="share-btn">Share to Story</button>
+                </div>  
+            </div>
+
+            <div class="rightPane">
+                <div id="livePreview">
+                    <p>Start typing...</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!--modal for discard option-->
+    <div id="discardModal" class="modal">
+        <div class="modalContent">
+            <div class="modalContent-header">
+                <h2>Discard story?</h2>
+                <button class="cancel-btn" id="cancel-btn">&times;</button>
+            </div>
+            <p>Are you sure you want to discard this story?. Your story won't be saved.</p>
+            <div class="modalContent-footer">
+                <button id="continueEditing-btn">Continue Editing</button>
+                <button id="confirmDiscard-btn">Discard</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

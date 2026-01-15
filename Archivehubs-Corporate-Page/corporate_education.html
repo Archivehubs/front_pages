@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Institution Page | ArchiveHubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left, .nav-middle, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            outline: none;
+            width: 200px;
+            transition: width 0.3s;
+        }
+
+        .search-input:focus {
+            width: 250px;
+            border-color: #4a90e2;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .nav-link i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-link:hover {
+            color: #4a90e2;
+        }
+
+        .nav-link.active {
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .pages-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 40px 15px;
+        }
+
+        /* Left Panel */
+        .left-panel {
+            flex: 0 0 280px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .left-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .left-panel-header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .left-panel-header h1 a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .left-panel-header h1 a:hover {
+            text-decoration: none;
+            color: #1877f2;
+        }
+
+        .main-nav-list {
+            list-style: none;
+        }
+        
+        .main-nav-list li {
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .main-nav-list li a {
+            display: flex;
+            align-items: center;
+            padding: 10px 10px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .main-nav-list li a:hover {
+            background-color: #f0f2f5;
+        }
+        
+        .main-nav-list li i {
+            margin-right: 10px;
+            color: #65676b;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-nav-list li.active {
+            background-color: #e6f2ff;
+            font-weight: 600;
+        }
+
+        .main-nav-list li.active a {
+            color: #1877f2;
+        }
+
+        .main-nav-list li.active i {
+            color: #1877f2;
+        }
+        
+        .sub-nav-list {
+            list-style: none;
+            padding-left: 30px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .sub-nav-list li a {
+            padding: 8px 0;
+            display: block;
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .sub-nav-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-divider {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 15px 0;
+        }
+
+        .category-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #65676b;
+            padding: 10px 10px;
+            margin-bottom: 5px;
+        }
+
+        /* Right Panel Styles */
+        .right-panel {
+            flex: 1;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .right-panel-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Accordion Styles */
+        .accordion-container {
+            border-top: 1px solid #eee; /* Top border for the first item */
+        }
+
+        .accordion-item {
+            margin-bottom: 0px; /* No margin between items */
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            list-style: none; /* Hide default arrow for details/summary */
+            border-bottom: 1px solid #eee; /* Separator between accordion items */
+        }
+
+        .accordion-item:last-child .accordion-header {
+            border-bottom: none; /* No border for the last accordion header */
+        }
+
+        .accordion-header::-webkit-details-marker {
+            display: none; /* Hide default marker in Webkit browsers */
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .accordion-item[open] > .accordion-header .accordion-icon {
+            transform: rotate(180deg); /* Rotate icon when open */
+        }
+
+        .accordion-content {
+            list-style: none;
+            padding: 10px 0 15px 0px; /* Adjust padding for content */
+            margin: 0;
+            border-top: 1px solid #f0f2f5; /* Light border between header and content */
+        }
+        
+        .accordion-content.file-list { /* Styling for the actual file lists */
+            padding-left: 20px; /* Indent the file list */
+            padding-bottom: 5px;
+        }
+
+        .accordion-content li {
+            margin-bottom: 8px;
+        }
+
+        .accordion-content li:last-child {
+            margin-bottom: 0;
+        }
+
+        .accordion-content a {
+            text-decoration: none;
+            color: #555;
+            font-size: 14px;
+            display: block;
+            padding: 4px 0;
+        }
+
+        .accordion-content a:hover {
+            color: #1877f2;
+            text-decoration: underline;
+        }
+
+        /* Specific styles for main and sub categories */
+        .accordion-item.main-category > .accordion-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1877f2;
+            padding: 20px 0;
+        }
+
+        .accordion-item.main-category > .accordion-content {
+            background-color: #f9f9f9; /* Light background for main category content */
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .accordion-item.sub-category > .accordion-header {
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f2f5; /* Lighter border for sub-categories */
+        }
+
+        .accordion-item.sub-category:last-child > .accordion-header {
+            border-bottom: none;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .pages-container {
+                flex-direction: column;
+                padding-top: 20px;
+            }
+            
+            .left-panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .nav-middle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="pages-container">
+        <div class="left-panel">
+            <div class="left-panel-header">
+                <h1><a href="corporate_pages.html" class="pages-link">Pages</a></h1>
+                <i class="fas fa-cog"></i> 
+            </div>
+            
+            <ul class="main-nav-list">
+                <li> 
+                    <a href="corporate_yourpages.html">
+                        <i class="fas fa-flag"></i>Your Pages
+                    </a>
+                    <ul class="sub-nav-list"> 
+                        <li><a href="#">Corporate Page 1</a></li>
+                        <li><a href="#">Corporate Page 2</a></li>
+                    </ul>
+                </li>
+                
+                <hr class="nav-divider"> 
+                <li> 
+                    <a href="corporate_home.html">
+                        <i class="fas fa-user-tie"></i>Corporate Manager
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_discover.html">
+                        <i class="fas fa-compass"></i>Discover
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_likedpages.html">
+                        <i class="far fa-thumbs-up"></i>Liked Pages
+                    </a>
+                </li>
+
+                <hr class="nav-divider"> 
+                <li class="category-title">Categories</li> 
+                <li> 
+                    <a href="corporate_companypage.html">
+                        <i class="fas fa-briefcase"></i>Company Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_organizationpage.html">
+                        <i class="fas fa-sitemap"></i>Organization Page
+                    </a>
+                </li>
+                <li class="active"> <a href="corporate_education.html">
+                        <i class="fas fa-graduation-cap"></i>Educational Institution Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_showcase.html">
+                        <i class="fas fa-star"></i>Showcase Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="#">
+                        <i class="fas fa-users"></i>Fans Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="affiliate_overview.html">
+                        <i class="fas fa-link"></i>Affiliate Marketers Page
+                    </a>
+                </li>
+            </ul>
+            <div class="footer">
+                ARCHIVEHUBS: ENINK Investment Limited © 2025
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h2 class="right-panel-title">Educational Institution Files</h2>
+            <div class="accordion-container">
+                <details class="accordion-item main-category">
+                    <summary class="accordion-header">
+                        All Basic Schools Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <div class="accordion-content">
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Student Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Admission Files</a></li>
+                                <li><a href="#">Academic Transcripts</a></li>
+                                <li><a href="#">Grades and GPA Files</a></li>
+                                <li><a href="#">Attendance Files</a></li>
+                                <li><a href="#">Discipline Files</a></li>
+                                <li><a href="#">Health Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Academic Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Course Catalogs</a></li>
+                                <li><a href="#">Curriculum Guides</a></li>
+                                <li><a href="#">Syllabi</a></li>
+                                <li><a href="#">Faculty Credentials</a></li>
+                                <li><a href="#">Academic Policies</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Employee Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Personnel Files</a></li>
+                                <li><a href="#">Performance Evaluations</a></li>
+                                <li><a href="#">Employment Contracts</a></li>
+                                <li><a href="#">Benefits and Leave Files</a></li>
+                                <li><a href="#">Professional Development Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Financial Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Budget Reports</a></li>
+                                <li><a href="#">Financial Statements</a></li>
+                                <li><a href="#">Tuition and Fee Files</a></li>
+                                <li><a href="#">Scholarship and Grant Files</a></li>
+                                <li><a href="#">Donor Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Library and Resource Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Book and Material Catalogs</a></li>
+                                <li><a href="#">Circulation Files</a></li>
+                                <li><a href="#">Database Subscriptions</a></li>
+                                <li><a href="#">Online Resource Directory</a></li>
+                                <li><a href="#">Interlibrary Loan Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Facilities and Maintenance Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Building Maintenance Files</a></li>
+                                <li><a href="#">Supplies and Materials Files</a></li>
+                                <li><a href="#">Equipment Inventory Files</a></li>
+                                <li><a href="#">Energy and Utilities Files</a></li>
+                                <li><a href="#">Safety and Security Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Alumni and Development Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Alumni Contact Information</a></li>
+                                <li><a href="#">Donation Files</a></li>
+                                <li><a href="#">Fundraising Campaigns</a></li>
+                                <li><a href="#">Event Planning Files</a></li>
+                                <li><a href="#">Alumni Newsletter Archives</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Accreditation and Compliance Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Accreditation Files</a></li>
+                                <li><a href="#">Policy Manuals</a></li>
+                                <li><a href="#">Compliance Documents</a></li>
+                                <li><a href="#">Regulatory Correspondence</a></li>
+                                <li><a href="#">Audit Reports</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Research and Grant Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Research Proposals</a></li>
+                                <li><a href="#">Grant Applications</a></li>
+                                <li><a href="#">Funding Agreements</a></li>
+                                <li><a href="#">Research Reports</a></li>
+                                <li><a href="#">Intellectual Property Records</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Governance and Administrative Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Board Meeting Minutes</a></li>
+                                <li><a href="#">Policy Decisions</a></li>
+                                <li><a href="#">Administrative Correspondence</a></li>
+                                <li><a href="#">Organizational Charts</a></li>
+                                <li><a href="#">Strategic Plans</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+                    </div>
+                </details>                <!-- 
+                    <summary class="accordion-header">
+                      All STEM Plus Activity Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <div class="accordion-content">
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                               Art Club File <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Debate Team File</a></li>
+                                <li><a href="#">Quiz Bowl Team File</a></li>
+                                <li><a href="#">Science Olympiad File</a></li>
+                                <li><a href="#">Mathematics Club File</a></li>
+                                <li><a href="#">Language Clubs Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Music Club File <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Choir File</a></li>
+                                <li><a href="#">Band File</a></li>
+                                <li><a href="#">Orchestra File</a></li>
+                                <
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Dance Club File <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Varsity Sports Teams Clubs Files</a></li>
+                                <li><a href="#">Intramural Sports Teams Clubs Files</a></li>
+                                <li><a href="#">Fitness Club File</a></li>                                
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Sports Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Key Club File</a></li>
+                                <li><a href="#">Rotary Club File</a></li>
+                                <li><a href="#">Volunteer Club File</a></li>                                
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Scouting Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Gaming Club File</a></li>
+                                <li><a href="#">Chess Club File</a></li>
+                                <li><a href="#">Robotics Club File</a></li>                                
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                               Environmental Club File  <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Cultural Diversity Club File</a></li>
+                                <li><a href="#">Black Student Union Club File</a></li>                                
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                School Garden Club File <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Student Council Club File</a></li>
+                                <li><a href="#">National Honor Society Club File</a></li>
+                                
+                            </ul>
+                        </details>
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Pet Care Club File <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Student Council Club File</a></li>
+                                <li><a href="#">National Honor Society Club File</a></li>
+                                
+                            </ul>
+                        </details>
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Book Club File <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Student Council Club File</a></li>
+                                <li><a href="#">National Honor Society Club File</a></li>
+                                
+                            </ul>
+                        </details>
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Drama Club File <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Student Council Club File</a></li>
+                                <li><a href="#">National Honor Society Club File</a></li>
+                                
+                            </ul>
+                        </details>
+                    </div>
+                </details> -->
+                <details class="accordion-item main-category">
+                    <summary class="accordion-header">
+                        All STEM Plus Activity Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content file-list">
+                        <li><a href="#">STEM (Science, Technology, Engineering, and Mathematics)</a></li>
+                        <li><a href="#">STEAM (Science, Technology, Engineering, Arts, and Mathematics)</a></li>
+                        <li><a href="#">eSTEAM (Environmental STEAM)</a></li>
+                        <li><a href="#">GEMS (Girls in Engineering, Mathematics, and Science)</a></li>
+                        <li><a href="#">MINT (Mathematics, Informatics, Natural Sciences, and Technology)</a></li>
+                        <li><a href="#">SHTEAM (Science, Humanities, Technology, Engineering, Arts, and Mathematics)</a></li>
+                        <li><a href="#">SMET (Science, Mathematics, Engineering, and Technology)</a></li>
+                        <li><a href="#">STEAM (Science, Technology, Engineering, Agriculture, and Mathematics)</a></li>
+                        <li><a href="#">STEAM (Science, Technology, Engineering, and Applied Mathematics)</a></li>
+                        <li><a href="#">STEEM (Science, Technology, Engineering, Economics and Mathematics)</a></li>
+                        <li><a href="#">STEMIE (Science, Technology, Engineering, Mathematics, Invention, and Entrepreneurship)</a></li>
+                        <li><a href="#">STEMM (Science, Technology, Engineering, Mathematics, and Medicine)</a></li>
+                        <li><a href="#">STM (Science, Technical, and Mathematics)</a></li>
+                        <li><a href="#">STM (Science, Technology, and Medicine)</a></li>
+                        <li><a href="#">STREAM (Science, Technology, Robotics, Engineering, Arts, and Mathematics)</a></li>
+                        <li><a href="#">STREAM (Science, Technology, Recreation, Engineering, Arts, and Mathematics)</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item main-category">
+                    <summary class="accordion-header">
+                        All Secondary/High Schools Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <div class="accordion-content">
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Academic Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Debate Team File</a></li>
+                                <li><a href="#">Quiz Bowl Team File</a></li>
+                                <li><a href="#">Science Olympiad File</a></li>
+                                <li><a href="#">Mathematics Club File</a></li>
+                                <li><a href="#">Language Clubs Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Arts and Music Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Choir File</a></li>
+                                <li><a href="#">Band File</a></li>
+                                <li><a href="#">Orchestra File</a></li>
+                                <li><a href="#">Drama Club File</a></li>
+                                <li><a href="#">Art Club File</a></li>
+                                <li><a href="#">Photography File</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Sports and Fitness Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Varsity Sports Teams Clubs Files</a></li>
+                                <li><a href="#">Intramural Sports Teams Clubs Files</a></li>
+                                <li><a href="#">Fitness Club File</a></li>
+                                <li><a href="#">Running Club File</a></li>
+                                <li><a href="#">Yoga Club File</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Community Service Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Key Club File</a></li>
+                                <li><a href="#">Rotary Club File</a></li>
+                                <li><a href="#">Volunteer Club File</a></li>
+                                <li><a href="#">Environmental Club File</a></li>
+                                <li><a href="#">Red Cross Club File</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Gaming and Hobby Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Gaming Club File</a></li>
+                                <li><a href="#">Chess Club File</a></li>
+                                <li><a href="#">Robotics Club File</a></li>
+                                <li><a href="#">Coding Club File</a></li>
+                                <li><a href="#">Anime and Manga Club File</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Cultural and Diversity Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Cultural Diversity Club File</a></li>
+                                <li><a href="#">Black Student Union Club File</a></li>
+                                <li><a href="#">Latinx Student Union Club File</a></li>
+                                <li><a href="#">Asian Student Union Club File</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Leadership and Career Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Student Council Club File</a></li>
+                                <li><a href="#">National Honor Society Club File</a></li>
+                                <li><a href="#">SEA – HUB (Business & Entrepreneurship) Club File</a></li>
+                                <li><a href="#">GLEC (Business & Entrepreneurship) Club File</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+                    </div>
+                </details>
+
+                <details class="accordion-item main-category">
+                    <summary class="accordion-header">
+                        All College/University Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <div class="accordion-content">
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Academic and Professional Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Research Clubs Files</a></li>
+                                <li><a href="#">Academic Teams Clubs Files</a></li>
+                                <li><a href="#">Professional Associations Clubs Files</a></li>
+                                <li><a href="#">Pre-Graduate/Professional School Clubs Files</a></li>
+                                <li><a href="#">Entrepreneurship Clubs Files</a></li>
+                                <li><a href="#">Innovation Clubs Files</a></li>
+                                <li><a href="#">Consulting Clubs Files</a></li>
+                                <li><a href="#">Others</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Arts and Cultural Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Music Ensembles Clubs Files</a></li>
+                                <li><a href="#">Art Clubs Files</a></li>
+                                <li><a href="#">Theater and Dance Clubs Files</a></li>
+                                <li><a href="#">Literary Clubs Files</a></li>
+                                <li><a href="#">Cultural Organizations Clubs Files</a></li>
+                                <li><a href="#">Language Clubs Files</a></li>
+                                <li><a href="#">Film Clubs Files</a></li>
+                                <li><a href="#">Others</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Recreation and Sports Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Varsity Sports Teams Files</a></li>
+                                <li><a href="#">Sports Teams Clubs Files</a></li>
+                                <li><a href="#">Intramural Sports Teams Files</a></li>
+                                <li><a href="#">Fitness Clubs Files</a></li>
+                                <li><a href="#">Running Clubs Files</a></li>
+                                <li><a href="#">Hiking Clubs Files</a></li>
+                                <li><a href="#">Gaming Clubs Files</a></li>
+                                <li><a href="#">Others</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Community Service and Volunteer Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Volunteer Clubs Files</a></li>
+                                <li><a href="#">Community Service Clubs Files</a></li>
+                                <li><a href="#">Habitat for Humanity Clubs Files</a></li>
+                                <li><a href="#">Red Cross Clubs Files</a></li>
+                                <li><a href="#">Environmental Clubs Files</a></li>
+                                <li><a href="#">Animal Welfare Clubs Files</a></li>
+                                <li><a href="#">Social Justice Clubs Files</a></li>
+                                <li><a href="#">Others</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Special Interest Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Anime and Manga Clubs Files</a></li>
+                                <li><a href="#">Comic Book Clubs Files</a></li>
+                                <li><a href="#">Fantasy and Science Fiction Clubs Files</a></li>
+                                <li><a href="#">Gaming Clubs Files</a></li>
+                                <li><a href="#">Quidditch Clubs Files</a></li>
+                                <li><a href="#">Role-Playing Game (RPG) Clubs Files</a></li>
+                                <li><a href="#">Board Game Clubs Files</a></li>
+                                <li><a href="#">Others</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Leadership and Career Development Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Students Government Associations (SGA) Files</a></li>
+                                <li><a href="#">Career Development Clubs Files</a></li>
+                                <li><a href="#">Leadership Clubs Files</a></li>
+                                <li><a href="#">Professional Networking Clubs Files</a></li>
+                                <li><a href="#">Entrepreneurship Clubs Files</a></li>
+                                <li><a href="#">Women in Business Clubs Files</a></li>
+                                <li><a href="#">Diversity and Inclusion Clubs Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                Spiritual and Religious Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">Campus Ministry Files</a></li>
+                                <li><a href="#">Interfaith Clubs Files</a></li>
+                                <li><a href="#">Muslim Student Associations Files</a></li>
+                                <li><a href="#">Jewish Student Unions Files</a></li>
+                                <li><a href="#">Christian Fellowship Files</a></li>
+                                <li><a href="#">Buddhist Clubs Files</a></li>
+                                <li><a href="#">Hindu Student Councils Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+
+                        <details class="accordion-item sub-category">
+                            <summary class="accordion-header">
+                                International and Cultural Exchange Clubs Files <i class="fas fa-chevron-down accordion-icon"></i>
+                            </summary>
+                            <ul class="accordion-content file-list">
+                                <li><a href="#">International Student Associations Files</a></li>
+                                <li><a href="#">Language Exchange Clubs Files</a></li>
+                                <li><a href="#">Cultural Exchange Clubs Files</a></li>
+                                <li><a href="#">Study Abroad Clubs Files</a></li>
+                                <li><a href="#">Global Health Clubs Files</a></li>
+                                <li><a href="#">International Business Clubs Files</a></li>
+                                <li><a href="#">Diplomacy Clubs Files</a></li>
+                                <li><a href="#">Other</a></li>
+                            </ul>
+                        </details>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

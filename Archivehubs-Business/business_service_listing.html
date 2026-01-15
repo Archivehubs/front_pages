@@ -1,0 +1,2492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Listing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+     <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+        }
+        .sidebar {
+            width: 400px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            border-radius: 16px 0 0 16px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #e4e6eb #fff;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #e4e6eb;
+            border-radius: 8px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: #fff;
+            border-radius: 8px;
+        }
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 20px 10px 20px;
+            border-bottom: 1px solid #f0f2f5;
+            position: relative;
+        }
+        .fb-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 12px;
+            background: #1877f2;
+        }
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 24px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #65676b;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn:hover {
+            background: #f0f2f5;
+        }
+        .sidebar-title {
+            font-size: 13px;
+            color: #65676b;
+            margin-top: 8px;
+            margin-left: 20px;
+            margin-bottom: 0;
+            letter-spacing: 0.5px;
+        }
+        
+        /* MODIFIED: Single line layout for title and button */
+        .sidebar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 20px;
+            padding: 10px 0;
+        }
+        
+        .sidebar-subtitle {
+            font-size: 22px;
+            font-weight: 700;
+            color: #050505;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        /* NEW: User info section with icon, name, service listing and public indicator */
+        .user-info-container {
+            display: flex;
+            align-items: center;
+            margin: 0 20px 18px;
+            padding: 12px;
+            background: #f7f8fa;
+            border-radius: 8px;
+        }
+        
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e4e6eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: #65676b;
+            font-size: 18px;
+        }
+        
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: #050505;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+        
+        .user-listing {
+            font-size: 13px;
+            color: #65676b;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .user-listing .public-icon {
+            font-size: 12px;
+            color: #65676b;
+        }
+        
+        /* NEW STYLES FOR SAVE DRAFT DROPDOWN */
+        .save-draft-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .save-draft-btn {
+            background: #e4e6eb;
+            color: #bcc0c4;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: not-allowed;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .save-draft-btn.enabled {
+            background: #1877f2;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .save-draft-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            z-index: 100;
+            margin-top: 5px;
+            display: none;
+            overflow: hidden;
+        }
+        
+        .save-draft-container.open .save-draft-dropdown {
+            display: block;
+        }
+        
+        .save-draft-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            color: #050505;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+        
+        .save-draft-option:hover {
+            background: #f0f2f5;
+        }
+        
+        .save-draft-option i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .save-draft-divider {
+            height: 1px;
+            background: #e4e6eb;
+            margin: 5px 0;
+        }
+        
+        .property-form {
+            padding: 0 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .property-type-select, 
+        .year-select, 
+        .location-input,
+        .property-input {
+            width: 100% !important;
+            padding: 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f5f6fa;
+            margin-top: 0;
+            margin-bottom: 0;
+            outline: none;
+            box-sizing: border-box;
+            color: #050505;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        
+        .property-input[name="make"] {
+            margin-top: 20px;
+        }
+        
+        .property-type-select:focus, .year-select:focus, .location-input:focus {
+            border-color: #1877f2;
+            background: #fff;
+        }
+        .photo-upload-section {
+            background: #fff;
+            border: 1px solid #f0f2f5;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .photo-upload-label {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 2px;
+            color: #050505;
+        }
+        .photo-upload-desc {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .photo-upload-box {
+            border: 1.5px dashed #ccd0d5;
+            border-radius: 10px;
+            background: #f5f6fa;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .photo-upload-box:hover {
+            border-color: #1877f2;
+        }
+        .photo-upload-icon {
+            width: 36px;
+            height: 36px;
+            background: #e4e6eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #65676b;
+            margin-bottom: 6px;
+        }
+        .photo-upload-text {
+            font-size: 15px;
+            color: #050505;
+            text-align: center;
+        }
+        .photo-upload-sub {
+            font-size: 13px;
+            color: #65676b;
+        }
+        .phone-upload-row {
+            display: flex;
+            align-items: center;
+            background: #f0f2f5;
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-bottom: 0;
+            gap: 10px;
+        }
+        .phone-upload-icon {
+            font-size: 22px;
+            color: #65676b;
+        }
+        .phone-upload-text {
+            font-size: 14px;
+            color: #050505;
+            flex: 1;
+        }
+        .learn-more {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .try-it-btn {
+            background: #e4e6eb;
+            color: #050505;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background 0.2s;
+        }
+        .try-it-btn:hover {
+            background: #d8dadf;
+        }
+        .about-section {
+            border-top: 1px solid #f0f2f5;
+            padding-top: 16px;
+            margin-top: 10px;
+        }
+        .about-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 2px;
+            color: #050505;
+        }
+        .about-desc {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .location-group {
+            display: block;
+            margin-bottom: 0;
+        }
+        .location-display {
+            display: flex;
+            align-items: center;
+            background: #f6f7fa;
+            border: 1px solid #e4e6eb;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 16px;
+            color: #050505;
+            min-width: 180px;
+            min-height: 40px;
+            font-weight: 500;
+        }
+        .location-display .location-svg {
+            margin-right: 10px;
+            color: #222;
+            font-size: 18px;
+            position: static;
+            left: unset;
+            top: unset;
+            transform: none;
+        }
+        .location-name {
+            font-size: 16px;
+            color: #050505;
+            font-weight: 500;
+        }
+        .location-input-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .location-svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #65676b;
+            font-size: 18px;
+            pointer-events: none;
+        }
+        .location-input {
+            width: 100%;
+            padding-left: 38px;
+            background: #f5f6fa;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #050505;
+            height: 44px;
+            outline: none;
+        }
+        .location-input:focus {
+            border-color: #1877f2;
+            background: #fff;
+        }
+        .location-label {
+            display: block;
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 4px;
+            margin-left: 2px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+        .location-ref {
+            font-size: 12px;
+            color: #8a8d91;
+            margin-bottom: 2px;
+            margin-left: 2px;
+            font-weight: 400;
+            letter-spacing: 0.1px;
+        }
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+            font-size: 16px;
+            user-select: none;
+        }
+        .dropdown-selected {
+            background: #f5f6fa;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .dropdown-selected:focus {
+            outline: none;
+            border-color: #1877f2;
+            background: #fff;
+        }
+        .dropdown-arrow {
+            margin-left: 8px;
+            font-size: 14px;
+            color: #65676b;
+        }
+        .dropdown-list {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            z-index: 10;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .custom-dropdown.open .dropdown-list {
+            display: block;
+        }
+        .dropdown-main-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            position: relative;
+            font-weight: 500;
+            color: #050505;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+        .dropdown-main-option:hover, .dropdown-main-option.active {
+            background: #f0f2f5;
+        }
+        .dropdown-main-option .dropdown-arrow {
+            transition: transform 0.2s;
+        }
+        .dropdown-main-option.expanded .dropdown-arrow {
+            transform: rotate(90deg);
+        }
+        .dropdown-sub-list {
+            display: none;
+            padding-left: 0;
+            margin: 8px 0 0 0;
+            list-style: none;
+            background: #f5f6fa;
+            border-radius: 0 0 8px 8px;
+        }
+        .dropdown-main-option.expanded > .dropdown-sub-list {
+            display: block;
+        }
+        .dropdown-sub-list li {
+            padding: 10px 16px 10px 32px;
+            cursor: pointer;
+            color: #050505;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .dropdown-sub-list li:hover {
+            background: #e4e6eb;
+        }
+        .property-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #f5f6fa;
+            margin-top: 0;
+            margin-bottom: 0;
+            outline: none;
+            color: #050505;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .property-input:focus {
+            border-color: #1877f2;
+            background: #fff;
+        }
+        .price-section {
+            border-top: 1px solid #e4e6eb;
+            margin-top: 18px;
+            padding-top: 18px;
+            margin-bottom: 0;
+        }
+        .price-label {
+            font-size: 17px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 2px;
+            display: block;
+        }
+        .price-helper {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .property-input[name="make"],
+        .property-input[name="model"],
+        .property-input[name="mileage"],
+        .property-input[name="price"] {
+        width: 92%;
+        }
+        .property-input[name="make"] {
+            margin-top: 20px;
+        }
+        .description-section {
+            background: #fff;
+            border-radius: 12px;
+            margin: 2px 20px 0 2px;
+            padding: 20px 20px 20px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .description-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 4px;
+        }
+        .description-helper {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 16px;
+        }
+        .description-textarea {
+            width: 100%;
+            min-height: 90px;
+            border: 1px solid #ccd0d5;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 16px;
+            background: #f5f6fa;
+            color: #050505;
+            resize: vertical;
+            margin-bottom: 14px;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .description-textarea:focus {
+            border-color: #000;
+            background: #fff;
+        }
+        .description-policy {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+        .commerce-policy-link {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .commerce-policy-link:hover {
+            text-decoration: underline;
+        }
+        .description-progress {
+            margin-bottom: 18px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e4e6eb;
+            border-radius: 4px;
+            display: flex;
+            overflow: hidden;
+        }
+        .progress-bar-filled {
+            width: 50%;
+            background: yellow;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+            transition: width 0.3s;
+        }
+        .progress-bar-disabled {
+            width: 50%;
+            background: #e4e6eb;
+            height: 100%;
+            border-radius: 0 4px 4px 0;
+        }
+        .next-btn {
+            width: 100%;
+            padding: 12px 0;
+            background: #e4e6eb;
+            color: #bcc0c4;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: not-allowed;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 2px;
+            letter-spacing: 0.2px;
+        }
+        .next-btn.enabled {
+            background: #1877f2;
+            color: white;
+            cursor: pointer;
+        }
+        .main-content {
+            margin-left: 360px;
+            min-height: 100vh;
+            background: #f0f2f5;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 0;
+        }
+        .preview-container {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            display: flex;
+            width: 800px;
+            min-height: 600px;
+            overflow: hidden;
+        }
+        .preview-left {
+            flex: 1.2;
+            background: #f5f6fa;
+            display: flex;
+            flex-direction: column;
+            padding: 32px 0 32px 32px;
+            border-right: 1px solid #e4e6eb;
+        }
+        .preview-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 16px;
+        }
+        .listing-preview-box {
+            background: #f0f2f5;
+            border-radius: 8px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+        .listing-preview-message {
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+        .listing-preview-main {
+            font-size: 22px;
+            font-weight: 700;
+            color: #65676b;
+            margin-bottom: 8px;
+        }
+        .listing-preview-sub {
+            font-size: 16px;
+            color: #8a8d91;
+            text-align: center;
+            max-width: 300px;
+        }
+        .preview-right {
+            flex: 1;
+            padding: 32px 32px 32px 32px;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+        }
+        .preview-summary {
+            width: 100%;
+        }
+        .preview-summary-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 2px;
+        }
+        .preview-summary-price {
+            font-size: 18px;
+            color: #65676b;
+            margin-bottom: 2px;
+        }
+        .preview-summary-meta {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 16px;
+        }
+        
+        /* Location and Street Address Preview */
+        .preview-summary-section {
+            margin-bottom: 18px;
+        }
+        .preview-summary-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #050505;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .preview-summary-description {
+            font-size: 15px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        
+        .preview-divider {
+            border: none;
+            border-top: 1px solid #e4e6eb;
+            margin: 18px 0;
+        }
+        
+        .preview-summary-map {
+            margin-bottom: 8px;
+        }
+        .preview-map-container {
+            width: 100%;
+            max-width: 320px;
+            height: 180px;
+            border-radius: 8px;
+            border: 1px solid #e4e6eb;
+            overflow: hidden;
+            background: #f5f6fa;
+            margin-bottom: 0;
+        }
+        .preview-summary-location-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #050505;
+            margin-bottom: 2px;
+            display: block;
+        }
+        .preview-summary-location-note {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .preview-seller-info {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .preview-seller-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #e4e6eb;
+
+        }
+        .preview-seller-name {
+            font-size: 15px;
+            color: #050505;
+            font-weight: 600;
+        }
+        .preview-seller-details {
+            font-size: 13px;
+            color: #65676b; 
+            margin-left: auto;
+            padding-right: 210px;
+        }
+        .preview-message-btn {
+            width: 100%;
+            padding: 12px 0;
+            background: #e4e6eb;
+            color: #bcc0c4;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: not-allowed;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 18px;
+            letter-spacing: 0.2px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 200px;
+            margin-top: 50px;
+        }
+        .preview-message-btn.enabled {
+            background: #1877f2;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 1200px) {
+            .preview-container {
+                width: 95vw;
+                min-width: 0;
+            }
+        }
+        @media (max-width: 900px) {
+            .main-content {
+                margin-left: 0;
+                padding: 0;
+            }
+            .sidebar {
+                position: static;
+                width: 100vw;
+                border-radius: 0;
+            }
+            .preview-container {
+                flex-direction: column;
+                width: 100vw;
+                min-width: 0;
+                border-radius: 0;
+            }
+            .preview-left, .preview-right {
+                padding: 24px 8vw;
+            }
+        }
+
+        /* Additional styles for preview elements */
+        .preview-condition {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .preview-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .preview-tag {
+            background: #f0f2f5;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: #65676b;
+        }
+        
+        /* Progress bar update */
+        .progress-update {
+            transition: all 0.3s ease;
+        }
+
+        /* Added style for title input */
+        .title-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f5f6fa;
+            margin-top: 0;
+            margin-bottom: 0;
+            outline: none;
+            box-sizing: border-box;
+            color: #050505;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        
+        .title-input:focus {
+            border-color: #1877f2;
+            background: #fff;
+        }
+        
+        /* Preview image styles - UPDATED FOR BETTER FIT */
+        .preview-image-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .preview-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            max-height: 360px;
+        }
+        
+        .preview-thumbnails {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 10px;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        .preview-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+        
+        .preview-thumbnail.active {
+            border-color: #1877f2;
+        }
+        
+        /* Property type preview */
+        .preview-property-type {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        
+        /* Digital Assets for Licensing section */
+        .digital-assets-section {
+            margin-top: 20px;
+        }
+        .digital-assets-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 4px;
+        }
+        .digital-assets-subtitle {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 16px;
+        }
+        
+        /* Digital Asset Definition */
+        .digital-asset-definition {
+            background-color: #f7f9fc;
+            border-left: 4px solid #1877f2;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+        }
+        
+        /* Visibility toggle */
+        .visibility-toggle {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #65676b;
+        }
+        .visibility-icon {
+            margin-right: 6px;
+            font-size: 16px;
+        }
+        
+        /* Renewal modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 24px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #050505;
+        }
+        .close-modal {
+            font-size: 24px;
+            cursor: pointer;
+            color: #65676b;
+        }
+        .date-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .date-col {
+            flex: 1;
+        }
+        .date-col label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #050505;
+        }
+        .date-col input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .reminder-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .reminder-select {
+            flex: 1;
+            position: relative;
+        }
+        .reminder-select label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #050505;
+        }
+        .select-input {
+            position: relative;
+        }
+        .select-input input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .dropdown-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        .dropdown-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            z-index: 10;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .dropdown-options .dropdown-option {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .dropdown-options .dropdown-option:hover {
+            background: #f0f2f5;
+        }
+        .add-reminder-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 25px;
+            height: fit-content;
+        }
+        .reminders-container {
+            margin-top: 15px;
+        }
+        .reminder-item {
+            background-color: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .remove-reminder {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #e74c3c;
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .modal-btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+        .modal-btn-secondary {
+            background-color: #f0f0f0;
+            color: #050505;
+        }
+        .modal-btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        /* FIXED DROPDOWN STYLES */
+        .dropdown-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            color: #050505;
+            border-radius: 6px;
+            transition: background 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .dropdown-option:hover {
+            background: #e4e6eb;
+        }
+        .dropdown-option .description {
+            font-size: 12px;
+            color: #65676b;
+            margin-top: 4px;
+            display: block;
+        }
+        
+        /* Price input with currency symbol */
+        .price-input-container {
+            position: relative;
+        }
+        .price-input-container .currency-symbol {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #555;
+            z-index: 1;
+        }
+        .price-input-container input {
+            padding-left: 30px;
+        }
+        
+        /* Error message styling */
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* Required asterisk */
+        .required-asterisk {
+            color: #e74c3c;
+            margin-left: 3px;
+        }
+        
+        /* Preview elements for digital assets */
+        .preview-license-type {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 8px;
+        }
+        
+        /* Asset type preview */
+        .preview-asset-type {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        
+        /* Added style for dropdown option text */
+        .dropdown-option-text {
+            display: block;
+        }
+        
+        /* BUTTONS SIDE BY SIDE */
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .form-buttons button {
+            flex: 1;
+        }
+        
+        /* NEW: Style for the selected text element */
+        .selected-text {
+            flex: 1;
+        }
+        
+        .publish-btn {
+            width: 100%;
+            padding: 12px 0;
+            background: #42b883;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 2px;
+            letter-spacing: 0.2px;
+        }
+        
+        .publish-btn:hover {
+            background: #369b70;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <button class="close-btn" title="Close">&times;</button>
+  </div>
+  <div class="sidebar-row">
+    <div class="sidebar-title">Service Listing</div>
+  </div>
+  
+  <!-- MODIFIED: Single line layout for title and button -->
+  <div class="sidebar-row">
+    <div class="sidebar-subtitle">Services for Offer</div>
+    <div class="save-draft-container" id="saveDraftContainer">
+      <button class="save-draft-btn" id="saveDraftBtn" disabled>
+        Save Draft <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="save-draft-dropdown">
+        <div class="save-draft-option">
+          <i class="fas fa-images"></i>
+          <span>Gallery</span>
+        </div>
+        <div class="save-draft-option">
+          <i class="fas fa-concierge-bell"></i>
+          <span>Service Centre</span>
+        </div>
+        <div class="save-draft-option">
+          <i class="fas fa-briefcase"></i>
+          <span>Portfolio</span>
+        </div>
+        <div class="save-draft-divider"></div>
+        <div class="save-draft-option">
+          <i class="fas fa-store"></i>
+          <span>Store</span>
+        </div>
+        <div class="save-draft-option">
+          <i class="fas fa-microchip"></i>
+          <span>Tech Hub</span>
+        </div>
+        <div class="save-draft-option">
+          <i class="fas fa-lock"></i>
+          <span>Vault</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- NEW: User info section with icon, name, service listing and public indicator -->
+  <div class="user-info-container">
+    <div class="user-icon">
+      <i class="fas fa-user"></i>
+    </div>
+    <div class="user-details">
+      <div class="user-name">Joshua Mide</div>
+      <div class="user-listing">
+        Service Listing <i class="fas fa-globe-americas public-icon"></i> Public
+      </div>
+    </div>
+  </div>
+  
+  <!-- Digital Assets Form -->
+  <form class="property-form" id="digitalAssetForm">
+    
+    <div class="digital-assets-section">
+      
+      
+      <div class="photo-upload-section">
+        <div class="photo-upload-label">Photo upload</div>
+        <div class="photo-upload-desc">Photos · <span id="photo-count">0</span>/10 – You can add up to 10 photos.</div>
+        <div class="photo-upload-box" id="photoUploadBox">
+          <div class="photo-upload-icon">+</div>
+          <div class="photo-upload-text">Add photos<br><span class="photo-upload-sub">or drag and drop</span></div>
+        </div>
+        
+        <div class="phone-upload-row">
+          <div class="phone-upload-icon">&#128241;</div>
+          <div class="phone-upload-text">Upload photos directly from your phone. <a href="#" class="learn-more">Learn more</a></div>
+          <button class="try-it-btn" type="button">Try It</button>
+        </div>
+        <div class="error-message" id="photoError">Please upload at least one photo</div>
+      </div>
+
+      <div class="digital-assets-subtitle">Be as descriptive as possible.</div>
+
+      <div class="form-group">
+        <input class="title-input" type="text" id="assetTitle" placeholder="Title" autocomplete="off" required>
+        <div class="error-message" id="titleError">Title is required</div>
+      </div>
+
+      <div class="form-group">
+        <div class="custom-dropdown" id="priceOptionDropdown">
+          <div class="dropdown-selected" tabindex="0">
+            <span class="selected-text">Price Option</span>
+            <span class="dropdown-arrow">▼</span>
+          </div>
+          <ul class="dropdown-list">
+            <li class="dropdown-option" data-value="Fixed Price">
+              <span class="dropdown-option-text">Fixed Price</span>
+              <span class="description">Set a standard price for each digital asset</span>
+            </li>
+            <li class="dropdown-option" data-value="Tiered Price">
+              <span class="dropdown-option-text">Tiered Price</span>
+              <span class="description">Offer different pricing levels based on usage rights</span>
+            </li>
+            <li class="dropdown-option" data-value="Subscription">
+              <span class="dropdown-option-text">Subscription</span>
+              <span class="description">Provide access to a bundle of assets for a recurring fee</span>
+            </li>
+            <li class="dropdown-option" data-value="Auction-based Sales">
+              <span class="dropdown-option-text">Auction-based Sales</span>
+              <span class="description">Allow buyers to bid on exclusive digital assets</span>
+            </li>
+          </ul>
+          <input type="hidden" name="price_option" id="priceOptionInput">
+        </div>
+        <div class="error-message" id="priceOptionError">Price option is required</div>
+      </div>
+      
+      <div class="form-group">
+        <div class="custom-dropdown" id="licensingOptionDropdown">
+          <div class="dropdown-selected" tabindex="0">
+            <span class="selected-text">Licensing Option</span>
+            <span class="dropdown-arrow">▼</span>
+          </div>
+          <ul class="dropdown-list">
+            <li class="dropdown-option" data-value="Royalty-Free License">
+              <span class="dropdown-option-text">Royalty-Free License</span>
+              <span class="description">Buyers can use the asset multiple times without additional fees</span>
+            </li>
+            <li class="dropdown-option" data-value="Exclusive License">
+              <span class="dropdown-option-text">Exclusive License</span>
+              <span class="description">Grants sole ownership rights to the buyer</span>
+            </li>
+            <li class="dropdown-option" data-value="Rights-Managed License">
+              <span class="dropdown-option-text">Rights-Managed License</span>
+              <span class="description">Defines specific usage terms (e.g., duration, region, platform)</span>
+            </li>
+            <li class="dropdown-option" data-value="Custom Licensing">
+              <span class="dropdown-option-text">Custom Licensing</span>
+              <span class="description">Users can set personalized terms for asset usage</span>
+            </li>
+            <li class="dropdown-main-option">
+              <span class="dropdown-option-text">Outright License</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Exclusive License (Outright)">
+                  <span class="dropdown-option-text">Exclusive License</span>
+                  <span class="description">Only the licensee has the sole right of the product</span>
+                </li>
+                <li class="dropdown-option" data-value="Non-exclusive License (Outright)">
+                  <span class="dropdown-option-text">Non-exclusive License</span>
+                  <span class="description">Multiple parties can have the same right of the product</span>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown-option" data-value="General License">
+              <span class="dropdown-option-text">General License</span>
+              <span class="description">To enable Digital Assets owners sell their product on an Open Marketplace</span>
+            </li>
+          </ul>
+          <input type="hidden" name="licensing_option" id="licensingOptionInput">
+        </div>
+        <div class="error-message" id="licensingOptionError">Licensing option is required</div>
+      </div>
+      
+      <div class="form-group">
+        <div class="custom-dropdown" id="categoryDropdown">
+          <div class="dropdown-selected" tabindex="0">
+            <span class="selected-text">Category</span>
+            <span class="dropdown-arrow">▼</span>
+          </div>
+          <ul class="dropdown-list">
+            <li class="dropdown-main-option">
+              <span class="dropdown-option-text">Creative & Digital Design Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Academic certificates">Graphic Design (logos, flyers, banners, posters)</li>
+                <li class="dropdown-option" data-value="Professional certifications"> UI/UX Design</li>
+                <li class="dropdown-option" data-value="Identification documents">Presentation & Slide Design </li>
+                <li class="dropdown-option" data-value="Legal agreements">Brand Identity Design</li>
+                <li class="dropdown-option" data-value="Whitepapers"> Infographics & Visual Reports </li>
+                <li class="dropdown-option" data-value="Documents & Certificates - Others">Others</li>
+              </ul>
+            </li>
+            <li class="dropdown-main-option">
+              <span class="dropdown-option-text">Media & Photography Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Thesis & dissertations">Photography (Event, Product, Portrait)</li>
+                <li class="dropdown-option" data-value="Research papers"> Photo Editing & Retouching</li>
+                <li class="dropdown-option" data-value="Case studies">Videography & Video Editing</li>
+                <li class="dropdown-option" data-value="E-books"> Drone Photography & Aerial Imaging</li>
+                <li class="dropdown-option" data-value="Study guides">Content Creation for Social Media </li>
+                <li class="dropdown-option" data-value="Research & Educational Materials - Others">Others</li>
+              </ul>
+            </li>
+            <li class="dropdown-main-option">
+              <span class="dropdown-option-text"> Delivery & Logistics Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Product Requirement Documents (PRDs)"> Courier & Package Delivery</li>
+                <li class="dropdown-option" data-value="Project charters">Document Dispatch & Archiving Support</li>
+                <li class="dropdown-option" data-value="Pitch decks"> On-Demand Pickup Services</li>
+                <li class="dropdown-option" data-value="Roadmaps">  Logistics Coordination for Remote Teams</li>
+                <li class="dropdown-option" data-value="Product & Project Assets - Others">Others</li>
+              </ul>
+            </li>
+          <li class="dropdown-main-option">
+              <span class="dropdown-option-text">Technology & Development Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Product Requirement Documents (PRDs)">Web Design & Development</li>
+                <li class="dropdown-option" data-value="Project charters"> Mobile App Development</li>
+                <li class="dropdown-option" data-value="Pitch decks">Software Documentation & PRDs</li>
+                <li class="dropdown-option" data-value="Roadmaps">API Integration Services</li>
+                <li class="dropdown-option" data-value="Business proposals"> IT Support & Troubleshooting</li>
+                <li class="dropdown-option" data-value="Product & Project Assets - Others">Others</li>
+              </ul>
+            </li>
+
+             <li class="dropdown-main-option">
+              <span class="dropdown-option-text"> Writing & Content Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Product Requirement Documents (PRDs)"> Copywriting & Editing</li>
+                <li class="dropdown-option" data-value="Project charters"> Blog & Article Writing </li>
+                <li class="dropdown-option" data-value="Pitch decks">  Proposal & Report Writing</li>
+                <li class="dropdown-option" data-value="Roadmaps">  Academic & Research Writing </li>
+                <li class="dropdown-option" data-value="Business proposals">Transcription & Subtitling </li>
+                <li class="dropdown-option" data-value="Product & Project Assets - Others">Others</li>
+              </ul>
+            </li>
+
+             <li class="dropdown-main-option">
+              <span class="dropdown-option-text"> Business & Financial Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Product Requirement Documents (PRDs)"> Financial Modeling & Analysis</li>
+                <li class="dropdown-option" data-value="Project charters">  Accounting & Bookkeeping </li>
+                <li class="dropdown-option" data-value="Pitch decks"> Tax Advisory</li>
+                <li class="dropdown-option" data-value="Roadmaps"> Business Plan Development </li>
+                <li class="dropdown-option" data-value="Business proposals"> Pitch Deck & Investor Document Design </li>
+                <li class="dropdown-option" data-value="Product & Project Assets - Others">Others</li>
+              </ul>
+            </li>
+
+<li class="dropdown-main-option">
+              <span class="dropdown-option-text">  Education & Training Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Product Requirement Documents (PRDs)">Online Course Creation</li>
+                <li class="dropdown-option" data-value="Project charters">E-learning Material Design</li>
+                <li class="dropdown-option" data-value="Pitch decks"> Virtual Tutoring</li>
+                <li class="dropdown-option" data-value="Roadmaps">Workshop & Webinar Hosting</li>
+                <li class="dropdown-option" data-value="Business proposals">Curriculum Development</li>
+                <li class="dropdown-option" data-value="Product & Project Assets - Others">Others</li>
+              </ul>
+            </li>
+
+            <li class="dropdown-main-option">
+              <span class="dropdown-option-text">Professional Consulting Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Product Requirement Documents (PRDs)">Legal Advisory (Contracts, IP, Policies)</li>
+                <li class="dropdown-option" data-value="Project charters">HR & Recruitment Support</li>
+                <li class="dropdown-option" data-value="Pitch decks">Project Management Consulting</li>
+                <li class="dropdown-option" data-value="Roadmaps">Data Analysis & Visualization</li>
+                <li class="dropdown-option" data-value="Business proposals">Market Research & Strategy</li>
+                <li class="dropdown-option" data-value="User manuals">Audit reports</li>
+                <li class="dropdown-option" data-value="Product & Project Assets - Others">Others</li>
+              </ul>
+            </li>
+
+             <li class="dropdown-main-option">
+              <span class="dropdown-option-text"> Marketing & Branding Services</span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Product Requirement Documents (PRDs)">Digital Marketing Strategy</li>
+                <li class="dropdown-option" data-value="Project charters">Social Media Management</li>
+                <li class="dropdown-option" data-value="Pitch decks"> SEO & SEM Optimization</li>
+                <li class="dropdown-option" data-value="Roadmaps"> Email Campaign Design</li>
+                <li class="dropdown-option" data-value="Business proposals">Brand Storytelling & Identity Building</li>
+                <li class="dropdown-option" data-value="Product & Project Assets - Others">Others</li>
+              </ul>
+            </li>
+
+             <li class="dropdown-main-option">
+              <span class="dropdown-option-text">Language & Localization Services  </span>
+              <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li class="dropdown-option" data-value="Product Requirement Documents (PRDs)">Translation (Documents, Websites, Subtitles)</li>
+                <li class="dropdown-option" data-value="Project charters"> Localization Services </li>
+                <li class="dropdown-option" data-value="Pitch decks"> Multilingual Voice-over Recording </li>
+                <li class="dropdown-option" data-value="Product & Project Assets - Others">Others</li>
+              </ul>
+            </li>
+
+             <li class="dropdown-main-option">
+              <span class="dropdown-option-text">Others</li>
+
+          </ul>
+          <input type="hidden" name="category" id="categoryInput">
+        </div>
+        <div class="error-message" id="categoryError">Category is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="price-input-container">
+        <span class="currency-symbol">₦</span>
+        <input class="property-input" type="number" id="assetPrice" placeholder="Price" required>
+      </div>
+      <div class="error-message" id="priceError">Price is required</div>
+    </div>
+
+    <div class="about-section">
+      <div class="about-title">More details</div>
+      <div class="about-desc">Attract more interest by including more details.</div>
+      
+      <div class="form-group">
+        <textarea class="description-textarea" id="descriptionTextarea" placeholder="Description" rows="5" required></textarea>
+        <div class="error-message" id="descriptionError">Description is required</div>
+      </div>
+      
+      <div class="form-group">
+        <input class="property-input" type="text" id="productTags" placeholder="Product tags (Limit: 20)">
+      </div>
+
+       <div class="form-group">
+        <input class="title-input" type="text" id="assetLocation" placeholder="Location" autocomplete="off" required>
+        <div class="error-message" id="titleError">Location is required</div>
+      </div>
+      
+       <div class="form-group">
+        <input class="title-input" type="text" id="assetStreet" placeholder="Street Address" autocomplete="off" required>
+        <div class="error-message" id="titleError">Street Address is required</div>
+      </div>
+
+      <div class="form-group">
+        <div class="custom-dropdown" id="renewalDropdown">
+          <div class="dropdown-selected" tabindex="0">
+            <span class="selected-text">Add Renewal</span>
+            <span class="dropdown-arrow">▼</span>
+          </div>
+          <ul class="dropdown-list">
+            <li class="dropdown-option" data-value="Yes">Yes</li>
+            <li class="dropdown-option" data-value="No">No</li>
+          </ul>
+          <input type="hidden" name="renewal" id="renewalInput">
+        </div>
+      </div>
+      
+     
+    <!-- Progress Bar -->
+    <div class="description-policy">
+      Marketplace items are public and can be seen by anyone on or off Facebook. Items such as animals, drugs, weapons, counterfeits and other items that infringe intellectual property aren't allowed on Marketplace. See our <a href="#" class="commerce-policy-link">Commerce Policies</a>.
+    </div>
+
+    <div class="description-progress">
+      <div class="progress-bar">
+        <div class="progress-bar-filled" id="progressBar"></div>
+        <div class="progress-bar-disabled"></div>
+      </div>
+    </div>
+
+    <!-- Buttons side by side -->
+    <div class="form-buttons">
+      <button class="next-btn" id="nextButton" disabled>Send To</button>
+      <button class="publish-btn" id="publishBtn">Publish</button>
+    </div>
+
+  </form>
+  
+
+    
+   
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="preview-container">
+    <div class="preview-left">
+      <div class="preview-title">Preview</div>
+      <div class="listing-preview-box" id="listingPreviewBox">
+        <div class="listing-preview-message">
+          <div class="listing-preview-main">Your listing preview</div>
+          <div class="listing-preview-sub">As you create your listing, you can preview how it will appear to others on Marketplace.</div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-right">
+      <div class="preview-summary">
+        <div class="preview-summary-title" id="previewTitle">Title</div>
+        <div class="preview-summary-price" id="previewPrice">₦0</div>
+        <!-- <div class="preview-asset-type" id="previewAssetType">Category</div> -->
+        <div class="preview-summary-meta">Listed a few seconds ago</div>
+        
+      
+        <hr class="preview-divider">
+        
+        <!-- Description -->
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Details</div>
+          <div class="preview-summary-description" id="previewDescription">
+            No description provided yet.
+          </div>
+        </div>
+        
+        <!-- Tags -->
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Tags</div>
+          <div class="preview-tags" id="previewTags">
+            <span class="preview-tag">No tags yet</span>
+          </div>
+        </div>
+
+          <!-- Location and Street Address Preview -->
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Location</div>
+          <div class="preview-summary-description" id="previewLocation">
+            No location specified
+          </div>
+          <div class="preview-summary-description" id="previewStreetAddress">
+            No street address specified
+          </div>
+        </div>
+        
+        
+        <hr class="preview-divider">
+        
+        <!-- Seller Information -->
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Seller information</div>
+          <div class="preview-seller-info">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxs=" alt="Seller profile" class="preview-seller-avatar">
+            <div class="preview-seller-details">
+              <div class="preview-seller-name" id="previewSellerName">Name</div>
+              <div class="preview-seller-joined"><a href="#">Profile</a></div>
+            </div>
+          </div>
+          
+          <!-- Moved and centralized message button -->
+          <button class="preview-message-btn" id="previewMessageBtn">
+            <i class="fas fa-comment-dots"></i> Message
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Renewal Modal -->
+<div class="modal" id="renewalModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">Set Renewal Details</div>
+            <div class="close-modal" id="closeModal">&times;</div>
+        </div>
+        <div class="modal-body">
+            <div class="date-row">
+                <div class="date-col">
+                    <label for="expirationDate">Expiration Date</label>
+                    <input type="date" id="expirationDate" required>
+                    <div class="error-message" id="expirationDateError">Expiration date is required</div>
+                </div>
+                <div class="date-col">
+                    <label for="renewalDate">Renewal Date</label>
+                    <input type="date" id="renewalDate" required>
+                    <div class="error-message" id="renewalDateError">Renewal date is required</div>
+                </div>
+            </div>
+            <div class="reminder-row">
+                <div class="reminder-select">
+                    <label for="reminderOption">Set Reminder</label>
+                    <div class="select-input">
+                        <input type="text" id="reminderOption" placeholder="Select reminder" readonly>
+                        <span class="dropdown-icon"></span>
+                        <div class="dropdown-options" id="reminderOptionDropdown">
+                            <div class="dropdown-option" data-value="3 Months">3 Months</div>
+                            <div class="dropdown-option" data-value="2 Months">2 Months</div>
+                            <div class="dropdown-option" data-value="1 Month">1 Month</div>
+                            <div class="dropdown-option" data-value="2 Weeks">2 Weeks</div>
+                            <div class="dropdown-option" data-value="1 Week">1 Week</div>
+                            <div class="dropdown-option" data-value="3 Days">3 Days</div>
+                            <div class="dropdown-option" data-value="2 Days">2 Days</div>
+                            <div class="dropdown-option" data-value="1 Day">1 Day</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-reminder-btn" id="addReminderBtn">Add Reminder</button>
+            </div>
+            <div class="reminders-container" id="remindersContainer"></div>
+            <div>
+                <label for="reminderDescription">Add Description</label>
+                <textarea id="reminderDescription" placeholder="Enter reminder description"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn modal-btn-secondary" id="cancelRenewal">Cancel</button>
+            <button class="modal-btn modal-btn-primary" id="saveRenewal">Save</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Form to Preview Binding Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all form elements
+    const form = document.getElementById('digitalAssetForm');
+    const titleInput = document.getElementById('assetTitle');
+    const priceInput = document.getElementById('assetPrice');
+    const priceOptionInput = document.getElementById('priceOptionInput');
+    const licensingOptionInput = document.getElementById('licensingOptionInput');
+    const categoryInput = document.getElementById('categoryInput');
+    const descriptionTextarea = document.getElementById('descriptionTextarea');
+    const tagsInput = document.getElementById('productTags');
+    const renewalInput = document.getElementById('renewalInput');
+    const locationInput = document.getElementById('assetLocation');
+    const streetInput = document.getElementById('assetStreet');
+    const progressBar = document.getElementById('progressBar');
+    const nextButton = document.getElementById('nextButton');
+    const saveDraftBtn = document.getElementById('saveDraftBtn');
+    const previewMessageBtn = document.getElementById('previewMessageBtn');
+    const photoCount = document.getElementById('photo-count');
+    const photoUploadBox = document.getElementById('photoUploadBox');
+    
+    // Get all preview elements
+    const previewTitle = document.getElementById('previewTitle');
+    const previewAssetType = document.getElementById('previewAssetType');
+    const previewPrice = document.getElementById('previewPrice');
+    const previewLicenseType = document.getElementById('previewLicenseType');
+    const previewDescription = document.getElementById('previewDescription');
+    const previewTags = document.getElementById('previewTags');
+    const previewSellerName = document.getElementById('previewSellerName');
+    const previewLocation = document.getElementById('previewLocation');
+    const previewStreetAddress = document.getElementById('previewStreetAddress');
+    const previewListingBox = document.getElementById('listingPreviewBox');
+    
+    // List in More Places elements
+    const listPlacesSection = document.getElementById('listPlacesSection');
+    const publishBtn = document.getElementById('publishBtn');
+    const backButton = document.getElementById('backButton');
+    
+    // Renewal modal elements
+    const renewalModal = document.getElementById('renewalModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const cancelRenewalBtn = document.getElementById('cancelRenewal');
+    const saveRenewalBtn = document.getElementById('saveRenewal');
+    const addReminderBtn = document.getElementById('addReminderBtn');
+    const remindersContainer = document.getElementById('remindersContainer');
+    
+    // Track form completion
+    let completedFields = 0;
+    const totalFields = 10; // Updated to include location and street address
+    
+    // Store uploaded images
+    let uploadedImages = [];
+    let currentImageIndex = 0;
+    
+    // Store reminders
+    let reminders = [];
+    
+    // Update progress bar and button states
+    function updateProgress() {
+        const progressPercentage = (completedFields / totalFields) * 100;
+        progressBar.style.width = `${progressPercentage}%`;
+        
+        // Enable buttons if enough fields are filled
+        if (progressPercentage >= 50) {
+            nextButton.disabled = false;
+            nextButton.classList.add('enabled');
+            saveDraftBtn.disabled = false;
+            saveDraftBtn.classList.add('enabled');
+            previewMessageBtn.disabled = false;
+            previewMessageBtn.classList.add('enabled');
+        } else {
+            nextButton.disabled = true;
+            nextButton.classList.remove('enabled');
+            saveDraftBtn.disabled = true;
+            saveDraftBtn.classList.remove('enabled');
+            previewMessageBtn.disabled = true;
+            previewMessageBtn.classList.remove('enabled');
+        }
+    }
+    
+    // Title input binding
+    titleInput.addEventListener('input', function() {
+        previewTitle.textContent = this.value || 'Digital Asset Title';
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Price input binding
+    priceInput.addEventListener('input', function() {
+        const value = this.value;
+        previewPrice.textContent = value ? `₦${value}` : '₦0';
+        
+        if (value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Price option binding
+    const priceOptions = document.querySelectorAll('#priceOptionDropdown .dropdown-option');
+    priceOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            priceOptionInput.value = value;
+            
+            // FIXED: Only update the text portion, not the entire content
+            const textElement = document.querySelector('#priceOptionDropdown .selected-text');
+            if (textElement) {
+                textElement.textContent = value;
+            }
+            
+            if (value && completedFields < totalFields) {
+                completedFields++;
+                updateProgress();
+            }
+        });
+    });
+    
+    // Licensing option binding
+    const licensingOptions = document.querySelectorAll('#licensingOptionDropdown .dropdown-option');
+    licensingOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            licensingOptionInput.value = value;
+            
+            // FIXED: Only update the text portion, not the entire content
+            const textElement = document.querySelector('#licensingOptionDropdown .selected-text');
+            if (textElement) {
+                textElement.textContent = value;
+            }
+            
+            previewLicenseType.textContent = `Licensing: ${value}`;
+            
+            if (value && completedFields < totalFields) {
+                completedFields++;
+                updateProgress();
+            }
+        });
+    });
+    
+    // Category binding
+    const categoryOptions = document.querySelectorAll('#categoryDropdown .dropdown-option');
+    categoryOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            categoryInput.value = value;
+            
+            // FIXED: Only update the text portion, not the entire content
+            const textElement = document.querySelector('#categoryDropdown .selected-text');
+            if (textElement) {
+                textElement.textContent = value;
+            }
+            
+            previewAssetType.textContent = value;
+            
+            if (value && completedFields < totalFields) {
+                completedFields++;
+                updateProgress();
+            }
+        });
+    });
+    
+    // Description textarea binding
+    descriptionTextarea.addEventListener('input', function() {
+        previewDescription.textContent = this.value || 'No description provided yet.';
+            
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Tags input binding
+    tagsInput.addEventListener('input', function() {
+        const tags = this.value.split(',').map(tag => tag.trim()).filter(tag => tag);
+        
+        if (tags.length > 0) {
+            previewTags.innerHTML = '';
+            tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'preview-tag';
+                tagElement.textContent = tag;
+                previewTags.appendChild(tagElement);
+            });
+        } else {
+            previewTags.innerHTML = '<span class="preview-tag">No tags yet</span>';
+        }
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Location input binding
+    locationInput.addEventListener('input', function() {
+        previewLocation.textContent = this.value || 'No location specified';
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Street address input binding
+    streetInput.addEventListener('input', function() {
+        previewStreetAddress.textContent = this.value || 'No street address specified';
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Renewal functionality
+    const renewalOptions = document.querySelectorAll('#renewalDropdown .dropdown-option');
+    renewalOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            renewalInput.value = value;
+            
+            // FIXED: Only update the text portion, not the entire content
+            const textElement = document.querySelector('#renewalDropdown .selected-text');
+            if (textElement) {
+                textElement.textContent = value;
+            }
+            
+            if (value === 'Yes') {
+                showRenewalModal();
+            }
+            
+            if (completedFields < totalFields) {
+                completedFields++;
+                updateProgress();
+            }
+        });
+    });
+    
+    // Show renewal modal
+    function showRenewalModal() {
+        renewalModal.style.display = 'flex';
+    }
+    
+    // Close renewal modal
+    function closeRenewalModal() {
+        renewalModal.style.display = 'none';
+    }
+    
+    // Display reminders in the modal
+    function displayReminders() {
+        remindersContainer.innerHTML = '';
+        reminders.forEach((reminder, index) => {
+            const reminderElement = document.createElement('div');
+            reminderElement.className = 'reminder-item';
+            reminderElement.innerHTML = `
+                <strong>${reminder.option}</strong>: ${reminder.description || 'No description'}
+                <span class="remove-reminder" data-index="${index}">×</span>
+            `;
+            remindersContainer.appendChild(reminderElement);
+        });
+    
+        // Add event listeners to remove buttons
+        document.querySelectorAll('.remove-reminder').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                reminders.splice(index, 1);
+                displayReminders();
+            });
+        });
+    }
+    
+    // Add reminder button
+    addReminderBtn.addEventListener('click', function() {
+        const reminderOption = document.getElementById('reminderOption').value;
+        const reminderDescription = document.getElementById('reminderDescription').value;
+        
+        if (!reminderOption) {
+            alert('Please select a reminder option');
+            return;
+        }
+        
+        reminders.push({
+            option: reminderOption,
+            description: reminderDescription
+        });
+        
+        displayReminders();
+        document.getElementById('reminderOption').value = '';
+        document.getElementById('reminderDescription').value = '';
+    });
+    
+    // Save renewal details
+    saveRenewalBtn.addEventListener('click', function() {
+        const expirationDate = document.getElementById('expirationDate').value;
+        const renewalDate = document.getElementById('renewalDate').value;
+        
+        if (!expirationDate) {
+            document.getElementById('expirationDateError').style.display = 'block';
+            return;
+        } else {
+            document.getElementById('expirationDateError').style.display = 'none';
+        }
+        
+        if (!renewalDate) {
+            document.getElementById('renewalDateError').style.display = 'block';
+            return;
+        } else {
+            document.getElementById('renewalDateError').style.display = 'none';
+        }
+        
+        if (new Date(renewalDate) <= new Date(expirationDate)) {
+            document.getElementById('renewalDateError').textContent = 'Renewal date must be after expiration date';
+            document.getElementById('renewalDateError').style.display = 'block';
+            return;
+        } else {
+            document.getElementById('renewalDateError').style.display = 'none';
+        }
+        
+        closeRenewalModal();
+    });
+    
+    // Modal event handlers
+    closeModalBtn.addEventListener('click', closeRenewalModal);
+    cancelRenewalBtn.addEventListener('click', closeRenewalModal);
+    
+    // Image upload and preview functionality
+    function handleImageUpload(files) {
+        for (let i = 0; i < files.length; i++) {
+            if (uploadedImages.length >= 10) break;
+            
+            const file = files[i];
+            if (!file.type.match('image.*')) continue;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImages.push(e.target.result);
+                updateImagePreview();
+                photoCount.textContent = uploadedImages.length;
+                
+                if (uploadedImages.length === 1 && completedFields < totalFields) {
+                    completedFields++;
+                    updateProgress();
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+    
+    function updateImagePreview() {
+        if (uploadedImages.length > 0) {
+            previewListingBox.innerHTML = '';
+            
+            // Create image carousel
+            const carousel = document.createElement('div');
+            carousel.className = 'preview-image-container';
+            
+            // Add main image
+            const mainImg = document.createElement('img');
+            mainImg.src = uploadedImages[currentImageIndex];
+            mainImg.className = 'preview-main-image';
+            mainImg.onload = function() {
+                // Ensure image fits properly without being cut off
+                this.style.objectFit = 'contain';
+                this.style.maxHeight = '360px';
+                this.style.maxWidth = '100%';
+            };
+            carousel.appendChild(mainImg);
+            
+            // Add navigation arrows if multiple images
+            if (uploadedImages.length > 1) {
+                const prevButton = document.createElement('button');
+                prevButton.className = 'carousel-nav prev';
+                prevButton.innerHTML = '&#10094;';
+                prevButton.addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex - 1 + uploadedImages.length) % uploadedImages.length;
+                    updateImagePreview();
+                });
+                carousel.appendChild(prevButton);
+                
+                const nextButton = document.createElement('button');
+                nextButton.className = 'carousel-nav next';
+                nextButton.innerHTML = '&#10095;';
+                nextButton.addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex + 1) % uploadedImages.length;
+                    updateImagePreview();
+                });
+                carousel.appendChild(nextButton);
+                
+                // Add image counter
+                const counter = document.createElement('div');
+                counter.className = 'image-counter';
+                counter.textContent = `${currentImageIndex + 1} / ${uploadedImages.length}`;
+                carousel.appendChild(counter);
+            }
+            
+            // Add thumbnail navigation if multiple images
+            if (uploadedImages.length > 1) {
+                const thumbnailsContainer = document.createElement('div');
+                thumbnailsContainer.className = 'preview-thumbnails';
+                
+                uploadedImages.forEach((img, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = img;
+                    thumb.className = 'preview-thumbnail';
+                    if (index === currentImageIndex) {
+                        thumb.classList.add('active');
+                    }
+                    
+                    thumb.addEventListener('click', () => {
+                        currentImageIndex = index;
+                        updateImagePreview();
+                    });
+                    
+                    thumbnailsContainer.appendChild(thumb);
+                });
+                
+                carousel.appendChild(thumbnailsContainer);
+            }
+            
+            previewListingBox.appendChild(carousel);
+        } else {
+            // Show default message if no images
+            previewListingBox.innerHTML = `
+                <div class="listing-preview-message">
+                    <div class="listing-preview-main">Your listing preview</div>
+                    <div class="listing-preview-sub">As you create your listing, you can preview how it will appear to others on Marketplace.</div>
+                </div>
+            `;
+        }
+    }
+    
+    // Photo upload box click handler
+    photoUploadBox.addEventListener('click', function() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = true;
+        input.accept = 'image/*';
+        input.onchange = (e) => handleImageUpload(e.target.files);
+        input.click();
+    });
+    
+    // Drag and drop functionality
+    photoUploadBox.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#1877f2';
+        this.style.background = '#e7f3ff';
+    });
+    
+    photoUploadBox.addEventListener('dragleave', function() {
+        this.style.borderColor = '#ccd0d5';
+        this.style.background = '#f5f6fa';
+    });
+    
+    photoUploadBox.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#ccd0d5';
+        this.style.background = '#f5f6fa';
+        handleImageUpload(e.dataTransfer.files);
+    });
+    
+    // Custom dropdown logic - FIXED FUNCTIONALITY
+    const dropdowns = document.querySelectorAll('.custom-dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const selected = dropdown.querySelector('.dropdown-selected');
+        const list = dropdown.querySelector('.dropdown-list');
+        const mainOptions = dropdown.querySelectorAll('.dropdown-main-option');
+        const options = dropdown.querySelectorAll('.dropdown-option');
+        
+        // Toggle dropdown on click
+        selected.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            // Close all other dropdowns
+            dropdowns.forEach(d => {
+                if (d !== dropdown) {
+                    d.classList.remove('open');
+                    d.querySelectorAll('.dropdown-main-option').forEach(opt => opt.classList.remove('expanded'));
+                }
+            });
+            
+            dropdown.classList.toggle('open');
+        });
+        
+        // Handle main options with submenus
+        if (mainOptions.length > 0) {
+            mainOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // Toggle submenu for this option
+                    const wasExpanded = this.classList.contains('expanded');
+                    
+                    // Close all other main options
+                    mainOptions.forEach(opt => {
+                        if (opt !== option) opt.classList.remove('expanded');
+                    });
+                    
+                    // Toggle this option
+                    if (!wasExpanded) {
+                        option.classList.add('expanded');
+                    } else {
+                        option.classList.remove('expanded');
+                    }
+                });
+            });
+        }
+        
+        // Handle option selection - FIXED: Only update the text portion
+        options.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Don't process clicks on main options with submenus
+                if (this.classList.contains('dropdown-main-option')) return;
+                
+                const value = this.getAttribute('data-value');
+                const optionText = this.querySelector('.dropdown-option-text') ? 
+                    this.querySelector('.dropdown-option-text').textContent : 
+                    this.textContent.split('\n')[0].trim();
+                
+                // FIXED: Update only the text portion, not the entire content
+                const textElement = selected.querySelector('.selected-text');
+                if (textElement) {
+                    textElement.textContent = optionText;
+                } else {
+                    // Fallback for if the structure isn't updated
+                    selected.innerHTML = optionText + ' <span class="dropdown-arrow">▼</span>';
+                }
+                
+                // Set hidden input value
+                const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+                if (hiddenInput) {
+                    hiddenInput.value = value;
+                }
+                
+                // Close dropdown
+                dropdown.classList.remove('open');
+                dropdown.querySelectorAll('.dropdown-main-option').forEach(opt => opt.classList.remove('expanded'));
+                
+                // Trigger change event for form validation
+                if (hiddenInput) {
+                    hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+        });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        dropdowns.forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('open');
+                dropdown.querySelectorAll('.dropdown-main-option').forEach(opt => opt.classList.remove('expanded'));
+            }
+        });
+    });
+    
+    // Close dropdowns when pressing Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('open');
+                dropdown.querySelectorAll('.dropdown-main-option').forEach(opt => opt.classList.remove('expanded'));
+            });
+        }
+    });
+    
+    // Next button click handler - show List in More Places section
+    nextButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!this.disabled) {
+            // Update sidebar title
+            document.querySelector('.sidebar-subtitle').textContent = 'List in More Places';
+        }
+    });
+    
+    // Back button click handler - go back to form
+    backButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Update sidebar title
+        document.querySelector('.sidebar-subtitle').textContent = 'Digital Assets Listing';
+    });
+    
+    // Publish button click handler
+    publishBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Your digital asset has been published successfully!');
+        // Here you would typically submit the form data to a server
+    });
+    
+    // Save draft button click handler
+    saveDraftBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!this.disabled) {
+            alert('Draft saved successfully!');
+        }
+    });
+    
+    previewMessageBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!this.disabled) {
+            alert('Message button clicked! This would open a messaging interface.');
+        }
+    });
+    
+    // Initialize progress bar
+    updateProgress();
+    
+    // Set seller name
+    previewSellerName.textContent = 'Joshua Mide';
+});
+
+// Add this code to your existing JavaScript to handle the reminder dropdown
+const reminderOptionInput = document.getElementById('reminderOption');
+const reminderOptionDropdown = document.getElementById('reminderOptionDropdown');
+const reminderOptions = reminderOptionDropdown.querySelectorAll('.dropdown-option');
+
+// Toggle reminder dropdown
+reminderOptionInput.addEventListener('click', function(e) {
+    e.stopPropagation();
+    reminderOptionDropdown.style.display = 
+        reminderOptionDropdown.style.display === 'block' ? 'none' : 'block';
+});
+
+// Select reminder option
+reminderOptions.forEach(option => {
+    option.addEventListener('click', function() {
+        reminderOptionInput.value = this.getAttribute('data-value');
+        reminderOptionDropdown.style.display = 'none';
+    });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (!reminderOptionInput.contains(e.target) && !reminderOptionDropdown.contains(e.target)) {
+        reminderOptionDropdown.style.display = 'none';
+    }
+});
+
+// Close dropdown when pressing Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        reminderOptionDropdown.style.display = 'none';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const saveDraftContainer = document.getElementById('saveDraftContainer');
+    const saveDraftBtn = document.getElementById('saveDraftBtn');
+    
+    // Toggle dropdown on button click
+    saveDraftBtn.addEventListener('click', function(e) {
+        if (this.disabled) return;
+        saveDraftContainer.classList.toggle('open');
+        e.stopPropagation();
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!saveDraftContainer.contains(e.target)) {
+            saveDraftContainer.classList.remove('open');
+        }
+    });
+    
+    // Close dropdown when pressing Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            saveDraftContainer.classList.remove('open');
+        }
+    });
+    
+    // Handle option selection
+    document.querySelectorAll('.save-draft-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const optionText = this.querySelector('span').textContent;
+            alert(`Navigating to ${optionText}`);
+            saveDraftContainer.classList.remove('open');
+        });
+    });
+});
+
+
+</script>
+</body>
+</html>

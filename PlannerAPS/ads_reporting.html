@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ArchiveHubs</title>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/campaign_account1.css">
+    <link rel="stylesheet" href="css/ads_reporting.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- <nav class="navbar">
+      <div class="nav-left">
+          <a href="home.html" class="logo">
+            <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+          </a>
+          <div class="search-box">
+            <div class="search-trigger">
+              <i class="fas fa-search search-icon"></i>
+              <div class="search-text">Search</div>
+            </div>
+            <input type="text" placeholder="Search..." class="search-input">
+          </div>
+      </div>
+          
+  <div class="nav-middle">
+      <a href="home.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+      </a>
+      <a href="#" class="nav-link">
+          <i class="fas fa-user-friends"></i>
+          <span>MyConnections</span>
+      </a>
+      <a href="#" class="nav-link">
+          <i class="fas fa-video"></i>
+          <span>Video</span>
+      </a>
+      <a href="#" class="nav-link">
+          <i class="fas fa-comment-dots"></i>
+          <span>Messages</span>
+      </a>
+      <a href="notification.html" class="nav-link">
+          <i class="fas fa-bell"></i>
+          <span>Notifications</span>
+      </a>
+      <a href="#" class="nav-link profile-nav-link">
+        <i class="fas fa-user-circle"></i>
+        <span>Account</span>
+      </a>
+    </div>
+
+          <div class="nav-right">
+
+            <a href="#" class="nav-link">
+              <i class="fas fa-briefcase"></i>
+              <span>Jobs</span>
+            </a>
+            <a href="business.html" class="nav-link">
+                <i class="fas fa-building"></i>
+                <span>Business</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <span>Drive</span>
+            </a>
+            <div class="profile-menu">
+              <button class="menu-toggle">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </button>
+               <-- Dropdown Menu -->
+                <!-- <div class="dropdown-menu">
+                    <div class="user-info">
+                        <img src="images/profile.svg">
+                        <div>
+                            <h3>John Doe</h3>
+                            <p>Web Developer</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user"></i>
+                        <span>View Profile</span>
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a> -->
+                    <!-- Add Theme Toggle Here -->
+                    <!-- <div class="dropdown-item theme-toggle">
+                      <div class="theme-toggle-left" onclick="toggleTheme()">
+                          <i class="fas fa-moon dark-icon"></i>
+                      <span>Dark Mode</span>
+                      </div>
+                      <div class="toggle-switch">
+                          <input type="checkbox" id="theme-switch">
+                          <label for="theme-switch"></label>
+                      </div>
+                  </div>
+                    <hr>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Log Out</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+      </nav> -->
+      <aside class="sidebar">
+        <a href="../home.html" class="nav-item">
+            <img src="images/Logo.jpg" alt="">
+            <span class="nav-text">ArchiveHubs</span>
+        </a>
+        <a href="campaign_account1.html" class="nav-item">
+            <i class="fas fa-briefcase"></i>
+            <span class="nav-text">Account Overview</span>
+        </a>
+        <a href="ads_manager.html" class="nav-item">
+            <i class="fas fa-table"></i>
+            <span class="nav-text">Campaigns</span>
+        </a>
+        <a href="ads_reporting.html" class="nav-item active">
+            <i class="fas fa-copy"></i>
+            <span class="nav-text">Ads Reporting</span>
+        </a>
+        <a href="Audience(plannerAPS).html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span class="nav-text">Audiences</span>
+        </a>
+        <a href="advertising(plannerAPS).html" class="nav-item">
+            <i class="fas fa-bullhorn"></i>
+            <span class="nav-text">Advertising Settings</span>
+        </a>
+        <a href="event_manager(plannerAPS).html" class="nav-item">
+            <i class="fas fa-chart-bar"></i>
+            <span class="nav-text">Events Manager</span>
+        </a>
+        <a onclick="openAllTools()" class="nav-item all-tools-link">
+          <i class="fas fa-bars"></i>
+          <span class="nav-text">All Tools</span>
+      </a>
+        <!-- <a href="#" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span class="nav-text">Settings</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-bell"></i>
+            <span class="nav-text">Notifications</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-search"></i>
+            <span class="nav-text">Search</span>
+        </a> -->
+    </aside>
+
+    <main class="main-content">
+        <div class="report-top-bar">
+          <div class="report-bar-left">
+            <button class="back-btn">All reports</button>
+            <div class="report-title-dropdown">
+              <span class="report-title">Untitled rep...</span>
+              <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="user-profile">
+              <img src="images/profile.svg" alt="User" class="user-avatar">
+              <span class="user-name">Joshua Mide</span>
+            </div>
+            <div class="ad-account-selector">
+              <i class="fas fa-file-alt"></i>
+              <span>1 Ad Account</span>
+            </div>
+          </div>
+          <div class="report-bar-right">
+            <div class="unsaved-changes">
+              <span>You have unsaved changes</span>
+              <span class="data-refresh">Data refreshed less than 1 minute ago</span>
+            </div>
+            <button class="save-btn">Save <i class="fas fa-caret-down"></i></button>
+            <button class="refresh-btn"><i class="fas fa-sync-alt"></i> Refresh</button>
+            <button class="share-btn"><i class="fas fa-share"></i> Share</button>
+            <button class="export-btn"><i class="fas fa-download"></i> Export</button>
+            <button class="menu-btn"><i class="fas fa-ellipsis-h"></i></button>
+            <div class="user-avatar-fb">
+              <img src="images/profile.jpg" alt="User" class="user-avatar">
+            </div>
+          </div>
+        </div>
+        <!-- Your main content goes here -->
+        <div class="report-content-wrapper">
+            <!-- Main Table/Empty State Section -->
+            <div class="report-main">
+              <div class="report-toolbar">
+                <div class="toolbar-left">
+                  <button class="toolbar-btn filter-btn">Had delivery <span class="remove-filter">&times;</span></button>
+                  <input class="search-input" type="text" placeholder="Search by name, ID or metrics">
+                </div>
+                <div class="toolbar-right">
+                  <button class="toolbar-link clear-btn">Clear</button>
+                  <button class="toolbar-btn date-btn">
+                    <i class="fas fa-calendar-alt"></i>
+                    This month: 1 Apr 2025 - 29 Apr 2025
+                    <i class="fas fa-caret-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="report-table-toolbar">
+                <button class="toolbar-btn"><i class="fas fa-table"></i> Pivot Table <i class="fas fa-caret-down"></i></button>
+                <button class="toolbar-btn">Ungroup Breakdowns</button>
+                <button class="toolbar-link right-toolbar">Reset Column Widths</button>
+                <button class="toolbar-btn">Format</button>
+                <button class="toolbar-btn">Customise</button>
+              </div>
+              <div class="report-table-header">
+                <div class="table-col">Campaign name <i class="fas fa-caret-down"></i></div>
+                <div class="table-col">Ad set name <i class="fas fa-caret-down"></i></div>
+                <div class="table-col">Delivery <i class="fas fa-caret-down"></i></div>
+                <div class="table-col">Reach <i class="fas fa-caret-down"></i></div>
+                <div class="table-col">Impressions <i class="fas fa-caret-down"></i></div>
+                <div class="table-col">Frequency <i class="fas fa-caret-down"></i></div>
+                <div class="table-col">Attribution setting</div>
+                <div class="table-col">Results <i class="fas fa-caret-down"></i></div>
+                <div class="table-col active">Amount spent <i class="fas fa-caret-down"></i> <i class="fas fa-arrow-down"></i></div>
+                <div class="table-col">Cost per result <i class="fas fa-caret-down"></i></div>
+                <div class="table-col">Schedule <i class="fas fa-caret-down"></i></div>
+              </div>
+              <div class="report-empty-state">
+                <img src="images/empty-state.svg" alt="No data" class="empty-img">
+                <div class="empty-title">No data to show</div>
+                <div class="empty-desc">Create a new campaign or wait until your campaigns have impressions to see data.</div>
+                <button class="create-btn">+ Create</button>
+              </div>
+            </div>
+            <!-- Right Customise Pivot Table Section -->
+            <div class="report-customise">
+              <div class="customise-header">
+                <span>Customise pivot table</span>
+                <button class="customise-menu"><i class="fas fa-ellipsis-h"></i></button>
+              </div>
+              <input class="customise-search" type="text" placeholder="Search">
+              <div class="customise-tabs">
+                <button class="tab active">Breakdowns</button>
+                <button class="tab">Metrics</button>
+              </div>
+              <div class="customise-section">
+                <div class="customise-group">
+                <div class="customise-label collapsible">
+                    Popular breakdowns
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="customise-list collapsible-content">
+                  <label><input type="checkbox" checked> Campaign name</label>
+                  <label><input type="checkbox" checked> Ad set name</label>
+                  <label><input type="checkbox"> Ad name</label>
+                  <label><input type="checkbox"> Page name</label>
+                  <label><input type="checkbox"> Ad creative</label>
+                  <label><input type="checkbox"> Age</label>
+                  <label><input type="checkbox"> Gender</label>
+                  <label><input type="checkbox"> Country</label>
+                  <label><input type="checkbox"> Region</label>
+                  <label><input type="checkbox"> Platform</label>
+                  <label><input type="checkbox"> Placement</label>
+                  <label><input type="checkbox"> Objective</label>
+                  <label><input type="checkbox"> Day</label>
+                  <label><input type="checkbox"> Month</label>
+                </div>
+                </div>
+                <div class="customise-group">
+                <div class="customise-label collapsible">
+                    Custom breakdowns
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <button class="create-btn small collapsible-content">+ Create</button>
+                </div>
+
+                <div class="customise-group">
+                <div class="customise-label collapsible">
+                    Level
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="customise-list collapsible-content">
+                  <label><input type="checkbox" checked> Campaign name</label>
+                  <label><input type="checkbox" checked> Ad set name</label>
+                  <label><input type="checkbox"> Ad name</label>
+                  <label><input type="checkbox"> Page name</label>
+                  <label><input type="checkbox"> Campaign ID</label>
+                  <label><input type="checkbox"> Ad set ID</label>
+                  <label><input type="checkbox"> Ad ID</label>
+                  <label><input type="checkbox"> Page ID</label>
+                  <label><input type="checkbox"> Ad Creative</label>
+                </div>
+                </div>
+
+                <div class="customise-group">
+                <div class="customise-label collapsible">
+                    Time
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="customise-list collapsible-content">
+                  <label><input type="checkbox"> Day</label>
+                  <label><input type="checkbox"> Week</label>
+                  <label><input type="checkbox"> 2 Weeks</label>
+                  <label><input type="checkbox"> Month</label>
+                </div>
+                </div>
+
+                <div class="customise-group">
+                <div class="customise-label collapsible">
+                    Delivery
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="customise-list collapsible-content">
+                  <label><input type="checkbox">Age</label>
+                  <label><input type="checkbox">Gender</label>
+                  <label><input type="checkbox">Business locations</label>
+                  <label><input type="checkbox">Country</label>
+                  <label><input type="checkbox">Region</label>
+                  <label><input type="checkbox">DMA region</label>
+                  <label><input type="checkbox">Impression device</label>
+                  <label><input type="checkbox">Media type</label>
+                  <label><input type="checkbox">Platform</label>
+                  <label><input type="checkbox">Placement</label>
+                  <label><input type="checkbox">Device platform</label>
+                  <label><input type="checkbox">Product ID</label>
+                  <label><input type="checkbox">Audience segments</label>
+                  <label><input type="checkbox">Time of day (ad account time zone)</label>
+                  <label><input type="checkbox">Time of day (viewer's time zone)</label>
+                </div>
+                </div>
+
+                <div class="customise-group">
+                <div class="customise-label collapsible">
+                    Action
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="customise-list collapsible-content">
+                  <label><input type="checkbox">Messaging outcome destination</label>
+                  <label><input type="checkbox">Messaging purchase source</label>
+                  <label><input type="checkbox">Conversion device</label>
+                  <label><input type="checkbox">Post reaction type</label>
+                  <label><input type="checkbox">Destination</label>
+                  <label><input type="checkbox">Video view type</label>
+                  <label><input type="checkbox">Video sound</label>
+                  <label><input type="checkbox">Carousel card</label>
+                  <label><input type="checkbox">Instant Experience component</label>
+                  <label><input type="checkbox">Category (Onsite)</label>
+                  <label><input type="checkbox">Brand (Onsite)</label>
+                </div>
+                </div>
+            
+                <div class="customise-group">
+                <div class="customise-label collapsible">
+                    Settings
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="customise-list collapsible-content">
+                  <label><input type="checkbox">Objective</label>
+                </div>
+                </div>
+
+                <div class="customise-group">
+                    <div class="customise-label collapsible">
+                        Dynamic creative asset
+                        <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="customise-list collapsible-content">
+                      <label><input type="checkbox">Image, video and slideshow</label>
+                      <label><input type="checkbox">Call to action</label>
+                      <label><input type="checkbox">Description</label>
+                      <label><input type="checkbox">Headline (ad settings)</label>
+                      <label><input type="checkbox">Text</label>
+                      <label><input type="checkbox">Website URL</label>
+                    </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+      </main>
+
+       <!-- All Tools Overlay -->
+
+<div id="all-tools-overlay" class="all-tools-overlay">
+  <div class="all-tools-modal">
+    <div class="all-tools-header">
+      <span class="all-tools-title"><b>All tools</b></span>
+      <a href="#" class="meta-suite-link">
+        <i class="fas fa-arrow-up-right-from-square"></i> Meta Business Suite
+      </a>
+      <button class="all-tools-close" onclick="closeAllTools()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="all-tools-shortcuts">
+      <div class="shortcut">
+        <i class="fas fa-bullhorn"></i>
+        <span>Adverts Manager</span>
+      </div>
+      <div class="shortcut">
+        <i class="fas fa-users"></i>
+        <span>Audiences</span>
+      </div>
+      <div class="shortcut">
+        <i class="fas fa-file-alt"></i>
+        <span>Ads Reporting</span>
+      </div>
+      <div class="shortcut active">
+        <i class="fas fa-user-circle"></i>
+        <span>Events Manager</span>
+      </div>
+      <div class="shortcut">
+        <i class="fas fa-credit-card"></i>
+        <span>Billing & payments</span>
+      </div>
+      <div class="shortcut">
+        <i class="fas fa-cog"></i>
+        <span>Business settings</span>
+      </div>
+    </div>
+    <div class="all-tools-columns">
+      <div class="tools-col">
+        <div class="tools-section-title">Manage</div>
+        <a href="#">Business support home</a>
+        <a href="#">Billing & payments</a>
+        <a href="#">Brand Rights Protection</a>
+        <a href="#">Brand safety and suitability</a>
+        <a href="#">Business apps</a>
+        <a href="#">Store locations</a>
+        <a href="#">Business settings</a>
+        <a href="#">Get Started</a>
+        <a href="#">Instant Forms</a>
+        <a href="#">Media Library</a>
+        <a href="#">WhatsApp Manager</a>
+      </div>
+      <div class="tools-col">
+        <div class="tools-section-title">Advertise</div>
+        <a href="#">Ad account settings</a>
+        <a href="#">Ads</a>
+        <a href="#">Ad limits per Page</a>
+        <a href="#">Adverts Manager</a>
+        <a href="#">Advertising settings</a>
+        <a href="#">Audiences</a>
+        <a href="#">Automated rules</a>
+        <a href="#">Campaign Planner</a>
+        <a href="#">Creative Hub</a>
+        <a href="#">Partnership Ads Hub</a>
+        <a class="active" href="#">Events Manager</a>
+      </div>
+      <div class="tools-col">
+        <div class="tools-section-title">Analyse and report</div>
+        <a href="#">Ads Reporting</a>
+        <a href="#">Audience Insights</a>
+        <a href="#">Insights</a>
+        <a href="#">Branded content</a>
+        <a href="#">Creative reporting</a>
+        <a href="#">Experiments</a>
+        <a href="#">Traffic analysis report</a>
+      </div>
+      <div class="tools-col">
+        <div class="tools-section-title">Engage audience</div>
+        <a href="#">Planner</a>
+        <a href="#">Inbox</a>
+        <a href="#">Charity manager</a>
+        <a href="#">Page posts</a>
+        <a href="#">Content</a>
+        <a href="#">Sound Collection</a>
+        <a href="#">Live dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+
+
+<script>
+  document.querySelectorAll('.customise-label.collapsible').forEach(label => {
+    label.addEventListener('click', function() {
+      const group = this.parentElement;
+      group.classList.toggle('collapsed');
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="../Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="../Archivehubs-Notifications/notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="../Archivehubs-Business/business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="#" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="../Archivehubs-Menu/menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+
+      <div class="calendar-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>My Schedule</h2>
+            </div>
+            
+            <div class="calendar-navigation">
+                <button class="nav-btn active">
+                    <i class="fas fa-calendar-day"></i>
+                    Day
+                </button>
+                <button class="nav-btn">
+                    <i class="fas fa-calendar-week"></i>
+                    Week
+                </button>
+                <button class="nav-btn">
+                    <i class="fas fa-calendar-alt"></i>
+                    Month
+                </button>
+            </div>
+
+            <div class="upcoming-events">
+                <h3>Upcoming Events</h3>
+                <!-- Placeholder for upcoming events -->
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="calendar-header">
+                <h1>Smart Calendar Integration</h1>
+                <p>Seamlessly manage your schedule and stay organized</p>
+            </div>
+
+            <div class="calendar-grid">
+                <!-- Calendar content will be dynamically populated -->
+                <div class="placeholder-text">
+                    Select a date to view or create events
+                </div>
+            </div>
+
+            <div class="international-days">
+                <div class="section-header">
+                    <h3>International Days</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <!-- International days content -->
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <div class="action-buttons">
+                <button class="create-schedule-btn primary" onclick="window.location.href='calendar_schedule.html'">
+                    <i class="fas fa-clock"></i>
+                    Create a Schedule
+                </button>
+
+                <div class="support-section">
+                    <h3>
+                        <i class="fas fa-headset"></i>
+                        Create Schedule with support
+                    </h3>
+                    <a href="schedule.html">
+                        <button class="start-schedule-btn">
+                            Start a Schedule
+                        </button>
+                    </a>
+                </div>
+
+                <div class="help-section">
+                    <a href="#" class="help-link">
+                        <i class="fas fa-question-circle"></i>
+                        Help Center
+                    </a>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <button class="quick-action-btn">
+                    <i class="fas fa-plus"></i>
+                    New Event
+                </button>
+                <button class="quick-action-btn">
+                    <i class="fas fa-share-alt"></i>
+                    Share Calendar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messaging Box -->
+    <div class="messaging-box">
+        <div class="messaging-header" onclick="toggleMessagingBox()">
+            <div class="messaging-left">
+                <img src="images/profile.jpg" alt="Profile" class="messaging-profile">
+                <span>Messaging</span>
+            </div>
+            <div class="messaging-actions">
+                <i class="fas fa-pen-to-square"></i>
+                <i class="fas fa-ellipsis"></i>
+            </div>
+        </div>
+
+        <div class="messaging-content">
+            <!-- Add messaging content -->
+            <div class="messaging-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search messages">
+            </div>
+            <div class="messages-list">
+                <div class="no-messages">
+                    <i class="fas fa-comment-dots"></i>
+                    <p>No messages yet</p>
+                    <span>Connect with people to start messaging</span>
+                </div>
+            </div>
+        </div>
+      </div>
+
+       <!-- Account Pop-up (ArchiveHubs-style) -->
+    <div id="accountPopupPanel" class="account-popup" style="display:none;">
+      <!-- Banner Cover Photo -->
+      <div class="account-popup-banner">
+        <img src="images/header.jpg" alt="Cover Photo" class="account-banner-img">
+      </div>
+      <!-- User Info -->
+      <div class="account-popup-userinfo underline clickable">
+        <div class="account-popup-avatar">
+          <img src="images/profile.jpg" alt="User Profile Picture">
+        </div>
+        <div class="account-popup-username">User</div>
+      </div>
+      
+              <!-- Account Switcher Section -->
+        <div class="account-popup-switcher underline">
+          <div class="account-switcher-item">
+            <div class="account-switcher-avatar-container">
+              <img src="images/profile.jpg" alt="User Profile Picture" class="account-switcher-avatar">
+              <div class="switch-roller"></div>
+            </div>
+            <div class="account-switcher-info">
+              <div class="account-switcher-name">User Page</div>
+            </div>
+          </div>
+        </div>
+      <!-- View Profile Button -->
+      <div class="account-popup-view-profile-row">
+        <button class="account-popup-view-profile">See all profiles</button>
+      </div>
+      <!-- Account Section -->
+      <div class="account-popup-section account-popup-account">
+        <div class="account-popup-account-row highlight">
+          <img src="images/profile.jpg" alt="Company Logo" class="account-popup-account-icon">
+          <div class="account-popup-account-info">
+            <div class="account-popup-account-name">Archivehubs Explorer</div>
+            <div class="account-popup-premium"><a href="#">Try free Premium for 1 month</a></div>
+          </div>
+        </div>
+        <!-- New: More popup links with icons -->
+        <div class="account-popup-link">
+          <i class="fa fa-gear"></i>
+          <span>Settings & privacy</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-question-circle"></i>
+          <span>Help & Support</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-moon"></i>
+          <span>Display & Accessibility</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-calendar"></i>
+          <span>Planner (APS)</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-folder-open"></i>
+          <span>Archive Explorer</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-hdd"></i>
+          <span>Archive Drive</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+        <div class="account-popup-link">
+          <i class="fa fa-file-alt"></i>
+          <span>General Terms</span>
+          <i class="fa fa-angle-right right-arrow"></i>
+        </div>
+      </div>
+      <hr class="account-popup-divider">
+      <!-- Sign Out -->
+      <div class="account-popup-signout-row">
+        <button class="account-popup-signout">Sign Out</button>
+      </div>
+    </div>
+
+
+
+      <script>
+        window.addEventListener('DOMContentLoaded', function() {
+      const accountNavLink = document.getElementById('accountPopup');
+      const accountPopupPanel = document.getElementById('accountPopupPanel');
+    
+      if (accountNavLink && accountPopupPanel) {
+        accountNavLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Position the popup under the nav-link
+          const rect = accountNavLink.getBoundingClientRect();
+          accountPopupPanel.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+          accountPopupPanel.style.right = (window.innerWidth - rect.right - 8) + 'px';
+          accountPopupPanel.style.display = (accountPopupPanel.style.display === 'none' || accountPopupPanel.style.display === '') ? 'block' : 'none';
+        });
+        // Hide popup when clicking outside
+        document.addEventListener('mousedown', function(e) {
+          if (accountPopupPanel.style.display !== 'none' && !accountPopupPanel.contains(e.target) && !accountNavLink.contains(e.target)) {
+            accountPopupPanel.style.display = 'none';
+          }
+        });
+      }
+    });
+      </script>
+
+<script src="js/script.js"></script>
+</body>
+</html>

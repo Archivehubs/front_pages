@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin-top: 100px;
+    margin: 50px auto;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.card {
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.search-box {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: #f9f9f9;
+}
+
+.menu-icon {
+    margin-right: 15px;
+    color: #555;
+    width: 20px;
+    text-align: center;
+}
+
+.menu-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 5px 0;
+}
+
+.section-title {
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.social-icon {
+    margin-right: 15px;
+    color: #555;
+    width: 20px;
+    text-align: center;
+}
+
+/* Activities Section Styles */
+.activities-section {
+    flex-grow: 1;
+}
+
+.activities-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.hall-of-fame-section {
+    margin-bottom: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    font-size: 18px;
+    color: #333;
+}
+
+.section-header a {
+    color: #141415;;
+    text-decoration: none;
+    font-weight: 600;
+    font-weight: 900px;
+}
+
+.boxes-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.box-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    flex: 1;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    text-align: center;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-content {
+    font-weight: 600;
+    color: #333;
+}
+
+.box-description {
+    text-align: center;
+    font-size: 12px;
+    color: #666 2px solid;
+    margin-bottom: 5px;
+}
+
+.see-more {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.see-more a {
+    color: #4a6bff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/* Footer Styles */
+.footer {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+    padding: 15px 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-link {
+    margin: 5px 0;
+    cursor: pointer;
+    display: block;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    margin-top: 10px;
+    font-size: 11px;
+}
+
+.sup-logo {
+    vertical-align: super;
+    margin-left: 2px;
+    height: 16px;
+}
+
+.strong-text {
+    font-weight: 600;
+}

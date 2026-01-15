@@ -1,0 +1,203 @@
+/* Profile Card Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+  }
+  
+  .profile-card-container {
+    width: 100%;
+    max-width: 350px;
+    margin: 20px auto;
+  }
+  
+  .profile-card {
+    width: 100%;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .banner {
+    height: 100px;
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=600&h=200');
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: background-image 0.3s ease;
+  }
+  
+  .profile-header-inline {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px 10px;
+    margin-top: -36px;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .profile-picture {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 3px solid white;
+    background-color: #e0e7ff;
+    color: #4f46e5;
+    font-weight: bold;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .profile-name-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .profile-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 18px;
+  }
+  
+  .dropdown-icon {
+    color: #666;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .view-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+  }
+  
+  .view-profile-btn {
+    background-color: #4f46e5;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: background-color 0.3s;
+  }
+  
+  .view-profile-btn:hover {
+    background-color: #4338ca;
+  }
+  
+  .profile-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    margin: 15px 0;
+  }
+  
+  .account-section {
+    margin-top: 15px;
+  }
+  
+  .account-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #444;
+    font-size: 16px;
+    padding-left: 20px;
+  }
+  
+  .account-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 20px;
+  }
+  
+  .account-logo {
+    width: 28px;
+    height: 28px;
+    background-color: #e0e7ff;
+    border-radius: 6px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4f46e5;
+    font-size: 12px;
+  }
+  
+  .account-text {
+    font-size: 13px;
+    color: #555;
+  }
+  
+  .account-premium {
+    color: #4f46e5;
+    font-weight: 600;
+    font-size: 12px;
+    margin-top: 4px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .account-premium:hover {
+    color: #4338ca;
+    text-decoration: underline;
+  }
+  
+  .menu-items {
+    margin-top: 25px;
+    padding: 0 20px;
+  }
+  
+  .menu-item {
+    font-size: 13px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.2s;
+  }
+  
+  .menu-item:hover {
+    color: #4f46e5;
+  }
+  
+  .sign-out-section {
+    margin-top: 25px;
+    padding: 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .sign-out-text {
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    color: #666;
+    transition: color 0.2s;
+  }
+  
+  .sign-out-text:hover {
+    color: #dc2626;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  

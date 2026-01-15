@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pages | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+        }
+        
+        .pages-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 90px 15px;
+        }
+        
+        /* Left Panel */
+        .left-panel {
+            flex: 0 0 280px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .left-panel-header { /* New class for the header with icon */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .left-panel-header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .left-panel-header h1 a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .left-panel-header h1 a:hover {
+            text-decoration: none;
+            color: #1877f2;
+        }
+
+        .main-nav-list { /* New main navigation list class */
+            list-style: none;
+        }
+        
+        .main-nav-list li {
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .main-nav-list li a { /* Style for anchor tags in main list */
+            display: flex;
+            align-items: center;
+            padding: 10px 10px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .main-nav-list li a:hover {
+            background-color: #f0f2f5;
+        }
+        
+        .main-nav-list li i {
+            margin-right: 10px;
+            color: #65676b; /* Default icon color */
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-nav-list li.active { /* Style for active menu item */
+            background-color: #e6f2ff;
+            font-weight: 600;
+        }
+
+        .main-nav-list li.active a {
+            color: #1877f2;
+        }
+
+        .main-nav-list li.active i {
+            color: #1877f2; /* Active icon color */
+        }
+        
+        .sub-nav-list { /* Style for nested sub-menus */
+            list-style: none;
+            padding-left: 30px; /* Indent sub-menus */
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .sub-nav-list li a {
+            padding: 8px 0;
+            color: #555;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sub-nav-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-divider { /* Style for horizontal rule divider */
+            border: 0;
+            height: 1px;
+            background-color: #eee;
+            margin: 15px 0;
+        }
+
+        .category-title { /* Style for category title */
+            font-size: 17px;
+            color: #65676b;
+            margin-bottom: 15px;
+            padding: 10px 10px 0 10px; /* Adjust padding to align with other items */
+        }
+        
+        /* Right Panel */
+        .right-panel {
+            flex: 1; /* Allow right panel to take remaining space */
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: fit-content;
+        }
+        
+        .right-panel h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .managed-page {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px; /* Add margin to separate blocks */
+        }
+        
+        .page-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .page-header i {
+            margin-right: 10px;
+            color: #1877f2;
+            font-size: 18px;
+        }
+        
+        .page-header h3 {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .page-actions {
+            display: flex;
+            justify-content: space-between;
+            color: #65676b;
+            font-size: 14px;
+        }
+        
+        .page-action {
+            display: flex;
+            align-items: center;
+        }
+        
+        .page-action i {
+            margin-right: 5px;
+            color: #65676b; /* Ensure icon color for actions */
+        }
+        
+        .switch-section {
+            margin: 25px 0;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            text-align: center; /* Center the switch button */
+        }
+
+        .switch-now-link { /* Style for the Switch Now link */
+            display: inline-flex; /* Use inline-flex for button-like appearance */
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1877f2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .switch-now-link:hover {
+            background-color: #166fe5;
+        }
+
+        .switch-now-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        .deactivated-pages {
+            margin-bottom: 20px;
+        }
+
+        .deactivated-pages-header { /* New class for deactivated pages header */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .deactivated-pages-header i {
+            color: #65676b; /* Icon color for info */
+        }
+        
+        .deactivated-pages p {
+            color: #65676b;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 15px; /* Add margin below paragraph */
+        }
+        
+        .corporate-details-block { /* New block for corporate name and location */
+            background-color: #f0f2f5; /* Blocked background */
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .corporate-details-block i {
+            margin-right: 10px;
+            color: #1877f2; /* Icon color for switch */
+        }
+        .deactivated-pages-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .deactivated-pages-section h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .deactivated-pages-section p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .corporate-details-block {
+            background-color: #f0f2f5;
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .corporate-details-block i {
+            margin-right: 10px;
+            color: #1877f2;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="../Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="../Archivehubs-Notifications/notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="../Archivehubs-Business/business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="../Archivehubs-Drive/drive.html" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="../Archivehubs-Menu/menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+    <div class="pages-container">
+        <div class="left-panel">
+            <div class="left-panel-header">
+                <h1><a href="corporate_pages.html" class="pages-link">Pages</a></h1>
+                <i class="fas fa-cog"></i> </div>
+            
+            <ul class="main-nav-list">
+                <li class="active"> <a href="corporate_yourpages.html">
+                        <i class="fas fa-flag"></i>Your Pages
+                    </a>
+                    <ul class="sub-nav-list"> <li><a href="#">Corporate Page 1</a></li>
+                        <li><a href="#">Corporate Page 2</a></li>
+                    </ul>
+                </li>
+                
+                <hr class="nav-divider"> <li> <a href="corporate_home.html">
+                        <i class="fas fa-user-tie"></i>Corporate Manager
+                    </a>
+                </li>
+                <li> <a href="corporate_discover.html">
+                        <i class="fas fa-compass"></i>Discover
+                    </a>
+                </li>
+                <li> <a href="corporate_likedpages.html">
+                        <i class="far fa-thumbs-up"></i>Liked Pages
+                    </a>
+                </li>
+
+                <hr class="nav-divider"> <li class="category-title">Categories</li> <li> <a href="corporate_companypage.html">
+                        <i class="fas fa-briefcase"></i>Company Page
+                    </a>
+                </li>
+                <li> <a href="corporate_organizationpage.html">
+                        <i class="fas fa-sitemap"></i>Organization Page
+                    </a>
+                </li>
+                <li> <a href="corporate_education.html">
+                        <i class="fas fa-graduation-cap"></i>Educational Institution Page
+                    </a>
+                </li>
+                <li> <a href="corporate_showcase.html">
+                        <i class="fas fa-star"></i>Showcase Page
+                    </a>
+                </li>
+                <li> <a href="#">
+                        <i class="fas fa-users"></i>Fans Page
+                    </a>
+                </li>
+                <li> <a href="affiliate_overview.html">
+                        <i class="fas fa-link"></i>Affiliate Marklete Page
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="right-panel">
+            <h1>Pages Corporate name manages</h1>
+            
+            <div class="managed-page">
+                <div class="page-header">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Corporate Page 1</h3>
+                </div>
+                <div class="page-actions">
+                    <div class="page-action">
+                        <i class="far fa-bell"></i>
+                        <span>1 Notification</span> </div>
+                    <div class="page-action">
+                        <i class="far fa-comment-dots"></i>
+                        <span>Messages</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="managed-page">
+                <div class="page-header">
+                    <i class="fas fa-user-circle"></i>
+                    <h3>Corporate Page 2</h3>
+                </div>
+                <div class="page-actions">
+                    <div class="page-action">
+                        <i class="far fa-bell"></i>
+                        <span>15 Notification</span> </div>
+                    <div class="page-action">
+                        <i class="far fa-comment-dots"></i>
+                        <span>Messages</span>
+                    </div>
+                    <div class="switch-section">
+                        <a href="#" class="switch-now-link">
+                            <i class="fas fa-user-switch"></i> Switch Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <div class="deactivated-pages-section">
+                <h3>Deactivated and deleted Pages</h3>
+                <p>Activate these Pages to make them visible again to the public and everyone who helps manage them.</p>
+                <div class="corporate-details-block">
+                    <i class="fas fa-user-switch"></i>
+                    <div>
+                        <i class="fas fa-user-circle"></i>
+                        <strong>Corporate Name</strong><br>
+                        <span>Location</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

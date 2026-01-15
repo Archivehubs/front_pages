@@ -1,0 +1,1546 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home | ArchiveHubs</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="css/insight-analysis.css">
+        <link rel="stylesheet" href="css/general-terms.css">
+        <link rel="stylesheet" href="css/message.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    </head>
+    <body>
+
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="../home.html" class="logo">
+                  <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+                </a>
+                <div class="search-box">
+                  <div class="search-trigger">
+                    <i class="fas fa-search search-icon"></i>
+                    <div class="search-text">Search</div>
+                  </div>
+                  <input type="text" placeholder="Search..." class="search-input">
+                </div>
+            </div>
+                
+        <div class="nav-middle">
+            <a href="../home.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="../Archivehubs-Connections/myconnections.html" class="nav-link">
+                <i class="fas fa-user-friends"></i>
+                <span>MyConnections</span>
+            </a>
+            <a href="../Archivehubs-Video/video1.html" class="nav-link">
+                <i class="fas fa-video"></i>
+                <span>Video</span>
+            </a>
+            <a href="../Archivehubs-Message/messaging_page.html" class="nav-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>Messages</span>
+            </a>
+            <a href="../Archivehubs-Notifications/notification.html" class="nav-link">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+            <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+              <i class="fas fa-user-circle"></i>
+              <span>Account</span>
+            </a>
+          </div>
+  
+                <div class="nav-right">
+  
+                  <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Jobs</span>
+                  </a>
+                  <a href="../Archivehubs-Business/business.html" class="nav-link">
+                      <i class="fas fa-building"></i>
+                      <span>Business</span>
+                  </a>
+                  <a href="../Archivehubs-Drive/drive.html" class="nav-link">
+                      <i class="fas fa-cloud-arrow-up"></i>
+                      <span>Drive</span>
+                  </a>
+                  <a href="../Archivehubs-Menu/menu.html" class="nav-link">
+                      <i class="fas fa-bars"></i>
+                      <span>Menu</span>
+                  </a>
+              </div>
+            </nav>
+  
+            <!-- Replace your existing mobile-upper-nav section -->
+            <div class="mobile-header">
+              <!-- Mobile Upper Nav -->
+              <nav class="mobile-upper-nav">
+                <a href="home.html" class="mobile-logo">
+                    <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+                </a>
+                <div class="upper-nav-right">
+                    <button class="upper-nav-btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="upper-nav-btn" id="searchTriggerBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="upper-nav-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                  </div>
+              </nav>
+  
+             <!-- Update the search-view to be a dropdown -->
+            <div class="search-overlay" id="searchView">
+                <div class="search-container">
+                    <div class="search-header">
+                        <button class="back-btn" id="searchBackBtn">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div class="search-bar">
+                            <div class="search-input-wrapper">
+                                <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                                <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                            </div>
+                        </div>
+                    </div>
+  
+                    <div class="search-content">
+                        <!-- Rest of your search content remains the same -->
+                    </div>
+                </div>
+            </div>
+  
+            <!-- Add this after the existing navbar -->
+          <nav class="mobile-top-nav">
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-video"></i>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-briefcase"></i>
+            </a>
+            <a href="business.html" class="mobile-nav-item">
+                <i class="fas fa-building"></i>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-cloud-arrow-up"></i>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-user-circle"></i>
+            </a>
+          </nav>
+
+            <div class="main-container">
+                <div class="left-column">
+                    <!-- First Card -->
+                    <div class="card">
+                        <div class="top-row">
+                            <div class="title">Messaging</div>
+                            <div class="search-containers">
+                                <div class="search-box-wrapped">
+                                    <i class="fas fa-search search-icons"></i>
+                                    <input type="text" class="search-boxx" placeholder="Search messages">
+                                </div>
+                                <div class="icons">
+                                    <i class="fas fa-ellipsis-v icon"></i>
+                                    <i class="fas fa-pen icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="divider"></div>
+                        
+                        <div class="filter-row">
+                            <div class="filter-tag filter-main focused-filter">Focused</div>
+                            <div class="filter-tag filter-secondary">Unread</div>
+                            <div class="filter-tag filter-secondary">MyConnections</div>
+                            <div class="filter-tag filter-secondary">InMail</div>
+                            <div class="filter-tag filter-secondary">Starred</div>
+                            
+                            <!-- Focused dropdown menu -->
+                            <div class="focused-dropdown" id="focusedDropdown">
+                                <div class="filter-vertical-item">Focused</div>
+                                <div class="filter-vertical-item">Other</div>
+                                <div class="filter-vertical-item">Archived</div>
+                                <div class="filter-vertical-item">Spam</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Second Card -->
+                    <div class="card">
+                        <div class="card-container">
+                            <!-- Messages Column -->
+                            <div class="messages-column">
+                                <!-- First Message -->
+                                <div class="message-row">
+                                    <div class="profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="message-details">
+                                        <div class="message-name">Name</div>
+                                        <div class="message-subtext">Sponsored Write-up</div>
+                                    </div>
+                                    <div class="message-date">Date</div>
+                                </div>
+                                
+                                <div class="message-divider"></div>
+                                
+                                <!-- Repeated Message Items -->
+                                <div class="message-row">
+                                    <div class="profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="message-details">
+                                        <div class="message-name">Name</div>
+                                        <div class="message-subtext">Write-up (Chats)</div>
+                                    </div>
+                                    <div class="message-date">Date</div>
+                                </div>
+                                
+                                <div class="message-row">
+                                    <div class="profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="message-details">
+                                        <div class="message-name">Name</div>
+                                        <div class="message-subtext">Write-up (Chats)</div>
+                                    </div>
+                                    <div class="message-date">Date</div>
+                                </div>
+        
+                                <div class="message-row">
+                                    <div class="profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="message-details">
+                                        <div class="message-name">Name</div>
+                                        <div class="message-subtext">Write-up (Chats)</div>
+                                    </div>
+                                    <div class="message-date">Date</div>
+                                </div>
+                                
+                                <div class="message-row">
+                                    <div class="profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="message-details">
+                                        <div class="message-name">Name</div>
+                                        <div class="message-subtext">Write-up (Chats)</div>
+                                    </div>
+                                    <div class="message-date">Date</div>
+                                </div>
+                                
+                                <div class="message-row">
+                                    <div class="profile-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="message-details">
+                                        <div class="message-name">Name</div>
+                                        <div class="message-subtext">Write-up (Chats)</div>
+                                    </div>
+                                    <div class="message-date">Date</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Promotional Column with Vertical Divider -->
+                            <div class="promo-column">
+                                <div class="promo-content">
+                                    <div class="promo-icons">
+                                        <i class="fas fa-ellipsis-v icon promo-actions-icon"></i>
+                                        <i class="far fa-star icon"></i>
+                                    </div>
+                                    <div class="promo-title">Promotional Messages</div>
+                                    <div class="message-subtext">Name</div>
+                                    <div class="message-subtext">Purpose</div>
+                                    <div class="message-subtext">Sponsored</div>
+                                    <div class="action-button">APPLY NOW</div>
+                                    
+                                    <div class="message-divider"></div>
+                                    
+                                    <div class="message-row">
+                                        <div class="profile-icon">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="message-details">
+                                            <div class="message-name">Sponsor Name</div>
+                                            <div class="message-subtext">Dear Account Owner</div>
+                                            <div class="write-up">Write-up</div>
+                                        </div>
+                                        <div class="message-date">Date</div>
+                                        <div class="action-button sponsor-apply-button">APPLY NOW →</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Horizontal Cards Container -->
+                    <div class="horizontal-cards-container">
+                        <!-- Promotional Actions Card -->
+                        <div class="card promo-actions-card" id="promoActionsCard">
+                            <div class="promo-actions-header">
+                                <div class="promo-actions-title">Promotional Messages</div>
+                                <div class="promo-actions-icons">
+                                    <i class="fas fa-ellipsis-v icon"></i>
+                                    <i class="far fa-star icon"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="promo-actions-item">Move to other</div>
+                            <div class="promo-actions-item">Mark as unread</div>
+                            <div class="promo-actions-item">Star</div>
+                            <div class="promo-actions-item">Archive</div>
+                            <div class="promo-actions-item">Hide or report this ad</div>
+                            <div class="promo-actions-item">Delete conversations</div>
+                            <div class="promo-actions-item">Why I am seeing this ad?</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column with Ad Card and Footer -->
+                <div class="right-column">
+                    <!-- Ad Card -->
+                    <div class="card ad-card">
+                        <div class="ad-header">
+                            <div class="ad-title-container">
+                                <div class="ad-title">Ads</div>
+                                <i class="fas fa-ellipsis-v icon"></i>
+                            </div>
+                        </div>
+                        <div class="ad-content">
+                            Maximize business growth on<br>
+                            Archivehubs Ads a platform built for B2B
+                        </div>
+                        <div class="ad-profile-icon">
+                            <i class="fas fa-user" style="font-size: 24px;"></i>
+                        </div>
+                        <div class="ad-content">
+                            Achieve higher ROI and see real results
+                        </div>
+                        <div class="start-button">Start Now</div>
+                    </div>
+                    
+                   <!-- Footer Card -->
+                   <div class="footer-text">
+                    <div style="color: #000000;"><strong>General Terms</strong></div>
+                    <div style="color: #0000EE;">Get the Archivehubs App</div>
+                    <div><strong style="color: #000000;">ARCHIVEHUBS: ENINK Investment</strong></div>
+                    <div><strong style="color: #000000;">Limited © 2025</strong><sup><img src="enink.png" alt="Logo" class="sup-logo" width="50" height="20"></sup></div>
+                </div>
+                </div>
+            </div>
+
+   <!-- Account Pop-up (ArchiveHubs-style) -->
+   <div id="accountPopupPanel" class="account-popup" style="display:none;">
+    <!-- Banner Cover Photo -->
+    <div class="account-popup-banner">
+      <img src="images/header.jpg" alt="Cover Photo" class="account-banner-img">
+    </div>
+    <!-- User Info -->
+    <div class="account-popup-userinfo underline clickable">
+      <div class="account-popup-avatar">
+        <img src="images/profile.jpg" alt="User Profile Picture">
+      </div>
+      <div class="account-popup-username">User</div>
+    </div>
+    
+            <!-- Account Switcher Section -->
+      <div class="account-popup-switcher underline">
+        <div class="account-switcher-item">
+          <div class="account-switcher-avatar-container">
+            <img src="images/profile.jpg" alt="User Profile Picture" class="account-switcher-avatar">
+            <div class="switch-roller"></div>
+          </div>
+          <div class="account-switcher-info">
+            <div class="account-switcher-name">User Page</div>
+          </div>
+        </div>
+      </div>
+    <!-- View Profile Button -->
+    <div class="account-popup-view-profile-row">
+      <button class="account-popup-view-profile">See all profiles</button>
+    </div>
+    <!-- Account Section -->
+    <div class="account-popup-section account-popup-account">
+      <div class="account-popup-account-row highlight">
+        <img src="images/profile.jpg" alt="Company Logo" class="account-popup-account-icon">
+        <div class="account-popup-account-info">
+          <div class="account-popup-account-name">Archivehubs Explorer</div>
+          <div class="account-popup-premium"><a href="#">Try free Premium for 1 month</a></div>
+        </div>
+      </div>
+      <!-- New: More popup links with icons -->
+      <div class="account-popup-link">
+        <i class="fa fa-gear"></i>
+        <span>Settings & privacy</span>
+        <i class="fa fa-angle-right right-arrow"></i>
+      </div>
+      <div class="account-popup-link">
+        <i class="fa fa-question-circle"></i>
+        <span>Help & Support</span>
+        <i class="fa fa-angle-right right-arrow"></i>
+      </div>
+      <div class="account-popup-link">
+        <i class="fa fa-moon"></i>
+        <span>Display & Accessibility</span>
+        <i class="fa fa-angle-right right-arrow"></i>
+      </div>
+      <div class="account-popup-link">
+        <i class="fa fa-calendar"></i>
+        <span>Planner (APS)</span>
+        <i class="fa fa-angle-right right-arrow"></i>
+      </div>
+      <div class="account-popup-link">
+        <i class="fa fa-folder-open"></i>
+        <span>Archive Explorer</span>
+        <i class="fa fa-angle-right right-arrow"></i>
+      </div>
+      <div class="account-popup-link">
+        <i class="fa fa-hdd"></i>
+        <span>Archive Drive</span>
+        <i class="fa fa-angle-right right-arrow"></i>
+      </div>
+      <div class="account-popup-link">
+        <i class="fa fa-file-alt"></i>
+        <span>General Terms</span>
+        <i class="fa fa-angle-right right-arrow"></i>
+      </div>
+    </div>
+    <hr class="account-popup-divider">
+    <!-- Sign Out -->
+    <div class="account-popup-signout-row">
+      <button class="account-popup-signout">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="messageWidget-container">
+
+        
+    <div class="chatThread-container hidden" id="chatThread-container">
+        <div class="chatThread-header">
+            <img src="Images/profile.jpg" alt="Contact Profile Picture" id="threadContactPicture">
+            <span class="threadContactName" id="threadContactName"></span>
+
+            <div class="chatThread-headerBtns">
+                <div class="chatThread-headerDropdown">
+                    <button class="control" id="chatHeader-dropdownInitializer">
+                    <span class="material-symbols-outlined">more_horiz</span>
+                    </button>
+                    <div class="chatHeader-dropdownMenu hidden" id="chatHeader-dropdownMenu">
+                        <button class="chatDropdown-item"><span>Move to others</span></button>
+                        <button class="chatDropdown-item"><span>Label as jobs</span></button>
+                        <button class="chatDropdown-item"><span>Mark as Unread</span></button>
+                        <button class="chatDropdown-item"><span>Star</span></button>
+                        <button class="chatDropdown-item"><span>Mute</span></button>
+                        <button class="chatDropdown-item"><span>Archive</span></button>
+                        <button class="chatDropdown-item"><span>Report/Block</span></button>
+                        <button class="chatDropdown-item"><span>Delete Conversation</span></button>
+                        <button class="chatDropdown-item"><span>Manage Settings</span></button>
+                    </div>
+                </div>
+
+                <button class="control">
+                    <span class="material-symbols-outlined"><span class="material-symbols-outlined">
+                        close_fullscreen
+                        </span></span>
+                </button>
+
+                <button id="backToChatList-btn" class="control">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                
+            </div>
+            
+        </div>
+
+        <div class="chatThread-messages" id="chatThread-messages">
+            <div class="no-messages-yet">
+               Start a conversation! 
+            </div>
+        </div>
+
+        <div class="chatThread-composer">
+            <div class="messageInput" id="messageInput" contenteditable="true"></div>
+            <div class="chatComposer-menus">
+                <div class="chatComposer-menuItem">
+                    <button class="menuItem-btn" id="attachImage-btn">
+                        <span class="material-symbols-outlined">image</span>
+                    </button>
+                    <button class="menuItem-btn" id="attachFile-btn">
+                        <span class="material-symbols-outlined">attach_file</span>
+                    </button>
+                    <button class="menuItem-btn" id="attachGif-btn">
+                        <span class="material-symbols-outlined">gif_box</span>
+                    </button>
+                    <div class="emojiWrapper">
+                        <button class="menuItem-btn" id="emoji-btn">
+                            <span class="material-symbols-outlined">insert_emoticon</span>
+                        </button>
+                        <div class="emojiPicker hidden" id="emojiPicker">
+                            <div class="emojiGrid">
+                                <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
+                                <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
+                                <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
+                                <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
+                                <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="file" id="attachmentInput" class="hidden">
+
+                <button id="sendMessage-btn">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="messageList-panel">
+    
+        <div class="messageWidget-wrapper">
+        <div class="messageWidget">
+        <img src="Images/profile.jpg" alt="User Profile Picture">
+        <p>Messaging</p>
+        <div class="messageWidget-controlsWrapper">
+            <div class="messageWidget-controls">
+                <button class="control" id="menuControl"><span class="material-symbols-outlined">more_horiz</span></button>
+                <button class="control"><span class="material-symbols-outlined">edit_square</span></button>
+                <button class="control" id="toggleWidget-btn"><span class="material-symbols-outlined" id="arrowIcon">keyboard_control_key</span></button>
+            </div>
+        </div>
+    </div>
+    <!--3 dot menu-->
+    <div class="manageConversations-menuItems hidden" id="manageConversations-menuItems">
+        <button class="subControl" id="manageConversations">Manage Conversations</button>
+        <button class="subControl" id="messageSettings">Message Settings</button>
+        <button class="subControl" id="awayMessage">Set Away Message</button>
+    </div>
+    </div>
+
+    <div class="messageWidget-extended">
+
+        <div class="searchWrapper">
+            <span class="material-symbols-outlined">search</span>
+            <input type="search" id="searchBar" placeholder="Search messages">
+        </div>
+
+        <div class="messageType-menu">
+            <div class="messageNavigation">
+                <button class="active" data-tab="focused" id="focusedTab">Focused</button>
+                <button data-tab="others" id="othersTab">Others</button>
+            </div>
+
+            <div class="messageType-content">
+                <div class="chatList active" id="focusedChats">
+                    <!--chat items-->
+                </div>
+
+                <div class="chatList" id="otherChats">
+                    <!--chat items-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+</div>
+
+<!--set an away message-->
+<div class="modal hidden" id="awayModal">
+    <div class="awayModal-content" id="awayModal-content">
+        <div class="awayModal-contentContainer">
+            <div class="awayModal-contentHeader" id="awayModal-contentHeader">
+                <p><img id="premium-img" src="Images/premium.png" alt="Diamond">PREMIUM</p>
+                <button class="cancel-btn" id="awayModal-cancelBtn">&times;</button>
+            </div>
+        </div>
+        <div class="awayModal-contentContainer">
+            <div class="awayModal-content1" id="awayModal-content1">
+                <h3>Set an away message</h3>
+                <p>With Premium, you can set away messages to inform your 
+                    connections to expect a delayed response to their messages.
+                </p>
+                <div id="awayModal-content11">
+                    <img src="Images/circle.png" alt="Name&others use premium">
+                    <span>Name and other members use premium</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="awayModal-contentContainer">
+            <div class="awayModal-content2" id="awayModal-content2">
+                <div id="awayModal-content21">
+                    <div class="date">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div><img id="line-img" src="Images/line.png" alt="Long hyphen"></div>
+                    <div class="date">
+                        <label for="startDate">End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+                <div id="awayModal-content22">
+                    <label for="awayMessenger">Message</label>
+                    <div id="awayMessenger" contenteditable="true"></div>
+                </div>
+                <div id="wordCounter" style="text-align: right; font-size: 0.9em; color: gray; margin-top: 0;">
+                    0/300
+                </div>
+            </div>
+        </div>
+
+        <div class="awayModal-contentContainer">
+            <div class="awayModal-content3" id="awayModal-content3">
+                <p>1-month free with 24/7 support. Cancel anytime. <br>
+                    We'll remind you 7 days before your trial ends.
+                </p>
+                <button id="tryPremium-btn">Try Premium for NGN0.00</button>
+            </div>
+        </div>
+
+        <div class="awayModal-content4"><button id="awayMessage-btn">Set Message</button></div> 
+    </div>
+</div>
+
+<!--Messaging settings-->
+<div class="modal hidden" id="messageSetting-modal">
+    <div class="messageSetting-modalContent">
+        <div class="options">
+            <div class="messageSetting-modalHeader">
+                <h3>Messaging Setting</h3>
+                <button class="cancel-btn" id="cancelMessage-settingBtn">&times;</button>
+            </div>
+        </div>
+        <div class="options">
+            <p>
+                <span>Always Open New Messages</span> 
+                <label class="toggleSwitch">
+                    <input type="checkbox" id="openNew-message">
+                    <span class="slider"></span>
+                </label>
+            </p>
+        </div>
+        <div class="options">
+            <p>
+                <span>Play Sound for New Messages</span>
+                <label class="toggleSwitch">
+                    <input type="checkbox" id="playMessage-sound">
+                    <span class="slider"></span>
+                </label>
+            </p>
+        </div>
+        <div class="options"><p><span>Focused Inbox Settings</span> <button class="messageSetters" id="FocusedInbox-btn">Update Settings</button></p></div>
+        <div class="options"><p><span>Active Status Settings</span> <button class="messageSetters" id="ActiveStatus-btn">Update Settings</button></p></div>
+    </div>
+</div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+      const accountNavLink = document.getElementById('accountPopup');
+      const accountPopupPanel = document.getElementById('accountPopupPanel');
+    
+      if (accountNavLink && accountPopupPanel) {
+        accountNavLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Position the popup under the nav-link
+          const rect = accountNavLink.getBoundingClientRect();
+          accountPopupPanel.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+          accountPopupPanel.style.right = (window.innerWidth - rect.right - 8) + 'px';
+          accountPopupPanel.style.display = (accountPopupPanel.style.display === 'none' || accountPopupPanel.style.display === '') ? 'block' : 'none';
+        });
+        // Hide popup when clicking outside
+        document.addEventListener('mousedown', function(e) {
+          if (accountPopupPanel.style.display !== 'none' && !accountPopupPanel.contains(e.target) && !accountNavLink.contains(e.target)) {
+            accountPopupPanel.style.display = 'none';
+          }
+        });
+      }
+    });
+      </script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    
+        // --- DOM Elements Cache ---
+        const menuBtn = document.getElementById('menuControl');
+        const menuItems = document.getElementById('manageConversations-menuItems');
+        const toggleWidgetBtn = document.getElementById('toggleWidget-btn');
+        const arrowIcon = toggleWidgetBtn.querySelector('.material-symbols-outlined');
+        const messageWidgetHeader = document.querySelector('.messageWidget');
+        const widgetExtended = document.querySelector('.messageWidget-extended');
+        const focusedBtn = document.getElementById('focusedTab');
+        const othersBtn = document.getElementById('othersTab');
+        const focusedChats = document.getElementById('focusedChats');
+        const otherChats = document.getElementById('otherChats');
+        const searchInput = document.getElementById('searchBar');
+        const manageConversationsBtn = document.getElementById('manageConversations');
+        const messageSettingBtn = document.getElementById('messageSettings');
+        const messageSettingModal = document.getElementById('messageSetting-modal');
+        const messageSettingCloseBtn = document.getElementById('cancelMessage-settingBtn');
+        const awayMessageBtn = document.getElementById('awayMessage');
+        const awayMessageModal = document.getElementById('awayModal');
+        const awayMessageCloseBtn = document.getElementById('awayModal-cancelBtn');
+        const wordCounter = document.getElementById('wordCounter');
+        const awayMessageInput = document.getElementById('awayMessenger');
+        const maxWords = 300;
+        const chatThreadContainer = document.getElementById('chatThread-container');
+        const backToChatListBtn = document.getElementById('backToChatList-btn');
+        const threadContactName = document.getElementById('threadContactName');
+        const threadContactPic = document.getElementById('threadContactPicture');
+        const chatThreadMessages = document.getElementById('chatThread-messages');
+        const messageInput = document.getElementById('messageInput'); // Now handles text + previews
+        const sendMessageBtn = document.getElementById('sendMessage-btn');
+        const chatHeaderDropdown = document.getElementById('chatHeader-dropdownMenu');
+        const chatHeaderDropdownInitializer = document.getElementById('chatHeader-dropdownInitializer');
+        const chatListContainer = document.querySelector('.messageType-content');
+        const messageNavigation = document.querySelector('.messageNavigation');
+    
+        // Attachment buttons and hidden input
+        const attachImageBtn = document.getElementById('attachImage-btn');
+        const attachFileBtn = document.getElementById('attachFile-btn'); // For documents, etc.
+        const emojiBtn = document.getElementById('emoji-btn'); // For emojis
+        const attachmentInput = document.getElementById('attachmentInput'); // The single hidden file input
+    
+        let currentOpenChatItem = null;
+        // Temporary storage for attachments before sending
+        let pendingAttachments = [];
+    
+        //date separator set to track inserted dates
+        const insertedDates = new Set();
+        const lastMessageDates = new Map();
+    
+    
+        // --- Global Data Store ---
+        const chats = {
+            focused: [{
+                id: 'chat1',
+                name: 'John Doe',
+                profilePic: 'Images/Placeholder1.jpg',
+                preview: 'Hey, how are you?',
+                timestamp: '2025-07-28T10:00:00Z'
+            }, {
+                id: 'chat2',
+                name: 'Jane Smith',
+                profilePic: 'Images/placeholder2.jpg',
+                preview: 'Let\'s catch up soon!',
+                timestamp: '2025-07-28T09:30:00Z'
+            }],
+            others: [{
+                id: 'chat3',
+                name: 'Alice Johnson',
+                profilePic: 'Images/user.png',
+                preview: 'Are we still on for tomorrow?',
+                timestamp: '2025-07-27T10:00:00Z'
+            }, {
+                id: 'chat4',
+                name: 'Bob Brown',
+                profilePic: 'Images/user.png',
+                preview: 'Can you send me the files?',
+                timestamp: '2025-07-26T09:00:00Z'
+            }]
+        };
+    
+        //all Messages structure to support mixed content (text + attachments)
+        const allMessages = {
+            'chat1': [
+                { sender: 'John Doe', content: [{ type: 'text', value: 'Hey, how are you?' }], isSent: false, timestamp: '2025-07-28T10:01:00Z' },
+                { sender: 'You', content: [{ type: 'text', value: 'I\'m doing great, thanks for asking! What\'s up?' }], isSent: true, timestamp: '2025-07-28T10:02:00Z' },
+                { sender: 'John Doe', content: [{ type: 'text', value: 'Just wanted to check in. Been a while!' }], isSent: false, timestamp: '2025-07-28T14:05:00Z' },
+                // Example of a message with both text and an image:
+                { sender: 'You', content: [{ type: 'text', value: 'Check out this cool placeholder image!' }, { type: 'image', value: { url: 'Images/Placeholder1.jpg', name: 'placeholder.png' } }], isSent: true, timestamp: '2025-07-28T14:30:00Z' },
+                // Example of a message with just an image:
+                { sender: 'John Doe', content: [{ type: 'image', value: { url: 'Images/placeholder2.jpg', name: 'sent_pic.png' } }], isSent: false, timestamp: '2025-07-28T15:00:00Z' },
+            ],
+            'chat2': [
+                { sender: 'Jane Smith', content: [{ type: 'text', value: 'Let\'s catch up soon!' }], isSent: false, timestamp: '2025-07-28T09:30:00Z' },
+            ],
+            'chat3': [
+                { sender: 'Alice Johnson', content: [{ type: 'text', value: 'Are we still on for tomorrow?' }], isSent: false, timestamp: '2025-07-27T10:00:00Z' },
+                { sender: 'You', content: [{ type: 'text', value: 'Yes! Looking forward to it.' }], isSent: true, timestamp: '2025-07-27T10:05:00Z' },
+            ],
+            'chat4': [
+                { sender: 'Bob Brown', content: [{ type: 'text', value: 'Can you send me the files?' }], isSent: false, timestamp: '2025-07-26T09:00:00Z' },
+                { sender: 'You', content: [{ type: 'text', value: 'Sure, they should be in your inbox now.' }], isSent: true, timestamp: '2025-07-26T09:05:00Z' },
+            ],
+        };
+    
+        /* --- Utility Functions ---
+    
+        function formatTimeAgo(timestamp) {
+            const now = new Date();
+            const time = new Date(timestamp);
+            const diffSeconds = Math.floor((now - time) / 1000);
+            if (diffSeconds < 60) return 'Just Now';
+            if (diffSeconds < 3600) return `${Math.floor(diffSeconds / 60)} min ago`;
+            if (diffSeconds < 86400) return `${Math.floor(diffSeconds / 3600)} hr${Math.floor(diffSeconds / 3600) === 1 ? '' : 's'} ago`;
+            if (diffSeconds < 604800) return `${Math.floor(diffSeconds / 86400)} day${Math.floor(diffSeconds / 86400) === 1 ? '' : 's'} ago`;
+            return time.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }*/
+        function formatTimeAgo(timestamp) {
+        const now = new Date();
+        const time = new Date(timestamp);
+        const seconds = Math.floor((now - time) / 1000);
+    
+        if (seconds < 60) return 'Just Now';
+    
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) {
+            return minutes === 1 ? '1 min ago' : `${minutes} mins ago`;
+        }
+    
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) {
+            return hours === 1 ? '1 hr ago' : `${hours} hrs ago`;
+        }
+    
+        const days = Math.floor(hours / 24);
+        if (days < 7) {
+            return days === 1 ? '1 day ago' : `${days} days ago`;
+        }
+    
+        // You can add more granular checks (e.g., for a week, month, etc.)
+        // For now, let's format it for a date older than a week.
+        return time.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+    
+        function toggleHiddenClass(element) {
+            element.classList.toggle('hidden');
+        }
+    
+        /**
+         * Helper to update send button state (will be called from input and attachment logic)
+         */
+        function updateSendMessageButtonState() {
+            // Check if there's actual text content (not just spaces or empty divs from previews)
+            const hasText = messageInput.textContent.trim().length > 0 &&
+                            messageInput.childNodes.length > 0 && // Ensure there are actual nodes
+                            Array.from(messageInput.childNodes).some(node =>
+                                node.nodeType === 3 && node.textContent.trim().length > 0 // Text node with content
+                            );
+            const hasAttachments = pendingAttachments.length > 0;
+            sendMessageBtn.disabled = !(hasText || hasAttachments);
+        }
+    
+    
+    
+            
+            /**
+         * Adds a message bubble to the chat thread UI, handling various content types.
+         * @param {string} senderName - Name of the sender.
+         * @param {Array<{type: string, value: string | {url: string, name: string, size?: number}}>} contentArray - Array of content objects.
+         * @param {boolean} isSentByCurrentUser - True if the message is from the current user.
+         * @param {string} [avatarSrc] - Optional URL for the sender's avatar.
+         * @param {string} timestamp - The ISO 8601 formatted timestamp of the message.
+         */
+        function addMessageToThread(senderName, contentArray, isSentByCurrentUser, avatarSrc = '', timestamp) {
+            const messageDate = new Date(timestamp);
+            const lastDate = lastMessageDates.get(senderName);
+            const messageTime = messageDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    
+            const lastMessage = chatThreadMessages.lastElementChild;
+            let lastMessageDate = null;
+            if (lastMessage && lastMessage.dataset.timestamp) {
+                lastMessageDate = new Date(lastMessage.dataset.timestamp);
+            }
+    
+            // Add date separator if it's a new day
+            // Create a consistent date string (e.g., "2025-08-03")
+            const currentDateKey = messageDate.toISOString().split('T')[0];
+    
+        if (lastDate !== currentDateKey) {
+        lastMessageDates.set(senderName, currentDateKey);
+    
+        const dateSeparator = document.createElement('div');
+        dateSeparator.classList.add('date-separator');
+        dateSeparator.textContent = messageDate.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    
+        chatThreadMessages.appendChild(dateSeparator);
+        }
+    
+    
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isSentByCurrentUser ? 'sent' : 'received');
+            messageDiv.dataset.timestamp = timestamp;
+    
+            //assign unique ID to messages
+            const uniqueID = 'msg-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+            messageDiv.dataset.messageId = uniqueID;
+    
+            // --- NEW: Separate logic for sent and received messages ---
+            if (isSentByCurrentUser) {
+        const menuContainer = document.createElement('div');
+        menuContainer.className = 'message-menu';
+        menuContainer.innerHTML = `
+            <button class="menu-btn">
+                <span class="material-symbols-outlined">more_vert</span>
+            </button>
+            <div class="dropdown-menu">
+                <div class="dropdown-item" id="delete-option">Delete Message</div>
+                <div class="dropdown-item">Report Message</div>
+            </div>
+        `;
+        messageDiv.appendChild(menuContainer);
+    
+        const menuBtn = menuContainer.querySelector('.menu-btn');
+        const dropdown = menuContainer.querySelector('.dropdown-menu');
+    
+        menuBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const currentlyVisible = dropdown.style.display === 'block';
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                if (menu !== dropdown) menu.style.display = 'none';
+            });
+            dropdown.style.display = currentlyVisible ? 'none' : 'block';
+        });
+            } else if (avatarSrc) {
+                // Add avatar for RECEIVED messages
+                const avatarImg = document.createElement('img');
+                avatarImg.src = avatarSrc;
+                avatarImg.alt = senderName;
+                avatarImg.classList.add('message-avatar');
+                messageDiv.appendChild(avatarImg);
+            }
+    
+            const messageContentWrapper = document.createElement('div');
+            messageContentWrapper.classList.add('message-content-wrapper');
+    
+            const messageContent = document.createElement('div');
+            messageContent.classList.add('message-content');
+    
+            contentArray.forEach(item => {
+                if (item.type === 'text') {
+                    const textP = document.createElement('p');
+                    textP.textContent = item.value;
+                    messageContent.appendChild(textP);
+                } else if (item.type === 'image') {
+                    const messageImage = document.createElement('img');
+                    messageImage.classList.add('message-image');
+                    messageImage.src = item.value.url;
+                    messageImage.alt = item.value.name || 'Attached image';
+                    messageContent.appendChild(messageImage);
+                } else if (item.type === 'file') {
+                    const fileBlock = document.createElement('div');
+                    fileBlock.classList.add('file-block');
+    
+                    const iconSpan = document.createElement('span');
+                    iconSpan.className = 'material-symbols-outlined file-icon';
+                    iconSpan.textContent = 'description';
+                    fileBlock.appendChild(iconSpan);
+    
+                    const fileInfoDiv = document.createElement('div');
+                    fileInfoDiv.className = 'fileInfo';
+    
+                    let displayName = item.value.name;
+                    if (displayName.length > 18) {
+                        displayName = displayName.substring(0, 15) + '...';
+                    }
+    
+                    const fileNameSpan = document.createElement('span');
+                    fileNameSpan.className = 'fileName';
+                    fileNameSpan.textContent = displayName;
+                    fileInfoDiv.appendChild(fileNameSpan);
+    
+                    if (item.value.size) {
+                        const fileSizeSpan = document.createElement('span');
+                        fileSizeSpan.className = 'fileSize';
+                        fileSizeSpan.textContent = `${(item.value.size / 1024).toFixed(1)} KB`;
+                        fileInfoDiv.appendChild(fileSizeSpan);
+                    }
+    
+                    fileBlock.appendChild(fileInfoDiv);
+    
+                    const downloadBtn = document.createElement('a');
+                    downloadBtn.className = 'fileDownload-btn material-symbols-outlined';
+                    downloadBtn.href = item.value.url;
+                    downloadBtn.download = item.value.name;
+                    downloadBtn.title = 'Download';
+                    downloadBtn.className = 'material-symbols-outlined file-download-btn';
+                    downloadBtn.textContent = 'download';
+                    fileBlock.appendChild(downloadBtn);
+    
+                    messageContent.appendChild(fileBlock);
+                }
+            });
+    
+            const messageTimeSpan = document.createElement('span');
+            messageTimeSpan.classList.add('message-time');
+            messageTimeSpan.textContent = messageTime;
+            messageContent.appendChild(messageTimeSpan);
+    
+    
+            messageContentWrapper.appendChild(messageContent);
+            messageDiv.appendChild(messageContentWrapper);
+            chatThreadMessages.appendChild(messageDiv);
+            chatThreadMessages.scrollTop = chatThreadMessages.scrollHeight;
+        }
+    
+            /**
+         * Creates and returns a DOM element for a single chat item.
+         * @param {object} chat - The chat data object.
+         * @returns {HTMLElement} The created .chatItem element.
+         */
+        function createChatItemElement(chat) {
+            const chatItem = document.createElement('div');
+            chatItem.classList.add('chatItem');
+            chatItem.dataset.contactId = chat.id;
+            chatItem.dataset.profilePic = chat.profilePic;
+            chatItem.dataset.timestamp = chat.timestamp;
+            chatItem.innerHTML = `
+                <img src="${chat.profilePic}" alt="${chat.name}" class="profilePic">
+                <div class='chatDetails'>
+                    <div class='nameTime'>
+                        <span class='userName'>${chat.name}</span>
+                        <span class='time'>${formatTimeAgo(chat.timestamp)}</span>
+                    </div>
+                    <div class='preview'>${chat.preview}</div>
+                </div>
+            `;
+            return chatItem;
+        }
+    
+        /**
+         * Renders a list of chat items into a specified container.
+         * @param {Array<object>} chatArray - An array of chat data objects.
+         * @param {HTMLElement} containerElement - The DOM element to render into.
+         */
+        function renderChatList(chatArray, containerElement) {
+            containerElement.innerHTML = '';
+            if (chatArray && chatArray.length > 0) {
+                chatArray.forEach(chat => {
+                    const chatItem = createChatItemElement(chat);
+                    containerElement.appendChild(chatItem);
+                });
+            } else {
+                containerElement.innerHTML = '<div class="noMatch">No conversations found</div>';
+            }
+        }
+    
+        function openChatThread(chatItemElement) {
+            currentOpenChatItem = chatItemElement;
+            const contactName = chatItemElement.querySelector('.userName').textContent;
+            const contactPic = chatItemElement.dataset.profilePic || 'Images/user.png';
+            const contactId = chatItemElement.dataset.contactId;
+    
+            threadContactName.textContent = contactName;
+            threadContactPic.src = contactPic;
+    
+            messageNavigation.classList.add('hidden');
+            chatListContainer.classList.add('hidden');
+            chatThreadContainer.classList.remove('hidden');
+    
+            chatThreadMessages.innerHTML = '';
+            const messagesForThisChat = allMessages[contactId] || [];
+    
+            if (messagesForThisChat.length === 0) {
+                const noMessagesYetElement = document.createElement('div');
+                noMessagesYetElement.className = 'no-messages-yet';
+                noMessagesYetElement.textContent = 'No messages yet. Say hello!';
+                chatThreadMessages.appendChild(noMessagesYetElement);
+            } else {
+                messagesForThisChat.forEach(msg => {
+                    // Pass msg.content directly, as it's now an array
+                    addMessageToThread(
+                        msg.sender,
+                        msg.content, // This is now an array
+                        msg.isSent,
+                        msg.isSent ? '' : contactPic,
+                        msg.timestamp
+                    );
+                });
+            }
+    
+            // Clear input and pending attachments when opening a new chat
+            messageInput.innerHTML = ''; // Use innerHTML for contenteditable to clear previews too
+            messageInput.style.height = 'auto';
+            pendingAttachments = []; // Clear pending attachments
+            updateSendMessageButtonState(); // Update send button state
+        }
+    
+    
+        function updateAllChatTimes() {
+            const chatItem = document.querySelectorAll('.chatItem');
+            chatItem.forEach(item => {
+                const timestamp = item.dataset.timestamp;
+                const timeElement = item.querySelector('.time');
+                if (timestamp && timeElement) {
+                    timeElement.textContent = formatTimeAgo(timestamp);
+                }
+            });
+        }
+        // --- Event Listeners ---
+    
+        // Widget Toggle and Menu
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuItems.classList.toggle('hidden');
+        });
+    
+        window.addEventListener('click', (e) => {
+            if (!menuItems.contains(e.target) && !menuBtn.contains(e.target)) {
+                menuItems.classList.add('hidden');
+            }
+            // Also close chat header dropdown if clicked outside
+            if (!chatHeaderDropdown.contains(e.target) && !chatHeaderDropdownInitializer.contains(e.target)) {
+                chatHeaderDropdown.classList.add('hidden');
+            }
+        });
+    
+        manageConversationsBtn.addEventListener('click', () => {
+            widgetExtended.classList.toggle('show');
+            arrowIcon.classList.toggle('rotate');
+            menuItems.classList.add('hidden');
+        });
+    
+        toggleWidgetBtn.addEventListener('click', () => {
+            widgetExtended.classList.toggle('show');
+            arrowIcon.classList.toggle('rotate');
+            menuItems.classList.add('hidden');
+        });
+    
+        // Tab Switching
+        messageNavigation.addEventListener('click', (e) => {
+            const clickedBtn = e.target.closest('button');
+            if (!clickedBtn) return;
+            focusedBtn.classList.remove('active');
+            othersBtn.classList.remove('active');
+            focusedChats.classList.remove('active');
+            otherChats.classList.remove('active');
+            clickedBtn.classList.add('active');
+            const targetTab = clickedBtn.dataset.tab;
+            if (targetTab === 'focused') {
+                focusedChats.classList.add('active');
+            } else if (targetTab === 'others') {
+                otherChats.classList.add('active');
+            }
+            searchInput.dispatchEvent(new Event('input'));
+        });
+    
+        // Search Functionality
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            const activeChatList = document.querySelector('.chatList.active');
+            if (!activeChatList) return;
+            const chatItems = activeChatList.querySelectorAll('.chatItem');
+            let listHasMatch = false;
+    
+            chatItems.forEach(item => {
+                const name = item.querySelector('.userName')?.textContent.toLowerCase() || '';
+                const preview = item.querySelector('.preview')?.textContent.toLowerCase() || '';
+                const isMatch = name.includes(query) || preview.includes(query);
+                if (isMatch) {
+                    item.style.display = 'flex';
+                    listHasMatch = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+    
+            let noMatchEl = activeChatList.querySelector('.noMatch');
+            if (query.length > 0 && !listHasMatch) {
+                if (!noMatchEl) {
+                    noMatchEl = document.createElement('div');
+                    noMatchEl.className = 'noMatch';
+                    noMatchEl.textContent = 'No match found';
+                    activeChatList.appendChild(noMatchEl);
+                }
+            } else if (noMatchEl) {
+                noMatchEl.remove();
+            }
+        });
+    
+        // Modals
+        messageSettingBtn.addEventListener('click', () => {
+            toggleHiddenClass(messageSettingModal);
+            menuItems.classList.add('hidden');
+        });
+        messageSettingCloseBtn.addEventListener('click', () => toggleHiddenClass(messageSettingModal));
+        awayMessageBtn.addEventListener('click', () => {
+            toggleHiddenClass(awayMessageModal);
+            menuItems.classList.add('hidden');
+        });
+        awayMessageCloseBtn.addEventListener('click', () => toggleHiddenClass(awayMessageModal));
+        awayMessageInput.addEventListener('input', () => {
+            const text = awayMessageInput.value.trim();
+            const words = text.split(/\s+/).filter(w => w.length > 0);
+            wordCounter.textContent = `${Math.min(words.length, maxWords)}/${maxWords}`;
+        });
+    
+        // Chat Thread Interface
+        chatListContainer.addEventListener('click', (e) => {
+            const chatItem = e.target.closest('.chatItem');
+            if (chatItem) {
+                openChatThread(chatItem);
+            }
+        });
+    
+        /* Back to chat list button*/
+        backToChatListBtn.addEventListener('click', () => {
+        if (currentOpenChatItem) {
+            const contactId = currentOpenChatItem.dataset.contactId;
+            const currentChatMessages = allMessages[contactId] || [];
+    
+            // Find the last message that is not marked as "deleted"
+            const lastValidMessage = currentChatMessages.slice().reverse().find(msg => {
+                // Check if the content is an array and the first item's value is not "Message deleted"
+                const contentValue = Array.isArray(msg.content) ? msg.content[0]?.value : msg.content;
+                return contentValue !== 'Message deleted' && contentValue !== undefined;
+            });
+    
+            if (lastValidMessage) {
+                let previewText = '';
+                if (Array.isArray(lastValidMessage.content)) {
+                    lastValidMessage.content.forEach(item => {
+                        if (item.type === 'text') {
+                            previewText += item.value + ' ';
+                        } else if (item.type === 'image') {
+                            previewText += '[Image] ';
+                        } else if (item.type === 'file') {
+                            previewText += '[File] ';
+                        }
+                    });
+                } else if (typeof lastValidMessage.content === 'string') {
+                    previewText = lastValidMessage.content;
+                }
+                
+                previewText = previewText.trim();
+                currentOpenChatItem.querySelector('.preview').textContent = previewText.length > 40 ? previewText.substring(0, 37) + '...' : previewText;
+                currentOpenChatItem.querySelector('.time').textContent = formatTimeAgo(lastValidMessage.timestamp);
+                currentOpenChatItem.dataset.timestamp = lastValidMessage.timestamp;
+            } else {
+                // If all messages are deleted or there are no messages
+                currentOpenChatItem.querySelector('.preview').textContent = 'No messages yet.';
+                currentOpenChatItem.querySelector('.time').textContent = '';
+                currentOpenChatItem.dataset.timestamp = '';
+            }
+        }
+    
+        chatThreadContainer.classList.add('hidden');
+        messageNavigation.classList.remove('hidden');
+        chatListContainer.classList.remove('hidden');
+        currentOpenChatItem = null;
+        });
+    
+        // Attach Image Button Click
+        attachImageBtn.addEventListener('click', () => {
+            attachmentInput.accept = 'image/*'; // Set accept attribute for image selection
+            attachmentInput.click(); // Trigger file input
+        });
+    
+        //Attach File Button Click (for documents etc.)
+        attachFileBtn.addEventListener('click', () => {
+            // You can specify more MIME types if needed (e.g., .doc, .ppt, .xls)
+            attachmentInput.accept = '.pdf, .doc, .docx, .xls, .xlsx, .txt, .zip, .rar';
+            attachmentInput.click();
+        });
+    
+        // Handle file selection from the hidden input
+        attachmentInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const fileUrl = e.target.result; // Base64 URL for image, or general data URL for file
+    
+                    let previewElement;
+                    let attachmentData;
+    
+                    // Determine file type and create appropriate preview
+                    if (file.type.startsWith('image/')) {
+                        previewElement = document.createElement('img');
+                        previewElement.src = fileUrl;
+                        previewElement.classList.add('input-image-preview');
+                        attachmentData = { type: 'image', value: { url: fileUrl, name: file.name, type: file.type, size: file.size } };
+                    } else {
+                        // For other file types, show a file icon and name
+                        previewElement = document.createElement('span');
+                        previewElement.classList.add('input-file-preview');
+                        // Add a file icon (assuming you have material icons loaded)
+                        previewElement.innerHTML = `<span class="material-symbols-outlined">description</span> ${file.name}`;
+                        attachmentData = { type: 'file', value: { url: fileUrl, name: file.name, type: file.type, size: file.size } };
+                    }
+    
+                    // Append a "remove" button to the preview
+                    const removeButton = document.createElement('span');
+                    removeButton.classList.add('attachment-remove-btn');
+                    removeButton.innerHTML = '&times;'; // 'x' symbol
+                    removeButton.onclick = (e) => {
+                        e.stopPropagation(); // Prevent messageInput focus
+                        // Find the parent container (attachment-preview-container) and remove it
+                        e.target.closest('.attachment-preview-container').remove();
+                        // Remove from pendingAttachments array by finding its index
+                        const indexToRemove = pendingAttachments.indexOf(attachmentData);
+                        if (indexToRemove > -1) {
+                            pendingAttachments.splice(indexToRemove, 1);
+                        }
+                        updateSendMessageButtonState(); // Update send button state
+                    };
+    
+                    const previewContainer = document.createElement('div');
+                    previewContainer.classList.add('attachment-preview-container');
+                    // Use a unique ID based on a combination of timestamp and file name to ensure uniqueness
+                    previewContainer.dataset.attachmentId = `${Date.now()}-${file.name}`;
+                    previewContainer.appendChild(previewElement);
+                    previewContainer.appendChild(removeButton);
+    
+                    
+                    // Add to messageInput. Insert at the end to keep text first if user types.
+                    messageInput.appendChild(previewContainer);
+    
+                    // Add to pending attachments
+                    pendingAttachments.push(attachmentData);
+    
+                    // Clear the file input value for subsequent selections
+                    attachmentInput.value = '';
+    
+                    // Update send button state
+                    updateSendMessageButtonState();
+    
+                    // Adjust messageInput height
+                    messageInput.style.height = 'auto';
+                    messageInput.style.height = messageInput.scrollHeight + 'px';
+                };
+                reader.readAsDataURL(file); // Read the file as a data URL (Base64)
+            }
+        });
+    
+    
+        //emoji picker control
+        const emojiPicker = document.getElementById('emojiPicker');
+    
+        if (emojiPicker && emojiBtn) {
+        document.body.appendChild(emojiPicker);
+    
+        //define its structure
+    
+        emojiBtn.addEventListener('click', function () {
+          emojiPicker.classList.toggle('hidden');
+    
+          if (!emojiPicker.classList.contains('hidden')) {
+            const buttonRect = emojiBtn.getBoundingClientRect();
+    
+            //aligning it ot the button
+            const pickerWidth = emojiPicker.offsetWidth;
+            const pickerHeight = emojiPicker.offsetHeight;
+    
+            //calculate top position to place the popup
+            const topPosition = buttonRect.top + window.scrollY - pickerHeight -10;
+            //calculate left position
+            const leftPosition = buttonRect.left + window.scrollX;
+    
+            emojiPicker.style.position = 'absolute'
+            emojiPicker.style.top = `${topPosition}px`;
+            emojiPicker.style.left = `${leftPosition}px`;
+          }
+        });
+        }
+    
+        //hide menu on outside click
+        document.addEventListener('click', function(event) {
+        if (emojiPicker && emojiBtn && !emojiPicker.classList.contains('hidden')) {
+          const isClickedInsidePicker = emojiPicker.contains(event.target);
+          const isClickOnButton = emojiBtn.contains(event.target);
+    
+          if (!isClickedInsidePicker && !isClickOnButton) {
+            emojiPicker.classList.add('hidden');
+          }
+        }
+        });
+    
+        //inserting emeoji into the editor
+        if (messageInput && emojiPicker) {
+        emojiPicker.addEventListener('click', function(event) {
+          const clickedButton = event.target.closest('button');
+    
+          if (clickedButton && clickedButton.parentElement && clickedButton.parentElement.classList.contains('emojiGrid')) {
+            const emoji = clickedButton.textContent;
+    
+            if (messageInput.contentEditable === 'true') {
+              const selection = window.getSelection();
+    
+              if (selection.rangeCount > 0 && messageInput.contains(selection.anchorNode)) {
+                const range = selection.getRangeAt(0); //get current cursor position
+    
+                const emojiNode = document.createTextNode(emoji);
+    
+                //insert emoji at current cursor position
+                range.deleteContents();
+                range.insertNode(emojiNode);
+    
+                //move cursor after the inserted emoji
+                range.setStartAfter(emojiNode);
+                range.setEndAfter(emojiNode);
+                selection.removeAllRanges();
+                selection.addRange(range);
+    
+                //placeholder updating
+                if (messageInput.textContent.trim() !== '') {
+                  messageInput.classList.add('has-content');
+                } else {
+                  messageInput.classList.remove('has-content');
+                }
+              } else {
+                messageInput.textContent += emoji;
+                //manually trigger input event
+                messageInput.dispatchEvent(new Event('input', {bubbles: true}));
+                if (messageInput.textContent.trim() !== '') {
+                  messageInput.classList.add('has-content');
+                } else {
+                  messageInput.classList.remove('has-content');
+                }
+              }
+            } 
+          }
+        })
+        }
+    
+    
+    
+        sendMessageBtn.addEventListener('click', () => {
+            // Collect text content from the messageInput, excluding attachment previews
+            let messageText = '';
+            Array.from(messageInput.childNodes).forEach(node => {
+                // Ignore attachment preview containers
+                if (
+                    node.nodeType === 3 // TEXT_NODE
+                    || (node.nodeType === 1 && !node.classList.contains('attachment-preview-container')) // ELEMENT_NODE
+                ) {
+                    messageText += node.textContent;
+                }
+            });
+            messageText = messageText.trim();
+    
+            const contentToSend = [];
+            if (messageText) {
+                contentToSend.push({ type: 'text', value: messageText });
+            }
+            pendingAttachments.forEach(att => {
+                contentToSend.push(att);
+            });
+    
+            if (contentToSend.length > 0) {
+                const contactId = currentOpenChatItem.dataset.contactId;
+                const contactPic = currentOpenChatItem.dataset.profilePic;
+                const now = new Date().toISOString();
+    
+                // Add combined message to UI
+                addMessageToThread('You', contentToSend, true, contactPic, now);
+    
+                // Store combined message data
+                allMessages[contactId].push({ sender: 'You', content: contentToSend, isSent: true, timestamp: now });
+    
+                // Clear message input and pending attachments
+                messageInput.innerHTML = '';
+                messageInput.style.height = 'auto';
+                pendingAttachments = [];
+                updateSendMessageButtonState();
+    
+                // Update chat list preview
+                if (currentOpenChatItem) {
+                    let previewContent = '';
+                    if (messageText) {
+                        previewContent = messageText.length > 30 ? messageText.substring(0, 27) + '...' : messageText;
+                    }
+                    if (contentToSend.some(item => item.type !== 'text')) {
+                        if (previewContent) previewContent += ' ';
+                        const fileCount = contentToSend.filter(item => item.type !== 'text').length;
+                        previewContent += `[${fileCount} attachment${fileCount > 1 ? 's' : ''}]`;
+                    }
+                    currentOpenChatItem.querySelector('.preview').textContent = previewContent || 'Message sent';
+                    currentOpenChatItem.querySelector('.time').textContent = formatTimeAgo(now);
+                    currentOpenChatItem.dataset.timestamp = now;
+                }
+            }
+        });
+    
+        // Listen for input changes in contenteditable div for enabling/disabling send button
+        messageInput.addEventListener('input', () => {
+            updateSendMessageButtonState(); // Update based on text and attachments
+            messageInput.style.height = 'auto';
+            messageInput.style.height = messageInput.scrollHeight + 'px';
+        });
+    
+        chatHeaderDropdownInitializer.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleHiddenClass(chatHeaderDropdown);
+        });
+    
+        // --- Initializations ---
+        renderChatList(chats.focused, focusedChats);
+        renderChatList(chats.others, otherChats);
+        focusedChats.classList.add('active');
+        focusedBtn.classList.add('active');
+        updateSendMessageButtonState(); // Initial check on load
+    
+        setInterval(updateAllChatTimes,60000);
+    
+    
+        //open the dropdown for individual message sent
+        document.addEventListener('click', () => {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.style.display = 'none';
+        });
+        });
+    
+    
+        /*delete messages*/
+        document.querySelector('.chatThread-messages').addEventListener('click', (e) => {
+        if (e.target.matches('.dropdown-item[id="delete-option"]')) {
+            const messageWrapper = e.target.closest('.message');
+            const confirmed = confirm('Are you sure you want to delete this message?');
+            if (!confirmed) return;
+    
+            const messageId = messageWrapper.dataset.messageId;
+            const contactId = currentOpenChatItem.dataset.contactId;
+    
+            const messagesForThisChat = allMessages[contactId] || [];
+            const msgIndex = messagesForThisChat.findIndex(msg => msg.id === messageId);
+    
+            if (msgIndex !== -1) {
+                // Update the data object to reflect the deletion
+                messagesForThisChat[msgIndex].content = [{ type: 'text', value: 'Message deleted' }];
+                // NEW: Save the updated allMessages object to localStorage
+                localStorage.setItem('allMessagesData', JSON.stringify(allMessages));
+            }
+    
+            const contentElement = messageWrapper.querySelector('.message-content');
+            if (contentElement) {
+                contentElement.innerHTML = `<p>Message deleted</p><span class="message-time">${new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>`;
+                messageWrapper.classList.add('deleted-message-bubble');
+            }
+    
+            const dropdownMenu = messageWrapper.querySelector('.message-menu');
+            if (dropdownMenu) {
+                dropdownMenu.remove();
+            }
+        }
+        });
+    
+    
+        });
+    
+    
+    
+    
+      </script>
+</body>
+</html>

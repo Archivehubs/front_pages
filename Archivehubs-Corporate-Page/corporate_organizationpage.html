@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Page | ArchiveHubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left, .nav-middle, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            outline: none;
+            width: 200px;
+            transition: width 0.3s;
+        }
+
+        .search-input:focus {
+            width: 250px;
+            border-color: #4a90e2;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .nav-link i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-link:hover {
+            color: #4a90e2;
+        }
+
+        .nav-link.active {
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .pages-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 40px 15px;
+        }
+
+        /* Left Panel */
+        .left-panel {
+            flex: 0 0 280px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .left-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .left-panel-header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .left-panel-header h1 a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .left-panel-header h1 a:hover {
+            text-decoration: none;
+            color: #1877f2;
+        }
+
+        .main-nav-list {
+            list-style: none;
+        }
+        
+        .main-nav-list li {
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .main-nav-list li a {
+            display: flex;
+            align-items: center;
+            padding: 10px 10px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .main-nav-list li a:hover {
+            background-color: #f0f2f5;
+        }
+        
+        .main-nav-list li i {
+            margin-right: 10px;
+            color: #65676b;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-nav-list li.active {
+            background-color: #e6f2ff;
+            font-weight: 600;
+        }
+
+        .main-nav-list li.active a {
+            color: #1877f2;
+        }
+
+        .main-nav-list li.active i {
+            color: #1877f2;
+        }
+        
+        .sub-nav-list {
+            list-style: none;
+            padding-left: 30px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .sub-nav-list li a {
+            padding: 8px 0;
+            display: block;
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .sub-nav-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-divider {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 15px 0;
+        }
+
+        .category-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #65676b;
+            padding: 10px 10px;
+            margin-bottom: 5px;
+        }
+
+        /* Right Panel Styles */
+        .right-panel {
+            flex: 1;
+            background: #fff; /* Added background to right panel */
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .right-panel-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Accordion Styles */
+        .accordion-container {
+            border-top: 1px solid #eee; /* Top border for the first item */
+        }
+
+        .accordion-item {
+            margin-bottom: 0px; /* No margin between items */
+            border-bottom: 1px solid #eee; /* Separator between accordion items */
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            list-style: none; /* Hide default arrow for details/summary */
+        }
+
+        .accordion-header::-webkit-details-marker {
+            display: none; /* Hide default marker in Webkit browsers */
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .accordion-item[open] .accordion-icon {
+            transform: rotate(180deg); /* Rotate icon when open */
+        }
+
+        .accordion-content {
+            list-style: none;
+            padding: 10px 0 15px 20px; /* Adjust padding for sub-list */
+            margin: 0;
+            border-top: 1px solid #f0f2f5; /* Light border between header and content */
+        }
+
+        .accordion-content li {
+            margin-bottom: 8px;
+        }
+
+        .accordion-content li:last-child {
+            margin-bottom: 0;
+        }
+
+        .accordion-content a {
+            text-decoration: none;
+            color: #555;
+            font-size: 14px;
+            display: block;
+            padding: 4px 0;
+        }
+
+        .accordion-content a:hover {
+            color: #1877f2;
+            text-decoration: underline;
+        }
+
+        /* Specific bolding for Financial Files as requested */
+        .accordion-item.financial-files .accordion-header {
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .pages-container {
+                flex-direction: column;
+                padding-top: 20px;
+            }
+            
+            .left-panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .nav-middle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="pages-container">
+        <div class="left-panel">
+            <div class="left-panel-header">
+                <h1><a href="corporate_pages.html" class="pages-link">Pages</a></h1>
+                <i class="fas fa-cog"></i> 
+            </div>
+            
+            <ul class="main-nav-list">
+                <li> 
+                    <a href="corporate_yourpages.html">
+                        <i class="fas fa-flag"></i>Your Pages
+                    </a>
+                    <ul class="sub-nav-list"> 
+                        <li><a href="#">Corporate Page 1</a></li>
+                        <li><a href="#">Corporate Page 2</a></li>
+                    </ul>
+                </li>
+                
+                <hr class="nav-divider"> 
+                <li> 
+                    <a href="corporate_home.html">
+                        <i class="fas fa-user-tie"></i>Corporate Manager
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_discover.html">
+                        <i class="fas fa-compass"></i>Discover
+                    </a>
+                </li>
+                <li> <a href="corporate_likedpages.html">
+                        <i class="far fa-thumbs-up"></i>Liked Pages
+                    </a>
+                </li>
+
+                <hr class="nav-divider"> 
+                <li class="category-title">Categories</li> 
+                <li> <a href="corporate_companypage.html">
+                        <i class="fas fa-briefcase"></i>Company Page
+                    </a>
+                </li>
+                <li class="active"> 
+                    <a href="corporate_organizationpage.html">
+                        <i class="fas fa-sitemap"></i>Organization Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_education.html">
+                        <i class="fas fa-graduation-cap"></i>Educational Institution Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_showcase.html">
+                        <i class="fas fa-star"></i>Showcase Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="#">
+                        <i class="fas fa-users"></i>Fans Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="affiliate_overview.html">
+                        <i class="fas fa-link"></i>Affiliate Marketers Page
+                    </a>
+                </li>
+            </ul>
+            <div class="footer">
+        ARCHIVEHUBS: ENINK Investment Limited © 2025
+    </div>
+        </div>
+
+        <div class="right-panel">
+            <h2 class="right-panel-title">All Office Files</h2>
+
+            <div class="accordion-container">
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Personnel Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Employee Files</a></li>
+                        <li><a href="#">Recruitment Files</a></li>
+                        <li><a href="#">Training Files</a></li>
+                        <li><a href="#">Performance Appraisal Files</a></li>
+                        <li><a href="#">Promotion and Transfer Files</a></li>
+                        <li><a href="#">Termination Files</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item financial-files">
+                    <summary class="accordion-header">
+                        Financial Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Accounting Ledgers</a></li>
+                        <li><a href="#">Invoices and Receipts</a></li>
+                        <li><a href="#">Bank Statements</a></li>
+                        <li><a href="#">Tax Returns</a></li>
+                        <li><a href="#">Budget</a></li>
+                        <li><a href="#">Financial Statements</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Correspondence Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Letters and Memos</a></li>
+                        <li><a href="#">Emails and Faxes</a></li>
+                        <li><a href="#">Reports and Proposals</a></li>
+                        <li><a href="#">Meeting Minutes and Notes</a></li>
+                        <li><a href="#">Telephone Records</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Operational Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Business Plans and Strategies</a></li>
+                        <li><a href="#">Policies and Procedures</a></li>
+                        <li><a href="#">Quality Control Files</a></li>
+                        <li><a href="#">Safety and Health Files</a></li>
+                        <li><a href="#">Environmental Files</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Customer Records <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Customers Files</a></li>
+                        <li><a href="#">Sales Records</a></li>
+                        <li><a href="#">Service Records</a></li>
+                        <li><a href="#">Complaints and Feedback</a></li>
+                        <li><a href="#">Customer Correspondence</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Legal Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Contracts and Agreements</a></li>
+                        <li><a href="#">Licenses and Permits</a></li>
+                        <li><a href="#">Court Documents</a></li>
+                        <li><a href="#">Intellectual Property Files</a></li>
+                        <li><a href="#">Compliance Files</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Property Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Land and Building Files</a></li>
+                        <li><a href="#">Equipment and Asset Files</a></li>
+                        <li><a href="#">Inventory Files</a></li>
+                        <li><a href="#">Maintenance and Repair Files</a></li>
+                        <li><a href="#">Insurance Files</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Events Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Company History</a></li>
+                        <li><a href="#">Archives</a></li>
+                        <li><a href="#">Photographs and Videos</a></li>
+                        <li><a href="#">News Clippings</a></li>
+                        <li><a href="#">Memorabilia</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Research and Development Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Research Files</a></li>
+                        <li><a href="#">Development Plans</a></li>
+                        <li><a href="#">Patents and Copyrights</a></li>
+                        <li><a href="#">Test Results</a></li>
+                        <li><a href="#">Product Development Files</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+
+                <details class="accordion-item">
+                    <summary class="accordion-header">
+                        Administrative Files <i class="fas fa-chevron-down accordion-icon"></i>
+                    </summary>
+                    <ul class="accordion-content">
+                        <li><a href="#">Office Administration Files</a></li>
+                        <li><a href="#">Travel Files</a></li>
+                        <li><a href="#">Meeting Files</a></li>
+                        <li><a href="#">Event Files</a></li>
+                        <li><a href="#">Miscellaneous Administrative Files</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

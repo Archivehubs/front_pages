@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Book Publishing Listing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+        }
+        .sidebar {
+            width: 400px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            border-radius: 16px 0 0 16px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #e4e6eb #fff;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #e4e6eb;
+            border-radius: 8px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: #fff;
+            border-radius: 8px;
+        }
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 20px 10px 20px;
+            border-bottom: 1px solid #f0f2f5;
+            position: relative;
+        }
+        .fb-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 12px;
+            background: #1877f2;
+        }
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 24px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #65676b;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn:hover {
+            background: #f0f2f5;
+        }
+        .sidebar-title {
+            font-size: 13px;
+            color: #65676b;
+            margin-top: 8px;
+            margin-left: 20px;
+            margin-bottom: 0;
+            letter-spacing: 0.5px;
+        }
+        .sidebar-subtitle {
+            font-size: 22px;
+            font-weight: 700;
+            color: #050505;
+            margin-left: 20px;
+            margin-top: 2px;
+            margin-bottom: 18px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            margin-bottom: 18px;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #e4e6eb;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #65676b;
+            font-size: 20px;
+        }
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+        .user-name {
+            font-weight: 600;
+            color: #050505;
+            font-size: 15px;
+        }
+        .user-listing {
+            font-size: 13px;
+            color: #65676b;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .user-listing .public-icon {
+            font-size: 13px;
+            margin-left: 2px;
+        }
+        .sidebar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 20px;
+        }
+        .save-draft-btn {
+            background: #e4e6eb;
+            color: #bcc0c4;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: not-allowed;
+            margin-left: 8px;
+        }
+        .save-draft-btn.enabled {
+            background: #1877f2;
+            color: white;
+            cursor: pointer;
+        }
+        .property-form {
+            padding: 0 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .property-type-select, 
+        .year-select, 
+        .location-input,
+        .property-input {
+            width: 100% !important;
+            padding: 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f5f6fa;
+            margin-top: 0;
+            margin-bottom: 0;
+            outline: none;
+            box-sizing: border-box;
+            color: #050505;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        
+        .property-input[name="make"] {
+            margin-top: 20px;
+        }
+        
+
+        @media (max-width: 768px) {
+        .property-input, .year-select, .location-input {
+            width: 100% !important;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        }
+        .property-type-select:focus, .year-select:focus, .location-input:focus {
+            border-color: #1877f2;
+            background: #fff;
+        }
+        .photo-upload-section {
+            background: #fff;
+            border: 1px solid #f0f2f5;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .photo-upload-label {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 2px;
+            color: #050505;
+        }
+        .photo-upload-desc {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .photo-upload-box {
+            border: 1.5px dashed #ccd0d5;
+            border-radius: 10px;
+            background: #f5f6fa;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .photo-upload-box:hover {
+            border-color: #1877f2;
+        }
+        .photo-upload-icon {
+            width: 36px;
+            height: 36px;
+            background: #e4e6eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #65676b;
+            margin-bottom: 6px;
+        }
+        .photo-upload-text {
+            font-size: 15px;
+            color: #050505;
+            text-align: center;
+        }
+        .photo-upload-sub {
+            font-size: 13px;
+            color: #65676b;
+        }
+        .phone-upload-row {
+            display: flex;
+            align-items: center;
+            background: #f0f2f5;
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-bottom: 0;
+            gap: 10px;
+        }
+        .phone-upload-icon {
+            font-size: 22px;
+            color: #65676b;
+        }
+        .phone-upload-text {
+            font-size: 14px;
+            color: #050505;
+            flex: 1;
+        }
+        .learn-more {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .try-it-btn {
+            background: #e4e6eb;
+            color: #050505;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background 0.2s;
+        }
+        .try-it-btn:hover {
+            background: #d8dadf;
+        }
+        .about-section {
+            border-top: 1px solid #f0f2f5;
+            padding-top: 16px;
+            margin-top: 10px;
+        }
+        .about-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 2px;
+            color: #050505;
+        }
+        .about-desc {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .location-group {
+            display: block;
+            margin-bottom: 0;
+        }
+        .location-display {
+            display: flex;
+            align-items: center;
+            background: #f6f7fa;
+            border: 1px solid #e4e6eb;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 16px;
+            color: #050505;
+            min-width: 180px;
+            min-height: 40px;
+            font-weight: 500;
+        }
+        .location-display .location-svg {
+            margin-right: 10px;
+            color: #222;
+            font-size: 18px;
+            position: static;
+            left: unset;
+            top: unset;
+            transform: none;
+        }
+        .location-name {
+            font-size: 16px;
+            color: #050505;
+            font-weight: 500;
+        }
+        .location-input-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .location-svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #65676b;
+            font-size: 18px;
+            pointer-events: none;
+        }
+        .location-input {
+            width: 100%;
+            padding-left: 38px;
+            background: #f5f6fa;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #050505;
+            height: 44px;
+            outline: none;
+        }
+        .location-input:focus {
+            border-color: #1877f2;
+            background: #fff;
+        }
+        .location-label {
+            display: block;
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 4px;
+            margin-left: 2px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+        .location-ref {
+            font-size: 12px;
+            color: #8a8d91;
+            margin-bottom: 2px;
+            margin-left: 2px;
+            font-weight: 400;
+            letter-spacing: 0.1px;
+        }
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+            font-size: 16px;
+            user-select: none;
+        }
+        .dropdown-selected {
+            background: #f5f6fa;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .dropdown-selected:focus {
+            outline: none;
+            border-color: #1877f2;
+            background: #fff;
+        }
+        .dropdown-arrow {
+            margin-left: 8px;
+            font-size: 14px;
+            color: #65676b;
+        }
+        .dropdown-list {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            z-index: 10;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .custom-dropdown.open .dropdown-list {
+            display: block;
+        }
+        .dropdown-main-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            position: relative;
+            font-weight: 500;
+            color: #050505;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+        .dropdown-main-option:hover, .dropdown-main-option.active {
+            background: #f0f2f5;
+        }
+        .dropdown-main-option .dropdown-arrow {
+            transition: transform 0.2s;
+        }
+        .dropdown-main-option.expanded .dropdown-arrow {
+            transform: rotate(90deg);
+        }
+        .dropdown-sub-list {
+            display: none;
+            padding-left: 24px;
+            margin: 0;
+            list-style: none;
+            background: #f5f6fa;
+            border-radius: 0 0 8px 8px;
+        }
+        .dropdown-main-option.expanded > .dropdown-sub-list {
+            display: block;
+        }
+        .dropdown-sub-list li {
+            padding: 10px 12px;
+            cursor: pointer;
+            color: #050505;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .dropdown-sub-list li:hover {
+            background: #e4e6eb;
+        }
+        .property-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #f5f6fa;
+            margin-top: 0;
+            margin-bottom: 0;
+            outline: none;
+            color: #050505;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .property-input:focus {
+            border-color: #1877f2;
+            background: #fff;
+        }
+        .price-section {
+            border-top: 1px solid #e4e6eb;
+            margin-top: 18px;
+            padding-top: 18px;
+            margin-bottom: 0;
+        }
+        .price-label {
+            font-size: 17px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 2px;
+            display: block;
+        }
+        .price-helper {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .property-input[name="make"],
+        .property-input[name="model"],
+        .property-input[name="mileage"],
+        .property-input[name="price"] {
+        width: 92%;
+        }
+        .property-input[name="make"] {
+            margin-top: 20px;
+        }
+        .description-section {
+            background: #fff;
+            border-radius: 12px;
+            margin: 2px 20px 0 2px;
+            padding: 20px 20px 20px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .description-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 4px;
+        }
+        .description-helper {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 16px;
+        }
+        .description-textarea {
+            width: 100%;
+            min-height: 90px;
+            border: 1px solid #ccd0d5;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 16px;
+            background: #f5f6fa;
+            color: #050505;
+            resize: vertical;
+            margin-bottom: 14px;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .description-textarea:focus {
+            border-color: #000;
+            background: #fff;
+        }
+        .description-policy {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+        .commerce-policy-link {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .commerce-policy-link:hover {
+            text-decoration: underline;
+        }
+        .description-progress {
+            margin-bottom: 18px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e4e6eb;
+            border-radius: 4px;
+            display: flex;
+            overflow: hidden;
+        }
+        .progress-bar-filled {
+            width: 50%;
+            background: yellow;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+            transition: width 0.3s;
+        }
+        .progress-bar-disabled {
+            width: 50%;
+            background: #e4e6eb;
+            height: 100%;
+            border-radius: 0 4px 4px 0;
+        }
+        .next-btn {
+            width: 100%;
+            padding: 12px 0;
+            background: #e4e6eb;
+            color: #bcc0c4;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: not-allowed;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 2px;
+            letter-spacing: 0.2px;
+        }
+        .next-btn.enabled {
+            background: #1877f2;
+            color: white;
+            cursor: pointer;
+        }
+        .main-content {
+            margin-left: 360px;
+            min-height: 100vh;
+            background: #f0f2f5;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 0;
+        }
+        .preview-container {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            display: flex;
+            width: 800px;
+            min-height: 600px;
+            overflow: hidden;
+        }
+        .preview-left {
+            flex: 1.2;
+            background: #f5f6fa;
+            display: flex;
+            flex-direction: column;
+            padding: 32px 0 32px 32px;
+            border-right: 1px solid #e4e6eb;
+        }
+        .preview-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 16px;
+        }
+        .listing-preview-box {
+            background: #f0f2f5;
+            border-radius: 8px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+        .listing-preview-message {
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .listing-preview-main {
+            font-size: 22px;
+            font-weight: 700;
+            color: #65676b;
+            margin-bottom: 8px;
+        }
+        .listing-preview-sub {
+            font-size: 16px;
+            color: #8a8d91;
+            text-align: center;
+            max-width: 300px;
+        }
+        .preview-right {
+            flex: 1;
+            padding: 32px 32px 32px 32px;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+        }
+        .preview-summary {
+            width: 100%;
+        }
+        .preview-summary-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 2px;
+        }
+        .preview-summary-price {
+            font-size: 18px;
+            color: #65676b;
+            margin-bottom: 2px;
+        }
+        .preview-publishing-type {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .preview-summary-meta {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 16px;
+        }
+        
+        .preview-condition {
+            font-size: 14px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        
+        .preview-divider {
+            border: none;
+            border-top: 1px solid #e4e6eb;
+            margin: 18px 0;
+        }
+        
+        .preview-summary-section {
+            margin-bottom: 18px;
+        }
+        .preview-summary-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #050505;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .preview-summary-description {
+            font-size: 15px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        
+        .preview-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .preview-tag {
+            background: #f0f2f5;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: #65676b;
+        }
+        
+        .preview-summary-map {
+            margin-bottom: 8px;
+        }
+        .preview-map-container {
+            width: 100%;
+            max-width: 320px;
+            height: 180px;
+            border-radius: 8px;
+            border: 1px solid #e4e6eb;
+            overflow: hidden;
+            background: #f5f6fa;
+            margin-bottom: 0;
+        }
+        .preview-summary-location-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #050505;
+            margin-bottom: 2px;
+        }
+        .preview-summary-location-note {
+            font-size: 13px;
+            color: #65676b;
+            margin-bottom: 10px;
+        }
+        .preview-seller-info {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .preview-seller-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #e4e6eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #65676b;
+        }
+        .preview-seller-name {
+            font-size: 15px;
+            color: #050505;
+            font-weight: 600;
+            padding-right: 180px;
+        }
+        .preview-seller-details {
+            font-size: 13px;
+            color: #65676b; 
+            margin-left: auto;
+        }
+        .preview-message-btn {
+            width: 100%;
+            padding: 12px 0;
+            background: #e4e6eb;
+            color: #bcc0c4;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: not-allowed;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 18px;
+            letter-spacing: 0.2px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 200px;
+        }
+        .preview-message-btn.enabled {
+            background: #1877f2;
+            color: white;
+            cursor: pointer;
+        }
+        @media (max-width: 1200px) {
+            .preview-container {
+                width: 95vw;
+                min-width: 0;
+            }
+        }
+        @media (max-width: 900px) {
+            .main-content {
+                margin-left: 0;
+                padding: 0;
+            }
+            .sidebar {
+                position: static;
+                width: 100vw;
+                border-radius: 0;
+            }
+            .preview-container {
+                flex-direction: column;
+                width: 100vw;
+                min-width: 0;
+                border-radius: 0;
+            }
+            .preview-left, .preview-right {
+                padding: 24px 8vw;
+            }
+        }
+
+        /* Additional styles for preview elements */
+        .progress-update {
+            transition: all 0.3s ease;
+        }
+
+        /* Added style for title input */
+        .title-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f5f6fa;
+            margin-top: 0;
+            margin-bottom: 0;
+            outline: none;
+            box-sizing: border-box;
+            color: #050505;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        
+        .title-input:focus {
+            border-color: #1877f2;
+            background: #fff;
+        }
+        
+        /* Preview image styles - UPDATED FOR BETTER FIT */
+        .preview-image-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .preview-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            max-height: 360px;
+        }
+        
+        .preview-thumbnails {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 10px;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        
+        .preview-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+        
+        .preview-thumbnail.active {
+            border-color: #1877f2;
+        }
+        
+        /* Navigation arrows for image carousel */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            color: #1877f2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+            transition: all 0.2s;
+        }
+        
+        .carousel-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .carousel-nav.prev {
+            left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .carousel-nav.next {
+            right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Image counter */
+        .image-counter {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 10;
+        }
+        
+        /* Map styles */
+        #previewMap {
+            height: 180px;
+            width: 100%;
+            border-radius: 8px;
+            z-index: 1;
+        }
+        
+        .map-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #65676b;
+            font-size: 14px;
+            background: #f0f2f5;
+        }
+
+        /* List in More Places Section */
+        .list-places-section {
+            display: none;
+            padding: 0 20px 20px 20px;
+        }
+        
+        .list-places-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 16px;
+        }
+        
+        .list-places-option {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e4e6eb;
+        }
+        
+        .list-places-option:last-child {
+            border-bottom: none;
+        }
+        
+        .list-places-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .list-places-checkbox {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            accent-color: #1877f2;
+        }
+        
+        .list-places-label {
+            font-size: 17px;
+            font-weight: 600;
+            color: #050505;
+        }
+        
+        .list-places-desc {
+            font-size: 15px;
+            color: #65676b;
+            margin-left: 32px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .groups-container {
+            margin-top: 16px;
+            margin-left: 32px;
+        }
+        
+        .group-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 1px solid #e4e6eb;
+            border-radius: 8px;
+            background: #f7f8fa;
+        }
+        
+        .group-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .group-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #050505;
+            margin-bottom: 4px;
+        }
+        
+        .group-members {
+            font-size: 13px;
+            color: #65676b;
+        }
+        
+        .join-group-btn {
+            background: #e4e6eb;
+            color: #050505;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .join-group-btn.joined {
+            background: #1877f2;
+            color: white;
+        }
+        
+        .publish-btn {
+            width: 100%;
+            padding: 12px 0;
+            background: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 18px;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            color: #1877f2;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .back-btn i {
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <button class="close-btn" title="Close">&times;</button>
+  </div>
+  <div class="sidebar-row">
+    <div class="sidebar-title">Marketplace</div>
+  </div>
+  <div class="sidebar-row">
+    <div class="sidebar-subtitle">Direct Book Publishing Listing </div>
+    <button class="save-draft-btn" id="saveDraftBtn" disabled>Save Draft</button>
+  </div>
+  
+  <!-- User Profile Section - Now visible by default -->
+  <div class="user-info">
+    <div class="user-avatar">
+      <i class="fas fa-user"></i>
+    </div>
+    <div class="user-details">
+      <span class="user-name">Joshua Mide</span>
+      <span class="user-listing">
+        Listing to Marketplace • <span class="public-icon">Public</span>
+      </span>
+    </div>
+  </div>
+  
+  <!-- Property Listing Form -->
+  <form class="property-form" id="propertyForm">
+    <div class="form-group">
+      <input class="title-input" type="text" name="property_title" placeholder="Title" autocomplete="off">
+    </div>
+    
+    <!-- Publishing Type Dropdown -->
+    <div class="form-group">
+      <div class="custom-dropdown" id="publishingTypeDropdown">
+        <div class="dropdown-selected" tabindex="0">Publishing Type <span class="dropdown-arrow">▼</span></div>
+        <ul class="dropdown-list">
+          <li>Hard Copy</li>
+          <li>Soft Copy</li>
+          <li>Combined Copy</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="photo-upload-section">
+      <div class="photo-upload-label">Photo upload</div>
+      <!-- CORRECTED: Changed back to 10 photos limit -->
+      <div class="photo-upload-desc">Photos · <span id="photo-count">0</span>/10 – You can add up to 10 photos.</div>
+      <div class="photo-upload-box" id="photoUploadBox">
+        <div class="photo-upload-icon">+</div>
+        <div class="photo-upload-text">Add photos<br><span class="photo-upload-sub">or drag and drop</span></div>
+      </div>
+      <div class="phone-upload-row">
+        <div class="phone-upload-icon">&#128241;</div>
+        <div class="phone-upload-text">Upload photos directly from your phone. <a href="#" class="learn-more">Learn more</a></div>
+        <button class="try-it-btn" type="button">Try It</button>
+      </div>
+    </div>
+    <div class="about-section">
+      <div class="about-title">About this property </div>
+      <div class="about-desc">Help buyers know more about the property that you're listing.</div>
+      <div class="form-group location-group">
+        <div class="location-input-wrapper">
+          <span class="location-svg">
+            <i class="fa-solid fa-globe"></i>
+          </span>
+          <input class="location-input" id="locationInput" name="location" type="text" placeholder="Location" autocomplete="off">
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <select class="year-select" id="purpose" name="purpose">
+          <option value="" disabled selected>Book Format</option>
+          <option value="sale">Hardcover</option>
+          <option value="rent">Paperback</option>
+          <option value="sale">Audiobooks</option>
+          <option value="rent">E-Books</option>
+           <option value="sale">Large Print Books</option>
+          <option value="rent">Braille Books</option>
+          <option value="rent">Others</option>
+        </select>
+      </div>
+
+      <!-- Book Category Dropdown -->
+      <div class="form-group">
+        <div class="custom-dropdown" id="bookCategoryDropdown">
+          <div class="dropdown-selected" tabindex="0">Book Category<span class="dropdown-arrow">▼</span></div>
+          <ul class="dropdown-list">
+            <li class="dropdown-main-option">Fiction<span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li>General Fiction</li>
+                <li>Romance</li>
+                <li>Mystery / Crime / Thriller</li>
+                <li>Science Fiction (Sci-Fi) </li>
+                <li>Fantasy</li>
+                 <li> Historical Fiction</li>
+                <li>Adventure</li>
+                <li> Horror / Supernatural</li>
+                <li> Literary Fiction  </li>
+                <li> Short Story Collections</li>
+                <li> Graphic Novels & Manga </li>
+                <li>  Others </li>
+              </ul>
+            </li>
+            <li class="dropdown-main-option">Non-Fiction <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li> Biographies & Autobiographies </li>
+                <li>Memoirs </li>
+                <li> Self-Help & Personal Development </li>
+                <li> Health & Wellness</li>
+                 <li>  Psychology & Mental Health</li>
+                  <li> Religion & Spirituality </li>
+                   <li>  Travel & Culture</li>
+                    <li>  History</li>
+                     <li> Politics & Current Affairs</li>
+                      <li> Philosophy</li>
+                       <li> True Crime</li>
+                        <li> Others</li>
+              </ul>
+            </li>
+
+            <li class="dropdown-main-option">Educational & Academic<span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li> Textbooks (Primary / Secondary / Tertiary)</li>
+                <li>Reference Books (Dictionaries, Encyclopedias, Atlases)</li>
+                <li>Study Guides & Exam Prep </li>
+                <li> Workbooks & Practice Books</li>
+                 <li> Research & Academic Journals  </li>
+                <li>  Theses & Dissertations </li>
+                 <li>  Others </li>
+              </ul>
+            </li>
+            <li class="dropdown-main-option">Children & Teens <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li> Board Books (0–3 yrs)</li>
+                <li> Picture Books (3–5 yrs)</li>
+                <li>Early Readers (5–7 yrs) </li>
+                <li>Chapter Books (7–9 yrs) </li>
+               <li> Middle Grade Fiction (9–12 yrs)</li>
+                <li> Young Adult (YA) Fiction (13-18 yrs)</li>
+                <li>Children’s Non-Fiction </li>
+                <li> Fairy Tales / Folk Tales / Myths </li>
+                <li> Other </li>
+
+              </ul>
+            </li>
+
+           <li class="dropdown-main-option"> Professional & Technical <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li> Business, Economics & Finance</li>
+                <li> Technology & Computer Science </li>
+                <li>Engineering & Architecture</li>
+                <li> Medical & Health Sciences</li>
+              <li>  Law & Legal Studies</li>
+                <li> Education & Teaching</li>
+                <li>  Art, Design & Media</li>
+                <li>  Hospitality & Tourism</li>
+                <li>  Agriculture & Environment</li>
+                <li> Vocational Training & Trade Skills </li>
+                <li> Others</li>
+              </ul>
+            </li>
+
+           <li class="dropdown-main-option">Arts & Lifestyle<span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li> Art & Photography </li>
+                <li> Fashion & Style</li>
+                <li> Interior Design </li>
+                <li> Music & Performing Arts</li>
+                  <li>  Cooking & Culinary Arts  </li>
+                <li>  Gardening & Landscaping</li>
+                <li>  Home Improvement & DIY </li>
+                <li>  Crafts & Hobbies</li>
+               <li> Others</li>
+              </ul>
+            </li>
+
+            <li class="dropdown-main-option"> Religion & Spirituality <span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li> Scriptures (Bible, Quran, etc.)</li>
+                <li> Devotionals & Prayer Books</li>
+                <li> Religious Commentary & Studies</li>
+                <li> Spiritual Growth & Meditation</li>
+                <li>  Comparative Religion</li>
+                <li> Others</li>
+              </ul>
+            </li>
+
+            <li class="dropdown-main-option">Reference & General Knowledge<span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li> Encyclopedias</li>
+                <li> Dictionaries / Thesauruses</li>
+                <li>Atlases & World Maps</li>
+                <li> Yearbooks / Almanacs</li>
+                 <li>  Manuals / Handbooks</li>
+                 <li>  Others</li>
+              </ul>
+            </li>
+
+           <li class="dropdown-main-option">Special Collections (Optional Sections)<span class="dropdown-arrow">▶</span>
+              <ul class="dropdown-sub-list">
+                <li> New Arrivals / Bestsellers</li>
+                <li> Local Authors / Regional Books </li>
+                <li> Award-Winning Titles </li>
+                <li> Rare / Collectible Books</li>
+                  <li>  Book Club Picks </li>
+                    <li>  Seasonal or Holiday Reads</li>
+                    <li>   Others </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="price-section">
+        <div class="price-label">Price</div>
+        <div class="price-helper">Enter your price for this property.</div>
+        <div class="form-group">
+          <input class="property-input" type="text" name="price" placeholder="Price" autocomplete="off">
+        </div>
+
+         <div class="form-group">
+          <select class="year-select" name="condition">
+            <option value="" disabled selected>Condition</option>
+            <option value="new">New</option>
+            <option value="used_like_new">Used – Like New</option>
+            <option value="used_good">Used – Good</option>
+            <option value="used_fair">Used – Fair</option>
+            <option value="used_scribed">Used – Scribed</option>
+          </select>
+        </div>
+
+        <div class="price-section">
+        <div class="price-label">Distribution Channel </div>
+        <div class="price-helper">Indicate the supply locations and availability of your Hard Copy Books. </div>
+        <div class="form-group">
+          <select class="year-select" name="condition">
+            <option value="" disabled selected>Distribution Channel</option>
+            <option value="new">Africa</option>
+            <option value="used_like_new">Antarctica </option>
+            <option value="used_good">Asia</option>
+            <option value="used_fair">Australia / Oceania</option>
+            <option value="used_scribed">Europe </option>
+            <option value="used_scribed">North America </option>
+            <option value="used_scribed">South America </option>
+            <option value="used_scribed">Selected Country(s)</option>
+            <option value="used_scribed">Worldwide </option>
+          </select>
+        </div>
+        </div>
+       
+         <div class="form-group">
+          <select class="year-select" name="selling_method">
+            <option value="" disabled selected>Selling Method</option>
+            <option value="direct">Direct Sales</option>
+            <option value="third_party">Third-Party Sales Only</option>
+            <option value="combined">Combine Sales</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description Section -->
+    <div class="sidebar-section description-section">
+      <div class="description-title">Description</div>
+      <div class="description-helper">Tell buyers anything that you haven't had the chance to include yet about your property.</div>
+      <textarea class="description-textarea" id="descriptionTextarea" placeholder="Description" rows="5"></textarea>
+    </div>
+
+    <!-- Property Purpose and Advanced Details -->
+    <div class="about-section">
+      <!-- Advanced Details -->
+      <div class="about-title">Advanced details</div>
+      <div class="about-desc">Optional</div>
+
+     <!-- Availability -->
+      <div class="form-group">
+        <label>Availability</label>
+        <div class="about-section">
+
+          <!-- Single Item -->
+          <label style="display:block; margin-bottom:10px;">
+            <input type="radio" name="availability" value="single">
+            <strong>List as Single Item</strong><br>
+            <span style="font-size:13px; color:#666;">
+              If you’re selling one item, show "Only One" on your listing
+            </span>
+          </label>
+
+          <!-- In Stock -->
+          <label style="display:block; margin-bottom:10px;">
+            <input type="radio" name="availability" value="in_stock">
+            <strong>List as In Stock</strong><br>
+            <span style="font-size:13px; color:#666;">
+              If you’re selling more than one item, show "In Stock" on your listing
+            </span>
+          </label>
+
+          <!-- Directory -->
+          <label style="display:block;">
+            <input type="radio" name="availability" value="directory">
+            <strong>List as a Directory</strong><br>
+            <span style="font-size:13px; color:#666;">
+              If you’re having a store on Archivehubs you can direct audience 
+              to your collection via your link. <a href="#">Link</a>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input class="property-input" type="text" name="tags" placeholder="Product tags (Limit: 20)">
+      </div>
+    </div>
+
+    <!-- Meetup Preferences -->
+    <div class="about-section">
+      <div class="about-title">Meetup preferences</div>
+      <div class="about-desc">
+        Buyers will be able to see your preferences on your listing. <a href="#">Learn more</a>
+      </div>
+
+      <!-- Public Meetup -->
+      <div class="form-group">
+        <i class="fa-solid fa-users"></i>
+        <label>
+          <input type="checkbox" name="meetup_public">
+          Public Meetup – Meet at a Public location. <a href="#">See Safety Tips</a>
+        </label>
+      </div>
+
+      <!-- Door Pickup -->
+      <div class="form-group">
+        <i class="fa-solid fa-door-open"></i>
+        <label>
+          <input type="checkbox" name="door_pickup">
+          Door Pickup – Buyer picks up at your door
+        </label>
+      </div>
+
+      <!-- Door Dropoff -->
+      <div class="form-group">
+        <i class="fa-solid fa-truck"></i>
+        <label>
+          <input type="checkbox" name="door_dropoff">
+          Door Dropoff – You drop off at buyer's door
+        </label>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="description-policy">
+      Marketplace items are public and can be seen by anyone on or off Facebook. Items such as animals, drugs, weapons, counterfeits and other items that infringe intellectual property aren't allowed on Marketplace. See our <a href="#" class="commerce-policy-link">Commerce Policies</a>.
+    </div>
+
+    <div class="description-progress">
+      <div class="progress-bar">
+        <div class="progress-bar-filled" id="progressBar"></div>
+        <div class="progress-bar-disabled"></div>
+      </div>
+    </div>
+
+    <button class="next-btn" id="nextButton" disabled>Next</button>
+  </form>
+  
+  <!-- List in More Places Section (initially hidden) -->
+  <div class="list-places-section" id="listPlacesSection">
+    <div class="list-places-title">List in More Places</div>
+    
+    <div class="list-places-option">
+      <div class="list-places-header">
+        <input type="checkbox" class="list-places-checkbox" id="marketplaceCheckbox" checked>
+        <label for="marketplaceCheckbox" class="list-places-label">List publicly</label>
+      </div>
+      <div class="list-places-desc">
+        Marketplace items are public and can be seen by anyone on or off Archivehubs.
+      </div>
+    </div>
+    
+    <div class="list-places-option">
+      <div class="list-places-header">
+        <input type="checkbox" class="list-places-checkbox" id="groupsCheckbox">
+        <label for="groupsCheckbox" class="list-places-label">List in your groups</label>
+      </div>
+      <div class="list-places-desc">
+        You can list in up to 20 groups.
+      </div>
+      
+      <div class="groups-container">
+        <div class="suggested-groups-title">Suggested groups you should join</div>
+        
+        <div class="group-item">
+          <div class="group-info">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">Member size</div>
+          </div>
+          <button class="join-group-btn">Join Group</button>
+        </div>
+        
+        <div class="group-item">
+          <div class="group-info">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">Member size</div>
+          </div>
+          <button class="join-group-btn">Join Group</button>
+        </div>
+        
+        <div class="group-item">
+          <div class="group-info">
+            <div class="group-name">Group Name</div>
+            <div class="group-members">Member size</div>
+          </div>
+          <button class="join-group-btn">Join Group</button>
+        </div>
+      </div>
+    </div>
+    
+    <button class="publish-btn" id="publishBtn">Publish</button>
+    <button class="back-btn" id="backButton">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="preview-container">
+    <div class="preview-left">
+      <div class="preview-title">Preview</div>
+      <div class="listing-preview-box" id="listingPreviewBox">
+        <div class="listing-preview-message">
+          <div class="listing-preview-main">Your listing preview</div>
+          <div class="listing-preview-sub">As you create your listing, you can preview how it will appear to others on Marketplace.</div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-right">
+      <div class="preview-summary">
+        <div class="preview-summary-title" id="previewTitle">Title</div>
+        <div class="preview-summary-price" id="previewPrice">$0</div>
+        <div class="preview-publishing-type" id="previewPublishingType">Publishing Type</div>
+        <div class="preview-summary-meta">Listed a few seconds ago in <span class="preview-summary-location" id="previewLocation">Location</span></div>
+        
+        <!-- Condition -->
+        <div class="preview-condition" id="previewCondition">Condition: Not specified</div>
+        
+        <hr class="preview-divider">
+        
+        <!-- Description -->
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Description</div>
+          <div class="preview-summary-description" id="previewDescription">
+            No description provided yet.
+          </div>
+        </div>
+        
+        <!-- Tags -->
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Tags</div>
+          <div class="preview-tags" id="previewTags">
+            <span class="preview-tag">No tags yet</span>
+          </div>
+        </div>
+        
+        <!-- Map and Location -->
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Map and Location Display</div>
+          <div id="previewMap" class="preview-map-container">
+            <div class="map-placeholder">Enter a location to see the map</div>
+          </div>
+          <div class="preview-summary-location-label" id="previewLocationLabel">Location</div>
+          <div class="preview-summary-location-note">Location is approximate</div>
+        </div>
+        
+        <hr class="preview-divider">
+        
+        <!-- Seller Information -->
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Seller information</div>
+          <div class="preview-seller-info">
+            <div class="preview-seller-avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="preview-seller-details">
+              <div class="preview-seller-name">Joshua Mide</div>
+              <div class="preview-seller-joined"><a href="#">Profile</a></div>
+            </div>
+          </div>
+          
+          <!-- Moved and centralized message button -->
+          <button class="preview-message-btn" id="previewMessageBtn">
+            <i class="fas fa-comment-dots"></i> Message
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+// Form to Preview Binding Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all form elements
+    const form = document.getElementById('propertyForm');
+    const titleInput = document.querySelector('input[name="property_title"]');
+    const locationInput = document.getElementById('locationInput');
+    const priceInput = document.querySelector('input[name="price"]');
+    const descriptionTextarea = document.getElementById('descriptionTextarea');
+    const conditionSelect = document.querySelector('select[name="condition"]');
+    const tagsInput = document.querySelector('input[name="tags"]');
+    const progressBar = document.getElementById('progressBar');
+    const nextButton = document.getElementById('nextButton');
+    const saveDraftBtn = document.getElementById('saveDraftBtn');
+    const previewMessageBtn = document.getElementById('previewMessageBtn');
+    const photoCount = document.getElementById('photo-count');
+    const photoUploadBox = document.getElementById('photoUploadBox');
+    const purposeSelect = document.querySelector('select[name="purpose"]');
+    
+    // Get all preview elements
+    const previewTitle = document.getElementById('previewTitle');
+    const previewPublishingType = document.getElementById('previewPublishingType');
+    const previewPrice = document.getElementById('previewPrice');
+    const previewLocation = document.querySelector('.preview-summary-location');
+    const previewLocationLabel = document.getElementById('previewLocationLabel');
+    const previewCondition = document.getElementById('previewCondition');
+    const previewDescription = document.getElementById('previewDescription');
+    const previewTags = document.getElementById('previewTags');
+    const previewListingBox = document.getElementById('listingPreviewBox');
+    const previewMapContainer = document.getElementById('previewMap');
+    
+    // List in More Places elements
+    const listPlacesSection = document.getElementById('listPlacesSection');
+    const publishBtn = document.getElementById('publishBtn');
+    const backButton = document.getElementById('backButton');
+    const userInfo = document.querySelector('.user-info');
+    
+    // Track form completion
+    let completedFields = 0;
+    const totalFields = 9; // Adjust based on important fields
+    
+    // Store uploaded images
+    let uploadedImages = [];
+    let currentImageIndex = 0;
+    
+    // Map variables
+    let map = null;
+    let marker = null;
+    
+    // Initialize map
+    function initMap() {
+        // Create a basic map centered on a default location
+        map = L.map(previewMapContainer).setView([0, 0], 2);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // Add a placeholder message
+        const placeholder = previewMapContainer.querySelector('.map-placeholder');
+        if (placeholder) {
+            placeholder.style.display = 'flex';
+        }
+    }
+    
+    // Update map based on location input
+    function updateMap(location) {
+        if (!location || location.trim() === '') {
+            // Show placeholder if no location
+            const placeholder = previewMapContainer.querySelector('.map-placeholder');
+            if (placeholder) {
+                placeholder.style.display = 'flex';
+                placeholder.textContent = 'Enter a location to see the map';
+            }
+            if (marker) {
+                map.removeLayer(marker);
+                marker = null;
+            }
+            return;
+        }
+        
+        // Use Nominatim for geocoding (OpenStreetMap's geocoding service)
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    // Hide placeholder
+                    const placeholder = previewMapContainer.querySelector('.map-placeholder');
+                    if (placeholder) {
+                        placeholder.style.display = 'none';
+                    }
+                    
+                    const lat = parseFloat(data[0].lat);
+                    const lon = parseFloat(data[0].lon);
+                    
+                    // Update map view
+                    map.setView([lat, lon], 13);
+                    
+                    // Remove existing marker if any
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+                    
+                    // Add new marker
+                    marker = L.marker([lat, lon]).addTo(map)
+                        .bindPopup(location)
+                        .openPopup();
+                } else {
+                    // Show error message if location not found
+                    const placeholder = previewMapContainer.querySelector('.map-placeholder');
+                    if (placeholder) {
+                        placeholder.style.display = 'flex';
+                        placeholder.textContent = 'Location not found';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error geocoding location:', error);
+                const placeholder = previewMapContainer.querySelector('.map-placeholder');
+                if (placeholder) {
+                    placeholder.style.display = 'flex';
+                    placeholder.textContent = 'Error loading map';
+                }
+            });
+    }
+    
+    // Initialize the map
+    initMap();
+    
+    // Update progress bar and button states
+    function updateProgress() {
+        const progressPercentage = (completedFields / totalFields) * 100;
+        progressBar.style.width = `${progressPercentage}%`;
+        
+        // Enable buttons if enough fields are filled
+        if (progressPercentage >= 50) {
+            nextButton.disabled = false;
+            nextButton.classList.add('enabled');
+            saveDraftBtn.disabled = false;
+            saveDraftBtn.classList.add('enabled');
+            previewMessageBtn.disabled = false;
+            previewMessageBtn.classList.add('enabled');
+        } else {
+            nextButton.disabled = true;
+            nextButton.classList.remove('enabled');
+            saveDraftBtn.disabled = true;
+            saveDraftBtn.classList.remove('enabled');
+            previewMessageBtn.disabled = true;
+            previewMessageBtn.classList.remove('enabled');
+        }
+    }
+    
+    // Title input binding
+    titleInput.addEventListener('input', function() {
+        previewTitle.textContent = this.value || 'Property Listing';
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Location input binding
+    locationInput.addEventListener('input', function() {
+        const location = this.value;
+        previewLocation.textContent = location || 'Location';
+        previewLocationLabel.textContent = location || 'Location';
+        
+        // Update the map with the entered location
+        updateMap(location);
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Price input binding
+    priceInput.addEventListener('input', function() {
+        const value = this.value;
+        previewPrice.textContent = value ? `$${value}` : '$0';
+        
+        if (value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Purpose select binding
+    purposeSelect.addEventListener('change', function() {
+        const purposeText = this.options[this.selectedIndex].text;
+        const price = priceInput.value;
+        
+        if (purposeText === 'For Rent' && price) {
+            previewPrice.textContent = `$${price}/month`;
+        } else if (price) {
+            previewPrice.textContent = `$${price}`;
+        }
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Description textarea binding
+    descriptionTextarea.addEventListener('input', function() {
+        previewDescription.textContent = this.value || 'No description provided yet.';
+            
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Condition select binding
+    conditionSelect.addEventListener('change', function() {
+        const conditionText = this.options[this.selectedIndex].text;
+        previewCondition.textContent = `Condition: ${conditionText}`;
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Tags input binding
+    tagsInput.addEventListener('input', function() {
+        const tags = this.value.split(',').map(tag => tag.trim()).filter(tag => tag);
+        
+        if (tags.length > 0) {
+            previewTags.innerHTML = '';
+            tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'preview-tag';
+                tagElement.textContent = tag;
+                previewTags.appendChild(tagElement);
+            });
+        } else {
+            previewTags.innerHTML = '<span class="preview-tag">No tags yet</span>';
+        }
+        
+        if (this.value && completedFields < totalFields) {
+            completedFields++;
+            updateProgress();
+        }
+    });
+    
+    // Image upload and preview functionality
+    function handleImageUpload(files) {
+        for (let i = 0; i < files.length; i++) {
+            // CORRECTED: Changed back to 10 photos limit
+            if (uploadedImages.length >= 10) break;
+            
+            const file = files[i];
+            if (!file.type.match('image.*')) continue;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImages.push(e.target.result);
+                updateImagePreview();
+                photoCount.textContent = uploadedImages.length;
+                
+                if (uploadedImages.length === 1 && completedFields < totalFields) {
+                    completedFields++;
+                    updateProgress();
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+    
+    function updateImagePreview() {
+        if (uploadedImages.length > 0) {
+            previewListingBox.innerHTML = '';
+            
+            // Create image carousel
+            const carousel = document.createElement('div');
+            carousel.className = 'preview-image-container';
+            
+            // Add main image
+            const mainImg = document.createElement('img');
+            mainImg.src = uploadedImages[currentImageIndex];
+            mainImg.className = 'preview-main-image';
+            mainImg.onload = function() {
+                // Ensure image fits properly without being cut off
+                this.style.objectFit = 'contain';
+                this.style.maxHeight = '360px';
+                this.style.maxWidth = '100%';
+            };
+            carousel.appendChild(mainImg);
+            
+            // Add navigation arrows if multiple images
+            if (uploadedImages.length > 1) {
+                const prevButton = document.createElement('button');
+                prevButton.className = 'carousel-nav prev';
+                prevButton.innerHTML = '&#10094;';
+                prevButton.addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex - 1 + uploadedImages.length) % uploadedImages.length;
+                    updateImagePreview();
+                });
+                carousel.appendChild(prevButton);
+                
+                const nextButton = document.createElement('button');
+                nextButton.className = 'carousel-nav next';
+                nextButton.innerHTML = '&#10095;';
+                nextButton.addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex + 1) % uploadedImages.length;
+                    updateImagePreview();
+                });
+                carousel.appendChild(nextButton);
+                
+                // Add image counter
+                const counter = document.createElement('div');
+                counter.className = 'image-counter';
+                counter.textContent = `${currentImageIndex + 1} / ${uploadedImages.length}`;
+                carousel.appendChild(counter);
+            }
+            
+            // Add thumbnail navigation if multiple images
+            if (uploadedImages.length > 1) {
+                const thumbnailsContainer = document.createElement('div');
+                thumbnailsContainer.className = 'preview-thumbnails';
+                
+                uploadedImages.forEach((img, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = img;
+                    thumb.className = 'preview-thumbnail';
+                    if (index === currentImageIndex) {
+                        thumb.classList.add('active');
+                    }
+                    
+                    thumb.addEventListener('click', () => {
+                        currentImageIndex = index;
+                        updateImagePreview();
+                    });
+                    
+                    thumbnailsContainer.appendChild(thumb);
+                });
+                
+                carousel.appendChild(thumbnailsContainer);
+            }
+            
+            previewListingBox.appendChild(carousel);
+        } else {
+            // Show default message if no images
+            previewListingBox.innerHTML = `
+                <div class="listing-preview-message">
+                    <div class="listing-preview-main">Your listing preview</div>
+                    <div class="listing-preview-sub">As you create your listing, you can preview how it will appear to others on Marketplace.</div>
+                </div>
+            `;
+        }
+    }
+    
+    // Photo upload box click handler
+    photoUploadBox.addEventListener('click', function() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = true;
+        input.accept = 'image/*';
+        input.onchange = (e) => handleImageUpload(e.target.files);
+        input.click();
+    });
+    
+    // Drag and drop functionality
+    photoUploadBox.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#1877f2';
+        this.style.background = '#e7f3ff';
+    });
+    
+    photoUploadBox.addEventListener('dragleave', function() {
+        this.style.borderColor = '#ccd0d5';
+        this.style.background = '#f5f6fa';
+    });
+    
+    photoUploadBox.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#ccd0d5';
+        this.style.background = '#f5f6fa';
+        handleImageUpload(e.dataTransfer.files);
+    });
+    
+    // FIXED: Custom dropdown logic for both dropdowns
+    function setupDropdown(dropdownId, previewElementId) {
+        const dropdown = document.getElementById(dropdownId);
+        if (!dropdown) return;
+        
+        const selected = dropdown.querySelector('.dropdown-selected');
+        const list = dropdown.querySelector('.dropdown-list');
+        const mainOptions = dropdown.querySelectorAll('.dropdown-main-option');
+        const previewElement = document.getElementById(previewElementId);
+        
+        selected.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('open');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('open');
+                mainOptions.forEach(opt => opt.classList.remove('expanded'));
+            }
+        });
+        
+        // Handle main option clicks
+        mainOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isExpanded = this.classList.contains('expanded');
+                
+                // Close other options
+                mainOptions.forEach(opt => {
+                    if (opt !== this) opt.classList.remove('expanded');
+                });
+                
+                // Toggle this option
+                this.classList.toggle('expanded');
+            });
+        });
+        
+        // Handle sub-option clicks
+        const allOptions = dropdown.querySelectorAll('.dropdown-list li:not(.dropdown-main-option), .dropdown-sub-list li');
+        allOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const value = this.textContent;
+                selected.innerHTML = value + ' <span class="dropdown-arrow">▼</span>';
+                dropdown.classList.remove('open');
+                
+                // Update the preview with the selected value
+                if (previewElement) {
+                    previewElement.textContent = value;
+                }
+                
+                // Update progress if needed
+                if (completedFields < totalFields) {
+                    completedFields++;
+                    updateProgress();
+                }
+            });
+        });
+        
+        // Handle regular list items (for Publishing Type dropdown)
+        const regularOptions = dropdown.querySelectorAll('.dropdown-list > li:not(.dropdown-main-option)');
+        regularOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const value = this.textContent;
+                selected.innerHTML = value + ' <span class="dropdown-arrow">▼</span>';
+                dropdown.classList.remove('open');
+                
+                // Update the preview with the selected value
+                if (previewElement) {
+                    previewElement.textContent = value;
+                }
+                
+                // Update progress if needed
+                if (completedFields < totalFields) {
+                    completedFields++;
+                    updateProgress();
+                }
+            });
+        });
+    }
+    
+    // Initialize both dropdowns with preview binding
+    setupDropdown('publishingTypeDropdown', 'previewPublishingType');
+    setupDropdown('bookCategoryDropdown', 'previewPropertyType');
+    
+    // Next button click handler - show List in More Places section
+    nextButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!this.disabled) {
+            // Hide the form and show the List in More Places section
+            form.style.display = 'none';
+            listPlacesSection.style.display = 'block';
+            userInfo.style.display = 'flex';
+            
+            // Update sidebar title
+            document.querySelector('.sidebar-subtitle').textContent = 'List in More Places';
+        }
+    });
+    
+    // Back button click handler - go back to form
+    backButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Hide the List in More Places section and show the form
+        listPlacesSection.style.display = 'none';
+        form.style.display = 'flex';
+        userInfo.style.display = 'none';
+        
+        // Update sidebar title
+        document.querySelector('.sidebar-subtitle').textContent = 'Property Listing';
+    });
+    
+    // Publish button click handler
+    publishBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Your listing has been published successfully!');
+        // Here you would typically submit the form data to a server
+    });
+    
+    // Save draft button click handler
+    saveDraftBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!this.disabled) {
+            alert('Draft saved successfully!');
+        }
+    });
+    
+    previewMessageBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!this.disabled) {
+            alert('Message button clicked! This would open a messaging interface.');
+        }
+    });
+    
+    // Join group buttons functionality
+    const joinGroupButtons = document.querySelectorAll('.join-group-btn');
+    joinGroupButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (this.textContent === 'Join Group') {
+                this.textContent = 'Joined';
+                this.classList.add('joined');
+            } else {
+                this.textContent = 'Join Group';
+                this.classList.remove('joined');
+            }
+        });
+    });
+    
+    // Initialize progress bar
+    updateProgress();
+});
+</script>
+</body>
+</html>

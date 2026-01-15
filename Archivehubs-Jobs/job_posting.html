@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post a Job</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #222;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 500px;
+      padding: 20px;
+    }
+
+    .container h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .container h2 span {
+      color: teal;
+    }
+
+    .container p {
+      font-size: 1rem;
+      color: #666;
+      margin: 10px 0 20px;
+    }
+
+    .input-box {
+      margin: 20px 0;
+    }
+
+    .input-box label {
+      display: block;
+      text-align: left;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      background: #0a66c2;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .btn:hover {
+      background: #004182;
+    }
+
+    .link {
+      display: block;
+      margin-top: 15px;
+      color: #0a66c2;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Hi <span>Gloria,</span></h2>
+    <h2>Find your next great hire</h2>
+    <p>86% of small businesses get a qualified candidate in one day</p>
+
+    <div class="input-box">
+      <label for="jobTitle">Job title <i class="fa fa-circle-question"></i></label>
+      <input type="text" id="jobTitle" placeholder="Developer">
+    </div>
+
+   <a href="write_with_ai.html">
+    <button class="btn"><i class="fa fa-star"></i> Start hiring with AI</button>
+</a>
+    <a href="write_job_description.html" class="link">Use my own job description</a>
+  </div>
+</body>
+</html>

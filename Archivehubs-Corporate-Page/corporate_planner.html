@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner | Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 60px;
+            --sidebar-expanded-width: 240px;
+            --sidebar-bg: #000;
+            --main-bg: #f5f5f5;
+            --blue: #1877f2;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --primary-color: #4267B2;
+            --secondary-color: #E4E6EB;
+            --border-color: #CED0D4;
+            --background-light: #F0F2F5;
+            --white: #FFFFFF;
+            --calendar-cell-border: var(--border-color);
+            --calendar-day-header-bg: var(--background-light);
+            --calendar-current-day-bg: #e0efff;
+            --calendar-event-bg: #dbe8f7;
+            --calendar-event-text: var(--text-primary);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--main-bg);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--text-primary);
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px 0;
+            gap: 20px;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .sidebar:hover {
+            width: var(--sidebar-expanded-width);
+        }
+
+        .nav-item {
+            width: 100%;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            color: #b0b3b8;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .nav-text {
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            color: #b0b3b8;
+            font-weight: 500;
+        }
+
+        .sidebar:hover .nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sidebar .nav-item.active {
+            background-color: #ffd700;
+            color: #000000;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .sidebar .nav-item.active .nav-text {
+            color: #000000;
+        }
+
+        .sidebar .nav-item:hover {
+            background-color: #3a3b3c;
+            color: #ffffff;
+        }
+
+        .sidebar .nav-item:hover .nav-text {
+            color: #ffffff;
+        }
+
+        .sidebar .nav-item.active:hover {
+            background-color: #ffed4a;
+        }
+
+        .nav-item img {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            object-fit: cover;
+            filter: brightness(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item i {
+            width: 24px;
+            font-size: 14px;
+            margin-right: 12px;
+            text-align: center;
+        }
+
+        .nav-item:hover img {
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        .nav-item.active img {
+            filter: brightness(1);
+        }
+
+        .nav-item:first-child {
+            margin-bottom: 10px;
+        }
+
+        .nav-divider {
+            color: #b0b3b8;
+            font-size: 12px;
+            padding: 0 16px;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar:hover .nav-divider {
+            opacity: 1;
+        }
+
+        .help-popup {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            top: 44px;
+            left: 0;
+            width: 200px;
+        }
+
+        .help-popup.active {
+            display: block;
+        }
+
+        .help-popup a {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .help-popup a i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .help-popup a:hover {
+            background-color: var(--background-light);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 20px 40px;
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+            width: calc(100% - var(--sidebar-width));
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar:hover ~ .main-content {
+            margin-left: var(--sidebar-expanded-width);
+            width: calc(100% - var(--sidebar-expanded-width));
+        }
+
+        .planner-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .planner-header-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .planner-header-text h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .planner-header-text p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .planner-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .planner-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background-color: var(--white);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .planner-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .planner-btn.primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .view-options {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .view-btn {
+            padding: 6px 12px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: transparent;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .view-btn:not(:last-child) {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .view-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .view-btn:hover:not(.active) {
+            background-color: var(--background-light);
+            color: var(--text-primary);
+        }
+
+        .date-navigation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .date-navigation .planner-btn {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .date-range {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .calendar-grid-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .calendar-wrapper {
+            flex: 1;
+        }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 5px;
+            background-color: transparent;
+            margin-bottom: 0;
+        }
+
+        .calendar-table thead th {
+            text-align: left;
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 10px 15px;
+            border-bottom: none;
+            background-color: var(--calendar-day-header-bg);
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .calendar-table td {
+            min-height: 200px;
+            padding: 10px;
+            vertical-align: top;
+            border: 1px solid var(--calendar-cell-border);
+            background-color: var(--white);
+            border-radius: 8px;
+            position: relative;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .calendar-table td:hover {
+            background-color: var(--background-light);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .calendar-table td .day-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .calendar-table td.current-day {
+            background-color: var(--calendar-current-day-bg);
+            border-color: var(--primary-color);
+        }
+
+        .calendar-cell-content {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 25px;
+        }
+
+        .event-item {
+            background-color: var(--calendar-event-bg);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--calendar-event-text);
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 500;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.2s ease;
+        }
+
+        .event-item:hover {
+            background-color: #cce7f5;
+            transform: translateY(-1px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .empty-state {
+            background-color: #f9fafb;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .empty-state h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .empty-state p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .empty-state .planner-btn.primary {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .goals-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .goals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .goals-header h2 {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .goals-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .goal-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .goal-item i {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .popup.active {
+            display: flex;
+        }
+
+        .popup-content {
+            background-color: var(--white);
+            padding: 24px;
+            border-radius: 8px;
+            width: 384px;
+            max-width: 90%;
+        }
+
+        .all-tools-content {
+            width: 900px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .all-tools-content .tools-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .search-popup {
+            width: 600px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .popup-close, .close-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .popup-close:hover, .close-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .tools-section {
+            margin-bottom: 16px;
+        }
+
+        .tools-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 8px;
+            grid-column: span 2;
+        }
+
+        .tools-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tools-list li a {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .tools-list li a i {
+            margin-right: 8px;
+        }
+
+        .tools-list li a:hover {
+            background-color: var(--background-light);
+            border-radius: 4px;
+        }
+
+        .tools-list li.hidden {
+            display: none;
+        }
+
+        .input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .search-input-container {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 16px;
+            padding-left: 45px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2365676b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 15px center;
+        }
+
+        .search-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            min-height: 300px;
+        }
+
+        .search-icon {
+            font-size: 60px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .search-caption {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                padding: 20px;
+            }
+            .calendar-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .date-navigation {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .calendar-grid-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .goals-section {
+                width: 100%;
+            }
+            .calendar-table td {
+                min-height: 150px;
+            }
+            .planner-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .planner-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 50px;
+            }
+
+            .sidebar:hover {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 50px;
+                width: calc(100% - 50px);
+                padding: 15px;
+            }
+
+            .sidebar:hover ~ .main-content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+
+            .nav-item {
+                width: 35px;
+                height: 35px;
+            }
+
+            .nav-item img {
+                width: 20px;
+                height: 20px;
+            }
+
+            .planner-header h1 {
+                font-size: 24px;
+            }
+            .planner-header-text p {
+                font-size: 14px;
+            }
+            .planner-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .planner-btn {
+                width: 100%;
+            }
+            .date-range {
+                font-size: 15px;
+            }
+
+            .calendar-table {
+                display: none;
+            }
+
+            .calendar-mobile {
+                display: block;
+            }
+
+            .calendar-mobile .calendar-cell {
+                padding: 10px;
+                margin-bottom: 10px;
+                background-color: var(--white);
+                border-radius: 8px;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            }
+
+            .calendar-mobile .day-header {
+                font-size: 14px;
+                color: var(--text-primary);
+                margin-bottom: 8px;
+                font-weight: 500;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 4px;
+            }
+
+            .help-popup {
+                width: 150px;
+                left: -8px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .calendar-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a href="../home.html" class="nav-item">
+            <img src="images/Logo.jpg">
+            <span class="nav-text">Archivehubs</span>
+        </a>
+        <div class="nav-divider">Corporate Manager</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-building"></i>
+            <span class="nav-text">Corporate Name</span>
+        </a>
+        <a href="corporate_home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">Home</span>
+        </a>
+        <a href="ads_manager.html" class="nav-item">
+            <i class="fas fa-table"></i>
+            <span class="nav-text">Ads Manager</span>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="corporate_notification.html" class="nav-item">
+            <i class="fas fa-bell"></i>
+            <span class="nav-text">Notifications</span>
+        </a>
+        <a href="corporate_inbox.html" class="nav-item">
+            <i class="fas fa-inbox"></i>
+            <span class="nav-text">Inbox</span>
+        </a>
+        <a href="corporate_content.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            <span class="nav-text">Content</span>
+        </a>
+        <a href="corporate_planner.html" class="nav-item active">
+            <i class="fas fa-calendar-alt"></i>
+            <span class="nav-text">Planner</span>
+        </a>
+        <a href="corporate_ads.html" class="nav-item">
+            <i class="fas fa-bullhorn"></i>
+            <span class="nav-text">Ads</span>
+        </a>
+        <a href="corporate_insights.html" class="nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span class="nav-text">Insights</span>
+        </a>
+        <a onclick="openAllTools()" class="nav-item all-tools-link">
+            <i class="fas fa-bars"></i>
+            <span class="nav-text">All Tools</span>
+        </a>
+        <div class="nav-divider">Edit</div>
+        <a href="#" class="nav-item" onclick="openSearchPopup()">
+            <i class="fas fa-search"></i>
+            <span class="nav-text">Search</span>
+        </a>
+        <a href="corporate_getstarted.html" class="nav-item">
+            <i class="fas fa-rocket"></i>
+            <span class="nav-text">Get Started</span>
+        </a>
+        <a href="corporate_settings.html" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span class="nav-text">Settings</span>
+        </a>
+        <a href="#" class="nav-item help-link">
+            <i class="fas fa-question-circle"></i>
+            <span class="nav-text">Help</span>
+            <div class="help-popup" id="help-popup">
+                <a href="#"><i class="fas fa-question-circle"></i>Help</a>
+                <a href="feedback.html"><i class="fas fa-comment-dots"></i>Give Feedback</a>
+            </div>
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <div class="planner-header">
+            <div class="planner-header-text">
+                <h1>Planner</h1>
+                <p>Plan your marketing calendar by creating, scheduling, and managing your content.</p>
+            </div>
+            <div class="planner-actions">
+                <button class="planner-btn">Create Ad</button>
+                <button class="planner-btn primary">Create Post</button>
+            </div>
+        </div>
+        
+        <div class="calendar-nav">
+            <div class="view-options">
+                <button class="view-btn active">Week</button>
+                <button class="view-btn">Month</button>
+            </div>
+            <div class="date-navigation">
+                <button class="planner-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="planner-btn">Today</button>
+                <button class="planner-btn"><i class="fas fa-chevron-right"></i></button>
+                <span class="date-range">Feb – March 2025</span>
+            </div>
+        </div>
+        
+        <div class="calendar-grid-container">
+            <div class="calendar-wrapper">
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th><span class="day-header-text">Sun</span><span class="day-number">23</span></th>
+                            <th><span class="day-header-text">Mon</span><span class="day-number">24</span></th>
+                            <th><span class="day-header-text">Tue</span><span class="day-number">25</span></th>
+                            <th><span class="day-header-text">Wed</span><span class="day-number">26</span></th>
+                            <th><span class="day-header-text">Thu</span><span class="day-number">27</span></th>
+                            <th><span class="day-header-text">Fri</span><span class="day-number">28</span></th>
+                            <th><span class="day-header-text">Sat</span><span class="day-number">1</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="calendar-cell-content"></div></td>
+                            <td><div class="calendar-cell-content"></div></td>
+                            <td><div class="calendar-cell-content"></div></td>
+                            <td><div class="calendar-cell-content"><div class="event-item">Marketing Campaign Brainstorm</div></div></td>
+                            <td class="current-day">
+                                <div class="calendar-cell-content">
+                                    <div class="event-item">Social Media Review</div>
+                                    <div class="event-item">Content Publishing</div>
+                                    <div class="empty-state">
+                                        <h3>Create a Post, Story, or Ad</h3>
+                                        <p>Share with your audience today.</p>
+                                        <button class="planner-btn primary">Create Post</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><div class="calendar-cell-content"></div></td>
+                            <td><div class="calendar-cell-content"></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="goals-section">
+                <div class="goals-header">
+                    <h2>Goals</h2>
+                    <button class="planner-btn">More</button>
+                </div>
+                <div class="goals-content">
+                    <p>Set a goal, track progress, and learn helpful tips for your professional success.</p>
+                    <div class="goal-item">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Start new goals</span>
+                    </div>
+                    <div class="goal-item">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Start sharing content more regularly to connect with your audience.</span>
+                    </div>
+                    <button class="planner-btn primary">Create Post</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-mobile">
+            <div class="calendar-cell">
+                <div class="day-header">Sun 23</div>
+                <div class="calendar-cell-content"></div>
+            </div>
+            <div class="calendar-cell">
+                <div class="day-header">Mon 24</div>
+                <div class="calendar-cell-content"></div>
+            </div>
+            <div class="calendar-cell">
+                <div class="day-header">Tue 25</div>
+                <div class="calendar-cell-content"></div>
+            </div>
+            <div class="calendar-cell">
+                <div class="day-header">Wed 26</div>
+                <div class="calendar-cell-content"><div class="event-item">Marketing Campaign Brainstorm</div></div>
+            </div>
+            <div class="calendar-cell current-day">
+                <div class="day-header">Thu 27</div>
+                <div class="calendar-cell-content">
+                    <div class="event-item">Social Media Review</div>
+                    <div class="event-item">Content Publishing</div>
+                    <div class="empty-state">
+                        <h3>Create a Post, Story, or Ad</h3>
+                        <p>Share with your audience today.</p>
+                        <button class="planner-btn primary">Create Post</button>
+                    </div>
+                </div>
+            </div>
+            <div class="calendar-cell">
+                <div class="day-header">Fri 28</div>
+                <div class="calendar-cell-content"></div>
+            </div>
+            <div class="calendar-cell">
+                <div class="day-header">Sat 1</div>
+                <div class="calendar-cell-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="all-tools-popup" class="popup">
+        <div class="popup-content all-tools-content">
+            <div class="popup-header">
+                <h3>All Tools</h3>
+                <button id="all-tools-close" class="popup-close"><i class="fas fa-times"></i></button>
+            </div>
+            <input type="text" id="tools-search" class="input" style="width: 80%;" placeholder="Search all tools">
+            <div class="tools-section">
+                <h4>Recently Used</h4>
+                <ul id="tools-list-recent" class="tools-list"></ul>
+            </div>
+            <div class="row" style="display: flex;">
+                <div class="col">
+                    <div class="tools-section">
+                        <h4>Engage</h4>
+                        <ul class="tools-list">
+                            <li><a href="inbox.html"><i class="fas fa-inbox"></i> Inbox</a></li>
+                            <li><a href="content.html"><i class="fas fa-file-alt"></i> Content</a></li>
+                            <li><a href="planner.html"><i class="fas fa-calendar-alt"></i> Planner</a></li>
+                            <li><a href="#"><i class="fas fa-users"></i> Leads Center</a></li>
+                            <li><a href="#"><i class="fas fa-video"></i> Live Dashboard</a></li>
+                            <li><a href="#"><i class="fas fa-file"></i> Page Posts</a></li>
+                            <li><a href="#"><i class="fas fa-music"></i> Sound Collection</a></li>
+                        </ul>
+                    </div>
+                    <div class="tools-section">
+                        <h4>Analyze</h4>
+                        <ul class="tools-list">
+                            <li><a href="insights.html"><i class="fas fa-chart-line"></i> Insights</a></li>
+                            <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                            <li><a href="#"><i class="fas fa-flask"></i> Experiments</a></li>
+                            <li><a href="#"><i class="fas fa-handshake"></i> Collabs</a></li>
+                            <li><a href="#"><i class="fas fa-traffic-light"></i> Traffic Report</a></li>
+                        </ul>
+                    </div>
+                    <div class="tools-section">
+                        <h4>Manage</h4>
+                        <ul class="tools-list">
+                            <li><a href="#"><i class="fas fa-shield-alt"></i> Brand Protection</a></li>
+                            <li><a href="#"><i class="fas fa-check-circle"></i> Brand Safety</a></li>
+                            <li><a href="#"><i class="fas fa-store"></i> Marketplace</a></li>
+                            <li><a href="#"><i class="fas fa-headset"></i> Support</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Locations</a></li>
+                            <li><a href="#"><i class="fas fa-cloud"></i> Drive</a></li>
+                            <li><a href="#"><i class="fas fa-envelope"></i> Messages</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="tools-section">
+                        <h4>Sell</h4>
+                        <ul class="tools-list">
+                            <li><a href="#"><i class="fas fa-calendar"></i> Appointments</a></li>
+                            <li><a href="#"><i class="fas fa-shopping-cart"></i> Commerce</a></li>
+                            <li><a href="#"><i class="fas fa-dollar-sign"></i> Monetization</a></li>
+                            <li><a href="#"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+                            <li><a href="#"><i class="fas fa-credit-card"></i> Payments</a></li>
+                        </ul>
+                    </div>
+                    <div class="tools-section">
+                        <h4>Advertise</h4>
+                        <ul class="tools-list">
+                            <li><a href="#"><i>Ads</i> Ads Overview</a></li>
+                            <li><a href="ads.html"><i class="fas fa-bullhorn"></i> Ads</a></li>
+                            <li><a href="#"><i>Ad Limits</i></a></li>
+                            <li><a href="ads_manager.html"><i>Ads Manager</i></a></li>
+                            <li><a href="#"><i>Audiences</i></a></li>
+                            <li><a href="#"><i>Automated Rules</i></a></li>
+                            <li><a href="#"><i>Creative Hub</i></a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">Forms</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-popup" class="popup">
+        <div class="search-popup">
+            <div class="search-header">
+                <div class="search-title">Search</div>
+                <button class="close-btn" onclick="closeSearchPopup()">×</button>
+            </div>
+            <div class="search-input-container">
+                <input type="text" class="search-input" placeholder="Find ad accounts, pages, people, tools">
+            </div>
+            <div class="search-content">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#e4e6eb" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1"></path>
+                    </svg>
+                </div>
+                <div class="search-caption">Get Started with Search</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const dayOfWeek = today.getDay();
+            const currentDayTableIndex = 5;
+            const currentDayMobileIndex = 4;
+
+            const tableCells = document.querySelectorAll('.calendar-table tbody td');
+            if (tableCells[currentDayTableIndex - 1]) {
+                tableCells[currentDayTableIndex - 1].classList.add('0');
+            }
+
+            const mobileCells = document.querySelectorAll('.calendar-mobile .calendar-cell');
+            if (mobileCells[currentDayMobileIndex]) {
+                mobileCells[currentDayMobileIndex].classList.add('0');
+            }
+
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelector('.view-btn.active').classList.remove('active');
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        function openAllTools() {
+            document.getElementById('all-tools-popup').classList.add('active');
+        }
+
+        function closeAllTools() {
+            document.getElementById('all-tools-popup').classList.remove('active');
+            document.getElementById('tools-search').value = '';
+            filterTools('');
+        }
+
+        function openSearchPopup() {
+            document.getElementById('search-popup').classList.add('active');
+        }
+
+        function closeSearchPopup() {
+            document.getElementById('search-popup').classList.remove('active');
+            document.querySelector('.search-input').value = '';
+        }
+
+        function filterTools(searchTerm) {
+            const toolLinks = document.querySelectorAll('.tools-list li');
+            toolLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (searchTerm === '' || text.includes(searchTerm)) {
+                    link.classList.remove('hidden');
+                } else {
+                    link.classList.add('hidden');
+                }
+            });
+        }
+
+        document.getElementById('all-tools-popup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAllTools();
+            }
+        });
+
+        document.getElementById('tools-search').addEventListener('input', () => {
+            const searchTerm = document.getElementById('tools-search').value.toLowerCase();
+            filterTools(searchTerm);
+        });
+
+        const helpLink = document.querySelector('.help-link');
+        const helpPopup = document.getElementById('help-popup');
+
+        helpLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            helpPopup.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!helpLink.contains(e.target) && !helpPopup.contains(e.target)) {
+                helpPopup.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

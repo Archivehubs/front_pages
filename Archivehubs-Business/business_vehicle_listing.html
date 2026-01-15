@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Listing</title>
+    <link rel="stylesheet" href="css/business_vehicle_listing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <img class="fb-logo" src="images/Logo.jpg" alt="Facebook Logo">
+    <button class="close-btn" title="Close">&times;</button>
+  </div>
+  <div class="sidebar-row">
+    <div class="sidebar-title">Marketplace</div>
+  </div>
+  <div class="sidebar-row">
+    <div class="sidebar-subtitle">Vehicle for sale</div>
+    <button class="save-draft-btn" disabled>Save Draft</button>
+  </div>
+  <div class="user-info">
+    <img class="user-avatar" src="images/profile.jpg" alt="User Profile">
+    <div class="user-details">
+      <span class="user-name">Joshua Mide</span>
+      <span class="user-listing">
+        Listing to Marketplace &bull; <span class="public-icon">&#128101;</span> Public
+      </span>
+    </div>
+  </div>
+  <form class="vehicle-form">
+    <div class="form-group">
+      <div class="custom-dropdown" id="vehicleDropdown">
+        <div class="dropdown-selected" tabindex="0">Vehicle type <span class="dropdown-arrow">▼</span></div>
+        <ul class="dropdown-list">
+          <li class="dropdown-main-option">Passenger Vehicles <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>Sedan</li>
+              <li>Hatchback</li>
+              <li>SUV</li>
+              <li>Coupe</li>
+              <li>Convertible</li>
+              <li>Wagon</li>
+              <li>Crossover</li>
+              <li>Others</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Commercial Vehicles <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>Pickup Truck</li>
+              <li>Panel Van</li>
+              <li>Box Truck</li>
+              <li>Flatbed Truck</li>
+              <li>Tow Truck</li>
+              <li>Trailer Truck / Articulated Lorry</li>
+              <li>Dump Truck</li>
+              <li>Tanker Truck</li>
+              <li>Refrigerated Truck</li>
+              <li>Others</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Public Transport Vehicles <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>City Bus</li>
+              <li>Coach Bus</li>
+              <li>Mini Bus</li>
+              <li>School Bus</li>
+              <li>Taxi</li>
+              <li>Rickshaw (Auto Rickshaw / Tuk-tuk)</li>
+              <li>Other</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Two-Wheelers <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>Motorcycle</li>
+              <li>Scooter</li>
+              <li>Moped</li>
+              <li>Electric Bike (E-bike)</li>
+              <li>Bicycle</li>
+              <li>Others</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Heavy Machinery / Utility Vehicles <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>Tractor</li>
+              <li>Bulldozer</li>
+              <li>Excavator</li>
+              <li>Forklift</li>
+              <li>Cranes</li>
+              <li>Backhoe Loader</li>
+              <li>Grader</li>
+              <li>Others</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Water Vehicles <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>Boat</li>
+              <li>Ferry</li>
+              <li>Yacht</li>
+              <li>Sailboat</li>
+              <li>Canoe / Kayak</li>
+              <li>Jet Ski</li>
+              <li>Submarine</li>
+              <li>Others</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Air Vehicles <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>Airplane</li>
+              <li>Helicopter</li>
+              <li>Glider</li>
+              <li>Hot Air Balloon</li>
+              <li>Drone</li>
+              <li>Jet</li>
+              <li>Others</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Rail Vehicles <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>Train</li>
+              <li>Tram</li>
+              <li>Monorail</li>
+              <li>Subway / Metro</li>
+              <li>Others</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Electric / Specialized Vehicles <span class="dropdown-arrow">▶</span>
+            <ul class="dropdown-sub-list">
+              <li>Electric Car (EV)</li>
+              <li>Hybrid Vehicle</li>
+              <li>Golf Cart</li>
+              <li>Segway</li>
+              <li>Hoverboard</li>
+              <li>Autonomous / Self-driving Car</li>
+              <li>Others</li>
+            </ul>
+          </li>
+          <li class="dropdown-main-option">Others</li>
+        </ul>
+        <input type="hidden" name="vehicle_type" id="vehicleTypeInput">
+      </div>
+    </div>
+    <div class="photo-upload-section">
+      <div class="photo-upload-label">Photo upload</div>
+      <div class="photo-upload-desc">Photos · 0/20 – You can add up to 20 photos.</div>
+      <div class="photo-upload-box">
+        <div class="photo-upload-icon">+</div>
+        <div class="photo-upload-text">Add photos<br><span class="photo-upload-sub">or drag and drop</span></div>
+      </div>
+      <div class="phone-upload-row">
+        <div class="phone-upload-icon">&#128241;</div>
+        <div class="phone-upload-text">Upload photos directly from your phone. <a href="#" class="learn-more">Learn more</a></div>
+        <button class="try-it-btn" type="button">Try It</button>
+      </div>
+    </div>
+    <div class="about-section">
+      <div class="about-title">About this vehicle</div>
+      <div class="about-desc">Help buyers know more about the vehicle that you're listing.</div>
+      <div class="form-group location-group">
+        <div class="location-input-wrapper">
+          <span class="location-svg">
+            <i class="fa-solid fa-globe"></i>
+          </span>
+          <input class="location-input" id="locationInput" name="location" type="text" placeholder="Location" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <select class="year-select">
+            <option value="" disabled selected>Year</option>
+            <!-- Years can be dynamically generated -->
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <input class="vehicle-input" type="text" name="make" placeholder="Make" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <input class="vehicle-input" type="text" name="model" placeholder="Model" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <input class="vehicle-input" type="text" name="mileage" placeholder="Mileage" autocomplete="off">
+      </div>
+      <div class="price-section">
+        <div class="price-label">Price</div>
+        <div class="price-helper">Enter your price for this vehicle.</div>
+        <div class="form-group">
+          <input class="vehicle-input" type="text" name="price" placeholder="Price" autocomplete="off">
+        </div>
+        <div class="price-label">Selling Method</div>
+        <div class="price-helper">Choose a specific selling method of your interest</div>
+        <div class="form-group">
+          <select class="year-select">
+            <option value="" disabled selected>Selling Method</option>
+            <!-- Years can be dynamically generated -->
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="year-select">
+            <option value="" disabled selected>Condition</option>
+            <!-- Years can be dynamically generated -->
+          </select>
+        </div>
+
+      </div>
+      
+    </div>
+  </form>
+  <div class="sidebar-section description-section">
+    <div class="description-title">Description</div>
+    <div class="description-helper">Tell buyers anything that you haven't had the chance to include yet about your vehicle.</div>
+    <textarea class="description-textarea" placeholder="Description" rows="5"></textarea>
+    <div class="description-policy">
+      Marketplace items are public and can be seen by anyone on or off Facebook. Items such as animals, drugs, weapons, counterfeits and other items that infringe intellectual property aren't allowed on Marketplace. See our <a href="#" class="commerce-policy-link">Commerce Policies</a>.
+    </div>
+    <div class="description-progress">
+      <div class="progress-bar">
+        <div class="progress-bar-filled"></div>
+        <div class="progress-bar-disabled"></div>
+      </div>
+    </div>
+    <button class="next-btn" disabled>Next</button>
+  </div>
+</div>
+<div class="main-content">
+  <div class="preview-container">
+    <div class="preview-left">
+      <div class="preview-title">Preview</div>
+      <div class="listing-preview-box">
+        <div class="listing-preview-message">
+          <div class="listing-preview-main">Your listing preview</div>
+          <div class="listing-preview-sub">As you create your listing, you can preview how it will appear to others on Marketplace.</div>
+        </div>
+      </div>
+    </div>
+    <div class="preview-right">
+      <div class="preview-summary">
+        <div class="preview-summary-title">Title</div>
+        <div class="preview-summary-price">Price</div>
+        <div class="preview-summary-meta">Listed a few seconds ago in <span class="preview-summary-location">Lushnje</span></div>
+        <hr class="preview-divider">
+        <div class="preview-summary-section">
+          <div class="preview-summary-label">Seller's description</div>
+          <div class="preview-summary-description">Description will appear here.</div>
+        </div>
+        <div class="preview-summary-map">
+          <div id="previewMap" class="preview-map-container"></div>
+        </div>
+        <div class="preview-summary-location-label">Lushnje</div>
+        <div class="preview-summary-location-note">Location is approximate</div>
+        <hr class="preview-divider">
+        <div class="preview-summary-section preview-seller-info">
+          <div class="preview-summary-label">Seller information</div>
+          <div class="preview-seller-row">
+            <img src="images/profile.jpg" alt="Seller profile" class="preview-seller-avatar">
+            <span class="preview-seller-name">Joshua Mide</span>
+            <span class="preview-seller-details">Seller details</span>
+          </div>
+        </div>
+        <button class="preview-message-btn" disabled>Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>
+<script>
+// Custom Dropdown Logic
+const dropdown = document.getElementById('vehicleDropdown');
+const selected = dropdown.querySelector('.dropdown-selected');
+const list = dropdown.querySelector('.dropdown-list');
+const mainOptions = dropdown.querySelectorAll('.dropdown-main-option');
+const subLists = dropdown.querySelectorAll('.dropdown-sub-list');
+const hiddenInput = document.getElementById('vehicleTypeInput');
+
+selected.addEventListener('click', () => {
+  dropdown.classList.toggle('open');
+});
+selected.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    dropdown.classList.toggle('open');
+    e.preventDefault();
+  }
+});
+document.addEventListener('click', (e) => {
+  if (!dropdown.contains(e.target)) {
+    dropdown.classList.remove('open');
+    mainOptions.forEach(opt => opt.classList.remove('expanded'));
+  }
+});
+mainOptions.forEach(option => {
+  option.addEventListener('click', function(e) {
+    // Only expand/collapse, don't select
+    e.stopPropagation();
+    // Collapse others
+    mainOptions.forEach(opt => {
+      if (opt !== option) opt.classList.remove('expanded');
+    });
+    option.classList.toggle('expanded');
+  });
+  // Sub-option selection
+  const subOptions = option.querySelectorAll('ul > li');
+  subOptions.forEach(sub => {
+    sub.addEventListener('click', function(ev) {
+      ev.stopPropagation();
+      selected.innerHTML = sub.textContent + ' <span class="dropdown-arrow">▼</span>';
+      hiddenInput.value = sub.textContent;
+      dropdown.classList.remove('open');
+      mainOptions.forEach(opt => opt.classList.remove('expanded'));
+    });
+  });
+});
+
+// Google Maps integration for preview
+let map, marker, geocoder;
+function initPreviewMap() {
+  geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('previewMap'), {
+    center: { lat: 40.9412, lng: 19.7056 }, // Default to Lushnje
+    zoom: 12,
+    disableDefaultUI: true,
+  });
+  marker = new google.maps.Marker({
+    map: map,
+    position: { lat: 40.9412, lng: 19.7056 },
+  });
+}
+function updatePreviewMap(location) {
+  if (!geocoder || !map || !marker) return;
+  geocoder.geocode({ address: location }, function(results, status) {
+    if (status === 'OK' && results[0]) {
+      const loc = results[0].geometry.location;
+      map.setCenter(loc);
+      marker.setPosition(loc);
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.google && window.google.maps) {
+    initPreviewMap();
+  } else {
+    window.initPreviewMap = initPreviewMap;
+  }
+  const locationInput = document.getElementById('locationInput');
+  if (locationInput) {
+    locationInput.addEventListener('change', function() {
+      updatePreviewMap(locationInput.value);
+      // Optionally update location label in preview
+      const label = document.querySelector('.preview-summary-location-label');
+      if (label) label.textContent = locationInput.value;
+    });
+  }
+});
+window.initPreviewMap = initPreviewMap;
+</script>
+</body>
+</html>

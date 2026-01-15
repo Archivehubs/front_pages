@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Marketing Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/files.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/affiliate_sidebar.css">
+    <link rel="stylesheet" href="css/affiliate_dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .bar-chart-canvas {
+            width: 100% !important;
+            height: 250px !important;
+            max-width: 100%;
+            display: block;
+        }
+        body {
+            font-size: 14px;
+        }
+        .pie-chart-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 320px;
+        }
+        .pie-chart-canvas {
+            width: 260px !important;
+            height: 260px !important;
+            max-width: 100%;
+            display: block;
+            margin: 0 24px 0 0;
+        }
+        .chart-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+        }
+        .legend-color {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            border-radius: 3px;
+        }
+        .legend-color.requirement { background: rgba(54, 162, 235, 0.6); }
+        .legend-color.performance { background: rgba(255, 99, 132, 0.6); }
+        .legend-color.achieved { background: rgba(75, 192, 192, 0.6); }
+        .legend-color.subscribers { background: rgba(153, 102, 255, 0.6); }
+
+        /* Responsive enhancements */
+        @media (max-width: 1200px) {
+            .pie-chart-container { height: 280px; }
+            .pie-chart-canvas { width: 220px !important; height: 220px !important; margin-right: 16px; }
+        }
+
+        @media (max-width: 992px) {
+            .files-container { grid-template-columns: 1fr; gap: 16px; padding: 16px; margin: 70px auto; }
+            .chart-section { grid-template-columns: 1fr !important; gap: 16px; }
+            .comparison-cards { grid-template-columns: 1fr !important; gap: 16px; }
+            .pie-chart-container { flex-direction: column; height: auto; }
+            .pie-chart-canvas { margin: 0 0 12px 0; }
+        }
+
+        @media (max-width: 768px) {
+            body { font-size: 13px; }
+            .bar-chart-canvas { height: 200px !important; }
+            .dashboard-summary { grid-template-columns: 1fr !important; }
+        }
+
+        @media (max-width: 576px) {
+            .bar-chart-canvas { height: 180px !important; }
+            /* Make commission table horizontally scrollable on small screens */
+            .chart-card table,
+            .commission-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        }
+    </style>
+</head>
+<body>
+
+ 
+
+        <div class="files-container">
+            <div class="left-panel">
+                <div class="sidebar-section affiliate-info">
+                    <p>Affiliate ID: ACAM000000000</p>
+                </div>
+
+                <div class="sidebar-section sidebar-menu">
+                    <a href="affiliate_overview.html" class="active"><i class="fas fa-tachometer-alt"></i> <span>Overview</span></a>
+                    <a href="affiliate_transactions.html"><i class="fas fa-exchange-alt"></i> <span>Transactions</span></a>
+                    <a href="affiliate_recurring.html"><i class="fas fa-sync-alt"></i> <span>Recurring</span></a>
+                    <a href="affiliate_referrals.html"><i class="fas fa-users"></i> <span>Referrals</span></a>
+                    <a href="affiliate_deals.html"><i class="fas fa-handshake"></i> <span>Deals</span></a>
+                    <a href="affiliate_resources.html"><i class="fas fa-book"></i> <span>Resources</span></a>
+                    <!-- <a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a>
+                    <a href="#"><i class="fas fa-question-circle"></i> <span>Help</span></a> -->
+                </div>
+
+                <div class="sidebar-section categories-section">
+                    <h3><b>Categories</b></h3>
+                    <div class="categories-list">
+                        <div><i class="fas fa-building"></i> <span>Company Page</span></div>
+                        <div><i class="fas fa-sitemap"></i> <span>Organization Page</span></div>
+                        <div><i class="fas fa-graduation-cap"></i> <span>Educational Page</span></div>                      
+                        <div><i class="fas fa-star"></i> <span>Showcase Page</span></div>
+                        <div><i class="fas fa-heart"></i> <span>Fans Page</span></div>
+                        <div><i class="fas fa-user-tie"></i> <span>Affiliate Marketers Page</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="dashboard-summary">
+                    <div class="summary-card">
+                        <h3>Dashboard</h3>
+                        <p>Affiliate Name</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Affiliate Tier</h3>
+                        <p><i class="fas fa-star star-icons"></i> Star</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>My Account</h3>
+                        <p>Available Balance</p>
+                        <p>N0.00</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>FAQs</h3>
+                        <p>Commission Earned</p>
+                        <p>N0.00</p>
+                    </div>
+                </div>
+
+                <div class="chart-section">
+                    <div class="chart-card">
+                        <h3>RECURRING PERFORMANCE</h3>
+                        <div class="pie-chart-container">
+                            <canvas id="recurringPieChart" class="pie-chart-canvas" width="260" height="260"></canvas>
+                            <div class="chart-legend">
+                                <div class="legend-item"><span class="legend-color requirement"></span> Level Requirement</div>
+                                <div class="legend-item"><span class="legend-color performance"></span> Current Performance</div>
+                                <div class="legend-item"><span class="legend-color achieved"></span> Percentage Achieved</div>
+                                <div class="legend-item"><span class="legend-color subscribers"></span> All Subscribers</div>
+                            </div>
+                        </div>
+                        <div class="chart-summary">
+                            Balance: 0 Commissions: 0
+                        </div>
+                        <div class="affiliate-progress-container">
+                            <span>Affiliate</span>
+                            <div class="affiliate-progress-bar">
+                                <div id="affiliateProgressFill" class="affiliate-progress-fill"></div>
+                            </div>
+                            <span id="affiliateStarIcons" class="star-progress-icons"></span>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>COMMISSION & BONUS</h3>
+                        <table class="commission-table">
+                            <thead>
+                                <tr><th colspan="2">CURRENT MONTH</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Available Balance</td><td>N0.00</td></tr>
+                                <tr><td>Commission Earned</td><td>N0.00</td></tr>
+                                <tr class="total-row"><td>Total</td><td><b>N0.00</b></td></tr>
+                            </tbody>
+                            <tbody class="separator-row">
+                                <tr><td colspan="2"></td></tr> </tbody>
+                            <thead>
+                                <tr><th colspan="2">PREVIOUS MONTH</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Available Balance</td><td>N0.00</td></tr>
+                                <tr><td>Commission Earned</td><td>N0.00</td></tr>
+                                <tr class="total-row"><td>Total</td><td><b>N0.00</b></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="comparison-section">
+                    <h2>CURRENT VS PREVIOUS MONTH COMPARISON</h2>
+                    <div class="comparison-cards">
+                        <div class="comparison-card">
+                            <h4>Transaction Volume</h4>
+                            <canvas id="transactionVolumeChart" class="bar-chart-canvas" height="250"></canvas>
+                        </div>
+                        <div class="comparison-card">
+                            <h4>Transaction Value</h4>
+                            <canvas id="transactionValueChart" class="bar-chart-canvas" height="250"></canvas>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    <script src="charts.js"></script> 
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pieChartCanvas = document.getElementById('recurringPieChart');
+            if (pieChartCanvas) {
+                const ctx = pieChartCanvas.getContext('2d');
+                const data = [
+                    { label: 'Level Requirement', value: 40, color: 'rgba(54, 162, 235, 0.6)' },
+                    { label: 'Current Performance', value: 30, color: 'rgba(255, 99, 132, 0.6)' },
+                    { label: 'Percentage Achieved', value: 20, color: 'rgba(75, 192, 192, 0.6)' },
+                    { label: 'All Subscribers', value: 10, color: 'rgba(153, 102, 255, 0.6)' }
+                ];
+
+                let total = data.reduce((sum, item) => sum + item.value, 0);
+                let startAngle = 0;
+                const centerX = pieChartCanvas.width / 2;
+                const centerY = pieChartCanvas.height / 2;
+                const outerRadius = Math.min(centerX, centerY) * 0.95;
+                const innerRadius = outerRadius * 0.6; 
+
+                data.forEach(item => {
+                    const sliceAngle = (item.value / total) * 2 * Math.PI;
+                    ctx.fillStyle = item.color;
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, outerRadius, startAngle, startAngle + sliceAngle);
+                    ctx.arc(centerX, centerY, innerRadius, startAngle + sliceAngle, startAngle, true);
+                    ctx.closePath();
+                    ctx.fill();
+                    startAngle += sliceAngle;
+                });
+            }
+
+            // Grouped Bar Chart Data and Initialization for Transaction Volume
+            const transactionVolumeData = {
+                labels: ['Marketplace', 'Digital Assets', 'Recurring', 'Service'],
+                datasets: [
+                    {
+                        label: 'Previous Volume',
+                        data: [772, 1788, 1709, 1502], // Example values from previous response
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)', // Blue
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Current Volume',
+                        data: [2411, 1372, 1804, 2466], // Example values from previous response
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)', // Red
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+            const transactionVolumeChartCtx = document.getElementById('transactionVolumeChart').getContext('2d');
+            new Chart(transactionVolumeChartCtx, {
+                type: 'bar',
+                data: transactionVolumeData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Volume'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Category'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    }
+                }
+            });
+
+            // Grouped Bar Chart Data and Initialization for Transaction Value
+            // Using placeholder values, you'd replace these with your actual transaction value data
+            const transactionValueData = {
+                labels: ['Marketplace', 'Digital Assets', 'Recurring', 'Service'],
+                datasets: [
+                    {
+                        label: 'Previous Value',
+                        data: [15000, 25000, 10000, 12000], // Example placeholder values
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)', // Greenish
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Current Value',
+                        data: [28000, 20000, 11000, 18000], // Example placeholder values
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)', // Purple
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+            const transactionValueChartCtx = document.getElementById('transactionValueChart').getContext('2d');
+            new Chart(transactionValueChartCtx, {
+                type: 'bar',
+                data: transactionValueData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Value (N)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Category'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    }
+                }
+            });
+
+            const affiliateProgressFill = document.getElementById('affiliateProgressFill');
+            const affiliateStarIcons = document.getElementById('affiliateStarIcons');
+
+            const progressPoints = 17; 
+
+            if (affiliateProgressFill) {
+                let progressPercentage;
+                let starText = '';
+                let stars = '';
+
+                if (progressPoints <= 10) {
+                    progressPercentage = (progressPoints / 10) * 100;
+                    stars = '<i class="fas fa-star"></i>';
+                    starText = '1 Star';
+                } else if (progressPoints <= 15) {
+                    progressPercentage = ((progressPoints - 10) / 5) * 100;
+                    stars = '<i class="fas fa-star"></i><i class="fas fa-star"></i>';
+                    starText = '2 Stars (Super Star)';
+                } else if (progressPoints <= 20) {
+                    progressPercentage = ((progressPoints - 15) / 5) * 100;
+                    stars = '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
+                    starText = '3 Stars (Mega Star)';
+                } else {
+                    progressPercentage = 100; 
+                    stars = '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>';
+                    starText = '3 Stars (Mega Star)';
+                }
+                
+                affiliateProgressFill.style.width = progressPercentage + '%';
+                affiliateStarIcons.innerHTML = stars + ' (' + progressPoints + ' points) ' + starText;
+            }
+        });
+        </script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

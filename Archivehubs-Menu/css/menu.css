@@ -1,0 +1,189 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    padding: 20px;
+    overflow-y: scroll;
+    margin-top: 90px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.columns-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.box {
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+h4 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.menu-item {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.icon {
+    font-size: 24px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.content p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.menu-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.menu-simple div {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    padding: 8px 0;
+}
+
+.menu-simple span {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+hr {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+/* Diary/Planner Section Styles */
+.planner-section {
+    margin-top: 15px;
+}
+
+.connection-section {
+    margin: 15px 0;
+}
+
+.connection-section h5 {
+    margin: 15px 0 10px 0;
+    font-weight: bold;
+    font-size: 15px;
+    color: #555;
+}
+
+.connection-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.connection-content {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+}
+
+.connection-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.event-organizer {
+    margin-top: 20px;
+}
+
+/* Profile & Account Management Styles */
+.ai-section {
+    margin: 15px 0;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.ai-section h4 {
+    margin: 15px 0 10px 0;
+    font-weight: bold;
+    color: #555;
+}
+
+.ai-section h5 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* Security & Privacy Styles */
+.notification-section {
+    margin: 15px 0;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.notification-section h4 {
+    margin: 15px 0 10px 0;
+    font-weight: bold;
+    color: #555;
+}
+
+.notification-section h5 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 15px;
+}

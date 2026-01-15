@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - File Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/drive_tech.css">
+</head>
+<body>
+    <!-- Order Modal -->
+    <div class="order-modal" id="orderModal">
+        <div class="order-modal-content">
+            <h3 id="modalTitle">Place Order</h3>
+            <div class="order-summary">
+                <p><strong>Product:</strong> <span id="modalProductName">Product Name</span></p>
+                <p><strong>Price:</strong> $<span id="modalProductPrice">0.00</span></p>
+            </div>
+            <div class="order-form">
+                <div class="form-group">
+                    <label for="orderQuantity">Quantity</label>
+                    <input type="number" id="orderQuantity" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="orderName">Your Name</label>
+                    <input type="text" id="orderName" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="orderEmail">Email</label>
+                    <input type="email" id="orderEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="orderNotes">Special Requests</label>
+                    <input type="text" id="orderNotes" placeholder="Any special requests?">
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="cancel-order" id="cancelOrder">Cancel</button>
+                <button class="confirm-order" id="confirmOrder">Confirm Order</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar Tabs for Mobile -->
+        <ul class="sidebar-tabs">
+            <li class="sidebar-tab active" data-target="archived">Archived</li>
+            <li class="sidebar-tab" data-target="categories">Categories</li>
+        </ul>
+
+        <!-- Sidebar -->
+        <div class="sidebar active" id="archived-sidebar">
+            <div class="sidebar-section active" id="archived-section">
+                <h3 class="sidebar-heading">Archived</h3>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search drive">
+                </div>
+                
+                <a href="audio.html" class="menu-item">
+                    <i class="fas fa-music"></i>
+                    <span>Audio</span>
+                </a>
+                
+                <a href="documents.html" class="menu-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Documents</span>
+                </a>
+                
+                <a href="images.html" class="menu-item">
+                    <i class="fas fa-image"></i>
+                    <span>Images</span>
+                </a>
+                
+                <a href="video.html" class="menu-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </a>
+                
+                <a href="storage.html" class="menu-item">
+                    <i class="fas fa-database"></i>
+                    <span>Storage</span>
+                </a>
+                
+                <div class="storage-bar-container">
+                    <div class="storage-bar"></div>
+                </div>
+                
+                <div class="storage-info">2.5GB of 10GB used</div>
+                
+                <button class="get-storage-btn">Get More Storage</button>
+            </div>
+            
+            <div class="sidebar-section" id="categories-section">
+                <h3 class="sidebar-heading">Categories</h3>
+                
+                <a href="appstore.html" class="menu-item">
+                    <i class="fab fa-app-store"></i>
+                    <span>App Store</span>
+                </a>
+                
+                <a href="backup.html" class="menu-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Backup & Recovery</span>
+                </a>
+                
+                <a href="corporate.html" class="menu-item">
+                    <i class="fas fa-building"></i>
+                    <span>Corporate Records</span>
+                </a>
+                
+                <a href="diary.html" class="menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>Diary</span>
+                </a>
+                
+                <div class="menu-item has-dropdown" id="files-dropdown">
+                    <div>
+                        <i class="fas fa-folder"></i>
+                        <span>Files</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                </div>
+                
+                <div class="sub-menu" id="files-submenu">
+                    <a href="family-files.html" class="menu-item">
+                        <i class="fas fa-users"></i>
+                        <span>Family files</span>
+                    </a>
+                    <a href="private-files.html" class="menu-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Private Files</span>
+                    </a>
+                </div>
+                
+                <a href="gallery.html" class="menu-item">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span>
+                </a>
+                
+                <a href="idea-bank.html" class="menu-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Idea Bank</span>
+                </a>
+                
+                <a href="library.html" class="menu-item current">
+                    <i class="fas fa-book-open"></i>
+                    <span>Library</span>
+                </a>
+                
+                <a href="portfolio.html" class="menu-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Portfolio</span>
+                </a>
+                
+                <a href="service-centre.html" class="menu-item">
+                    <i class="fas fa-tools"></i>
+                    <span>Service Centre</span>
+                </a>
+                
+                <a href="store.html" class="menu-item">
+                    <i class="fas fa-store"></i>
+                    <span>Store</span>
+                </a>
+                
+                <a href="tech-hub.html" class="menu-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Tech Hub</span>
+                </a>
+                
+                <a href="vault.html" class="menu-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Vault</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content - Tech Hub Page -->
+        <div class="main-content">
+            <!-- <h1 class="section-heading">Tech Hub</h1> -->
+           
+            <div class="tech-section">
+                <h2 class="section-title">Audio</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name</h3>
+                            <p class="card-description">Description</p>
+                            <div class="card-description">Date</div>
+                            <button class="order-btn" data-name="Project Management Suite" data-price="29.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description</p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="Design Pro Tool" data-price="49.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description: </p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="Code Assistant AI" data-price="19.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description</p>
+                            <div class="card-description">Date</div>
+                            <button class="order-btn" data-name="Cloud Storage Pro" data-price="9.99">Edit Post</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="see-more">See More</a>
+            </div>
+            
+            <!-- Product Requirement Documents (PRD) Picks -->
+            <div class="tech-section">
+                <h2 class="section-title">Documents</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description</p>
+                            <div class="card-description">Date:</div>
+                            <button class="order-btn" data-name="PRD Template Pack" data-price="14.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description</p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="Requirements Management" data-price="39.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description: </p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="User Story Generator" data-price="24.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description: </p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="PRD Collaboration Suite" data-price="59.99">Edit Post</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="see-more">See More</a>
+            </div>
+            
+            <!-- Domain Name (DN) Picks -->
+            <div class="tech-section">
+                <h2 class="section-title">Images</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description: </p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="TechInnovate.com" data-price="2499.00">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description: </p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="AppBuilder.io" data-price="1799.00">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description: </p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="DataFlow.net" data-price="1200.00">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description</p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="CloudServe.org" data-price="899.00">Edit Post</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="see-more">See More</a>
+            </div>
+            
+            <!-- Software Picks -->
+            <div class="tech-section">
+                <h2 class="section-title">Vdeos</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description: </p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="Security Suite Pro" data-price="89.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description</p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="Database Manager" data-price="129.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description</p>
+                            <div class="card-description">Date:</div>
+                            <button class="order-btn" data-name="DevOps Automation" data-price="79.99">Edit Post</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image"></div>
+                        <div class="card-content">
+                            <h3 class="card-title">Name: </h3>
+                            <p class="card-description">Description: </p>
+                            <div class="card-description">Date: </div>
+                            <button class="order-btn" data-name="API Development Suite" data-price="149.99">Edit Post</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="see-more">See More</a>
+            </div>
+            
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle sidebar tabs for mobile
+            const sidebarTabs = document.querySelectorAll('.sidebar-tab');
+            const sidebarSections = document.querySelectorAll('.sidebar-section');
+            
+            // Function to show a specific section and hide others
+            function showSidebarSection(sectionId) {
+                sidebarSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+            }
+            
+            sidebarTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-target');
+                    
+                    // Update active tab
+                    sidebarTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show the corresponding section
+                    showSidebarSection(target + '-section');
+                });
+            });
+            
+            // Handle dropdown for Files menu item
+            const filesDropdown = document.getElementById('files-dropdown');
+            const filesSubmenu = document.getElementById('files-submenu');
+            const dropdownIcon = filesDropdown.querySelector('.dropdown-icon');
+            
+            filesDropdown.addEventListener('click', () => {
+                filesSubmenu.classList.toggle('active');
+                dropdownIcon.classList.toggle('rotated');
+            });
+            
+            // Order functionality
+            const orderModal = document.getElementById('orderModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalProductName = document.getElementById('modalProductName');
+            const modalProductPrice = document.getElementById('modalProductPrice');
+            const orderQuantity = document.getElementById('orderQuantity');
+            const cancelOrder = document.getElementById('cancelOrder');
+            const confirmOrder = document.getElementById('confirmOrder');
+            const orderButtons = document.querySelectorAll('.order-btn');
+            
+            // Open order modal when order button is clicked
+            orderButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const productName = button.getAttribute('data-name');
+                    const productPrice = button.getAttribute('data-price');
+                    
+                    modalProductName.textContent = productName;
+                    modalProductPrice.textContent = productPrice;
+                    orderQuantity.value = 1;
+                    
+                    orderModal.style.display = 'flex';
+                });
+            });
+            
+            // Close modal when cancel button is clicked
+            cancelOrder.addEventListener('click', () => {
+                orderModal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside the modal content
+            orderModal.addEventListener('click', (e) => {
+                if (e.target === orderModal) {
+                    orderModal.style.display = 'none';
+                }
+            });
+            
+            // Handle order confirmation
+            confirmOrder.addEventListener('click', () => {
+                const name = document.getElementById('orderName').value;
+                const email = document.getElementById('orderEmail').value;
+                
+                if (!name || !email) {
+                    alert('Please enter your name and email to complete the order.');
+                    return;
+                }
+                
+                const product = modalProductName.textContent;
+                const price = modalProductPrice.textContent;
+                const quantity = orderQuantity.value;
+                const total = (parseFloat(price) * parseInt(quantity)).toFixed(2);
+                
+                alert(`Thank you for your order, ${name}!\n\nProduct: ${product}\nQuantity: ${quantity}\nTotal: $${total}\n\nA confirmation has been sent to ${email}`);
+                
+                orderModal.style.display = 'none';
+                
+                // Reset form
+                document.getElementById('orderName').value = '';
+                document.getElementById('orderEmail').value = '';
+                document.getElementById('orderNotes').value = '';
+            });
+            
+            // Adjust layout on window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 992) {
+                    // Reset sidebar display on large screens - show all sections
+                    sidebarSections.forEach(section => {
+                        section.classList.add('active');
+                    });
+                } else {
+                    // Apply mobile view adjustments
+                    const activeTab = document.querySelector('.sidebar-tab.active');
+                    if (activeTab) {
+                        const target = activeTab.getAttribute('data-target');
+                        showSidebarSection(target + '-section');
+                    }
+                }
+            });
+            
+            // Initialize mobile view if needed
+            if (window.innerWidth <= 992) {
+                // Start with only the archived section visible on mobile
+                showSidebarSection('archived-section');
+            }
+        });
+    </script>
+</body>
+</html>

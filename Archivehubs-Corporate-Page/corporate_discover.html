@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pages | ArchiveHubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5; /* Updated background color */
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left, .nav-middle, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .search-input {
+            padding: 8px 35px 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            outline: none;
+            width: 200px;
+            transition: width 0.3s;
+        }
+
+        .search-input:focus {
+            width: 250px;
+            border-color: #4a90e2;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .nav-link i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-link:hover {
+            color: #4a90e2;
+        }
+
+        .nav-link.active {
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .pages-container { /* Renamed from .container */
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            gap: 20px; /* Added gap */
+            padding: 40px 15px; /* Added padding */
+        }
+
+        /* Left Panel */
+        .left-panel {
+            flex: 0 0 280px; /* Updated flex property */
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: fit-content;
+        }
+
+        .left-panel-header { /* New class for the header with icon */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .left-panel-header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .left-panel-header h1 a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .left-panel-header h1 a:hover {
+            text-decoration: none;
+            color: #1877f2;
+        }
+
+        .main-nav-list { /* New main navigation list class */
+            list-style: none;
+        }
+        
+        .main-nav-list li {
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .main-nav-list li a { /* Style for anchor tags in main list */
+            display: flex;
+            align-items: center;
+            padding: 10px 10px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .main-nav-list li a:hover {
+            background-color: #f0f2f5;
+        }
+        
+        .main-nav-list li i {
+            margin-right: 10px;
+            color: #65676b; /* Default icon color */
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-nav-list li.active { /* Style for active menu item */
+            background-color: #e6f2ff;
+            font-weight: 600;
+        }
+
+        .main-nav-list li.active a {
+            color: #1877f2;
+        }
+
+        .main-nav-list li.active i {
+            color: #1877f2; /* Active icon color */
+        }
+        
+        .sub-nav-list { /* Style for nested sub-menus */
+            list-style: none;
+            padding-left: 30px; /* Indent sub-menus */
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .sub-nav-list li a {
+            padding: 8px 0;
+            display: block; /* Ensures the whole area is clickable */
+            color: #555;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .sub-nav-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-divider { /* Style for horizontal rule */
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 15px 0;
+        }
+
+        .category-title { /* Style for category titles */
+            font-size: 16px;
+            font-weight: 600;
+            color: #65676b;
+            padding: 10px 10px;
+            margin-bottom: 5px;
+        }
+
+        /* Right Panel Styles */
+        .right-panel {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .discover-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .page-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #eee; 
+        }
+
+        /* New styles for company image banner */
+        .page-banner-img {
+            width: 100%;
+            height: 150px; /* Keep height consistent with previous banner */
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            display: block; /* Ensure it behaves like a block element */
+        }
+
+        .page-details {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .page-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: #4a90e2;
+            flex-shrink: 0; 
+        }
+
+        .page-info {
+            flex: 1;
+        }
+
+        .page-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 16px; 
+        }
+
+        .page-description {
+            font-size: 13px; 
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .page-reactions {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px; 
+        }
+
+        .page-reactions i {
+            margin-right: 5px;
+        }
+
+        .page-reactions span {
+            margin-right: 15px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+        }
+
+
+        @media (max-width: 768px) {
+            .pages-container { /* Renamed from .container */
+                flex-direction: column;
+                padding-top: 20px; /* Adjust padding for smaller screens */
+            }
+            
+            .left-panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .nav-middle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="pages-container"> <div class="left-panel">
+            <div class="left-panel-header"> <h1><a href="corporate_pages.html" class="pages-link">Pages</a></h1>
+                <i class="fas fa-cog"></i> 
+            </div>
+            
+            <ul class="main-nav-list">
+                <li> 
+                    <a href="corporate_yourpages.html">
+                        <i class="fas fa-flag"></i>Your Pages
+                    </a>
+                    <ul class="sub-nav-list"> 
+                        <li><a href="#">Corporate Page 1</a></li>
+                        <li><a href="#">Corporate Page 2</a></li>
+                    </ul>
+                </li>
+                
+                <hr class="nav-divider"> 
+                <li> 
+                    <a href="corporate_home.html">
+                        <i class="fas fa-user-tie"></i>Corporate Manager
+                    </a>
+                </li>
+                <li class="active"> <a href="corporate_discover.html">
+                        <i class="fas fa-compass"></i>Discover
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_likedpages.html">
+                        <i class="far fa-thumbs-up"></i>Liked Pages
+                    </a>
+                </li>
+
+                <hr class="nav-divider"> 
+                <li class="category-title">Categories</li> 
+                <li> 
+                    <a href="corporate_companypage.html">
+                        <i class="fas fa-briefcase"></i>Company Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_organizationpage.html">
+                        <i class="fas fa-sitemap"></i>Organization Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_education.html">
+                        <i class="fas fa-graduation-cap"></i>Educational Institution Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="corporate_showcase.html">
+                        <i class="fas fa-star"></i>Showcase Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="#">
+                        <i class="fas fa-users"></i>Fans Page
+                    </a>
+                </li>
+                <li> 
+                    <a href="affiliate_overview.html">
+                        <i class="fas fa-link"></i>Affiliate Marketers Page
+                    </a>
+                </li>
+            </ul>
+            <div class="footer">
+                ARCHIVEHUBS: ENINK Investment Limited © 2025
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h2 class="discover-title">Discover Pages Suggested for You</h2>
+            
+            <div class="page-card">
+                <img src="img/comp-1.jpg" alt="Company Banner" class="page-banner-img">
+                <div class="page-details">
+                    <div class="page-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="page-info">
+                        <div class="page-name">Tech Innovators Inc.</div>
+                        <div class="page-description">Leading technology solutions provider</div>
+                        <div class="page-reactions">
+                            <span><i class="fas fa-thumbs-up"></i> 245</span>
+                            <span><i class="fas fa-comment"></i> 32</span>
+                            <span><i class="fas fa-retweet"></i> 20</span> 
+                            <span><i class="fas fa-share"></i> 12</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page-card">
+                <img src="img/comp-2.jpg" alt="Company Banner" class="page-banner-img">
+                <div class="page-details">
+                    <div class="page-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="page-info">
+                        <div class="page-name">Global University</div>
+                        <div class="page-description">Premier educational institution since 1950</div>
+                        <div class="page-reactions">
+                            <span><i class="fas fa-thumbs-up"></i> 1.2K</span>
+                            <span><i class="fas fa-comment"></i> 87</span>
+                            <span><i class="fas fa-retweet"></i> 60</span> 
+                            <span><i class="fas fa-share"></i> 45</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

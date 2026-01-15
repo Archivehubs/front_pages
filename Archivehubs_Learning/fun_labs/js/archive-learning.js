@@ -1,4 +1,4 @@
--// Archive Learning JavaScript
+// Archive Learning JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     // Accordion functionality for navigation menu
     const accordionHeaders = document.querySelectorAll('.accordion-header');

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/planner-aps.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Scoped styles for user profile dropdown */
+        .planner-navbar { position: relative; }
+        .planner-navbar .nav-right { position: relative; }
+        .planner-navbar .user-profile { background: transparent; border: 0; padding: 0; cursor: pointer; }
+        .planner-navbar .user-profile i { font-size: 28px; color: #555; }
+        .planner-navbar .user-menu { position: absolute; top: 100%; right: 0; margin-top: 10px; width: 320px; background: #fff; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 12px 28px rgba(0,0,0,0.2); border-radius: 12px; display: none; z-index: 1000; overflow: hidden; }
+        .planner-navbar .user-menu.open { display: block; }
+        .planner-navbar .user-menu .section-sep { height: 10px; background: #f0f2f5; border-top: 1px solid rgba(0,0,0,0.06); border-bottom: 1px solid rgba(0,0,0,0.06); }
+        /* Header */
+        .planner-navbar .user-menu-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+        .planner-navbar .user-avatar { width: 36px; height: 36px; border-radius: 999px; background: #fff; display: grid; place-items: center; border: 1px solid rgba(0,0,0,0.1); }
+        .planner-navbar .user-avatar i { font-size: 20px; color: #333; }
+        .planner-navbar .user-title { font-weight: 600; color: #000; }
+        /* Profile switcher item */
+        .planner-navbar .profile-switch { display: flex; align-items: center; gap: 12px; padding: 12px 16px; text-decoration: none; color: #111; }
+        .planner-navbar .profile-switch:hover { background: #f6f7f9; }
+        .planner-navbar .see-all { display: flex; justify-content: center; padding: 10px 16px; }
+        .planner-navbar .see-all button { background: #f0f2f5; border: 0; padding: 10px 16px; border-radius: 999px; font-weight: 600; cursor: pointer; }
+        .planner-navbar .see-all button:hover { background: #e4e6eb; }
+        /* Highlight card */
+        .planner-navbar .highlight-card { margin: 10px 16px 12px 16px; border: 1px solid rgba(88, 86, 214, 0.25); background: rgba(88,86,214,0.06); border-radius: 10px; padding: 12px; }
+        .planner-navbar .highlight-title { font-weight: 600; margin-bottom: 4px; color: #111; }
+        .planner-navbar .highlight-note { color: #ffd700; font-size: 13px; font-weight: 600; }
+        /* List items */
+        .planner-navbar .menu-list { list-style: none; margin: 0; padding: 4px 0; }
+        .planner-navbar .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; text-decoration: none; color: #111; }
+        .planner-navbar .menu-item:hover { background: #f6f7f9; }
+        .planner-navbar .menu-item:hover .menu-icon,
+        .planner-navbar .menu-item:hover .chev { color: #ffd700; }
+        .planner-navbar .menu-left { display: flex; align-items: center; gap: 12px; }
+        .planner-navbar .menu-icon { width: 28px; display: grid; place-items: center; color: #606770; }
+        .planner-navbar .menu-label { font-weight: 500; }
+        .planner-navbar .chev { color: #8a8d91; }
+        /* Footer */
+        .planner-navbar .signout { display: flex; justify-content: center; padding: 14px 16px; border-top: 1px solid rgba(0,0,0,0.06); color: #111; font-weight: 600; text-decoration: none; }
+        .planner-navbar .signout:hover { background: #fff5f5; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="planner-navbar">
+        <div class="nav-left">
+            <a href="../home.html">.
+              <div class="logo-square">
+                <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+              </div>
+            </a>
+            <div class="nav-title">
+                <h1>Planner (APS)</h1>
+                <p>Integrated Activity Scheduling</p>
+            </div>
+        </div>
+        
+          <div class="nav-right" id="navRightUser" aria-haspopup="true" aria-expanded="false">
+            <button class="user-profile" id="userProfileBtn" aria-label="User menu" title="User">
+                <i class="fas fa-user-circle"></i>
+            </button>
+            <div class="user-menu" id="userMenu" role="menu" aria-hidden="true">
+                <!-- Top user row -->
+                <div class="user-menu-header">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-title">User</div>
+                </div>
+                <div class="section-sep"></div>
+                <!-- Corporate Page (switch profile) row -->
+                <a href="#" class="profile-switch" role="menuitem">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div>Corporate Page</div>
+                </a>
+                <div class="section-sep"></div>
+                <!-- See all profiles button -->
+                <div class="see-all">
+                    <button type="button">See all profiles</button>
+                </div>
+                <!-- Highlight card: Archivehubs Explorer -->
+                <div class="highlight-card">
+                    <div class="menu-left">
+                        <div class="user-avatar"><i class="fas fa-user"></i></div>
+                        <div>
+                            <div class="highlight-title">Archivehubs Explorer</div>
+                            <div class="highlight-note">Try free Premium for 1 month</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main list -->
+                <ul class="menu-list">
+                    <li>
+                        <a href="#" class="menu-item" role="menuitem">
+                            <div class="menu-left"><span class="menu-icon"><i class="fas fa-gear"></i></span><span class="menu-label">Settings & privacy</span></div>
+                            <span class="chev"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item" role="menuitem">
+                            <div class="menu-left"><span class="menu-icon"><i class="fas fa-circle-question"></i></span><span class="menu-label">Help & Support</span></div>
+                            <span class="chev"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item" role="menuitem">
+                            <div class="menu-left"><span class="menu-icon"><i class="fas fa-moon"></i></span><span class="menu-label">Display & Accessibility</span></div>
+                            <span class="chev"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item" role="menuitem">
+                            <div class="menu-left"><span class="menu-icon"><i class="fas fa-calendar-check"></i></span><span class="menu-label">Planner (APS)</span></div>
+                            <span class="chev"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item" role="menuitem">
+                            <div class="menu-left"><span class="menu-icon"><i class="fas fa-compass"></i></span><span class="menu-label">Archivehubs Explorer</span></div>
+                            <span class="chev"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item" role="menuitem">
+                            <div class="menu-left"><span class="menu-icon"><i class="fas fa-hard-drive"></i></span><span class="menu-label">Archivehubs Drive</span></div>
+                            <span class="chev"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item" role="menuitem">
+                            <div class="menu-left"><span class="menu-icon"><i class="fas fa-file-alt"></i></span><span class="menu-label">General Terms</span></div>
+                            <span class="chev"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                </ul>
+                <a href="#" class="signout" role="menuitem">Sign Out</a>
+            </div>
+          </div>
+    </nav>
+        
+    <div class="container">
+        <main>
+            <section class="left-panel">
+                <h2>Create a Plan</h2>
+                <ul>
+                    <a href="activities(planner APS).html"><li>Activity Log frame</li></a>
+                    <a href="ARL-Request.html"><li>Archive Reference Location (ARL)</li></a>
+                    <a href="#"><li>Corporate Page</li></a>
+                    <a href="calendar.html"><li>Calendar</li></a>
+                    <a href="APS_page.html"><li>Page</li></a>
+                    <a href="groups.html"><li>Groups</li></a>
+                    <a href="#"><li>Marketplace Listing</li></a>
+                    <a href="#"><li>Post and Activities</li></a>
+                    <a href="#"><li>Search a Job Plan</li></a>
+                    <a href="#"><li>Tec hub</li></a>
+                </ul>
+            </section>
+            <section class="right-panel">
+                <ul>
+                    <a href="policy.html"><li>Ad Manager</li></a>
+                    <a href="ACM.html"><li>Automatic Corporate Manager (ACM)</li></a>
+                    <a href="files.html"><li>Files</li></a>
+                    <a href="APS_event2.html"><li>Event</li></a>
+                    <a href="#"><li>Job Posting Account</li></a>
+                    <a href="#"><li>Portfolio</li></a>
+                    <a href="#"><li>Purchase Order</li></a>
+                    <a href="#"><li>Story</li></a>
+                    <a href="supervision_plannerAPS.html"><li>Supervision</li></a>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+     
+
+
+       
+
+
+<script>
+  // User profile dropdown logic
+  (function(){
+    const btn = document.getElementById('userProfileBtn');
+    const menu = document.getElementById('userMenu');
+    const navRight = document.getElementById('navRightUser');
+    if(!btn || !menu || !navRight) return;
+
+    function openMenu(){
+      menu.classList.add('open');
+      navRight.setAttribute('aria-expanded','true');
+      menu.setAttribute('aria-hidden','false');
+    }
+    function closeMenu(){
+      menu.classList.remove('open');
+      navRight.setAttribute('aria-expanded','false');
+      menu.setAttribute('aria-hidden','true');
+    }
+    function toggleMenu(){
+      if(menu.classList.contains('open')) closeMenu(); else openMenu();
+    }
+
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    document.addEventListener('mousedown', function(e){
+      if(!menu.contains(e.target) && e.target !== btn && !btn.contains(e.target)){
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeMenu();
+    });
+  })();
+</script>
+<script>
+  // Repost popup logic
+  (function(){
+    // Localized popup for the FIRST post only
+    const btn = document.getElementById('repost-btn-1');
+    const localPopup = document.getElementById('repost-expanded-1');
+    if(!btn || !localPopup) return;
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      localPopup.style.display = localPopup.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Close if clicking outside
+    document.addEventListener('mousedown', (e) => {
+      if (!localPopup.contains(e.target) && e.target !== btn && !btn.contains(e.target)){
+        localPopup.style.display = 'none';
+      }
+    });
+
+    // Handle option clicks
+    localPopup.addEventListener('click', (e) => {
+      const thoughtBtn = e.target.closest('#thoughtRepost-btn-1');
+      // If clicking 'Repost with your thoughts'
+      if (thoughtBtn){
+        localPopup.style.display = 'none';
+        // Build a simple preview of the original post (clone first post element)
+        const firstPost = thoughtBtn.closest('.post');
+        const previewContainer = document.getElementById('repostOriginalPreview1');
+        const modal = document.getElementById('repostThoughtsModal1');
+        if (firstPost && previewContainer && modal){
+          const clone = firstPost.cloneNode(true);
+          // Remove action areas from preview to avoid nested interactions
+          const actions = clone.querySelectorAll('.post-actions, .repost-expanded');
+          actions.forEach(a => a.remove());
+          previewContainer.innerHTML = '';
+          previewContainer.appendChild(clone);
+          modal.style.display = 'block';
+          document.body.style.overflow = 'hidden';
+        }
+        return;
+      }
+      // Otherwise any click inside closes the small popup
+      localPopup.style.display = 'none';
+    });
+  })();
+</script>
+</body>
+</html>

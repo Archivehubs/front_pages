@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Marketing - Deal Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/files.css">
+    <link rel="stylesheet" href="css/deals.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* dashboard.css */
+
+        /* ... (previous CSS rules) ... */
+
+        /* --- New styles for Deal Details Page --- */
+        .deal-details-panel {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px; /* More padding for a single card view */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px; /* Constrain width for readability */
+            margin: 90px auto; /* Center the panel */
+        }
+
+        .deal-details-panel h1 {
+            font-size: 28px;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .deal-details-panel h3 {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .deal-details-panel p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .deal-details-panel ul {
+            list-style-type: decimal; /* Numbered list */
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .deal-details-panel ul li {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .purchase-button-container {
+            text-align: center; /* Center the button */
+            margin-top: 20px;
+        }
+
+        .purchase-button {
+            padding: 12px 25px;
+            background-color: var(--deals-active-color); /* Green for purchase */
+            color: white;
+            border: 1px solid var(--deals-active-color); /* Bordered as requested */
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.2s, border-color 0.2s;
+            text-decoration: none; /* For anchor tags */
+        }
+
+        .purchase-button:hover {
+            background-color: #218838; /* Darker green on hover */
+            border-color: #1e7e34;
+        }
+
+        /* New styles for the sharing section */
+        .share-deal-section {
+            margin-top: 30px; /* Space from the purchase button */
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color); /* Separator line */
+            text-align: center;
+        }
+
+        .share-deal-section h3 {
+            font-size: 18px;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between icons */
+        }
+
+        .social-icon-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px; /* Size of the circle */
+            height: 45px;
+            border-radius: 50%; /* Make it a circle */
+            background-color: #f0f2f5; /* Light grey background for icons */
+            color: var(--primary-color); /* Default icon color */
+            font-size: 22px;
+            transition: background-color 0.2s, color 0.2s;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline for links */
+        }
+
+        .social-icon-circle:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Specific colors for social media icons if needed */
+        .social-icon-circle.facebook { background-color: #3b5998; color: white; }
+        .social-icon-circle.facebook:hover { background-color: #2d4373; }
+
+        .social-icon-circle.twitter { background-color: #1DA1F2; color: white; }
+        .social-icon-circle.twitter:hover { background-color: #0c85d0; }
+
+        .social-icon-circle.linkedin { background-color: #0077B5; color: white; }
+        .social-icon-circle.linkedin:hover { background-color: #005582; }
+
+        .social-icon-circle.instagram { background-color: #E4405F; color: white; }
+        .social-icon-circle.instagram:hover { background-color: #c22b46; }
+
+        .social-icon-circle.gmail { background-color: #EA4335; color: white; }
+        .social-icon-circle.gmail:hover { background-color: #c82e20; }
+
+        /* For "Arvhivinbus" app logo - using a placeholder for now */
+        .social-icon-circle.app-logo img {
+            width: 70%; /* Adjust size of the logo within the circle */
+            height: 70%;
+            object-fit: contain;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .files-container {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-section {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-cards {
+                grid-template-columns: 1fr;
+            }
+            .transaction-nav-section {
+                justify-content: flex-start; /* Align left on small screens */
+            }
+            .referrals-content-section {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+            .statistics-cards {
+                grid-template-columns: 1fr; /* Stack statistics cards on small screens */
+            }
+            .deals-cards-container,
+            .resource-cards-container {
+                grid-template-columns: 1fr; /* Stack cards on small screens */
+            }
+            .deal-details-panel {
+                padding: 20px; /* Reduce padding for smaller screens */
+            }
+            .resources-navigation {
+                justify-content: flex-start;
+            }
+            .social-icons {
+                flex-wrap: wrap; /* Allow icons to wrap on small screens */
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .deal-details-panel {
+                margin: 70px 15px;
+                padding: 16px;
+            }
+            .deal-details-panel h1 {
+                font-size: 22px;
+            }
+            .deal-details-panel h3 {
+                font-size: 18px;
+            }
+            .purchase-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .deal-details-panel {
+                margin: 60px 10px;
+                padding: 14px;
+            }
+            .social-icons {
+                gap: 12px;
+            }
+            .social-icon-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+   
+
+
+    <div class="deal-details-panel">
+        <h1>GIGM.com</h1>
+        <h3>Get the GIGM.com Tools with 10% off!</h3>
+        <p>
+            Want to get new clients? This Marketing Tools by GIGM.com gives you a detailed Step-by-Step guide on how to reach clients, tons of message templates you can send to potential clients, and simple Google Sheet and Notion trackers for tracking your audiences. It’s the best tool for winning clients over.
+        </p>
+        <h3>How to Purchase</h3>
+        <ul>
+            <li>Go to the link below</li>
+            <li>Enter the discount code ARCHIVEHUBS2020 at checkout and enjoy 10% off.</li>
+        </ul>
+        <div class="purchase-button-container">
+            <a href="#" class="purchase-button">Purchase Now</a>
+        </div>
+
+        <div class="share-deal-section">
+            <h3>Close deal by sharing via:</h3>
+            <div class="social-icons">
+                <a href="#" class="social-icon-circle app-logo" title="Arvhivinbus App">
+                    <img src="images/Logo.jpg" alt="App Logo">
+                </a>
+                <a href="mailto:?subject=Check%20out%20this%20deal!&body=I%20found%20a%20great%20deal%20on%20GIGM.com:%20[Link%20to%20deal]" class="social-icon-circle gmail" title="Gmail">
+                    <i class="far fa-envelope"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=[Link%20to%20deal]" target="_blank" class="social-icon-circle facebook" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=[Link%20to%20deal]&text=Check%20out%20this%20deal%20on%20GIGM.com!" target="_blank" class="social-icon-circle twitter" title="X (Twitter)">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=[Link%20to%20deal]&title=GIGM.com%20Deal&summary=Get%2010%25%20off%20on%20GIGM.com%20tools!&source=ArchiveHubs" target="_blank" class="social-icon-circle linkedin" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" class="social-icon-circle instagram" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="charts.js"></script>
+</body>
+</html>

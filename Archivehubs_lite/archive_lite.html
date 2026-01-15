@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivehubs Lite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+        }
+
+        /* Main Content */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .video-player-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-player {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: #1c2526;
+        }
+
+        .play-icon {
+            font-size: 4em;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .play-icon:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .video-controls-top {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .video-controls-top button {
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .video-controls-top button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .video-controls-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            z-index: 10;
+        }
+
+        .video-controls-bottom button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 5px;
+        }
+
+        .video-controls-bottom button:hover {
+            color: #007bff;
+        }
+
+        .video-description {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .user-info i {
+            font-size: 1.5em;
+        }
+
+        .user-info .name {
+            font-weight: 500;
+        }
+
+        .user-info .description {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .follow-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background-color 0.2s;
+        }
+
+        .follow-button:hover {
+            background-color: #0056b3;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icons i {
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.2s;
+        }
+
+        .social-icons i:hover {
+            color: #007bff;
+        }
+
+        .video-description-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #495057;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .create-lite-button {
+            display: block;
+            margin: 20px auto;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .create-lite-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .create-lite-button:active {
+            transform: translateY(0);
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup-container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            width: 95%;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .popup-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            grid-column: 1 / -1;
+        }
+
+        .popup-header h2 {
+            margin: 0 auto;
+            font-size: 1.6em;
+            color: #343a40;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+
+        .close-button:hover {
+            color: #343a40;
+        }
+
+        .left-panel {
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+
+        .left-panel h3 {
+            font-size: 1.2em;
+            color: #343a40;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .right-panel {
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+
+        .right-panel h2 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #343a40;
+        }
+
+        .upload-box {
+            border: 2px dashed #ced4da;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .upload-box:hover {
+            border-color: #007bff;
+            background-color: #f1f8ff;
+        }
+
+        .upload-box i {
+            font-size: 2.5em;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .upload-box p {
+            margin: 5px 0;
+            color: #495057;
+            font-size: 0.9em;
+        }
+
+        .preview-box {
+            width: 100%;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            text-align: center;
+            border-radius: 8px;
+            background-color: #f9f9fa;
+            border: 1px solid #dee2e6;
+            overflow: hidden;
+        }
+
+        .preview-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .trim-video-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .trim-video-section i {
+            font-size: 1.3em;
+            color: #007bff;
+        }
+
+        .trim-video-section span {
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .timeline-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .timeline-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 12px;
+            border-radius: 6px;
+            background: #e9ecef;
+            outline: none;
+            position: relative;
+        }
+
+        .timeline-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #495057;
+            margin-top: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9em;
+            color: #495057;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 0.9em;
+            min-height: 100px;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .visibility-info {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.9em;
+        }
+
+        .radio-label input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .radio-label strong {
+            font-weight: 500;
+        }
+
+        .radio-label small {
+            display: block;
+            color: #6c757d;
+            font-size: 0.8em;
+            margin-top: 2px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .checkbox-group a {
+            color: #007bff;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        .option-group {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .option-group:last-child {
+            border-bottom: none;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            font-size: 0.95em;
+            color: #343a40;
+            margin-bottom: 8px;
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .option-description {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 0;
+            line-height: 1.4;
+        }
+
+        /* Pagination Bar */
+        .pagination-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            grid-column: 1 / -1;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .pagination-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .pagination-item.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .pagination-item:not(.active):hover {
+            background-color: #e9ecef;
+        }
+
+        .pagination-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-number {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .pagination-label {
+            font-size: 0.8em;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Buttons */
+        .popup-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .popup-button {
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+            border: 1px solid #ced4da;
+            background-color: #f8f9fa;
+            color: #495057;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .popup-button.primary {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .popup-button:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .popup-button.primary:hover {
+            background-color: #0056b3;
+        }
+
+        .popup-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .popup-button i {
+            margin-right: 8px;
+        }
+
+        /* Messaging Box */
+        .messaging-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            overflow: hidden;
+            display: none;
+        }
+
+        .messaging-box.active {
+            display: block;
+        }
+
+        .messaging-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            cursor: pointer;
+        }
+
+        .messaging-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .messaging-profile {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .messaging-actions i {
+            margin-left: 10px;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        .messaging-actions i:hover {
+            color: #007bff;
+        }
+
+        .messaging-content {
+            padding: 15px;
+        }
+
+        .messaging-search {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ced4da;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+        }
+
+        .messaging-search i {
+            color: #6c757d;
+            margin-right: 5px;
+        }
+
+        .messaging-search input {
+            border: none;
+            outline: none;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .no-messages {
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .no-messages i {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .no-messages p {
+            margin: 5px 0;
+        }
+
+        /* Mobile Action Button */
+        .mobile-action-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .mobile-action-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 769px) {
+            .mobile-action-btn {
+                display: none;
+            }
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-top: 1px solid #dee2e6;
+            background-color: #fff;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        /* Feedback Popup */
+        .feedback-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback-popup {
+            background-color: #fff;
+            width: 400px;
+            max-width: 90%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .feedback-popup-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #343a40;
+            font-weight: 500;
+        }
+
+        .feedback-popup-header i {
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: #495057;
+            transition: color 0.2s;
+        }
+
+        .feedback-popup-header i:hover {
+            color: #007bff;
+        }
+
+        .feedback-popup-content {
+            padding: 20px;
+        }
+
+        .feedback-section {
+            margin-bottom: 20px;
+        }
+
+        .feedback-section h4 {
+            font-size: 1.1rem;
+            color: #343a40;
+            margin: 0 0 10px;
+            font-weight: 500;
+        }
+
+        .feedback-section p {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin: 0 0 10px;
+        }
+
+        .feedback-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.2s;
+        }
+
+        .feedback-section textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .feedback-popup-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .feedback-popup-actions button {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .feedback-popup-actions .cancel-button {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .feedback-popup-actions .cancel-button:hover {
+            background-color: #dee2e6;
+            transform: translateY(-2px);
+        }
+
+        .feedback-popup-actions .submit-button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .feedback-popup-actions .submit-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .popup-container {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+
+            .right-panel {
+                order: -1;
+            }
+
+            .video-player-container {
+                max-width: 100%;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .nav-middle, .nav-right {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .search-input {
+                width: 100px;
+            }
+
+            .pagination-bar {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 8px;
+            }
+
+            .pagination-item {
+                padding: 8px 10px;
+            }
+
+            .messaging-box {
+                width: 90%;
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-controls-bottom {
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .video-description {
+                font-size: 0.8rem;
+            }
+
+            .popup-header h2 {
+                font-size: 1.3em;
+            }
+
+            .popup-button {
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="home.html" class="logo">
+                  <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+                </a>
+                <div class="search-box">
+                  <div class="search-trigger">
+                    <i class="fas fa-search search-icon"></i>
+                    <div class="search-text">Search</div>
+                  </div>
+                  <input type="text" placeholder="Search..." class="search-input">
+                </div>
+            </div>
+                
+        <div class="nav-middle">
+            <a href="../home.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="./Archivehubs-Connections/myconnections.html" class="nav-link">
+                <i class="fas fa-user-friends"></i>
+                <span>MyConnections</span>
+            </a>
+            <a href="./Archivehubs-Video/video1.html" class="nav-link">
+                <i class="fas fa-video"></i>
+                <span>Video</span>
+            </a>
+            <a href="./Archivehubs-Message/messaging_page.html" class="nav-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>Messages</span>
+            </a>
+            <a href="./Archivehubs-Notifications/notification.html" class="nav-link">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+            <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+              <i class="fas fa-user-circle"></i>
+              <span>Account</span>
+            </a>
+          </div>
+  
+                <div class="nav-right">
+  
+                  <a href="./Archivehubs-Jobs/jobs.html" class="nav-link">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Jobs</span>
+                  </a>
+                  <a href="./Archivehubs-Business/business.html" class="nav-link">
+                      <i class="fas fa-building"></i>
+                      <span>Business</span>
+                  </a>
+                  <a href="./Archivehubs-Drive/drive.html" class="nav-link">
+                      <i class="fas fa-cloud-arrow-up"></i>
+                      <span>Drive</span>
+                  </a>
+                  <a href="./Archivehubs-Menu/menu.html" class="nav-link">
+                      <i class="fas fa-bars"></i>
+                      <span>Menu</span>
+                  </a>
+              </div>
+            </nav>
+  
+            <!-- Replace your existing mobile-upper-nav section -->
+            <div class="mobile-header">
+              <!-- Mobile Upper Nav -->
+              <nav class="mobile-upper-nav">
+                <a href="home.html" class="mobile-logo">
+                    <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+                </a>
+                <div class="upper-nav-right">
+                    <button class="upper-nav-btn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="upper-nav-btn" id="searchTriggerBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="upper-nav-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                  </div>
+              </nav>
+  
+             <!-- Update the search-view to be a dropdown -->
+            <div class="search-overlay" id="searchView">
+                <div class="search-container">
+                    <div class="search-header">
+                        <button class="back-btn" id="searchBackBtn">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div class="search-bar">
+                            <div class="search-input-wrapper">
+                                <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                                <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                            </div>
+                        </div>
+                    </div>
+  
+                    <div class="search-content">
+                        <!-- Rest of your search content remains the same -->
+                    </div>
+                </div>
+            </div>
+  
+            <!-- Add this after the existing navbar -->
+          <nav class="mobile-top-nav">
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-video"></i>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-briefcase"></i>
+            </a>
+            <a href="business.html" class="mobile-nav-item">
+                <i class="fas fa-building"></i>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-cloud-arrow-up"></i>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-user-circle"></i>
+            </a>
+          </nav>
+
+        <!-- Main Content -->
+        <main>
+            <section id="main-view">
+                <div class="video-player-container">
+                    <div class="video-controls-top">
+                        <button class="play-button" aria-label="Play/Pause"><i class="fas fa-play"></i></button>
+                        <button class="volume-button" aria-label="Toggle Mute"><i class="fas fa-volume-up"></i></button>
+                        <button class="more-options" aria-label="More Options"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
+                    <div class="video-player">
+                        <div class="play-icon" aria-label="Play Video"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="video-controls-bottom">
+                        <button class="arrow-left" aria-label="Previous Video"><i class="fas fa-chevron-left"></i></button>
+                        <div class="video-description">
+                            <div class="user-info">
+                                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                                <span class="name">User Name</span>
+                                <span class="description">Video Creator</span>
+                            </div>
+                            <button class="follow-button" aria-label="Follow User">Follow</button>
+                        </div>
+                        <button class="arrow-right" aria-label="Next Video"><i class="fas fa-chevron-right"></i></button>
+                        <div class="social-icons">
+                            <i class="far fa-thumbs-up" aria-label="Like Video"></i>
+                            <i class="far fa-comment-dots" aria-label="Comment on Video"></i>
+                            <i class="far fa-bookmark" aria-label="Bookmark Video"></i>
+                            <i class="fas fa-share" aria-label="Share Video"></i>
+                        </div>
+                    </div>
+                    <p class="video-description-text">This is an example video description for Archivehubs Lite. Create your own Lite to share with your audience!</p>
+                </div>
+                <button class="create-lite-button" onclick="showPopup(1)" aria-label="Create a New Lite">Create Lite</button>
+            </section>
+
+            <!-- Upload Video Popup -->
+            <section class="popup-overlay" id="uploadVideoPopup">
+                <div class="popup-container">
+                    <div class="popup-header">
+                        <button class="close-button" onclick="hideAllPopups()" aria-label="Close Popup">×</button>
+                        <h2>Create a Lite</h2>
+                    </div>
+                    <div class="pagination-bar">
+                        <div class="pagination-item active" onclick="showPopup(1)" aria-label="Step 1: Upload">
+                            <span class="pagination-number">1</span>
+                            <span class="pagination-label">Upload</span>
+                        </div>
+                        <div class="pagination-item disabled" onclick="showPopup(2)" aria-label="Step 2: Edit">
+                            <span class="pagination-number">2</span>
+                            <span class="pagination-label">Edit</span>
+                        </div>
+                        <div class="pagination-item disabled" onclick="showPopup(3)" aria-label="Step 3: Details">
+                            <span class="pagination-number">3</span>
+                            <span class="pagination-label">Details</span>
+                        </div>
+                        <div class="pagination-item disabled" onclick="showPopup(4)" aria-label="Step 4: Audience">
+                            <span class="pagination-number">4</span>
+                            <span class="pagination-label">Audience</span>
+                        </div>
+                    </div>
+                    <div class="left-panel">
+                        <h3>Upload Video</h3>
+                        <div class="upload-box" onclick="document.getElementById('videoUpload').click()" aria-label="Upload Video">
+                            <i class="fas fa-camera"></i>
+                            <p>Add Video</p>
+                            <p>Or drag and drop</p>
+                            <input type="file" id="videoUpload" accept="video/*" style="display: none;" onchange="handleFileUpload(event)">
+                        </div>
+                    </div>
+                    <div class="right-panel">
+                        <h2>Preview</h2>
+                        <div class="preview-box" id="previewBox">
+                            <p id="previewText">Your Video Preview</p>
+                            <p>Upload your video to see a preview here.</p>
+                        </div>
+                    </div>
+                    <div class="popup-buttons">
+                        <button class="popup-button" onclick="hideAllPopups()" aria-label="Cancel">Cancel</button>
+                        <button class="popup-button primary" onclick="showPopup(2)" id="uploadNextButton" disabled aria-label="Next Step">Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Edit Video Popup -->
+            <section class="popup-overlay" id="editLitePopup">
+                <div class="popup-container">
+                    <div class="popup-header">
+                        <button class="close-button" onclick="hideAllPopups()" aria-label="Close Popup">×</button>
+                        <h2>Create a Lite</h2>
+                    </div>
+                    <div class="pagination-bar">
+                        <div class="pagination-item" onclick="showPopup(1)" aria-label="Step 1: Upload">
+                            <span class="pagination-number">1</span>
+                            <span class="pagination-label">Upload</span>
+                        </div>
+                        <div class="pagination-item active" onclick="showPopup(2)" aria-label="Step 2: Edit">
+                            <span class="pagination-number">2</span>
+                            <span class="pagination-label">Edit</span>
+                        </div>
+                        <div class="pagination-item disabled" onclick="showPopup(3)" aria-label="Step 3: Details">
+                            <span class="pagination-number">3</span>
+                            <span class="pagination-label">Details</span>
+                        </div>
+                        <div class="pagination-item disabled" onclick="showPopup(4)" aria-label="Step 4: Audience">
+                            <span class="pagination-number">4</span>
+                            <span class="pagination-label">Audience</span>
+                        </div>
+                    </div>
+                    <div class="left-panel">
+                        <h3>Edit Your Lite</h3>
+                        <div class="trim-video-section">
+                            <i class="fas fa-cut"></i>
+                            <span>Trim Video</span>
+                        </div>
+                        <div class="timeline-container">
+                            <input type="range" class="timeline-slider" id="trimStart" min="0" max="100" value="0" oninput="updateTrimDisplay()">
+                            <input type="range" class="timeline-slider" id="trimEnd" min="0" max="100" value="100" oninput="updateTrimDisplay()">
+                            <div class="time-display">
+                                <span id="startTime">0.0s</span>
+                                <span id="endTime">100.0s</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-panel">
+                        <h2>Preview</h2>
+                        <div class="preview-box" id="editPreviewBox">
+                            <p id="editPreviewText">[Video Preview Placeholder]</p>
+                        </div>
+                    </div>
+                    <div class="popup-buttons">
+                        <button class="popup-button" onclick="showPopup(1)" aria-label="Previous Step"><i class="fas fa-chevron-left"></i> Previous</button>
+                        <button class="popup-button primary" onclick="showPopup(3)" aria-label="Next Step">Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Details Popup -->
+            <section class="popup-overlay" id="addDetailsPopup">
+                <div class="popup-container">
+                    <div class="popup-header">
+                        <button class="close-button" onclick="hideAllPopups()" aria-label="Close Popup">×</button>
+                        <h2>Create a Lite</h2>
+                    </div>
+                    <div class="pagination-bar">
+                        <div class="pagination-item" onclick="showPopup(1)" aria-label="Step 1: Upload">
+                            <span class="pagination-number">1</span>
+                            <span class="pagination-label">Upload</span>
+                        </div>
+                        <div class="pagination-item" onclick="showPopup(2)" aria-label="Step 2: Edit">
+                            <span class="pagination-number">2</span>
+                            <span class="pagination-label">Edit</span>
+                        </div>
+                        <div class="pagination-item active" onclick="showPopup(3)" aria-label="Step 3: Details">
+                            <span class="pagination-number">3</span>
+                            <span class="pagination-label">Details</span>
+                        </div>
+                        <div class="pagination-item disabled" onclick="showPopup(4)" aria-label="Step 4: Audience">
+                            <span class="pagination-number">4</span>
+                            <span class="pagination-label">Audience</span>
+                        </div>
+                    </div>
+                    <div class="left-panel">
+                        <h3>Add Details</h3>
+                        <div class="form-group">
+                            <label for="lite-description"><strong>Describe your lite</strong></label>
+                            <textarea id="lite-description" placeholder="Enter a description" aria-label="Lite Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Who can see this?</strong></label>
+                            <div class="visibility-info">
+                                ArchiveLite can appear across Archivehubs in places like Home and Video.
+                            </div>
+                            <label class="radio-label">
+                                <input type="radio" name="visibility" value="public" checked aria-label="Public Visibility">
+                                <span>
+                                    <strong>Public</strong>
+                                    <small>Anyone on or off Archivehubs. This lets anyone create Lite with your original audio.</small>
+                                </span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="visibility" value="connections" aria-label="Connections Visibility">
+                                <span>
+                                    <strong>MyConnections</strong>
+                                    <small>Your networks on Archivehubs.</small>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="enable-remixing" aria-label="Enable Remixing">
+                                Allow others to create Lites that play your video with theirs. <a href="#" aria-label="Learn more about remixing">Learn more</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="right-panel">
+                        <h2>Preview</h2>
+                        <div class="preview-box" id="detailsPreviewBox">
+                            <p>[Video Preview Placeholder]</p>
+                        </div>
+                    </div>
+                    <div class="popup-buttons">
+                        <button class="popup-button" onclick="showPopup(2)" aria-label="Previous Step"><i class="fas fa-chevron-left"></i> Previous</button>
+                        <button class="popup-button primary" onclick="showPopup(4)" id="publishButton" aria-label="Proceed to Audience">Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Select Audience Popup -->
+            <section class="popup-overlay" id="selectAudiencePopup">
+                <div class="popup-container">
+                    <div class="popup-header">
+                        <button class="close-button" onclick="hideAllPopups()" aria-label="Close Popup">×</button>
+                        <h2>Select Audience</h2>
+                    </div>
+                    <div class="pagination-bar">
+                        <div class="pagination-item" onclick="showPopup(1)" aria-label="Step 1: Upload">
+                            <span class="pagination-number">1</span>
+                            <span class="pagination-label">Upload</span>
+                        </div>
+                        <div class="pagination-item" onclick="showPopup(2)" aria-label="Step 2: Edit">
+                            <span class="pagination-number">2</span>
+                            <span class="pagination-label">Edit</span>
+                        </div>
+                        <div class="pagination-item" onclick="showPopup(3)" aria-label="Step 3: Details">
+                            <span class="pagination-number">3</span>
+                            <span class="pagination-label">Details</span>
+                        </div>
+                        <div class="pagination-item active" onclick="showPopup(4)" aria-label="Step 4: Audience">
+                            <span class="pagination-number">4</span>
+                            <span class="pagination-label">Audience</span>
+                        </div>
+                    </div>
+                    <div class="left-panel">
+                        <h3>Who can see this?</h3>
+                        <p>Your default audience for Lite is set to Public, but you can always change the audience of this specific Lite.</p>
+                        <div class="option-group">
+                            <label class="option-label">
+                                <input type="radio" name="audience" value="public" checked aria-label="Public Audience">
+                                Public
+                            </label>
+                            <p class="option-description">Anyone on or off Archivehubs. This lets anyone create lites with your original audio.</p>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">
+                                <input type="radio" name="audience" value="myconnections" aria-label="MyConnections Audience">
+                                MyConnections
+                            </label>
+                            <p class="option-description">Your networks on Archivehubs</p>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">
+                                <input type="radio" name="audience" value="selectedconnections" aria-label="Selected Connections Audience">
+                                Selected Connections
+                            </label>
+                            <p class="option-description">Hide from certain connections</p>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">
+                                <input type="radio" name="audience" value="onlyme" aria-label="Only Me Audience">
+                                Only me
+                            </label>
+                            <p class="option-description">Visible only to you</p>
+                        </div>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="set-default-audience" aria-label="Set as Default Audience">
+                            Set as default audience for Lite
+                        </label>
+                    </div>
+                    <div class="right-panel">
+                        <h2>Preview</h2>
+                        <div class="preview-box" id="audiencePreviewBox">
+                            <p>[Video Preview Placeholder]</p>
+                        </div>
+                    </div>
+                    <div class="popup-buttons">
+                        <button class="popup-button" onclick="showPopup(3)" aria-label="Previous Step"><i class="fas fa-chevron-left"></i> Previous</button>
+                        <button class="popup-button primary" onclick="publishLite()" aria-label="Publish Lite">Publish <i class="fas fa-check"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback Popup -->
+            <div id="feedbackPopupOverlay" class="feedback-popup-overlay">
+                <div class="feedback-popup">
+                    <div class="feedback-popup-header">
+                        <h3>Give Feedback to Archivehubs</h3>
+                        <i id="closeFeedbackPopup" class="fas fa-times" aria-label="Close Feedback"></i>
+                    </div>
+                    <div class="feedback-popup-content">
+                        <div class="feedback-section">
+                            <h4>Help us improve Archivehubs</h4>
+                            <p>Give feedback about your Archivehubs experience</p>
+                            <textarea id="generalFeedback" placeholder="Type your feedback here..." rows="4" aria-label="General Feedback"></textarea>
+                        </div>
+                        <div class="feedback-section">
+                            <h4>Something went wrong</h4>
+                            <p>Let us know about a broken feature</p>
+                            <textarea id="issueFeedback" placeholder="Describe the issue..." rows="4" aria-label="Issue Report"></textarea>
+                        </div>
+                        <div class="feedback-popup-actions">
+                            <button class="cancel-button" aria-label="Cancel Feedback">Cancel</button>
+                            <button class="submit-button" aria-label="Submit Feedback">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messaging Box -->
+            <div class="messaging-box" id="messagingBox">
+                <div class="messaging-header" onclick="toggleMessagingBox()">
+                    <div class="messaging-left">
+                        <img src="images/profile.jpg" alt="Profile" class="messaging-profile">
+                        <span>Messaging</span>
+                    </div>
+                    <div class="messaging-actions">
+                        <i class="fas fa-pen-to-square" aria-label="New Message"></i>
+                        <i class="fas fa-ellipsis" aria-label="More Options"></i>
+                    </div>
+                </div>
+                <div class="messaging-content">
+                    <div class="messaging-search">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input type="text" placeholder="Search messages" aria-label="Search Messages">
+                    </div>
+                    <div class="messages-list">
+                        <div class="no-messages">
+                            <i class="fas fa-comment-dots"></i>
+                            <p>No messages yet</p>
+                            <span>Connect with people to start messaging</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Action Button -->
+            <button class="mobile-action-btn" onclick="showPopup(1)" aria-label="Create New Lite">
+                <i class="fas fa-plus"></i>
+            </button>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <span>© 2025 Archivehubs</span>
+            <a href="#" onclick="showFeedbackPopup()" aria-label="Give Feedback">Give Feedback</a>
+        </footer>
+    </div>
+
+    <script>
+        let state = {
+            currentStep: 0,
+            uploadedFile: null,
+            trimStart: 0,
+            trimEnd: 100,
+            description: '',
+            visibility: 'public',
+            remixing: false,
+            audience: 'public',
+            defaultAudience: false
+        };
+
+        function showPopup(step) {
+            // Prevent skipping steps without required data
+            if (step > 1 && !state.uploadedFile) return;
+            if (step === 4 && !state.description) {
+                alert('Please provide a description before selecting an audience.');
+                return;
+            }
+
+            hideAllPopups();
+            state.currentStep = step;
+            const popupIds = ['main-view', 'uploadVideoPopup', 'editLitePopup', 'addDetailsPopup', 'selectAudiencePopup'];
+            const targetPopup = document.getElementById(popupIds[step]);
+            targetPopup.style.display = 'flex';
+            targetPopup.focus();
+
+            // Update pagination bar
+            const paginationItems = document.querySelectorAll('.pagination-item');
+            paginationItems.forEach((item, index) => {
+                item.classList.toggle('active', index + 1 === step);
+                item.classList.toggle('disabled', index + 1 > (state.uploadedFile ? step : 1));
+            });
+
+            // Update preview based on state
+            if (state.uploadedFile) {
+                const previewBoxes = [
+                    'previewBox',
+                    'editPreviewBox',
+                    'detailsPreviewBox',
+                    'audiencePreviewBox'
+                ];
+                previewBoxes.forEach(boxId => {
+                    const box = document.getElementById(boxId);
+                    if (box) {
+                        box.innerHTML = `<p>Preview: ${state.uploadedFile.name}</p>`;
+                        if (state.uploadedFile.type.startsWith('video/')) {
+                            const url = URL.createObjectURL(state.uploadedFile);
+                            box.innerHTML = `<video src="${url}" controls style="max-width: 100%; max-height: 100%;" aria-label="Video Preview"></video>`;
+                        }
+                    }
+                });
+            }
+        }
+
+        function hideAllPopups() {
+            const popupIds = ['uploadVideoPopup', 'editLitePopup', 'addDetailsPopup', 'selectAudiencePopup'];
+            popupIds.forEach(id => document.getElementById(id).style.display = 'none');
+            document.getElementById('main-view').style.display = 'block';
+            state.currentStep = 0;
+
+            // Reset pagination bar
+            const paginationItems = document.querySelectorAll('.pagination-item');
+            paginationItems.forEach((item, index) => {
+                item.classList.toggle('active', index === 0);
+                item.classList.toggle('disabled', index > 0 && !state.uploadedFile);
+            });
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (!file.type.startsWith('video/')) {
+                    alert('Please upload a valid video file.');
+                    return;
+                }
+                if (file.size > 100 * 1024 * 1024) { // 100MB limit
+                    alert('File size exceeds 100MB limit.');
+                    return;
+                }
+                state.uploadedFile = file;
+                const previewBox = document.getElementById('previewBox');
+                previewBox.innerHTML = `<p>Uploaded: ${file.name}</p>`;
+                if (file.type.startsWith('video/')) {
+                    const url = URL.createObjectURL(file);
+                    previewBox.innerHTML = `<video src="${url}" controls style="max-width: 100%; max-height: 100%;" aria-label="Video Preview"></video>`;
+                }
+                document.getElementById('uploadNextButton').disabled = false;
+            }
+        }
+
+        function updateTrimDisplay() {
+            const startSlider = document.getElementById('trimStart');
+            const endSlider = document.getElementById('trimEnd');
+            const startTime = document.getElementById('startTime');
+            const endTime = document.getElementById('endTime');
+
+            // Ensure end is not before start
+            if (parseFloat(endSlider.value) <= parseFloat(startSlider.value)) {
+                endSlider.value = parseFloat(startSlider.value) + 1;
+            }
+
+            state.trimStart = parseFloat(startSlider.value);
+            state.trimEnd = parseFloat(endSlider.value);
+            startTime.textContent = `${state.trimStart.toFixed(1)}s`;
+            endTime.textContent = `${state.trimEnd.toFixed(1)}s`;
+        }
+
+        function publishLite() {
+            state.description = document.getElementById('lite-description').value;
+            state.visibility = document.querySelector('input[name="visibility"]:checked')?.value || 'public';
+            state.remixing = document.getElementById('enable-remixing').checked;
+            state.audience = document.querySelector('input[name="audience"]:checked')?.value || 'public';
+            state.defaultAudience = document.getElementById('set-default-audience').checked;
+
+            if (!state.description) {
+                alert('Please provide a description before publishing.');
+                return;
+            }
+
+            const formData = {
+                file: state.uploadedFile?.name,
+                trim: { start: state.trimStart, end: state.trimEnd },
+                description: state.description,
+                visibility: state.visibility,
+                remixing: state.remixing,
+                audience: state.audience,
+                defaultAudience: state.defaultAudience
+            };
+
+            console.log('Publishing Lite:', formData);
+            // For production, send formData to backend API
+            // Example: fetch('/api/publish-lite', { method: 'POST', body: JSON.stringify(formData) })
+
+            alert('Lite published successfully!');
+            resetState();
+            hideAllPopups();
+        }
+
+        function resetState() {
+            state = {
+                currentStep: 0,
+                uploadedFile: null,
+                trimStart: 0,
+                trimEnd: 100,
+                description: '',
+                visibility: 'public',
+                remixing: false,
+                audience: 'public',
+                defaultAudience: false
+            };
+            const previewBoxes = [
+                'previewBox',
+                'editPreviewBox',
+                'detailsPreviewBox',
+                'audiencePreviewBox'
+            ];
+            previewBoxes.forEach(boxId => {
+                const box = document.getElementById(boxId);
+                if (box) {
+                    box.innerHTML = `<p>Your Video Preview</p><p>Upload your video to see a preview here.</p>`;
+                }
+            });
+            document.getElementById('videoUpload').value = '';
+            document.getElementById('lite-description').value = '';
+            document.getElementById('enable-remixing').checked = false;
+            document.querySelector('input[name="visibility"][value="public"]').checked = true;
+            document.querySelector('input[name="audience"][value="public"]').checked = true;
+            document.getElementById('set-default-audience').checked = false;
+            document.getElementById('trimStart').value = 0;
+            document.getElementById('trimEnd').value = 100;
+            document.getElementById('uploadNextButton').disabled = true;
+            updateTrimDisplay();
+        }
+
+        // Feedback Popup
+        function showFeedbackPopup() {
+            document.getElementById('feedbackPopupOverlay').style.display = 'flex';
+            document.getElementById('generalFeedback').focus();
+        }
+
+        function hideFeedbackPopup() {
+            document.getElementById('feedbackPopupOverlay').style.display = 'none';
+            document.getElementById('generalFeedback').value = '';
+            document.getElementById('issueFeedback').value = '';
+        }
+
+        // Messaging Box
+        function toggleMessagingBox() {
+            const messagingBox = document.getElementById('messagingBox');
+            messagingBox.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Feedback Popup Event Listeners
+            const closeFeedbackPopup = document.getElementById('closeFeedbackPopup');
+            const cancelFeedbackButton = document.querySelector('.feedback-popup-actions .cancel-button');
+            const submitFeedbackButton = document.querySelector('.feedback-popup-actions .submit-button');
+
+            if (closeFeedbackPopup) {
+                closeFeedbackPopup.addEventListener('click', hideFeedbackPopup);
+            }
+            if (cancelFeedbackButton) {
+                cancelFeedbackButton.addEventListener('click', hideFeedbackPopup);
+            }
+            if (submitFeedbackButton) {
+                submitFeedbackButton.addEventListener('click', () => {
+                    const generalFeedback = document.getElementById('generalFeedback').value;
+                    const issueFeedback = document.getElementById('issueFeedback').value;
+                    if (!generalFeedback && !issueFeedback) {
+                        alert('Please provide feedback before submitting.');
+                        return;
+                    }
+                    console.log('Feedback Submitted:', { generalFeedback, issueFeedback });
+                    // For production, send to backend API
+                    alert('Thank you for your feedback!');
+                    hideFeedbackPopup();
+                });
+            }
+
+            window.addEventListener('click', (event) => {
+                if (event.target === document.getElementById('feedbackPopupOverlay')) {
+                    hideFeedbackPopup();
+                }
+                const popupOverlays = document.querySelectorAll('.popup-overlay');
+                popupOverlays.forEach(overlay => {
+                    if (event.target === overlay) {
+                        hideAllPopups();
+                    }
+                });
+            });
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    hideAllPopups();
+                    hideFeedbackPopup();
+                }
+            });
+
+            // Initialize trim sliders
+            updateTrimDisplay();
+
+            // Validate description before proceeding to audience
+            document.getElementById('lite-description').addEventListener('input', () => {
+                state.description = document.getElementById('lite-description').value;
+                document.getElementById('publishButton').disabled = !state.description;
+            });
+        });
+    </script>
+</body>
+</html>

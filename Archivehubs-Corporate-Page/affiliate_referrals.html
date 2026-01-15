@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Marketing - Referrals</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/files.css">
+    <link rel="stylesheet" href="dashboard.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/affiliate_sidebar.css">
+
+    <style>
+        /* dashboard.css */
+
+    :root {
+        --primary-color: #4267B2;
+        --border-color: #ddd;
+        --text-color: #333;
+        --hover-bg: #f5f5f5;
+        --card-bg: #fff;
+        --accent-color: #007bff; /* A blue often seen in dashboards */
+        --bar-color-1: #007bff;
+        --bar-color-2: #28a745;
+        --bar-color-3: #ffc107;
+        --bar-color-4: #dc3545;
+        --active-green: #28a745; /* Specific green for active transaction tab */
+        --referrals-banner-bg: url('https://via.placeholder.com/1400x300/ffc107/333333?text=Referrals+Banner'); /* Placeholder banner image */
+    }
+
+    /* Base files-container from files.css - assuming it's loaded before this */
+    .files-container {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 90px auto;
+    }
+
+    /* Left Panel Styles */
+    .left-panel {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .sidebar-section {
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 15px;
+    }
+
+    .affiliate-info p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: var(--text-color);
+    }
+
+    .sidebar-menu a {
+        display: flex;
+        align-items: center;
+        padding: 10px 8px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+        color: var(--text-color);
+        text-decoration: none;
+    }
+
+    .sidebar-menu a:hover {
+        background-color: var(--hover-bg);
+    }
+   
+    /* Active sidebar menu item */
+        .sidebar-menu a.active {
+             color: #1877f2; 
+            font-weight: 600; 
+        }
+
+        .sidebar-menu a.active i {
+             color: #1877f2; 
+        }
+
+    .sidebar-menu a i {
+        margin-right: 10px;
+        color: #666;
+        width: 20px;
+        text-align: center;
+    }
+
+    .categories-section h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: var(--text-color);
+        font-weight: bold;
+    }
+
+    .categories-list div {
+        display: flex;
+        align-items: center;
+        padding: 10px 8px;
+        border-radius: 4px;
+    }
+
+    .categories-list div i {
+        margin-right: 10px;
+        color: #666;
+        width: 20px;
+        text-align: center;
+    }
+
+    .categories-list div:hover {
+        background-color: var(--hover-bg);
+        cursor: pointer;
+    }
+
+    .educational-page {
+        position: relative;
+    }
+
+    .educational-dropdown {
+        display: none;
+        position: absolute;
+        left: 25px;
+        top: 100%;
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 10;
+    }
+
+    .educational-page:hover .educational-dropdown {
+        display: block;
+    }
+
+    .educational-dropdown a {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        color: var(--text-color);
+        text-decoration: none;
+    }
+
+    .educational-dropdown a:hover {
+        background-color: var(--hover-bg);
+    }
+
+    .educational-dropdown a i {
+        margin-right: 10px;
+        color: #666;
+        width: 20px;
+        text-align: center;
+    }
+
+    /* Right Panel Styles */
+    .right-panel {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Dashboard Summary Section */
+    .dashboard-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .summary-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .summary-card h3 {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 5px;
+    }
+
+    .summary-card p {
+        font-size: 18px;
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    .star-icons {
+        color: gold;
+        margin: 0 5px;
+    }
+
+    /* Chart Section */
+    .chart-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px; /* Provides margin between cards */
+        margin-bottom: 20px;
+    }
+
+    .chart-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color); /* Ensures border for each card */
+        border-radius: 6px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chart-card h3 {
+        font-size: 16px;
+        color: var(--text-color);
+        margin-bottom: 10px;
+    }
+
+    .pie-chart-container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center; /* Center pie chart and legend */
+        margin-bottom: 10px;
+    }
+
+    .pie-chart-canvas {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: #f0f0f0; /* Placeholder */
+    }
+
+    .chart-legend {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .legend-color {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    .legend-color.requirement { background-color: #007bff; }
+    .legend-color.performance { background-color: #28a745; }
+    .legend-color.achieved { background-color: #ffc107; }
+    .legend-color.subscribers { background-color: #dc3545; }
+
+    .chart-summary {
+        font-size: 14px;
+        color: #555;
+        text-align: center; /* Centralize Balance/Commissions */
+        margin-top: 10px;
+        padding-bottom: 15px; /* Space before progress bar */
+    }
+
+    /* Affiliate Progress Bar */
+    .affiliate-progress-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+        font-size: 14px;
+        color: var(--text-color);
+        justify-content: center; /* Center the entire progress bar line */
+    }
+
+    .affiliate-progress-bar {
+        width: 150px;
+        height: 8px;
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .affiliate-progress-fill {
+        height: 100%;
+        background-color: gold;
+        border-radius: 4px;
+        transition: width 0.5s ease-in-out;
+    }
+
+    .star-progress-icons {
+        color: gold;
+    }
+
+
+    .commission-table {
+        width: 100%;
+        border-collapse: collapse; /* Ensure no default table borders */
+    }
+
+    .commission-table th {
+        padding: 10px 0;
+        text-align: center; /* Centralize titles */
+        font-weight: bold; /* Make titles bold */
+        color: var(--text-color);
+    }
+
+    .commission-table td {
+        padding: 5px 0;
+        text-align: left;
+    }
+
+    .commission-table .total-row td {
+        font-weight: bold; /* Make total bold */
+    }
+
+    .commission-table tbody.separator-row {
+        border-bottom: 1px solid var(--border-color); /* Horizontal line */
+    }
+    .commission-table tbody.separator-row tr td {
+        padding-bottom: 15px; /* Adds space below the line */
+    }
+
+    /* Comparison Section */
+    .comparison-section {
+        margin-bottom: 20px;
+    }
+
+    .comparison-section h2 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin-bottom: 15px;
+    }
+
+    .comparison-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px; /* Margin between cards */
+    }
+
+    .comparison-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color); /* Border for each card */
+        border-radius: 6px;
+        padding: 15px;
+        text-align: center; /* Centralize content within card */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center content horizontally */
+    }
+
+    .comparison-card h4 {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 15px; /* Space before chart */
+        text-align: center; /* Centralize sub-headings */
+    }
+
+    .bar-chart-canvas {
+        width: 100%; /* Make canvas fill card width */
+        max-width: 250px; /* Max width for chart */
+        height: 150px; /* Fixed height for chart */
+        margin-bottom: 15px;
+    }
+
+    .bar-chart-legend {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping for many items */
+        justify-content: center; /* Center legend items */
+        gap: 10px 20px; /* Space between legend items */
+        font-size: 13px;
+        color: #555;
+        margin-top: 10px;
+    }
+
+    .bar-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .bar-legend-color {
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+    }
+
+    .bar-legend-color.marketplace { background-color: var(--bar-color-1); }
+    .bar-legend-color.digital-assets { background-color: var(--bar-color-2); }
+    .bar-legend-color.recurring { background-color: var(--bar-color-3); }
+    .bar-legend-color.service { background-color: var(--bar-color-4); }
+
+    /* --- New styles for Transactions Page --- */
+    .transactions-panel {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .transaction-nav-section {
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-around; /* Distribute items evenly */
+        align-items: center;
+        flex-wrap: wrap; /* Allow wrapping if space is tight */
+        gap: 10px; /* Space between items */
+    }
+
+    .transaction-nav-item {
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--text-color);
+        background-color: #f0f0f0; /* Default background */
+        transition: background-color 0.2s, color 0.2s;
+        text-decoration: none; /* Ensure no underline */
+    }
+
+    .transaction-nav-item:hover {
+        background-color: var(--hover-bg);
+    }
+
+    .transaction-nav-item.active {
+        background-color: var(--active-green);
+        color: white;
+        font-weight: bold;
+    }
+
+    .transactions-search-box {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box; /* Include padding in width */
+    }
+
+    .transactions-table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .transactions-table-header h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 0; /* Reset margin */
+    }
+
+    .export-button {
+        padding: 8px 15px;
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.2s;
+    }
+
+    .export-button:hover {
+        background-color: #0056b3;
+    }
+
+    .transactions-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .transactions-table th, .transactions-table td {
+        border: 1px solid var(--border-color);
+        padding: 10px;
+        text-align: left;
+        font-size: 14px;
+        color: var(--text-color);
+    }
+
+    .transactions-table th {
+        background-color: #f8f8f8;
+        font-weight: bold;
+    }
+
+    .transactions-table tbody tr:nth-child(even) {
+        background-color: #fcfcfc;
+    }
+
+    /* --- New styles for Referrals Page --- */
+    .referrals-panel {
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .referrals-banner {
+        width: 100%;
+        height: 180px; /* Adjust height as needed */
+        background-image: var(--referrals-banner-bg);
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .referrals-content-section {
+        display: grid;
+        grid-template-columns: 2fr 1fr; /* Two columns: broader text, narrower cards */
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .referrals-text-column {
+        background: var(--card-bg); /* Match general card background */
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 15px;
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--text-color);
+    }
+
+    .referral-codes-column {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px; /* Space between code cards */
+    }
+
+    .referral-code-card {
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        background-color: #f9f9f9;
+    }
+
+    .referral-code-card .code-info p {
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    .referral-code-card .copy-button {
+        padding: 5px 10px;
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: background-color 0.2s;
+    }
+
+    .referral-code-card .copy-button:hover {
+        background-color: #0056b3;
+    }
+
+    .statistics-section {
+        margin-bottom: 20px;
+    }
+
+    .statistics-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .statistics-header h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 0;
+    }
+
+    .statistics-header a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .statistics-header a:hover {
+        text-decoration: underline;
+    }
+
+    .statistics-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns for stats cards */
+        gap: 20px; /* Margin between cards */
+    }
+
+    .statistic-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 15px;
+        text-align: center; /* Center content within stat card */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Vertically center content */
+    }
+
+    .statistic-card p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .statistic-card .value {
+        font-weight: bold;
+        font-size: 20px;
+        color: var(--primary-color);
+    }
+
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+        .files-container {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-section {
+            grid-template-columns: 1fr;
+        }
+
+        .comparison-cards {
+            grid-template-columns: 1fr;
+        }
+        .transaction-nav-section {
+            justify-content: flex-start; /* Align left on small screens */
+        }
+        .referrals-content-section {
+            grid-template-columns: 1fr; /* Stack columns on small screens */
+        }
+        .statistics-cards {
+            grid-template-columns: 1fr; /* Stack statistics cards on small screens */
+        }
+    }
+    </style>
+</head>
+<body>
+
+
+
+
+        <div class="files-container">
+            <div class="left-panel">
+                <div class="sidebar-section affiliate-info">
+                    <p>Affiliate ID: ACAM000000000</p>
+                </div>
+
+                <div class="sidebar-section sidebar-menu">
+                    <a href="affiliate_overview.html"><i class="fas fa-tachometer-alt"></i> <span>Overview</span></a>
+                    <a href="affiliate_transactions.html"><i class="fas fa-exchange-alt"></i> <span>Transactions</span></a>
+                    <a href="affiliate_recurring.html"><i class="fas fa-sync-alt"></i> <span>Recurring</span></a>
+                    <a href="affiliate_referrals.html" class="active"><i class="fas fa-users"></i> <span>Referrals</span></a>
+                    <a href="affiliate_deals.html"><i class="fas fa-handshake"></i> <span>Deals</span></a>
+                    <a href="affiliate_resources.html"><i class="fas fa-book"></i> <span>Resources</span></a>
+                    <!-- <a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a>
+                    <a href="#"><i class="fas fa-question-circle"></i> <span>Help</span></a> -->
+                </div>
+
+                <div class="sidebar-section categories-section">
+                    <h3><b>Categories</b></h3>
+                    <div class="categories-list">
+                        <div><i class="fas fa-building"></i> <span>Company Page</span></div>
+                        <div><i class="fas fa-sitemap"></i> <span>Organization Page</span></div>
+                        <div><i class="fas fa-graduation-cap"></i> <span>Educational Page</span></div>
+                        <div class="educational-page">
+                            <i class="fas fa-university"></i> <span>Educational Institution Page</span>
+                            <div class="educational-dropdown">
+                                <a href="#"><i class="fas fa-arrow-right"></i> <span>Sub Item 1</span></a>
+                                <a href="#"><i class="fas fa-arrow-right"></i> <span>Sub Item 2</span></a>
+                            </div>
+                        </div>
+                        <div><i class="fas fa-star"></i> <span>Showcase Page</span></div>
+                        <div><i class="fas fa-heart"></i> <span>Fans Page</span></div>
+                        <div><i class="fas fa-user-tie"></i> <span>Affiliate Marketers Page</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel referrals-panel">
+                <div class="referrals-banner" style="background-color: orange;"></div>
+
+                <div class="referrals-content-section">
+                    <div class="referrals-text-column">
+                        <p>Earn between 10% to 20% Commission for Successful Referrals.</p><br>
+                        <p>You get 10% to 20% Commission for referrals when clients create a Corporate Page on Archivehubs.com and carry on recurring transactions. Your cash Commission and Bonus will be deposited into your balance and available for payment on monthly basis.</p>
+                    </div>
+                    <div class="referral-codes-column">
+                        <div class="referral-code-card">
+                            <div class="code-info">
+                                <p>Your Referral Code</p>
+                                <p><b>PAUL8535</b></p>
+                            </div>
+                            <button class="copy-button">Copy Code</button>
+                        </div>
+                        <div class="referral-code-card">
+                            <div class="code-info">
+                                <p>Your Referral Link</p>
+                                <p>https://archivehubs.com/refer/PAUL8535</p>
+                            </div>
+                            <button class="copy-button">Copy Link</button>
+                        </div>
+                        <div class="referral-code-card">
+                            <div class="code-info">
+                                <p>Your Affiliate ID</p>
+                                <p><b>ACAM000000000</b></p>
+                            </div>
+                            <button class="copy-button">Copy ID</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statistics-section">
+                    <div class="statistics-header">
+                        <h3>Your Statistics</h3>
+                        <a href="#">See Details &gt;</a>
+                    </div>
+                    <div class="statistics-cards">
+                        <div class="statistic-card">
+                            <p class="value">N0.00</p>
+                            <p>Pending Commission and Bonus Earned</p>
+                        </div>
+                        <div class="statistic-card">
+                            <p class="value">N0.00</p>
+                            <p>Total Cash Commission and Bonus Earned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="charts.js"></script>
+</body>
+</html>

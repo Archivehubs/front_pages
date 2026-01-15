@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="createPost">
+        <div class="createPost-Header">
+            <h1>Create Post</h1>
+            <button class="close-btn" id="createPost-close" title="Close" onclick="window.location.href='../home.html'">&times;</button>
+        </div>
+
+        <div class="createPost-userIcon">
+            <img src="Images/profile.png" alt="User Profile Picture" style="height:30px; width:30px;">
+            <div class="createPost-userText">
+                <h2>Name</h2>
+                <button id="audience-btn" type="button">
+                    <span class="material-symbols-outlined">groups</span>
+                    Connections ▾
+               </button>
+            </div>
+        </div>
+
+        <div class="createPost-content" id="createPost-content">
+            <div class="textSection show-placeholder" id="textSection" contenteditable="true"></div>
+            <div class="mediaSection"></div>
+            <div class="locationSection"></div>
+        </div>
+
+        <div class="formatWrapper">
+            <div class="createPost-decorationWrapper">
+                <div class="createPost-decoration">
+                    <button id="createPost-colorDecoration"  class="createPost-colorDecoration" type="button">
+                    <span class="material-symbols-outlined">format_color_fill</span>
+                    </button>
+
+                    <!--first color pop up menu-->    
+                    <div id="colorPopup" class="colorPopup hidden">
+                        <div class="colorGrid">
+                            <div class="colorOption colorSwatch" data-color="#ffffff" style="background-color: #ffffff; border: 1px solid #ddd;"></div>
+                            <div class="colorOption colorSwatch" data-color="#000000" style="background-color: #000000; "></div>
+                            <div class="colorOption colorSwatch" data-color="#ff0000" style="background-color: #ff0000; "></div>
+                            <div class="colorOption colorSwatch" data-color="#0000ff" style="background-color: #0000ff; "></div>
+                            <div class="colorOption colorSwatch" data-color="#00ff00" style="background-color: #00ff00; "></div>
+                            <div class="colorOption colorSwatch" data-color="#ffff00" style="background-color: #ffff00; "></div>
+                            <div class="colorOption colorSwatch" data-color="#800080" style="background-color: #800080; "></div>
+                            <div class="colorOption colorSwatch" data-color="#ffa500" style="background-color: #ffa500; "></div>
+                            <div class="colorOption colorSwatch" data-color="#808080" style="background-color: #808080; "></div>
+                            <div class="colorOption expandOption"> 
+                                <span class="material-symbols-outlined">dashboard_customize</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="createPost-textDecoration">
+                    <button id="colorText-btn" class="createPost-colorDecoration">
+                        <span class="material-symbols-outlined">format_color_text</span>
+                    </button>
+                    <div class="text-colorPopup hidden" id="text-colorPopup">
+                        <div class="textColorOption" data-color="#ffffff" style="background-color: #ffffff; border: 1px solid #eee;"></div>
+                        <div class="textColorOption" data-color="#000000" style="background-color: #000000; "></div>
+                        <div class="textColorOption" data-color="#ff0000" style="background-color: #ff0000; "></div>
+                        <div class="textColorOption" data-color="#0000ff" style="background-color: #0000ff; "></div>
+                        <div class="textColorOption" data-color="#00ff00" style="background-color: #00ff00; "></div>
+                        <div class="textColorOption" data-color="#ffff00" style="background-color: #ffff00; border: 1px solid #ffff00; "></div>
+                        <div class="textColorOption" data-color="#800080" style="background-color: #800080; "></div>
+                        <div class="textColorOption" data-color="#ffa500" style="background-color: #ffa500; "></div>
+                        <div class="textColorOption" data-color="#808080" style="background-color: #808080; "></div>
+                        <div class="textColorOption" data-color="#9bf6ff" style="background-color: #9bf6ff; "></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="createPost-additions">
+                <h3>Add to your post</h3>
+                <div class="createPost-icons" >
+                    <button class="addIcons" data-action="Add Photo">
+                        <span class="material-symbols-outlined">add_photo_alternate</span>
+                    </button>
+                    <button class="addIcons" data-action="Add Tag">
+                    <span class="material-symbols-outlined">sell</span>
+                    </button>
+                    <button class="addIcons" id="emoji-btn">
+                        <span class="material-symbols-outlined">add_reaction</span>
+                    </button>
+                    <div class="emojiPicker hidden" id="emojiPicker">
+                        <div class="emojiGrid">
+                            <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
+                            <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
+                            <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
+                            <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
+                            <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
+                        </div>
+                    </div>
+                    <button class="addIcons" data-action="Add Location">
+                    <span class="material-symbols-outlined">add_location_alt</span>
+                    </button>
+                    <button class="addIcons" data-action="Add Gif">
+                    <span class="material-symbols-outlined">gif_box</span>
+                    </button>
+                    <button class="addIcons" data-action="Add Video">
+                    <span class="material-symbols-outlined">video_call</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="createPost-post">
+                <button class="post" id="post" disabled>Post</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Audience selection-->
+    <div class="audienceModal" id="audienceModal">
+        <div class="audienceModal-content">
+            <div class="audienceHeader">
+                <button class="goBack-btn"><span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <h2>Post Audience</h2>
+            </div>
+
+            <div class="audienceSelection">
+                <h2>Who can see your Post?</h2>
+                <p>Your Post will show up in Feed, on your Profile and in search results. 
+                    Your default audience is set to your connections, but you can change the 
+                    audience of this specific post.
+                </p>
+                <div class="audienceOptions">
+                    <div class="audienceOption" data-value="Public">
+                        <span class="material-symbols-outlined">globe</span>
+                        <div class="optionInfo">
+                            <span class="optionTitle">Public</span>
+                            <span class="optionDescription">Anyone on or off Archivehubs</span>
+                        </div>
+                        <input type="radio" name="audience" value="Public">
+                    </div>
+
+                    <div class="audienceOption" data-value="Connections">
+                        <span class="material-symbols-outlined">groups</span>
+                        <div class="optionInfo">
+                            <span class="optionTitle">Connections</span>
+                            <span class="optionDescription">Your Connections on Archivehubs</span>
+                        </div>
+                        <input type="radio" name="audience" value="Connections" checked>
+                    </div>
+
+                    <div class="audienceOption" data-value="ConnectionsExcept">
+                        <span class="material-symbols-outlined">groups</span>
+                        <div class="optionInfo">
+                            <span class="optionTitle">Connections except...</span>
+                            <span class="optionDescription">Don't show to some Connections</span>
+                        </div>
+                        <input type="radio" name="audience" value="ConnectionsExcept">
+                    </div>
+
+                    <div class="audienceOption" data-value="Groups">
+                        <span class="material-symbols-outlined">group</span>
+                        <div class="optionInfo">
+                            <span class="optionTitle">Groups</span>
+                            <span class="optionDescription">Show to some specific Groups</span>
+                        </div>
+                        <input type="radio" name="audience" value="Groups">
+                    </div>
+
+                    <div class="audienceOption" data-value="OnlyMe">
+                        <span class="material-symbols-outlined" id="userAccount">account_circle</span>
+                        <div class="optionInfo">
+                            <span class="optionTitle">Only Me</span>
+                            <span class="optionDescription">Don't show to some Connections</span>
+                        </div>
+                        <input type="radio" name="audience" value="OnlyMe">
+                    </div>
+
+                    <div class="audienceOption" data-value="SpecificConnections">
+                        <span class="material-symbols-outlined">groups</span>
+                        <div class="optionInfo">
+                            <span class="optionTitle">Specific Connections</span>
+                            <span class="optionDescription">Only show to some Connections</span>
+                        </div>
+                        <input type="radio" name="audience" value="SpecificConnections">
+                    </div>
+
+                    <div class="audienceOption" data-value="Custom">
+                        <span class="material-symbols-outlined">account_circle</span>
+                        <div class="optionInfo">
+                            <span class="optionTitle">Custom</span>
+                            <span class="optionDescription">Include and exclude Connections</span>
+                        </div>
+                        <input type="radio" name="audience" value="Custom">
+                    </div>
+                </div>
+            </div>
+
+            <div class="audienceFooter">
+                <div class="footDefault">
+                    <input type="checkbox" id="defaultAudience">
+                    <label for="defaultAudience">Set as default audience</label>
+                </div>
+                <div class="footButtons">
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="done-btn">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>   
+    
+    <!--Full color pick screen-->
+        <div id="fullColor-popup" class="fullColor-popup hidden">
+            <div class="fullColor-content">
+                <div class="fullColor-header">
+                    <button id="closeFull-color" class="closeFull-color"><img src="Images/back.png" alt="Go back" style="height: 22px; width: 22px; padding: 0;"></button>
+                    <h2>Choose background</h2>
+                </div>
+                <div class="section" data-name="Decorative">
+                    <h3>Decorative</h3>
+                    <div class="colorGrid">
+                        <div class="colorOption colorSwatch" data-color="#000000" style="background: #000000; "></div>
+                        <div class="colorOption colorSwatch" data-color="#ff0000" style="background: #ff0000; "></div>
+                        <div class="colorOption colorSwatch" data-color="#0000ff" style="background: #0000ff; "></div>
+                        <div class="colorOption colorSwatch" data-color="#00ff00" style="background: #00ff00; "></div>
+                        <div class="colorOption colorSwatch" data-color="#ffff00" style="background: #ffff00; "></div>
+                        <div class="colorOption colorSwatch" data-color="#800080" style="background: #800080; "></div>
+                        <div class="colorOption colorSwatch" data-color="#ffa500" style="background: #ffa500; "></div>
+                        <div class="colorOption colorSwatch" data-color="#808080" style="background: #808080; "></div>
+                        <div class="colorOption colorSwatch" data-color="#bdb2ff" style="background:#bdb2ff"></div>
+                        <div class="colorOption colorSwatch" data-color="#ffc6ff" style="background:#ffc6ff"></div>
+                        <div class="colorOption colorSwatch" data-color="#faedcd" style="background:#faedcd"></div>
+                        <div class="colorOption colorSwatch" data-color="#afe9ff" style="background:#afe9ff"></div>
+                        <div class="colorOption colorSwatch" data-color="#ffafcc" style="background:#ffafcc"></div>
+                        <div class="colorOption colorSwatch" data-color="#d3f8e2" style="background:#d3f8e2"></div>
+                        <div class="colorOption colorSwatch" data-color="#e4c1f9" style="background:#e4c1f9"></div>
+                        <div class="colorOption colorSwatch" data-color="#ffe5d9" style="background:#ffe5d9"></div>
+                    </div>
+                </div>
+                <div class="section" data-name="Patterns">
+                    <h3>Gradient</h3>
+                    <div class="colorGrid">
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #6a11cb 0%, #2575fc 100%)" style="background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #fc00ff 0%, #00dbde 100%)" style="background: linear-gradient(to right, #fc00ff 0%, #00dbde 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #ff4e50 0%, #f9d423 100%)" style="background: linear-gradient(to right, #ff4e50 0%, #f9d423 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #4facfe 0%, #00f2fe 100%)" style="background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #fa709a 0%, #fee140 100%)" style="background: linear-gradient(to right, #fa709a 0%, #fee140 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #a1c4fd 0%, #c2e9fb 100%)" style="background: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%)" style="background: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #fbc7d4 0%, #9795ef 100%)" style="background: linear-gradient(to right, #fbc7d4 0%, #9795ef 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #84fab0 0%, #8fd3f4 100%)" style="background: linear-gradient(to right, #84fab0 0%, #8fd3f4 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%)" style="background: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #3f2b96 0%, #a8c0ff 100%)" style="background: linear-gradient(to right, #3f2b96 0%, #a8c0ff 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #74ebd5 0%, #9face6 100%)" style="background: linear-gradient(to right, #74ebd5 0%, #9face6 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #ffafbd 0%, #ffc3a0 100%)" style="background: linear-gradient(to right, #ffafbd 0%, #ffc3a0 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #c3e2dc 0%, #68a0a9 100%)" style="background: linear-gradient(to right, #c3e2dc 0%, #68a0a9 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #d4fc79 0%, #96e6a1 100%)" style="background: linear-gradient(to right, #d4fc79 0%, #96e6a1 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #f6d2e0 0%, #f6e0e0 100%)" style="background: linear-gradient(to right, #f6d2e0 0%, #f6e0e0 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #a0d9d9 0%, #b3ecb3 100%)" style="background: linear-gradient(to right, #a0d9d9 0%, #b3ecb3 100%);"></div>
+                        <div class="colorOption colorSwatch" data-color="linear-gradient(to right, #ffecd2 0%, #fcb69f 100%)" style="background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);"></div>
+                    </div>
+                </div>
+                <div class="section" data-name="Solid">
+                    <h3>Solid</h3>
+                    <div class="colorGrid">
+                        <div class="colorOption colorSwatch" data-color="#000000" style="background:#000"></div>
+                        <div class="colorOption colorSwatch" data-color="#333333" style="background:#333"></div>
+                        <div class="colorOption colorSwatch" data-color="#666666" style="background:#666"></div>
+                        <div class="colorOption colorSwatch" data-color="#999999" style="background:#999"></div>
+                        <div class="colorOption colorSwatch" data-color="#cccccc" style="background:#ccc"></div>
+                        <div class="colorOption colorSwatch" data-color="#ffffff" style="background:#fff; border: 1px solid #eee;"></div>
+                        <div class="colorOption colorSwatch" data-color="#ff0000" style="background:#f00"></div>
+                        <div class="colorOption colorSwatch" data-color="#00ff00" style="background:#0f0"></div>
+                        <div class="colorOption colorSwatch" data-color="#0000ff" style="background:#00f"></div>
+                        <div class="colorOption colorSwatch" data-color="#ffff00" style="background:#ff0"></div>
+                        <div class="colorOption colorSwatch" data-color="#ff00ff" style="background:#f0f"></div>
+                        <div class="colorOption colorSwatch" data-color="#00ffff" style="background:#0ff"></div>
+                        <div class="colorOption colorSwatch" data-color="#ff7f50" style="background:#ff7f50"></div>
+                        <div class="colorOption colorSwatch" data-color="#ffa500" style="background:#ffa500"></div>
+                        <div class="colorOption colorSwatch" data-color="#800080" style="background:#800080"></div>
+                        <div class="colorOption colorSwatch" data-color="#ffadad" style="background:#ffadad"></div>
+                        <div class="colorOption colorSwatch" data-color="#ffd6a5" style="background:#ffd6a5"></div>
+                        <div class="colorOption colorSwatch" data-color="#fdffb6" style="background:#fdffb6"></div>
+                        <div class="colorOption colorSwatch" data-color="#caffbf" style="background:#caffbf"></div>
+                        <div class="colorOption colorSwatch" data-color="#9bf6ff" style="background:#9bf6ff"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="js/script.js"></script>
+</body>
+</html>

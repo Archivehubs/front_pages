@@ -1,0 +1,253 @@
+body {
+    background: #f5f6fa;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  
+  .main-content {
+    margin-left: 220px; /* Adjust if your sidebar is a different width */
+    min-height: 100vh;
+    padding: 0;
+    background: none;
+  }
+  
+  .events-manager-header-container {
+    max-width: 95vw;
+    min-width: 1500px;
+    width: 100%;
+    margin: 24px auto 0 auto;
+    background: linear-gradient(90deg, #f9f6f7 0%, #f6f7fa 100%);
+    border: 1px solid #ececec;
+    border-radius: 6px 6px 0 0;
+    box-sizing: border-box;
+    box-shadow: none;
+  }
+  
+  .events-manager-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+  }
+  
+  .events-manager-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #222;
+  }
+  
+  .events-manager-account-select {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ccd0d5;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 1rem;
+    color: #1877f2;
+    gap: 6px;
+    cursor: pointer;
+    min-width: 260px;
+    justify-content: flex-end;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.01);
+  }
+  
+  .account-icon {
+    color: #888;
+    margin-right: 4px;
+    font-size: 1.1em;
+  }
+  
+  .account-name {
+    color: #1877f2;
+    font-weight: 500;
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+  
+  .events-manager-account-select i.fas.fa-caret-down {
+    color: #888;
+    font-size: 0.95em;
+  }
+
+  .events-manager-layout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    margin-top: 32px;
+    gap: 64px;
+  }
+  
+  .events-manager-sidebar {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 18px 0 8px 0;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 200px;
+  }
+  
+  .sidebar-connect-btn {
+    background: none;
+    border: none;
+    color: #35794b;
+    font-weight: 600;
+    font-size: 1.08rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px 12px 24px;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+  
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 16px;
+  }
+  
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    color: #222;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  
+  .sidebar-link.active, .sidebar-link:hover {
+    background: #e7f0fa;
+    color: #1877f2;
+    font-weight: 600;
+  }
+  
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 8px 24px 0 24px;
+    color: #888;
+    font-size: 1.2em;
+  }
+  
+  .events-manager-welcome-card {
+    display: flex;
+    align-items: stretch;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07);
+    overflow: hidden;
+    max-width: 850px;
+    min-width: 700px;
+    margin: 24px auto;
+    min-height: 480px;
+    border: none;
+  }
+  
+  .welcome-card-content {
+    flex: 1.2;
+    padding: 40px 36px 36px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .welcome-card-content h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #222;
+  }
+  
+  .welcome-card-content > p {
+    color: #444;
+    font-size: 1.05rem;
+    margin: 0 0 24px 0;
+  }
+  
+  .welcome-card-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+  }
+  
+  .welcome-card-content li {
+    margin-bottom: 22px;
+    font-size: 1rem;
+    color: #222;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .welcome-card-content li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .welcome-icon {
+    color: #1877f2;
+    font-size: 1.15em;
+    margin-top: 4px;
+    min-width: 22px;
+  }
+  
+  .welcome-card-content b {
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 2px;
+  }
+  
+  .welcome-card-content li span {
+    display: inline;
+    font-weight: 400;
+    color: #222;
+  }
+  
+  .welcome-connect-btn {
+    background: #4267b2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 32px;
+    font-size: 1.08rem;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 12px;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(66,103,178,0.08);
+  }
+  
+  .welcome-connect-btn:hover {
+    background: #365899;
+  }
+  
+  .welcome-card-illustration {
+    flex: 1;
+    background: #ffe6a7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 260px;
+    max-width: 340px;
+    border-left: 1px solid #f3e3b0;
+  }
+  
+  .welcome-card-illustration img {
+    width: 100%;
+    max-width: 320px;
+    height: 50%;
+    display: block;
+    border-radius: 0 12px 12px 0;
+    object-fit: cover;
+  }
+
+ 

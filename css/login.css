@@ -69,22 +69,25 @@ body {
 }
 
 .btn-primary {
-    background-color: #0066ff;
-    color: white;
+    background-color: #FFD700;
+    color: #000000;
+    border: 2px solid #000000;
+    font-weight: 600;
 }
 
 .btn-primary:hover {
-    background-color: #0052cc;
+    background-color: #FFE44D;
 }
 
 .btn-secondary {
-    background-color: white;
-    color: #0066ff;
-    border: 1px solid #0066ff;
+    background-color: #000000;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    font-weight: 600;
 }
 
 .btn-secondary:hover {
-    background-color: #f0f7ff;
+    background-color: #333333;
 }
 
 /* Responsive Design */

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Manager Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/drive.css">
+
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Tabs for Mobile -->
+        <ul class="sidebar-tabs">
+            <li class="sidebar-tab active" data-target="archived">Archived</li>
+            <li class="sidebar-tab" data-target="categories">Categories</li>
+        </ul>
+
+        <!-- Sidebar -->
+        <div class="sidebar active" id="archived-sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-heading">Archived</h3>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search drive">
+                </div>
+                
+                <a href="audio.html" class="menu-item">
+                    <i class="fas fa-music"></i>
+                    <span>Audio</span>
+                </a>
+                
+                <a href="documents.html" class="menu-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Documents</span>
+                </a>
+                
+                <a href="images.html" class="menu-item">
+                    <i class="fas fa-image"></i>
+                    <span>Images</span>
+                </a>
+                
+                <a href="video.html" class="menu-item current">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </a>
+                
+                <a href="storage.html" class="menu-item">
+                    <i class="fas fa-database"></i>
+                    <span>Storage</span>
+                </a>
+                
+                <div class="storage-bar-container">
+                    <div class="storage-bar"></div>
+                </div>
+                
+                <div class="storage-info">2.5GB of 10GB used</div>
+                
+                <button class="get-storage-btn">Get More Storage</button>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-heading">Categories</h3>
+                
+                <a href="appstore.html" class="menu-item">
+                    <i class="fab fa-app-store"></i>
+                    <span>App Store</span>
+                </a>
+                
+                <a href="backup.html" class="menu-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Backup & Recovery</span>
+                </a>
+                
+                <a href="corporate.html" class="menu-item">
+                    <i class="fas fa-building"></i>
+                    <span>Corporate Records</span>
+                </a>
+                
+                <a href="diary.html" class="menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>Diary</span>
+                </a>
+                
+                <div class="menu-item has-dropdown" id="files-dropdown">
+                    <div>
+                        <i class="fas fa-folder"></i>
+                        <span>Files</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                </div>
+                
+                <div class="sub-menu" id="files-submenu">
+                    <a href="family-files.html" class="menu-item">
+                        <i class="fas fa-users"></i>
+                        <span>Family files</span>
+                    </a>
+                    <a href="private-files.html" class="menu-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Private Files</span>
+                    </a>
+                </div>
+                <a href="folder.html" class="menu-item current">
+                    <i class="fas fa-folder"></i>
+                    <span>Folder</span>
+                </a>
+                
+                <a href="gallery.html" class="menu-item">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span>
+                </a>
+                
+                <a href="idea-bank.html" class="menu-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Idea Bank</span>
+                </a>
+                
+                <a href="library.html" class="menu-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Library</span>
+                </a>
+                
+                <a href="portfolio.html" class="menu-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Portfolio</span>
+                </a>
+                
+                <a href="service-centre.html" class="menu-item">
+                    <i class="fas fa-tools"></i>
+                    <span>Service Centre</span>
+                </a>
+                
+                <a href="store.html" class="menu-item">
+                    <i class="fas fa-store"></i>
+                    <span>Store</span>
+                </a>
+                
+                <a href="tech-hub.html" class="menu-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Tech Hub</span>
+                </a>
+                
+                <a href="vault.html" class="menu-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Vault</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="section-heading">Video Files</h1>
+
+            <div class="file-section">
+                <div class="section-title">
+                    <!-- <span>Videos</span> -->
+                </div>
+                <div class="cards-container">
+                    <!-- Video Cards -->
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MP4</div>
+                            <div class="card-description">Tutorial Video</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">AVI</div>
+                            <div class="card-description">Presentation</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MOV</div>
+                            <div class="card-description">Event Recording</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MKV</div>
+                            <div class="card-description">Movie File</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">WMV</div>
+                            <div class="card-description">Archived Video</div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="cards-container">
+                    <!-- Video Cards -->
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MP4</div>
+                            <div class="card-description">Tutorial Video</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">AVI</div>
+                            <div class="card-description">Presentation</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MOV</div>
+                            <div class="card-description">Event Recording</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MKV</div>
+                            <div class="card-description">Movie File</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">WMV</div>
+                            <div class="card-description">Archived Video</div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="cards-container">
+                    <!-- Video Cards -->
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MP4</div>
+                            <div class="card-description">Tutorial Video</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">AVI</div>
+                            <div class="card-description">Presentation</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MOV</div>
+                            <div class="card-description">Event Recording</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MKV</div>
+                            <div class="card-description">Movie File</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">WMV</div>
+                            <div class="card-description">Archived Video</div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="cards-container">
+                    <!-- Video Cards -->
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MP4</div>
+                            <div class="card-description">Tutorial Video</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">AVI</div>
+                            <div class="card-description">Presentation</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MOV</div>
+                            <div class="card-description">Event Recording</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">MKV</div>
+                            <div class="card-description">Movie File</div>
+                        </div>
+                    </div>
+                    <div class="card video-card">
+                        <div class="card-content">
+                            <div class="card-type">WMV</div>
+                            <div class="card-description">Archived Video</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="see-more">See More</a>
+            </div> 
+          
+        </div>
+    </div>
+
+    <script src="js/drive.js"></script>
+</body>
+</html>

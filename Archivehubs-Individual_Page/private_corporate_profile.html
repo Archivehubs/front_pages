@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Corporate Profile | archivehubs </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/profile_view.css">
+  
+
+</head>
+<body>
+    <div class="profile-container">
+        <div class="main-content">
+            <!-- Profile Header Section -->
+            <div class="card profile-header">
+                <div class="profile-banner">
+                    <img id="bannerImage" src="images/post-example.jpg" alt="Profile Banner">
+                    
+                    <div class="banner-upload-icon" onclick="document.getElementById('bannerUpload').click();">
+                        <i class="fas fa-camera"></i>
+                    </div>
+
+                    <!-- Hidden file input -->
+                    <input type="file" id="bannerUpload" accept="image/*" style="display: none;" onchange="previewBanner(this)">
+                </div>
+                <div class="profile-info-top">
+                    <img src="images/corporate_education.png" alt="David James" class="profile-picture">                    
+                </div>
+                <div class="profile-details">
+                    <h1>Maven's International College</h1>
+                    <p class="title">Educational Institution</p>
+                    <p class="location-connections">Lagos, State · <a href="#">Contact info</a></p>
+                    <p class="connections">300+ connections</p>
+                    <div class="header-buttons">
+                        <button class="primary-button" id="openToMainBtn">Open to</button>
+                        <button class="secondary-button">Add portfolio section</button>
+                        <button class="secondary-button">Enhance portfolio</button>
+                        <button class="secondary-button">Resources</button>
+                    </div>
+                    
+                    <!-- Open To Dropdown -->
+                    <div class="open-to-dropdown" id="openToDropdown">
+                        <div class="dropdown-item">
+                            <h4>Show recruiters you're open to work</h4>
+                            <p>You control who sees this</p>
+                            <button class="get-started-btn">Get Started</button>
+                        </div>
+                        <div class="dropdown-item">
+                            <h4>Share that you're hiring</h4>
+                            <p>Attract qualified candidates</p>
+                            <button class="get-started-btn">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggested for You Section -->
+            <div class="card suggested-section">
+                <h2>Suggested for you</h2>
+                <p class="private-to-you"><i class="fas fa-eye"></i> Private to you</p>
+                <div class="suggested-cards">
+                    <div class="suggested-card">
+                        <p>Suggestions based on owner's profile and activities including premium suggestions</p>
+                    </div>
+                    <div class="suggested-card">
+                        <p>Suggestions based on owners profile and activities including premium suggestions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div class="card analytics-section">
+                <div class="section-header">
+                    <h2>Analytics</h2>
+                    <p class="private-to-you"><i class="fas fa-eye"></i> Private to you</p>
+                </div>
+                <div class="analytics-grid">
+                    <div class="analytic-item">
+                        <i class="fas fa-users"></i>
+                        <h3>No. of Profile view</h3>
+                        <p>Discover who's viewed your profile</p>
+                    </div>
+                    <div class="analytic-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>No. of Post impressions</h3>
+                        <p>Start a post to increase engagement duration</p>
+                    </div>
+                    <div class="analytic-item">
+                        <i class="fas fa-search"></i>
+                        <h3>Search appearance</h3>
+                        <p>See how often you appear in search results</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all analytics <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- About Section -->
+            <div class="card about-section">
+                <div class="section-header">
+                    <h2>About</h2>
+                    <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                </div>
+                <p class="about-text">Portfolio Narration</p>
+            </div>
+
+            <!-- Activity Section -->
+            <div class="card activity-section">
+                <div class="section-header">
+                    <h2>Activity</h2>
+                    <div class="header-actions">
+                        <button class="create-post-btn"><i class="fas fa-pencil-alt"></i> Create a post</button>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="activity-tabs">
+                    <button class="active">Posts</button>
+                    <button>Comments</button>
+                </div>
+                <p class="activity-text">Owner's post and shares</p>
+                <a href="#" class="show-all">Show all posts <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            
+
+
+           <!-- Corporate Overview Section -->
+            <div class="card corporate-overview-section">
+                <div class="section-header">
+                    <h2>Corporate Overview</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="corporate-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                    <div class="corporate-overview-details">
+                        <h3>Legal Name & Business Registration Info</h3>
+                        <p class="business-type">Corporate / Business Type</p>
+                        <p class="year-established">Year Established</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision, Mission, and Core Values Section -->
+            <div class="card vision-section">
+                <div class="section-header">
+                    <h2>Vision, Mission, and Core Values</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="vision-content">
+                    <p>Vision Statement</p>
+                    <p>Mission Statement</p>
+                    <p>Core Values</p>
+                </div>
+            </div>
+
+            <!-- Products and Services Section -->
+            <div class="card products-section">
+                <div class="section-header">
+                    <h2>Products and Services</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="product-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                    <div class="product-details">
+                        <p>Description of key products and/or service offerings</p>
+                        <p>Features and benefits</p>
+                        <p>Any Unique Selling Points (USPs)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Organizational Structure Section -->
+            <div class="card org-structure-section">
+                <div class="section-header">
+                    <h2>Organizational Structure</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="org-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                    <div class="org-details">
+                        <p>Management Team / Leadership Bios</p>
+                        <p>Company Hierarchy/ or Organizational Chart</p>
+                    </div>
+                </div>
+                <button class="show-chart-btn">Show Chart</button>
+            </div>
+
+            <!-- Market and Client Base Section -->
+            <div class="card market-section">
+                <div class="section-header">
+                    <h2>Market and Client Base</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="market-items">
+                    <div class="market-item flex-org-image">
+                        <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                        <div class="market-details">
+                            <p>Target Market/ Industry Sector</p>
+                            <p>Notable Clients or Partners</p>
+                            <p>Descriptions</p>
+                        </div>
+                    </div>
+                    <div class="market-item flex-org-image">
+                        <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                        <div class="market-details">
+                            <p>Target Market/ Industry Sector</p>
+                            <p>Notable Clients or Partners</p>
+                            <p>Descriptions</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all Market and Client Base <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Achievements and Milestones Section -->
+            <div class="card achievements-section">
+                <div class="section-header">
+                    <h2>Achievements and Milestones</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="achievement-items">
+                    <div class="achievement-item flex-org-image">
+                        <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                        <div class="achievement-details">
+                            <p>Key Accomplishments / Major Project Completed</p>
+                            <p>Awards & Certifications</p>
+                            <p>Name of organization</p>
+                            <p>Issued date</p>
+                            <p>Credential ID</p>
+                        </div>
+                        <button class="show-credential-btn">Show credential</button>
+                    </div>
+                    <div class="achievement-item flex-org-image">
+                        <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                        <div class="achievement-details">
+                            <p>Key Accomplishments / Major Project Completed</p>
+                            <p>Awards & Certifications</p>
+                            <p>Name of organization</p>
+                            <p>Issued date</p>
+                            <p>Credential ID</p>
+                        </div>
+                        <button class="show-credential-btn">Show credential</button>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all Achievements and Milestones <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- CSR Section -->
+            <div class="card csr-section">
+                <div class="section-header">
+                    <h2>Corporate Social Responsibility (CSR) <span class="optional">(Optional)</span></h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="csr-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                    <div class="csr-details">
+                        <p>Environmental Sustainability Efforts</p>
+                        <p>Community Engagement</p>
+                        <p>Ethical Practices</p>
+                        <p>Others</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all CSR <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Contact & Links Section -->
+            <div class="card contact-section">
+                <div class="section-header">
+                    <h2>Contact & Links</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="contact-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                    <div class="contact-details">
+                        <p>Corporate Data</p>
+                        <p>Name</p>
+                        <p>Professional Email</p>
+                        <p>Phone</p>
+                        <p>Archivehubs Profile Link</p>
+                        <p>Other Links and more</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appendices Section -->
+            <div class="card appendices-section">
+                <div class="section-header">
+                    <h2>Appendices <span class="optional">(Optional)</span></h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="appendix-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                    <div class="appendix-details">
+                        <p>Brochure</p>
+                        <p>Licenses</p>
+                        <p>Charts</p>
+                        <p>Legal Documents</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all Appendices <i class="fas fa-arrow-right"></i></a>
+            </div>
+        
+
+            <!-- Contact & Links Section -->
+            <div class="card contact-section">
+                <div class="section-header">
+                    <h2>Contact & Links</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="contact-info flex-org-image">
+                    <img src="images/Company Logo.png" alt="Contact" class="org-image-small">
+                    <div class="contact-details">
+                        <p class="name">David James</p>
+                        <p class="email">david@example.com</p>
+                        <p class="phone">+234 123 456 7890</p>
+                        <p class="profile-link">www.archivehubs.com/in/david-agbor</p>
+                        <p class="other-links">Other links and more</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appendix Section -->
+            <div class="card appendix-section">
+                <div class="section-header">
+                    <h2>Appendix / Extras (Optional)</h2>
+                    <div class="header-actions">
+                        <i class="fas fa-plus icon-button"></i>
+                        <i class="fas fa-pencil-alt icon-button edit-btn"></i>
+                    </div>
+                </div>
+                <div class="appendix-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                    <div class="appendix-details">
+                        <p class="item">Resume</p>
+                        <p class="item">Project timelines</p>
+                        <p class="item">Detailed case studies</p>
+                        <p class="item">Press features or publications</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all appendices <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Interests Section -->
+            <div class="card interests-section">
+                <div class="section-header">
+                    <h2>Interests</h2>
+                </div>
+                <div class="interest-tabs">
+                    <button class="active">Top voices</button>
+                    <button>Companies</button>
+                    <button>Group</button>
+                    <button>Newsletters</button>
+                    <button>Schools</button>
+                </div>
+                <div class="interest-items">
+                    <div class="interest-item flex-org-image">
+                        <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                        <div class="interest-details">
+                            <h3>David J. Malan</h3>
+                            <p class="description">Professor of Computer Science at Harvard</p>
+                            <p class="followers">1.2M followers</p>
+                            <button class="following-btn"><i class="fas fa-check"></i> Following</button>
+                        </div>
+                    </div>
+                    <div class="interest-item flex-org-image">
+                        <img src="images/Company Logo.png" alt="Organization" class="org-image-small">
+                        <div class="interest-details">
+                            <h3>Satya Nadella</h3>
+                            <p class="description">CEO at Microsoft</p>
+                            <p class="followers">5.7M followers</p>
+                            <button class="following-btn"><i class="fas fa-check"></i> Following</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all Top Voices <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <p class="copyright">Get the Archivehubs App General Terms
+                    ARCHIVEHUBS: ENINK Investment Limited © 2025</p>
+        </div>
+
+        <!-- Right Sidebar -->
+         <div class="right-sidebar">
+            <div class="card sidebar-card profile-language">
+                <h2>Profile language</h2>
+                <p>English</p>
+            </div>
+
+            <div class="card sidebar-card public-profile-url">
+                <h2>Public Profile & URL</h2>
+                <a href="#">www.Archivehubs.com/in/name-0000000/</a>
+                <i class="fas fa-pencil-alt icon-button"></i>
+            </div>
+
+            <div class="card sidebar-card target-audiences">
+                <!-- <img src="https://i.ibb.co/q5kY3mJ/profile-pic.png" alt="Profile" class="ad-profile-pic"> -->
+                <!-- <i class="fas fa-star premium-star"></i> -->
+                <h3> Maximize business growth on Archivehubs Ads a platform built for B2B      </h3>
+                <button class="get-started-btn">Get started</button>
+            </div>
+
+            <div class="card sidebar-card who-viewed">
+                <h2>Add to your network</h2>
+                <div class="viewer-item">
+                    <img src="images/profile-2.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Gabriel Danladi<span class="dot">·</span> <span class="follow-status">2nd</span></h3>
+                        <p class="viewer-title">Software Engineer | AI, SE Akemi | Co-founding...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <div class="viewer-item">
+                    <img src="images/profile-3.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Sarah Essan</h3>
+                        <p class="viewer-title">Executive Assistant | Expert in Elaborat...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <div class="viewer-item">
+                    <img src="images/profile-1.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Julie Daniel</h3>
+                        <p class="viewer-title">Executive Assistant | Expert in Elaborat...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card sidebar-card people-you-may-know">
+                <h2>Connections you may want</h2>
+                <div class="person-item">
+                    <img src="images/profile-2.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Kingsley Mokena</h3>
+                        <p class="person-title">Data Science Student at ALX</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-1.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Melvin A.</h3>
+                        <p class="person-title">Aspiring Backend | Cloud Architect | Passionate abou...</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-3.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Felix Alabama</h3>
+                        <p class="person-title">Bio economics | Data Scientist | AWS Certified | Cloud...</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                 <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+             <div class="card sidebar-card people-you-may-know">
+                <h2>Your viewers also viewed</h2>
+                <div class="person-item">
+                    <img src="images/profile-2.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Kingsley Mokena</h3>
+                        <p class="person-title">Data Science Student at ALX</p>
+                        <button class="connect-button"> View Profile</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-1.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Melvin A.</h3>
+                        <p class="person-title">Aspiring Backend | Cloud Architect | Passionate abou...</p>
+                        <button class="connect-button"> View Profile</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-3.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Felix Alabama</h3>
+                        <p class="person-title">Bio economics | Data Scientist | AWS Certified | Cloud...</p>
+                        <button class="connect-button"> View Profile</button>
+                    </div>
+                </div>
+                 <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>          
+
+        </div>
+    </div>
+
+    <!-- Modals will be inserted here by JavaScript -->
+    <script src="js/private_corporate_profile.js"></script>
+    
+
+   
+</body>
+</html>

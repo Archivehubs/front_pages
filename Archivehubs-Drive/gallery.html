@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - File Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/drive_gallery.css">
+
+</head>
+<body>
+    <!-- Upload Modal -->
+    <div class="upload-modal" id="uploadModal">
+        <div class="upload-modal-content">
+            <h3>Upload New Cover Photo</h3>
+            <p>Select a method to upload your new cover photo</p>
+            <div class="upload-options">
+                <div class="upload-option" id="uploadFromDevice">
+                    <i class="fas fa-upload"></i> Device
+                </div>
+                <div class="upload-option" id="takePhoto">
+                    <i class="fas fa-camera"></i> Camera
+                </div>
+            </div>
+            <button class="close-modal" id="closeModal">Cancel</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar Tabs for Mobile -->
+        <ul class="sidebar-tabs">
+            <li class="sidebar-tab active" data-target="archived">Archived</li>
+            <li class="sidebar-tab" data-target="categories">Categories</li>
+        </ul>
+
+        <!-- Sidebar -->
+        <div class="sidebar active" id="archived-sidebar">
+            <div class="sidebar-section active" id="archived-section">
+                <h3 class="sidebar-heading">Archived</h3>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search drive">
+                </div>
+                
+                <a href="audio.html" class="menu-item">
+                    <i class="fas fa-music"></i>
+                    <span>Audio</span>
+                </a>
+                
+                <a href="documents.html" class="menu-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Documents</span>
+                </a>
+                
+                <a href="images.html" class="menu-item">
+                    <i class="fas fa-image"></i>
+                    <span>Images</span>
+                </a>
+                
+                <a href="video.html" class="menu-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </a>
+                
+                <a href="storage.html" class="menu-item">
+                    <i class="fas fa-database"></i>
+                    <span>Storage</span>
+                </a>
+                
+                <div class="storage-bar-container">
+                    <div class="storage-bar"></div>
+                </div>
+                
+                <div class="storage-info">2.5GB of 10GB used</div>
+                
+                <button class="get-storage-btn">Get More Storage</button>
+            </div>
+            
+            <div class="sidebar-section" id="categories-section">
+                <h3 class="sidebar-heading">Categories</h3>
+                
+                <a href="appstore.html" class="menu-item">
+                    <i class="fab fa-app-store"></i>
+                    <span>App Store</span>
+                </a>
+                
+                <a href="backup.html" class="menu-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Backup & Recovery</span>
+                </a>
+                
+                <a href="corporate.html" class="menu-item">
+                    <i class="fas fa-building"></i>
+                    <span>Corporate Records</span>
+                </a>
+                
+                <a href="diary.html" class="menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>Diary</span>
+                </a>
+                
+                <div class="menu-item has-dropdown" id="files-dropdown">
+                    <div>
+                        <i class="fas fa-folder"></i>
+                        <span>Files</span>
+                    </div>
+                    <i class="fas fa-chevron-down dropdown-icon"></i>
+                </div>
+                
+                <div class="sub-menu" id="files-submenu">
+                    <a href="family-files.html" class="menu-item">
+                        <i class="fas fa-users"></i>
+                        <span>Family files</span>
+                    </a>
+                    <a href="private-files.html" class="menu-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Private Files</span>
+                    </a>
+                </div>
+                
+                <a href="gallery.html" class="menu-item current">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span>
+                </a>
+                
+                <a href="idea-bank.html" class="menu-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Idea Bank</span>
+                </a>
+                
+                <a href="library.html" class="menu-item">
+                    <i class="fas fa-book-open"></i>
+                    <span>Library</span>
+                </a>
+                
+                <a href="portfolio.html" class="menu-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Portfolio</span>
+                </a>
+                
+                <a href="service-centre.html" class="menu-item">
+                    <i class="fas fa-tools"></i>
+                    <span>Service Centre</span>
+                </a>
+                
+                <a href="store.html" class="menu-item">
+                    <i class="fas fa-store"></i>
+                    <span>Store</span>
+                </a>
+                
+                <a href="tech-hub.html" class="menu-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Tech Hub</span>
+                </a>
+                
+                <a href="vault.html" class="menu-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Vault</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content - Gallery Page -->
+        <div class="main-content">
+            <!-- Gallery Header with Cover and Profile Photos -->
+            <div class="gallery-header">
+                <div class="cover-photo" id="coverPhoto">
+                    <img id="bannerImage" src="images/coverphoto.jpg" alt="Profile Banner">
+                    <div class="cover-upload" id="coverUpload">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <div class="profile-photo">
+                    <img src="images/profile-1.jpg" alt="David James" class="profile-picture">  
+                </div>
+            </div>
+            
+            <!-- Gallery Content -->
+            <div class="gallery-content">
+                <h1 class="section-heading">Gallery Offers</h1>
+                
+                <!-- First Row of Gallery Items -->
+                <div class="gallery-items">
+                    <!-- Item 1 -->
+                    <div class="gallery-item">
+                        <div class="item-image">
+                            <!-- Placeholder for image -->
+                            <div style="width:100%; height:100%; background:linear-gradient(135deg, #6e8efb, #a777e3);"></div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-price">$45.99</div>
+                            <div class="item-description">Professional portrait photography session</div>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>New York, NY</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="gallery-item">
+                        <div class="item-image">
+                            <!-- Placeholder for image -->
+                            <div style="width:100%; height:100%; background:linear-gradient(135deg, #5ee7df, #b490ca);"></div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-price">Price: </div>
+                            <div class="item-description">Description: </div>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location:</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3 -->
+                    <div class="gallery-item">
+                        <div class="item-image">
+                            <!-- Placeholder for image -->
+                            <div style="width:100%; height:100%; background:linear-gradient(135deg, #f093fb, #f5576c);"></div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-price">Price:</div>
+                            <div class="item-description">Description:</div>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location: </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 4 -->
+                    <div class="gallery-item">
+                        <div class="item-image">
+                            <!-- Placeholder for image -->
+                            <div style="width:100%; height:100%; background:linear-gradient(135deg, #4facfe, #00f2fe);"></div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-price">Price:</div>
+                            <div class="item-description">Description:</div>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location:</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Second Row of Gallery Items -->
+                <div class="gallery-items">
+                    <!-- Item 5 -->
+                    <div class="gallery-item">
+                        <div class="item-image">
+                            <!-- Placeholder for image -->
+                            <div style="width:100%; height:100%; background:linear-gradient(135deg, #fa709a, #fee140);"></div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-price">Price:</div>
+                            <div class="item-description">Description: </div>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location: </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 6 -->
+                    <div class="gallery-item">
+                        <div class="item-image">
+                            <!-- Placeholder for image -->
+                            <div style="width:100%; height:100%; background:linear-gradient(135deg, #a8edea, #fed6e3);"></div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-price">Price: </div>
+                            <div class="item-description">Description:</div>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location: </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 7 -->
+                    <div class="gallery-item">
+                        <div class="item-image">
+                            <!-- Placeholder for image -->
+                            <div style="width:100%; height:100%; background:linear-gradient(135deg, #ff9a9e, #fad0c4);"></div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-price">Price:</div>
+                            <div class="item-description">Description:</div>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location: </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 8 -->
+                    <div class="gallery-item">
+                        <div class="item-image">
+                            <!-- Placeholder for image -->
+                            <div style="width:100%; height:100%; background:linear-gradient(135deg, #a1c4fd, #c2e9fb);"></div>
+                        </div>
+                        <div class="item-details">
+                            <div class="item-price">Price:</div>
+                            <div class="item-description">Description:</div>
+                            <div class="item-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location:</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- See More Link -->
+                <a href="#" class="see-more">See More</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/drive_gallery.js"></script>
+
+</body>
+</html>

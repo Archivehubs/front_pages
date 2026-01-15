@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Shortcuts</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header img {
+            height: 60px;
+            width: 60px;
+            object-fit: cover;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header h1 {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+            margin-top: 3px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #6c7576;
+        }
+
+        .searchContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .searchContainer span {
+            font-size: 1.8rem;
+            color: #6c7576;
+            margin-right: 10px;
+        }
+
+        #searchInput {
+            width: 100%;
+            max-width: 450px;
+            padding: 10px 15px;
+            border: none;
+            font-size: 1rem;
+            border: 1px solid #dee2e6;
+            transition: border-color 0.3s;
+            border-radius: 8px;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .shortcutsTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        .shortcutsTable th, .shortcutsTable td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .shortcutsTable thead {
+            background-color: #343a40;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .shortcutsTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .shortcutsTable tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .shortcutsTable td:first-child {
+            font-weight: 500;
+        }
+
+        .shortcut-mono {
+            background-color: #e9ecef;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .notes {
+            background-color: #ffffff;
+            padding: 20px;
+            border-left: 4px solid yellow;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .notes h3 {
+            margin-top: 0;
+        }
+
+        .notes ul {
+            list-style-type: disc ;
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+
+
+
+
+
+
+        /*fade*/
+        .grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+            grid-template-columns: repeat(2, minmax(300px, 1fr)); 
+        }
+
+        .gridLink {
+            height: 20rem;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .gridLink img {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            padding: 0;
+        }
+
+        .gridLink h3 {
+            margin: 5px;
+            padding: 0;
+        }
+
+        .gridLink p {
+            padding: 0 10px;
+            margin: 0 auto;
+        }
+
+        .gridLink a {
+            text-decoration: none;
+        }
+
+        .gridLink a:hover {
+            font-weight: bold;
+        }
+
+        /*footer*/
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            margin-top: auto;
+            padding-bottom: 5px;
+            background: #e9ecef;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            height: 70px;
+        }
+
+        .footerContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .containerTop {
+            display: flex;
+            color: #0000EE;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .containerTop p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .containerBottom {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .containerBottom p {
+            margin: 0;
+            font-size: clamp(0.6rem, 2vw, 1rem);
+        }
+
+        footer img {
+            height: 25px;
+            width: 80px;
+            object-fit: cover;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="../home.html"><img src="images/Logo.jpg" alt="Archivehubs Logo"></a>
+            <h1>Keyboard Shortcuts</h1>
+            <p>Speed up your workflow with these handy shorcuts 
+                for Archivehubs.
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="searchContainer">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" id="searchInput" placeholder="Search for a shortcut...">
+        </div>
+
+        <table class="shortcutsTable">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Shortcut(Windows/Linux)</th>
+                    <th>Shortcut (Mac)</th>
+                </tr>
+            </thead>
+
+            <tbody id="shortcutsTableBody">
+                <tr data-action="Focus on Search Bar">
+                    <td data-label="Action">Focus on Search Bar</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Ctrl + /</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Cmd + /</span>
+                    </td>
+                </tr>
+                 <tr data-action="Go to Home">
+                    <td data-label="Action">Go to Home</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + H</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Control + Option + H</span>
+                    </td>
+                </tr>
+                 <tr data-action="Open Drive">
+                    <td data-label="Action">Open Drive</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + D</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Contro + Option + D</span>
+                    </td>
+                </tr>
+                 <tr data-action="Open MyConnections">
+                    <td data-label="Action">Open MyConnections</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + C</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Control + Option + C</span>
+                    </td>
+                </tr>
+                 <tr data-action="Open Monetization Hub">
+                    <td data-label="Action">Open Monetization Hub</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + M</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Contro + Option + M</span>
+                    </td>
+                </tr>
+                 <tr data-action="Open Affiliate Program">
+                    <td data-label="Action">Open Affiliate Program</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + A</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Control + Option + A</span>
+                    </td>
+                </tr>
+                <tr data-action="Open Settings">
+                    <td data-label="Action">Open Settings</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + S</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Control + Option + S</span>
+                    </td>
+                </tr>
+                <tr data-action="Upload File">
+                    <td data-label="Action">Upload File</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">U</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">U</span>
+                    </td>
+                </tr>
+                <tr data-action="Refresh Current Feed">
+                    <td data-label="Action">Refresh Current Feed</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">R</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">R</span>
+                    </td>
+                </tr>
+                <tr data-action="Navigate to Notifications">
+                    <td data-label="Action">Navigate to Notifications</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + N</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Control + Option + N</span>
+                    </td>
+                </tr>
+                <tr data-action="Toggle Messages">
+                    <td data-label="Action">Toggle Messages</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + T</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Control + Option + T</span>
+                    </td>
+                </tr>
+                <tr data-action="View Dashboard Summary">
+                    <td data-label="Action">View Dashboard Summary</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Alt + J</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Control + Option + J</span>
+                    </td>
+                </tr>
+                <tr data-action="Share Selected File">
+                    <td data-label="Action">Share Selected File</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Shift + S</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Shift + S</span>
+                    </td>
+                </tr>
+                <tr data-action="Lock/Unlock Selected File">
+                    <td data-label="Action">Lock/Unlock Selected File</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Shift + L</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Shift + L</span>
+                    </td>
+                </tr>
+                <tr data-action="Delete Selected File">
+                    <td data-label="Action">Delete Selected File</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Del</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Delete</span>
+                    </td>
+                </tr>
+                <tr data-action="Open Help & Keyboard Shortcut Menu">
+                    <td data-label="Action">Open Help & Keyboard Shortcut Menu</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Shift + / or ?</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Shift + / or ?</span>
+                    </td>
+                </tr>
+                <tr data-action="Switch Theme">
+                    <td data-label="Action">Switch Theme (Dark/Light)</td>
+                    <td data-label="Shortcut (Windows/Linux)">
+                        <span class="shortcut-mono">Ctrl + Shift + L</span>
+                    </td>
+                    <td data-label="Shortcut (Mac)">
+                        <span class="shortcut-mono">Ctrl + Shift + L</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="notes">
+            <h3>Notes:</h3>
+            <ul>
+                <li>
+                    These shortcuts work best when not in an input field 
+                    (like search or chat).
+                </li>
+                <li>Use <span class="shortcut-mono">Tab</span> and 
+                    <span class="shortcut-mono">Shift + Tab</span> to 
+                    navigate between buttons, links, and form fields.
+                </li>
+                <li>
+                    Archivehubs.com is screen-reader friendly; all shortcuts 
+                    are tested for accessibility compactability.
+                </li>
+            </ul>
+        </div>
+
+        <section class="fadeIn">
+        <h2>For more information about our platform</h2>
+        <div class="grid">
+            <div class="gridLink">
+                <img src="images/Logo.jpg" alt="Banner">
+                <h3>Archivehubs Community</h3>
+                <p>The Archivehubs Community is a Centralized 
+                    Discussion Forums designed to facilitate 
+                    meaningful conversations, collaboration, 
+                    and knowledge sharing among users.
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="gridLink">
+                <img src="images/Logo.jpg" alt="Banner">
+                <h3>Corporate Page</h3>
+                <p>Corporate Page Archivehubs Corporate Pages 
+                    are for businesses, affiliates, brands, 
+                    organizations and public figures to 
+                    share updates and connect with people.
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="gridLink">
+                <img src="images/Logo.jpg" alt="Banner">
+                <h3>Pressroom</h3>
+                <p>Explore the latest Archivehubs news, updates, 
+                    and reports 
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            <div class="gridLink">
+                <img src="images/Logo.jpg" alt="Banner">
+                <h3>Partnering Models</h3>
+                <p>Find up - to - date guideline on Archivehubs 
+                    partnering models. 
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            
+        </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footerContainer">
+            <div class="containerTop">
+                <p>Get the Archivehubs App</p>
+                <strong>General Terms</strong>
+            </div>
+            <div class="containerBottom">
+                <p>ARCHIVEHUBS: ENINK Investment Limited 2025 <strong>RC 1741345</strong></p>
+                <img src="images/company-name.jpg" alt="Enink Trademark">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        //search input logic
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            let searchValue = event.target.value.toLowerCase();
+            let rows = document.querySelectorAll('#shortcutsTableBody tr')
+
+            rows.forEach(row => {
+                let actionText = row.getAttribute('data-action').toLowerCase();
+                let winShortcut = row.children[1].textContent.toLowerCase();
+                let macShortcut = row.children[2].textContent.toLowerCase();
+
+                if (actionText.includes(searchValue) || winShortcut.includes(searchValue) || macShortcut.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

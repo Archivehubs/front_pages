@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive Article | ArchiveHubs</title>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/article.css">
+</head>
+<body>
+    <div class="slider">
+        <div class="startArticle"> <!--page 1-->
+            <button id="closeStartArticleBtn">&times;</button>
+            <div class="startArticleContent">
+                <p>Say hello to a smoother editing and publishing
+                 experience</p>
+                <div id="toolbar" class="styleContainer">
+                    <select class="ql-font">
+                        <option selected></option>
+                        <option value="serif"></option>
+                        <option value="monospace"></option>
+                        <option value="tahoma"></option>
+                        <option value="calibri"></option>
+                    </select>
+                    <button class="ql-bold"></button>
+                    <button class="ql-italic"></button>
+                    <button class="ql-underline"></button>
+                    <button class="ql-list" value="ordered"></button>
+                    <button class="ql-list" value="bullet"></button>
+                    <button class="ql-blockquote"></button>
+                    <button class="ql-code-block"></button>
+                    <button class="ql-image"></button>
+                    <button id="bracket-btn" type="button">[ ]</button>
+                </div>
+
+                <div id="editor-cont" contenteditable="true" style="display: none;"></div>
+                
+                <p>Publish your article easily and reliably with
+                 our editing tools,<br>now all in one place</p>
+            </div>
+            
+            <div class="startArticleButton">
+                <button id="start-btn">Get Started</button>
+            </div>
+        </div> 
+
+        <section class="getStartedClick"> <!--page 2-->
+            <div class="getStartedIdentity">
+                <div class="getStartedPicture">
+                    <img src="Images/profile.png" alt="User profile pic" class="getStartPicture">
+                </div>
+                <div class="posterId">
+                    <div class="usernameDisplay">
+                        Name ▾ 
+                    </div>
+
+                    <div class="accountPopup" id="accountPopup">
+                        <div class="popupSection">
+                            <div class="publishAs">
+                                <p>Publish As:</p>
+                                <div class="publishName">
+                                    <img src="Images/profile.png" alt="Profile photo" class="profilePic">
+                                    <span>Name</span>
+                                    <input type="radio" name="poster" checked>
+                                </div>
+                            </div>
+                            <div class="publishTo">
+                                <p>Publish To:</p>
+                                <div class="publishDestination">
+                                    <img src="Images/contract.png" alt="Profile photo"class="profilePic">
+                                    <span>Individual Article</span>
+                                    <input type="radio" name="destination" checked>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="backNavigation">
+                        <button class="back-arrow" title="Go Back">← Back</button>
+                    </div>
+    
+                </div>
+
+            </div>
+            
+            <div id="toolbar2" class="styleContainer"><!-- rich text section-->
+                <select class="ql-font">
+                    <option selected></option>
+                    <option value="serif"></option>
+                    <option value="monospace"></option>
+                    <option value="tahoma"></option>
+                    <option value="calibri"></option>
+                </select>
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+                <button class="ql-blockquote"></button>
+                <button class="ql-code-block"></button>
+                <button class="ql-image"></button>
+                <button id="bracket-btn" type="button">[ ]</button>
+            </div>
+
+            <input id="article-title" name="article-title" type="text" placeholder="Article Title">
+            <!-- Editable Article Body -->
+            <div id="editor-container" class="editorBody" contenteditable="true" data-placeholder="Write your article here..."></div>
+
+            <div class="getStartClick-btns">
+                <div class="manage-dropdown">
+                    <button class="manage-btn">Manage▾</button>
+                    <!--Manage option-->
+                    <section class="manageArticle">
+                        <div class="manageSettings">
+                            <ul>
+                                <li><button id="settings-btn" class="setArticle-btn">Settings</button></li>
+                            </ul>
+                        </div>
+
+                        <div class="manageDraft">
+                            <ul>
+                                <li><button id="draft-btn" class="setArticle-btn">Draft</button></li>
+                                <li><button id="schedule-btn" class="setArticle-btn">Scheduled</button></li>
+                                <li><button id="publish-btn" class="setArticle-btn">Published</button></li>
+                            </ul>
+                        </div>
+
+                        <div class="manageNewDraft">
+                            <ul>
+                                <li><button id="newDraft-btn" class="setArticle-btn">New Draft</button></li>
+                                <li><button id="createLetter-btn" class="setArticle-btn">Create Newsletter</button></li>
+                                <li><button id="help-btn" class="setArticle-btn">Help</button></li>
+                                <li><button id="feedback-btn" class="setArticle-btn">Give Feedback</button></li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="next-dropdown">
+                    <button class="next-btn">Next</button>
+                    <section class="nextSection">
+                        <div class="nextProfile">
+                            <div class="nextIdentity">
+                                <img src="Images/profile.png" alt="Profile Photo" class="nextPic" style="height: 30px; width: 30px; border-radius: 50%;">
+                                <p>Name<br>Post to anyone</p>
+                            </div>
+                            <button class="close-btn" id="modalCloseBtn" title="Close">&times;</button>
+                        </div>
+                        <div class="nextDescription">
+                            <p>Tell your network what your article is about...</p>
+                        </div>
+
+                        <div class="editorBody">
+                            <div class="companyLogo">
+                                <img src="images/Logo.jpg" alt="company logo" style="height: 25px; width: 25px;">
+                                <p id="publishText">Publish with Archivehubs</p>
+                            </div>
+                            <p>Article Title <br>Body</p>
+                            
+                            <div class="emojiToggle">
+                                😊
+                                <div class="emojiList">
+                                    <span class="emoji">😀</span>
+                                    <span class="emoji">😂</span>
+                                    <span class="emoji">😎</span>
+                                    <span class="emoji">❤️</span>
+                                    <span class="emoji">👍</span>
+                                    <span class="emoji">🎉</span>
+                                    <!-- Add more if needed -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="publish-btn">Publish</button>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+    </div> <!--slider ends-->
+
+    <!--Settings-->
+    <div class="settingsModal" id="settingsModal">
+        <div class="modalBackdrop"></div>
+        <section class="articleSettings">
+            <div class="settingsHeader">
+                <h2>SETTINGS</h2>
+                <button class="close-btn" id="settingsCloseBtn" title="Close">&times;</button>
+            </div>
+
+            <div class="settingsBody">
+                <div class="generalSettings">
+                    <h3>General</h3>
+                    <h4>Article URL</h4>
+                    <p>This URL will be created using your article's current title. This URL cannot be changed once it is created. <br>You need to add a title before you can create a URL for your article.</p>
+                    <button class="createURL-btn">Create URL</button>
+                </div>
+                
+
+                <div class="SEOSettings">
+                    <h3>SEO</h3>
+                    <h4>SEO Title</h4>
+                    <p>We'll use your added SEO title in place of your article title for search engine result pages, such as Google search.</p>
+                    
+                    <div class="SEOForm">
+                        <label for="SEOTitle"></label>
+                        <input type="text" placeholder="Ex:My Story" id="SEOTitle">
+
+                        <div class="SEODescription">
+                            <h4>SEO Description</h4>
+                            <p>We'll use the SEO description in place of the first few lines of your article on search engine result pages. <br>We suggest utilizing keywords,
+                            summarizing your writing, and aiming to write between 140-160 characters.</p>
+                            <label for="SEODescription"></label>
+                            <input type="text" placeholder="Ex: A recap about what the article is about" id="SEODescription">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+            </div>
+            <div class="SEO-btns">
+                <button class="cancel-btn">Cancel</button>
+                <button class="save-btn">Save</button>
+            </div>
+        </section>
+    </div>
+
+    <!--Articles menu section-->
+    <div class="manageModal" id="manageModal">
+        <div class="modalBackdrop"></div>
+        <div class="modalBox">
+            <button class="modalClose" id="modalClose">&times;</button>
+        
+            <!--top bar navigation-->
+            <section class="articleNavigation">
+                <button class="nav-btn active" data-tab="draftArticle">Drafts</button>
+                <button class="nav-btn" data-tab="scheduleArticle">Scheduled</button>
+                <button class="nav-btn" data-tab="publishedArticle">Published</button>
+            </section>
+
+            <section class="articleContent">
+                <div id="draftArticle" class="tab-content active">
+                    <!--Two placeholder examples-->
+                    <div class="draft-card">
+                        <div class="card-header">
+                            <h3>How to Front-end Develop</h3>
+                            <div class="card-menu">
+                                <span class="menu-btn">...</span>
+                                <ul class="menu-options">
+                                    <li>Edit</li><li>Delete</li><li>Publish</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="card-date">Last modified May 12, 2025</p>
+                        <p class="card-excerpt">
+                            Learn the best practices for designing great interfaces...
+                        </p>
+                    </div>
+                    <div class="draft-card">
+                        <div class="card-header">
+                            <h3>The Art of Learning</h3>
+                            <div class="card-menu">
+                                <span class="menu-btn">...</span>
+                                <ul class="menu-options">
+                                    <li>Edit</li><li>Delete</li><li>Publish</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="card-date">Last modified May 13, 2025</p>
+                        <p class="card-excerpt">
+                            How do you make learning productive and fun...
+                        </p>
+                    </div>
+                </div>
+
+                <div id="scheduleArticle" class="tab-content">
+                    <img src="Images/schedule.png" alt="Timer image">
+                    <h2 id="schedule1">No scheduled articles yet</h2>
+                    <p>When you schedule an article, it automatically posts at the date and time you choose. </p>
+                </div>
+
+                <div id="publishedArticle" class="tab-content">
+                    <img src="Images/schedule.png" alt="Timer image">
+                    <h2 id="publish1">No published articles yet</h2>
+                    <p>When you publish an article it appears here. </p>
+                </div>
+            </section>
+            <div class="closeArt">
+                <button class="closeArticle">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!--help menu section-->
+    <div class="helpModal" id="helpModal"> <!--The help section-->
+        <div class="modalBackdrop"></div>
+        <div class="helpModalBox">
+            <div class="helpTop">
+                <div class="helpTopLeft">
+                    <img src="" alt="Company Icon" style="width: 30px; height: 30px;">
+                    <h2>Help</h2>
+                </div>
+
+                <div class="helpTopCenter">
+                    <div class="helpTopChangeView">
+                        <select name="" id="helpTopArchiveSelect">
+                            <option value="FAQ">FAQs</option>
+                            <option value="article">Related Articles</option>
+                            <option value="ticket">Support Ticket</option>
+                        </select>
+                    </div>
+
+                    <div class="helpTopSearchWrapper">
+                        <input type="search" placeholder="How can we help?" id="helpSearchInput">
+                        <button id="helpSearchBtn" title="Search Help">🔍</button>
+                    </div>
+                </div>
+
+                <div class="helpTopRight">
+                    <img src="Images/profile.png" alt="Profile Picture" style="width: 40px; height: 40px;">
+                </div>
+            </div>
+
+            <div class="helpContent">
+                <div class="helpContentItem" data-type="FAQ">
+                    <h2>Archivehubs Publishing Platform FAQ</h2>
+                    <p>Last updated: 1 year ago</p>
+                    <p>The Archivehubs Publishing Platform allows members and admins (super admins or content admins) 
+                        of a Archivehubs Page to write, edit, and share articles on Archivehubs. <br>
+                        To write and publish articles on LinkedIn, you can use the article publishing tool 
+                        available on the home page. This tool is not available on the Archivehubs mobile app. <br>
+                        Check out some of our frequently asked questions below to learn more about publishing on 
+                        Archivehubs. 
+                        <h4>How do I manage my drafts and published articles?</h4>
+                        <h4>What are the multimedia options available for publishing articles?</h4>
+                        <h4>What is the image resolution size for images in articles?</h4>
+                        <h4>Can I add third-party content to my articles?</h4>
+                        <h4>Why can't I click into certain fields, for instance the Headline field or the URL field, 
+                            for adding rich media such as video?</h4>
+                    </p>
+                    <div class="learnMoreLinks">
+                        <h4>Learn More</h4>
+                        <ul>
+                            <li><a href="#">Publish Articles on Archivehubs</a></li>
+                            <li><a href="#">Publish Articles on your Archivehubs Page</a></li>
+                            <li><a href="#">Add images and other rich media to your articles</a></li>
+                            <li><a href="#">Uninstall browser extensions</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="helpContentItem" data-type="article">
+                    <p>Tagged in</p>
+                    <div class="article-btn">
+                        <button id="post-btn">Post</button>
+                        <button id="share-btn">Share Content</button>
+                    </div>
+                    <h3>Related Articles</h3>
+                    <ul>
+                        <li><a href="#">Share photos or videos</a></li>
+                        <li><a href="#">Archivehubs top voices</a></li>
+                        <li><a href="#">How to report on Archivehubs</a></li>
+                    </ul>
+                </div>
+
+                <div class="helpContentItem" id="helpTicket" data-type="ticket" style="display: none;">
+                    <h2>Contact Archivehubs Support</h2>
+                    <a href="#" class="helpTicketLink">
+                        <img src="Images/contract.png" alt="Message" style="width: 30px; height: 30px;">
+                        <h3>Create a support ticket</h3>
+                        <p>We'll get back to you soon</p>
+                    </a>
+                </div>
+            </div>
+            <button id="helpCloseBtn" class="helpCloseBtn">Close</button>
+        </div>
+    </div>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js">
+        document.addEventListener('DOMContentLoaded', () => {
+
+//image uploader from laptop
+      function selectLocalImage() {
+          const input = document.createElement('input');
+          input.setAttribute('type', 'file');
+          input.setAttribute('accept', 'image/*');
+          input.click();
+
+          input.onchange = function(){
+              const file = input.files[0];
+              if (file && /^image\//.test(file.type)) {
+                  const reader = new FileReader();
+                  reader.onload = function(e) {
+                      const range = quill.getSelection();
+                      quill.insertEmbed(range ? range.index : 0, 'image', e.target.result, 'user');
+                  };
+                  reader.readAsDataURL(file)
+              }   else {
+                  console.warn('Please select an image.')
+              }
+          };
+      }
+
+
+      //initialize Quill with custom toolbar settings
+      var quill = new Quill ('#editor-cont',{
+          theme : 'snow',
+          modules: {
+              toolbar:{
+                  container: "#toolbar",
+                  handlers : {
+                      image: selectLocalImage
+                  }
+              }
+          }
+      });
+
+      // Custom button that wraps selected text in square brackets.
+      document.getElementById('bracket-btn').addEventListener('click', function() {
+      let range = quill.getSelection();
+      if (range && range.length > 0) {
+          let selectedText = quill.getText(range.index, range.length).trim();
+          quill.deleteText(range.index, range.length);
+          quill.insertText(range.index, '[' + selectedText + ']');
+      } else {
+          alert('Please select some text to wrap with brackets.');
+      }
+      });
+
+      //initialize Quill with custom toolbar2 settings
+      var quill2 = new Quill ('#editor-container',{
+          theme : 'snow',
+          modules: {
+              toolbar:{
+                  container: "#toolbar2",
+                  handlers : {
+                      image: selectLocalImage
+                  }
+              }
+          }
+      });
+
+
+
+// === 1. Modal (Manage Modal) Handling ===
+const modal = document.getElementById('manageModal');
+const closeBtn = document.getElementById('modalClose');
+const backdrop = modal.querySelector('.modalBackdrop');
+const tabs = modal.querySelectorAll('.nav-btn');
+const contents = modal.querySelectorAll('.tab-content');
+
+// === 2. Settings Section Handling ===
+const settingsModal = document.getElementById('settingsModal')
+const settingsSection = document.querySelector('.articleSettings');
+const openSettingsBtn = document.getElementById('settings-btn');
+const closeSettingsBtn = document.getElementById('settingsCloseBtn');
+
+
+//display the settings modal from the help button
+if(openSettingsBtn) { 
+  openSettingsBtn.addEventListener ('click', (e) => {
+    e.stopPropagation();
+    settingsModal.style.display = 'flex' //show the help modal
+  });
+}
+
+//close the modal when we click the close button
+
+closeSettingsBtn.addEventListener('click', () => {
+  settingsModal.style.display = 'none';
+});
+
+// Initially hide settings section
+if (settingsSection) {
+  settingsSection.style.display = 'none';
+}
+
+// Show settings when the settings button is clicked
+if (openSettingsBtn) {
+  openSettingsBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsSection.style.display = 'block';
+  });
+}
+
+// Hide settings when the close button is clicked
+if (closeSettingsBtn) {
+  closeSettingsBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    settingsSection.style.display = 'none';
+  });
+}
+
+// Hide settings if the user clicks outside of it
+// document.addEventListener('click', (event) => {
+ // if (settingsSection &&
+   //   !settingsSection.contains(event.target) &&
+     // event.target !== openSettingsBtn) {
+   // settingsSection.style.display = 'none';
+  //}
+//});
+
+// === 3. Modal Open Buttons (Draft, Schedule, Publish) ===
+const openButtons = {
+  'draft-btn': 'draftArticle',
+  'schedule-btn': 'scheduleArticle',
+  'publish-btn': 'publishedArticle'
+};
+
+Object.keys(openButtons).forEach(id => {
+  const btn = document.getElementById(id);
+  if (btn) {
+    btn.addEventListener('click', () => {
+      modal.style.display = 'block';
+      // Reset all tabs and contents
+      tabs.forEach(tab => tab.classList.remove('active'));
+      contents.forEach(content => content.classList.remove('active'));
+
+      const tabId = openButtons[id];
+      const targetTab = Array.from(tabs).find(tab => tab.dataset.tab === tabId);
+      const targetContent = document.getElementById(tabId);
+      if (targetTab && targetContent) {
+        targetTab.classList.add('active');
+        targetContent.classList.add('active');
+      }
+    });
+  }
+});
+
+// === 4. Close Modal Handlers ===
+[closeBtn, backdrop].forEach(el =>
+  el.addEventListener('click', () => { modal.style.display = 'none'; })
+);
+
+// Close the article modal via the closeArticle button (inside modal)
+const closeArticleBtn = modal.querySelector('.closeArticle');
+if (closeArticleBtn) {
+  closeArticleBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+}
+
+// === 5. Tab Switching inside Modal ===
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    const targetContent = modal.querySelector(`#${tab.dataset.tab}`);
+    if (targetContent) {
+      targetContent.classList.add('active');
+    }
+  });
+});
+
+// === 6. Per-Card Menu Toggle within Modal ===
+modal.querySelectorAll('.menu-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const opts = btn.nextElementSibling;
+    opts.style.display = opts.style.display === 'block' ? 'none' : 'block';
+  });
+});
+
+// === 7. Account Popup Handling ===
+const accountPopup = document.getElementById("accountPopup");
+const usernameDisplay = document.querySelector(".usernameDisplay");
+if (usernameDisplay) {
+  usernameDisplay.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if (accountPopup) {
+      accountPopup.style.display = "block";
+    }
+  });
+}
+document.addEventListener("click", function(e) {
+  if (accountPopup &&
+      !accountPopup.contains(e.target) &&
+      e.target !== usernameDisplay) {
+    accountPopup.style.display = "none";
+  }
+});
+
+// === 8. Manage Dropdown Handling ===
+const manageBtn = document.querySelector(".manage-btn");
+const manageArticle = document.querySelector(".manageArticle");
+if (manageArticle) {
+  manageArticle.style.display = "none";
+}
+if (manageBtn) {
+  manageBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    manageArticle.style.display =
+      manageArticle.style.display === "block" ? "none" : "block";
+  });
+}
+if (manageArticle) {
+  manageArticle.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+}
+document.addEventListener("click", function (e) {
+  if (manageArticle &&
+      !manageArticle.contains(e.target) &&
+      e.target !== manageBtn) {
+    manageArticle.style.display = "none";
+  }
+});
+if (manageArticle) {
+  const submenuButtons = manageArticle.querySelectorAll("button");
+  submenuButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      manageArticle.style.display = "none";
+    });
+  });
+}
+
+// === 9. Next Section Handling ===
+const nextBtn = document.querySelector(".next-btn");
+const nextSection = document.querySelector(".nextSection");
+if (nextSection) {
+  nextSection.style.display = "none";
+}
+if (nextBtn) {
+  nextBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    nextSection.style.display =
+      nextSection.style.display === "block" ? "none" : "block";
+  });
+}
+if (nextSection) {
+  nextSection.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+}
+document.addEventListener("click", function (e) {
+  if (nextSection &&
+      !nextSection.contains(e.target) &&
+      e.target !== manageBtn) {
+    nextSection.style.display = "none";
+  }
+});
+if (nextSection) {
+  const subnextButtons = nextSection.querySelectorAll("button");
+  subnextButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      nextSection.style.display = "none";
+    });
+  });
+}
+
+
+// Help menu handling
+const helpModal = document.getElementById('helpModal');
+const helpCloseBtn = document.getElementById('helpCloseBtn');
+const helpTopArchiveSelect = document.getElementById('helpTopArchiveSelect');
+const helpContentItem = document.querySelectorAll('.helpContentItem');
+const helpSearchBtn = document.getElementById('helpSearchBtn');
+const helpSearchInput = document.querySelector('.helpSearchInput');
+
+
+//display the help modal from the help button
+const helpBtn = document.getElementById('help-btn');
+if(helpBtn) { 
+  helpBtn.addEventListener ('click', (e) => {
+    e.stopPropagation();
+    helpModal.style.display = 'flex' //show the help modal
+  });
+}
+
+//close the modal when we click the close button
+
+helpCloseBtn.addEventListener('click', () => {
+  helpModal.style.display = 'none';
+});
+
+
+// update help content based on dropdown selection
+helpTopArchiveSelect.addEventListener('change', (e) => {
+const selected = e.target.value; // 'faq' 'article', 'ticket'
+helpContentItem.forEach(item => {
+  if(item.dataset.type === selected){
+    item.style.display = 'block';
+  } else{
+    item.style.display = 'none';
+  }
+});
+});
+
+// setting FAQ as the defult view
+helpContentItem.forEach(item => {
+if(item.dataset.type === helpTopArchiveSelect.value){
+  item.style.display = 'block';
+} else{
+  item.style.display = 'none';
+}
+});
+
+
+
+//slide in 
+document.getElementById('start-btn').addEventListener('click', function() {
+// Slide the startArticle up and fade it out.
+document.querySelector('.startArticle').classList.add('slide-up');
+
+// After the transition duration, slide the getStartedClick section into view.
+setTimeout(function() {
+  document.querySelector('.getStartedClick').classList.add('slide-in');
+}, 300);
+});
+
+//reverse the slide
+document.querySelector('.back-arrow').addEventListener('click', function() {
+// Remove the slide-in class for the second section,
+// making it slide out down off the screen.
+document.querySelector('.getStartedClick').classList.remove('slide-in');
+
+// Wait for the transition duration before reversing the first section.
+setTimeout(function(){
+  document.querySelector('.startArticle').classList.remove('slide-up');
+}, 300);  //  the timing is in milliseconds to match my CSS transition duration.
+
+
+
+
+//placeholder visibility contenteditable
+const editor = document.getElementById('editor-container');
+
+// Create a custom placeholder element
+const placeholder = document.createElement('div');
+placeholder.className = 'placeholder';
+placeholder.textContent = editor.getAttribute('data-placeholder');
+editor.parentElement.insertBefore(placeholder, editor);
+
+// Function to update placeholder visibility
+function updatePlaceholder() {
+// Consider the editor empty if it contains only a <br> or nothing at all.
+const html = editor.innerHTML.trim();
+if (html === "" || html === "<br>") {
+  placeholder.style.display = 'block';
+} else {
+  placeholder.style.display = 'none';
+}
+}
+
+// Update placeholder on focus, blur, and input
+editor.addEventListener('input', updatePlaceholder);
+editor.addEventListener('focus', updatePlaceholder);
+editor.addEventListener('blur', updatePlaceholder);
+
+// Initial check
+updatePlaceholder();
+});
+
+});
+    </script>
+</body>
+</html>

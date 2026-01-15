@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivehubs Jobs Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f3f6f8;
+            padding: 20px;
+        }
+
+        .page-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+
+        .left-column {
+            flex: 0 0 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .right-column {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .job-card {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner {
+            width: 100%;
+            height: 80px;
+            background-color: #e6f2ff;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .profile-pic {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid white;
+            position: absolute;
+            top: 44px;
+            left: 16px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content {
+            padding: 40px 16px 16px 16px;
+        }
+
+        .name {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 4px;
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 8px;
+        }
+
+        .location {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 12px;
+        }
+
+        .company {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .company-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border-radius: 2px;
+            object-fit: contain;
+        }
+        
+        .company-icon.fallback {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            background-color: #f0f0f0;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0077b5;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .nav-card {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 8px;
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .nav-item.active {
+            font-weight: 600;
+            color: #0077b5;
+        }
+
+        .nav-item:not(:last-child) {
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: inherit;
+        }
+
+        .preferences-card {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            height: fit-content;
+        }
+
+        .preferences-header {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 8px;
+            max-width: 70%;
+        }
+
+        .preferences-subheader {
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            max-width: 70%;
+        }
+
+        .preferences-buttons {
+            display: flex;
+            gap: 12px;
+            max-width: 70%;
+        }
+
+        .pref-btn {
+            padding: 10px 16px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+        }
+
+        .pref-btn-primary {
+            background-color: #0077b5;
+            color: white;
+            border: 1px solid #0077b5;
+        }
+
+        .pref-btn-secondary {
+            background-color: white;
+            color: #0077b5;
+            border: 1px solid #0077b5;
+        }
+
+        .chat-image {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            z-index: 1;
+        }
+
+        .recommended-jobs-card {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+        }
+
+        .recommended-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .recommended-subheader {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 16px;
+        }
+
+        .job-recommendation {
+            padding: 16px 0;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .job-recommendation:last-child {
+            border-bottom: none;
+        }
+
+        .job-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0077b5;
+            margin-bottom: 4px;
+            cursor: pointer;
+        }
+
+        .job-title:hover {
+            text-decoration: underline;
+        }
+
+        .job-company {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 4px;
+        }
+
+        .job-location {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .job-description {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .job-btn {
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .job-btn-primary {
+            background-color: #0077b5;
+            color: white;
+            border: 1px solid #0077b5;
+        }
+
+        .job-btn-secondary {
+            background-color: white;
+            color: #0077b5;
+            border: 1px solid #0077b5;
+        }
+
+        .job-btn-secondary:hover {
+            background-color: #e6f2ff;
+        }
+
+        .see-all-link {
+            font-size: 14px;
+            color: #0077b5;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .see-all-link:hover {
+            text-decoration: underline;
+        }
+
+        .verification-card {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verification-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 8px;
+            max-width: 70%;
+        }
+
+        .verification-subheader {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            max-width: 70%;
+        }
+
+        .verification-btn {
+            padding: 10px 16px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: #0077b5;
+            color: white;
+            border: 1px solid #0077b5;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .verification-btn:hover {
+            background-color: #006097;
+        }
+
+        .handshake-image {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            z-index: 1;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.05);
+            z-index: 2;
+        }
+
+        .close-btn:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 16px;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 12px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: rgba(0, 0, 0, 0.6);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: #0077b5;
+        }
+
+        .copyright {
+            margin-top: 8px;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        @media (max-width: 900px) {
+            .page-container {
+                flex-direction: column;
+            }
+            
+            .left-column {
+                flex: 1;
+                max-width: 100%;
+            }
+            
+            .preferences-header,
+            .preferences-subheader,
+            .preferences-buttons,
+            .verification-header,
+            .verification-subheader {
+                max-width: 100%;
+            }
+            
+            .chat-image,
+            .handshake-image {
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 100%;
+                height: auto;
+                margin-top: 20px;
+            }
+        }
+
+        .recommended-header {
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .card-cancel-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: none;
+            border: none;
+            color: rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .card-cancel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .job-search-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .job-search-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .job-search-btn {
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #0077b5;
+            background-color: #e6f2ff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            transition: background-color 0.2s;
+        }
+
+        .job-search-btn:hover {
+            background-color: #d0e3ff;
+        }
+
+        .search-icon {
+            margin-right: 8px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .see-more-container {
+            margin-top: 16px;
+            text-align: center;
+            padding-top: 12px;
+            border-top: 1px solid #e6e6e6;
+            grid-column: 1 / -1;
+        }
+
+        .see-more-link {
+            font-size: 14px;
+            color: #0077b5;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .see-more-link:hover {
+            text-decoration: underline;
+        }
+
+        .see-more-link i {
+            margin-left: 4px;
+            font-size: 12px;
+        }
+
+        /* Likely Jobs Card Styles */
+        .likely-jobs-content {
+            padding: 8px 0;
+        }
+
+        .likely-jobs-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-icon-large {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e6f2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0077b5;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .profile-icons-group {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .profile-icon-tiny {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #e6f2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0077b5;
+            font-size: 12px;
+        }
+
+        .likely-jobs-text {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .premium-btn {
+            padding: 12px 24px;
+            border-radius: 24px;
+            background-color: #915907;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            margin: 16px auto 8px auto;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            width: fit-content;
+        }
+
+        .premium-btn:hover {
+            background-color: #7a4a06;
+        }
+
+        .premium-icon {
+            font-size: 14px;
+        }
+
+        .premium-trial-text {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .profile-icons-container {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            margin-left: 52px;
+        }
+
+        .profile-icons-group {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .profile-icon-tiny {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #e6f2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0077b5;
+            font-size: 12px;
+        }
+
+        /* Job Collections Card Styles */
+        .job-collections-card {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+        }
+
+        .job-collections-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-collections-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .job-collections-tab {
+            padding: 8px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            background-color: #e6f2ff;
+            color: #0077b5;
+            border: none;
+        }
+
+        .job-collections-tab.active {
+            background-color: #0077b5;
+            color: white;
+        }
+
+        .job-collection-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #e6e6e6;
+            display: flex;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .job-collection-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-collection-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 4px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .job-collection-logo.fallback {
+            background-color: #e6f2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0077b5;
+            font-size: 18px;
+        }
+
+        .job-collection-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .job-collection-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .job-collection-company {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 4px;
+        }
+
+        .job-collection-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .job-collection-easy-apply {
+            color: #057642;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .job-collection-time {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .job-collections-show-all {
+            margin-top: 16px;
+            text-align: center;
+            padding-top: 12px;
+            border-top: 1px solid #e6e6e6;
+        }
+
+        .job-collections-show-all-link {
+            font-size: 14px;
+            color: #0077b5;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .job-collections-show-all-link:hover {
+            text-decoration: underline;
+        }
+
+        .job-collections-show-all-link i {
+            margin-left: 4px;
+            font-size: 12px;
+        }
+
+        /* Modal Backdrop */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Preferences Modal */
+        .preferences-modal {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-backdrop.active .preferences-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: rgba(0, 0, 0, 0.6);
+            padding: 8px;
+        }
+
+        .modal-content {
+            padding: 0;
+        }
+
+        .preference-section {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 16px;
+        }
+
+        .preference-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            cursor: pointer;
+        }
+
+        .preference-item:not(:last-child) {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .preference-info {
+            flex: 1;
+        }
+
+        .preference-main {
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.9);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .preference-sub {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .preference-control {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #0077b5;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .arrow-icon {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 16px;
+        }
+
+        /* Interview Preparation Modal Styles */
+        .interview-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .interview-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .interview-modal-card {
+            background-color: white;
+            border-radius: 10px;
+            width: 600px;
+            max-width: 90%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            padding: 25px;
+        }
+
+        .interview-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #888;
+            background: none;
+            border: none;
+        }
+
+        .interview-close-btn:hover {
+            color: #333;
+        }
+
+        .interview-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .interview-icons {
+            font-size: 28px;
+            color: #3a86ff;
+            margin-right: 15px;
+        }
+
+        .interview-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .interview-feature-list {
+            margin: 20px 0;
+            padding-left: 10px;
+        }
+
+        .interview-feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .interview-feature-item:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .interview-notification-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .interview-notification-text {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .interview-learn-more {
+            color: #3a86ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .interview-toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .interview-toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .interview-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .interview-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        .interview-toggle-switch input:checked + .interview-slider {
+            background-color: #4CAF50;
+        }
+
+        .interview-toggle-switch input:checked + .interview-slider:before {
+            transform: translateX(26px);
+        }
+
+        .interview-action-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .interview-continue-btn {
+            background-color: #3a86ff;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .interview-continue-btn:hover {
+            background-color: #2667cc;
+        }
+
+        .interview-stats {
+            font-size: 13px;
+            color: #777;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../home.html" class="logo">
+              <img src="images/Logo.jpg" alt="ArchiveHubs Logo" class="logo-img">
+            </a>
+            <div class="search-box">
+              <div class="search-trigger">
+                <i class="fas fa-search search-icon"></i>
+                <div class="search-text">Search</div>
+              </div>
+              <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+            
+    <div class="nav-middle">
+        <a href="../home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="./Archivehubs-Connections/myconnections.html" class="nav-link">
+            <i class="fas fa-user-friends"></i>
+            <span>MyConnections</span>
+        </a>
+        <a href="./Archivehubs-Video/video1.html" class="nav-link">
+            <i class="fas fa-video"></i>
+            <span>Video</span>
+        </a>
+        <a href="./Archivehubs-Message/messaging_page.html" class="nav-link">
+            <i class="fas fa-comment-dots"></i>
+            <span>Messages</span>
+        </a>
+        <a href="./Archivehubs-Notifications/notification.html" class="nav-link">
+            <i class="fas fa-bell"></i>
+            <span>Notifications</span>
+        </a>
+        <a href="#" class="nav-link profile-nav-link" id="accountPopup">
+          <i class="fas fa-user-circle"></i>
+          <span>Account</span>
+        </a>
+      </div>
+
+            <div class="nav-right">
+
+              <a href="./Archivehubs-Jobs/jobs.html" class="nav-link">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+              </a>
+              <a href="../Archivehubs-Business/business.html" class="nav-link">
+                  <i class="fas fa-building"></i>
+                  <span>Business</span>
+              </a>
+              <a href="./Archivehubs-Drive/drive_page1.html" class="nav-link">
+                  <i class="fas fa-cloud-arrow-up"></i>
+                  <span>Drive</span>
+              </a>
+              <a href="./Archivehubs-Menu/menu.html" class="nav-link">
+                  <i class="fas fa-bars"></i>
+                  <span>Menu</span>
+              </a>
+          </div>
+        </nav>
+
+        <!-- Replace your existing mobile-upper-nav section -->
+        <div class="mobile-header">
+          <!-- Mobile Upper Nav -->
+          <nav class="mobile-upper-nav">
+            <a href="home.html" class="mobile-logo">
+                <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+            </a>
+            <div class="upper-nav-right">
+                <button class="upper-nav-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="upper-nav-btn" id="searchTriggerBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="upper-nav-btn">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+          </nav>
+
+         <!-- Update the search-view to be a dropdown -->
+        <div class="search-overlay" id="searchView">
+            <div class="search-container">
+                <div class="search-header">
+                    <button class="back-btn" id="searchBackBtn">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="search-bar">
+                        <div class="search-input-wrapper">
+                            <img src="images/meta-ai-icon.png" alt="Meta AI" class="meta-ai-icon">
+                            <input type="text" id="searchInput" placeholder="Ask Meta AI or search">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-content">
+                    <!-- Rest of your search content remains the same -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Add this after the existing navbar -->
+      <nav class="mobile-top-nav">
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-video"></i>
+        </a>
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-briefcase"></i>
+        </a>
+        <a href="business.html" class="mobile-nav-item">
+            <i class="fas fa-building"></i>
+        </a>
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-cloud-arrow-up"></i>
+        </a>
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-user-circle"></i>
+        </a>
+      </nav>
+
+
+    <div class="page-container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <!-- Job Card -->
+            <div class="job-card">
+                <div class="banner" id="banner-image"></div>
+                <div class="profile-pic" id="profile-picture">
+                    <img src="" alt="Profile Picture" id="profile-image">
+                </div>
+                <div class="content">
+                    <div class="name" id="user-name">Loading...</div>
+                    <div class="title" id="user-title"></div>
+                    <div class="location" id="user-location"></div>
+                    <div class="company">
+                        <div id="company-logo-container" class="company-icon fallback"></div>
+                        <div id="user-company"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences Navigation Card -->
+            <div class="nav-card">
+                <div class="nav-item active" id="preferences-nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    Preferences
+                </div>
+                <a href="searchjob.html" class="nav-item" style="text-decoration: none;">
+                    <div class="nav-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    Search a Job
+                </a>
+                <a href="carreer.html" class="nav-item" style="text-decoration: none;">
+                    <div class="nav-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    Career Opportunities
+                </a>
+                <div class="nav-item" id="interview-prep-nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    Interview Preparation
+                </div>
+                <a href="job_posting.html">
+                    <div class="nav-item">
+                        <div class="nav-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        Post a job for free
+                    </div>
+                </a>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="footer">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">General Terms</a>
+                    <a href="#" class="footer-link">Get the Archivehubs App</a>
+                </div>
+                <div class="copyright">
+                    <div class="strong-text">ARCHIVEHUBS: ENINK Investment</div>
+                    <div class="strong-text">Limited © 2025<sup><img src="images/enink.png" alt="Logo" class="sup-logo" width="40" height="20"></sup></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <!-- New Job Preferences Card -->
+            <div class="preferences-card">
+                <div class="preferences-header">Gloria, are you looking for a new job?</div>
+                <div class="preferences-subheader">Add your preferences to find relevant jobs and get notified about new open roles.</div>
+                <div class="preferences-buttons">
+                    <button class="pref-btn pref-btn-primary">Actively Searching</button>
+                    <button class="pref-btn pref-btn-secondary">Offering Jobs</button>
+                </div>
+                <img src="images/people.jpg" alt="People chatting" class="chat-image">
+            </div>
+
+            <!-- Job Recommendations Card -->
+            <div class="recommended-jobs-card">
+                <div class="recommended-header">
+                    <span>Jobs recommended for you</span>
+                    <span class="see-all-link">See all</span>
+                </div>
+                <div class="recommended-subheader">
+                    Based on your profile, preferences, and activity like applies, searches, and saves.
+                </div>
+                
+                <!-- First Job Recommendation -->
+                <div class="job-recommendation">
+                    <div class="job-title">Senior C# Developer - ASP.NET Core</div>
+                    <div class="job-company">
+                        <img src="https://logo.clearbit.com/techsolutions.com" alt="TechSolutions Inc. logo" class="company-logo" onerror="this.style.display='none'; this.parentElement.querySelector('.company-icon.fallback').style.display='flex'">
+                        <div class="company-icon fallback" style="display: none">T</div>
+                        TechSolutions Inc.
+                    </div>
+                    <div class="job-location">Federal Capital Territory (Hybrid)</div>
+                    <div class="job-description">
+                        We're looking for an experienced C# developer with strong ASP.NET Core skills to join our team. 
+                        You'll be working on enterprise-level applications with a focus on microservices architecture.
+                    </div>
+                    <div class="job-actions">
+                        <button class="job-btn job-btn-primary">Apply</button>
+                        <button class="job-btn job-btn-secondary">Save</button>
+                    </div>
+                </div>
+                
+                <!-- Second Job Recommendation -->
+                <div class="job-recommendation">
+                    <div class="job-title">Full Stack .NET Developer</div>
+                    <div class="job-company">
+                        <img src="https://logo.clearbit.com/digitalinnovations.com" alt="Digital Innovations Ltd. logo" class="company-logo" onerror="this.style.display='none'; this.parentElement.querySelector('.company-icon.fallback').style.display='flex'">
+                        <div class="company-icon fallback" style="display: none">D</div>
+                        Digital Innovations Ltd.
+                    </div>
+                    <div class="job-location">Lagos (Remote)</div>
+                    <div class="job-description">
+                        Join our growing team as a Full Stack Developer working with C#, ASP.NET Core, and React. 
+                        Experience with Azure cloud services is a plus. Competitive salary and benefits package.
+                    </div>
+                    <div class="job-actions">
+                        <button class="job-btn job-btn-primary">Apply</button>
+                        <button class="job-btn job-btn-secondary">Save</button>
+                    </div>
+                </div>
+                
+                <!-- Third Job Recommendation -->
+                <div class="job-recommendation">
+                    <div class="job-title">Backend Engineer - .NET</div>
+                    <div class="job-company">
+                        <img src="https://logo.clearbit.com/fintechsolutions.com" alt="FinTech Solutions logo" class="company-logo" onerror="this.style.display='none'; this.parentElement.querySelector('.company-icon.fallback').style.display='flex'">
+                        <div class="company-icon fallback" style="display: none">F</div>
+                        FinTech Solutions
+                    </div>
+                    <div class="job-location">Abuja (On-site)</div>
+                    <div class="job-description">
+                        Seeking a backend engineer with 3+ years of .NET experience to develop and maintain our 
+                        financial services platform. Strong database skills required.
+                    </div>
+                    <div class="job-actions">
+                        <button class="job-btn job-btn-primary">Apply</button>
+                        <button class="job-btn job-btn-secondary">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification Card -->
+            <div class="verification-card" id="verification-card">
+                <div class="close-btn" id="close-verification">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="verification-header">Verify to stand out in your job search</div>
+                <div class="verification-subheader">Verified members get 60% more profile views on average.</div>
+                <button class="verification-btn">Verify now</button>
+                <img src="https://www.freepnglogos.com/uploads/handshake-png/handshake-png-transparent-images-png-only-28.png" 
+                     alt="People shaking hands" 
+                     class="handshake-image">
+            </div>
+
+            <!-- Suggested Job Searches Card -->
+            <div class="recommended-jobs-card" id="suggested-searches-card">
+                <div class="recommended-header">
+                    <span>Suggested job searches</span>
+                    <button class="card-cancel-btn" id="close-suggested-searches">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="job-search-grid">
+                    <!-- First Column -->
+                    <div class="job-search-column">
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            Managing Director
+                        </button>
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            Software Engineer
+                        </button>
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            Project Manager
+                        </button>
+                    </div>
+                    
+                    <!-- Second Column -->
+                    <div class="job-search-column">
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            Data Analyst
+                        </button>
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            Marketing Manager
+                        </button>
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            HR Specialist
+                        </button>
+                    </div>
+                    
+                    <!-- Third Column -->
+                    <div class="job-search-column">
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            Financial Advisor
+                        </button>
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            UX Designer
+                        </button>
+                        <button class="job-search-btn">
+                            <i class="fas fa-search search-icon"></i>
+                            Sales Executive
+                        </button>
+                    </div>
+                </div>
+
+                <div class="see-more-container">
+                    <span class="see-more-link" id="see-more-suggestions">
+                        See more →
+                    </span>
+                </div>
+            </div>
+
+            <!-- Jobs Where You're More Likely to Hear Back Card -->
+            <div class="recommended-jobs-card" id="likely-jobs-card">
+                <div class="close-btn" id="close-likely-jobs">
+                    <i class="fas fa-times"></i>
+                </div>
+                
+                <div class="recommended-header">
+                    Jobs where you're more likely to hear back
+                </div>
+                
+                <div class="recommended-subheader">
+                    Based on your chances of hearing back
+                </div>
+                
+                <div class="likely-jobs-content">
+                    <div class="likely-jobs-row">
+                        <div class="profile-icon-large">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="likely-jobs-text">
+                            See the full list of jobs where you'd be a top candidate
+                        </div>
+                    </div>
+                    
+                    <div class="likely-jobs-row" style="margin-top: 12px;">
+                        <div class="profile-icons-container">
+                            <div class="profile-icons-group">
+                                <div class="profile-icon-tiny">
+                                    <i class="fas fa-user"></i>
+                                </div>
+
+                                <div class="profile-icon-tiny">
+                                    <i class="fas fa-user"></i>
+                                </div>
+
+                                <div class="profile-icon-tiny">
+                                    <i class="fas fa-user"></i>
+                                </div>
+
+                                <div class="profile-icon-tiny">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="likely-jobs-text">
+                                    Contact and millions of other members use Premium
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="premium-btn">
+                    <i class="fas fa-crown premium-icon"></i>
+                    Try Premium for free
+                </button>
+                <div class="premium-trial-text">
+                    1-month free trial. We'll send you a reminder 7 days before your trial ends.
+                </div>
+            </div>
+
+            <!-- Job Collections Card -->
+            <div class="job-collections-card">
+                <div class="job-collections-header">
+                    <span>Job collections</span>
+                    <span class="see-all-link">See all</span>
+                </div>
+                
+                <div class="job-collections-tabs">
+                    <button class="job-collections-tab active">For you</button>
+                    <button class="job-collections-tab">Remote</button>
+                    <button class="job-collections-tab">Tech</button>
+                    <button class="job-collections-tab">Finance</button>
+                    <button class="job-collections-tab">Marketing</button>
+                </div>
+                
+                <!-- First Job Collection Item -->
+                <div class="job-collection-item">
+                    <div class="job-collection-logo fallback">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="job-collection-details">
+                        <div class="job-collection-title">Top Companies Hiring Now</div>
+                        <div class="job-collection-company">Multiple companies • 1,200+ jobs</div>
+                        <!-- <div class="job-collection-meta">
+                            <span class="job-collection-easy-apply">
+                                <i class="fas fa-bolt"></i>
+                                Easy Apply
+                            </span>
+                            <span class="job-collection-time">
+                                <i class="far fa-clock"></i>
+                                Active 2 days ago
+                            </span>
+                        </div> -->
+                    </div>
+                </div>
+                
+                <!-- Second Job Collection Item -->
+                <div class="job-collection-item">
+                    <div class="job-collection-logo fallback">
+                        <i class="fas fa-laptop-house"></i>
+                    </div>
+                    <div class="job-collection-details">
+                        <div class="job-collection-title">Remote Software Developer Jobs</div>
+                        <div class="job-collection-company">Multiple companies • 850+ jobs</div>
+                        <div class="job-collection-meta">
+                            <!-- <span class="job-collection-easy-apply">
+                                <i class="fas fa-bolt"></i>
+                                Easy Apply
+                            </span> -->
+                            <!-- <span class="job-collection-time">
+                                <i class="far fa-clock"></i>
+                                Active 1 day ago
+                            </span> -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Third Job Collection Item -->
+                <div class="job-collection-item">
+                    <div class="job-collection-logo fallback">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="job-collection-details">
+                        <div class="job-collection-title">Data Science & Analytics Jobs</div>
+                        <div class="job-collection-company">Multiple companies • 620+ jobs</div>
+                        <!-- <div class="job-collection-meta">
+                            <span class="job-collection-easy-apply">
+                                <i class="fas fa-bolt"></i>
+                                Easy Apply
+                            </span>
+                            <span class="job-collection-time">
+                                <i class="far fa-clock"></i>
+                                Active 3 days ago
+                            </span>
+                        </div> -->
+                    </div>
+                </div>
+                
+                <div class="job-collections-show-all">
+                    <span class="job-collections-show-all-link">
+                        Show all 12 collections
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preferences Modal -->
+    <div class="modal-backdrop" id="preferences-modal">
+        <div class="preferences-modal">
+            <div class="modal-header">
+                <div class="modal-title">Job preferences</div>
+                <button class="modal-close" id="close-preferences-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <div class="preference-section">
+                    <div class="section-title">Job search status</div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <div class="preference-main">
+                                <i class="fas fa-search" style="margin-right: 8px;"></i>
+                                Actively searching
+                            </div>
+                            <div class="preference-sub">
+                                Recruiters will know you're open to opportunities
+                            </div>
+                        </div>
+                        <div class="preference-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="preference-section">
+                    <div class="section-title">Job preferences</div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <div class="preference-main">Job titles</div>
+                            <div class="preference-sub">Software Engineer, Developer, Programmer</div>
+                        </div>
+                        <div class="preference-control">
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <div class="preference-main">Location</div>
+                            <div class="preference-sub">Lagos, Nigeria • Remote</div>
+                        </div>
+                        <div class="preference-control">
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <div class="preference-main">Job types</div>
+                            <div class="preference-sub">Full-time • Contract</div>
+                        </div>
+                        <div class="preference-control">
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <div class="preference-main">Remote work level</div>
+                            <div class="preference-sub">Remote only</div>
+                        </div>
+                        <div class="preference-control">
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <div class="preference-main">Experience level</div>
+                            <div class="preference-sub">Mid-Senior level</div>
+                        </div>
+                        <div class="preference-control">
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="preference-section">
+                    <div class="section-title">Notification preferences</div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <div class="preference-main">Email notifications</div>
+                            <div class="preference-sub">Weekly digest</div>
+                        </div>
+                        <div class="preference-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <div class="preference-main">Push notifications</div>
+                            <div class="preference-sub">On for relevant jobs</div>
+                        </div>
+                        <div class="preference-control">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <i class="fas fa-chevron-right arrow-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interview Preparation Modal -->
+    <div class="interview-modal-overlay" id="interviewModal">
+        <div class="interview-modal-card">
+            <button class="interview-close-btn" id="closeInterviewModal">&times;</button>
+            
+            <div class="interview-card-header">
+                <div class="interview-icons">
+                    <i class="fas fa-book"></i>
+                    <i class="fas fa-pen" style="margin-left: 10px;"></i>
+                </div>
+                <div class="interview-title">Perform your best in your next interview</div>
+            </div>
+            
+            <div class="interview-feature-list">
+                <div class="interview-feature-item">See the most common interview questions</div>
+                <div class="interview-feature-item">Learn how to approach answers from experts and hiring managers</div>
+                <div class="interview-feature-item">View examples of strong answers with Archivehubs Premium</div>
+                <div class="interview-feature-item">Practice your answers and get feedback</div>
+            </div>
+            
+            <div class="interview-notification-section">
+                <div class="interview-notification-text">
+                    Get notifications on interview preparation resources. <a href="#" class="interview-learn-more">Learn more</a>
+                </div>
+                <label class="interview-toggle-switch">
+                    <input type="checkbox">
+                    <span class="interview-slider"></span>
+                </label>
+            </div>
+            
+            <div class="interview-action-section">
+                <button class="interview-continue-btn">Continue</button>
+                <div class="interview-stats">Statistics of people that have used interview prep</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock user data
+        const userData = {
+            name: "Gloria Enink",
+            title: "Senior Software Engineer at Tech Solutions",
+            location: "Lagos, Nigeria",
+            company: "Tech Solutions",
+            profileImage: "https://randomuser.me/api/portraits/women/44.jpg",
+            bannerImage: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+        };
+
+        // Set user data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('user-name').textContent = userData.name;
+            document.getElementById('user-title').textContent = userData.title;
+            document.getElementById('user-location').textContent = userData.location;
+            document.getElementById('user-company').textContent = userData.company;
+            document.getElementById('profile-image').src = userData.profileImage;
+            document.getElementById('banner-image').style.backgroundImage = `url(${userData.bannerImage})`;
+            
+            // Set first letter of company as fallback logo
+            const companyLogo = document.getElementById('company-logo-container');
+            companyLogo.textContent = userData.company.charAt(0);
+            
+            // Close buttons functionality
+            document.getElementById('close-verification').addEventListener('click', function() {
+                document.getElementById('verification-card').style.display = 'none';
+            });
+            
+            document.getElementById('close-suggested-searches').addEventListener('click', function() {
+                document.getElementById('suggested-searches-card').style.display = 'none';
+            });
+            
+            document.getElementById('close-likely-jobs').addEventListener('click', function() {
+                document.getElementById('likely-jobs-card').style.display = 'none';
+            });
+            
+            // Preferences modal functionality
+            document.getElementById('preferences-nav-item').addEventListener('click', function() {
+                document.getElementById('preferences-modal').classList.add('active');
+            });
+            
+            document.getElementById('close-preferences-modal').addEventListener('click', function() {
+                document.getElementById('preferences-modal').classList.remove('active');
+            });
+            
+            // Click outside modal to close
+            document.getElementById('preferences-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+
+            // Interview Preparation modal functionality
+            document.getElementById('interview-prep-nav-item').addEventListener('click', function() {
+                document.getElementById('interviewModal').classList.add('active');
+            });
+            
+            document.getElementById('closeInterviewModal').addEventListener('click', function() {
+                document.getElementById('interviewModal').classList.remove('active');
+            });
+            
+            // Click outside modal to close
+            document.getElementById('interviewModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

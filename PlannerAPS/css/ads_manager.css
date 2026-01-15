@@ -1,0 +1,290 @@
+/* Main Content Styles */
+.main-content {
+    margin: auto; /* Adjust based on your aside width */
+    width: 95%;
+    padding: 16px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}
+
+/* Top Navigation Styles */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.account-selector, .score-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.account-selector:hover, .score-indicator:hover {
+    background-color: #f0f2f5;
+}
+
+.score {
+    background-color: #1877f2;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Button Styles */
+.review-btn {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.sync-btn, .more-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.sync-btn:hover, .more-btn:hover {
+    background-color: #f0f2f5;
+}
+
+/* Search and Filters */
+.search-filters {
+    margin-bottom: 16px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 8px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: none;
+    background-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background-color: #e7f3ff;
+    color: #1877f2;
+}
+
+/* Campaign Section */
+.campaign-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.section-tabs {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e4e6eb;
+    padding-bottom: 8px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #65676b;
+}
+
+.tab.active {
+    color: #1877f2;
+    border-bottom: 2px solid #1877f2;
+}
+
+/* Campaign Tools */
+.campaign-tools {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.tool-group {
+    display: flex;
+    gap: 8px;
+}
+
+.create-btn {
+    background-color: #42b72a;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.tool-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: none;
+    border: 1px solid #dadde1;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Campaign Table */
+.campaign-table {
+    width: 100%;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 40px 80px 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 12px 16px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dadde1;
+}
+
+.header-cell {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+    color: #65676b;
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 64px;
+    height: 64px;
+    background-color: #f0f2f5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.empty-icon i {
+    font-size: 24px;
+    color: #65676b;
+}
+
+.empty-state h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: #65676b;
+    margin-bottom: 16px;
+}
+
+.account-overview-btn {
+    background-color: #e4e6eb;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .table-header {
+        grid-template-columns: 40px 80px 2fr 1fr 1fr 1fr 1fr;
+    }
+    
+    .campaign-tools {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-right .user-controls {
+        display: none;
+    }
+    
+    .filter-buttons {
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .main-content {
+        background-color: #18191a;
+    }
+
+    .top-nav, .campaign-section, .search-box, .filter-btn {
+        background-color: #242526;
+    }
+
+    .empty-state h2 {
+        color: #e4e6eb;
+    }
+
+    .table-header {
+        background-color: #3a3b3c;
+    }
+}
