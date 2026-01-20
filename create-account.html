@@ -3,192 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account - ArchiveHubs</title>
+    <title>Create Account - ArchiveHubs</title>   
     <link rel="stylesheet" href="css/create-account.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/libphonenumber-js@1.10.55/bundle/libphonenumber-js.min.js"></script>
     <style>
-       
-        .signup-box {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
-            padding: 40px 32px 32px 32px;
-            width: 100%;
-            max-width: 420px;
-            position: relative;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .logo-container img.logo {
-            width: 150px;
-            border-radius: 8px;
-        }
-        .signup-form {
-            position: relative;
-            min-height: 420px;
-            overflow: hidden;
-        }
-        .form-part {
-            display: none; /* Hide by default */
-            position: absolute;
-            width: 100%;
-            left: 0;
-            top: 0;
-            background: #fff;
-            transition: transform 0.5s cubic-bezier(.77,0,.18,1), opacity 0.5s;
-            opacity: 0;
-            z-index: 1;
-        }
-        .form-part.active {
-            display: block; /* Only active part is displayed */
-            opacity: 1;
-            position: relative;
-            transform: translateX(0);
-            z-index: 2;
-        }
-        .form-part.left {
-            /* display: block; Remove display block from here */
-            opacity: 0.5;
-            transform: translateX(-100%);
-            z-index: 1;
-        }
-        .form-part.right {
-            /* display: block; Remove display block from here */
-            opacity: 0.5;
-            transform: translateX(100%);
-            z-index: 1;
-        }
-        /* Ensure non-active parts are not displayed */
-        .form-part:not(.active) {
-             display: none;
-        }
-        /* Override for left and right during transition */
-        /* .form-part.left, .form-part.right {
-            display: block;
-        } Remove this override */
-        .name-group {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .signup-form input[type="text"],
-        .signup-form input[type="email"],
-        .signup-form input[type="password"],
-        .signup-form input[type="tel"],
-        .signup-form select {
-            width: 100%;
-            padding: 12px 10px;
-            margin-bottom: 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-            background: #f8fafc;
-            transition: border 0.2s;
-        }
-        .signup-form input:focus,
-        .signup-form select:focus {
-            border: 1.5px solid #007bff;
-            outline: none;
-        }
-        .form-group label {
-            font-weight: 500;
-            margin-bottom: 6px;
-            display: block;
-        }
-        .phone-input-container {
-            display: flex;
-            gap: 8px;
-        }
-        .country-select {
-            min-width: 120px;
-        }
-        .directory-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        .terms-container {
-            margin: 24px 0 16px 0;
-        }
-        .terms-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .terms-text {
-            font-size: 0.97rem;
-        }
-        .form-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            margin-right: 10px;
-        }
-        .next-btn, .back-btn, .signup-button {
-            padding: 10px 30px;
-            border: none;
-            border-radius: 4px;
-            background: #FFD700;
-            color: #000000;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.2s;
-            border: 2px solid #000000;
-            font-weight: 600;
-        }
-        .back-btn {
-            background: #888;
-            color: #fff;
-            border: none;
-        }
-        .next-btn:focus, .back-btn:focus, .signup-button:focus {
-            outline: 2px solid #007bff;
-        }
-        .signup-button {
-            background: #FFD700;
-            color: #000000;
-            border: 2px solid #000000;
-        }
-        .signup-button:hover {
-            background: #FFE44D;
-        }
-        .signup-button:disabled {
-            background: #e4e6eb;
-            color: #b0b3b8;
-            border: none;
-            cursor: not-allowed;
-        }
-        .login-link {
-            text-align: center;
-            margin-top: 18px;
-        }
-        .login-link a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .error-message {
-            color: #e74c3c;
-            font-size: 0.95rem;
-            min-height: 18px;
-            display: block;
-        }
-    </style>
+    .signup-box {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+        padding: 40px 32px 32px 32px;
+        width: 100%;
+        max-width: 420px;
+        position: relative;
+    }
+    .header {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+    .logo-container img.logo {
+        width: 150px;
+        border-radius: 8px;
+    }
+    .signup-form {
+        position: relative;
+        min-height: 420px;
+        overflow: hidden;
+    }
+    .form-part {
+        display: none;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: #fff;
+        transition: transform 0.5s cubic-bezier(.77,0,.18,1), opacity 0.5s;
+        opacity: 0;
+        z-index: 1;
+    }
+    .form-part.active {
+        display: block;
+        opacity: 1;
+        position: relative;
+        transform: translateX(0);
+        z-index: 2;
+    }
+    .form-part.left {
+        opacity: 0.5;
+        transform: translateX(-100%);
+        z-index: 1;
+    }
+    .form-part.right {
+        opacity: 0.5;
+        transform: translateX(100%);
+        z-index: 1;
+    }
+    .form-part:not(.active) {
+         display: none;
+    }
+    .name-group {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .signup-form input[type="text"],
+    .signup-form input[type="email"],
+    .signup-form input[type="password"],
+    .signup-form input[type="tel"],
+    .signup-form select {
+        width: 100%;
+        padding: 12px 10px;
+        margin-bottom: 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 1rem;
+        background: #f8fafc;
+        transition: border 0.2s;
+    }
+    .signup-form input:focus,
+    .signup-form select:focus {
+        border: 1.5px solid #007bff;
+        outline: none;
+    }
+    .form-group label {
+        font-weight: 500;
+        margin-bottom: 6px;
+        display: block;
+    }
+    .phone-input-container {
+        display: flex;
+        gap: 8px;
+    }
+    .country-select {
+        min-width: 120px;
+    }
+    .directory-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+    .terms-container {
+        margin: 24px 0 16px 0;
+    }
+    .terms-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .terms-text {
+        font-size: 0.97rem;
+    }
+    .form-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        margin-right: 10px;
+    }
+    .next-btn, .back-btn, .signup-button {
+        padding: 10px 30px;
+        border: none;
+        border-radius: 4px;
+        background: #FFD700;
+        color: #000000;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        border: 2px solid #000000;
+        font-weight: 600;
+    }
+    .back-btn {
+        background: #888;
+        color: #fff;
+        border: none;
+    }
+    .next-btn:focus, .back-btn:focus, .signup-button:focus {
+        outline: 2px solid #007bff;
+    }
+    .signup-button {
+        background: #FFD700;
+        color: #000000;
+        border: 2px solid #000000;
+    }
+    .signup-button:hover {
+        background: #FFE44D;
+    }
+    .signup-button:disabled {
+        background: #e4e6eb;
+        color: #b0b3b8;
+        border: none;
+        cursor: not-allowed;
+    }
+    .login-link {
+        text-align: center;
+        margin-top: 18px;
+    }
+    .login-link a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .error-message {
+        color: #e74c3c;
+        font-size: 0.95rem;
+        min-height: 18px;
+        display: block;
+    }
+    
+    /* Account Type Selection Styles */
+    .account-type-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+    .account-type-option {
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #fafafa;
+    }
+    .account-type-option:hover {
+        border-color: #007bff;
+        background: #f0f8ff;
+    }
+    .account-type-option.selected {
+        border-color: #007bff;
+        background: #f0f8ff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+    .account-type-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .account-type-icon {
+        font-size: 24px;
+        color: #007bff;
+        min-width: 40px;
+    }
+    .account-type-info h3 {
+        margin: 0 0 8px 0;
+        color: #333;
+        font-size: 1.1rem;
+    }
+    .account-type-info p {
+        margin: 0;
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    /* Professional Status Fields */
+    .professional-fields-group {
+        margin-bottom: 20px;
+    }
+    .professional-fields-group .form-group {
+        margin-bottom: 15px;
+    }
+</style>
 </head>
 <body>
-    <div class="signup-container">
-        <div class="signup-box">
-            <div class="header">
-                <div class="logo-container">
-                    <img src="images/hubs.jpg" alt="ArchiveHubs" class="logo">
-                </div>
+   <div class="signup-container">
+    <div class="signup-box">
+        <div class="header">
+            <div class="logo-container">
+                <img src="images/hubs.jpg" alt="ArchiveHubs" class="logo">
             </div>
+        </div>
 
-            <form class="signup-form" id="multiStepForm">
-                <!-- PART 1: Personal Details -->
+        <form class="signup-form" id="multiStepForm">
+            <!-- PART 1: Personal Details -->
                 <div class="form-part" id="part1">
                     <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Personal Details</h3>
                     <div class="name-group">
@@ -624,7 +670,7 @@
                     </div>
                 </div>
 
-                <!-- PART 2: Account Type Selection -->
+            <!-- PART 2: Account Type Selection -->
                 <div class="form-part" id="part2">
                     <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Choose Account Type</h3>
                     <div class="account-type-container">
@@ -657,7 +703,7 @@
                     </div>
                 </div>
 
-                <!-- PART 3: Corporate Account Confirmation -->
+           <!-- PART 3: Corporate Account Confirmation -->
                 <div class="form-part" id="part3">
                     <div class="confirmation-box" style="padding: 30px;">
                         <div class="confirmation-logo" style="text-align:center; margin-bottom:20px;">
@@ -782,99 +828,91 @@
                     </div>
                 </div>
 
-                <!-- PART 4: Individual Account Confirmation -->
-                <div class="form-part" id="part4">
-                    <div class="confirmation-box" style="padding: 20px; margin-top: -400px;">
-                         <div class="confirmation-logo" style="text-align:center; margin-bottom:20px;">
-                            <img src="images/Logo.jpg" alt="Archivehubs Logo" style="width:80px; height:80px; object-fit:contain; display:block; margin:0 auto;">
+            <!-- PART 4: Individual Account Confirmation (UPDATED) -->
+            <div class="form-part" id="part4">
+                <div class="confirmation-box" style="padding: 20px; margin-top: -400px;">
+                    <div class="confirmation-logo" style="text-align:center; margin-bottom:20px;">
+                        <img src="images/Logo.jpg" alt="Archivehubs Logo" style="width:80px; height:80px; object-fit:contain; display:block; margin:0 auto;">
+                    </div>
+                    <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:15px; text-align:center;">Account Confirmation</h2>
+                    <p style="margin-bottom:20px; color:#444; font-size:1rem; line-height:1.5;">Welcome to Archivehubs.com. Thank you for creating an Archivehubs account. To start exploiting and to discover the benefits of Archivehubs.com, please complete the information as provided below and confirm your account.<br><br>Welcome to the Archivehubs community!<br><br>The Archivehubs Team</p>
+                    <form id="individualConfirmationForm">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Account Type</label>
+                            <div style="padding: 12px 10px; background: #f8fafc; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; color: #555;">Individual Account</div>
                         </div>
-                        <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:15px; text-align:center;">Account Confirmation</h2>
-                        <p style="margin-bottom:20px; color:#444; font-size:1rem; line-height:1.5;">Welcome to Archivehubs.com. Thank you for creating an Archivehubs account. To start exploiting and to discover the benefits of Archivehubs.com, please complete the information as provided below and confirm your account.<br><br>Welcome to the Archivehubs community!<br><br>The Archivehubs Team</p>
-                        <form id="individualConfirmationForm">
-                            <div class="form-group" style="margin-bottom: 15px;">
-                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Account Type</label>
-                                <div style="padding: 12px 10px; background: #f8fafc; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; color: #555;">Individual Account</div>
-                            </div>
-                            <div class="form-group" style="margin-bottom: 15px;">
-                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Professional Status</label>
-                                <select id="professionalStatus" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                    <option value="" disabled selected>Select your professional status</option>
-                                    <option value="employed">Employed</option>
-                                    <option value="self-employed">Self-employed</option>
-                                    <option value="unemployed">Unemployed</option>
-                                    <option value="student">Student</option>
-                                    <option value="retired">Retired</option>
-                                    <option value="others">Others</option>
+                        
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Professional Status</label>
+                            <select id="professionalStatus" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                <option value="" disabled selected>Select your professional status</option>
+                                <option value="student">Student</option>
+                                <option value="unemployed">Unemployed</option>
+                                <option value="employed">Employed</option>
+                                <option value="self-employed">Self Employed</option>
+                                <option value="retired">Retired</option>
+                                <option value="others">Others</option>
+                            </select>
+                            <input type="text" id="otherProfessionalStatusInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                        </div>
+
+                        <!-- Dynamic Background and Interest Fields -->
+                        <div class="professional-fields-group">
+                            <!-- Background Field -->
+                            <div class="form-group" id="backgroundGroup" style="margin-bottom: 15px; display: none;">
+                                <label id="backgroundLabel" style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Select your background</label>
+                                <select id="backgroundSelect" style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                    <option value="" disabled selected>Select your background</option>
                                 </select>
-                                <input type="text" id="otherProfessionalStatusInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                                <input type="text" id="otherBackgroundInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
                             </div>
 
-                            <!-- Student Form Groups (initially hidden) -->
-                            <div id="studentGroups" style="display: none;">
-                                <div class="form-group" style="margin-bottom: 15px;">
-                                    <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Student Background</label>
-                                    <select id="studentBackground" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                        <option value="" disabled selected>Select your student background</option>
-                                        <option value="highschool">High School</option>
-                                        <option value="undergraduate">Undergraduate</option>
-                                        <option value="postgraduate">Postgraduate</option>
-                                        <option value="none">Not a student</option>
-                                        <option value="others">Others</option>
-                                    </select>
-                                    <input type="text" id="otherStudentBackgroundInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                                </div>
-                                <div class="form-group" style="margin-bottom: 20px;">
-                                    <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Interest</label>
-                                    <select id="interest" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                        <option value="" disabled selected>Select your Interest</option>
-                                        <option value="technology">Technology</option>
-                                        <option value="business">Business</option>
-                                        <option value="education">Education</option>
-                                        <option value="finance">Finance</option>
-                                        <option value="healthcare">Healthcare</option>
-                                        <option value="others">Others</option>
-                                    </select>
-                                    <input type="text" id="otherInterestInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                                </div>
+                            <!-- Interest Field -->
+                            <div class="form-group" id="interestGroup" style="margin-bottom: 20px; display: none;">
+                                <label id="interestLabel" style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Select your Interest</label>
+                                <select id="interestSelect" style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
+                                    <option value="" disabled selected>Select your interest</option>
+                                </select>
+                                <input type="text" id="otherInterestInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
                             </div>
+                        </div>
 
-                             <div class="form-nav" style="display:flex; flex-direction: column; gap: 10px; margin-top:20px; margin-right:0;">
-                                <button type="button" class="back-btn" id="backToStep2BtnIndividual">Back</button>
-                                <button type="button" class="confirm-account-btn" id="confirmIndividualAccountBtn" disabled>Confirm Account</button>
-                             </div>
-                        </form>
-                        <div style="margin-top:20px; text-align:center; font-size:0.9rem;">
-                            <a href="#" style="color:#007bff; text-decoration:none; margin-right: 10px;">Get the Archivehubs App</a>
-                            <span style="color:#222;"> <b>General Terms</b></span>
+                        <div class="form-nav" style="display:flex; flex-direction: column; gap: 10px; margin-top:20px; margin-right:0;">
+                            <button type="button" class="back-btn" id="backToStep2BtnIndividual">Back</button>
+                            <button type="button" class="confirm-account-btn" id="confirmIndividualAccountBtn" disabled>Confirm Account</button>
                         </div>
-                        <div style="margin-top:8px; text-align:center; font-size:0.85rem; color:#222;">
-                            ARCHIVEHUBS: ENINK Investment Limited &copy; 2025 <b>RC 1741345</b>
-                        </div>
+                    </form>
+                    <div style="margin-top:20px; text-align:center; font-size:0.9rem;">
+                        <a href="#" style="color:#007bff; text-decoration:none; margin-right: 10px;">Get the Archivehubs App</a>
+                        <span style="color:#222;"> <b>General Terms</b></span>
+                    </div>
+                    <div style="margin-top:8px; text-align:center; font-size:0.85rem; color:#222;">
+                        ARCHIVEHUBS: ENINK Investment Limited &copy; 2025 <b>RC 1741345</b>
                     </div>
                 </div>
-            </form>
-
-            <div class="login-link">
-                <a href="sign-in_account.html">Already have an account?</a>
             </div>
+        </form>
+
+        <div class="login-link">
+            <a href="sign-in_account.html">Already have an account?</a>
         </div>
     </div>
+</div>
 
-    <script src="js/country-code.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Multi-step form logic
-            const parts = document.querySelectorAll('.form-part');
-            let currentPart = 0;
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Multi-step form logic
+        const parts = document.querySelectorAll('.form-part');
+        let currentPart = 0;
 
-            // Add phone number formatting functionality
-            const countrySelect = document.getElementById('countrySelect');
-            const phoneInput = document.getElementById('phone');
-            const phoneError = document.getElementById('phoneError');
-            const countryDropdown = document.querySelector('.directory-group select:last-child'); // Get the country dropdown in directory-group
-            const stateDropdown = document.querySelector('.directory-group select:last-of-type'); // Get the state/province dropdown
+        // Add phone number formatting functionality
+        const countrySelect = document.getElementById('countrySelect');
+        const phoneInput = document.getElementById('phone');
+        const phoneError = document.getElementById('phoneError');
+        const countryDropdown = document.querySelector('.directory-group select:last-child');
+        const stateDropdown = document.querySelector('.directory-group select:last-of-type');
 
-            // Define states/provinces for each country
+        // Define states/provinces for each country
             const statesByCountry = {
                 'US': [
                     { value: 'AL', label: 'Alabama' },
@@ -1085,615 +1123,471 @@
                 ]
             };
 
-            // Function to update state/province dropdown
-            function updateStateDropdown(countryCode) {
-                // Clear existing options except the first one
-                while (stateDropdown.options.length > 1) {
-                    stateDropdown.remove(1);
+        // Professional Status Configuration
+        const professionalStatusConfig = {
+            'student': {
+                background: {
+                    label: 'Select your student background',
+                    options: [
+                        { value: 'basic-education', label: 'Basic Education' },
+                        { value: 'secondary-education', label: 'Secondary Education' },
+                        { value: 'tertiary-education', label: 'Tertiary Education' },
+                        { value: 'others', label: 'Others' }
+                    ]
+                },
+                interest: {
+                    label: 'Select your Interest',
+                    options: [
+                        { value: 'arts', label: 'Arts' },
+                        { value: 'sciences', label: 'Sciences' },
+                        { value: 'social-sciences', label: 'Social Sciences' },
+                        { value: 'engineering', label: 'Engineering' },
+                        { value: 'others', label: 'Others' }
+                    ]
                 }
+            },
+            'unemployed': {
+                background: {
+                    label: 'Select your unemployment background',
+                    options: [
+                        { value: 'able-willing-work', label: 'Able and willing work' },
+                        { value: 'disabled-willing-work', label: 'Disabled but willing to work' },
+                        { value: 'disabled-cannot-work', label: 'Disabled and cannot work' },
+                        { value: 'others', label: 'Others' }
+                    ]
+                },
+                interest: {
+                    label: 'Select your Interest',
+                    options: [
+                        { value: 'career-development', label: 'Job (Career Development)' },
+                        { value: 'skill-building', label: 'Skill Building' },
+                        { value: 'business-entrepreneurship', label: 'Business / Entrepreneurship' },
+                        { value: 'marketing-sales', label: 'Marketing / Sales' },
+                        { value: 'education-training', label: 'Education and Training' },
+                        { value: 'personal-development', label: 'Personal Development' },
+                        { value: 'digital-literacy', label: 'Digital Literacy' },
+                        { value: 'internships-apprenticeships', label: 'Internships or Apprenticeships' },
+                        { value: 'others', label: 'Others' }
+                    ]
+                }
+            },
+            'employed': {
+                background: {
+                    label: 'Select your employment background',
+                    options: [
+                        { value: 'professional-white-collar', label: 'Professional/White-Collar Jobs' },
+                        { value: 'skilled-trades-blue-collar', label: 'Skilled Trades/Blue-Collar Jobs' },
+                        { value: 'service-industry', label: 'Service Industry Jobs' },
+                        { value: 'manual-labor', label: 'Manual Labor Jobs' },
+                        { value: 'technology-it', label: 'Technology & IT Jobs' },
+                        { value: 'sales-marketing', label: 'Sales & Marketing Jobs' },
+                        { value: 'education-training', label: 'Education & Training Jobs' },
+                        { value: 'creative', label: 'Creative Jobs' },
+                        { value: 'transport-logistics', label: 'Transport & Logistics Jobs' },
+                        { value: 'science-research', label: 'Science & Research Jobs' },
+                        { value: 'public-service-security', label: 'Public Service & Security Jobs' },
+                        { value: 'healthcare', label: 'Healthcare Jobs' },
+                        { value: 'others', label: 'Others' }
+                    ]
+                },
+                interest: {
+                    label: 'Select your Interest',
+                    options: [
+                        { value: 'career-advancement', label: 'Career Advancement' },
+                        { value: 'skill-enhancement', label: 'Skill Enhancement' },
+                        { value: 'work-life-balance', label: 'Work-Life Balance' },
+                        { value: 'financial-growth', label: 'Financial Growth' },
+                        { value: 'entrepreneurship', label: 'Entrepreneurship' },
+                        { value: 'networking-mentorship', label: 'Networking & Mentorship' },
+                        { value: 'education', label: 'Education' },
+                        { value: 'personal-development', label: 'Personal Development' },
+                        { value: 'others', label: 'Others' }
+                    ]
+                }
+            },
+            'self-employed': {
+                background: {
+                    label: 'Select your self-employed background',
+                    options: [
+                        { value: 'skilled-trades-services', label: 'Skilled Trades & Services' },
+                        { value: 'freelancing-remote-work', label: 'Freelancing & Remote Work' },
+                        { value: 'retail-sales', label: 'Retail & Sales' },
+                        { value: 'agriculture-farming', label: 'Agriculture & Farming' },
+                        { value: 'crafts-production', label: 'Crafts & Production' },
+                        { value: 'consulting-training', label: 'Consulting & Training' },
+                        { value: 'transport-logistics', label: 'Transport & Logistics' },
+                        { value: 'food-hospitality', label: 'Food & Hospitality' },
+                        { value: 'real-estate-property', label: 'Real Estate & Property' },
+                        { value: 'digital-online-businesses', label: 'Digital & Online Businesses' },
+                        { value: 'others', label: 'Others' }
+                    ]
+                },
+                interest: {
+                    label: 'Select your Interest',
+                    options: [
+                        { value: 'business-growth-scaling', label: 'Business Growth & Scaling' },
+                        { value: 'financial-management', label: 'Financial Management' },
+                        { value: 'skill-development', label: 'Skill Development' },
+                        { value: 'legal-regulatory-compliance', label: 'Legal & Regulatory Compliance' },
+                        { value: 'technology-tools', label: 'Technology & Tools' },
+                        { value: 'marketing-branding', label: 'Marketing & Branding' },
+                        { value: 'networking-partnerships', label: 'Networking & Partnerships' },
+                        { value: 'work-life-balance-self-care', label: 'Work-Life Balance & Self-Care' },
+                        { value: 'innovation-trend-awareness', label: 'Innovation & Trend Awareness' }
+                    ]
+                }
+            },
+            'retired': {
+                background: {
+                    label: 'Select your retirement background',
+                    options: [
+                        { value: 'voluntary-retirement', label: 'Voluntary Retirement' },
+                        { value: 'health-retirement', label: 'Health-related Retirement' },
+                        { value: 'mandatory-retirement', label: 'Mandatory Retirement Age' },
+                        { value: 'others', label: 'Others' }
+                    ]
+                },
+                interest: {
+                    label: 'Select your Interest',
+                    options: [
+                        { value: 'hobbies-leisure', label: 'Hobbies & Leisure' },
+                        { value: 'volunteering', label: 'Volunteering' },
+                        { value: 'part-time-work', label: 'Part-time Work' },
+                        { value: 'health-wellness', label: 'Health & Wellness' },
+                        { value: 'travel', label: 'Travel' },
+                        { value: 'learning', label: 'Learning & Education' },
+                        { value: 'family-community', label: 'Family & Community' },
+                        { value: 'others', label: 'Others' }
+                    ]
+                }
+            }
+        };
 
-                // Get states for the selected country
-                const states = statesByCountry[countryCode];
-                
-                if (states) {
-                    // Add new options
-                    states.forEach(state => {
-                        const option = new Option(state.label, state.value);
-                        stateDropdown.add(option);
-                    });
-                    stateDropdown.disabled = false;
-                } else {
-                    // If no states defined for the country, add a generic option
-                    const option = new Option('Not Applicable', 'NA');
+        // Function to update professional status fields
+        function updateProfessionalStatusFields(status) {
+            const config = professionalStatusConfig[status];
+            const backgroundGroup = document.getElementById('backgroundGroup');
+            const interestGroup = document.getElementById('interestGroup');
+            const backgroundSelect = document.getElementById('backgroundSelect');
+            const interestSelect = document.getElementById('interestSelect');
+            const backgroundLabel = document.getElementById('backgroundLabel');
+            const interestLabel = document.getElementById('interestLabel');
+
+            if (config && backgroundSelect && interestSelect) {
+                // Update labels
+                backgroundLabel.textContent = config.background.label;
+                interestLabel.textContent = config.interest.label;
+
+                // Clear existing options
+                backgroundSelect.innerHTML = '<option value="" disabled selected>Select your background</option>';
+                interestSelect.innerHTML = '<option value="" disabled selected>Select your interest</option>';
+
+                // Add new background options
+                config.background.options.forEach(option => {
+                    const opt = new Option(option.label, option.value);
+                    backgroundSelect.add(opt);
+                });
+
+                // Add new interest options
+                config.interest.options.forEach(option => {
+                    const opt = new Option(option.label, option.value);
+                    interestSelect.add(opt);
+                });
+
+                // Show both groups
+                backgroundGroup.style.display = 'block';
+                interestGroup.style.display = 'block';
+
+                // Set required attributes
+                backgroundSelect.required = true;
+                interestSelect.required = true;
+
+                // Clear "Others" input fields
+                const otherBackgroundInput = document.getElementById('otherBackgroundInput');
+                const otherInterestInput = document.getElementById('otherInterestInput');
+                if (otherBackgroundInput) {
+                    otherBackgroundInput.style.display = 'none';
+                    otherBackgroundInput.removeAttribute('required');
+                    otherBackgroundInput.value = '';
+                }
+                if (otherInterestInput) {
+                    otherInterestInput.style.display = 'none';
+                    otherInterestInput.removeAttribute('required');
+                    otherInterestInput.value = '';
+                }
+            } else {
+                // Hide both groups if no config found
+                if (backgroundGroup) backgroundGroup.style.display = 'none';
+                if (interestGroup) interestGroup.style.display = 'none';
+                if (backgroundSelect) backgroundSelect.required = false;
+                if (interestSelect) interestSelect.required = false;
+            }
+
+            // Update confirm button state
+            const individualConfirmationForm = document.getElementById('individualConfirmationForm');
+            if (individualConfirmationForm) {
+                updateIndividualConfirmAccountBtnState(individualConfirmationForm);
+            }
+        }
+
+        // Function to update state/province dropdown
+        function updateStateDropdown(countryCode) {
+            while (stateDropdown.options.length > 1) {
+                stateDropdown.remove(1);
+            }
+
+            const states = statesByCountry[countryCode];
+            
+            if (states) {
+                states.forEach(state => {
+                    const option = new Option(state.label, state.value);
                     stateDropdown.add(option);
-                    stateDropdown.disabled = true;
-                }
+                });
+                stateDropdown.disabled = false;
+            } else {
+                const option = new Option('Not Applicable', 'NA');
+                stateDropdown.add(option);
+                stateDropdown.disabled = true;
             }
+        }
 
-            // Add event listener for country selection in directory-group
-            countryDropdown.addEventListener('change', function() {
-                const selectedCountry = this.value;
-                updateStateDropdown(selectedCountry);
-            });
+        // Add event listener for country selection in directory-group
+        countryDropdown.addEventListener('change', function() {
+            const selectedCountry = this.value;
+            updateStateDropdown(selectedCountry);
+        });
 
-            // Initialize state dropdown based on default country selection
-            if (countryDropdown.value) {
-                updateStateDropdown(countryDropdown.value);
+        // Initialize state dropdown based on default country selection
+        if (countryDropdown.value) {
+            updateStateDropdown(countryDropdown.value);
+        }
+
+        // Phone number functionality
+        countrySelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const countryCode = selectedOption.text.match(/\+(\d+)/)[1];
+            
+            phoneError.textContent = '';
+            
+            let currentNumber = phoneInput.value.replace(/^\+\d+\s*/, '');
+            phoneInput.value = `+${countryCode} ${currentNumber}`;
+        });
+
+        phoneInput.addEventListener('input', function(e) {
+            let value = this.value.replace(/[^\d+]/g, '');
+            
+            if (value.indexOf('+') > 0) {
+                value = value.replace(/\+/g, '');
+                value = '+' + value;
             }
+            
+            if (value.length > 3) {
+                value = value.replace(/(\+\d{1,3})(\d{3})(\d{3})(\d{4})/, '$1 $2 $3 $4');
+            }
+            
+            this.value = value;
+        });
 
-            countrySelect.addEventListener('change', function() {
-                const selectedOption = this.options[this.selectedIndex];
-                const countryCode = selectedOption.text.match(/\+(\d+)/)[1];
-                
-                // Clear any existing error message
+        phoneInput.addEventListener('blur', function() {
+            const value = this.value.trim();
+            if (value && !value.match(/^\+\d{1,3}\s\d{3}\s\d{3}\s\d{4}$/)) {
+                phoneError.textContent = 'Please enter a valid phone number with country code';
+            } else {
                 phoneError.textContent = '';
-                
-                // Get the current phone number value without any country code
-                let currentNumber = phoneInput.value.replace(/^\+\d+\s*/, '');
-                
-                // Add the new country code
-                phoneInput.value = `+${countryCode} ${currentNumber}`;
-            });
+            }
+        });
 
-            // Format phone number as user types
-            phoneInput.addEventListener('input', function(e) {
-                // Remove any non-digit characters except the plus sign at the start
-                let value = this.value.replace(/[^\d+]/g, '');
-                
-                // Ensure only one plus sign at the start
-                if (value.indexOf('+') > 0) {
-                    value = value.replace(/\+/g, '');
-                    value = '+' + value;
-                }
-                
-                // Format the number with spaces
-                if (value.length > 3) {
-                    value = value.replace(/(\+\d{1,3})(\d{3})(\d{3})(\d{4})/, '$1 $2 $3 $4');
-                }
-                
-                this.value = value;
-            });
+        function showPart(index) {
+            parts.forEach((part, i) => {
+                part.classList.toggle('active', i === index);
+                part.classList.toggle('left', i < index);
+                part.classList.toggle('right', i > index);
 
-            // Validate phone number on blur
-            phoneInput.addEventListener('blur', function() {
-                const value = this.value.trim();
-                if (value && !value.match(/^\+\d{1,3}\s\d{3}\s\d{3}\s\d{4}$/)) {
-                    phoneError.textContent = 'Please enter a valid phone number with country code';
+                if (part.classList.contains('active')) {
+                    part.style.display = 'block';
                 } else {
-                    phoneError.textContent = '';
+                    part.style.display = 'none';
                 }
             });
 
-            function showPart(index) {
-                console.log('Showing part index:', index);
-                parts.forEach((part, i) => {
-                    part.classList.toggle('active', i === index);
-                    part.classList.toggle('left', i < index);
-                    part.classList.toggle('right', i > index);
-
-                    // Explicitly manage display based on active class
-                    if (part.classList.contains('active')) {
-                        part.style.display = 'block';
-                        console.log('Part', i, 'set to display: block');
-                    } else {
-                        part.style.display = 'none';
-                         console.log('Part', i, 'set to display: none');
-                    }
-
-                });
-                // updateSignupButtonState(); // This might not be needed here anymore
-
-                // Attach listeners and update confirm button state based on current part
-                if (index === 2) { // Corporate Account Confirmation
-                    setTimeout(() => {
-                        const corporateConfirmationForm = document.getElementById('confirmationForm');
-                        if (corporateConfirmationForm) {
-                            attachCorporateConfirmAccountListeners(corporateConfirmationForm);
-                            updateCorporateConfirmAccountBtnState(corporateConfirmationForm); // Explicitly update state when showing part 3
-                        }
-                    }, 500); // Increased delay again
-                } else if (index === 3) { // Individual Account Confirmation
-                     setTimeout(() => {
-                        const individualConfirmationForm = document.getElementById('individualConfirmationForm');
-                        if (individualConfirmationForm) {
-                            attachIndividualConfirmAccountListeners(individualConfirmationForm);
-                            updateIndividualConfirmAccountBtnState(individualConfirmationForm);
-                        }
-                    }, 200); // Increased delay
-                }
-            }
-
-            // Account type selection
-            document.querySelectorAll('.account-type-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove selected class from all options
-                    document.querySelectorAll('.account-type-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    // Add selected class to clicked option
-                    this.classList.add('selected');
-                    // Enable the create account button (on part2)
-                    document.querySelector('#part2 .signup-button').disabled = false;
-
-                    // Transition to the next part based on selected type
-                    if (this.dataset.type === 'corporate') {
-                        setTimeout(() => {
-                            currentPart = 2; // part3 is index 2
-                            showPart(currentPart);
-                        }, 350); // allow a short delay for animation
-                    } else if (this.dataset.type === 'individual') {
-                         setTimeout(() => {
-                            currentPart = 3; // part4 is index 3
-                            showPart(currentPart);
-                        }, 350); // allow a short delay for animation
-                    }
-                });
-            });
-
-            // Next button click handler (on part1)
-            document.querySelector('#part1 .signup-button').addEventListener('click', () => {
-                // Check if part1 is valid before moving
-                const part1RequiredFields = document.querySelectorAll('#part1 input[required], #part1 select[required]');
-                let part1Valid = true;
-                part1RequiredFields.forEach(field => {
-                    if (field.type === 'checkbox') {
-                        if (!field.checked) part1Valid = false;
-                    } else if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
-                        part1Valid = false;
-                    }
-                });
-
-                if (part1Valid) {
-                     if (currentPart < parts.length - 1) {
-                        currentPart++;
-                        showPart(currentPart);
-                    }
-                }
-            });
-
-            // Back button click handler (on part2)
-            document.querySelector('#part2 .back-btn').addEventListener('click', () => {
-                if (currentPart > 0) {
-                    currentPart--;
-                    showPart(currentPart);
-                }
-            });
-
-            // Enable/disable signup button logic (for part1 and part2)
-            // This function is primarily for the 'Next' button on part1 and 'Create Account' on part2
-            function updateSignupButtonState() {
-                const activePart = document.querySelector('.form-part.active');
-                if (!activePart || activePart.id === 'part3' || activePart.id === 'part4') return; // Only applies to part1 and part2
-
-                const signupBtn = activePart.querySelector('.signup-button');
-                if (!signupBtn) return;
-
-                // Find all required inputs/selects/checkboxes in the active part
-                const requiredFields = activePart.querySelectorAll('input[required], select[required], textarea[required]');
-                const termsCheckbox = activePart.querySelector('input[type="checkbox"][required]');
-
-                let allFilled = true;
-                requiredFields.forEach(field => {
-                    if (field.type === 'checkbox') {
-                        if (!field.checked) allFilled = false;
-                    } else if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
-                        allFilled = false;
-                    }
-                });
-
-                // Check if terms checkbox is checked
-                const termsChecked = termsCheckbox ? termsCheckbox.checked : true;
-
-                signupBtn.disabled = !allFilled || !termsChecked;
-                signupBtn.style.cursor = (allFilled && termsChecked) ? 'pointer' : 'not-allowed';
-                
-                if (allFilled && termsChecked) {
-                    signupBtn.style.background = '#FFD700'; // Yellow background
-                    signupBtn.style.color = '#000000'; // Black text
-                    signupBtn.style.border = '2px solid #000000'; // Black border
-                } else {
-                    signupBtn.style.background = '#e4e6eb'; // Gray background
-                    signupBtn.style.color = '#b0b3b8'; // Gray text
-                    signupBtn.style.border = 'none';
-                }
-            }
-
-             // Listen for input changes in part1
-            document.querySelectorAll('#part1 input, #part1 select, #part1 textarea').forEach(field => {
-                field.addEventListener('input', updateSignupButtonState);
-                field.addEventListener('change', updateSignupButtonState);
-            });
-
-            // Initialize
-            showPart(currentPart); // Call showPart for initial display
-
-            // Show textbox if 'Others' is selected in Corporate Account Type
-            const corporateAccountType = document.getElementById('corporateAccountType');
-            const otherCorporateAccountTypeInput = document.getElementById('otherCorporateAccountTypeInput');
-            const privateCorpGroups = document.getElementById('privateCorpGroups');
-            const publicCorpGroups = document.getElementById('publicCorpGroups');
-
-            // Initially hide both groups
-            if (privateCorpGroups) privateCorpGroups.style.display = 'none';
-            if (publicCorpGroups) publicCorpGroups.style.display = 'none';
-
-            if (corporateAccountType) {
-                corporateAccountType.addEventListener('change', function() {
-                    if (this.value === 'private') {
-                        // Show private corporation groups, hide public corporation groups
-                        if (privateCorpGroups) privateCorpGroups.style.display = 'block';
-                        if (publicCorpGroups) publicCorpGroups.style.display = 'none';
-                        // Set required fields
-                        document.querySelectorAll('#privateCorpGroups select[required]').forEach(select => select.required = true);
-                        document.querySelectorAll('#publicCorpGroups select[required]').forEach(select => {
-                            select.required = false;
-                            select.value = '';
-                        });
-                    } else if (this.value === 'public') {
-                        // Show public corporation groups, hide private corporation groups
-                        if (privateCorpGroups) privateCorpGroups.style.display = 'none';
-                        if (publicCorpGroups) publicCorpGroups.style.display = 'block';
-                        // Set required fields
-                        document.querySelectorAll('#publicCorpGroups select[required]').forEach(select => select.required = true);
-                        document.querySelectorAll('#privateCorpGroups select[required]').forEach(select => {
-                            select.required = false;
-                            select.value = '';
-                        });
-                    } else if (this.value === 'others') {
-                        // Show both groups for others
-                        if (privateCorpGroups) privateCorpGroups.style.display = 'block';
-                        if (publicCorpGroups) publicCorpGroups.style.display = 'block';
-                        // Set required fields
-                        document.querySelectorAll('#privateCorpGroups select[required], #publicCorpGroups select[required]').forEach(select => select.required = true);
-                    }
-
-                    // Handle the "Others" input field
-                    if (this.value === 'others') {
-                        otherCorporateAccountTypeInput.style.display = 'block';
-                        otherCorporateAccountTypeInput.setAttribute('required', 'required');
-                    } else {
-                        otherCorporateAccountTypeInput.style.display = 'none';
-                        otherCorporateAccountTypeInput.removeAttribute('required');
-                        otherCorporateAccountTypeInput.value = '';
-                    }
-
-                    // Update the confirm button state
-                    const corporateConfirmationForm = document.getElementById('confirmationForm');
-                    if (corporateConfirmationForm) {
-                        updateCorporateConfirmAccountBtnState(corporateConfirmationForm);
-                    }
-                });
-            }
-
-            // Handle "Others" option for private organization
-            const organizationSelect = document.getElementById('organizationSelect');
-            const otherOrganizationInput = document.getElementById('otherOrganizationInput');
-            if (organizationSelect) {
-                organizationSelect.addEventListener('change', function() {
-                    if (this.value === 'others') {
-                        otherOrganizationInput.style.display = 'block';
-                        otherOrganizationInput.setAttribute('required', 'required');
-                    } else {
-                        otherOrganizationInput.style.display = 'none';
-                        otherOrganizationInput.removeAttribute('required');
-                        otherOrganizationInput.value = '';
-                    }
-                    updateCorporateConfirmAccountBtnState(document.getElementById('confirmationForm'));
-                });
-            }
-
-            // Handle "Others" option for public organization
-            const publicOrganizationSelect = document.getElementById('publicOrganizationSelect');
-            const otherPublicOrganizationInput = document.getElementById('otherPublicOrganizationInput');
-            if (publicOrganizationSelect) {
-                publicOrganizationSelect.addEventListener('change', function() {
-                    if (this.value === 'others') {
-                        otherPublicOrganizationInput.style.display = 'block';
-                        otherPublicOrganizationInput.setAttribute('required', 'required');
-                    } else {
-                        otherPublicOrganizationInput.style.display = 'none';
-                        otherPublicOrganizationInput.removeAttribute('required');
-                        otherPublicOrganizationInput.value = '';
-                    }
-                    updateCorporateConfirmAccountBtnState(document.getElementById('confirmationForm'));
-                });
-            }
-
-            // Handle "Others" option for private sector
-            const privateSectorSelect = document.getElementById('privateSectorSelect');
-            const otherPrivateSectorInput = document.getElementById('otherPrivateSectorInput');
-            if (privateSectorSelect) {
-                privateSectorSelect.addEventListener('change', function() {
-                    if (this.value === 'others') {
-                        otherPrivateSectorInput.style.display = 'block';
-                        otherPrivateSectorInput.setAttribute('required', 'required');
-                    } else {
-                        otherPrivateSectorInput.style.display = 'none';
-                        otherPrivateSectorInput.removeAttribute('required');
-                        otherPrivateSectorInput.value = '';
-                    }
-                    updateCorporateConfirmAccountBtnState(document.getElementById('confirmationForm'));
-                });
-            }
-
-            // Handle "Others" option for public sector
-            const publicSectorSelect = document.getElementById('publicSectorSelect');
-            const otherPublicSectorInput = document.getElementById('otherPublicSectorInput');
-            if (publicSectorSelect) {
-                publicSectorSelect.addEventListener('change', function() {
-                    if (this.value === 'others') {
-                        otherPublicSectorInput.style.display = 'block';
-                        otherPublicSectorInput.setAttribute('required', 'required');
-                    } else {
-                        otherPublicSectorInput.style.display = 'none';
-                        otherPublicSectorInput.removeAttribute('required');
-                        otherPublicSectorInput.value = '';
-                    }
-                    updateCorporateConfirmAccountBtnState(document.getElementById('confirmationForm'));
-                });
-            }
-
-            // Back button for corporate confirmation step (part3)
-            const backToStep2BtnCorporate = document.getElementById('backToStep2Btn');
-            if (backToStep2BtnCorporate) {
-                backToStep2BtnCorporate.addEventListener('click', function() {
-                    currentPart = 1; // Go back to part2
-                    showPart(currentPart);
-                });
-            }
-
-            // Confirm Account button validation for Corporate Account (part3)
-            const confirmCorporateAccountBtn = document.getElementById('confirmCorporateAccountBtn');
-            function updateCorporateConfirmAccountBtnState(corporateConfirmationForm) {
-                console.log('updateCorporateConfirmAccountBtnState called');
-                let allFilled = true;
-                
-                const corporateAccountTypeSelect = corporateConfirmationForm.querySelector('#corporateAccountType');
-                const otherCorporateAccountTypeInput = corporateConfirmationForm.querySelector('#otherCorporateAccountTypeInput');
-                const organizationSelect = corporateConfirmationForm.querySelector('#organizationSelect');
-                const otherOrganizationInput = corporateConfirmationForm.querySelector('#otherOrganizationInput');
-                const sectorSelect = corporateConfirmationForm.querySelector('#sectorSelect');
-                const otherSectorInput = corporateConfirmationForm.querySelector('#otherSectorInput');
-
-                console.log('Corporate Account Type value:', corporateAccountTypeSelect?.value);
-                console.log('Other Corporate Account Type Input value:', otherCorporateAccountTypeInput?.value);
-                console.log('Organization Select value:', organizationSelect?.value);
-                console.log('Other Organization Input value:', otherOrganizationInput?.value);
-                console.log('Sector Select value:', sectorSelect?.value);
-                console.log('Other Sector Input value:', otherSectorInput?.value);
-
-                // Check Corporate Account Type
-                if (corporateAccountTypeSelect) {
-                    if (corporateAccountTypeSelect.value === 'others') {
-                        if (!otherCorporateAccountTypeInput || !otherCorporateAccountTypeInput.value.trim()) {
-                            allFilled = false;
-                        }
-                    } else if (!corporateAccountTypeSelect.value || corporateAccountTypeSelect.value === corporateAccountTypeSelect.querySelector('option[disabled][selected]')?.value) {
-                        allFilled = false;
-                    }
-                }
-
-                // Check Organization Select
-                if (allFilled && organizationSelect) {
-                     if (organizationSelect.value === 'others') {
-                        if (!otherOrganizationInput || !otherOrganizationInput.value.trim()) {
-                            allFilled = false;
-                        }
-                    } else if (!organizationSelect.value || organizationSelect.value === organizationSelect.querySelector('option[disabled][selected]')?.value) {
-                        allFilled = false;
-                    }
-                }
-
-                // Check Sector Select
-                if (allFilled && sectorSelect) {
-                     if (sectorSelect.value === 'others') {
-                        if (!otherSectorInput || !otherSectorInput.value.trim()) {
-                            allFilled = false;
-                        }
-                    } else if (!sectorSelect.value || sectorSelect.value === sectorSelect.querySelector('option[disabled][selected]')?.value) {
-                        allFilled = false;
-                    }
-                }
-
-                console.log('allFilled status:', allFilled);
-
-                confirmCorporateAccountBtn.disabled = !allFilled;
-                confirmCorporateAccountBtn.style.cursor = allFilled ? 'pointer' : 'not-allowed';
-                confirmCorporateAccountBtn.style.background = allFilled ? '#43b04a' : '#b0b3b8';
-                confirmCorporateAccountBtn.style.color = allFilled ? '#fff' : '#fff';
-            }
-            // Listen for changes in corporate confirmation form fields
-            function attachCorporateConfirmAccountListeners(corporateConfirmationForm) {
-                 const corporateConfirmationFormFields = corporateConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
-                corporateConfirmationFormFields.forEach(field => {
-                    if (!field.hasListener) {
-                        field.addEventListener('input', () => {
-                            updateCorporateConfirmAccountBtnState(corporateConfirmationForm);
-                        });
-                        field.addEventListener('change', () => {
-                            updateCorporateConfirmAccountBtnState(corporateConfirmationForm);
-                        });
-                        field.hasListener = true;
-                    }
-                });
-            }
-
-             // Back button for individual confirmation step (part4)
-            const backToStep2BtnIndividual = document.getElementById('backToStep2BtnIndividual');
-            if (backToStep2BtnIndividual) {
-                backToStep2BtnIndividual.addEventListener('click', function() {
-                    currentPart = 1; // Go back to part2
-                    showPart(currentPart);
-                });
-            }
-
-            // Confirm Account button validation for Individual Account (part4)
-            const confirmIndividualAccountBtn = document.getElementById('confirmIndividualAccountBtn');
-            function updateIndividualConfirmAccountBtnState(individualConfirmationForm) {
-                let allFilled = true;
-                // Check all required fields in the individual confirmation form
-                const requiredFields = individualConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
-                 requiredFields.forEach(field => {
-                     if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
-                         allFilled = false;
-                     }
-                 });
-                confirmIndividualAccountBtn.disabled = !allFilled;
-                confirmIndividualAccountBtn.style.cursor = allFilled ? 'pointer' : 'not-allowed';
-                confirmIndividualAccountBtn.style.background = allFilled ? '#43b04a' : '#b0b3b8';
-                confirmIndividualAccountBtn.style.color = allFilled ? '#fff' : '#fff';
-            }
-
-            // Listen for changes in individual confirmation form fields
-            function attachIndividualConfirmAccountListeners(individualConfirmationForm) {
-                 const individualConfirmationFormFields = individualConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
-                individualConfirmationFormFields.forEach(field => {
-                    if (!field.hasListener) {
-                        field.addEventListener('input', () => updateIndividualConfirmAccountBtnState(individualConfirmationForm));
-                        field.addEventListener('change', () => updateIndividualConfirmAccountBtnState(individualConfirmationForm));
-                        field.hasListener = true;
-                    }
-                });
-            }
-
-            // Handle form submission for part3 (Confirm Account) - Corporate
-             // if (corporateConfirmationForm) { // Condition no longer needed here
-                confirmCorporateAccountBtn.addEventListener('click', function() {
-                     const corporateConfirmationForm = document.getElementById('confirmationForm'); // Get reference before using
-                    // Only redirect if the button is enabled and form is valid (additional check)
-                     if (!this.disabled && corporateConfirmationForm && corporateConfirmationForm.checkValidity()) {
-                        window.location.href = 'home.html';
-                    }
-                });
-            // }
-
-            // Handle form submission for part4 (Confirm Account) - Individual
-             // if (individualConfirmationForm) { // Condition no longer needed here
-                confirmIndividualAccountBtn.addEventListener('click', function() {
-                     const individualConfirmationForm = document.getElementById('individualConfirmationForm'); // Get reference before using
-                    // Only redirect if the button is enabled and form is valid (additional check)
-                     if (!this.disabled && individualConfirmationForm && individualConfirmationForm.checkValidity()) {
-                        window.location.href = 'loading.html';
-                    }
-                });
-            // }
-
-            const accountTypeSelect = document.getElementById('accountType');
-            const privateCorpOptions = document.getElementById('privateCorpOptions');
-            const privateCorpType = document.getElementById('privateCorpType');
-
-            accountTypeSelect.addEventListener('change', function() {
-                if (this.value === 'private') {
-                    privateCorpOptions.style.display = 'block';
-                    privateCorpType.required = true;
-                } else {
-                    privateCorpOptions.style.display = 'none';
-                    privateCorpType.required = false;
-                    privateCorpType.value = '';
-                }
-            });
-
-            // Handle professional status selection for individual account
-            const professionalStatus = document.getElementById('professionalStatus');
-            const otherProfessionalStatusInput = document.getElementById('otherProfessionalStatusInput');
-            const studentBackground = document.getElementById('studentBackground');
-            const interest = document.getElementById('interest');
-            const studentBackgroundGroup = studentBackground.closest('.form-group');
-            const interestGroup = interest.closest('.form-group');
-
-            // Initially hide both groups
-            if (studentBackgroundGroup) studentBackgroundGroup.style.display = 'none';
-            if (interestGroup) interestGroup.style.display = 'none';
-
-            if (professionalStatus) {
-                professionalStatus.addEventListener('change', function() {
-                    if (this.value === 'student') {
-                        // Show both student background and interest groups
-                        if (studentBackgroundGroup) studentBackgroundGroup.style.display = 'block';
-                        if (interestGroup) interestGroup.style.display = 'block';
-                        // Set required fields
-                        if (studentBackground) studentBackground.required = true;
-                        if (interest) interest.required = true;
-                    } else {
-                        // Hide both groups
-                        if (studentBackgroundGroup) studentBackgroundGroup.style.display = 'none';
-                        if (interestGroup) interestGroup.style.display = 'none';
-                        // Clear and unrequire fields
-                        if (studentBackground) {
-                            studentBackground.required = false;
-                            studentBackground.value = '';
-                        }
-                        if (interest) {
-                            interest.required = false;
-                            interest.value = '';
-                        }
-                        // Clear any "Others" input fields
-                        const otherStudentBackgroundInput = document.getElementById('otherStudentBackgroundInput');
-                        const otherInterestInput = document.getElementById('otherInterestInput');
-                        if (otherStudentBackgroundInput) {
-                            otherStudentBackgroundInput.style.display = 'none';
-                            otherStudentBackgroundInput.removeAttribute('required');
-                            otherStudentBackgroundInput.value = '';
-                        }
-                        if (otherInterestInput) {
-                            otherInterestInput.style.display = 'none';
-                            otherInterestInput.removeAttribute('required');
-                            otherInterestInput.value = '';
-                        }
-                    }
-
-                    // Handle the "Others" input field for professional status
-                    if (this.value === 'others') {
-                        otherProfessionalStatusInput.style.display = 'block';
-                        otherProfessionalStatusInput.setAttribute('required', 'required');
-                    } else {
-                        otherProfessionalStatusInput.style.display = 'none';
-                        otherProfessionalStatusInput.removeAttribute('required');
-                        otherProfessionalStatusInput.value = '';
-                    }
-
-                    // Update the confirm button state
+            if (index === 3) {
+                setTimeout(() => {
                     const individualConfirmationForm = document.getElementById('individualConfirmationForm');
                     if (individualConfirmationForm) {
+                        attachIndividualConfirmAccountListeners(individualConfirmationForm);
                         updateIndividualConfirmAccountBtnState(individualConfirmationForm);
                     }
+                }, 200);
+            }
+        }
+
+        // Account type selection
+        document.querySelectorAll('.account-type-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.account-type-option').forEach(opt => {
+                    opt.classList.remove('selected');
                 });
+                this.classList.add('selected');
+                document.querySelector('#part2 .signup-button').disabled = false;
+
+                if (this.dataset.type === 'corporate') {
+                    setTimeout(() => {
+                        currentPart = 2;
+                        showPart(currentPart);
+                    }, 350);
+                } else if (this.dataset.type === 'individual') {
+                    setTimeout(() => {
+                        currentPart = 3;
+                        showPart(currentPart);
+                    }, 350);
+                }
+            });
+        });
+
+        // Next button click handler
+        document.querySelector('#part1 .signup-button').addEventListener('click', () => {
+            const part1RequiredFields = document.querySelectorAll('#part1 input[required], #part1 select[required]');
+            let part1Valid = true;
+            part1RequiredFields.forEach(field => {
+                if (field.type === 'checkbox') {
+                    if (!field.checked) part1Valid = false;
+                } else if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
+                    part1Valid = false;
+                }
+            });
+
+            if (part1Valid) {
+                if (currentPart < parts.length - 1) {
+                    currentPart++;
+                    showPart(currentPart);
+                }
+            }
+        });
+
+        // Back button click handler
+        document.querySelector('#part2 .back-btn').addEventListener('click', () => {
+            if (currentPart > 0) {
+                currentPart--;
+                showPart(currentPart);
+            }
+        });
+
+        // Professional status change handler
+        const professionalStatus = document.getElementById('professionalStatus');
+        if (professionalStatus) {
+            professionalStatus.addEventListener('change', function() {
+                const status = this.value;
+                const otherProfessionalStatusInput = document.getElementById('otherProfessionalStatusInput');
+
+                // Handle "Others" input for professional status
+                if (status === 'others') {
+                    otherProfessionalStatusInput.style.display = 'block';
+                    otherProfessionalStatusInput.setAttribute('required', 'required');
+                } else {
+                    otherProfessionalStatusInput.style.display = 'none';
+                    otherProfessionalStatusInput.removeAttribute('required');
+                    otherProfessionalStatusInput.value = '';
+                }
+
+                // Update background and interest fields based on status
+                updateProfessionalStatusFields(status);
+            });
+        }
+
+        // Handle "Others" option for background
+        const backgroundSelect = document.getElementById('backgroundSelect');
+        const otherBackgroundInput = document.getElementById('otherBackgroundInput');
+        if (backgroundSelect) {
+            backgroundSelect.addEventListener('change', function() {
+                if (this.value === 'others') {
+                    otherBackgroundInput.style.display = 'block';
+                    otherBackgroundInput.setAttribute('required', 'required');
+                } else {
+                    otherBackgroundInput.style.display = 'none';
+                    otherBackgroundInput.removeAttribute('required');
+                    otherBackgroundInput.value = '';
+                }
+                updateIndividualConfirmAccountBtnState(document.getElementById('individualConfirmationForm'));
+            });
+        }
+
+        // Handle "Others" option for interest
+        const interestSelect = document.getElementById('interestSelect');
+        const otherInterestInput = document.getElementById('otherInterestInput');
+        if (interestSelect) {
+            interestSelect.addEventListener('change', function() {
+                if (this.value === 'others') {
+                    otherInterestInput.style.display = 'block';
+                    otherInterestInput.setAttribute('required', 'required');
+                } else {
+                    otherInterestInput.style.display = 'none';
+                    otherInterestInput.removeAttribute('required');
+                    otherInterestInput.value = '';
+                }
+                updateIndividualConfirmAccountBtnState(document.getElementById('individualConfirmationForm'));
+            });
+        }
+
+        // Back button for individual confirmation
+        const backToStep2BtnIndividual = document.getElementById('backToStep2BtnIndividual');
+        if (backToStep2BtnIndividual) {
+            backToStep2BtnIndividual.addEventListener('click', function() {
+                currentPart = 1;
+                showPart(currentPart);
+            });
+        }
+
+        // Confirm Account button validation for Individual Account
+        const confirmIndividualAccountBtn = document.getElementById('confirmIndividualAccountBtn');
+        function updateIndividualConfirmAccountBtnState(individualConfirmationForm) {
+            let allFilled = true;
+            const requiredFields = individualConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
+            
+            requiredFields.forEach(field => {
+                if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
+                    allFilled = false;
+                }
+            });
+
+            // Check professional status specific fields
+            const professionalStatus = document.getElementById('professionalStatus');
+            if (professionalStatus && professionalStatus.value && professionalStatus.value !== 'others') {
+                const backgroundSelect = document.getElementById('backgroundSelect');
+                const interestSelect = document.getElementById('interestSelect');
+                
+                if (backgroundSelect && !backgroundSelect.value) allFilled = false;
+                if (interestSelect && !interestSelect.value) allFilled = false;
             }
 
-            // Handle "Others" option for student background
-            const otherStudentBackgroundInput = document.getElementById('otherStudentBackgroundInput');
-            if (studentBackground) {
-                studentBackground.addEventListener('change', function() {
-                    if (this.value === 'others') {
-                        otherStudentBackgroundInput.style.display = 'block';
-                        otherStudentBackgroundInput.setAttribute('required', 'required');
-                    } else {
-                        otherStudentBackgroundInput.style.display = 'none';
-                        otherStudentBackgroundInput.removeAttribute('required');
-                        otherStudentBackgroundInput.value = '';
-                    }
-                    updateIndividualConfirmAccountBtnState(document.getElementById('individualConfirmationForm'));
-                });
+            confirmIndividualAccountBtn.disabled = !allFilled;
+            confirmIndividualAccountBtn.style.cursor = allFilled ? 'pointer' : 'not-allowed';
+            confirmIndividualAccountBtn.style.background = allFilled ? '#43b04a' : '#b0b3b8';
+            confirmIndividualAccountBtn.style.color = allFilled ? '#fff' : '#fff';
+        }
+
+        function attachIndividualConfirmAccountListeners(individualConfirmationForm) {
+            const individualConfirmationFormFields = individualConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
+            individualConfirmationFormFields.forEach(field => {
+                if (!field.hasListener) {
+                    field.addEventListener('input', () => updateIndividualConfirmAccountBtnState(individualConfirmationForm));
+                    field.addEventListener('change', () => updateIndividualConfirmAccountBtnState(individualConfirmationForm));
+                    field.hasListener = true;
+                }
+            });
+        }
+
+        // Handle form submission for individual account
+        confirmIndividualAccountBtn.addEventListener('click', function() {
+            const individualConfirmationForm = document.getElementById('individualConfirmationForm');
+            if (!this.disabled && individualConfirmationForm && individualConfirmationForm.checkValidity()) {
+                window.location.href = 'loading.html';
             }
+        });
 
-            // Handle "Others" option for interest
-            const otherInterestInput = document.getElementById('otherInterestInput');
-            if (interest) {
-                interest.addEventListener('change', function() {
-                    if (this.value === 'others') {
-                        otherInterestInput.style.display = 'block';
-                        otherInterestInput.setAttribute('required', 'required');
-                    } else {
-                        otherInterestInput.style.display = 'none';
-                        otherInterestInput.removeAttribute('required');
-                        otherInterestInput.value = '';
-                    }
-                    updateIndividualConfirmAccountBtnState(document.getElementById('individualConfirmationForm'));
-                });
-            }
+        // Initialize
+        showPart(currentPart);
 
-        }); // End of DOMContentLoaded listener
-
-    </script>
+    });
+</script>
 </body>
 </html>
