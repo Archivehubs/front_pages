@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account - ArchiveHubs</title>   
-    <link rel="stylesheet" href="css/create-account.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://unpkg.com/libphonenumber-js@1.10.55/bundle/libphonenumber-js.min.js"></script>
     <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    .signup-container {
+        width: 100%;
+        max-width: 480px;
+    }
     .signup-box {
         background: #fff;
         border-radius: 12px;
@@ -16,6 +32,7 @@
         width: 100%;
         max-width: 420px;
         position: relative;
+        margin: 0 auto;
     }
     .header {
         text-align: center;
@@ -144,7 +161,7 @@
         color: #000000;
         border: 2px solid #000000;
     }
-    .signup-button:hover {
+    .signup-button:hover:not(:disabled) {
         background: #FFE44D;
     }
     .signup-button:disabled {
@@ -167,6 +184,13 @@
         font-size: 0.95rem;
         min-height: 18px;
         display: block;
+        margin-bottom: 10px;
+    }
+    .success-message {
+        color: #27ae60;
+        font-size: 0.95rem;
+        display: block;
+        margin-bottom: 10px;
     }
     
     /* Account Type Selection Styles */
@@ -222,6 +246,46 @@
     .professional-fields-group .form-group {
         margin-bottom: 15px;
     }
+
+    /* Loading Spinner */
+    .loading-spinner {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #000;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-left: 10px;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .button-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .confirm-account-btn {
+        padding: 10px 30px;
+        border: none;
+        border-radius: 4px;
+        background: #43b04a;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-weight: 600;
+        width: 100%;
+    }
+    .confirm-account-btn:hover:not(:disabled) {
+        background: #38a03f;
+    }
+    .confirm-account-btn:disabled {
+        background: #b0b3b8;
+        cursor: not-allowed;
+    }
 </style>
 </head>
 <body>
@@ -229,666 +293,227 @@
     <div class="signup-box">
         <div class="header">
             <div class="logo-container">
-                <img src="images/hubs.jpg" alt="ArchiveHubs" class="logo">
+                <img src="https://via.placeholder.com/150x50/FFD700/000000?text=ArchiveHubs" alt="ArchiveHubs" class="logo">
             </div>
         </div>
 
         <form class="signup-form" id="multiStepForm">
             <!-- PART 1: Personal Details -->
-                <div class="form-part" id="part1">
-                    <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Personal Details</h3>
-                    <div class="name-group">
-                        <input type="text" placeholder="First Name" required>
-                        <input type="text" placeholder="Surname" required>
-                    </div>
-                    <input type="text" placeholder="Other Name (optional)">
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="password" placeholder="Your Password" required>
-                    <input type="password" placeholder="Confirm Password" required>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <div class="phone-input-container">
-                            <select class="country-select" id="countrySelect">
-                                <option value="" disabled selected>Select Country Code</option>
-                                <option value="AF">Afghanistan (+93)</option>
-                                <option value="AL">Albania (+355)</option>
-                                <option value="DZ">Algeria (+213)</option>
-                                <option value="AD">Andorra (+376)</option>
-                                <option value="AO">Angola (+244)</option>
-                                <option value="AG">Antigua and Barbuda (+1)</option>
-                                <option value="AR">Argentina (+54)</option>
-                                <option value="AM">Armenia (+374)</option>
-                                <option value="AU">Australia (+61)</option>
-                                <option value="AT">Austria (+43)</option>
-                                <option value="AZ">Azerbaijan (+994)</option>
-                                <option value="BS">Bahamas (+1)</option>
-                                <option value="BH">Bahrain (+973)</option>
-                                <option value="BD">Bangladesh (+880)</option>
-                                <option value="BB">Barbados (+1)</option>
-                                <option value="BY">Belarus (+375)</option>
-                                <option value="BE">Belgium (+32)</option>
-                                <option value="BZ">Belize (+501)</option>
-                                <option value="BJ">Benin (+229)</option>
-                                <option value="BT">Bhutan (+975)</option>
-                                <option value="BO">Bolivia (+591)</option>
-                                <option value="BA">Bosnia and Herzegovina (+387)</option>
-                                <option value="BW">Botswana (+267)</option>
-                                <option value="BR">Brazil (+55)</option>
-                                <option value="BN">Brunei (+673)</option>
-                                <option value="BG">Bulgaria (+359)</option>
-                                <option value="BF">Burkina Faso (+226)</option>
-                                <option value="BI">Burundi (+257)</option>
-                                <option value="KH">Cambodia (+855)</option>
-                                <option value="CM">Cameroon (+237)</option>
-                                <option value="CA">Canada (+1)</option>
-                                <option value="CV">Cape Verde (+238)</option>
-                                <option value="CF">Central African Republic (+236)</option>
-                                <option value="TD">Chad (+235)</option>
-                                <option value="CL">Chile (+56)</option>
-                                <option value="CN">China (+86)</option>
-                                <option value="CO">Colombia (+57)</option>
-                                <option value="KM">Comoros (+269)</option>
-                                <option value="CG">Congo (+242)</option>
-                                <option value="CR">Costa Rica (+506)</option>
-                                <option value="HR">Croatia (+385)</option>
-                                <option value="CU">Cuba (+53)</option>
-                                <option value="CY">Cyprus (+357)</option>
-                                <option value="CZ">Czech Republic (+420)</option>
-                                <option value="DK">Denmark (+45)</option>
-                                <option value="DJ">Djibouti (+253)</option>
-                                <option value="DM">Dominica (+1)</option>
-                                <option value="DO">Dominican Republic (+1)</option>
-                                <option value="EC">Ecuador (+593)</option>
-                                <option value="EG">Egypt (+20)</option>
-                                <option value="SV">El Salvador (+503)</option>
-                                <option value="GQ">Equatorial Guinea (+240)</option>
-                                <option value="ER">Eritrea (+291)</option>
-                                <option value="EE">Estonia (+372)</option>
-                                <option value="ET">Ethiopia (+251)</option>
-                                <option value="FJ">Fiji (+679)</option>
-                                <option value="FI">Finland (+358)</option>
-                                <option value="FR">France (+33)</option>
-                                <option value="GA">Gabon (+241)</option>
-                                <option value="GM">Gambia (+220)</option>
-                                <option value="GE">Georgia (+995)</option>
-                                <option value="DE">Germany (+49)</option>
-                                <option value="GH">Ghana (+233)</option>
-                                <option value="GR">Greece (+30)</option>
-                                <option value="GD">Grenada (+1)</option>
-                                <option value="GT">Guatemala (+502)</option>
-                                <option value="GN">Guinea (+224)</option>
-                                <option value="GW">Guinea-Bissau (+245)</option>
-                                <option value="GY">Guyana (+592)</option>
-                                <option value="HT">Haiti (+509)</option>
-                                <option value="HN">Honduras (+504)</option>
-                                <option value="HU">Hungary (+36)</option>
-                                <option value="IS">Iceland (+354)</option>
-                                <option value="IN">India (+91)</option>
-                                <option value="ID">Indonesia (+62)</option>
-                                <option value="IR">Iran (+98)</option>
-                                <option value="IQ">Iraq (+964)</option>
-                                <option value="IE">Ireland (+353)</option>
-                                <option value="IL">Israel (+972)</option>
-                                <option value="IT">Italy (+39)</option>
-                                <option value="JM">Jamaica (+1)</option>
-                                <option value="JP">Japan (+81)</option>
-                                <option value="JO">Jordan (+962)</option>
-                                <option value="KZ">Kazakhstan (+7)</option>
-                                <option value="KE">Kenya (+254)</option>
-                                <option value="KI">Kiribati (+686)</option>
-                                <option value="KP">North Korea (+850)</option>
-                                <option value="KR">South Korea (+82)</option>
-                                <option value="KW">Kuwait (+965)</option>
-                                <option value="KG">Kyrgyzstan (+996)</option>
-                                <option value="LA">Laos (+856)</option>
-                                <option value="LV">Latvia (+371)</option>
-                                <option value="LB">Lebanon (+961)</option>
-                                <option value="LS">Lesotho (+266)</option>
-                                <option value="LR">Liberia (+231)</option>
-                                <option value="LY">Libya (+218)</option>
-                                <option value="LI">Liechtenstein (+423)</option>
-                                <option value="LT">Lithuania (+370)</option>
-                                <option value="LU">Luxembourg (+352)</option>
-                                <option value="MG">Madagascar (+261)</option>
-                                <option value="MW">Malawi (+265)</option>
-                                <option value="MY">Malaysia (+60)</option>
-                                <option value="MV">Maldives (+960)</option>
-                                <option value="ML">Mali (+223)</option>
-                                <option value="MT">Malta (+356)</option>
-                                <option value="MH">Marshall Islands (+692)</option>
-                                <option value="MR">Mauritania (+222)</option>
-                                <option value="MU">Mauritius (+230)</option>
-                                <option value="MX">Mexico (+52)</option>
-                                <option value="FM">Micronesia (+691)</option>
-                                <option value="MD">Moldova (+373)</option>
-                                <option value="MC">Monaco (+377)</option>
-                                <option value="MN">Mongolia (+976)</option>
-                                <option value="ME">Montenegro (+382)</option>
-                                <option value="MA">Morocco (+212)</option>
-                                <option value="MZ">Mozambique (+258)</option>
-                                <option value="MM">Myanmar (+95)</option>
-                                <option value="NA">Namibia (+264)</option>
-                                <option value="NR">Nauru (+674)</option>
-                                <option value="NP">Nepal (+977)</option>
-                                <option value="NL">Netherlands (+31)</option>
-                                <option value="NZ">New Zealand (+64)</option>
-                                <option value="NI">Nicaragua (+505)</option>
-                                <option value="NE">Niger (+227)</option>
-                                <option value="NG">Nigeria (+234)</option>
-                                <option value="NO">Norway (+47)</option>
-                                <option value="OM">Oman (+968)</option>
-                                <option value="PK">Pakistan (+92)</option>
-                                <option value="PW">Palau (+680)</option>
-                                <option value="PS">Palestine (+970)</option>
-                                <option value="PA">Panama (+507)</option>
-                                <option value="PG">Papua New Guinea (+675)</option>
-                                <option value="PY">Paraguay (+595)</option>
-                                <option value="PE">Peru (+51)</option>
-                                <option value="PH">Philippines (+63)</option>
-                                <option value="PL">Poland (+48)</option>
-                                <option value="PT">Portugal (+351)</option>
-                                <option value="QA">Qatar (+974)</option>
-                                <option value="RO">Romania (+40)</option>
-                                <option value="RU">Russia (+7)</option>
-                                <option value="RW">Rwanda (+250)</option>
-                                <option value="KN">Saint Kitts and Nevis (+1)</option>
-                                <option value="LC">Saint Lucia (+1)</option>
-                                <option value="VC">Saint Vincent and the Grenadines (+1)</option>
-                                <option value="WS">Samoa (+685)</option>
-                                <option value="SM">San Marino (+378)</option>
-                                <option value="ST">Sao Tome and Principe (+239)</option>
-                                <option value="SA">Saudi Arabia (+966)</option>
-                                <option value="SN">Senegal (+221)</option>
-                                <option value="RS">Serbia (+381)</option>
-                                <option value="SC">Seychelles (+248)</option>
-                                <option value="SL">Sierra Leone (+232)</option>
-                                <option value="SG">Singapore (+65)</option>
-                                <option value="SK">Slovakia (+421)</option>
-                                <option value="SI">Slovenia (+386)</option>
-                                <option value="SB">Solomon Islands (+677)</option>
-                                <option value="SO">Somalia (+252)</option>
-                                <option value="ZA">South Africa (+27)</option>
-                                <option value="SS">South Sudan (+211)</option>
-                                <option value="ES">Spain (+34)</option>
-                                <option value="LK">Sri Lanka (+94)</option>
-                                <option value="SD">Sudan (+249)</option>
-                                <option value="SR">Suriname (+597)</option>
-                                <option value="SE">Sweden (+46)</option>
-                                <option value="CH">Switzerland (+41)</option>
-                                <option value="SY">Syria (+963)</option>
-                                <option value="TW">Taiwan (+886)</option>
-                                <option value="TJ">Tajikistan (+992)</option>
-                                <option value="TZ">Tanzania (+255)</option>
-                                <option value="TH">Thailand (+66)</option>
-                                <option value="TL">Timor-Leste (+670)</option>
-                                <option value="TG">Togo (+228)</option>
-                                <option value="TO">Tonga (+676)</option>
-                                <option value="TT">Trinidad and Tobago (+1)</option>
-                                <option value="TN">Tunisia (+216)</option>
-                                <option value="TR">Turkey (+90)</option>
-                                <option value="TM">Turkmenistan (+993)</option>
-                                <option value="TV">Tuvalu (+688)</option>
-                                <option value="UG">Uganda (+256)</option>
-                                <option value="UA">Ukraine (+380)</option>
-                                <option value="AE">United Arab Emirates (+971)</option>
-                                <option value="GB">United Kingdom (+44)</option>
-                                <option value="US">United States (+1)</option>
-                                <option value="UY">Uruguay (+598)</option>
-                                <option value="UZ">Uzbekistan (+998)</option>
-                                <option value="VU">Vanuatu (+678)</option>
-                                <option value="VA">Vatican City (+379)</option>
-                                <option value="VE">Venezuela (+58)</option>
-                                <option value="VN">Vietnam (+84)</option>
-                                <option value="YE">Yemen (+967)</option>
-                                <option value="ZM">Zambia (+260)</option>
-                                <option value="ZW">Zimbabwe (+263)</option>
-                            </select>
-                        </div>
-                        <input type="tel" id="phone" name="phone" class="phone-number-input" placeholder="Phone number" required>
-                        <span class="error-message" id="phoneError"></span>
-                    </div>
-                    <div class="directory-group">
-                        <select required>
-                            <option value="" disabled selected>Sex</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                        <select required>
-                            <option value="" disabled selected>Country</option>
-                            <option value="AF">Afghanistan</option>
-                            <option value="AL">Albania</option>
-                            <option value="DZ">Algeria</option>
-                            <option value="AD">Andorra</option>
-                            <option value="AO">Angola</option>
-                            <option value="AG">Antigua and Barbuda</option>
-                            <option value="AR">Argentina</option>
-                            <option value="AM">Armenia</option>
-                            <option value="AU">Australia</option>
-                            <option value="AT">Austria</option>
-                            <option value="AZ">Azerbaijan</option>
-                            <option value="BS">Bahamas</option>
-                            <option value="BH">Bahrain</option>
-                            <option value="BD">Bangladesh</option>
-                            <option value="BB">Barbados</option>
-                            <option value="BY">Belarus</option>
-                            <option value="BE">Belgium</option>
-                            <option value="BZ">Belize</option>
-                            <option value="BJ">Benin</option>
-                            <option value="BT">Bhutan</option>
-                            <option value="BO">Bolivia</option>
-                            <option value="BA">Bosnia and Herzegovina</option>
-                            <option value="BW">Botswana</option>
-                            <option value="BR">Brazil</option>
-                            <option value="BN">Brunei</option>
-                            <option value="BG">Bulgaria</option>
-                            <option value="BF">Burkina Faso</option>
-                            <option value="BI">Burundi</option>
-                            <option value="KH">Cambodia</option>
-                            <option value="CM">Cameroon</option>
-                            <option value="CA">Canada</option>
-                            <option value="CV">Cape Verde</option>
-                            <option value="CF">Central African Republic</option>
-                            <option value="TD">Chad</option>
-                            <option value="CL">Chile</option>
-                            <option value="CN">China</option>
-                            <option value="CO">Colombia</option>
-                            <option value="KM">Comoros</option>
-                            <option value="CG">Congo</option>
-                            <option value="CR">Costa Rica</option>
-                            <option value="HR">Croatia</option>
-                            <option value="CU">Cuba</option>
-                            <option value="CY">Cyprus</option>
-                            <option value="CZ">Czech Republic</option>
-                            <option value="DK">Denmark</option>
-                            <option value="DJ">Djibouti</option>
-                            <option value="DM">Dominica</option>
-                            <option value="DO">Dominican Republic</option>
-                            <option value="EC">Ecuador</option>
-                            <option value="EG">Egypt</option>
-                            <option value="SV">El Salvador</option>
-                            <option value="GQ">Equatorial Guinea</option>
-                            <option value="ER">Eritrea</option>
-                            <option value="EE">Estonia</option>
-                            <option value="ET">Ethiopia</option>
-                            <option value="FJ">Fiji</option>
-                            <option value="FI">Finland</option>
-                            <option value="FR">France</option>
-                            <option value="GA">Gabon</option>
-                            <option value="GM">Gambia</option>
-                            <option value="GE">Georgia</option>
-                            <option value="DE">Germany</option>
-                            <option value="GH">Ghana</option>
-                            <option value="GR">Greece</option>
-                            <option value="GD">Grenada</option>
-                            <option value="GT">Guatemala</option>
-                            <option value="GN">Guinea</option>
-                            <option value="GW">Guinea-Bissau</option>
-                            <option value="GY">Guyana</option>
-                            <option value="HT">Haiti</option>
-                            <option value="HN">Honduras</option>
-                            <option value="HU">Hungary</option>
-                            <option value="IS">Iceland</option>
-                            <option value="IN">India</option>
-                            <option value="ID">Indonesia</option>
-                            <option value="IR">Iran</option>
-                            <option value="IQ">Iraq</option>
-                            <option value="IE">Ireland</option>
-                            <option value="IL">Israel</option>
-                            <option value="IT">Italy</option>
-                            <option value="JM">Jamaica</option>
-                            <option value="JP">Japan</option>
-                            <option value="JO">Jordan</option>
-                            <option value="KZ">Kazakhstan</option>
-                            <option value="KE">Kenya</option>
-                            <option value="KI">Kiribati</option>
-                            <option value="KP">North Korea</option>
-                            <option value="KR">South Korea</option>
-                            <option value="KW">Kuwait</option>
-                            <option value="KG">Kyrgyzstan</option>
-                            <option value="LA">Laos</option>
-                            <option value="LV">Latvia</option>
-                            <option value="LB">Lebanon</option>
-                            <option value="LS">Lesotho</option>
-                            <option value="LR">Liberia</option>
-                            <option value="LY">Libya</option>
-                            <option value="LI">Liechtenstein</option>
-                            <option value="LT">Lithuania</option>
-                            <option value="LU">Luxembourg</option>
-                            <option value="MG">Madagascar</option>
-                            <option value="MW">Malawi</option>
-                            <option value="MY">Malaysia</option>
-                            <option value="MV">Maldives</option>
-                            <option value="ML">Mali</option>
-                            <option value="MT">Malta</option>
-                            <option value="MH">Marshall Islands</option>
-                            <option value="MR">Mauritania</option>
-                            <option value="MU">Mauritius</option>
-                            <option value="MX">Mexico</option>
-                            <option value="FM">Micronesia</option>
-                            <option value="MD">Moldova</option>
-                            <option value="MC">Monaco</option>
-                            <option value="MN">Mongolia</option>
-                            <option value="ME">Montenegro</option>
-                            <option value="MA">Morocco</option>
-                            <option value="MZ">Mozambique</option>
-                            <option value="MM">Myanmar</option>
-                            <option value="NA">Namibia</option>
-                            <option value="NR">Nauru</option>
-                            <option value="NP">Nepal</option>
-                            <option value="NL">Netherlands</option>
-                            <option value="NZ">New Zealand</option>
-                            <option value="NI">Nicaragua</option>
-                            <option value="NE">Niger</option>
-                            <option value="NG">Nigeria</option>
-                            <option value="NO">Norway</option>
-                            <option value="OM">Oman</option>
-                            <option value="PK">Pakistan</option>
-                            <option value="PW">Palau</option>
-                            <option value="PS">Palestine</option>
-                            <option value="PA">Panama</option>
-                            <option value="PG">Papua New Guinea</option>
-                            <option value="PY">Paraguay</option>
-                            <option value="PE">Peru</option>
-                            <option value="PH">Philippines</option>
-                            <option value="PL">Poland</option>
-                            <option value="PT">Portugal</option>
-                            <option value="QA">Qatar</option>
-                            <option value="RO">Romania</option>
-                            <option value="RU">Russia</option>
-                            <option value="RW">Rwanda</option>
-                            <option value="KN">Saint Kitts and Nevis</option>
-                            <option value="LC">Saint Lucia</option>
-                            <option value="VC">Saint Vincent and the Grenadines</option>
-                            <option value="WS">Samoa</option>
-                            <option value="SM">San Marino</option>
-                            <option value="ST">Sao Tome and Principe</option>
-                            <option value="SA">Saudi Arabia</option>
-                            <option value="SN">Senegal</option>
-                            <option value="RS">Serbia</option>
-                            <option value="SC">Seychelles</option>
-                            <option value="SL">Sierra Leone</option>
-                            <option value="SG">Singapore</option>
-                            <option value="SK">Slovakia</option>
-                            <option value="SI">Slovenia</option>
-                            <option value="SB">Solomon Islands</option>
-                            <option value="SO">Somalia</option>
-                            <option value="ZA">South Africa</option>
-                            <option value="SS">South Sudan</option>
-                            <option value="ES">Spain</option>
-                            <option value="LK">Sri Lanka</option>
-                            <option value="SD">Sudan</option>
-                            <option value="SR">Suriname</option>
-                            <option value="SE">Sweden</option>
-                            <option value="CH">Switzerland</option>
-                            <option value="SY">Syria</option>
-                            <option value="TW">Taiwan</option>
-                            <option value="TJ">Tajikistan</option>
-                            <option value="TZ">Tanzania</option>
-                            <option value="TH">Thailand</option>
-                            <option value="TL">Timor-Leste</option>
-                            <option value="TG">Togo</option>
-                            <option value="TO">Tonga</option>
-                            <option value="TT">Trinidad and Tobago</option>
-                            <option value="TN">Tunisia</option>
-                            <option value="TR">Turkey</option>
-                            <option value="TM">Turkmenistan</option>
-                            <option value="TV">Tuvalu</option>
-                            <option value="UG">Uganda</option>
-                            <option value="UA">Ukraine</option>
-                            <option value="AE">United Arab Emirates</option>
-                            <option value="GB">United Kingdom</option>
-                            <option value="US">United States</option>
-                            <option value="UY">Uruguay</option>
-                            <option value="UZ">Uzbekistan</option>
-                            <option value="VU">Vanuatu</option>
-                            <option value="VA">Vatican City</option>
-                            <option value="VE">Venezuela</option>
-                            <option value="VN">Vietnam</option>
-                            <option value="YE">Yemen</option>
-                            <option value="ZM">Zambia</option>
-                            <option value="ZW">Zimbabwe</option>
-                        </select>
-                    </div>
-                    <div class="directory-group">
-                        <select required>
-                            <option value="" disabled selected>State/Province</option>
-                            <option value="NSW">New South Wales</option>
-                            <option value="VIC">Victoria</option>
-                            <option value="CA">California</option>
-                            <option value="TX">Texas</option>
-                            <!-- Add more states/provinces as needed -->
-                        </select>
-                    </div>
-                    <div class="terms-container">
-                        <label class="terms-checkbox">
-                            <input type="checkbox" required>
-                            <span class="terms-text">I agree to the Terms & Conditions and Privacy Policy</span>
-                        </label>
-                    </div>
-                    <div class="form-nav">
-                        <button type="button" class="signup-button">Next</button>
-                    </div>
+            <div class="form-part active" id="part1">
+                <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Personal Details</h3>
+                <span class="error-message" id="part1Error"></span>
+                <div class="name-group">
+                    <input type="text" id="firstName" placeholder="First Name" required>
+                    <input type="text" id="lastName" placeholder="Surname" required>
                 </div>
+                <input type="text" id="otherName" placeholder="Other Name (optional)">
+                <input type="email" id="email" placeholder="Your Email" required>
+                <input type="password" id="password" placeholder="Your Password" required>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="phone-input-container">
+                        <select class="country-select" id="countryCodeSelect">
+                            <option value="" disabled selected>Country Code</option>
+                            <option value="+234">Nigeria (+234)</option>
+                            <option value="+1">USA/Canada (+1)</option>
+                            <option value="+44">UK (+44)</option>
+                            <option value="+91">India (+91)</option>
+                        </select>
+                    </div>
+                    <input type="tel" id="phone" name="phone" placeholder="08034567890" required>
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+                <div class="directory-group">
+                    <select id="sex" required>
+                        <option value="" disabled selected>Sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <select id="country" required>
+                        <option value="" disabled selected>Country</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="United States">United States</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="India">India</option>
+                    </select>
+                </div>
+                <div class="directory-group">
+                    <select id="state" required>
+                        <option value="" disabled selected>State/Province</option>
+                        <option value="Lagos">Lagos</option>
+                        <option value="Abuja">Abuja</option>
+                        <option value="California">California</option>
+                        <option value="Texas">Texas</option>
+                    </select>
+                </div>
+                <div class="terms-container">
+                    <label class="terms-checkbox">
+                        <input type="checkbox" id="termsCheckbox" required>
+                        <span class="terms-text">I agree to the Terms & Conditions and Privacy Policy</span>
+                    </label>
+                </div>
+                <div class="form-nav">
+                    <button type="button" class="signup-button" id="nextBtn">
+                        <span class="button-content">
+                            Next
+                            <span class="loading-spinner" id="nextSpinner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
 
             <!-- PART 2: Account Type Selection -->
-                <div class="form-part" id="part2">
-                    <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Choose Account Type</h3>
-                    <div class="account-type-container">
-                        <div class="account-type-option" data-type="corporate">
-                            <div class="account-type-content">
-                                <div class="account-type-icon">
-                                    <i class="fas fa-building"></i>
-                                </div>
-                                <div class="account-type-info">
-                                    <h3>Corporate Account</h3>
-                                    <p>Perfect for businesses and organizations. Includes team management, advanced analytics, and priority support.</p>
-                                </div>
+            <div class="form-part" id="part2">
+                <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Choose Account Type</h3>
+                <div class="account-type-container">
+                    <div class="account-type-option" data-type="corporate">
+                        <div class="account-type-content">
+                            <div class="account-type-icon">
+                                <i class="fas fa-building"></i>
                             </div>
-                        </div>
-                        <div class="account-type-option" data-type="individual">
-                            <div class="account-type-content">
-                                <div class="account-type-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="account-type-info">
-                                    <h3>Individual Account</h3>
-                                    <p>Ideal for personal use. Simple and straightforward with all essential features.</p>
-                                </div>
+                            <div class="account-type-info">
+                                <h3>Corporate Account</h3>
+                                <p>Perfect for businesses and organizations. Includes team management, advanced analytics, and priority support.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="form-nav">
-                        <button type="button" class="back-btn">Back</button>
-                        <button type="submit" class="signup-button" disabled>Create Account</button>
-                    </div>
-                </div>
-
-           <!-- PART 3: Corporate Account Confirmation -->
-                <div class="form-part" id="part3">
-                    <div class="confirmation-box" style="padding: 30px;">
-                        <div class="confirmation-logo" style="text-align:center; margin-bottom:20px;">
-                            <img src="images/Logo.jpg" alt="Archivehubs Logo" style="width:80px; height:80px; object-fit:contain; display:block; margin:0 auto;">
-                        </div>
-                        <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:15px; text-align:center;">Account Confirmation</h2>
-                        <p style="margin-bottom:20px; color:#444; font-size:1rem; line-height:1.5;">Welcome to Archivehubs.com. Thank you for creating an Archivehubs account. To start exploiting and to discover the benefits of Archivehubs.com, please complete the information as provided below and confirm your account.<br><br>Welcome to the Archivehubs community!<br><br>The Archivehubs Team</p>
-                        <form id="confirmationForm">
-                            <div class="form-group" style="margin-bottom: 15px;">
-                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Account Type</label>
-                                <div style="padding: 12px 10px; background: #f8fafc; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; color: #555;">Corporate Account</div>
+                    <div class="account-type-option" data-type="individual">
+                        <div class="account-type-content">
+                            <div class="account-type-icon">
+                                <i class="fas fa-user"></i>
                             </div>
-                            <div class="form-group" style="margin-bottom: 15px;">
-                                <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Corporate Account Type</label>
-                                <select id="corporateAccountType" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                    <option value="" disabled selected>Select your account type</option>
-                                    <option value="private">Private Corporation</option>
-                                    <option value="public">Public Corporation</option>
-                                    <option value="others">Others</option>
-                                </select>
-                                <input type="text" id="otherCorporateAccountTypeInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
+                            <div class="account-type-info">
+                                <h3>Individual Account</h3>
+                                <p>Ideal for personal use. Simple and straightforward with all essential features.</p>
                             </div>
-
-                            <!-- Private Corporation Form Groups -->
-                            <div id="privateCorpGroups">
-                                <div class="form-group" style="margin-bottom: 15px;">
-                                    <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Private Corporation</label>
-                                    <select id="organizationSelect" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                        <option value="" disabled selected>Select your organization</option>
-                                        <option value="self-employed">Self-employed</option>
-                                        <option value="sole-proprietorship">Sole Proprietorship</option>
-                                        <option value="partnership">Partnership</option>
-                                        <option value="private-ltd">Private Limited Liability Company</option>
-                                        <option value="public-ltd">Public Limited Liability Company</option>
-                                        <option value="ngo">Non-Profit Organization (NGO)</option>
-                                        <option value="social-enterprise">Social Enterprise</option>
-                                        <option value="civil-society">Civil Society Organization</option>
-                                        <option value="cooperative-society">Cooperative Society</option>
-                                        <option value="community-initiative">Community Initiative Group</option>
-                                        <option value="faith-based">Faith Based Organization</option>
-                                        <option value="others">Others</option>
-                                    </select>
-                                    <input type="text" id="otherOrganizationInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                                </div>
-                                <div class="form-group" style="margin-bottom: 20px;">
-                                    <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Private Corporation Sector</label>
-                                    <select id="privateSectorSelect" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                        <option value="" disabled selected>Select your sector of operation</option>
-                                        <option value="manufacturing">Manufacturing & Industrial</option>
-                                        <option value="retail">Retail & Wholesale</option>
-                                        <option value="professional-service">Professional Service</option>
-                                        <option value="ict">Information & Communication Technology (ICT)</option>
-                                        <option value="financial">Financial Services</option>
-                                        <option value="transport">Transport & Logistics</option>
-                                        <option value="real-estate">Real Estate & Construction</option>
-                                        <option value="healthcare">Healthcare & Life Sciences</option>
-                                        <option value="agriculture">Agriculture & Agribusiness</option>
-                                        <option value="media">Media, Entertainment & Creative Arts</option>
-                                        <option value="education">Education & Training</option>
-                                        <option value="energy">Energy & Environment</option>
-                                        <option value="others">Others</option>
-                                    </select>
-                                    <input type="text" id="otherPrivateSectorInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                                </div>
-                            </div>
-
-                            <!-- Public Corporation Form Groups -->
-                            <div id="publicCorpGroups" style="display: none;">
-                                <div class="form-group" style="margin-bottom: 15px;">
-                                    <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Public Corporation</label>
-                                    <select id="publicOrganizationSelect" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                        <option value="" disabled selected>Select your organization</option>
-                                        <option value="government">Ministry</option>
-                                        <option value="state-owned">Department</option>
-                                        <option value="public-service">Agency</option>
-                                        <option value="municipal">Commission</option>
-                                        <option value="public-utility">Council</option>
-                                        <option value="public-transport">Board</option>
-                                        <option value="public-health">Commercial Public Corporation</option>
-                                        <option value="public-education">Regulatory & Oversight Corporation</option>
-                                        <option value="public-research">Service-Oriented Public Corporation</option>
-                                        <option value="public-research">Infrastructure & Industrial Development Corporation</option>
-                                        <option value="public-research">Natural Resources & Extractive Corporation</option>
-                                        <option value="others">Others</option>
-                                    </select>
-                                    <input type="text" id="otherPublicOrganizationInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                                </div>
-                                <div class="form-group" style="margin-bottom: 20px;">
-                                    <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Public Corporation Sector</label>
-                                    <select id="publicSectorSelect" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                        <option value="" disabled selected>Select your sector of operation</option>
-                                        <option value="administration">Energy & Natural Resources</option>
-                                        <option value="defense">Infrastructure & Public Works</option>
-                                        <option value="healthcare">Health & Social Services</option>
-                                        <option value="education">Information & Communication Technology (ICT)</option>
-                                        <option value="infrastructure">Education & Training</option>
-                                        <option value="utilities">Finance & Economic Development</option>
-                                        <option value="social-services">Trade, Commerce & Industry</option>
-                                        <option value="environment">Environment & Agriculture</option>
-                                        <option value="economic-development">Transportation</option>
-                                        <option value="economic-development">Media, Entertainment & Creative Arts</option>
-                                        <option value="economic-development">Defense, Security & Emergency Services</option>
-                                        <option value="economic-development">Governance & Regulation</option>
-                                        <option value="others">Others</option>
-                                    </select>
-                                    <input type="text" id="otherPublicSectorInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                                </div>
-                            </div>
-
-                            <div class="form-nav" style="display:flex; flex-direction: column; gap: 10px; margin-top:20px; margin-right:0;">
-                                <button type="button" class="back-btn" id="backToStep2Btn">Back</button>
-                                <button type="button" class="confirm-account-btn" id="confirmCorporateAccountBtn" onclick="window.location.href='loading.html'" disabled>Confirm Account</button>
-                            </div>
-                        </form>
-                        <div style="margin-top:20px; text-align:center; font-size:0.9rem;">
-                            <a href="#" style="color:#007bff; text-decoration:none; margin-right: 10px;">Get the Archivehubs App</a>
-                            <span style="color:#222;"> <b>General Terms</b></span>
-                        </div>
-                        <div style="margin-top:8px; text-align:center; font-size:0.85rem; color:#222;">
-                            ARCHIVEHUBS: ENINK Investment Limited &copy; 2025 <b>RC 1741345</b>
                         </div>
                     </div>
                 </div>
+                <div class="form-nav">
+                    <button type="button" class="back-btn" id="backToStep1">Back</button>
+                </div>
+            </div>
 
-            <!-- PART 4: Individual Account Confirmation (UPDATED) -->
+            <!-- PART 3: Corporate Account Confirmation -->
+            <div class="form-part" id="part3">
+                <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Corporate Account Details</h3>
+                <span class="error-message" id="part3Error"></span>
+                <span class="success-message" id="part3Success"></span>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Corporate Account Type</label>
+                    <select id="corporateAccountType" required>
+                        <option value="" disabled selected>Select account type</option>
+                        <option value="private">Private Corporation</option>
+                        <option value="public">Public Corporation</option>
+                        <option value="others">Others</option>
+                    </select>
+                    <input type="text" id="otherCorporateAccountTypeInput" placeholder="Please specify" style="display:none;" />
+                </div>
+
+                <div id="privateCorpGroups">
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label>Organization</label>
+                        <select id="organizationSelect" required>
+                            <option value="" disabled selected>Select your organization</option>
+                            <option value="self-employed">Self-employed</option>
+                            <option value="sole-proprietorship">Sole Proprietorship</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="private-ltd">Private Limited Liability Company</option>
+                            <option value="public-ltd">Public Limited Liability Company</option>
+                            <option value="ngo">Non-Profit Organization (NGO)</option>
+                            <option value="social-enterprise">Social Enterprise</option>
+                            <option value="civil-society">Civil Society Organization</option>
+                            <option value="cooperative-society">Cooperative Society</option>
+                            <option value="community-initiative">Community Initiative Group</option>
+                            <option value="faith-based">Faith Based Organization</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <input type="text" id="otherOrganizationInput" placeholder="Please specify" style="display:none;" />
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label>Sector</label>
+                        <select id="privateSectorSelect" required>
+                            <option value="" disabled selected>Select your sector</option>
+                            <option value="manufacturing">Manufacturing & Industrial</option>
+                            <option value="retail">Retail & Wholesale</option>
+                            <option value="professional-service">Professional Service</option>
+                            <option value="ict">Information & Communication Technology (ICT)</option>
+                            <option value="financial">Financial Services</option>
+                            <option value="transport">Transport & Logistics</option>
+                            <option value="real-estate">Real Estate & Construction</option>
+                            <option value="healthcare">Healthcare & Life Sciences</option>
+                            <option value="agriculture">Agriculture & Agribusiness</option>
+                            <option value="media">Media, Entertainment & Creative Arts</option>
+                            <option value="education">Education & Training</option>
+                            <option value="energy">Energy & Environment</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <input type="text" id="otherPrivateSectorInput" placeholder="Please specify" style="display:none;" />
+                    </div>
+                </div>
+
+                <div class="form-nav" style="flex-direction: column; gap: 10px;">
+                    <button type="button" class="back-btn" id="backToStep2Corporate">Back</button>
+                    <button type="button" class="confirm-account-btn" id="confirmCorporateAccountBtn">
+                        <span class="button-content">
+                            Confirm Account
+                            <span class="loading-spinner" id="corporateSpinner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PART 4: Individual Account Confirmation -->
             <div class="form-part" id="part4">
-                <div class="confirmation-box" style="padding: 20px; margin-top: -400px;">
-                    <div class="confirmation-logo" style="text-align:center; margin-bottom:20px;">
-                        <img src="images/Logo.jpg" alt="Archivehubs Logo" style="width:80px; height:80px; object-fit:contain; display:block; margin:0 auto;">
-                    </div>
-                    <h2 style="font-size:1.5rem; font-weight:700; margin-bottom:15px; text-align:center;">Account Confirmation</h2>
-                    <p style="margin-bottom:20px; color:#444; font-size:1rem; line-height:1.5;">Welcome to Archivehubs.com. Thank you for creating an Archivehubs account. To start exploiting and to discover the benefits of Archivehubs.com, please complete the information as provided below and confirm your account.<br><br>Welcome to the Archivehubs community!<br><br>The Archivehubs Team</p>
-                    <form id="individualConfirmationForm">
-                        <div class="form-group" style="margin-bottom: 15px;">
-                            <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Account Type</label>
-                            <div style="padding: 12px 10px; background: #f8fafc; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; color: #555;">Individual Account</div>
-                        </div>
-                        
-                        <div class="form-group" style="margin-bottom: 15px;">
-                            <label style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Professional Status</label>
-                            <select id="professionalStatus" required style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                <option value="" disabled selected>Select your professional status</option>
-                                <option value="student">Student</option>
-                                <option value="unemployed">Unemployed</option>
-                                <option value="employed">Employed</option>
-                                <option value="self-employed">Self Employed</option>
-                                <option value="retired">Retired</option>
-                                <option value="others">Others</option>
-                            </select>
-                            <input type="text" id="otherProfessionalStatusInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                        </div>
+                <h3 style="text-align: center; margin-bottom: 24px; color: #333;">Individual Account Details</h3>
+                <span class="error-message" id="part4Error"></span>
+                <span class="success-message" id="part4Success"></span>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Professional Status</label>
+                    <select id="professionalStatus" required>
+                        <option value="" disabled selected>Select your status</option>
+                        <option value="student">Student</option>
+                        <option value="unemployed">Unemployed</option>
+                        <option value="employed">Employed</option>
+                        <option value="self-employed">Self Employed</option>
+                        <option value="retired">Retired</option>
+                        <option value="others">Others</option>
+                    </select>
+                    <input type="text" id="otherProfessionalStatusInput" placeholder="Please specify" style="display:none;" />
+                </div>
 
-                        <!-- Dynamic Background and Interest Fields -->
-                        <div class="professional-fields-group">
-                            <!-- Background Field -->
-                            <div class="form-group" id="backgroundGroup" style="margin-bottom: 15px; display: none;">
-                                <label id="backgroundLabel" style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Select your background</label>
-                                <select id="backgroundSelect" style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                    <option value="" disabled selected>Select your background</option>
-                                </select>
-                                <input type="text" id="otherBackgroundInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                            </div>
-
-                            <!-- Interest Field -->
-                            <div class="form-group" id="interestGroup" style="margin-bottom: 20px; display: none;">
-                                <label id="interestLabel" style="font-weight:600; margin-bottom:5px; display:block; color:#333;">Select your Interest</label>
-                                <select id="interestSelect" style="width:100%; padding:12px 10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem; background:#f8fafc; margin-bottom: 10px;">
-                                    <option value="" disabled selected>Select your interest</option>
-                                </select>
-                                <input type="text" id="otherInterestInput" placeholder="Please specify" style="display:none; margin-top:8px; width:100%; padding:10px; border:1px solid #d1d5db; border-radius:6px; font-size:1rem;" />
-                            </div>
-                        </div>
-
-                        <div class="form-nav" style="display:flex; flex-direction: column; gap: 10px; margin-top:20px; margin-right:0;">
-                            <button type="button" class="back-btn" id="backToStep2BtnIndividual">Back</button>
-                            <button type="button" class="confirm-account-btn" id="confirmIndividualAccountBtn" disabled>Confirm Account</button>
-                        </div>
-                    </form>
-                    <div style="margin-top:20px; text-align:center; font-size:0.9rem;">
-                        <a href="#" style="color:#007bff; text-decoration:none; margin-right: 10px;">Get the Archivehubs App</a>
-                        <span style="color:#222;"> <b>General Terms</b></span>
+                <div class="professional-fields-group">
+                    <div class="form-group" id="backgroundGroup" style="display: none;">
+                        <label id="backgroundLabel">Background</label>
+                        <select id="backgroundSelect">
+                            <option value="" disabled selected>Select background</option>
+                        </select>
+                        <input type="text" id="otherBackgroundInput" placeholder="Please specify" style="display:none;" />
                     </div>
-                    <div style="margin-top:8px; text-align:center; font-size:0.85rem; color:#222;">
-                        ARCHIVEHUBS: ENINK Investment Limited &copy; 2025 <b>RC 1741345</b>
+
+                    <div class="form-group" id="interestGroup" style="display: none;">
+                        <label id="interestLabel">Interest</label>
+                        <select id="interestSelect">
+                            <option value="" disabled selected>Select interest</option>
+                        </select>
+                        <input type="text" id="otherInterestInput" placeholder="Please specify" style="display:none;" />
                     </div>
+                </div>
+
+                <div class="form-nav" style="flex-direction: column; gap: 10px;">
+                    <button type="button" class="back-btn" id="backToStep2Individual">Back</button>
+                    <button type="button" class="confirm-account-btn" id="confirmIndividualAccountBtn">
+                        <span class="button-content">
+                            Confirm Account
+                            <span class="loading-spinner" id="individualSpinner"></span>
+                        </span>
+                    </button>
                 </div>
             </div>
         </form>
@@ -899,373 +524,389 @@
     </div>
 </div>
 
-   <script>
+<script>
+    const API_BASE_URL = 'https://13.49.221.111';
+    let userId = null;
+    let selectedAccountType = null;
+
+    // Professional Status Configuration
+    const professionalStatusConfig = {
+        'student': {
+            background: {
+                label: 'Student Background',
+                options: [
+                    { value: 'basic-education', label: 'Basic Education' },
+                    { value: 'secondary-education', label: 'Secondary Education' },
+                    { value: 'tertiary-education', label: 'Tertiary Education' },
+                    { value: 'others', label: 'Others' }
+                ]
+            },
+            interest: {
+                label: 'Interest',
+                options: [
+                    { value: 'arts', label: 'Arts' },
+                    { value: 'sciences', label: 'Sciences' },
+                    { value: 'social-sciences', label: 'Social Sciences' },
+                    { value: 'engineering', label: 'Engineering' },
+                    { value: 'others', label: 'Others' }
+                ]
+            }
+        },
+        'unemployed': {
+            background: {
+                label: 'Unemployment Background',
+                options: [
+                    { value: 'able-willing-work', label: 'Able and willing to work' },
+                    { value: 'disabled-willing-work', label: 'Disabled but willing to work' },
+                    { value: 'disabled-cannot-work', label: 'Disabled and cannot work' },
+                    { value: 'others', label: 'Others' }
+                ]
+            },
+            interest: {
+                label: 'Interest',
+                options: [
+                    { value: 'career-development', label: 'Job (Career Development)' },
+                    { value: 'skill-building', label: 'Skill Building' },
+                    { value: 'business-entrepreneurship', label: 'Business / Entrepreneurship' },
+                    { value: 'others', label: 'Others' }
+                ]
+            }
+        },
+        'employed': {
+            background: {
+                label: 'Employment Background',
+                options: [
+                    { value: 'professional-white-collar', label: 'Professional/White-Collar Jobs' },
+                    { value: 'skilled-trades-blue-collar', label: 'Skilled Trades/Blue-Collar Jobs' },
+                    { value: 'service-industry', label: 'Service Industry Jobs' },
+                    { value: 'healthcare', label: 'Healthcare Jobs' },
+                    { value: 'others', label: 'Others' }
+                ]
+            },
+            interest: {
+                label: 'Interest',
+                options: [
+                    { value: 'career-advancement', label: 'Career Advancement' },
+                    { value: 'skill-enhancement', label: 'Skill Enhancement' },
+                    { value: 'work-life-balance', label: 'Work-Life Balance' },
+                    { value: 'financial-growth', label: 'Financial Growth' },
+                    { value: 'others', label: 'Others' }
+                ]
+            }
+        },
+        'self-employed': {
+            background: {
+                label: 'Self-Employed Background',
+                options: [
+                    { value: 'skilled-trades-services', label: 'Skilled Trades & Services' },
+                    { value: 'freelancing-remote-work', label: 'Freelancing & Remote Work' },
+                    { value: 'retail-sales', label: 'Retail & Sales' },
+                    { value: 'agriculture-farming', label: 'Agriculture & Farming' },
+                    { value: 'others', label: 'Others' }
+                ]
+            },
+            interest: {
+                label: 'Interest',
+                options: [
+                    { value: 'business-growth-scaling', label: 'Business Growth & Scaling' },
+                    { value: 'financial-management', label: 'Financial Management' },
+                    { value: 'skill-development', label: 'Skill Development' },
+                    { value: 'marketing-branding', label: 'Marketing & Branding' },
+                    { value: 'others', label: 'Others' }
+                ]
+            }
+        },
+        'retired': {
+            background: {
+                label: 'Retirement Background',
+                options: [
+                    { value: 'voluntary-retirement', label: 'Voluntary Retirement' },
+                    { value: 'health-retirement', label: 'Health-related Retirement' },
+                    { value: 'mandatory-retirement', label: 'Mandatory Retirement Age' },
+                    { value: 'others', label: 'Others' }
+                ]
+            },
+            interest: {
+                label: 'Interest',
+                options: [
+                    { value: 'hobbies-leisure', label: 'Hobbies & Leisure' },
+                    { value: 'volunteering', label: 'Volunteering' },
+                    { value: 'part-time-work', label: 'Part-time Work' },
+                    { value: 'health-wellness', label: 'Health & Wellness' },
+                    { value: 'others', label: 'Others' }
+                ]
+            }
+        }
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
-        // Multi-step form logic
         const parts = document.querySelectorAll('.form-part');
         let currentPart = 0;
 
-        // Add phone number formatting functionality
-        const countrySelect = document.getElementById('countrySelect');
-        const phoneInput = document.getElementById('phone');
-        const phoneError = document.getElementById('phoneError');
-        const countryDropdown = document.querySelector('.directory-group select:last-child');
-        const stateDropdown = document.querySelector('.directory-group select:last-of-type');
+        function showPart(index) {
+            parts.forEach((part, i) => {
+                part.classList.toggle('active', i === index);
+                part.classList.toggle('left', i < index);
+                part.classList.toggle('right', i > index);
+            });
+        }
 
-        // Define states/provinces for each country
-            const statesByCountry = {
-                'US': [
-                    { value: 'AL', label: 'Alabama' },
-                    { value: 'AK', label: 'Alaska' },
-                    { value: 'AZ', label: 'Arizona' },
-                    { value: 'AR', label: 'Arkansas' },
-                    { value: 'CA', label: 'California' },
-                    { value: 'CO', label: 'Colorado' },
-                    { value: 'CT', label: 'Connecticut' },
-                    { value: 'DE', label: 'Delaware' },
-                    { value: 'FL', label: 'Florida' },
-                    { value: 'GA', label: 'Georgia' },
-                    { value: 'HI', label: 'Hawaii' },
-                    { value: 'ID', label: 'Idaho' },
-                    { value: 'IL', label: 'Illinois' },
-                    { value: 'IN', label: 'Indiana' },
-                    { value: 'IA', label: 'Iowa' },
-                    { value: 'KS', label: 'Kansas' },
-                    { value: 'KY', label: 'Kentucky' },
-                    { value: 'LA', label: 'Louisiana' },
-                    { value: 'ME', label: 'Maine' },
-                    { value: 'MD', label: 'Maryland' },
-                    { value: 'MA', label: 'Massachusetts' },
-                    { value: 'MI', label: 'Michigan' },
-                    { value: 'MN', label: 'Minnesota' },
-                    { value: 'MS', label: 'Mississippi' },
-                    { value: 'MO', label: 'Missouri' },
-                    { value: 'MT', label: 'Montana' },
-                    { value: 'NE', label: 'Nebraska' },
-                    { value: 'NV', label: 'Nevada' },
-                    { value: 'NH', label: 'New Hampshire' },
-                    { value: 'NJ', label: 'New Jersey' },
-                    { value: 'NM', label: 'New Mexico' },
-                    { value: 'NY', label: 'New York' },
-                    { value: 'NC', label: 'North Carolina' },
-                    { value: 'ND', label: 'North Dakota' },
-                    { value: 'OH', label: 'Ohio' },
-                    { value: 'OK', label: 'Oklahoma' },
-                    { value: 'OR', label: 'Oregon' },
-                    { value: 'PA', label: 'Pennsylvania' },
-                    { value: 'RI', label: 'Rhode Island' },
-                    { value: 'SC', label: 'South Carolina' },
-                    { value: 'SD', label: 'South Dakota' },
-                    { value: 'TN', label: 'Tennessee' },
-                    { value: 'TX', label: 'Texas' },
-                    { value: 'UT', label: 'Utah' },
-                    { value: 'VT', label: 'Vermont' },
-                    { value: 'VA', label: 'Virginia' },
-                    { value: 'WA', label: 'Washington' },
-                    { value: 'WV', label: 'West Virginia' },
-                    { value: 'WI', label: 'Wisconsin' },
-                    { value: 'WY', label: 'Wyoming' }
-                ],
-                'CA': [
-                    { value: 'AB', label: 'Alberta' },
-                    { value: 'BC', label: 'British Columbia' },
-                    { value: 'MB', label: 'Manitoba' },
-                    { value: 'NB', label: 'New Brunswick' },
-                    { value: 'NL', label: 'Newfoundland and Labrador' },
-                    { value: 'NS', label: 'Nova Scotia' },
-                    { value: 'ON', label: 'Ontario' },
-                    { value: 'PE', label: 'Prince Edward Island' },
-                    { value: 'QC', label: 'Quebec' },
-                    { value: 'SK', label: 'Saskatchewan' },
-                    { value: 'NT', label: 'Northwest Territories' },
-                    { value: 'NU', label: 'Nunavut' },
-                    { value: 'YT', label: 'Yukon' }
-                ],
-                'AU': [
-                    { value: 'NSW', label: 'New South Wales' },
-                    { value: 'VIC', label: 'Victoria' },
-                    { value: 'QLD', label: 'Queensland' },
-                    { value: 'WA', label: 'Western Australia' },
-                    { value: 'SA', label: 'South Australia' },
-                    { value: 'TAS', label: 'Tasmania' },
-                    { value: 'ACT', label: 'Australian Capital Territory' },
-                    { value: 'NT', label: 'Northern Territory' }
-                ],
-                'GB': [
-                    { value: 'ENG', label: 'England' },
-                    { value: 'SCT', label: 'Scotland' },
-                    { value: 'WLS', label: 'Wales' },
-                    { value: 'NIR', label: 'Northern Ireland' }
-                ],
-                'IN': [
-                    { value: 'AN', label: 'Andaman and Nicobar Islands' },
-                    { value: 'AP', label: 'Andhra Pradesh' },
-                    { value: 'AR', label: 'Arunachal Pradesh' },
-                    { value: 'AS', label: 'Assam' },
-                    { value: 'BR', label: 'Bihar' },
-                    { value: 'CH', label: 'Chandigarh' },
-                    { value: 'CT', label: 'Chhattisgarh' },
-                    { value: 'DL', label: 'Delhi' },
-                    { value: 'GA', label: 'Goa' },
-                    { value: 'GJ', label: 'Gujarat' },
-                    { value: 'HR', label: 'Haryana' },
-                    { value: 'HP', label: 'Himachal Pradesh' },
-                    { value: 'JK', label: 'Jammu and Kashmir' },
-                    { value: 'JH', label: 'Jharkhand' },
-                    { value: 'KA', label: 'Karnataka' },
-                    { value: 'KL', label: 'Kerala' },
-                    { value: 'MP', label: 'Madhya Pradesh' },
-                    { value: 'MH', label: 'Maharashtra' },
-                    { value: 'MN', label: 'Manipur' },
-                    { value: 'ML', label: 'Meghalaya' },
-                    { value: 'MZ', label: 'Mizoram' },
-                    { value: 'NL', label: 'Nagaland' },
-                    { value: 'OR', label: 'Odisha' },
-                    { value: 'PY', label: 'Puducherry' },
-                    { value: 'PB', label: 'Punjab' },
-                    { value: 'RJ', label: 'Rajasthan' },
-                    { value: 'SK', label: 'Sikkim' },
-                    { value: 'TN', label: 'Tamil Nadu' },
-                    { value: 'TG', label: 'Telangana' },
-                    { value: 'TR', label: 'Tripura' },
-                    { value: 'UP', label: 'Uttar Pradesh' },
-                    { value: 'UT', label: 'Uttarakhand' },
-                    { value: 'WB', label: 'West Bengal' }
-                ],
-                'CN': [
-                    { value: 'BJ', label: 'Beijing' },
-                    { value: 'SH', label: 'Shanghai' },
-                    { value: 'GD', label: 'Guangdong' },
-                    { value: 'JS', label: 'Jiangsu' },
-                    { value: 'ZJ', label: 'Zhejiang' },
-                    { value: 'SD', label: 'Shandong' },
-                    { value: 'HN', label: 'Henan' },
-                    { value: 'SC', label: 'Sichuan' },
-                    { value: 'HB', label: 'Hubei' },
-                    { value: 'FJ', label: 'Fujian' },
-                    { value: 'HE', label: 'Hebei' },
-                    { value: 'AH', label: 'Anhui' },
-                    { value: 'JX', label: 'Jiangxi' },
-                    { value: 'CQ', label: 'Chongqing' },
-                    { value: 'SX', label: 'Shanxi' },
-                    { value: 'YN', label: 'Yunnan' },
-                    { value: 'GX', label: 'Guangxi' },
-                    { value: 'GZ', label: 'Guizhou' },
-                    { value: 'HI', label: 'Hainan' },
-                    { value: 'XJ', label: 'Xinjiang' },
-                    { value: 'NX', label: 'Ningxia' },
-                    { value: 'QH', label: 'Qinghai' },
-                    { value: 'GS', label: 'Gansu' },
-                    { value: 'XZ', label: 'Tibet' }
-                ],
-                'BR': [
-                    { value: 'AC', label: 'Acre' },
-                    { value: 'AL', label: 'Alagoas' },
-                    { value: 'AP', label: 'Amapá' },
-                    { value: 'AM', label: 'Amazonas' },
-                    { value: 'BA', label: 'Bahia' },
-                    { value: 'CE', label: 'Ceará' },
-                    { value: 'DF', label: 'Distrito Federal' },
-                    { value: 'ES', label: 'Espírito Santo' },
-                    { value: 'GO', label: 'Goiás' },
-                    { value: 'MA', label: 'Maranhão' },
-                    { value: 'MT', label: 'Mato Grosso' },
-                    { value: 'MS', label: 'Mato Grosso do Sul' },
-                    { value: 'MG', label: 'Minas Gerais' },
-                    { value: 'PA', label: 'Pará' },
-                    { value: 'PB', label: 'Paraíba' },
-                    { value: 'PR', label: 'Paraná' },
-                    { value: 'PE', label: 'Pernambuco' },
-                    { value: 'PI', label: 'Piauí' },
-                    { value: 'RJ', label: 'Rio de Janeiro' },
-                    { value: 'RN', label: 'Rio Grande do Norte' },
-                    { value: 'RS', label: 'Rio Grande do Sul' },
-                    { value: 'RO', label: 'Rondônia' },
-                    { value: 'RR', label: 'Roraima' },
-                    { value: 'SC', label: 'Santa Catarina' },
-                    { value: 'SP', label: 'São Paulo' },
-                    { value: 'SE', label: 'Sergipe' },
-                    { value: 'TO', label: 'Tocantins' }
-                ],
-                'MX': [
-                    { value: 'AGU', label: 'Aguascalientes' },
-                    { value: 'BCN', label: 'Baja California' },
-                    { value: 'BCS', label: 'Baja California Sur' },
-                    { value: 'CAM', label: 'Campeche' },
-                    { value: 'CHP', label: 'Chiapas' },
-                    { value: 'CHH', label: 'Chihuahua' },
-                    { value: 'CMX', label: 'Ciudad de México' },
-                    { value: 'COA', label: 'Coahuila' },
-                    { value: 'COL', label: 'Colima' },
-                    { value: 'DUR', label: 'Durango' },
-                    { value: 'GUA', label: 'Guanajuato' },
-                    { value: 'GRO', label: 'Guerrero' },
-                    { value: 'HID', label: 'Hidalgo' },
-                    { value: 'JAL', label: 'Jalisco' },
-                    { value: 'MEX', label: 'Estado de México' },
-                    { value: 'MIC', label: 'Michoacán' },
-                    { value: 'MOR', label: 'Morelos' },
-                    { value: 'NAY', label: 'Nayarit' },
-                    { value: 'NLE', label: 'Nuevo León' },
-                    { value: 'OAX', label: 'Oaxaca' },
-                    { value: 'PUE', label: 'Puebla' },
-                    { value: 'QUE', label: 'Querétaro' },
-                    { value: 'ROO', label: 'Quintana Roo' },
-                    { value: 'SLP', label: 'San Luis Potosí' },
-                    { value: 'SIN', label: 'Sinaloa' },
-                    { value: 'SON', label: 'Sonora' },
-                    { value: 'TAB', label: 'Tabasco' },
-                    { value: 'TAM', label: 'Tamaulipas' },
-                    { value: 'TLA', label: 'Tlaxcala' },
-                    { value: 'VER', label: 'Veracruz' },
-                    { value: 'YUC', label: 'Yucatán' },
-                    { value: 'ZAC', label: 'Zacatecas' }
-                ]
-            };
+        // Step 1: Create User Account
+        document.getElementById('nextBtn').addEventListener('click', async function() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const otherName = document.getElementById('otherName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const phone = document.getElementById('phone').value.trim();
+            const sex = document.getElementById('sex').value;
+            const country = document.getElementById('country').value;
+            const state = document.getElementById('state').value;
+            const terms = document.getElementById('termsCheckbox').checked;
+            const errorEl = document.getElementById('part1Error');
 
-        // Professional Status Configuration
-        const professionalStatusConfig = {
-            'student': {
-                background: {
-                    label: 'Select your student background',
-                    options: [
-                        { value: 'basic-education', label: 'Basic Education' },
-                        { value: 'secondary-education', label: 'Secondary Education' },
-                        { value: 'tertiary-education', label: 'Tertiary Education' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                },
-                interest: {
-                    label: 'Select your Interest',
-                    options: [
-                        { value: 'arts', label: 'Arts' },
-                        { value: 'sciences', label: 'Sciences' },
-                        { value: 'social-sciences', label: 'Social Sciences' },
-                        { value: 'engineering', label: 'Engineering' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                }
-            },
-            'unemployed': {
-                background: {
-                    label: 'Select your unemployment background',
-                    options: [
-                        { value: 'able-willing-work', label: 'Able and willing work' },
-                        { value: 'disabled-willing-work', label: 'Disabled but willing to work' },
-                        { value: 'disabled-cannot-work', label: 'Disabled and cannot work' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                },
-                interest: {
-                    label: 'Select your Interest',
-                    options: [
-                        { value: 'career-development', label: 'Job (Career Development)' },
-                        { value: 'skill-building', label: 'Skill Building' },
-                        { value: 'business-entrepreneurship', label: 'Business / Entrepreneurship' },
-                        { value: 'marketing-sales', label: 'Marketing / Sales' },
-                        { value: 'education-training', label: 'Education and Training' },
-                        { value: 'personal-development', label: 'Personal Development' },
-                        { value: 'digital-literacy', label: 'Digital Literacy' },
-                        { value: 'internships-apprenticeships', label: 'Internships or Apprenticeships' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                }
-            },
-            'employed': {
-                background: {
-                    label: 'Select your employment background',
-                    options: [
-                        { value: 'professional-white-collar', label: 'Professional/White-Collar Jobs' },
-                        { value: 'skilled-trades-blue-collar', label: 'Skilled Trades/Blue-Collar Jobs' },
-                        { value: 'service-industry', label: 'Service Industry Jobs' },
-                        { value: 'manual-labor', label: 'Manual Labor Jobs' },
-                        { value: 'technology-it', label: 'Technology & IT Jobs' },
-                        { value: 'sales-marketing', label: 'Sales & Marketing Jobs' },
-                        { value: 'education-training', label: 'Education & Training Jobs' },
-                        { value: 'creative', label: 'Creative Jobs' },
-                        { value: 'transport-logistics', label: 'Transport & Logistics Jobs' },
-                        { value: 'science-research', label: 'Science & Research Jobs' },
-                        { value: 'public-service-security', label: 'Public Service & Security Jobs' },
-                        { value: 'healthcare', label: 'Healthcare Jobs' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                },
-                interest: {
-                    label: 'Select your Interest',
-                    options: [
-                        { value: 'career-advancement', label: 'Career Advancement' },
-                        { value: 'skill-enhancement', label: 'Skill Enhancement' },
-                        { value: 'work-life-balance', label: 'Work-Life Balance' },
-                        { value: 'financial-growth', label: 'Financial Growth' },
-                        { value: 'entrepreneurship', label: 'Entrepreneurship' },
-                        { value: 'networking-mentorship', label: 'Networking & Mentorship' },
-                        { value: 'education', label: 'Education' },
-                        { value: 'personal-development', label: 'Personal Development' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                }
-            },
-            'self-employed': {
-                background: {
-                    label: 'Select your self-employed background',
-                    options: [
-                        { value: 'skilled-trades-services', label: 'Skilled Trades & Services' },
-                        { value: 'freelancing-remote-work', label: 'Freelancing & Remote Work' },
-                        { value: 'retail-sales', label: 'Retail & Sales' },
-                        { value: 'agriculture-farming', label: 'Agriculture & Farming' },
-                        { value: 'crafts-production', label: 'Crafts & Production' },
-                        { value: 'consulting-training', label: 'Consulting & Training' },
-                        { value: 'transport-logistics', label: 'Transport & Logistics' },
-                        { value: 'food-hospitality', label: 'Food & Hospitality' },
-                        { value: 'real-estate-property', label: 'Real Estate & Property' },
-                        { value: 'digital-online-businesses', label: 'Digital & Online Businesses' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                },
-                interest: {
-                    label: 'Select your Interest',
-                    options: [
-                        { value: 'business-growth-scaling', label: 'Business Growth & Scaling' },
-                        { value: 'financial-management', label: 'Financial Management' },
-                        { value: 'skill-development', label: 'Skill Development' },
-                        { value: 'legal-regulatory-compliance', label: 'Legal & Regulatory Compliance' },
-                        { value: 'technology-tools', label: 'Technology & Tools' },
-                        { value: 'marketing-branding', label: 'Marketing & Branding' },
-                        { value: 'networking-partnerships', label: 'Networking & Partnerships' },
-                        { value: 'work-life-balance-self-care', label: 'Work-Life Balance & Self-Care' },
-                        { value: 'innovation-trend-awareness', label: 'Innovation & Trend Awareness' }
-                    ]
-                }
-            },
-            'retired': {
-                background: {
-                    label: 'Select your retirement background',
-                    options: [
-                        { value: 'voluntary-retirement', label: 'Voluntary Retirement' },
-                        { value: 'health-retirement', label: 'Health-related Retirement' },
-                        { value: 'mandatory-retirement', label: 'Mandatory Retirement Age' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                },
-                interest: {
-                    label: 'Select your Interest',
-                    options: [
-                        { value: 'hobbies-leisure', label: 'Hobbies & Leisure' },
-                        { value: 'volunteering', label: 'Volunteering' },
-                        { value: 'part-time-work', label: 'Part-time Work' },
-                        { value: 'health-wellness', label: 'Health & Wellness' },
-                        { value: 'travel', label: 'Travel' },
-                        { value: 'learning', label: 'Learning & Education' },
-                        { value: 'family-community', label: 'Family & Community' },
-                        { value: 'others', label: 'Others' }
-                    ]
-                }
+            errorEl.textContent = '';
+
+            // Validation
+            if (!firstName || !lastName || !email || !password || !confirmPassword || !phone || !sex || !country || !state) {
+                errorEl.textContent = 'Please fill in all required fields';
+                return;
             }
-        };
 
-        // Function to update professional status fields
-        function updateProfessionalStatusFields(status) {
-            const config = professionalStatusConfig[status];
+            if (password !== confirmPassword) {
+                errorEl.textContent = 'Passwords do not match';
+                return;
+            }
+
+            if (password.length < 8) {
+                errorEl.textContent = 'Password must be at least 8 characters';
+                return;
+            }
+
+            if (!terms) {
+                errorEl.textContent = 'Please accept the terms and conditions';
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorEl.textContent = 'Please enter a valid email address';
+                return;
+            }
+
+            // Phone validation (basic)
+            if (phone.length < 10) {
+                errorEl.textContent = 'Please enter a valid phone number';
+                return;
+            }
+
+            // Show loading
+            this.disabled = true;
+            document.getElementById('nextSpinner').style.display = 'inline-block';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        otherName,
+                        email,
+                        password,
+                        phoneNumber: phone,
+                        sex,
+                        country,
+                        state_province: state,
+                        account_type: 'pending' // Will be set in next step
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || data.error || 'Failed to create account');
+                }
+
+                userId = data.userId;
+                currentPart = 1;
+                showPart(currentPart);
+
+            } catch (error) {
+                errorEl.textContent = error.message || 'An error occurred. Please try again.';
+            } finally {
+                this.disabled = false;
+                document.getElementById('nextSpinner').style.display = 'none';
+            }
+        });
+
+        // Account Type Selection
+        document.querySelectorAll('.account-type-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.account-type-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                selectedAccountType = this.dataset.type;
+
+                setTimeout(() => {
+                    if (selectedAccountType === 'corporate') {
+                        currentPart = 2;
+                    } else {
+                        currentPart = 3;
+                    }
+                    showPart(currentPart);
+                }, 300);
+            });
+        });
+
+        // Back buttons
+        document.getElementById('backToStep1').addEventListener('click', () => {
+            currentPart = 0;
+            showPart(currentPart);
+        });
+
+        document.getElementById('backToStep2Corporate').addEventListener('click', () => {
+            currentPart = 1;
+            showPart(currentPart);
+        });
+
+        document.getElementById('backToStep2Individual').addEventListener('click', () => {
+            currentPart = 1;
+            showPart(currentPart);
+        });
+
+        // Corporate Account Type Change Handler
+        document.getElementById('corporateAccountType').addEventListener('change', function() {
+            const otherInput = document.getElementById('otherCorporateAccountTypeInput');
+            if (this.value === 'others') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
+                otherInput.value = '';
+            }
+        });
+
+        // Organization Select Handler
+        document.getElementById('organizationSelect').addEventListener('change', function() {
+            const otherInput = document.getElementById('otherOrganizationInput');
+            if (this.value === 'others') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
+                otherInput.value = '';
+            }
+        });
+
+        // Sector Select Handler
+        document.getElementById('privateSectorSelect').addEventListener('change', function() {
+            const otherInput = document.getElementById('otherPrivateSectorInput');
+            if (this.value === 'others') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
+                otherInput.value = '';
+            }
+        });
+
+        // Confirm Corporate Account
+        document.getElementById('confirmCorporateAccountBtn').addEventListener('click', async function() {
+            const accountType = document.getElementById('corporateAccountType').value;
+            const accountTypeOther = document.getElementById('otherCorporateAccountTypeInput').value.trim();
+            const organization = document.getElementById('organizationSelect').value;
+            const organizationOther = document.getElementById('otherOrganizationInput').value.trim();
+            const sector = document.getElementById('privateSectorSelect').value;
+            const sectorOther = document.getElementById('otherPrivateSectorInput').value.trim();
+            const errorEl = document.getElementById('part3Error');
+            const successEl = document.getElementById('part3Success');
+
+            errorEl.textContent = '';
+            successEl.textContent = '';
+
+            // Validation
+            if (!accountType || !organization || !sector) {
+                errorEl.textContent = 'Please fill in all required fields';
+                return;
+            }
+
+            if (accountType === 'others' && !accountTypeOther) {
+                errorEl.textContent = 'Please specify your corporate account type';
+                return;
+            }
+
+            if (organization === 'others' && !organizationOther) {
+                errorEl.textContent = 'Please specify your organization';
+                return;
+            }
+
+            if (sector === 'others' && !sectorOther) {
+                errorEl.textContent = 'Please specify your sector';
+                return;
+            }
+
+            if (!userId) {
+                errorEl.textContent = 'Session expired. Please start over.';
+                return;
+            }
+
+            // Show loading
+            this.disabled = true;
+            document.getElementById('corporateSpinner').style.display = 'inline-block';
+
+            try {
+                const finalAccountType = accountType === 'others' ? accountTypeOther : accountType;
+                const finalOrganization = organization === 'others' ? organizationOther : organization;
+                const finalSector = sector === 'others' ? sectorOther : sector;
+
+                const response = await fetch(`${API_BASE_URL}/account/create-corporate-account`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        account_type: finalAccountType,
+                        organization: finalOrganization,
+                        sector: finalSector,
+                        userId: userId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || data.error || 'Failed to create corporate account');
+                }
+
+                successEl.textContent = 'Account created successfully! Redirecting...';
+                
+                setTimeout(() => {
+                    window.location.href = 'loading.html';
+                }, 1500);
+
+            } catch (error) {
+                errorEl.textContent = error.message || 'An error occurred. Please try again.';
+            } finally {
+                this.disabled = false;
+                document.getElementById('corporateSpinner').style.display = 'none';
+            }
+        });
+
+        // Professional Status Change Handler
+        document.getElementById('professionalStatus').addEventListener('change', function() {
+            const status = this.value;
+            const otherInput = document.getElementById('otherProfessionalStatusInput');
             const backgroundGroup = document.getElementById('backgroundGroup');
             const interestGroup = document.getElementById('interestGroup');
             const backgroundSelect = document.getElementById('backgroundSelect');
@@ -1273,320 +914,171 @@
             const backgroundLabel = document.getElementById('backgroundLabel');
             const interestLabel = document.getElementById('interestLabel');
 
-            if (config && backgroundSelect && interestSelect) {
-                // Update labels
-                backgroundLabel.textContent = config.background.label;
-                interestLabel.textContent = config.interest.label;
+            // Handle "Others" input
+            if (status === 'others') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+                backgroundGroup.style.display = 'none';
+                interestGroup.style.display = 'none';
+                backgroundSelect.required = false;
+                interestSelect.required = false;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
+                otherInput.value = '';
 
-                // Clear existing options
-                backgroundSelect.innerHTML = '<option value="" disabled selected>Select your background</option>';
-                interestSelect.innerHTML = '<option value="" disabled selected>Select your interest</option>';
+                // Update background and interest fields
+                const config = professionalStatusConfig[status];
+                if (config) {
+                    // Update labels
+                    backgroundLabel.textContent = config.background.label;
+                    interestLabel.textContent = config.interest.label;
 
-                // Add new background options
-                config.background.options.forEach(option => {
-                    const opt = new Option(option.label, option.value);
-                    backgroundSelect.add(opt);
-                });
+                    // Clear and populate background options
+                    backgroundSelect.innerHTML = '<option value="" disabled selected>Select background</option>';
+                    config.background.options.forEach(option => {
+                        const opt = new Option(option.label, option.value);
+                        backgroundSelect.add(opt);
+                    });
 
-                // Add new interest options
-                config.interest.options.forEach(option => {
-                    const opt = new Option(option.label, option.value);
-                    interestSelect.add(opt);
-                });
+                    // Clear and populate interest options
+                    interestSelect.innerHTML = '<option value="" disabled selected>Select interest</option>';
+                    config.interest.options.forEach(option => {
+                        const opt = new Option(option.label, option.value);
+                        interestSelect.add(opt);
+                    });
 
-                // Show both groups
-                backgroundGroup.style.display = 'block';
-                interestGroup.style.display = 'block';
+                    // Show groups
+                    backgroundGroup.style.display = 'block';
+                    interestGroup.style.display = 'block';
+                    backgroundSelect.required = true;
+                    interestSelect.required = true;
 
-                // Set required attributes
-                backgroundSelect.required = true;
-                interestSelect.required = true;
-
-                // Clear "Others" input fields
-                const otherBackgroundInput = document.getElementById('otherBackgroundInput');
-                const otherInterestInput = document.getElementById('otherInterestInput');
-                if (otherBackgroundInput) {
-                    otherBackgroundInput.style.display = 'none';
-                    otherBackgroundInput.removeAttribute('required');
-                    otherBackgroundInput.value = '';
+                    // Hide "Others" inputs
+                    document.getElementById('otherBackgroundInput').style.display = 'none';
+                    document.getElementById('otherInterestInput').style.display = 'none';
                 }
-                if (otherInterestInput) {
-                    otherInterestInput.style.display = 'none';
-                    otherInterestInput.removeAttribute('required');
-                    otherInterestInput.value = '';
+            }
+        });
+
+        // Background Select Handler
+        document.getElementById('backgroundSelect').addEventListener('change', function() {
+            const otherInput = document.getElementById('otherBackgroundInput');
+            if (this.value === 'others') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
+                otherInput.value = '';
+            }
+        });
+
+        // Interest Select Handler
+        document.getElementById('interestSelect').addEventListener('change', function() {
+            const otherInput = document.getElementById('otherInterestInput');
+            if (this.value === 'others') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
+                otherInput.value = '';
+            }
+        });
+
+        // Confirm Individual Account
+        document.getElementById('confirmIndividualAccountBtn').addEventListener('click', async function() {
+            const status = document.getElementById('professionalStatus').value;
+            const statusOther = document.getElementById('otherProfessionalStatusInput').value.trim();
+            const background = document.getElementById('backgroundSelect').value;
+            const backgroundOther = document.getElementById('otherBackgroundInput').value.trim();
+            const interest = document.getElementById('interestSelect').value;
+            const interestOther = document.getElementById('otherInterestInput').value.trim();
+            const errorEl = document.getElementById('part4Error');
+            const successEl = document.getElementById('part4Success');
+
+            errorEl.textContent = '';
+            successEl.textContent = '';
+
+            // Validation
+            if (!status) {
+                errorEl.textContent = 'Please select your professional status';
+                return;
+            }
+
+            if (status === 'others') {
+                if (!statusOther) {
+                    errorEl.textContent = 'Please specify your professional status';
+                    return;
                 }
             } else {
-                // Hide both groups if no config found
-                if (backgroundGroup) backgroundGroup.style.display = 'none';
-                if (interestGroup) interestGroup.style.display = 'none';
-                if (backgroundSelect) backgroundSelect.required = false;
-                if (interestSelect) interestSelect.required = false;
+                if (!background || !interest) {
+                    errorEl.textContent = 'Please fill in all required fields';
+                    return;
+                }
+
+                if (background === 'others' && !backgroundOther) {
+                    errorEl.textContent = 'Please specify your background';
+                    return;
+                }
+
+                if (interest === 'others' && !interestOther) {
+                    errorEl.textContent = 'Please specify your interest';
+                    return;
+                }
             }
 
-            // Update confirm button state
-            const individualConfirmationForm = document.getElementById('individualConfirmationForm');
-            if (individualConfirmationForm) {
-                updateIndividualConfirmAccountBtnState(individualConfirmationForm);
-            }
-        }
-
-        // Function to update state/province dropdown
-        function updateStateDropdown(countryCode) {
-            while (stateDropdown.options.length > 1) {
-                stateDropdown.remove(1);
+            if (!userId) {
+                errorEl.textContent = 'Session expired. Please start over.';
+                return;
             }
 
-            const states = statesByCountry[countryCode];
-            
-            if (states) {
-                states.forEach(state => {
-                    const option = new Option(state.label, state.value);
-                    stateDropdown.add(option);
+            // Show loading
+            this.disabled = true;
+            document.getElementById('individualSpinner').style.display = 'inline-block';
+
+            try {
+                const finalStatus = status === 'others' ? statusOther : status;
+                const finalBackground = background === 'others' ? backgroundOther : background;
+                const finalInterest = interest === 'others' ? interestOther : interest;
+
+                const response = await fetch(`${API_BASE_URL}/account/create-individual-account`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        status_title: finalStatus,
+                        status_background: finalBackground || '',
+                        interests: [finalInterest || ''],
+                        userId: userId
+                    })
                 });
-                stateDropdown.disabled = false;
-            } else {
-                const option = new Option('Not Applicable', 'NA');
-                stateDropdown.add(option);
-                stateDropdown.disabled = true;
-            }
-        }
 
-        // Add event listener for country selection in directory-group
-        countryDropdown.addEventListener('change', function() {
-            const selectedCountry = this.value;
-            updateStateDropdown(selectedCountry);
-        });
+                const data = await response.json();
 
-        // Initialize state dropdown based on default country selection
-        if (countryDropdown.value) {
-            updateStateDropdown(countryDropdown.value);
-        }
-
-        // Phone number functionality
-        countrySelect.addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const countryCode = selectedOption.text.match(/\+(\d+)/)[1];
-            
-            phoneError.textContent = '';
-            
-            let currentNumber = phoneInput.value.replace(/^\+\d+\s*/, '');
-            phoneInput.value = `+${countryCode} ${currentNumber}`;
-        });
-
-        phoneInput.addEventListener('input', function(e) {
-            let value = this.value.replace(/[^\d+]/g, '');
-            
-            if (value.indexOf('+') > 0) {
-                value = value.replace(/\+/g, '');
-                value = '+' + value;
-            }
-            
-            if (value.length > 3) {
-                value = value.replace(/(\+\d{1,3})(\d{3})(\d{3})(\d{4})/, '$1 $2 $3 $4');
-            }
-            
-            this.value = value;
-        });
-
-        phoneInput.addEventListener('blur', function() {
-            const value = this.value.trim();
-            if (value && !value.match(/^\+\d{1,3}\s\d{3}\s\d{3}\s\d{4}$/)) {
-                phoneError.textContent = 'Please enter a valid phone number with country code';
-            } else {
-                phoneError.textContent = '';
-            }
-        });
-
-        function showPart(index) {
-            parts.forEach((part, i) => {
-                part.classList.toggle('active', i === index);
-                part.classList.toggle('left', i < index);
-                part.classList.toggle('right', i > index);
-
-                if (part.classList.contains('active')) {
-                    part.style.display = 'block';
-                } else {
-                    part.style.display = 'none';
-                }
-            });
-
-            if (index === 3) {
-                setTimeout(() => {
-                    const individualConfirmationForm = document.getElementById('individualConfirmationForm');
-                    if (individualConfirmationForm) {
-                        attachIndividualConfirmAccountListeners(individualConfirmationForm);
-                        updateIndividualConfirmAccountBtnState(individualConfirmationForm);
-                    }
-                }, 200);
-            }
-        }
-
-        // Account type selection
-        document.querySelectorAll('.account-type-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.account-type-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                this.classList.add('selected');
-                document.querySelector('#part2 .signup-button').disabled = false;
-
-                if (this.dataset.type === 'corporate') {
-                    setTimeout(() => {
-                        currentPart = 2;
-                        showPart(currentPart);
-                    }, 350);
-                } else if (this.dataset.type === 'individual') {
-                    setTimeout(() => {
-                        currentPart = 3;
-                        showPart(currentPart);
-                    }, 350);
-                }
-            });
-        });
-
-        // Next button click handler
-        document.querySelector('#part1 .signup-button').addEventListener('click', () => {
-            const part1RequiredFields = document.querySelectorAll('#part1 input[required], #part1 select[required]');
-            let part1Valid = true;
-            part1RequiredFields.forEach(field => {
-                if (field.type === 'checkbox') {
-                    if (!field.checked) part1Valid = false;
-                } else if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
-                    part1Valid = false;
-                }
-            });
-
-            if (part1Valid) {
-                if (currentPart < parts.length - 1) {
-                    currentPart++;
-                    showPart(currentPart);
-                }
-            }
-        });
-
-        // Back button click handler
-        document.querySelector('#part2 .back-btn').addEventListener('click', () => {
-            if (currentPart > 0) {
-                currentPart--;
-                showPart(currentPart);
-            }
-        });
-
-        // Professional status change handler
-        const professionalStatus = document.getElementById('professionalStatus');
-        if (professionalStatus) {
-            professionalStatus.addEventListener('change', function() {
-                const status = this.value;
-                const otherProfessionalStatusInput = document.getElementById('otherProfessionalStatusInput');
-
-                // Handle "Others" input for professional status
-                if (status === 'others') {
-                    otherProfessionalStatusInput.style.display = 'block';
-                    otherProfessionalStatusInput.setAttribute('required', 'required');
-                } else {
-                    otherProfessionalStatusInput.style.display = 'none';
-                    otherProfessionalStatusInput.removeAttribute('required');
-                    otherProfessionalStatusInput.value = '';
+                if (!response.ok) {
+                    throw new Error(data.message || data.error || 'Failed to create individual account');
                 }
 
-                // Update background and interest fields based on status
-                updateProfessionalStatusFields(status);
-            });
-        }
-
-        // Handle "Others" option for background
-        const backgroundSelect = document.getElementById('backgroundSelect');
-        const otherBackgroundInput = document.getElementById('otherBackgroundInput');
-        if (backgroundSelect) {
-            backgroundSelect.addEventListener('change', function() {
-                if (this.value === 'others') {
-                    otherBackgroundInput.style.display = 'block';
-                    otherBackgroundInput.setAttribute('required', 'required');
-                } else {
-                    otherBackgroundInput.style.display = 'none';
-                    otherBackgroundInput.removeAttribute('required');
-                    otherBackgroundInput.value = '';
-                }
-                updateIndividualConfirmAccountBtnState(document.getElementById('individualConfirmationForm'));
-            });
-        }
-
-        // Handle "Others" option for interest
-        const interestSelect = document.getElementById('interestSelect');
-        const otherInterestInput = document.getElementById('otherInterestInput');
-        if (interestSelect) {
-            interestSelect.addEventListener('change', function() {
-                if (this.value === 'others') {
-                    otherInterestInput.style.display = 'block';
-                    otherInterestInput.setAttribute('required', 'required');
-                } else {
-                    otherInterestInput.style.display = 'none';
-                    otherInterestInput.removeAttribute('required');
-                    otherInterestInput.value = '';
-                }
-                updateIndividualConfirmAccountBtnState(document.getElementById('individualConfirmationForm'));
-            });
-        }
-
-        // Back button for individual confirmation
-        const backToStep2BtnIndividual = document.getElementById('backToStep2BtnIndividual');
-        if (backToStep2BtnIndividual) {
-            backToStep2BtnIndividual.addEventListener('click', function() {
-                currentPart = 1;
-                showPart(currentPart);
-            });
-        }
-
-        // Confirm Account button validation for Individual Account
-        const confirmIndividualAccountBtn = document.getElementById('confirmIndividualAccountBtn');
-        function updateIndividualConfirmAccountBtnState(individualConfirmationForm) {
-            let allFilled = true;
-            const requiredFields = individualConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
-            
-            requiredFields.forEach(field => {
-                if (!field.value || field.value.trim() === '' || field.value === field.querySelector('option[disabled][selected]')?.value) {
-                    allFilled = false;
-                }
-            });
-
-            // Check professional status specific fields
-            const professionalStatus = document.getElementById('professionalStatus');
-            if (professionalStatus && professionalStatus.value && professionalStatus.value !== 'others') {
-                const backgroundSelect = document.getElementById('backgroundSelect');
-                const interestSelect = document.getElementById('interestSelect');
+                successEl.textContent = 'Account created successfully! Redirecting...';
                 
-                if (backgroundSelect && !backgroundSelect.value) allFilled = false;
-                if (interestSelect && !interestSelect.value) allFilled = false;
-            }
+                setTimeout(() => {
+                    window.location.href = 'loading.html';
+                }, 1500);
 
-            confirmIndividualAccountBtn.disabled = !allFilled;
-            confirmIndividualAccountBtn.style.cursor = allFilled ? 'pointer' : 'not-allowed';
-            confirmIndividualAccountBtn.style.background = allFilled ? '#43b04a' : '#b0b3b8';
-            confirmIndividualAccountBtn.style.color = allFilled ? '#fff' : '#fff';
-        }
-
-        function attachIndividualConfirmAccountListeners(individualConfirmationForm) {
-            const individualConfirmationFormFields = individualConfirmationForm.querySelectorAll('select[required], input[type="text"][required]');
-            individualConfirmationFormFields.forEach(field => {
-                if (!field.hasListener) {
-                    field.addEventListener('input', () => updateIndividualConfirmAccountBtnState(individualConfirmationForm));
-                    field.addEventListener('change', () => updateIndividualConfirmAccountBtnState(individualConfirmationForm));
-                    field.hasListener = true;
-                }
-            });
-        }
-
-        // Handle form submission for individual account
-        confirmIndividualAccountBtn.addEventListener('click', function() {
-            const individualConfirmationForm = document.getElementById('individualConfirmationForm');
-            if (!this.disabled && individualConfirmationForm && individualConfirmationForm.checkValidity()) {
-                window.location.href = 'loading.html';
+            } catch (error) {
+                errorEl.textContent = error.message || 'An error occurred. Please try again.';
+            } finally {
+                this.disabled = false;
+                document.getElementById('individualSpinner').style.display = 'none';
             }
         });
 
         // Initialize
         showPart(currentPart);
-
     });
 </script>
 </body>
