@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/sign-in_account.css">
     <title>Archivehubs Sign In</title>
+    <style>
+        /* CSS to fix the password toggle positioning */
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        #togglePassword {
+            position: absolute;
+            right: 12px;
+            top: 38px; /* Adjust this based on your specific label height */
+            cursor: pointer;
+            font-size: 1.2rem;
+            user-select: none;
+            color: #666;
+            z-index: 10;
+        }
+
+        /* Error message box */
+        .error-box {
+            color: #d9534f;
+            background: #f9eded;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+            font-size: 0.9rem;
+            text-align: center;
+            border: 1px solid #d9534f;
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -12,22 +51,93 @@
         <p class="subtitle">Your Global Diary</p>
         <img src="images/header.jpg" alt="Archivehubs Logo" class="logo">
         <p class="account-text">Sign in</p>
+
+        <div id="error-message" class="error-box"></div>
         
-        <form>
+        <form id="loginForm">
             <label for="email">Email</label>
-            <input type="email" id="email" required>
+            <input type="email" id="email" name="email" placeholder="example@mail.com" required>
             
-            <label for="password">Password</label>
-            <input type="password" id="password" required>
+            <div class="password-wrapper">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <span id="togglePassword" title="Show/Hide Password">👁️</span>
+            </div>
             
             <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
             
-            <button type="submit" class="submit-btn" onclick="window.location.href='loading.html'">Submit</button>
+            <button type="submit" id="loginBtn" class="submit-btn">Submit</button>
             
             <p class="signup-text">
                 First - time user? <a href="create-account.html" class="signup-link">Sign up Here</a>
             </p>
         </form>
     </div>
+
+    <script>
+        
+        const BASE_URL = 'https://13.49.221.209'; 
+
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const errorBox = document.getElementById('error-message');
+
+        // 1. PASSWORD VISIBILITY TOGGLE LOGIC
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            // Switch icon based on state
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // 2. BACKEND API INTEGRATION (REDIS SESSION)
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            
+            errorBox.style.display = 'none';
+            const email = document.getElementById('email').value;
+            const password = passwordInput.value;
+
+            // Give user visual feedback
+            loginBtn.innerText = "Authenticating...";
+            loginBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    
+                    credentials: 'include', 
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+
+                if (response.ok) {
+                    // Success: Redirect to loading page
+                    window.location.href = 'loading.html';
+                } else {
+                    const data = await response.json();
+                    showError(data.message || 'Invalid email or password.');
+                }
+            } catch (error) {
+                console.error('Network Error:', error);
+                showError('Server connection failed. Please check your internet.');
+            } finally {
+                loginBtn.innerText = "Submit";
+                loginBtn.disabled = false;
+            }
+        });
+
+        function showError(msg) {
+            errorBox.textContent = msg;
+            errorBox.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
