@@ -2,9 +2,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #f8f8f8; /* optional - light background */
 }
 
 .login-container {
@@ -12,6 +13,9 @@ body {
     padding: 30px;
     text-align: center;
     width: 400px;
+    background-color: white;
+    border-radius: 8px; /* slight softening - optional */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* subtle depth - optional */
 }
 
 .logo {
@@ -23,30 +27,81 @@ body {
 h1 {
     margin: 0;
     font-size: 18px;
+    font-weight: bold;
 }
 
 .subtitle {
     margin: 5px 0 20px 0;
     font-size: 16px;
+    color: #555;
 }
 
 .account-text {
     font-style: italic;
     margin-bottom: 20px;
+    color: #333;
 }
 
+/* ── Consistent input styling for both email and password ── */
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
     width: 100%;
-    padding: 8px;
-    margin: 10px 0;
+    padding: 10px 12px;
+    margin: 6px 0 12px 0;
     box-sizing: border-box;
+    border: 1px solid #777;
+    border-radius: 4px;
+    font-size: 16px;
+    height: 44px;               /* fixed height - prevents resize on type change */
+    line-height: 1.5;
+}
+
+/* Make sure placeholder looks good */
+input::placeholder {
+    color: #aaa;
+    font-size: 15px;
 }
 
 label {
     display: block;
     text-align: left;
     color: #000;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+/* Password section specific */
+.password-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.password-field {
+    width: 100%;
+}
+
+.show-password-container {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.show-password-container input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    accent-color: #000;         /* matches your black theme better */
+    cursor: pointer;
+}
+
+.show-password-container label {
+    margin: 0;
+    cursor: pointer;
 }
 
 .forgot-password {
@@ -54,7 +109,8 @@ label {
     text-align: left;
     color: #000;
     text-decoration: none;
-    margin: 5px 0 15px 0;
+    margin: 5px 0 20px 0;
+    font-size: 0.95rem;
 }
 
 .forgot-password:hover {
@@ -64,18 +120,48 @@ label {
 .submit-btn {
     background-color: #000;
     color: white;
-    padding: 10px 30px;
+    padding: 12px 40px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 15px;
+    font-size: 16px;
+    margin: 10px 0 15px 0;
+    min-width: 140px;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #222;
+}
+
+.submit-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
 .signup-text {
     margin: 0;
+    font-size: 0.95rem;
 }
 
 .signup-link {
     color: #0000FF;
     text-decoration: none;
+    font-weight: 500;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* Error box */
+.error-box {
+    color: #d9534f;
+    background: #f9eded;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: none;
+    font-size: 0.9rem;
+    text-align: center;
+    border: 1px solid #d9534f;
 }
