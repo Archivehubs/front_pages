@@ -1,0 +1,5538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio Portfolio | Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f2ef;
+    color: #333;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+.footer .copyright{
+    color: #0a66c2;
+    margin-bottom: 0;
+}
+
+.footer .copyright2{
+    display: flex;
+    align-items: center;
+}
+
+.footer p{
+    margin-top: 0;
+}
+
+.footer .copyright2 img{
+    height: 2rem;
+    width: 5rem;
+}
+
+
+a, a:visited, a:active {
+    color: #0073b1 !important;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #005983 !important;
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #000;
+}
+
+h1 { font-size: 24px; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
+h4 { font-size: 14px; }
+
+p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+.profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px; /* space between left & right cards */
+    row-gap: 8px;     /* space between top, tabs, and content */
+    max-width: 1128px;
+    width: 100%;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.full-width-top {
+    flex: 0 0 100%;
+}
+
+/* Card Styling */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+    margin-bottom: 10px;
+    padding: 24px;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.primary-button {
+    background-color: #0a66c2;
+    color: #fff;
+    border-color: #0a66c2;
+}
+
+.primary-button:hover {
+    background-color: #004182;
+    border-color: #004182;
+}
+
+.secondary-button {
+    background-color: transparent;
+    color: #0a66c2;
+    border-color: #0a66c2;
+}
+
+.secondary-button:hover {
+    background-color: rgba(10,102,194,0.1);
+}
+
+.show-all {
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #666;
+}
+
+.show-all:hover {
+    background-color: #f9f9f9;
+    text-decoration: none;
+}
+
+.show-all i {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.icon-button {
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.icon-button:hover {
+    color: #0a66c2;
+}
+
+.dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background-color: #666;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+/* Main Content Area (Left Column) 
+.main-content {
+    flex: 0 0 65%;
+
+}*/
+.main-content{
+    display: none ;
+}
+
+.main-content.active {
+    display: block;
+}
+
+.portfolioo {
+    display: flex;
+}
+
+#portfolioLeft {
+    flex: 0 0 65%;
+}
+
+#portfolioRight {
+    flex: 0 0 30%;
+    margin-left: auto;
+    min-width: 300px;
+}
+
+/* Right Sidebar 
+.right-sidebar {
+    flex: 0 0 30%;
+    min-width: 300px;
+}*/
+
+/* Profile Header Card */
+.profile-header {
+    padding: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.profile-banner {
+    position: relative;
+    width: 100%;
+    height: 135px; /* Reduced height */
+    overflow: hidden;
+}
+
+.profile-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 24px;
+    position: relative;
+    top: -50px;
+    margin-bottom: -50px;
+}
+
+.profile-picture {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+    object-fit: cover;
+    background-color: #fff;
+}
+
+.profile-details {
+    padding: 0 24px 24px;
+    margin-top: -10px;
+    position: relative;
+}
+
+.profile-details h1 {
+    font-size: 28px;
+    margin-bottom: 4px;
+}
+
+.profile-details .title {
+    font-size: 16px;
+    color: #333;
+}
+
+.profile-details .location-connections,
+.profile-details .connection {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.mutual-connections {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+/* Connections Dropdown */
+.connections-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 6px 9px rgba(0,0,0,.2);
+    padding: 16px;
+    z-index: 20;
+    margin-top: 10px;
+}
+
+.connections-dropdown.show {
+    display: block;
+}
+
+.connections-header {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.connections-profiles {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.profile-item {
+    text-align: center;
+    min-width: 80px;
+}
+
+.profile-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.profile-item h3 {
+    font-size: 14px;
+    margin: 5px 0 0;
+}
+
+.profile-item p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.profile-item button {
+    font-size: 12px;
+    padding: 4px 8px;
+    margin-top: 5px;
+}
+
+/* Profile Tabs */
+.profile-tabs {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.profile-tabs ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.profile-tabs a {
+    color: #000;
+    text-decoration: none;
+}
+
+/*.profile-tabs li.active a{
+    color: #0a66c2;
+}*/
+
+.profile-tabs li {
+    flex: 1;
+    min-width: 0;
+}
+
+.profileTabs a, .profileTabs button {
+    display: block;
+    padding: 10px 5px;
+    text-align: center;
+    color: #000; /* Black font */
+    font-weight: 600;
+    transition: color 0.2s;
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.profileTabs a:hover, .profileTabs button:hover {
+    color: #0a66c2;
+}
+
+.profileTabs a.active, .profileTabs button.active {
+    color: #0a66c2;
+}
+
+.profile-tabs button i {
+    font-size: 12px;
+}
+
+
+.profile-tabs ul li.dropdown-container {    
+    position: relative; 
+}
+
+/* More Dropdown */
+#moreDropdown {
+    display: none;
+    position: absolute;   
+    top: 100%; 
+    right: 0;     
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 6px 9px rgba(0,0,0,.2);
+    padding: 8px 0;
+    z-index: 25;
+    width: 150px;
+    list-style: none;
+    margin: 0; 
+}
+
+#moreDropdown.show {
+    display: block;
+}
+
+
+
+.more-dropdown li {
+    margin: 0;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.more-dropdown li:hover {
+    background-color: #f3f2ef;
+}
+
+
+#dotsDropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;    
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 6px 9px rgba(0,0,0,.2);
+    padding: 8px 0;
+    z-index: 26;
+    width: 150px;
+    list-style: none;
+    margin: 0; 
+}
+
+    #dotsDropdown.show {
+    display: block;
+}
+
+#dotsDropdown li{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.dots-dropdown li {
+    margin: 0;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dots-dropdown li:hover {
+    background-color: #f3f2ef;
+}
+
+/* Top Skills */
+.top-skills {
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 8px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-skills i {
+    color: #0a66c2;
+}
+
+/* Unlock Insights */
+.unlock-insights h2 {
+    font-size: 16px;
+}
+
+.unlock-insights p {
+    font-size: 14px;
+}
+
+.sales-explorer {
+    background-color: #ffd700;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* Connections Grid */
+.connections h2 a {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.connections-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.connection-item {
+    text-align: center;
+}
+
+.connection-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.connection-item p {
+    font-size: 12px;
+    margin: 2px 0;
+}
+
+/* Section Headers */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Experience/Education Items etc. */
+.experience-item, 
+.education-item,
+.showcase-item,
+.license-item,
+.award-item,
+.affiliation-item,
+.volunteer-item,
+.testimonial-item,
+.publication-item,
+.activity-item,
+.contact-info,
+.appendix-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.flex-org-image {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.org-image-small {
+    width: 48px !important;
+    height: 48px !important;
+    object-fit: contain !important;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: block;
+}
+
+/* Sidebar cards */
+.sidebar-card {
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.sidebar-card h2 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.sidebar-card p,
+.sidebar-card a {
+    font-size: 14px;
+    color: #666;
+}
+
+.viewer-item, .person-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.viewer-item:last-of-type, .person-item:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.viewer-avatar, .person-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.viewer-details, .person-details {
+    flex-grow: 1;
+}
+
+.viewer-details h3, .person-details h3 {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.viewer-details .viewer-title, .person-details .person-title {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.connect-button {
+    background-color: transparent;
+    color: #666;
+    border-color: #666;
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+.connect-button:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.connect-button i {
+    margin-right: 5px;
+}
+
+.get-started-btn {
+    background-color: transparent;
+    color: #0a66c2;
+    border-color: #0a66c2;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.get-started-btn:hover {
+    background-color: rgba(10,102,194,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .profile-container {
+        flex-direction: column;
+        gap: 0;
+        padding: 10px;
+    }
+
+    .full-width-top, .main-contentArea, .right-sidebar {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    .profile-tabs a, .profile-tabs button {
+        padding: 10px 3px;
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*about page*/
+.Container{
+    max-width: 1128px;
+    width: 100%;
+}
+
+.Container .about{
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 8px;
+    margin-top: 0;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0.2) 0px 2px 3px; 
+}
+
+.Container .about.active{
+    display: grid;
+}
+
+.aboutLeft {
+    padding:1rem  2rem;
+           border-right: 3px solid #c0c8d0; /* Even thicker and darker */
+    padding-right: 5rem;
+}
+
+.aboutRight {
+    padding: 20px;
+}
+
+
+.aboutProfile{
+    display: block;
+}
+
+.aboutProfile h3{
+    font-size: 1.8rem;
+    margin-top: 0;
+}
+
+.aboutProfile img{
+    margin-top: 0.5rem;
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+}
+
+.aboutNavigation ul{
+    list-style: none;
+    padding: 0;
+}
+
+.aboutNavigation ul li{
+    padding: 0.6rem 0;
+}
+
+.aboutNavigation button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+
+}
+
+
+.aboutNavigation button:hover {
+    background-color: #f3f2ef;
+    color: #0a66c2;
+}
+
+.aboutNavigation button.active {
+    background-color: #f9f9f9;
+    color: #0a66c2;
+}
+
+/*about right page*/
+.aboutRight h4 {
+    font-size: 1rem;
+}
+
+.aboutRight h5{
+    font-size: 0.9rem;
+    margin-bottom: 0.1rem;
+}
+
+.aboutRight h5 i {
+    font-size: 1.8rem;
+}
+
+.aboutRight p {
+    margin-top: 0;
+}
+
+/*.aboutContent {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    cursor: none;
+}
+
+.aboutContent.active{
+    opacity: 1;
+
+}*/
+
+.aboutContent {
+    display: none;
+}
+
+.aboutContent.active{
+    display: block;
+
+}
+
+.aboutContent h4{
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.aboutContent h4 i {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    color: #666;
+}
+
+.rightDesignators {
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: top;
+    gap: 8px;
+    margin: 1rem 0;
+}
+
+.aboutWorkDesignation p,
+.languages p{
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.rightDesignators  img{
+    height: 5rem;
+    width: 5rem;
+    object-fit: contain;
+}
+
+.rightDesignatorsLinkers {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 1rem;
+}
+
+.aboutWorkBtns{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 1rem;
+}
+
+.aboutWorkBtns a {
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.rightDesignatorsLinks{
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.9rem;
+}
+
+.rightDesignatorsLinks a{
+    text-decoration: none;
+    padding: 0.8rem ;
+    background: #f3f2ef;
+    border-radius: 3rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: 70%;
+}
+
+.rightDesignatorsLinks a:hover {
+    background: #f9f9f9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*lite, photos, videos page*/
+.lite,
+.connections,
+.publicOpinion{
+    max-width: 1120px;
+    width: 100%;
+    padding: 1rem 0.2rem 1rem ;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0.2) 0px 2px 3px; 
+}
+
+.lite h4{
+    margin-bottom: 0;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+}
+
+.lite p{
+    margin-left: 1rem;
+}
+
+.mediaLinker{
+    color: #0073b1;
+}
+
+.liteGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 0.7rem;
+    padding: 1rem 0;
+    margin: 1rem;
+}
+
+.liteItem,
+.photoItem{
+    height: 15rem;
+    width: 10rem;
+    background: transparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0.2) 0px 2px 3px;
+}
+
+.liteItem img{
+    height: 12rem;
+    width: 9rem;
+    object-fit: cover;
+    margin-top: 0;
+    margin-left: 0.5rem;
+}
+
+.liteItem p {
+    color: #333;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.liteItem p i {
+    font-size: 1rem;
+}
+
+.photoItem img{
+    height: 15rem;
+    width: 9rem;
+    object-fit: cover;
+    margin-top: 0;
+    margin-left: 0.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*connections*/
+.connectionsSearcher{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-left: 1rem;
+}
+
+.connectionnHeader {
+    padding: 0.2rem 0.2rem 0 1rem ;
+    background: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0.2) 0px 2px 3px; 
+    margin-bottom: 1rem;
+    width: 17rem;
+    height: 2rem;
+    font-size: 1rem;
+}
+
+.connectionsSearcher input{
+    border: none;
+    padding: 5px 5px 3px 0;
+    background: none;
+    height: 100%;
+    width: 90%;
+}
+
+.connectionsSearcher input:focus{
+    outline: none;
+}
+
+.connectionsGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.connectionItem {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.connectionItem img{
+    height: 3rem;
+    width: 3rem;
+}
+
+.connectionItem p{
+    margin-bottom: 0;
+}
+
+.connectionItem button{
+    padding:0.4rem 0.6rem;
+    color: #ffffff;
+    background: #0a66c2;
+    border: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.connectionItem button:hover{
+    background: #004182;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*public opinion page*/
+.goodbook,
+.badbook{
+    margin-left: 1rem;
+}
+
+.bookGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 1rem;
+    padding: 1rem 0;
+    margin: 1rem;
+}
+
+.booksTopic{
+    position: relative;
+    height: 12rem;
+    width: 9rem;
+    text-align: center;
+    line-height: 10rem;
+
+}
+
+.booksTopic p{
+    position: absolute;
+    font-weight: 600;
+    font-size: 1rem;
+    left: 5%;
+    top: 5%;
+    text-align: center;
+}
+
+.booksController{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+}
+
+
+
+.booksController p{
+    margin-bottom: 0;
+}
+
+.booksController button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background-color: transparent;
+    color: #0a66c2;
+}
+
+.booksController button:hover{
+    color: #005983;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*mentions dropdown*/
+.mentionsDropdown{
+    z-index: 30;
+    position: absolute;
+    right: 15%;
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    width: 100%;
+    gap: 1rem;
+    padding: 1rem 0.2rem 1rem ;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0.3) 0px 7px 17px;
+}
+
+.mentionsDropdown.hidden{
+    display: none;
+}
+
+.mentionItem{
+    margin: 0 1rem;
+}
+
+.one{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    height: 3rem;
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+.one button{
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+#blueBtn{
+    background: #0a66c2;
+    color: #fff;
+}
+
+#blueBtn:hover{
+    background: #004182;
+}
+
+.grayBtn{
+    background: #f3f2ef;
+    color: #333;
+}
+
+.grayBtn:hover{
+    background: #e1dfdd;
+}
+
+
+
+.two{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    border-bottom:1px solid #f9f9f9;
+}
+
+.mentionMessage img{
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.mentionMessage textarea{
+    width: 50%;
+    height: 2rem;
+    border: 1px solid #f3f2ef;
+    outline: none;
+    resize: none;
+    background: #eee;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.mentionMessage textarea.focus{
+    outline: none;
+}
+
+.mentionMessage textarea:focus{
+    border: 1px solid #0a66c2;
+    background: #fff;
+}
+
+.mentionMessage-btns{
+    display: flex;
+}
+
+.mentionMessage-btns button{
+    cursor: pointer;
+    font-weight: 300;
+    background: none;
+    border: none;
+    outline: none;
+    display: flex;
+    gap: 0.4rem;
+}
+
+.mentionMessage-btns button:hover{
+    background: #f9f9f9;
+}
+
+.three{
+    position: relative;
+    margin-left: auto;
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+
+.dropdowN button,
+.dropdowM button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 0.9rem;
+    padding: 0 1rem;
+    background: none;
+    color: #333;
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    position: relative;
+}
+
+.dropdowN button:hover,
+.dropdowM button:hover{
+    color: #000;
+}
+
+
+
+
+
+.dropdownIteM{
+    position: absolute;
+    left: 10%;
+    display: none;
+    flex-direction: column;
+    z-index: 35;
+    max-width: 12rem;
+    width: 100%;
+    gap: 0.6rem;
+    padding: 1rem 0.2rem 1rem ;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0.2) 0px 2px 3px; 
+}
+
+.dropdownIteM.show{
+    display: flex;
+}
+
+.dropdownIteM h4{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 0.98rem;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.dropdownIteM ul{
+    list-style: none;
+    margin: 0;
+    font-size: 0.9rem;
+    padding: 0;
+}
+
+.dropdownIteM ul li{
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.3rem;
+}
+
+.dropdownIteM ul li:hover{
+    background: #f3f2ef;
+    cursor: pointer;
+}
+
+.dropdownIteM-btn{
+    display: flex;
+    justify-content: space-around;
+    padding: 0.3rem 0.5rem;
+    border-top: 1px solid #f9f9f9;
+    font-size: 0.8rem;
+}
+
+#doneBtn,
+#doneBtnF{
+    background: #0a66c2;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 0.7rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+#doneBtn:hover,
+#doneBtnF:hover{
+    background: #004182;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*filter submenu*/
+.filterHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f9f9f9;
+    padding: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.filterHeader h4{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 0.98rem;
+    border: none;
+}
+
+.filterHeader button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    background: none;
+    color: #333;
+}
+
+.filterMenu-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.filterMenu-content input{
+    margin-right: 0.5rem;
+
+    font-size: 0.9rem;
+}
+
+.filterMenu-content p{
+    color: #333;
+    margin-bottom: 0;
+}
+
+
+
+/*four */
+
+.four{
+    border: 1px solid #eee;
+}
+
+.fourHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.7rem;
+}
+
+.fourHeader div{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0.7rem;
+}
+
+.fourHeader div img,
+.five img{
+    height: 3.5rem;
+    width: 3rem;
+}
+
+.fourMore-Btn{
+    position: relative;
+}
+
+.fourMore-Btn #buut{
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.fourMore-dropdown{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 20%;
+    right: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 6px 9px rgba(0,0,0,.2);
+    padding: 8px 0;
+    z-index: 37;
+    width: 20rem;
+    margin: 0; 
+    align-items: flex-start;
+}
+
+.fourMore-dropdown.hidden{
+    display: none;
+}
+
+
+.fourMore-dropdown button{
+    background: none;
+    border: none;
+    outline: none;
+    border-radius: 0;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.7rem 0.9rem ;
+    text-align: left;
+    width: 100%;
+}
+
+.fourMore-dropdown button:hover{
+    background: #f9f9f9;
+}
+
+.fourMore-dropdown button span{
+    font-weight: 100;
+    font-size: 0.89rem;
+    color: #666;
+}
+
+.separator{
+    height: 1px;
+    background-color: #e0e0e0;
+    width: 90%;
+    margin: 8px auto;
+}
+
+.fourImage{
+    display: flex;
+    justify-content: center;
+}
+
+
+.fourImage img{
+    width: 70%;
+    height: 10rem;
+    object-fit: cover;
+}
+
+.fourControllers{
+    margin: 0.7rem;
+}
+
+.fourControllers p{
+    color: #333;
+}
+
+.fourController-Btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fourController-Btn button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    background: none;
+    color: #333;
+}
+
+.fourController-Btn button:hover{
+    color: black;
+}
+
+
+
+
+/*hidden input for accepting image file*/
+.hidden-file-input {
+    display: none;
+}
+
+.five{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    
+}
+
+textarea{
+    background: transparent;
+}
+
+.mentionComment-area{
+    display: flex;
+    align-items: center;
+    background-color: #eee;
+}
+
+#commentMention{
+    width: 15rem;
+    resize: none;
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.mentionComment-areaBtn{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.mentionComment-area button,
+.mentionComment-area label{
+    margin-left: 0;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 0.9rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+
+.mentionComment-area button:hover,
+.mentionComment-area label:hover{
+    color: black;
+}
+
+
+/* Posts and Filters Card */
+.posts-filters-card {
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.posts-filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.posts-title {
+    font-size: 16px;
+    margin: 0;
+    color: #000;
+}
+
+.filters-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.filter-icon {
+    color: #666;
+    font-size: 14px;
+}
+
+.filters-text {
+    font-size: 14px;
+    color: #666;
+}
+
+.filters-container:hover .filter-icon,
+.filters-container:hover .filters-text {
+    color: #0a66c2;
+}
+
+/* Profile Content Card */
+.profile-content-card {
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.profile-header-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.profile-icon-container {
+    flex-shrink: 0;
+}
+
+.profile-icon {
+    font-size: 40px;
+    color: #666;
+}
+
+.profile-details-content {
+    flex-grow: 1;
+}
+
+.profile-name {
+    font-size: 16px;
+    margin: 0 0 4px 0;
+    color: #000;
+}
+
+.profile-role {
+    font-size: 14px;
+    margin: 0 0 6px 0;
+    color: #666;
+}
+
+.time-global-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.time-text {
+    font-size: 12px;
+    color: #666;
+}
+
+.global-icon {
+    font-size: 12px;
+    color: #666;
+}
+
+.content-preview {
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+
+.content-text {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+    color: #333;
+}
+
+.see-more {
+    color: #0a66c2;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.see-more:hover {
+    text-decoration: underline;
+}
+
+/* Engagement Card Styles */
+.engagement-card {
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.post-image-container {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.engagement-metrics {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 16px;
+}
+
+.metric-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-size: 14px;
+}
+
+.metric-item i {
+    font-size: 14px;
+}
+
+.metric-count {
+    font-weight: 500;
+}
+
+.comments-section {
+    padding-top: 8px;
+}
+
+.comments-title {
+    font-size: 16px;
+    margin: 0 0 16px 0;
+    color: #000;
+    font-weight: 600;
+}
+
+.comment-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.commenter-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+}
+
+.comment-time {
+    font-size: 12px;
+    color: #666;
+}
+
+.comment-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    margin: 0 0 8px 0;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.comment-action-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.comment-action-btn:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.add-comment-section {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.add-comment-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.commenter-avatar {
+    font-size: 32px;
+    color: #666;
+    flex-shrink: 0;
+}
+
+.comment-input-container {
+    flex-grow: 1;
+    position: relative;
+}
+
+.comment-input {
+    width: 85%;
+    padding: 10px 40px 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.comment-input:focus {
+    border-color: #0a66c2;
+}
+
+.comment-input-actions {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 4px;
+}
+
+.input-action-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 16px;
+}
+
+.input-action-btn:hover {
+    color: #0a66c2;
+}
+
+#portfolioLeft {
+    flex: 0 0 65%;
+}
+
+#portfolioRight {
+    flex: 0 0 35%;
+    min-width: 300px;
+    margin-left: auto;
+}
+
+/* Restore gap between left and right cards */
+.portfolioo {
+    display: flex;
+    gap: 24px; /* Add this to restore gap */
+}
+
+/* Comments Header */
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.comments-title {
+    font-size: 16px;
+    margin: 0;
+    color: #000;
+    font-weight: 600;
+}
+
+.view-more-comments-btn {
+    background: none;
+    border: none;
+    color: #0a66c2;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background-color 0.2s;
+}
+
+.view-more-comments-btn:hover {
+    background-color: rgba(10,102,194,0.1);
+}
+
+.view-more-comments-btn i {
+    font-size: 12px;
+    transition: transform 0.2s;
+}
+
+.view-more-comments-btn.expanded i {
+    transform: rotate(180deg);
+}
+
+/* More comments section */
+.more-comments {
+    border-top: 1px solid #f5f5f5;
+    padding-top: 12px;
+    margin-top: 12px;
+}
+
+/* Post Action Buttons */
+.post-action-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 8px 0 16px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 16px;
+}
+
+.post-action-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.post-action-btn:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.post-action-btn i {
+    font-size: 16px;
+}
+
+/* Active state for like button */
+.post-action-btn.liked {
+    color: #0a66c2;
+}
+
+.post-action-btn.liked i {
+    color: #0a66c2;
+}
+
+/* Comment button focus state */
+.comment-input:focus + .comment-input-actions .input-action-btn,
+.post-action-btn.comment-btn:focus {
+    color: #0a66c2;
+}
+
+/* Share button hover effect */
+.post-action-btn.share-btn:hover {
+    color: #0a66c2;
+}
+
+/* Repost button hover effect */
+.post-action-btn.repost-btn:hover {
+    color: #0a66c2;
+}
+
+/* Post Card Styles */
+.post-card {
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+/* Post Header */
+.post-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.post-profile-icon {
+    flex-shrink: 0;
+}
+
+.post-profile-icon i {
+    font-size: 48px;
+    color: #666;
+}
+
+.post-user-info {
+    flex-grow: 1;
+}
+
+.post-user-main {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+
+.post-user-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.post-user-badge i {
+    color: #0a66c2;
+    font-size: 14px;
+}
+
+.post-user-profile {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.post-time-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.post-time {
+    font-size: 12px;
+    color: #666;
+}
+
+.post-visibility i {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Post Content */
+.post-content {
+    margin-bottom: 12px;
+}
+
+.post-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0;
+}
+
+.see-more-post {
+    color: #0a66c2;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.see-more-post:hover {
+    text-decoration: underline;
+}
+
+/* Post Image */
+.post-image-section {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.post-main-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Post Engagement Metrics */
+.post-engagement-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 8px;
+}
+
+.post-metric {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #666;
+    font-size: 14px;
+}
+
+.post-metric i {
+    font-size: 14px;
+}
+
+.post-metric-count {
+    font-weight: 500;
+}
+
+/* Post Action Row */
+.post-action-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 8px 0 16px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 16px;
+}
+
+.post-action-button {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.post-action-button:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.post-action-button i {
+    font-size: 16px;
+}
+
+.post-action-button.liked {
+    color: #0a66c2;
+}
+
+.post-action-button.liked i {
+    color: #0a66c2;
+}
+
+/* Comments Preview */
+.comments-preview {
+    padding-top: 8px;
+}
+
+.comment-preview-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.comment-preview-item:last-child {
+    border-bottom: none;
+}
+
+.comment-preview-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.comment-preview-icon i {
+    font-size: 32px;
+    color: #666;
+}
+
+.comment-preview-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.comment-preview-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.comment-preview-time {
+    font-size: 12px;
+    color: #666;
+}
+
+.comment-preview-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    margin: 0 0 8px 40px;
+}
+
+.comment-preview-actions {
+    display: flex;
+    gap: 12px;
+    margin-left: 40px;
+}
+
+.comment-preview-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+}
+
+.comment-preview-btn:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+/* Add Comment Box */
+.add-comment-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.add-comment-icon i {
+    font-size: 32px;
+    color: #666;
+    flex-shrink: 0;
+}
+
+.add-comment-input-container {
+    flex-grow: 1;
+    position: relative;
+}
+
+.add-comment-input {
+    width: calc(100% - 60px);
+    padding: 10px 50px 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.add-comment-input:focus {
+    border-color: #0a66c2;
+}
+
+.add-comment-actions {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 4px;
+}
+
+.add-comment-action-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 16px;
+}
+
+.add-comment-action-btn:hover {
+    color: #0a66c2;
+}
+
+/* Ad Card Styles for Left Column */
+.ad-card-left {
+    position: relative;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #f5f9ff 0%, #ffffff 100%);
+    border: 1px solid #d0e3ff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(10, 102, 194, 0.08);
+    text-align: center;
+}
+
+.ad-badge-left {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: #0a66c2;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ad-content-left {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.ad-title-left {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 10px 0 8px 0;
+    line-height: 1.3;
+    text-align: center;
+    padding-right: 40px; /* Space for the Ad badge */
+}
+
+.ad-subtitle-left {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eaeaea;
+    text-align: center;
+}
+
+.ad-icon-container {
+    margin: 20px 0 24px 0;
+}
+
+.ad-profile-icon-left {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    box-shadow: 0 4px 15px rgba(10, 102, 194, 0.2);
+}
+
+.ad-description-left {
+    font-size: 15px;
+    color: #333;
+    margin: 0 0 24px 0;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.ad-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.ad-button-left {
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 24px;
+    background-color: #0a66c2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(10, 102, 194, 0.25);
+    min-width: 160px;
+}
+
+.ad-button-left:hover {
+    background-color: #004182;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(10, 102, 194, 0.35);
+}
+
+.ad-button-left:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .ad-card-left {
+        padding: 20px 16px;
+    }
+    
+    .ad-title-left {
+        font-size: 18px;
+        padding-right: 50px;
+    }
+    
+    .ad-profile-icon-left {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    
+    .ad-button-left {
+        padding: 10px 24px;
+        min-width: 140px;
+    }
+}
+
+/* Sales Insights Card Styles */
+.sales-insights-card {
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.sales-insights-content {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.sales-insights-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.sales-insights-subtitle {
+    font-size: 15px;
+    color: #666;
+    margin: 0 0 24px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    font-weight: 400;
+}
+
+.sales-explorer-trial {
+    margin: 20px 0 24px 0;
+}
+
+.trial-badge {
+    display: inline-block;
+    padding: 14px 24px;
+    background-color: #ffd700;
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
+    border: 2px solid #ffcc00;
+    width: 90%;
+    max-width: 300px;
+}
+
+.trial-details {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.trial-info {
+    font-size: 14px;
+    color: #333;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+    text-align: center;
+    font-weight: 500;
+}
+
+.trial-reminder {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sales-insights-card {
+        padding: 20px 16px;
+    }
+    
+    .sales-insights-title {
+        font-size: 18px;
+    }
+    
+    .sales-insights-subtitle {
+        font-size: 14px;
+    }
+    
+    .trial-badge {
+        padding: 12px 20px;
+        font-size: 15px;
+        width: 95%;
+    }
+    
+    .trial-info {
+        font-size: 13px;
+    }
+    
+    .trial-reminder {
+        font-size: 12px;
+    }
+}
+
+/* Organizational Structure Card Footer Styles */
+.org-structure-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+}
+
+.organogram-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #0a66c2;
+    border: 1px solid #0a66c2;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+.organogram-button:hover {
+    background-color: rgba(10, 102, 194, 0.1);
+    box-shadow: 0 2px 4px rgba(10, 102, 194, 0.2);
+}
+
+.organogram-button:active {
+    background-color: rgba(10, 102, 194, 0.2);
+    transform: translateY(1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .org-structure-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .organogram-button {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .show-all {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/* Achievements and Milestones Card Styles */
+.achievements-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.achievement-item {
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.achievement-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 1px solid #0a66c2;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.view-awards-button {
+    color: #0a66c2;
+}
+
+.view-certificates-button {
+    color: #0a66c2;
+}
+
+.achievement-button:hover {
+    background-color: rgba(10, 102, 194, 0.1);
+    box-shadow: 0 2px 4px rgba(10, 102, 194, 0.2);
+}
+
+.achievement-button:active {
+    background-color: rgba(10, 102, 194, 0.2);
+    transform: translateY(1px);
+}
+
+.achievements-footer {
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .achievement-button {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .achievement-item {
+        padding-bottom: 20px;
+    }
+}
+
+/* Connections Card Styles */
+.connections-card {
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.connections-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.connections-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+}
+
+.see-all-connections {
+    font-size: 14px;
+    color: #0a66c2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.see-all-connections:hover {
+    text-decoration: underline;
+    color: #004182;
+}
+
+.connections-count {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.connections-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.connection-profile-card {
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.connection-profile-card:hover {
+    background: #f5f5f5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.connection-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.connection-info {
+    width: 100%;
+}
+
+.connection-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 5px 0;
+    text-align: center;
+}
+
+.connection-profile {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .connections-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .connections-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .connections-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .see-all-connections {
+        align-self: flex-end;
+    }
+    
+    .connection-profile-card {
+        flex-direction: row;
+        text-align: left;
+        padding: 15px;
+    }
+    
+    .connection-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+        margin-bottom: 0;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+    
+    .connection-info {
+        text-align: left;
+    }
+}
+
+/* Footer Styles - Simplified without card */
+.footer {
+    padding: 30px 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: transparent;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.footer-link {
+    color: #0a66c2;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+    color: #004182;
+}
+
+.app-link {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.footer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.company-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.company-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.company-details {
+    color: #666;
+}
+
+.registration-image {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registration-image img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer {
+        padding: 25px 16px;
+    }
+    
+    .footer-links {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+    
+    .footer-link {
+        font-size: 13px;
+    }
+    
+    .app-link {
+        font-size: 15px;
+    }
+    
+    .company-info {
+        font-size: 13px;
+    }
+    
+    .registration-image img {
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 20px 12px;
+    }
+    
+    .footer-links {
+        gap: 8px;
+    }
+    
+    .company-info {
+        font-size: 12px;
+    }
+    
+    .registration-image img {
+        height: 30px;
+    }
+}
+
+/* Align the Contact & Links section to the left */
+#stakeholders .rightDesignatorsLinkers {
+    justify-content: flex-start !important;
+    padding-left: 0 !important;
+}
+
+#stakeholders .rightDesignators {
+    justify-content: flex-start !important;
+}
+
+#stakeholders .aboutWorkDesignation {
+    text-align: left !important;
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="profile-container">
+        <div class="full-width-top">
+            <!-- Profile Header Section -->
+            <div class="card profile-header">
+                <div class="profile-banner">
+                    <img id="bannerImage" src="images/coverphoto.jpg" alt="Profile Banner">
+                </div>
+
+                <div class="profile-info-top">
+                    <img src="images/profile-1.jpg" alt="Oluchi Nkem" class="profile-picture">                    
+                </div>
+                <div class="profile-details">
+                    <h1>Oluchi Nkem</h1>
+                    <p class="title">Certified Chartered Accountant</p>
+                    <p class="location-connections">Lagos, Nigeria · <a href="#">Contact info</a></p>
+                    <p class="connection">589 connections</p>
+                    <p class="mutual-connections"><i class="fas fa-link"></i> David James, Gabriel Samson, and other 5 Mutual Connections</p>
+                    <div class="header-buttons">
+                        <button class="secondary-button">Message</button>
+                        <a href="individual_profile.html"><button class="primary-button">Edit Profile</button></a>
+                        <button class="secondary-button" id="connectionsBtn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    
+                    <!-- Connections Dropdown -->
+                    <div class="connections-dropdown" id="connectionsDropdown">
+                        <h4 class="connections-header">Find more Connections</h4>
+                        <div class="connections-profiles">
+                            <div class="profile-item">
+                                <img src="images/profile-1.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-2.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-3.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-1.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-2.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-3.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-1.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                        </div>
+                        <a href="#" class="show-all">See More Connections <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <ul class="profileTabs">
+                    <li class="tab-button active" data-tab="portfolio"><a href="#">Posts</a></li>
+                    <li class="tab-button" data-tab="about"><a href="#" >About</a></li>
+                    <li class="tab-button" data-tab="lite"><a href="#" >Lite</a></li>
+                    <li class="tab-button" data-tab="photos"><a href="#">Photos</a></li>
+                    <li class="tab-button" data-tab="videos"><a href="#">Videos</a></li>
+                    <li class="tab-button" data-tab="connections"><a href="#">Connections</a></li>
+                    <li class="tab-button" data-tab="publicOpinion"><a href="#">Public Opinion</a></li>
+                    <li  class="dropdown-container"><button id="moreBtn">More <i class="fas fa-chevron-down"></i></button>
+                        <!-- More Dropdown -->
+                        <ul class="more-dropdown" id="moreDropdown">
+                            <li id="mentionBtn">Mentions</li>
+                            <li>videos</li>
+                            <li>Live</li>
+                            <li>Groups</li>
+                            <li>Connections</li>
+                            <li>Music</li>
+                            <li>Check-ins</li>
+                            <li>Sports</li>
+                            <li>Movies</li>
+                            <li>TV Shows</li>
+                        </ul>
+                    </li>
+                    <li  class="dropdown-container"><button id="dotsBtn">...</button>
+                        <!-- Dots Dropdown -->
+                        <ul class="dots-dropdown" id="dotsDropdown">
+                            <li><i class="fa-solid fa-flag"></i>Report Account</li>
+                            <li ><i class="fa-solid fa-ban"></i>Block</li>
+                            <li><i class="fa-solid fa-user-plus"></i>Invite Connections</li>
+                            <li><i class="fa-solid fa-user-check"></i>Connect</li>
+                            <li><i class="fa-solid fa-thumbs-up"></i>Like as your profile</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="mentionsDropdown hidden" id="mentionsDropdown">
+                            <div class="mentionItem one">
+                                <button class="blueBtn" id="blueBtn"><i class="fa-solid fa-message"></i>Message</button>
+                                <button class="grayBtn"><i class="fa-solid fa-thumbs-up"></i>Like</button>
+                                <button class="grayBtn"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+                            </div>
+
+                            <div class="mentionItem two">
+                                <div class="mentionMessage">
+                                    <img src="images/profile.jpg" alt="User profile picture">
+                                    <textarea name="Message" id="" placeholder="Write something to Account Owner"></textarea>
+                                </div>
+                                <div class="mentionMessage-btns">
+                                    <button><i class="fa-solid fa-photo-film"></i>Media</button>
+                                    <button><i class="fa-solid fa-tag"></i>Tag People</button>
+                                    <button><i class="fa-solid fa-face-smile"></i>Feeling/Activity</button>
+                                </div>
+                            </div>
+
+                            <div class="mentionItem three">
+                                <div class="dropdowN">
+                                    <button id="filterBtn">
+                                        <i class="fa-solid fa-filter"></i>Filter
+                                    </button>
+                                    <div class="dropdownIteM" id="dropdownIteS">
+                                        <div class="filterHeader">
+                                            <h4>Post Filters</h4>
+                                            <button><i class="fa-solid fa-x"></i></button>
+                                        </div>
+                                        <div class="filterMenu-content">
+                                            <p>Go to:</p>
+                                            <input type="date" name="" id="">
+                                        </div>
+                                        <div class="dropdownIteM-btn">
+                                            <button id="cancelSortF">Cancel</button>
+                                            <button id="doneBtnF">Done</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdowM">
+                                    <button id="sortBtn">
+                                        <i class="fa-solid fa-sort"></i>Sort
+                                    </button>
+                                    <div class="dropdownIteM" id="dropdownIteM">
+                                        <h4>Sort by</h4>
+                                        <ul>
+                                            <li><i class="fa-solid fa-star"></i>Most Relevant</li>
+                                            <li><i class="fa-solid fa-clock-rotate-left"></i>Most Recent</li>
+                                        </ul>
+                                        <div class="dropdownIteM-btn">
+                                            <button id="cancelSort">Cancel</button>
+                                            <button id="doneBtn">Done</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mentionItem four">
+                                <div class="fourHeader">
+                                    <div>
+                                        <img src="images/profile.jpg" alt="user profile picture">
+                                        <p> Poster Name is with Author Name and 11 others</p>
+                                    </div>
+                                    <div class="fourMore-Btn">
+                                        <button id="buut"><i class="fa-solid fa-ellipsis"></i></button>
+
+                                        <div class="fourMore-dropdown hidden" id="fourMoreDropdown">
+                                            <button>
+                                                <i class="fa-solid fa-bookmark"></i> Saved Post </br>
+                                                <span>Add this to your saved items</span>
+                                            </button>
+
+                                            <div class="separator"></div>
+
+                                            <button>
+                                                    <i class="fa-solid fa-bell"></i> Turn on notifications for this post
+                                            </button>
+
+                                            <button>
+                                                <i class="fa-solid fa-code"></i> Embed
+                                            </button>
+
+                                            <button>
+                                                <i class="fa-solid fa-triangle-exclamation"></i> Report Post </br>
+                                                <span>We won't let Name know who reported this</span>
+                                            </button>
+                                            
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="fourImage">
+                                    <img src="images/tesla-post.jpg" alt="">
+                                </div>
+
+                                <div class="fourControllers">
+                                    <p style="margin-bottom:0;">Platform Name</p>
+                                    <p>Brief description of message</p>
+                                    <div class="fourController-Btn">
+                                        <button><i class="fa-solid fa-thumbs-up"></i> Like</button>
+                                        <button><i class="fa-solid fa-comment"></i> Comment</button>
+                                        <button><i class="fa-solid fa-retweet"></i> Repost</button>
+                                        <button><i class="fa-solid fa-share"></i> Share</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mentionItem five">
+                                <img src="images/profile.jpg" alt="user profile picture">
+                                <div class="mentionComment-area">
+                                    <textarea name="" id="commentMention" placeholder="comment as Profile Owner"></textarea>
+                                    <div class="mentionComment-areaBtn">
+                                        <button><i class="fa-solid fa-icons"></i></button>
+                                        <button><i class="fa-solid fa-face-laugh-wink"></i></button>
+                                         <label for="file-upload" class="icon-button" aria-label="Upload Image">
+                                            <i class="fa-solid fa-camera"></i>
+                                        </label>
+                                        <button><i class="fa-solid fa-film"></i></button>
+                                        <button><i class="fa-solid fa-note-sticky"></i></button>
+                                    </div>
+
+                                    <input type="file" id="file-upload" class="hidden-file-input" accept="image/*">
+                                </div>
+                            </div>
+                </div>
+                   
+            </div>
+        </div>
+                        <div></div>
+
+        <div class="Container">
+            <div class="main-content  active" id="portfolio">
+                
+                <div class="portfolioo">
+                    <div class="portfolio" id="portfolioLeft">
+            <!-- About Section -->
+            <div class="card about-section">
+                <div class="section-header">
+                    <h2>About</h2>
+                </div>
+                <p class="about-text">I am a Certified Chartered Accountant currently 
+practicing with Asah Alpha & Co Accounting Firm 
+wherein I work as a consultant to assist Businesses, NGOs 
+and Public Establishments to find solutions to all their 
+Accounting and Financial Management problems…</p>
+                <div class="top-skills">
+                    <i class="fas fa-diamond"></i> Top Skills
+                    <p>Accounting . Financial Management <i class="fas fa-arrow-right"></i></p>
+                </div>
+            </div>
+
+ <!-- NEW AD CARD GOES HERE -->
+    <div class="card ad-card-left">
+        <div class="ad-badge-left">Ad</div>
+        
+        <div class="ad-content-left">
+            <h3 class="ad-title-left">Maximize business growth on Archivehubs</h3>
+            <p class="ad-subtitle-left">Ads: a platform built for B2B</p>
+            
+            <div class="ad-icon-container">
+                <div class="ad-profile-icon-left">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+            </div>
+            
+            <p class="ad-description-left">Achieve higher ROI and see real results.</p>
+            
+            <div class="ad-button-container">
+                <button class="ad-button-left primary-button">Start now</button>
+            </div>
+        </div>
+    </div>
+ 
+
+            <!-- Work Experience Section -->
+            <div class="card experience-section">
+                <div class="section-header">
+                    <h2>Work Experience / Professional Background</h2>
+                </div>
+                <div class="experience-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Company Logo" class="org-image-small">
+                    <div class="experience-details">
+                        <p class="company-name">Designation</p>
+                        <p class="duration">Company / Business</p>
+                        <p class="duration">Duration</p>
+                    </div>
+                </div>
+
+                 <div class="experience-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Company Logo" class="org-image-small">
+                    <div class="experience-details">
+                        <p class="company-name">Designation</p>
+                        <p class="duration">Company / Business</p>
+                        <p class="duration">Duration</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all experience<i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Work Showcase Section -->
+            <div class="card showcase-section">
+                <div class="section-header">
+                    <h2>Education and Qualifications</h2>
+                </div>
+                <div class="showcase-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Project Image" class="org-image-small">
+                    <div class="showcase-details">
+                        <p class="client">Name of institution</p>
+                        <p class="date">Qualification</p>
+                        <p class="objective">Duration</p>
+                    </div>
+                </div>
+
+                 <div class="showcase-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Project Image" class="org-image-small">
+                    <div class="showcase-details">
+                       <p class="client">Name of institution</p>
+                        <p class="date">Qualification</p>
+                        <p class="objective">Duration</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all qualifications<i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card sales-insights-card">
+    <div class="sales-insights-content">
+        <h3 class="sales-insights-title">Unlock more insights about leads</h3>
+        <p class="sales-insights-subtitle">Improve outreach with sales insights</p>
+        
+        <div class="sales-explorer-trial">
+            <div class="trial-badge">Try Sales Explorer for NGN0</div>
+        </div>
+        
+        <div class="trial-details">
+            <p class="trial-info">1-month free with 24/7 support. Cancel anytime.</p>
+            <p class="trial-reminder">We'll remind you 7 days before your trial ends.</p>
+        </div>
+    </div>
+</div>
+
+
+ <!-- Update the Organizational Structure card with the new button -->
+<div class="card licenses-section">
+    <div class="section-header">
+        <h2>Licenses & certifications</h2>
+    </div>
+    <div class="license-item flex-org-image">
+        <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+        <div class="license-details">
+            <p class="issuer">Name of Licenses / certificate</p>
+            <p class="issued-date">Name of organization</p>
+            <p class="issued-date">Issued date</p>
+            <p class="issued-date">Credential ID</p>
+
+        </div>
+    </div>
+
+     <div class="license-item flex-org-image">
+        <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+        <div class="license-details">
+            <p class="issuer">Name of Licenses / certificate</p>
+            <p class="issued-date">Name of organization</p>
+            <p class="issued-date">Issued date</p>
+            <p class="issued-date">Credential ID</p>
+
+        </div>
+    </div>
+    
+    <div>
+    <a href="#" class="show-all">Show all licenses & certifications<i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+
+
+ <!-- Update the Organizational Structure card with the new button -->
+<div class="card licenses-section">
+    <div class="section-header">
+        <h2>Key Achievements / Milestones</h2>
+    </div>
+    <div class="license-item flex-org-image">
+        <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+        <div class="license-details">
+            <p class="issuer">Awards or recognitions</p>
+            <p class="issued-date">Publications or patents</p>
+            <p class="issued-date">Noteworthy projects or results</p>
+            <p class="issued-date">Public engagements (talks, media features)</p>
+
+        </div>
+    </div>
+
+     <div class="license-item flex-org-image">
+        <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+        <div class="license-details">
+            <p class="issuer">Awards or recognitions</p>
+            <p class="issued-date">Publications or patents</p>
+            <p class="issued-date">Noteworthy projects or results</p>
+            <p class="issued-date">Public engagements (talks, media features)</p>
+
+        </div>
+    </div>
+    
+    <div>
+    <a href="#" class="show-all"> Show all achievements<i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<!-- Add this new Connections card after the Achievements and Milestones card -->
+<div class="card connections-card">
+    <div class="connections-header">
+        <h3 class="connections-title">Connections</h3>
+        <a href="#" class="see-all-connections">See all connections</a>
+    </div>
+    
+    <div class="connections-count">512 connections</div>
+    
+    <div class="connections-grid">
+        <!-- Row 1 -->
+        <div class="connection-profile-card">
+            <div class="connection-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="connection-info">
+                <h4 class="connection-name">Name</h4>
+                <p class="connection-profile">Profile</p>
+            </div>
+        </div>
+        
+        <div class="connection-profile-card">
+            <div class="connection-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="connection-info">
+                <h4 class="connection-name">Name</h4>
+                <p class="connection-profile">Profile</p>
+            </div>
+        </div>
+        
+        <div class="connection-profile-card">
+            <div class="connection-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="connection-info">
+                <h4 class="connection-name">Name</h4>
+                <p class="connection-profile">Profile</p>
+            </div>
+        </div>
+        
+        <!-- Row 2 -->
+        <div class="connection-profile-card">
+            <div class="connection-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="connection-info">
+                <h4 class="connection-name">Name</h4>
+                <p class="connection-profile">Profile</p>
+            </div>
+        </div>
+        
+        <div class="connection-profile-card">
+            <div class="connection-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="connection-info">
+                <h4 class="connection-name">Name</h4>
+                <p class="connection-profile">Profile</p>
+            </div>
+        </div>
+        
+        <div class="connection-profile-card">
+            <div class="connection-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="connection-info">
+                <h4 class="connection-name">Name</h4>
+                <p class="connection-profile">Profile</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Partnerships and Stakeholders  -->
+            <div class="card volunteer-section">
+                <div class="section-header">
+                    <h2>Professional Affiliations</h2>
+                </div>
+                <div class="volunteer-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization Logo" class="org-image-small">
+                    <div class="volunteer-details">
+                        <p class="role">Memberships in industry bodies or associations</p>
+                        <p class="duration">Roles held (if any)</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all affiliations<i class="fas fa-arrow-right"></i></a>
+            </div>
+
+
+
+         <!-- Volunteer Work  -->
+            <div class="card volunteer-section">
+                <div class="section-header">
+                    <h2>Volunteer Work / Social Impact</h2>
+                </div>
+                <div class="volunteer-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization Logo" class="org-image-small">
+                    <div class="volunteer-details">
+                        <p class="role">Organization Name</p>
+                        <p class="duration">Role</p>
+                        <p class="duration">Duration</p>
+                        <p class="duration">Contribution/Impact</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all voluntary works<i class="fas fa-arrow-right"></i></a>
+            </div>
+
+
+
+    <!--Languages-->
+           <div class="card licenses-section">
+    <div class="section-header">
+        <h2>Languages</h2>
+    </div>
+    <div class="license-item flex-org-image">
+        <div class="license-details">
+            <p class="issuer">English (Fluent), Spanish (Intermediate), see more…</p>
+        </div>
+    </div>
+</div>
+
+    <!-- Monitoring, Evaluation, and Reporting -->
+<div class="card affiliations-section">
+    <div class="section-header">
+        <h2>Personal Interests / Hobbies</h2>
+    </div>
+    <div class="achievements-container">
+        <div class="achievement-item">
+            <div class="affiliation-item flex-org-image">
+                <div class="affiliation-details">
+                    <p class="roles">Passionate about photography and sustainable living</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+ <!-- Skills  -->
+            <div class="card volunteer-section">
+                <div class="section-header">
+                    <h2>Skills</h2>
+                </div>
+                <div class="volunteer-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Organization Logo" class="org-image-small">
+                    <div class="volunteer-details">
+                        <p class="role">Social Media Manager</p>
+                        <p class="duration">Content Creations</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all skills<i class="fas fa-arrow-right"></i></a>
+            </div>
+
+
+
+            <!-- Contact & Links Section -->
+            <div class="card contact-section">
+                <div class="section-header">
+                    <h2>Contact & Links</h2>
+                </div>
+                <div class="contact-info flex-org-image">
+                    <img src="images/Company Logo.png" alt="Contact" class="org-image-small">
+                    <div class="contact-details">
+                        <h2 class="name">Name</h2>
+                        <p class="email">Professional Email</p>
+                        <p class="phone">Phone</p>
+                        <p class="phone">Archivehubs Portfolio Link</p>
+                        <p class="phone">Other Links and more</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appendix Section -->
+            <div class="card appendix-section">
+                <div class="section-header">
+                    <h2>References</h2>
+                </div>
+                <div class="appendix-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Appendix" class="org-image-small">
+                    <div class="appendix-details">
+                        <p class="item">Including contact details with permission</p>
+                    </div>
+                    
+                </div>
+
+                <div class="appendix-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Appendix" class="org-image-small">
+                    <div class="appendix-details">
+                        <p class="item">Including contact details with permission</p>
+                    </div>
+                    
+                </div>
+                <a href="#" class="show-all">Show all references<i class="fas fa-arrow-right"></i></a>
+               
+            </div>
+            
+<!-- Simple centered footer without card -->
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="#" class="footer-link">General Terms</a>
+            <a href="#" class="footer-link app-link">Get the Archivehubs App</a>
+        </div>
+        
+        <div class="footer-info">
+            <p class="company-info">
+                <span class="company-name">ARCHIVEHUBS: ENINK Investment</span>
+                <span class="company-details">Limited © 2025 RC 1741345</span>
+            </p>
+            
+            <div class="registration-image">
+                <img src="images/company-name.jpg" alt="Registration Certificate">
+            </div>
+        </div>
+    </div>
+</div>
+                    </div>
+                    <!-- Right Sidebar -->
+                    <div class="portfolio" id="portfolioRight">
+           <div class="card posts-filters-card">
+    <div class="posts-filters-header">
+        <h3 class="posts-title">Posts</h3>
+        <div class="filters-container">
+            <i class="fas fa-filter filter-icon"></i>
+            <span class="filters-text">Filters</span>
+        </div>
+    </div>
+</div>
+
+<div class="card profile-content-card">
+    <div class="profile-header-content">
+        <div class="profile-icon-container">
+            <i class="fas fa-user-circle profile-icon"></i>
+        </div>
+        <div class="profile-details-content">
+            <h4 class="profile-name">Oluchi Nkem</h4>
+            <p class="profile-role">Certified Chartered Accountant</p>
+            <div class="time-global-container">
+                <span class="time-text">2h ago</span>
+                <i class="fas fa-globe-americas global-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="content-preview">
+        <p class="content-text">Gen Z leader Kasmuel McOure is set to be sworn in as a nominated senator representing the youth upon his return from the US, taking over from Karen Nyamu. The transition marks a significant shift in youth representation… <span class="see-more">See more</span></p>
+    </div>
+</div>
+
+<div class="card engagement-card wide-card">
+    <!-- Post Image -->
+    <div class="post-image-container">
+        <img src="images/tesla-post.jpg" alt="Post content" class="post-image">
+    </div>
+    
+    <!-- Engagement Metrics -->
+    <div class="engagement-metrics">
+        <div class="metric-item">
+            <i class="fas fa-thumbs-up"></i>
+            <span class="metric-count">1k</span>
+        </div>
+        <div class="metric-item">
+            <i class="fas fa-comment"></i>
+            <span class="metric-count">389 Comments</span>
+        </div>
+        <div class="metric-item">
+            <i class="fas fa-retweet"></i>
+            <span class="metric-count">55 Reposts</span>
+        </div>
+        <div class="metric-item">
+            <i class="fas fa-share"></i>
+            <span class="metric-count">100 Share</span>
+        </div>
+    </div>
+    
+    <!-- Post Action Buttons -->
+    <div class="post-action-buttons">
+        <button class="post-action-btn like-btn" data-action="like">
+            <i class="far fa-thumbs-up"></i> Like
+        </button>
+        <button class="post-action-btn comment-btn" data-action="comment">
+            <i class="far fa-comment"></i> Comment
+        </button>
+        <button class="post-action-btn repost-btn" data-action="repost">
+            <i class="fas fa-retweet"></i> Repost
+        </button>
+        <button class="post-action-btn share-btn" data-action="share">
+            <i class="far fa-share-square"></i> Share
+        </button>
+    </div>
+    
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <div class="comments-header">
+            <h4 class="comments-title">Comments</h4>
+            <button class="view-more-comments-btn" id="viewMoreCommentsBtn">
+                View More Comments <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        
+        <!-- Comment Items -->
+        <div class="comment-item">
+            <div class="comment-header">
+                <span class="commenter-name">David James</span>
+                <span class="comment-time">2h ago</span>
+            </div>
+            <p class="comment-text">This is a great achievement for youth representation. Looking forward to seeing the impact!</p>
+            <div class="comment-actions">
+                <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+            </div>
+        </div>
+        
+        <div class="comment-item">
+            <div class="comment-header">
+                <span class="commenter-name">Sarah Essan</span>
+                <span class="comment-time">3h ago</span>
+            </div>
+            <p class="comment-text">Fresh perspectives are always welcome in parliament. Best of luck to him!</p>
+            <div class="comment-actions">
+                <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+            </div>
+        </div>
+        
+        <div class="comment-item">
+            <div class="comment-header">
+                <span class="commenter-name">Gabriel Samson</span>
+                <span class="comment-time">5h ago</span>
+            </div>
+            <p class="comment-text">International experience will bring valuable insights to our youth policies.</p>
+            <div class="comment-actions">
+                <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+            </div>
+        </div>
+        
+        <!-- Hidden comments that will show when "View More Comments" is clicked -->
+        <div class="more-comments" id="moreComments" style="display: none;">
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="commenter-name">Julie Daniel</span>
+                    <span class="comment-time">6h ago</span>
+                </div>
+                <p class="comment-text">This is exactly what our youth representation needs. Exciting times ahead!</p>
+                <div class="comment-actions">
+                    <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                    <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+                </div>
+            </div>
+            
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="commenter-name">Kingsley Mokena</span>
+                    <span class="comment-time">7h ago</span>
+                </div>
+                <p class="comment-text">Youth leadership is crucial for our country's future. Well done!</p>
+                <div class="comment-actions">
+                    <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                    <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+                </div>
+            </div>
+            
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="commenter-name">Melvin A.</span>
+                    <span class="comment-time">8h ago</span>
+                </div>
+                <p class="comment-text">Looking forward to seeing positive changes in youth policies.</p>
+                <div class="comment-actions">
+                    <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                    <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Add Comment Section -->
+        <div class="add-comment-section">
+            <div class="add-comment-header">
+                <i class="fas fa-user-circle commenter-avatar"></i>
+                <div class="comment-input-container">
+                    <input type="text" class="comment-input" placeholder="Comment as Account Owner">
+                    <div class="comment-input-actions">
+                        <button class="input-action-btn"><i class="fas fa-smile"></i></button>
+                        <button class="input-action-btn"><i class="fas fa-image"></i></button>
+                        <button class="input-action-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card sidebar-card people-you-may-know">
+                <h2>Connections you may want</h2>
+                <div class="person-item">
+                    <img src="images/profile-2.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Kingsley Mokena</h3>
+                        <p class="person-title">Data Science Student at ALX</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-1.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Melvin A.</h3>
+                        <p class="person-title">Aspiring Backend | Cloud Architect | Passionate abou...</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-3.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Felix Alabama</h3>
+                        <p class="person-title">Bio economics | Data Scientist | AWS Certified | Cloud...</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                 <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+<div class="card engagement-card">
+    <!-- Post Header -->
+    <div class="profile-header-content">
+        <div class="profile-icon-container">
+            <i class="fas fa-user-circle profile-icon"></i>
+        </div>
+        <div class="profile-details-content">
+            <h4 class="profile-name">Raila Odinga <i class="fas fa-badge-check" style="color: #0a66c2; font-size: 14px;"></i></h4>
+            <p class="profile-role">African Union Infrastructure Envoy</p>
+            <div class="time-global-container">
+                <span class="time-text">2h ago</span>
+                <i class="fas fa-globe-americas global-icon"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Post Content -->
+    <div class="content-preview">
+        <p class="content-text">
+            "There is nothing I can say in public that I have not discussed with my party leader Baba Raila Amollo Odinga. The narrative that we differ on matters Azimio is misguided... 
+            <span class="see-more">See more</span>
+        </p>
+    </div>
+    
+    <!-- Post Image -->
+    <div class="post-image-container">
+        <img src="images/business_img1.jpg" alt="Political meeting" class="post-image">
+    </div>
+    
+    <!-- Engagement Metrics -->
+    <div class="engagement-metrics">
+        <div class="metric-item">
+            <i class="fas fa-thumbs-up"></i>
+            <span class="metric-count">2.5k</span>
+        </div>
+        <div class="metric-item">
+            <i class="fas fa-comment"></i>
+            <span class="metric-count">489 Comments</span>
+        </div>
+        <div class="metric-item">
+            <i class="fas fa-retweet"></i>
+            <span class="metric-count">112 Reposts</span>
+        </div>
+        <div class="metric-item">
+            <i class="fas fa-share"></i>
+            <span class="metric-count">250 Share</span>
+        </div>
+    </div>
+    
+    <!-- Post Action Buttons -->
+    <div class="post-action-buttons">
+        <button class="post-action-btn like-btn" data-action="like">
+            <i class="far fa-thumbs-up"></i> Like
+        </button>
+        <button class="post-action-btn comment-btn" data-action="comment">
+            <i class="far fa-comment"></i> Comment
+        </button>
+        <button class="post-action-btn repost-btn" data-action="repost">
+            <i class="fas fa-retweet"></i> Repost
+        </button>
+        <button class="post-action-btn share-btn" data-action="share">
+            <i class="far fa-share-square"></i> Share
+        </button>
+    </div>
+    
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <div class="comments-header">
+            <h4 class="comments-title">Comments</h4>
+            <button class="view-more-comments-btn" id="viewMoreCommentsBtn2">
+                View More Comments <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        
+        <!-- Comment Items -->
+        <div class="comment-item">
+            <div class="comment-header">
+                <span class="commenter-name">David James</span>
+                <span class="comment-time">1h ago</span>
+            </div>
+            <p class="comment-text">Unity is key for any political movement. Well said!</p>
+            <div class="comment-actions">
+                <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+            </div>
+        </div>
+        
+        <div class="comment-item">
+            <div class="comment-header">
+                <span class="commenter-name">Sarah Essan</span>
+                <span class="comment-time">45m ago</span>
+            </div>
+            <p class="comment-text">This clarification was needed. Thanks for speaking up.</p>
+            <div class="comment-actions">
+                <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+            </div>
+        </div>
+        
+        <!-- Hidden comments that will show when "View More Comments" is clicked -->
+        <div class="more-comments" id="moreComments2" style="display: none;">
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="commenter-name">Julie Daniel</span>
+                    <span class="comment-time">2h ago</span>
+                </div>
+                <p class="comment-text">Leadership unity inspires confidence in the political process.</p>
+                <div class="comment-actions">
+                    <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                    <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+                </div>
+            </div>
+            
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="commenter-name">Kingsley Mokena</span>
+                    <span class="comment-time">3h ago</span>
+                </div>
+                <p class="comment-text">Clear communication prevents misunderstandings in politics.</p>
+                <div class="comment-actions">
+                    <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                    <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+                </div>
+            </div>
+            
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="commenter-name">Melvin A.</span>
+                    <span class="comment-time">4h ago</span>
+                </div>
+                <p class="comment-text">This shows maturity in political leadership.</p>
+                <div class="comment-actions">
+                    <button class="comment-action-btn"><i class="far fa-thumbs-up"></i> Like</button>
+                    <button class="comment-action-btn"><i class="fas fa-reply"></i> Reply</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Add Comment Section -->
+        <div class="add-comment-section">
+            <div class="add-comment-header">
+                <i class="fas fa-user-circle commenter-avatar"></i>
+                <div class="comment-input-container">
+                    <input type="text" class="comment-input" placeholder="Write a comment...">
+                    <div class="comment-input-actions">
+                        <button class="input-action-btn"><i class="fas fa-smile"></i></button>
+                        <button class="input-action-btn"><i class="fas fa-image"></i></button>
+                        <button class="input-action-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <div class="card sidebar-card who-viewed">
+                <h2>Profiles you can follow </h2>
+                <div class="viewer-item">
+                    <img src="images/profile-2.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Gabriel Danladi<span class="dot">·</span> <span class="follow-status">2nd</span></h3>
+                        <p class="viewer-title">Software Engineer | AI, SE Akemi | Co-founding...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <div class="viewer-item">
+                    <img src="images/profile-3.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Sarah Essan</h3>
+                        <p class="viewer-title">Executive Assistant | Expert in Elaborat...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <div class="viewer-item">
+                    <img src="images/profile-1.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Julie Daniel</h3>
+                        <p class="viewer-title">Executive Assistant | Expert in Elaborat...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            
+
+            <!-- <div class="card sidebar-card people-you-may-know">
+                <h2>Your viewers also viewed</h2>
+                <div class="person-item">
+                    <img src="images/profile-2.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Kingsley Mokena</h3>
+                        <p class="person-title">Data Science Student at ALX</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-1.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Melvin A.</h3>
+                        <p class="person-title">Aspiring Backend | Cloud Architect | Passionate abou...</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-3.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Felix Alabama</h3>
+                        <p class="person-title">Bio economics | Data Scientist | AWS Certified | Cloud...</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                 <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>           -->
+
+        
+
+
+
+        
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="main-content about" id="about">
+                <div class="aboutLeft">
+                    <div class="aboutProfile">
+                        <h3>About</h3>
+                        <img src="images/profile-1.jpg" alt="User profile picture">        
+                    </div>
+
+                    <div class="aboutNavigation">
+                        <ul>
+                            <li><button  class="aboutBtn active" data-tab="overview">Overview</button></li>
+                            <li><button  class="aboutBtn" data-tab="workExperience">Work Experience / Professional Background</button></li>
+                            <li><button  class="aboutBtn" data-tab="vision">Education and Qualifications</button></li>
+                            <li><button  class="aboutBtn "data-tab="education">Licenses & certifications</button></li>
+                            <li><button  class="aboutBtn "data-tab="workShowcase">Key Achievements / Milestones</button></li>
+                            <li><button  class="aboutBtn "data-tab="licenses">Professional Affiliations</button></li>
+                            <li><button  class="aboutBtn "data-tab="awards">Languages</button></li>
+                            <li><button  class="aboutBtn "data-tab="achievements">Personal Interests / Hobbies</button></li>
+                            <li><button  class="aboutBtn "data-tab="volunteer">Volunteer Work / Social Impact</button></li>
+                         <li><button  class="aboutBtn "data-tab="stakeholders">Contact & Links</button></li>
+                          <li><button  class="aboutBtn "data-tab="interests">References</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="aboutRight">
+                    <div class="aboutContent active" id="overview">
+                        <h4>Overview</h4>
+
+                        <div>
+                            <h5><i class="fa-solid fa-user-tie"></i>Professional Title or Designations:</h5>
+                            <p>Software Engineer</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-bullseye"></i> Career Objectives:</h5>
+                            <p>Career objectives details</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-regular fa-calendar"></i> Location:</h5>
+                            <p>Lives in Abuja, Nigeria From Buea, Cameroon</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-address-card"></i>Professional Summary / Bio:</h5>
+                            <p>A short paragraph (4–6 lines) summarizing: Core expertise or field, Years of experience, Industry or sectors worked in, Notable achievements or roles, Current role or area of focus</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-check-circle"></i> Areas of Expertise / Skills:</h5>
+                            <p>Example: Project Management, Financial Analysis, Data Science, Policy 
+Development, Graphic Design.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="aboutContent" id="workExperience">
+                       <h4><i class="fa-solid fa-graduation-cap"></i> Work Experience / Professional Background</h4>
+                        <p>10 Workplaces to Show</p>
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>Designation</p>
+                                <p>Organization Name</p>
+                                <p>Location</p>
+                                <p>Duration</p>
+                                <p>Brief description of responsibilities and accomplishment</p>
+
+                            </div>
+                        </div>
+
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>Designation</p>
+                                <p>Organization Name</p>
+                                <p>Location</p>
+                                <p>Duration</p>
+                                <p>Brief description of responsibilities and accomplishment</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                   <div class="aboutRight">
+                    <div class="aboutContent" id="vision">
+                       
+                        <h4><i class="fa-solid fa-graduation-cap"></i>Education and Qualifications</h4>
+                        <p> 5 Educational Institutions Attended</p>
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>Degree / Certificate</p>
+                                <p>Institution Name</p>
+                                <p>Year of Graduation</p>
+                                <p>Honours or Distinction(if any)</p>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>Degree / Certificate</p>
+                                <p>Institution Name</p>
+                                <p>Year of Graduation</p>
+                                <p>Honours or Distinction(if any)</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+
+                    <div class="aboutContent" id="education">
+                        <h4><i class="fa-solid fa-graduation-cap"></i>Licenses & certifications</h4>
+                        <p> 15 Licenses & Certification Acquired</p>
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>License & Certification</p>
+                                <p>Issuing Organization</p>
+                                <p>Date Acquired or Validity Period</p>
+                                <p>Credential ID</p>
+                            </div>
+                        </div>
+                             <a href="">View Certificate</a>
+
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>License & Certification</p>
+                                <p>Issuing Organization</p>
+                                <p>Date Acquired or Validity Period</p>
+                                <p>Credential ID</p>
+                            </div>
+                        </div>
+                         <a href="">View Certificate</a> 
+                    </div>
+
+                    <div class="aboutContent" id="workShowcase">
+                         <h4><i class="fa-solid fa-graduation-cap"></i>Key Achievements / Milestones</h4>
+                        <p>8 Awards or Recognitions Received</p>
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>Award or Recognition</p>
+                                <p>Issuing Organization</p>
+                                <p>Date Received</p>
+                            </div>
+                             <div class="aboutWorkBtns">
+                                <a href="" style="margin-left: 150px;">View Award</a>
+                                <a href="" style="margin-left: 150px;">View Photo</a>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                               <p>Award or Recognition</p>
+                                <p>Issuing Organization</p>
+                                <p>Date Received</p>
+
+
+                            </div>
+                             <div class="aboutWorkBtns">
+                                <a href="" style="margin-left: 150px;">View Award</a>
+                                <a href="" style="margin-left: 150px;">View Photo</a>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+
+                    <div class="aboutContent" id="licenses">
+                        <h4><i class="fa-solid fa-graduation-cap"></i>Professional Affiliations</h4>
+                        <p> 3 Professional Affiliates</p>
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                    <p>Membership Awarded</p>
+                                    <p>Body</p>
+                                    <p>Date issue</p>
+                                    <p>Role Held (if any)</p>
+
+                            </div>
+                             <div class="aboutWorkBtns">
+                                <a href="" style="margin-left: 150px;">View Award</a>
+                            </div>
+                        </div>
+
+        
+                            <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                    <p>Membership Awarded</p>
+                                    <p>Body</p>
+                                    <p>Date issue</p>
+                                    <p>Role Held (if any)</p>
+
+                            </div>
+                             <div class="aboutWorkBtns">
+                                <a href="" style="margin-left: 150px;">View Award</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="aboutContent" id="awards">
+                        <h4><i class="fa-solid fa-trophy"></i>Languages</h4>
+                                <div class="aboutWorkDesignation">
+                                    <p> 4 Languages & Fluency Levels</p>
+                                    <p> English – (Fluent)</p>
+                                    <p> Spanish – (Intermediates)</p>
+                                </div>
+                           
+                    </div>
+
+                    <div class="aboutContent" id="achievements">
+                        <h4><i class="fa-solid fa-graduation-cap"></i>Personal Interests / Hobbies</h4>
+                        <div class="rightDesignators">
+                            <div class="aboutWorkDesignation">
+                                    <p> Passionate about photography and sustainable living</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+    <div class="aboutContent volunteer-left" id="volunteer">
+    <h4><i class="fa-solid fa-trophy"></i>Volunteer Work / Social Impact</h4>
+    <p>20 Voluntary Works / Social Impacts</p>
+    <div class="volunteer-items">
+        <div class="volunteer-item">
+            <img src="images/Company Logo.png" alt="Company Logo">
+            <div class="volunteer-details">
+                <p>Organization Name</p>
+                <p>Role</p>
+                <p>Duration</p>
+                <p>Contribution / Impact</p>
+            </div>
+        </div>
+
+        <div class="volunteer-item">
+            <img src="images/Company Logo.png" alt="Company Logo">
+            <div class="volunteer-details">
+               <p>Organization Name</p>
+                <p>Role</p>
+                <p>Duration</p>
+                <p>Contribution / Impact</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+                          <div class="aboutContent" id="stakeholders">
+                        <h4><i class="fa-solid fa-trophy"></i>Contact & Links</h4>
+                        <p>Personal Data</p>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Full Name</p>
+                                    <p>Residential Address</p>
+                                    <p>Postal Address</p>
+                                    <p>Date of Birth</p>
+                                    <p>Email</p>
+                                    <p>Phone</p>
+                                    <p>Website or Block</p>
+                                    <p>Archivehubs Portfolio Link</p>
+                                    <p>Social Media Links</p>
+                                    <p>Other Portfolio Link</p>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+
+                      <div class="aboutContent" id="policy">
+                        <h4><i class="fa-solid fa-trophy"></i>Policy and Regulatory Framework</h4>
+                        <p> 10 Key Policies and Regulations</p>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Relevant laws, Regulations, or Policy Documents</p>
+                                    <p>Oversight Mechanisms and Accountability Structures</p>
+                                    <p>Compliance with National and International Standards</p>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                         <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                        
+
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Relevant laws, Regulations, or Policy Documents</p>
+                                    <p>Oversight Mechanisms and Accountability Structures</p>
+                                    <p>Compliance with National and International Standards</p>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                         <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                    </div>
+
+
+                    <div class="aboutContent" id="evaluation">
+                        <h4><i class="fa-solid fa-trophy"></i>Monitoring, Evaluation, and Reporting</h4>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>How the Organization Measures Performance</p>
+                                    <p>Monitoring tools or Dashboards</p>
+                                    <p>Reporting Procedures and Public Disclosure</p>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                         <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                        
+
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                  <p>How the Organization Measures Performance</p>
+                                    <p>Monitoring tools or Dashboards</p>
+                                    <p>Reporting Procedures and Public Disclosure</p>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                         <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                    </div>
+
+
+                    <div class="aboutContent" id="languages">
+                        <h4><i class="fa-solid fa-language"></i> Contact Information</h4>
+                        <p>Organization Data</p>
+                        <div class="languages">
+                            <p>Organization Name</p>
+                            <p>Date of Establishment</p>
+                            <p>Registration ID / Number</p>
+                            <p>Postal Address </p>
+                            <p>Headquarter Address</p>
+                            <p>Regional Office Address</p>
+                            <p>Organization Email</p>
+                            <p>Phone</p>
+                            <p>Helpline</p>
+                            <p>Official Website or Block</p>
+                            <p>Archivehubs Portfolio Link</p>
+                            <p>Social Media Links</p>
+                            <p>Other Portfolio Link</p>
+                        </div>
+
+
+                    </div>
+
+
+                   
+
+                   
+
+                   
+
+                    <div class="aboutContent" id="interests">
+                         <h4><i class="fa-solid fa-graduation-cap"></i>References</h4>
+                        <p> 3 References</p>
+                        <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                    <p>Referee Name</p>
+                                    <p>Referee Organization</p>
+                                    <p>Referee Designation</p>
+                                    <p>Description</p>
+                                    <p>Reference Date</p>
+                                    <p>Referee Email</p>
+                                    <p>Referee Phone</p>
+                            </div>
+                             <div class="aboutWorkBtns">
+                                <a href="" style="margin-left: 150px;">View Recommendation</a>
+                            </div>
+                        </div>
+
+        
+                            <div class="rightDesignators">
+                            <img src="images/corporate_education.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                    <p>Referee Name</p>
+                                    <p>Referee Organization</p>
+                                    <p>Referee Designation</p>
+                                    <p>Description</p>
+                                    <p>Reference Date</p>
+                                    <p>Referee Email</p>
+                                    <p>Referee Phone</p>
+
+                            </div>
+                             <div class="aboutWorkBtns">
+                                <a href="" style="margin-left: 150px;">View Recommendation</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="main-content" id="lite">
+                <div class="lite">
+                    <h4>Lite</h4>
+                    <p class="mediaLinker">Account Owners Name Lites</p>
+                    <div class="liteGrid">
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" id="photos">
+                <div class="lite">
+                    <h4>Photos</h4>
+                    <p class="mediaLinker">Account Owners Name Photos</p>
+                    <div class="liteGrid">
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" id="videos">
+                <div class="lite">
+                    <h4>Videos</h4>
+                    <p class="mediaLinker">Account Owners Name Videos</p>
+                    <div class="liteGrid">
+                        <div class="liteItem">
+                             <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 3114</p>
+                        </div>
+
+                        <div class="liteItem">
+                             <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                             <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                             <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                             <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" id="connections">
+                <div class="connections">
+                    <div class="connectionsSearcher">
+                        <h4>Connections</h4>
+                        <div class="connectionnHeader">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="search" placeholder="Search">
+                        </div>
+                    </div>
+                    <p style="color: #0a66c2; margin-left: 1rem;">Account Owners Connections</p>
+
+                    <div class="connectionsGrid">
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" id="publicOpinion">
+                <div class="publicOpinion">
+                    <div class="goodbook">
+                        <h4>Good Book</h4>
+                        <p style="color: #0a66c2;">Account Owners Name Public Opinion</p>
+                        <div class="bookGrid">
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Recommendations</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 314</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Recommendations</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 314</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Recommendations</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 314</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Recommendations</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 314</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Recommendations</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Recommendations</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="badbook">
+                        <h4>Black Book</h4>
+                        <p style="color: #0a66c2;">Account Owners Name Public Opinion</p>
+                        <div class="bookGrid">
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Queries</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 100</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+            
+
+    </div>
+    <script>
+        const moreBtn = document.getElementById('moreBtn');
+        const moreDropdown = document.getElementById('moreDropdown');
+        const dotsBtn = document.getElementById('dotsBtn');
+        const dotsDropdown = document.getElementById('dotsDropdown');
+
+
+        //get buttons and content for the pages
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.main-content');
+
+        //buttons for the about page
+        const aboutTabButtons = document.querySelectorAll('.about .aboutBtn');
+        const aboutTabContents = document.querySelectorAll('.aboutContent');
+
+        //button on mention post
+        const mentionPostBtn = document.getElementById('buut');
+        const mentionPostDropdown = document.getElementById('fourMoreDropdown');
+
+        //sort menu buttons
+        const sortMenuBtn = document.getElementById('sortBtn');
+        const sortMenuDropdown = document.getElementById('dropdownIteM');
+        const cancelSortMenu = document.getElementById('cancelSort');
+
+
+
+        //first opening of the mention dropdown
+        const mentionBtn = document.getElementById('mentionBtn')
+        const mentionMenu = document.getElementById('mentionsDropdown')
+
+
+        //filter enu bttons
+        const filterMenuBtn = document.getElementById('filterBtn');
+        const filterMenuDropdown = document.getElementById('dropdownIteS');
+        const cancelFilterMenu = document.getElementById('cancelSortF');
+        const closeFilterMenu = document.querySelector('.filterHeader button');
+
+        console.log({
+      sortMenuBtn,
+      sortMenuDropdown,
+      cancelSortMenu
+    });
+
+
+        moreBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            moreDropdown.classList.toggle('show');
+            dotsDropdown.classList.remove('show'); 
+        });
+
+       
+        dotsBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            dotsDropdown.classList.toggle('show');
+            moreDropdown.classList.remove('show'); 
+        });
+
+       
+        document.addEventListener('click', (event) => {
+            // If the click is NOT inside the More button/dropdown, remove 'show'
+            if (!moreBtn.contains(event.target) && !moreDropdown.contains(event.target)) {
+                moreDropdown.classList.remove('show');
+            }
+            // If the click is NOT inside the Dots button/dropdown, remove 'show'
+            if (!dotsBtn.contains(event.target) && !dotsDropdown.contains(event.target)) {
+                dotsDropdown.classList.remove('show');
+            }
+        });
+
+        // work the tab switching
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.tab;
+
+                // Remove 'active' class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                //add active class for clicked button
+                button.classList.add('active');
+                // Show the corresponding content
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                    //reset scroll position after click
+                    targetContent.scrollTop = 0;
+                }
+            });
+        });
+
+
+        // work the about tab switching
+        aboutTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.tab;
+                // Remove 'active' class from all buttons and contents
+                aboutTabButtons.forEach(btn => btn.classList.remove('active'));
+                aboutTabContents.forEach(content => content.classList.remove('active'));        
+
+                //add active class for clicked button
+                button.classList.add('active');
+                // Show the corresponding content
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                    //reset scroll position after click
+                    targetContent.scrollTop = 0;
+                }
+            });
+
+
+        });
+
+        //logic for the sort menu
+       sortMenuBtn.addEventListener('click', () => {
+        filterMenuDropdown.classList.remove('show')
+        mentionPostDropdown.classList.remove('show')
+        sortMenuDropdown.classList.toggle('show');
+        });
+
+
+        cancelSortMenu.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            sortMenuDropdown.classList.remove('show');
+        });
+
+
+        //filter menu logic
+        filterMenuBtn.addEventListener('click', () => {
+            sortMenuDropdown.classList.remove('show')
+            mentionPostDropdown.classList.remove('show')
+            filterMenuDropdown.classList.toggle('show');
+        });
+
+
+        cancelFilterMenu.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            filterMenuDropdown.classList.remove('show');
+        });
+
+        closeFilterMenu.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            filterMenuDropdown.classList.remove('show');
+        });
+
+
+        //open and close the mention post dropdown
+        if (mentionPostBtn && mentionPostDropdown){
+            mentionPostBtn.addEventListener('click',(e) => {
+                e.stopPropagation();
+                sortMenuDropdown.classList.remove('show')
+                filterMenuDropdown.classList.remove('show')
+                mentionPostDropdown.classList.toggle('hidden');
+            });
+
+            //close when click ouside
+            document.addEventListener('click', (event) => {
+                    mentionPostDropdown.classList.add('hidden');
+            });
+        }
+
+
+
+
+
+        //read in an image file
+    const fileInput = document.getElementById('file-upload');
+    const imagePreview = document.getElementById('image-preview');
+
+    // Listen for when a file is selected
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                // Set the image source to the selected file
+                imagePreview.src = e.target.result;
+                // Make the preview visible
+                imagePreview.classList.add('visible');
+            };
+                reader.readAsDataURL(file);
+                }
+        });
+
+
+
+    //mention dropdown first control
+        if (mentionBtn && mentionMenu){
+            mentionBtn.addEventListener('click',(e) => {
+                e.stopPropagation();
+                sortMenuDropdown.classList.remove('show');
+                mentionPostDropdown.classList.remove('show');
+                mentionPostDropdown.classList.add('hidden');
+                moreDropdown.classList.remove('show');
+                mentionMenu.classList.toggle('hidden');
+            });
+
+            //close when click ouside
+            document.addEventListener('click', (event) => {
+                    mentionMenu.classList.add('hidden');
+            });
+        }
+
+        // "See more" functionality for the new card
+        const seeMoreElements = document.querySelectorAll('.see-more');
+        
+        seeMoreElements.forEach(element => {
+            element.addEventListener('click', function() {
+                const contentText = this.parentElement;
+                const fullText = "Gen Z leader Kasmuel McOure is set to be sworn in as a nominated senator representing the youth upon his return from the US, taking over from Karen Nyamu. The transition marks a significant shift in youth representation in parliament, with McOure bringing fresh perspectives from his international experience.";
+                
+                if (this.textContent === 'See more') {
+                    contentText.textContent = fullText;
+                    this.textContent = 'See less';
+                } else {
+                    contentText.innerHTML = fullText.substring(0, 100) + '… <span class="see-more">See more</span>';
+                }
+            }); 
+        });
+
+        // View More Comments functionality
+const viewMoreCommentsBtn = document.getElementById('viewMoreCommentsBtn');
+const moreComments = document.getElementById('moreComments');
+
+if (viewMoreCommentsBtn && moreComments) {
+    viewMoreCommentsBtn.addEventListener('click', function() {
+        if (moreComments.style.display === 'none') {
+            moreComments.style.display = 'block';
+            this.innerHTML = 'View Less Comments <i class="fas fa-chevron-up"></i>';
+            this.classList.add('expanded');
+        } else {
+            moreComments.style.display = 'none';
+            this.innerHTML = 'View More Comments <i class="fas fa-chevron-down"></i>';
+            this.classList.remove('expanded');
+        }
+    });
+}
+
+// View More Comments functionality for second card
+const viewMoreCommentsBtn2 = document.getElementById('viewMoreCommentsBtn2');
+const moreComments2 = document.getElementById('moreComments2');
+
+if (viewMoreCommentsBtn2 && moreComments2) {
+    viewMoreCommentsBtn2.addEventListener('click', function() {
+        if (moreComments2.style.display === 'none') {
+            moreComments2.style.display = 'block';
+            this.innerHTML = 'View Less Comments <i class="fas fa-chevron-up"></i>';
+            this.classList.add('expanded');
+        } else {
+            moreComments2.style.display = 'none';
+            this.innerHTML = 'View More Comments <i class="fas fa-chevron-down"></i>';
+            this.classList.remove('expanded');
+        }
+    });
+}
+
+    </script>
+</body>
+</html>
