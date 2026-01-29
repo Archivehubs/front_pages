@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Bio Portfolio | Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="css/public_corporate_bio_portfolio.css">
+
+</head>
+<body>
+    <div class="profile-container">
+        <div class="full-width-top">
+            <!-- Profile Header Section -->
+            <div class="card profile-header">
+                <div class="profile-banner">
+                    <img id="bannerImage" src="images/coverphoto.jpg" alt="Profile Banner">
+                </div>
+
+                <div class="profile-info-top">
+                    <img src="images/profile-1.jpg" alt="Oluchi Nkem" class="profile-picture">                    
+                </div>
+                <div class="profile-details">
+                    <h1>Oluchi Nkem</h1>
+                    <p class="title">Certified Chartered Accountant</p>
+                    <p class="location-connections">Lagos, Nigeria · <a href="#">Contact info</a></p>
+                    <p class="connection">589 connections</p>
+                    <p class="mutual-connections"><i class="fas fa-link"></i> David James, Gabriel Samson, and other 5 Mutual Connections</p>
+                    <div class="header-buttons">
+                        <button class="secondary-button">Message</button>
+                        <button class="primary-button">Edit Portfolio</button>
+                        <button class="secondary-button" id="connectionsBtn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    
+                    <!-- Connections Dropdown -->
+                    <div class="connections-dropdown" id="connectionsDropdown">
+                        <h4 class="connections-header">Find more Connections</h4>
+                        <div class="connections-profiles">
+                            <div class="profile-item">
+                                <img src="images/profile-1.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-2.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-3.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-1.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-2.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-3.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                            <div class="profile-item">
+                                <img src="images/profile-1.jpg" alt="Profile">
+                                <h3>Name</h3>
+                                <p>Profile</p>
+                                <button class="connect-button">Connect</button>
+                            </div>
+                        </div>
+                        <a href="#" class="show-all">See More Connections <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <ul class="profileTabs">
+                    <li class="tab-button active" data-tab="portfolio"><a href="#" >Portfolio</a></li>
+                    <li class="tab-button" data-tab="about"><a href="#" >About</a></li>
+                    <li class="tab-button" data-tab="lite"><a href="#" >Lite</a></li>
+                    <li class="tab-button" data-tab="photos"><a href="#">Photos</a></li>
+                    <li class="tab-button" data-tab="videos"><a href="#">Videos</a></li>
+                    <li class="tab-button" data-tab="connections"><a href="#">Connections</a></li>
+                    <li class="tab-button" data-tab="publicOpinion"><a href="#">Public Opinion</a></li>
+                    <li  class="dropdown-container"><button id="moreBtn">More <i class="fas fa-chevron-down"></i></button>
+                        <!-- More Dropdown -->
+                        <ul class="more-dropdown" id="moreDropdown">
+                            <li id="mentionBtn">Mentions</li>
+                            <li>videos</li>
+                            <li>Live</li>
+                            <li>Groups</li>
+                            <li>Connections</li>
+                            <li>Music</li>
+                            <li>Check-ins</li>
+                            <li>Sports</li>
+                            <li>Movies</li>
+                            <li>TV Shows</li>
+                        </ul>
+                    </li>
+                    <li  class="dropdown-container"><button id="dotsBtn">...</button>
+                        <!-- Dots Dropdown -->
+                        <ul class="dots-dropdown" id="dotsDropdown">
+                            <li><i class="fa-solid fa-flag"></i>Report Account</li>
+                            <li ><i class="fa-solid fa-ban"></i>Block</li>
+                            <li><i class="fa-solid fa-user-plus"></i>Invite Connections</li>
+                            <li><i class="fa-solid fa-user-check"></i>Connect</li>
+                            <li><i class="fa-solid fa-thumbs-up"></i>Like as your profile</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="mentionsDropdown hidden" id="mentionsDropdown">
+                            <div class="mentionItem one">
+                                <button class="blueBtn" id="blueBtn"><i class="fa-solid fa-message"></i>Message</button>
+                                <button class="grayBtn"><i class="fa-solid fa-thumbs-up"></i>Like</button>
+                                <button class="grayBtn"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+                            </div>
+
+                            <div class="mentionItem two">
+                                <div class="mentionMessage">
+                                    <img src="images/profile.jpg" alt="User profile picture">
+                                    <textarea name="Message" id="" placeholder="Write something to Account Owner"></textarea>
+                                </div>
+                                <div class="mentionMessage-btns">
+                                    <button><i class="fa-solid fa-photo-film"></i>Media</button>
+                                    <button><i class="fa-solid fa-tag"></i>Tag People</button>
+                                    <button><i class="fa-solid fa-face-smile"></i>Feeling/Activity</button>
+                                </div>
+                            </div>
+
+                            <div class="mentionItem three">
+                                <div class="dropdowN">
+                                    <button id="filterBtn">
+                                        <i class="fa-solid fa-filter"></i>Filter
+                                    </button>
+                                    <div class="dropdownIteM" id="dropdownIteS">
+                                        <div class="filterHeader">
+                                            <h4>Post Filters</h4>
+                                            <button><i class="fa-solid fa-x"></i></button>
+                                        </div>
+                                        <div class="filterMenu-content">
+                                            <p>Go to:</p>
+                                            <input type="date" name="" id="">
+                                        </div>
+                                        <div class="dropdownIteM-btn">
+                                            <button id="cancelSortF">Cancel</button>
+                                            <button id="doneBtnF">Done</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdowM">
+                                    <button id="sortBtn">
+                                        <i class="fa-solid fa-sort"></i>Sort
+                                    </button>
+                                    <div class="dropdownIteM" id="dropdownIteM">
+                                        <h4>Sort by</h4>
+                                        <ul>
+                                            <li><i class="fa-solid fa-star"></i>Most Relevant</li>
+                                            <li><i class="fa-solid fa-clock-rotate-left"></i>Most Recent</li>
+                                        </ul>
+                                        <div class="dropdownIteM-btn">
+                                            <button id="cancelSort">Cancel</button>
+                                            <button id="doneBtn">Done</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mentionItem four">
+                                <div class="fourHeader">
+                                    <div>
+                                        <img src="images/profile.jpg" alt="user profile picture">
+                                        <p> Poster Name is with Author Name and 11 others</p>
+                                    </div>
+                                    <div class="fourMore-Btn">
+                                        <button id="buut"><i class="fa-solid fa-ellipsis"></i></button>
+
+                                        <div class="fourMore-dropdown hidden" id="fourMoreDropdown">
+                                            <button>
+                                                <i class="fa-solid fa-bookmark"></i> Saved Post </br>
+                                                <span>Add this to your saved items</span>
+                                            </button>
+
+                                            <div class="separator"></div>
+
+                                            <button>
+                                                    <i class="fa-solid fa-bell"></i> Turn on notifications for this post
+                                            </button>
+
+                                            <button>
+                                                <i class="fa-solid fa-code"></i> Embed
+                                            </button>
+
+                                            <button>
+                                                <i class="fa-solid fa-triangle-exclamation"></i> Report Post </br>
+                                                <span>We won't let Name know who reported this</span>
+                                            </button>
+                                            
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="fourImage">
+                                    <img src="images/tesla-post.jpg" alt="">
+                                </div>
+
+                                <div class="fourControllers">
+                                    <p style="margin-bottom:0;">Platform Name</p>
+                                    <p>Brief description of message</p>
+                                    <div class="fourController-Btn">
+                                        <button><i class="fa-solid fa-thumbs-up"></i> Like</button>
+                                        <button><i class="fa-solid fa-comment"></i> Comment</button>
+                                        <button><i class="fa-solid fa-retweet"></i> Repost</button>
+                                        <button><i class="fa-solid fa-share"></i> Share</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mentionItem five">
+                                <img src="images/profile.jpg" alt="user profile picture">
+                                <div class="mentionComment-area">
+                                    <textarea name="" id="commentMention" placeholder="comment as Profile Owner"></textarea>
+                                    <div class="mentionComment-areaBtn">
+                                        <button><i class="fa-solid fa-icons"></i></button>
+                                        <button><i class="fa-solid fa-face-laugh-wink"></i></button>
+                                         <label for="file-upload" class="icon-button" aria-label="Upload Image">
+                                            <i class="fa-solid fa-camera"></i>
+                                        </label>
+                                        <button><i class="fa-solid fa-film"></i></button>
+                                        <button><i class="fa-solid fa-note-sticky"></i></button>
+                                    </div>
+
+                                    <input type="file" id="file-upload" class="hidden-file-input" accept="image/*">
+                                </div>
+                            </div>
+                </div>
+                   
+            </div>
+        </div>
+                        <div></div>
+
+        <div class="Container">
+            <div class="main-content  active" id="portfolio">
+                
+                <div class="portfolioo">
+                    <div class="portfolio" id="portfolioLeft">
+            <!-- About Section -->
+            <div class="card about-section">
+                <div class="section-header">
+                    <h2>About</h2>
+                </div>
+                <p class="about-text">We are Federal Ministry of Information wherein we work as an entity to assist 
+                    Businesses, NGOs and Public Establishments to find solutions to all their Information and Technology problems. </p>
+                <div class="top-skills">
+                    <i class="fas fa-diamond"></i> Top Skills
+                    <p>Accounting . Financial Management <i class="fas fa-arrow-right"></i></p>
+                </div>
+            </div>
+
+            <div class="card introduction-section">
+                <div class="section-header">
+                    <h2>Introduction/Executive Message</h2>
+                </div>
+                <div>
+                    <img src="images/profile.jpg" alt="corporate profile pic">
+                    <p class="about-text">We are Federal Ministry of Information wherein we work as an entity to assist 
+                        Businesses, NGOs and Public Establishments 
+                        to find solutions to all their Information 
+                        and Technology problems.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Work Experience Section -->
+            <div class="card overview-section">
+                <div class="section-header">
+                    <h2>Organizational Overview (Brief)</h2>
+                </div>
+                <div class="overview-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Company Logo" class="org-image-small">
+                    <div class="experience-details">
+                        <p class="company-name">Full Name and Acronym</p>
+                        <p class="duration">Mandate and Mission</p>
+                        <p>Jurisdiction (national, state, regional, local)</p>
+                        <p>Organizational structure and key divisions (summary)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div class="card focus-section">
+                <div class="section-header">
+                    <h2>Strategic Focus Areas</h2>
+                </div>
+                <div class="education-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="School Logo" class="org-image-small">
+                    <div class="education-details">
+                        <p class="degree">Core thematic or operational areas</p>
+                        <p class="duration">Goals and objectives for each area</p>
+                        <p>Linkage to national development plans, SDGs, or policy frameworks</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- portfolio Section -->
+            <div class="card portfolio-section">
+                <div class="section-header">
+                    <h2>Portfolio of Programs  and Projects</h2>
+                </div>
+                <div class="portfolio-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Project Image" class="org-image-small">
+                    <div class="portfolio-details">
+                        <p>Project Title</p>
+                        <p class="client">Implementing Department/Unit</p>
+                        <p class="date">Location(s)</p>
+                        <p class="tools">Timeline (start-end date or ongoing)</p>
+                        <p>Budget/ Funding Source</p>
+                        <p class="objective">Objective / Purpose</p>
+                        <p>Activities/ Components</p>
+                        <p>Stakeholder/ Partners</p>
+                        <p>Outcomes/ Results</p>
+                        <p>Visuals (photos, charts, maps)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- key Performane highlight Section -->
+            <div class="card performance-section">
+                <div class="section-header">
+                    <h2>Key Performance Highlights</h2>
+                </div>
+                <div class="performance-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+                    <div class="performance-details">
+                        <p>Summary of measurable results</p>
+                        <p class="issuer">Indicators and targets achieved</p>
+                        <p class="issued-date">Beneficiary data</p>
+                        <p class="credential-id">Year-over-year comparisons</p>
+                        <p>Infographics and dta visualizations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- collaboration Section -->
+            <div class="card collaboration-section">
+                <div class="section-header">
+                    <h2>Collaborations and Partnerships</h2>
+                </div>
+                <div class="collaboration-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+                    <div class="performance-details">
+                        <p>National, regional, and international partners</p>
+                        <p>Donor-funded initiatives</p>
+                        <p>Joint ventures with private sector, NGOs, or 
+                            other public agencies
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- M&E Section -->
+            <div class="card monitoring-section">
+                <div class="section-header">
+                    <h2>Monitoring, Evaluation, and Learning (MEL)</h2>
+                </div>
+                <div class="monitoring-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+                    <div class="monitoring-details">
+                        <p>Overview of monitoring frameworks</p>
+                        <p>Evaluation proceses and impact assessment methods</p>
+                        <p>Adaptive learning approaches used for future planning
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Challenges Section -->
+            <div class=" card challenges-section">
+                <div class="section-header">
+                    <h2>Challenges and Mitigation Strategies</h2>
+                </div>
+                <div class="challenges-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+                    <div class="challenges-details">
+                        <p>Operational, financial, or political challenges</p>
+                        <p>Response and mitigation mechanisms</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Awards Section -->
+            <div class="card awards-section">
+                <div class="section-header">
+                    <h2>Awards and Recognitions (Optional)</h2>
+                </div>
+                <div class="award-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Award Logo" class="org-image-small">
+                    <div class="award-details">
+                        <p>Key Accomplishment/ Major Project Completed</p>
+                        <p>Awards & Certifications</p>
+                        <p>Name of organization</p>
+                        <p>Issued date</p>
+                        <p>Credential ID</p>
+                    </div>
+                    <a href="#" class="view_credentials">View Credential</a>
+                </div>
+
+                <div class="award-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Award Logo" class="org-image-small">
+                    <div class="award-details">
+                        <p>Key Accomplishment/ Major Project Completed</p>
+                        <p>Awards & Certifications</p>
+                        <p>Name of organization</p>
+                        <p>Issued date</p>
+                        <p>Credential ID</p>
+                    </div>
+                    <a href="#" class="view_credentials">View Credential</a>
+                </div>
+                
+            </div>
+
+            <!-- outlook Section -->
+            <div class=" card outlook-section">
+                <div class="section-header">
+                    <h2>Outlook and Strategic plans</h2>
+                </div>
+                <div class="outlook-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+                    <div class="challenges-details">
+                        <p>Future projects in the pipeline</p>
+                        <p>Policy reform efforts or expansion plans</p>
+                        <p>Innovation and digization strategies</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case study Section -->
+            <div class=" card study-section">
+                <div class="section-header">
+                    <h2>Case Studies or Deep Dives</h2>
+                </div>
+                <div class="study-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+                    <div class="challenges-details">
+                        <p>More detailed breakdown in 1-3 landmark projects</p>
+                        <p>Success metrics, timelines, budget</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- testimonial Section -->
+            <div class=" card testimonial-section">
+                <div class="section-header">
+                    <h2>Client Testimonials</h2>
+                </div>
+                <div class="testimonial-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+                    <div class="challenges-details">
+                        <p>Quotes or feedback from beneficiaries or partners </p>
+                        <p>Content or reference to the project the relate to</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- publication Section -->
+            <div class=" card publication-section">
+                <div class="section-header">
+                    <h2>Publications</h2>
+                </div>
+                <div class="testimonial-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="License Logo" class="org-image-small">
+                    <div class="publications-details">
+                        <p>Title</p>
+                        <p>Author</p>
+                        <p>Description of Topic</p>
+                        <p>Status</p>
+                        <p>Date of Publication</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Contact & Links Section -->
+            <div class="card contact-section">
+                <div class="section-header">
+                    <h2>Contact & Links</h2>
+                </div>
+                <div class="contact-info flex-org-image">
+                    <img src="images/Company Logo.png" alt="Contact" class="org-image-small">
+                    <div class="contact-details">
+                        <p class="name">Name</p>
+                        <p class="email">Professional Email</p>
+                        <p class="phone">Phone</p>
+                        <p class="profile-link">Archivehubs Profile Link</p>
+                        <p class="other-links">Other Links and more</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appendix Section -->
+            <div class="card appendix-section">
+                <div class="section-header">
+                    <h2>Appendices</h2>
+                </div>
+                <div class="appendix-item flex-org-image">
+                    <img src="images/Company Logo.png" alt="Appendix" class="org-image-small">
+                    <div class="appendix-details">
+                        <p class="item">Maps  of project locations</p>
+                        <p class="item">White paper or brochures</p>
+                        <p class="item">Legal references</p>
+                        <p class="item">Budget breakdowns</p>
+                        <p>Reports, photos, or charts</p>
+                    </div>
+                </div>
+                <a href="#" class="show-all">Show all appendices <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="footer">
+                <p class="copyright">Get the Archivehubs App <strong class="terms">General Terms</strong>
+                </p>
+                <p class="copyright2">ARCHIVEHUBS: ENINK Investment Limited © 2025 <strong>RC1741345</strong> 
+                    <img src="images/company-name.jpg" alt="">
+                </p>
+            </div>
+                    </div>
+                    <!-- Right Sidebar -->
+                    <div class="portfolio" id="portfolioRight">
+            <div class="card sidebar-card target-audiences">
+                <h3>Maximize business growth on Archivehubs</h3>
+                <p>Ads a platform built for B2B</p>
+                <p>Achieve higher ROI and see real results</p>
+                <button class="get-started-btn">Start now</button>
+            </div>
+
+            <div class="card sidebar-card unlock-insights">
+                <h2>Unlock more insights about leads</h2>
+                <p>Improve outreach with sales insights</p>
+                <div class="sales-explorer">
+                    Try Sales Explorer for NGN0
+                    <p>1-month free with 24/7 support. Cancel anytime.</p>
+                    <p>We'll remind you 7 days before your trial ends.</p>
+                </div>
+            </div>
+
+            <div class="card sidebar-card connections">
+                <h2>Connections <a href="#">See all connections</a></h2>
+                <div class="connections-grid">
+                    <div class="connection-item">
+                        <img src="images/profile-1.jpg" alt="Profile" class="connection-avatar">
+                        <p>Name</p>
+                        <p>Profile</p>
+                    </div>
+                    <div class="connection-item">
+                        <img src="images/profile-2.jpg" alt="Profile" class="connection-avatar">
+                        <p>Name</p>
+                        <p>Profile</p>
+                    </div>
+                    <div class="connection-item">
+                        <img src="images/profile-3.jpg" alt="Profile" class="connection-avatar">
+                        <p>Name</p>
+                        <p>Profile</p>
+                    </div>
+                    <div class="connection-item">
+                        <img src="images/profile-1.jpg" alt="Profile" class="connection-avatar">
+                        <p>Name</p>
+                        <p>Profile</p>
+                    </div>
+                    <div class="connection-item">
+                        <img src="images/profile-2.jpg" alt="Profile" class="connection-avatar">
+                        <p>Name</p>
+                        <p>Profile</p>
+                    </div>
+                    <div class="connection-item">
+                        <img src="images/profile-3.jpg" alt="Profile" class="connection-avatar">
+                        <p>Name</p>
+                        <p>Profile</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card sidebar-card who-viewed">
+                <h2>Add to your network</h2>
+                <div class="viewer-item">
+                    <img src="images/profile-2.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Gabriel Danladi<span class="dot">·</span> <span class="follow-status">2nd</span></h3>
+                        <p class="viewer-title">Software Engineer | AI, SE Akemi | Co-founding...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <div class="viewer-item">
+                    <img src="images/profile-3.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Sarah Essan</h3>
+                        <p class="viewer-title">Executive Assistant | Expert in Elaborat...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <div class="viewer-item">
+                    <img src="images/profile-1.jpg" alt="Viewer" class="viewer-avatar">
+                    <div class="viewer-details">
+                        <h3>Julie Daniel</h3>
+                        <p class="viewer-title">Executive Assistant | Expert in Elaborat...</p>
+                       <button class="connect-button"> <i class="fas fa-user-plus"></i> Follow</button>
+                    </div>
+                </div>
+                <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card sidebar-card people-you-may-know">
+                <h2>Connections you may want</h2>
+                <div class="person-item">
+                    <img src="images/profile-2.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Kingsley Mokena</h3>
+                        <p class="person-title">Data Science Student at ALX</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-1.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Melvin A.</h3>
+                        <p class="person-title">Aspiring Backend | Cloud Architect | Passionate abou...</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-3.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Felix Alabama</h3>
+                        <p class="person-title">Bio economics | Data Scientist | AWS Certified | Cloud...</p>
+                        <button class="connect-button"><i class="fas fa-plus"></i> Connect</button>
+                    </div>
+                </div>
+                 <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="card sidebar-card people-you-may-know">
+                <h2>Your viewers also viewed</h2>
+                <div class="person-item">
+                    <img src="images/profile-2.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Kingsley Mokena</h3>
+                        <p class="person-title">Data Science Student at ALX</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-1.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Melvin A.</h3>
+                        <p class="person-title">Aspiring Backend | Cloud Architect | Passionate abou...</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                <div class="person-item">
+                    <img src="images/profile-3.jpg" alt="Person" class="person-avatar">
+                    <div class="person-details">
+                        <h3>Felix Alabama</h3>
+                        <p class="person-title">Bio economics | Data Scientist | AWS Certified | Cloud...</p>
+                        <button class="connect-button"> View</button>
+                    </div>
+                </div>
+                 <a href="#" class="show-all">See more <i class="fas fa-arrow-right"></i></a>
+            </div>          
+
+        
+
+
+
+        
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="main-content about" id="about">
+                <div class="aboutLeft">
+                    <div class="aboutProfile">
+                        <h3>About</h3>
+                        <img src="images/Company Logo.png" alt="company profile picture">        
+                    </div>
+
+                    <div class="aboutNavigation">
+                        <ul>
+                            <li><button  class="aboutBtn active" data-tab="about">About</button></li>
+                            <li><button  class="aboutBtn" data-tab="overview">Organizational Overview</button></li>
+                            <li><button  class="aboutBtn" data-tab="vision">Vision, Mission, and Core Values</button></li>
+                            <li><button  class="aboutBtn "data-tab="services">Key Programs and Services</button></li>
+                            <li><button  class="aboutBtn "data-tab="structure">Organizational Structure</button></li>
+                            <li><button  class="aboutBtn "data-tab="functions">Functions and Mandates</button></li>
+                            <li><button  class="aboutBtn "data-tab="goals">Strategic Goals and Objectives</button></li>
+                            <li><button  class="aboutBtn "data-tab="achievements">Major Achievements</button></li>
+                            <li><button  class="aboutBtn "data-tab="budget">Budget and Funding Sources</button></li>
+                            <li><button  class="aboutBtn " data-tab="partnership">Partnerships and Stakeholders</button></li>
+                            <li><button  class="aboutBtn "data-tab="policy">Policy and Regulatory Framework</button></li>
+                            <li><button  class="aboutBtn " data-tab="monitoring">Monitoring, Evaluation and Reporting</button></li>
+                            <li><button  class="aboutBtn " data-tab="contact">Contact Information</button></li>
+                            <li><button  class="aboutBtn "data-tab="appendix">Appendix/ Extras</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="aboutRight">
+                    <div class="aboutContent active" id="about">
+                        <h4>About</h4>
+
+                        <div>
+                            <h5><i class="fa-solid fa-building"></i> Official Name</h5>
+                            <p>Federal Ministry of information and Technology</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-bullseye"></i> Tagline or Motto</h5>
+                            <p>Creating Additional Value</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-calendar-days"></i> Year Established</h5>
+                            <p>14/08/2004</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-align-left"></i>Organization Description</h5>
+                            <p>Brief description about the corporation
+                            </p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-location-dot"></i> Organization Address</h5>
+                            <p>NO 2 Victory Close, Gbazango Extension, Kubwa, FCT -Abuja, Nigeria</p>
+                        </div>
+
+                    </div>
+
+                    <div class="aboutContent" id="overview">
+                        <h4><i class="fa-solid fa-building-user"></i>Organization Overview</h4>
+                        <div>
+                            <h5><i class="fa-solid fa-id-card"></i> Full Name and Acronymn</h5>
+                            <p>Federal Ministry of Finance (FMF)</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-stamp"></i> Registration Number</h5>
+                            <p>RC 80996532</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-calendar-days"></i> Date of Establishment</h5>
+                            <p>14/ 08/2025</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-gavel"></i> Mandate or Legal Foundation</h5>
+                            <p>Public Finance and Budget Implementation</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-sitemap"></i> Parent Ministry or Supervisory Authority</h5>
+                            <p>None</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-landmark"></i> Jurisdiction</h5>
+                            <p>National</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-building"></i> Headquarters</h5>
+                            <p>No 2 Victory Close, Gbazango Extension, Kubwa, FCT - Abuja</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-building"></i> Regional Offices</h5>
+                            <p>Goldenspot Complex, Gbazango West, Kubwa, FCT - Abuja</p>
+                        </div>
+                        
+                    </div>
+
+                    <div class="aboutContent" id="vision">
+                        <h4>Vision, Mission and Core Values</h4>
+                        <div>
+                            <h5><i class="fa-solid fa-eye"></i> Vision Statement</h5>
+                            <p>Long-term aspirational goal</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-bullseye"></i> Mission Statement</h5>
+                            <p>Purpose and how it operates</p>
+                        </div>
+
+                        <div>
+                            <h5><i class="fa-solid fa-gem"></i> Core Values</h5>
+                            <p>Beliefs guiding behavior and decision-making</p>
+                        </div>    
+                        
+                    </div>
+
+                    <div class="aboutContent" id="services">
+                        <h4> <i class="fa-solid fa-list-check"></i>Key Programs and Services</h4>
+                        <p>5 Distinct Programs Showcase</p>
+                        <div class="rightDesignators">
+                            <img src="images/Company Logo.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>Ongoing Iniiatives, Public Services, or Policy Programs</p>
+                                <p>Target Popoulation or Beneficiaries</p>
+                                <p>Delivery Mechaniz=sms (Offices, Digital Platforms, Partnerships)</p>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignators">
+                            <img src="images/Company Logo.png" alt="Company Logo">
+                            <div class="aboutWorkDesignation">
+                                <p>Ongoing Iniiatives, Public Services, or Policy Programs</p>
+                                <p>Target Popoulation or Beneficiaries</p>
+                                <p>Delivery Mechaniz=sms (Offices, Digital Platforms, Partnerships)</p>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="aboutContent" id="structure">
+                        <h4><i class="fa-solid fa-sitemap"></i>Organizational Structure</h4>
+                        <p>8 members of management team</p>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/profile.jpg" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Leadership (Director General, Minister, Head, etc)</p>
+                                    <p>Key Departmentss/Units</p>
+                                    <p>Staffing Overview (number of employee, distribution etc)</p>
+                                    <p>Organizational Hierarchy/ organizational chart</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/profile.jpg" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Leadership (Director General, Minister, Head, etc)</p>
+                                    <p>Key Departmentss/Units</p>
+                                    <p>Staffing Overview (number of employee, distribution etc)</p>
+                                    <p>Organizational Hierarchy/ organizational chart</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="aboutWorkBtns">
+                            <a href="">View Organizational Chart</a>
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="aboutContent" id="functions">
+                        <h4><i class="fa-solid fa-gears"></i> Functions and Mandate</h4>
+                        <p>5 Specific Functions and Mandates</p>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Primary responsibilities and legal mandates</p>
+                                    <p>Scope of Authority (policy-making, implmentation, regulation, service delivery etc.)</p>
+                            
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Primary responsibilities and legal mandates</p>
+                                    <p>Scope of Authority (policy-making, implmentation, regulation, service delivery etc.)</p>
+                            
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="aboutContent" id="goals">
+                        <h4><i class="fa-solid fa-bullseye"></i> Strategic Goals and Objectives</h4>
+                        <p>7 specific goals and objectives</p>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Medium to long-term plans</p>
+                                    <p>Alignment with National Development Frameworks, SDGs, etc</p>
+                                    <p>Delivery Mechanisms (Offices, digital platforms, partnerships)</p>
+                                    <p>Performance indicators</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Medium to long-term plans</p>
+                                    <p>Alignment with National Development Frameworks, SDGs, etc</p>
+                                    <p>Delivery Mechanisms (Offices, digital platforms, partnerships)</p>
+                                    <p>Performance indicators</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="aboutContent" id="achievements">
+                        <h4><i class="fa-solid fa-trophy"></i> Major Achievements</h4>
+                        <p>20 major achievement received</p>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Key accomplishments in recent years</p>
+                                    <p>Impact summaries with data or success stories</p>
+                                    <p>Recognition, awards, or major milestones</p>
+                                    <p>Issued date</p>
+                                    <p>Credential ID</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View Award</a>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Key accomplishments in recent years</p>
+                                    <p>Impact summaries with data or success stories</p>
+                                    <p>Recognition, awards, or major milestones</p>
+                                    <p>Issued date</p>
+                                    <p>Credential ID</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View Award</a>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Key accomplishments in recent years</p>
+                                    <p>Impact summaries with data or success stories</p>
+                                    <p>Recognition, awards, or major milestones</p>
+                                    <p>Issued date</p>
+                                    <p>Credential ID</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View Award</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="aboutContent" id="budget">
+                        <h4><i class="fa-solid fa-piggy-bank"></i> Budget and Funding Sources</h4>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <div class="aboutWorkDesignation">
+                                    <p>Annual budget summary (expenditures and allocations)</p>
+                                    <p>Sources of funding (goernment appropriation, donors, support, grants)</p>
+                                    <p>Financia accountability and audit practices</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View Budget</a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="aboutContent" id="partnership">
+                        <h4><i class="fa-solid fa-handshake"></i> Partnerships and Stakeholders</h4>
+                        <p>5 strategic partnerships</p>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Collaborations with other government bodies, NGOs, international agencies, or private sector</p>
+                                    <p>Community engagement mechanisms</p>
+                                    <p>Public-Private partnership</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View Photo</a>
+                            </div>
+                        </div>
+                        
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Collaborations with other government bodies, NGOs, international agencies, or private sector</p>
+                                    <p>Community engagement mechanisms</p>
+                                    <p>Public-Private partnership</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View Photo</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="aboutContent" id="policy">
+                        <h4><i class="fa-solid fa-scroll"></i> Policy and Regulatory Framework</h4>
+                        <p>10 Key Policies and Regulations</p>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Relevant laws, Regulations, or Policy documents</p>
+                                    <p>Oversight mechanisms and accountability structures</p>
+                                    <p>Compliance with national and international standards</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                        </div>
+                        
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Relevant laws, Regulations, or Policy documents</p>
+                                    <p>Oversight mechanisms and accountability structures</p>
+                                    <p>Compliance with national and international standards</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="aboutContent" id="monitoring">
+                        <h4><i class="fa-solid fa-chart-pie"></i> Monitoring, Evaluation, and Reporting</h4>
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Ho the organization measures performance</p>
+                                    <p>Monitoring tools or dashboards</p>
+                                    <p>Reporting procedures and public disclosure</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                        </div>
+
+                        <div class="rightDesignatorsLinkers">
+                            <div class="rightDesignators">
+                                <img src="images/Company Logo.png" alt="Company Logo">
+                                <div class="aboutWorkDesignation">
+                                    <p>Ho the organization measures performance</p>
+                                    <p>Monitoring tools or dashboards</p>
+                                    <p>Reporting procedures and public disclosure</p>
+                                </div>
+                            </div>
+                            <div class="aboutWorkBtns">
+                                <a href="">View File</a>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="aboutContent" id="contact">
+                        <h4><i class="fa-solid fa-address-card"></i> Contact Information</h4>
+
+                        <div class="rightDesignators">
+                            <img src="images/community-logo.jpeg" alt="company profile picture">
+                            
+                            <div class="aboutWorkDesignation">
+                                <p><strong>Organization Data</strong></p>
+                                <p>Organization Name</p>
+                                <p>Date of establishment</p>
+                                <p>Registration ID/ Number</p>
+                                <p>Postal address</p>
+                                <p>Headquarter address</p>
+                                <p>Regional office address</p>
+                                <p>Organization Email</p>
+                                <p>Phone</p>
+                                <p>Helpline</p>
+                                <p>Official website or blog</p>
+                                <p>Archivehubs Portfolio Link</p>
+                                <p>Social Media Links</p>
+                                <p>Other Portfolio Link</p>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="aboutContent" id="appendix">
+                        <h4><i class="fa-solid fa-address-card"></i> Appendix/ Extras</h4>
+                        <p>5 attachments</p>
+                        <div class="rightDesignatorsLinks">
+                            <a href="">View Organizational chart</a>
+                            <a href="">View Press mentions</a>
+                            <a href="">View program brochure or flyers</a>
+                            <a href="">View legal references or foundational acts</a>
+                            <a href="">View maps, report, or infographics</a>
+
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="main-content" id="lite">
+                <div class="lite">
+                    <h4>Lite</h4>
+                    <p class="mediaLinker">Account Owners Name Lites</p>
+                    <div class="liteGrid">
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/game-2.jpg" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" id="photos">
+                <div class="lite">
+                    <h4>Photos</h4>
+                    <p class="mediaLinker">Account Owners Name Photos</p>
+                    <div class="liteGrid">
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+
+                        <div class="photoItem">
+                            <img src="images/tesla-post.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" id="videos">
+                <div class="lite">
+                    <h4>Videos</h4>
+                    <p class="mediaLinker">Account Owners Name Videos</p>
+                    <div class="liteGrid">
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 3114</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                        <div class="liteItem">
+                            <img src="images/video imager.jfif" alt="">
+                            <p><i class="fa-solid fa-eye"></i> 314</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" id="connections">
+                <div class="connections">
+                    <div class="connectionsSearcher">
+                        <h4>Connections</h4>
+                        <div class="connectionnHeader">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="search" placeholder="Search">
+                        </div>
+                    </div>
+                    <p style="color: #0a66c2; margin-left: 1rem;">Account Owners Connections</p>
+
+                    <div class="connectionsGrid">
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+
+                        <div class="connectionItem">
+                            <img src="images/profile.jpg" alt="userProfile">
+                            <p>Name </br> Profile</p>
+                            <button>Connect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" id="publicOpinion">
+                <div class="publicOpinion">
+                    <div class="goodbook">
+                        <h4>Good Book</h4>
+                        <p style="color: #0a66c2;">Account Owners Name Public Opinion</p>
+                        <div class="bookGrid">
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Recommendations</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 314</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Recommendations</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 314</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Recommendations</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 314</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Recommendations</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 314</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Recommendations</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Recommendations</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>References</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Testimonials</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Appointments</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 314</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="badbook">
+                        <h4>Black Book</h4>
+                        <p style="color: #0a66c2;">Account Owners Name Public Opinion</p>
+                        <div class="bookGrid">
+                            <div class="liteItem">
+                            <div class="booksTopic">
+                                <p>Queries</p>
+                            </div>
+                            <div class="booksController">
+                                <p><i class="fa-solid fa-eye"></i> 100</p>
+                                <button>View</button>
+                            </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Queries</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Suspensions</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Dismissals</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+                            <div class="liteItem">
+                                <div class="booksTopic">
+                                    <p>Jail Sentences</p>
+                                </div>
+                                <div class="booksController">
+                                    <p><i class="fa-solid fa-eye"></i> 100</p>
+                                    <button>View</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+            
+
+    </div>
+    <script src="js/public_corporate_bio_portfolio.js"></script>
+</body>
+</html>
