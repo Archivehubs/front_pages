@@ -346,6 +346,8 @@ a {
   flex: 1;
   max-width: 480px;
   margin: 0 20px;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
 }
 
 /* Basic Nav Link Styles */
@@ -357,9 +359,10 @@ a {
   min-width: 70px;
   height: 60px;
   padding: 0 8px;
-  color: var(--text-secondary);
+  color: var(--text-secondary);  
   text-decoration: none;
   position: relative;
+  transition: color 0.2s ease; 
 }
 
 .nav-link i {
@@ -374,7 +377,8 @@ a {
 }
 
 .nav-link.active {
-  color: yellow;
+  color: black;
+
 }
 
 .nav-link.active::after {
@@ -557,7 +561,11 @@ a {
       transform: translateY(0);
   }
 }
-
+/* menu updates */
+.nav-middle .nav-link:hover,
+.nav-middle .nav-link.active {
+  color: #000000;              /* black text on hover & active */
+}
 
 .profile-menu:hover .dropdown-menu {
   display: block;
