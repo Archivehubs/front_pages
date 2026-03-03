@@ -590,7 +590,7 @@ function togglePassword(inputId, icon) {
 </script>
 
 <script>
-    const API_BASE_URL = 'https://13.49.221.111';
+    const API_BASE_URL = 'https://api.archivehubs.com';
     let userId = null;
     let selectedAccountType = null;
 
@@ -717,22 +717,97 @@ function togglePassword(inputId, icon) {
         }
 
         // Step 1: Create User Account
+        // User skeletal structure
+        const userSkeleton = {
+            firstName: '',
+            lastName: '',
+            otherName: '',
+            email: '',
+            password: '',
+            phone: '',
+            sex: '',
+            country: '',
+            state: '',
+        }
+        const signUpUser = async (errorEl, accountType) =>  {
+            const {
+                firstName,
+                lastName,
+                otherName,
+                email,
+                password,
+                phone,
+                sex,
+                country,
+                state
+            } = userSkeleton;
+
+            let isFailure = false;
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        otherName,
+                        email,
+                        password,
+                        phoneNumber: phone,
+                        sex,
+                        country,
+                        state_province: state,
+                        account_type: accountType 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    console.log(data)
+                    throw new Error(data.message || data.error || 'Failed to create account');
+                }
+
+                userId = data.userId;
+                isFailure = false;
+
+            } catch (error) {
+                isFailure = true;
+                errorEl.textContent = error.message || 'An error occurred. Please try again.';
+            }
+
+            return isFailure
+        }
         document.getElementById('nextBtn').addEventListener('click', async function() {
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const otherName = document.getElementById('otherName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+            userSkeleton.firstName = document.getElementById('firstName').value.trim();
+            userSkeleton.lastName = document.getElementById('lastName').value.trim();
+            userSkeleton.otherName = document.getElementById('otherName').value.trim();
+            userSkeleton.email = document.getElementById('email').value.trim();
+            userSkeleton.password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-            const phone = document.getElementById('phone').value.trim();
-            const sex = document.getElementById('sex').value;
-            const country = document.getElementById('country').value;
-            const state = document.getElementById('state').value;
+            userSkeleton.phone = document.getElementById('phone').value.trim();
+            userSkeleton.sex = document.getElementById('sex').value;
+            userSkeleton.country = document.getElementById('country').value;
+            userSkeleton.state = document.getElementById('state').value;
             const terms = document.getElementById('termsCheckbox').checked;
             const errorEl = document.getElementById('part1Error');
 
             errorEl.textContent = '';
 
+            const {
+                firstName,
+                lastName,
+                otherName,
+                email,
+                password,
+                phone,
+                sex,
+                country,
+                state
+            } = userSkeleton;
             // Validation
             if (!firstName || !lastName || !email || !password || !confirmPassword || !phone || !sex || !country || !state) {
                 errorEl.textContent = 'Please fill in all required fields';
@@ -771,43 +846,12 @@ function togglePassword(inputId, icon) {
             this.disabled = true;
             document.getElementById('nextSpinner').style.display = 'inline-block';
 
-            try {
-                const response = await fetch(`${API_BASE_URL}/auth/signup`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify({
-                        firstName,
-                        lastName,
-                        otherName,
-                        email,
-                        password,
-                        phoneNumber: phone,
-                        sex,
-                        country,
-                        state_province: state,
-                        account_type: 'pending' // Will be set in next step
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || data.error || 'Failed to create account');
-                }
-
-                userId = data.userId;
+            setTimeout(() => {
                 currentPart = 1;
                 showPart(currentPart);
-
-            } catch (error) {
-                errorEl.textContent = error.message || 'An error occurred. Please try again.';
-            } finally {
                 this.disabled = false;
                 document.getElementById('nextSpinner').style.display = 'none';
-            }
+            }, 2000);
         });
 
         // Account Type Selection
@@ -920,6 +964,11 @@ function togglePassword(inputId, icon) {
                 return;
             }
 
+             // signup user
+            const isFailure = await signUpUser(errorEl, "business");
+
+            if (isFailure) return;
+            
             if (!userId) {
                 errorEl.textContent = 'Session expired. Please start over.';
                 return;
@@ -1093,6 +1142,11 @@ function togglePassword(inputId, icon) {
                     return;
                 }
             }
+
+            // signup user
+            const isFailure = await signUpUser(errorEl, "individual");
+
+            if (isFailure) return;
 
             if (!userId) {
                 errorEl.textContent = 'Session expired. Please start over.';

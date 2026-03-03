@@ -34,9 +34,24 @@
     <div class="loader"></div>
 
     <script>
-        setTimeout(function() {
-            window.location.href = 'home.html';
-        }, 4000); // 4000 milliseconds = 4 seconds
+        const BASE_URL = 'https://api.archivehubs.com';
+        window.onload = async function() {
+            const response = await fetch(`${BASE_URL}/user`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+            });
+
+            if (response.ok){
+                setTimeout(function() {
+                    window.location.href = 'home.html';
+                }, 4000); // 4000 milliseconds = 4 seconds
+            } else {
+                window.location.href = 'sign-in_account.html';
+            }
+        }
     </script>
 </body>
 </html>
