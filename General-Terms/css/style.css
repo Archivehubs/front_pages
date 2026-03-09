@@ -388,7 +388,7 @@ a {
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: var(--accent-color);
+  background-color: #000000;
 }
 
 /* Profile Nav Link Specific */
