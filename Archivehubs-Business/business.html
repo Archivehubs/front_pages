@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Business - ArchiveHubs</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/business.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
 </head>
 <body>
     <!-- Header/Navbar -->
@@ -24,7 +25,7 @@
               <input type="text" placeholder="Search..." class="search-input">
             </div>
         </div>
-            
+           
     <div class="nav-middle">
         <a href="../home.html" class="nav-link">
             <i class="fas fa-home"></i>
@@ -51,9 +52,7 @@
           <span>Account</span>
         </a>
       </div>
-
             <div class="nav-right">
-
               <a href="../Archivehubs-Jobs/jobs.html" class="nav-link">
                 <i class="fas fa-briefcase"></i>
                 <span>Jobs</span>
@@ -72,9 +71,6 @@
               </a>
           </div>
         </nav>
-
-
-
         <div class="marketplace-container">
             <!-- Left Sidebar -->
             <div class="marketplace-sidebar">
@@ -85,12 +81,12 @@
                             <i class="fas fa-cog"></i>
                         </button>
                 </div>
-                
+               
                 <div class="search-text">
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Search Marketplace">
                 </div>
-        
+       
                 <div class="sidebar-menu">
                     <a href="business.html" class="menu-item active">
                         <i class="fas fa-globe"></i>
@@ -118,110 +114,54 @@
                         <span>Selling</span>
                         <i class="fas fa-chevron-right"></i>
                     </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-car"></i>
-                        <span>Vehicles</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-home"></i>
-                        <span>Property Rentals</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-building"></i>
-                        <span>Real Estate</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-tshirt"></i>
-                        <span>Apparel</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-list"></i>
-                        <span>Classifieds</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-laptop"></i>
-                        <span>Electronics</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-film"></i>
-                        <span>Entertainment</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-users"></i>
-                        <span>Family</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-gift"></i>
-                        <span>Free Stuff</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-tree"></i>
-                        <span>Garden & Outdoor</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-puzzle-piece"></i>
-                        <span>Hobbies</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-couch"></i>
-                        <span>Home Goods</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-house"></i>
-                        <span>Home Sales</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-guitar"></i>
-                        <span>Musical Instruments</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Office supplies</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-paw"></i>
-                        <span>Pet supplies</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-basketball-ball"></i>
-                        <span>Sporting goods</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-gamepad"></i>
-                        <span>Toys & Games</span>
-                    </a>
-                    <a href="#" class="menu-item">
-                        <i class="fas fa-users-rectangle"></i>
-                        <span>Buy & Sell groups</span>
-                    </a>
-        
                     <button class="create-listing-btn" onclick="window.location.href='business_create_listing.html'">
                         + Create new listing
                     </button>
                 </div>
-        
+       
                 <div class="sidebar-section">
                     <h3>Location</h3>
                     <div class="location-input">
                         <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" placeholder="State, Country, Km away">
+                        <input type="text" placeholder="State, Country, Distance away">
                     </div>
                 </div>
             </div>
-        
+       
             <!-- Main Content -->
             <div class="marketplace-content">
                 <div class="content-header">
                     <div class="header-left">
-                        <h2>Marketplace</h2>
-                        <span class="subtitle">Today's Picks</span>
+                        <div class="title-filter">
+                            <h2 id="main-title">Marketplace</h2>
+                            <div class="category-dropdown">
+                                <div class="dropdown-toggle">
+                                    <input type="text" id="category-input" readonly value="All Categories">
+                                    <i class="fas fa-caret-down"></i>
+                                </div>
+                                <div class="dropdown-menu">
+                                    <a href="#" data-category="all">All Categories</a>
+                                    <a href="#" data-category="items">Items Market</a>
+                                    <a href="#" data-category="vehicles">Vehicles Showroom</a>
+                                    <a href="#" data-category="property">Property Markets</a>
+                                    <a href="#" data-category="services">Service Offerings</a>
+                                    <a href="#" data-category="dbp">Direct Book Publishing (DBP)</a>
+                                    <a href="#" data-category="deals">Archivehubs Deals</a>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="subtitle" id="subtitle">Today's Picks</span>
                     </div>
-                    
+                    <div class="header-right">
+                        <span class="location-badge">
+                            <i class="fas fa-map-marker-alt"></i> Location
+                        </span>
+                    </div>
                 </div>
-        
+       
                 <div class="items-grid">
-                    <!-- Item Cards (2x4 grid) -->
-                    <div class="item-card">
+                    <!-- Item Cards -->
+                    <div class="item-card" data-category="items" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img1.jpg" alt="Item">
                         </div>
@@ -231,8 +171,7 @@
                             <p class="location">Abuja, Nigeria</p>
                         </div>
                     </div>
-
-                    <div class="item-card">
+                    <div class="item-card" data-category="items" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img2.jpg" alt="Item">
                         </div>
@@ -242,8 +181,7 @@
                             <p class="location">Lagos, Nigeria</p>
                         </div>
                     </div>
-
-                    <div class="item-card">
+                    <div class="item-card" data-category="vehicles" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img3.jpg" alt="Item">
                         </div>
@@ -253,8 +191,7 @@
                             <p class="location">Lagos, Nigeria</p>
                         </div>
                     </div>
-
-                    <div class="item-card">
+                    <div class="item-card" data-category="items" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img4.jpg" alt="Item">
                         </div>
@@ -264,8 +201,7 @@
                             <p class="location">Warri, Nigeria</p>
                         </div>
                     </div>
-
-                    <div class="item-card">
+                    <div class="item-card" data-category="items" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img5.jpg" alt="Item">
                         </div>
@@ -275,51 +211,206 @@
                             <p class="location">Abuja, Nigeria</p>
                         </div>
                     </div>
-
-                    <div class="item-card">
+                    <div class="item-card" data-category="services" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img6.jpg" alt="Item">
                         </div>
                         <div class="item-details">
                             <p class="price">NGN55,000</p>
-                            <p class="description">Item Description</p>
+                            <p class="description">Plumbing Service</p>
                             <p class="location">Location</p>
                         </div>
                     </div>
-
-                    <div class="item-card">
+                    <div class="item-card" data-category="dbp" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img7.jpg" alt="Item">
                         </div>
                         <div class="item-details">
                             <p class="price">NGN55,000</p>
-                            <p class="description">Item Description</p>
+                            <p class="description">Best Selling Book</p>
                             <p class="location">Location</p>
                         </div>
                     </div>
-
-                    <div class="item-card">
+                    <div class="item-card" data-category="deals" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img8.jpg" alt="Item">
                         </div>
                         <div class="item-details">
                             <p class="price">NGN55,000</p>
-                            <p class="description">Item Description</p>
+                            <p class="description">Special Deal Package</p>
                             <p class="location">Location</p>
                         </div>
                     </div>
-
-                    <div class="item-card">
+                    <div class="item-card" data-category="property" onclick="openFBModal()">
                         <div class="item-image">
                             <img src="images/business_img8.jpg" alt="Item">
                         </div>
                         <div class="item-details">
                             <p class="price">NGN55,000</p>
-                            <p class="description">Item Description</p>
+                            <p class="description">Luxury Apartment</p>
                             <p class="location">Location</p>
                         </div>
                     </div>
-                    <!-- Repeat item-card div 7 more times for a 2x4 grid -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Facebook Marketplace Modal -->
+        <div id="fbModal" class="fb-modal">
+            <div class="fb-modal-container">
+                <!-- Close Button -->
+                <button class="fb-modal-close" onclick="closeFBModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <!-- Left Side - Full Height Gallery -->
+                <div class="fb-modal-left">
+                    <div class="fb-modal-gallery">
+                        <div class="fb-main-image-container">
+                            <img src="images/business_img1.jpg" alt="Product" class="fb-main-image" id="fbMainImage">
+                        </div>
+                        
+                        <!-- Gallery Navigation -->
+                        <button class="fb-gallery-nav left" onclick="changeFBImage(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="fb-gallery-nav right" onclick="changeFBImage(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <!-- Thumbnails -->
+                        <div class="fb-thumbnails">
+                            <div class="fb-thumbnail active" onclick="selectFBImage(0)">
+                                <img src="images/business_img1.jpg" alt="Thumb 1">
+                            </div>
+                            <div class="fb-thumbnail" onclick="selectFBImage(1)">
+                                <img src="images/business_img5.jpg" alt="Thumb 2">
+                            </div>
+                            <div class="fb-thumbnail" onclick="selectFBImage(2)">
+                                <img src="images/business_img4.jpg" alt="Thumb 3">
+                            </div>
+                            <div class="fb-thumbnail" onclick="selectFBImage(3)">
+                                <img src="images/business_img2.jpg" alt="Thumb 4">
+                            </div>
+                            <div class="fb-thumbnail" onclick="selectFBImage(4)">
+                                <img src="images/business_img3.jpg" alt="Thumb 5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Scrollable Content with Fixed Bottom -->
+                <div class="fb-modal-right">
+                    <!-- Scrollable Content Area -->
+                    <div class="fb-modal-scrollable">
+                        <!-- Product Info -->
+                        <h1 class="fb-product-title">Lenovo Thinkpad L512</h1>
+                        <div class="fb-product-price">NGN 85,000</div>
+                        <div class="fb-product-listed">
+                            <i class="far fa-clock"></i> Listed 13 hours ago in Abuja, Nigeria
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="fb-action-buttons">
+                            <button class="fb-message-btn">
+                                <i class="fab fa-facebook-messenger"></i> Message
+                            </button>
+                            <button class="fb-icon-btn">
+                                <i class="far fa-bookmark"></i>
+                            </button>
+                            <button class="fb-icon-btn">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="fb-icon-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+
+                        <!-- Product Details -->
+                        <div class="fb-details-section">
+                            <h3 class="fb-details-title">Details</h3>
+                            <div class="fb-details-grid">
+                                <div class="fb-detail-item">
+                                    <span class="fb-detail-label">Condition:</span>
+                                    <span class="fb-detail-value">Used - Like New</span>
+                                </div>
+                                <div class="fb-detail-item">
+                                    <span class="fb-detail-label">Brand:</span>
+                                    <span class="fb-detail-value">Lenovo</span>
+                                </div>
+                                <div class="fb-detail-item">
+                                    <span class="fb-detail-label">Size:</span>
+                                    <span class="fb-detail-value">15.6 inches</span>
+                                </div>
+                            </div>
+                            <div class="fb-description">
+                                Lenovo Thinkpad L512 with Intel Core i3 2.40GHz, 4GB RAM, 320GB HDD, Windows 10. Super excellent battery life. Includes charger and original packaging. See less
+                            </div>
+                        </div>
+
+                        <!-- Map Section -->
+                        <div class="fb-map-section">
+                            <h3 class="fb-details-title">Location</h3>
+                            <div class="fb-map-container">
+                                <img src="images/map-placeholder.jpg" alt="Map" class="fb-map-image">
+                                <div class="fb-map-overlay">
+                                    <div class="fb-map-address">Abuja, Federal Capital Territory</div>
+                                    <div class="fb-map-approx">Location is approximate</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seller Information -->
+                        <div class="fb-seller-section">
+                            <div class="fb-seller-header">
+                                <h3 class="fb-details-title">Seller Information</h3>
+                                <a href="#" style="color: #1877f2; text-decoration: none;">See Profile</a>
+                            </div>
+                            
+                            <div class="fb-seller-profile">
+                                <img src="images/profile.jpg" alt="Seller" class="fb-seller-avatar">
+                                <div class="fb-seller-details">
+                                    <span class="fb-seller-name">John Doe</span>
+                                    <span class="fb-seller-rating">
+                                        <i class="fas fa-star"></i> 4.9 (234 reviews)
+                                    </span>
+                                    <span class="fb-seller-joined">
+                                        <i class="fas fa-calendar-alt"></i> Joined ArchiveHubs in 2025
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="fb-seller-stats">
+                                <div class="fb-stat">
+                                    <div class="fb-stat-value">98%</div>
+                                    <div class="fb-stat-label">Positive feedback</div>
+                                </div>
+                                <div class="fb-stat">
+                                    <div class="fb-stat-value">156</div>
+                                    <div class="fb-stat-label">Items sold</div>
+                                </div>
+                                <div class="fb-stat">
+                                    <div class="fb-stat-value">2</div>
+                                    <div class="fb-stat-label">Active listings</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fixed Bottom Section - Message Input -->
+                    <div class="fb-fixed-bottom">
+                        <div class="fb-message-input-container">
+                            <div class="fb-message-input-wrapper">
+                                <input type="text" class="fb-message-input" placeholder="Hi, is this available?">
+                            </div>
+                            <button class="fb-send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="fb-offer-text">
+                            <i class="fas fa-shield-alt"></i> Buy with confidence • ArchiveHubs Protection
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -327,7 +418,6 @@
         <button class="mobile-action-btn">
             <i class="fas fa-plus"></i>
         </button>
-
         <div class="messaging-box">
             <div class="messaging-header" onclick="toggleMessagingBox()">
                 <div class="messaging-left">
@@ -339,9 +429,8 @@
                     <i class="fas fa-ellipsis"></i>
                 </div>
             </div>
-  
+ 
             <div class="messaging-content">
-                <!-- Add messaging content -->
                 <div class="messaging-search">
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Search messages">
@@ -356,22 +445,19 @@
             </div>
         </div>
 
-         <!-- Account Pop-up (ArchiveHubs-style) -->
+         <!-- Account Pop-up -->
     <div id="accountPopupPanel" class="account-popup" style="display:none;">
-        <!-- Banner Cover Photo -->
         <div class="account-popup-banner">
           <img src="images/header.jpg" alt="Cover Photo" class="account-banner-img">
         </div>
-        <!-- User Info -->
         <div class="account-popup-userinfo underline clickable">
           <div class="account-popup-avatar">
             <img src="images/profile.jpg" alt="User Profile Picture">
           </div>
           <div class="account-popup-username">User</div>
         </div>
-        
-                <!-- Account Switcher Section -->
-          <div class="account-popup-switcher underline">
+       
+        <div class="account-popup-switcher underline">
             <div class="account-switcher-item">
               <div class="account-switcher-avatar-container">
                 <img src="images/profile.jpg" alt="User Profile Picture" class="account-switcher-avatar">
@@ -382,11 +468,9 @@
               </div>
             </div>
           </div>
-        <!-- View Profile Button -->
         <div class="account-popup-view-profile-row">
           <button class="account-popup-view-profile">See all profiles</button>
         </div>
-        <!-- Account Section -->
         <div class="account-popup-section account-popup-account">
           <div class="account-popup-account-row highlight">
             <img src="images/profile.jpg" alt="Company Logo" class="account-popup-account-icon">
@@ -395,7 +479,6 @@
               <div class="account-popup-premium"><a href="#">Try free Premium for 1 month</a></div>
             </div>
           </div>
-          <!-- New: More popup links with icons -->
           <div class="account-popup-link">
             <i class="fa fa-gear"></i>
             <span>Settings & privacy</span>
@@ -433,37 +516,155 @@
           </div>
         </div>
         <hr class="account-popup-divider">
-        <!-- Sign Out -->
         <div class="account-popup-signout-row">
           <button class="account-popup-signout">Sign Out</button>
         </div>
       </div>
-        
-            
-
+       
         <script>
+            // Account popup
             window.addEventListener('DOMContentLoaded', function() {
-          const accountNavLink = document.getElementById('accountPopup');
-          const accountPopupPanel = document.getElementById('accountPopupPanel');
-        
-          if (accountNavLink && accountPopupPanel) {
-            accountNavLink.addEventListener('click', function(e) {
-              e.preventDefault();
-              // Position the popup under the nav-link
-              const rect = accountNavLink.getBoundingClientRect();
-              accountPopupPanel.style.top = (rect.bottom + window.scrollY + 8) + 'px';
-              accountPopupPanel.style.right = (window.innerWidth - rect.right - 8) + 'px';
-              accountPopupPanel.style.display = (accountPopupPanel.style.display === 'none' || accountPopupPanel.style.display === '') ? 'block' : 'none';
+                const accountNavLink = document.getElementById('accountPopup');
+                const accountPopupPanel = document.getElementById('accountPopupPanel');
+                if (accountNavLink && accountPopupPanel) {
+                    accountNavLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const rect = accountNavLink.getBoundingClientRect();
+                        accountPopupPanel.style.top = (rect.bottom + window.scrollY + 8) + 'px';
+                        accountPopupPanel.style.right = (window.innerWidth - rect.right - 8) + 'px';
+                        accountPopupPanel.style.display = (accountPopupPanel.style.display === 'none' || accountPopupPanel.style.display === '') ? 'block' : 'none';
+                    });
+                    document.addEventListener('mousedown', function(e) {
+                        if (accountPopupPanel.style.display !== 'none' && !accountPopupPanel.contains(e.target) && !accountNavLink.contains(e.target)) {
+                            accountPopupPanel.style.display = 'none';
+                        }
+                    });
+                }
             });
-            // Hide popup when clicking outside
-            document.addEventListener('mousedown', function(e) {
-              if (accountPopupPanel.style.display !== 'none' && !accountPopupPanel.contains(e.target) && !accountNavLink.contains(e.target)) {
-                accountPopupPanel.style.display = 'none';
-              }
-            });
-          }
-        });
-          </script>
 
+            // Category filter + horizontal scroll for non-Items
+            document.addEventListener('DOMContentLoaded', () => {
+                const toggle = document.querySelector('.dropdown-toggle');
+                const menu = document.querySelector('.dropdown-menu');
+                const input = document.getElementById('category-input');
+                const subtitle = document.getElementById('subtitle');
+                const grid = document.querySelector('.items-grid');
+                const items = document.querySelectorAll('.item-card');
+
+                toggle.addEventListener('click', () => {
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                });
+
+                menu.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                        const cat = e.target.dataset.category;
+                        const text = e.target.textContent;
+                        input.value = text;
+
+                        if (cat === 'all') {
+                            subtitle.style.display = 'block';
+                            items.forEach(item => item.style.display = 'block');
+                            grid.style.display = 'grid';
+                            grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+                            grid.style.overflowX = 'hidden';
+                            grid.style.flexDirection = '';
+                            grid.style.paddingBottom = '';
+                        } else {
+                            subtitle.style.display = 'none';
+                            items.forEach(item => {
+                                item.style.display = (item.dataset.category === cat) ? 'block' : 'none';
+                            });
+
+                            if (cat === 'items') {
+                                grid.style.display = 'grid';
+                                grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+                                grid.style.overflowX = 'hidden';
+                                grid.style.flexDirection = '';
+                                grid.style.paddingBottom = '';
+                            } else {
+                                // Horizontal scroll for Vehicles, Property, Services, DBP, Deals
+                                grid.style.display = 'flex';
+                                grid.style.flexDirection = 'row';
+                                grid.style.overflowX = 'auto';
+                                grid.style.gridTemplateColumns = '';
+                                grid.style.paddingBottom = '10px';
+                            }
+                        }
+                        menu.style.display = 'none';
+                    }
+                });
+
+                // Click outside to close dropdown
+                document.addEventListener('click', (e) => {
+                    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+                        menu.style.display = 'none';
+                    }
+                });
+            });
+
+            // Facebook Marketplace Modal Functions
+            let currentFBImage = 0;
+            const fbImages = [
+                'images/business_img1.jpg',
+                'images/business_img5.jpg',
+                'images/business_img4.jpg',
+                'images/business_img2.jpg',
+                'images/business_img3.jpg'
+            ];
+
+            function openFBModal() {
+                document.getElementById('fbModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeFBModal() {
+                document.getElementById('fbModal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function changeFBImage(direction) {
+                currentFBImage = (currentFBImage + direction + fbImages.length) % fbImages.length;
+                updateFBImage();
+            }
+
+            function selectFBImage(index) {
+                currentFBImage = index;
+                updateFBImage();
+            }
+
+            function updateFBImage() {
+                const mainImage = document.getElementById('fbMainImage');
+                const blurredBg = document.getElementById('fbBlurredBg');
+                const newImageSrc = fbImages[currentFBImage];
+                
+                mainImage.src = newImageSrc;
+                blurredBg.style.backgroundImage = `url('${newImageSrc}')`;
+                
+                // Update thumbnails
+                const thumbnails = document.querySelectorAll('.fb-thumbnail');
+                thumbnails.forEach((thumb, index) => {
+                    if (index === currentFBImage) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+            }
+
+            // Close modal on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeFBModal();
+                }
+            });
+
+            // Close modal when clicking outside (on left side only to keep right side accessible)
+            document.getElementById('fbModal').addEventListener('click', (e) => {
+                if (e.target.classList.contains('fb-modal')) {
+                    closeFBModal();
+                }
+            });
+        </script>
 </body>
 </html>

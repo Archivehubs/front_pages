@@ -699,3 +699,651 @@
 
 }
 
+
+.title-filter {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#main-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.category-dropdown {
+    position: relative;
+    width: 250px;
+}
+
+.dropdown-toggle {
+    position: relative;
+    background: #f0f2f5;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.dropdown-toggle input {
+    width: 100%;
+    padding: 8px 32px 8px 12px;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown-toggle i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #65676b;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    min-width: 100%;
+    z-index: 1;
+    margin-top: 4px;
+}
+
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #050505;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+    background: #f0f2f5;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #65676b;
+    margin-top: 8px;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+}
+
+[data-theme='dark'] #main-title {
+    color: #e4e6eb;
+}
+
+[data-theme='dark'] .dropdown-toggle {
+    background: #3a3b3c;
+}
+
+[data-theme='dark'] .dropdown-toggle input {
+    color: #e4e6eb;
+}
+
+[data-theme='dark'] .dropdown-toggle i {
+    color: #b0b3b8;
+}
+
+[data-theme='dark'] .dropdown-menu {
+    background: #242526;
+}
+
+[data-theme='dark'] .dropdown-menu a {
+    color: #e4e6eb;
+}
+
+[data-theme='dark'] .dropdown-menu a:hover {
+    background: #3a3b3c;
+}
+
+[data-theme='dark'] .subtitle {
+    color: #b0b3b8;
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 1024px) {
+    .title-filter {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .category-dropdown {
+        width: 100%;
+    }
+}
+
+
+        /* Facebook Marketplace Modal Styles */
+        .fb-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            z-index: 9999;
+        }
+
+        .fb-modal.active {
+            display: block;
+        }
+
+        .fb-modal-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Left Section - Full Height Image Gallery */
+        .fb-modal-left {
+            flex: 1.2;
+            background-color: #f0f2f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .fb-modal-gallery {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 16px 16px 16px;
+        }
+
+        .fb-main-image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            min-height: 0;
+        }
+
+        .fb-main-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .fb-thumbnails {
+            display: flex;
+            gap: 8px;
+            padding: 8px 0;
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+
+        .fb-thumbnail {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .fb-thumbnail:hover {
+            border-color: #1c1e21;
+        }
+
+        .fb-thumbnail.active {
+            border-color: #1c1e21;
+        }
+
+        .fb-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .fb-gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .fb-gallery-nav.left {
+            left: 20px;
+        }
+
+        .fb-gallery-nav.right {
+            right: 20px;
+        }
+
+        .fb-gallery-nav:hover {
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Right Section - Scrollable Content with Fixed Bottom */
+        .fb-modal-right {
+            flex: 0.8;
+            background-color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid #e4e6eb;
+        }
+
+        /* Close Button */
+        .fb-modal-close {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+        }
+
+        .fb-modal-close:hover {
+            background-color: #f0f2f5;
+        }
+
+        /* Scrollable Content Area */
+        .fb-modal-scrollable {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 24px 0 24px;
+        }
+
+        /* Product Info */
+        .fb-product-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #050505;
+            margin-bottom: 8px;
+        }
+
+        .fb-product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: #050505;
+            margin-bottom: 8px;
+        }
+
+        .fb-product-listed {
+            font-size: 15px;
+            color: #65676b;
+            margin-bottom: 16px;
+        }
+
+        /* Action Buttons */
+        .fb-action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .fb-message-btn {
+            flex: 1;
+            background-color: #1c1e21;
+            color: #f7d000;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .fb-message-btn:hover {
+            color: #1c1e21;
+            background-color: #f7d000;
+        }
+
+        .fb-icon-btn {
+            width: 48px;
+            height: 48px;
+            background-color: #e4e6eb;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #050505;
+        }
+
+        .fb-icon-btn:hover {
+            background-color: #d8dadf;
+        }
+
+        /* Product Details Section */
+        .fb-details-section {
+            margin-bottom: 24px;
+        }
+
+        .fb-details-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #050505;
+            margin-bottom: 12px;
+        }
+
+        .fb-details-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .fb-detail-item {
+            display: flex;
+            gap: 8px;
+            font-size: 15px;
+        }
+
+        .fb-detail-label {
+            color: #65676b;
+            min-width: 80px;
+        }
+
+        .fb-detail-value {
+            color: #050505;
+            font-weight: 500;
+        }
+
+        .fb-description {
+            font-size: 15px;
+            color: #050505;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        /* Map Section */
+        .fb-map-section {
+            margin-bottom: 24px;
+        }
+
+        .fb-map-container {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f2f5;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .fb-map-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fb-map-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+        }
+
+        .fb-map-address {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .fb-map-approx {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Seller Info */
+        .fb-seller-section {
+            margin-bottom: 24px;
+        }
+
+        .fb-seller-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .fb-seller-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fb-seller-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .fb-seller-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fb-seller-name {
+            font-weight: 600;
+            color: #050505;
+        }
+
+        .fb-seller-rating {
+            font-size: 14px;
+            color: #65676b;
+        }
+
+        .fb-seller-rating i {
+            color: #f7d000;
+        }
+
+        .fb-seller-joined {
+            font-size: 13px;
+            color: #65676b;
+            margin-top: 4px;
+        }
+
+        .fb-seller-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .fb-stat {
+            text-align: center;
+        }
+
+        .fb-stat-value {
+            font-weight: 600;
+            color: #050505;
+        }
+
+        .fb-stat-label {
+            font-size: 13px;
+            color: #65676b;
+        }
+
+        /* Fixed Bottom Section */
+        .fb-fixed-bottom {
+            background-color: #fff;
+            border-top: 1px solid #e4e6eb;
+            padding: 16px 24px;
+            flex-shrink: 0;
+        }
+
+        .fb-message-input-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .fb-message-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .fb-message-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e4e6eb;
+            border-radius: 24px;
+            font-size: 15px;
+            outline: none;
+            background-color: #f0f2f5;
+        }
+
+        .fb-message-input:focus {
+            border-color: #f7d000;
+            background-color: #fff;
+        }
+
+        .fb-send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #1c1e21;
+            border: none;
+            color: #f7d000;;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .fb-send-btn:hover {
+            color: #1c1e21;
+            background-color: #f7d000;;
+        }
+
+        .fb-send-btn i {
+            font-size: 16px;
+        }
+
+        .fb-offer-text {
+            font-size: 13px;
+            color: #65676b;
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        /* Scrollbar Styling */
+        .fb-modal-scrollable::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .fb-modal-scrollable::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .fb-modal-scrollable::-webkit-scrollbar-thumb {
+            background: #bcc0c4;
+            border-radius: 4px;
+        }
+
+        .fb-modal-scrollable::-webkit-scrollbar-thumb:hover {
+            background: #a0a4a8;
+        }
+
+        /* Dark Mode Support */
+        [data-theme='dark'] .fb-modal {
+            background-color: #242526;
+        }
+
+        [data-theme='dark'] .fb-modal-left {
+            background-color: #1a1b1c;
+        }
+
+        [data-theme='dark'] .fb-main-image-container {
+            background-color: #242526;
+        }
+
+        [data-theme='dark'] .fb-modal-right {
+            background-color: #242526;
+            border-left-color: #3a3b3c;
+        }
+
+        [data-theme='dark'] .fb-product-title,
+        [data-theme='dark'] .fb-product-price,
+        [data-theme='dark'] .fb-detail-value,
+        [data-theme='dark'] .fb-description,
+        [data-theme='dark'] .fb-seller-name,
+        [data-theme='dark'] .fb-stat-value {
+            color: #e4e6eb;
+        }
+
+        [data-theme='dark'] .fb-product-listed,
+        [data-theme='dark'] .fb-detail-label,
+        [data-theme='dark'] .fb-seller-rating,
+        [data-theme='dark'] .fb-seller-joined,
+        [data-theme='dark'] .fb-stat-label,
+        [data-theme='dark'] .fb-offer-text {
+            color: #b0b3b8;
+        }
+
+        [data-theme='dark'] .fb-icon-btn {
+            background-color: #3a3b3c;
+            color: #e4e6eb;
+        }
+
+        [data-theme='dark'] .fb-icon-btn:hover {
+            background-color: #4e4f50;
+        }
+
+        [data-theme='dark'] .fb-message-input {
+            background-color: #3a3b3c;
+            border-color: #3a3b3c;
+            color: #e4e6eb;
+        }
+
+        [data-theme='dark'] .fb-message-input:focus {
+            border-color: #1877f2;
+            background-color: #242526;
+        }
+
+        [data-theme='dark'] .fb-fixed-bottom {
+            background-color: #242526;
+            border-top-color: #3a3b3c;
+        }
+   
