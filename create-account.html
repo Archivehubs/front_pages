@@ -81,7 +81,7 @@
     }
     .signup-form input:focus,
     .signup-form select:focus {
-        border: 1.5px solid #007bff;
+        border: 1.5px solid #f7d000;
         outline: none;
     }
     .form-group label {
@@ -122,8 +122,8 @@
         padding: 10px 30px;
         border: none;
         border-radius: 4px;
-        background: #FFD700;
-        color: #000000;
+        background: #1c1e21;
+        color: #f7d000;
         font-size: 1rem;
         cursor: pointer;
         transition: background 0.2s;
@@ -135,9 +135,7 @@
         color: #fff;
         border: none;
     }
-    .next-btn:focus, .back-btn:focus, .signup-button:focus {
-        outline: 2px solid #007bff;
-    }
+    
     .signup-button {
         background: #FFD700;
         color: #000000;
@@ -157,7 +155,7 @@
         margin-top: 18px;
     }
     .login-link a {
-        color: #007bff;
+        color: #f7d000;
         text-decoration: none;
         font-weight: 500;
     }
@@ -169,7 +167,7 @@
         margin-bottom: 10px;
     }
     .success-message {
-        color: #27ae60;
+        color: #f7d000;
         font-size: 0.95rem;
         display: block;
         margin-bottom: 10px;
@@ -278,8 +276,8 @@
         padding: 10px 30px;
         border: none;
         border-radius: 4px;
-        background: #43b04a;
-        color: #fff;
+        background: #1c1e21;
+        color: #f7d000;
         font-size: 1rem;
         cursor: pointer;
         transition: background 0.2s;
@@ -287,7 +285,8 @@
         width: 100%;
     }
     .confirm-account-btn:hover:not(:disabled) {
-        background: #38a03f;
+        color: #1c1e21;
+        background: #f7d000;
     }
     .confirm-account-btn:disabled {
         background: #b0b3b8;
@@ -406,7 +405,7 @@
                     </label>
                 </div>
                 <div class="form-nav">
-                    <button type="button" class="signup-button" id="nextBtn">
+                    <button type="button" class="signup-button" id="nextBtn" disabled>
                         <span class="button-content">
                             Next
                             <span class="loading-spinner" id="nextSpinner"></span>
@@ -715,6 +714,14 @@ function togglePassword(inputId, icon) {
                 part.classList.toggle('right', i > index);
             });
         }
+
+        // Enable/disable next button based on terms checkbox
+        const termsCheckbox = document.getElementById('termsCheckbox');
+        const nextBtn = document.getElementById('nextBtn');
+
+        termsCheckbox.addEventListener('change', function() {
+            nextBtn.disabled = !this.checked;
+        });
 
         // Step 1: Create User Account
         // User skeletal structure

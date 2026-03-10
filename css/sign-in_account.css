@@ -118,8 +118,8 @@ label {
 }
 
 .submit-btn {
-    background-color: #000;
-    color: white;
+    background-color: #1c1e21;
+    color: #f7d000;
     padding: 12px 40px;
     border: none;
     border-radius: 10px;
@@ -130,7 +130,8 @@ label {
 }
 
 .submit-btn:hover:not(:disabled) {
-    background-color: #222;
+    color: #1c1e21;;
+    background-color: #f7d000;
 }
 
 .submit-btn:disabled {
@@ -144,7 +145,7 @@ label {
 }
 
 .signup-link {
-    color: #0000FF;
+    color: #f7d000;
     text-decoration: none;
     font-weight: 500;
 }
