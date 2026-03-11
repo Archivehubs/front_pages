@@ -152,7 +152,7 @@ body {
 }
 
 .toggle-switch input:checked + label {
-  background-color: #1877f2;
+  background-color: #f7d000;
 }
 
 .toggle-switch input:checked + label:before {
@@ -704,7 +704,7 @@ a {
 
 .profile-bg {
   height: 120px;
-  background: #1877f2;
+  background: #f7d000;
   position: relative;
   overflow: hidden;
 }
@@ -884,7 +884,7 @@ a {
 
 /* Hover effect for both icon and text */
 .stat-item:hover i {
-  color: #1877f2;
+  color: #f7d000;
 }
 
 /* Menu Box Styles */
@@ -912,7 +912,7 @@ a {
 
 .menu-item:hover {
   background-color: #f0f2f5;
-  color: #1877f2;
+  color: #f7d000;
 }
 
 .menu-item i {
@@ -929,7 +929,7 @@ a {
 
 /* Hover effect for both icon and text */
 .menu-item:hover i {
-  color: #1877f2;
+  color: #f7d000;
 }
 
 /* Add these styles for the menu icon image */
@@ -1490,13 +1490,16 @@ a {
   min-width: 90px;
   background: white;
   border: 1px solid var(--accent-color);
-  color: var(--accent-color);
+  color: #1c1e21;
+}
+.decline-btn {
+  border: 1px solid #1c1e21;
 }
 
 .connect-btn {  /* Previously connect-btn */
   background: transparent;
   border: 1px solid var(--accent-color);
-  color: var(--accent-color);
+  color: #1c1e21;
 }
 
 .connect-btn:hover {
@@ -1505,7 +1508,7 @@ a {
 
 .decline-btn:hover {
   background: black;
-  color: white;
+  color: #ffd700;
 }
 
 .connect-btn i {
@@ -4720,7 +4723,7 @@ body {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #1877f2;
+  background-color: #f7d000;
   border-radius: 1px;
 }
 
@@ -4877,7 +4880,7 @@ body {
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: #1877f2;
+  background-color: #f7d000;
   border-radius: 2px;
 }
 
