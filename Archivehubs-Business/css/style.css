@@ -19,7 +19,7 @@ body {
   --text-primary: #1c1e21;
   --text-secondary: #65676b;
   --border-color: #e4e6eb;
-  --accent-color: #1877f2;
+  --accent-color: #f7d000;
   --hover-bg: #f0f2f5;
   --card-bg: #fff;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -374,7 +374,7 @@ a {
 }
 
 .nav-link.active {
-  color: yellow;
+  color: #1c1e21;
 }
 
 .nav-link.active::after {
