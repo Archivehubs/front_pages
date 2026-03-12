@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivehubs Deals • Create New Deal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-width: 70px;
+            --sidebar-expanded: 350px;
+            --sidebar-bg: #000;
+            --main-bg: #f5f5f5;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --primary-gold: #ffd700;
+            --border-light: #ddd;
+            --white: #fff;
+            --transition: 0.3s ease;
+            --orange: #ff6a00;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--main-bg);
+            color: var(--text-primary);
+        }
+        .container {
+            max-width: 1300px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+            padding: 0 20px;
+        }
+        .left-col {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .right-col {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
+            font-weight: 600;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-weight: 600;
+            margin: 28px 0 12px;
+            font-size: 16px;
+        }
+        .required { color: red; }
+        .photo-upload {
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+            margin: 16px 0;
+            cursor: pointer;
+        }
+        .photo-upload i { font-size: 48px; color: #999; margin-bottom: 12px; }
+        .phone-upload {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .phone-upload a { color: var(--primary-gold); font-weight: 600; }
+        .try-btn {
+            background: var(--primary-gold);
+            color: black;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        /* Dropdowns */
+        .dropdown {
+            position: relative;
+            margin: 12px 0;
+        }
+        .dropdown select, .dropdown input[readonly] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            background: white;
+            font-size: 16px;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2365676b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            left: 105%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+        }
+        .dropdown:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Grid layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        textarea { resize: vertical; min-height: 100px; }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+        }
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-send { background: #e4e6eb; color: #1c1e21; }
+        .btn-publish { background: var(--primary-gold); color: black; }
+
+        /* Preview */
+        .preview-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .preview-box {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        .preview-meta {
+            font-size: 13px;
+            color: #8a8d91;
+            margin: 12px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- INTRO MODAL (First Screen - Updated Colors) -->
+<div class="modal-overlay" id="introModal" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:9999;">
+    <div style="background:white;width:90%;max-width:540px;border-radius:16px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+        <div style="background:black;color:white;padding:20px 24px;font-size:20px;font-weight:700;display:flex;justify-content:space-between;align-items:center;">
+            Archivehubs Deals
+            <span class="deal-modal-close" style="cursor:pointer;font-size:30px;" onclick="document.getElementById('introModal').style.display='none'">×</span>
+            <!-- In the modal header -->
+        </div>
+        <div style="padding:28px;">
+            <p style="font-size:15px;line-height:1.6;margin-bottom:20px;">
+                Partner with Archivehubs to showcase your brand, share exclusive deals, and reach engaged customers eager for curated offers and subscriptions.
+            </p>
+            <strong style="display:block;margin:20px 0 12px;">Features for Archivehubs Deals:</strong>
+            <ul style="margin:0;padding-left:20px;">
+                <li style="margin:8px 0;">Provision of Discount sales for consumers</li>
+                <li style="margin:8px 0;">Placement of coupons (optional)</li>
+                <li style="margin:8px 0;">Promotional validity period</li>
+                <li style="margin:8px 0;">Deals option are open for Digital Products only</li>
+                <li style="margin:8px 0;">The deal provision is for Registered / Legal organizations</li>
+            </ul>
+            <div style="margin-top:20px;font-size:13px;color:var(--text-secondary);">
+                (Deals are subject to Archivehubs Deals Terms and Conditions. <a href="#" style="color:var(--primary-gold);font-weight:600;">Learn More</a>)
+            </div>
+            <button id="openCreateDeal" style="margin-top:24px;background:black;color:var(--primary-gold);border:none;padding:16px;width:100%;font-size:18px;font-weight:700;border-radius:12px;cursor:pointer;">
+                Create New Deal
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN CREATE DEAL PAGE -->
+<div class="container" id="mainPage" style="display:none;">
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+        <button style="background:none;border:none;font-size:20px;cursor:pointer;float:right;" onclick="history.back()">×</button>
+        <h1>Deals Offer</h1>
+        <div class="subtitle">
+            Deals are crafted digital asset with special offers from Archivehubs Partners to showcase brand, share exclusive products and reach engaged customers eager for curated offers and subscription.
+        </div>
+
+        <div class="section-title">Deals for Licensing</div>
+        <div style="display:flex;align-items:center;gap:12px;margin:16px 0;">
+            <i class="fas fa-user-circle" style="font-size:24px;color:var(--primary-gold);"></i>
+            <div>
+                <strong>Name</strong><br>
+                <span style="color:var(--text-secondary);">Deals Listing • Public</span>
+            </div>
+        </div>
+
+        <div class="section-title">Photo 0/10 – you can add up to 10 photos</div>
+        <div class="photo-upload">
+            <i class="fas fa-image"></i>
+            <div><strong>Add Photos</strong><br>or drag and drop</div>
+        </div>
+        <div class="phone-upload">
+            Upload photos directly from your phone. <a href="#">Learn More</a>
+            <button class="try-btn">Try it</button>
+        </div>
+
+        <div class="section-title">Required</div>
+        <div style="margin:16px 0;">
+            <label>Title <span class="required">*</span></label>
+            <input type="text" placeholder="Be as descriptive as possible">
+        </div>
+
+        <!-- 3-Column Grid -->
+        <div class="grid-3">
+            <div class="dropdown">
+                <label>Price Option</label>
+                <select>
+                    <option>Fixed Price</option>
+                    <option>Tiered Price</option>
+                    <option>Subscription</option>
+                    <option>Auction-based Sales</option>
+                </select>
+            </div>
+            <div class="dropdown">
+                <label>Licensing Option</label>
+                <select>
+                    <option>Royalty-Free License</option>
+                    <option>Exclusive License</option>
+                    <option>Rights-Managed License</option>
+                    <option>Custom Licensing</option>
+                    <option>Outright-License</option>
+                    <option>General License</option>
+                </select>
+                <div class="tooltip">
+                    <strong>Royalty-Free License</strong>: Buyers can use the asset multiple times without additional fees.<br><br>
+                    <strong>Exclusive License</strong>: Grants sole ownership rights to the buyer.<br><br>
+                    <strong>Rights-Managed</strong>: Defines specific usage terms (e.g. duration, region, platform).<br><br>
+                    <strong>Custom Licensing</strong>: Users can set personalized terms for asset usage.<br><br>
+                    <strong>Outright-License</strong>: The license can be exclusive, meaning only the licensee has the rights, or non-exclusive.<br><br>
+                    <strong>General License</strong>: To enable Digital Assets owners sell their product on an Open Marketplace.
+                </div>
+            </div>
+            <div class="dropdown">
+                <label>Category</label>
+                <select>
+                    <option>Documents & Certificates</option>
+                    <option>Research & Educational Materials</option>
+                    <option>Product & Project Assets</option>
+                    <option>Media & Creative Content</option>
+                    <option>Designs & Creative Works</option>
+                    <option>Code & Software Assets</option>
+                    <option>Web & Digital Marketing Assets</option>
+                    <option>Audio & Music Files</option>
+                    <option>Learning & Development Content</option>
+                    <option>Business & Analytics Tools</option>
+                    <option>Others</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:20px;">
+            <div>
+                <label>Discount Rate (%) <span class="required">*</span></label>
+                <input type="number" value="10">
+            </div>
+            <div class="dropdown">
+                <label>Coupon Rate (%) (Optional)</label>
+                <input type="number" value="5">
+            </div>
+        </div>
+
+        <div class="dropdown" style="margin:20px 0;">
+            <label>Organization Status</label>
+            <select>
+                <option>Registered</option>
+                <option>Not Registered</option>
+            </select>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <label>Launch Date <span class="required">*</span></label>
+                <input type="date" value="2025-10-01">
+            </div>
+            <div>
+                <label>Stop Date <span class="required">*</span></label>
+                <input type="date" value="2026-04-31">
+            </div>
+        </div>
+
+        <div class="section-title">More details</div>
+        <div style="color:var(--text-secondary);font-size:14px;margin-bottom:12px;">
+            Attract more interest by including more details
+        </div>
+        <label>Description</label>
+        <textarea placeholder="Describe your deal..."></textarea>
+
+        <div style="margin:20px 0;">
+            <label>Product Tags (Optional, Limit: 20)</label>
+            <input type="text" placeholder="e.g. ebook, discount, template">
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-send">Send to</button>
+            <button class="btn btn-publish">Publish</button>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN - PREVIEW -->
+    <div class="right-col">
+        <div class="preview-title">Your listing preview</div>
+        <div style="font-size:14px;color:var(--text-secondary);text-align:center;margin-bottom:20px;">
+            As you create your listing, you can preview how it will appear to others on Marketplace.
+        </div>
+        <div class="preview-box">
+            <div style="background:#eee;height:180px;border-radius:8px;margin-bottom:16px;"></div>
+            <h3>Title</h3>
+            <div style="font-size:20px;font-weight:600;margin:8px 0;">Price</div>
+            <div class="preview-meta">Listed a few seconds ago in location</div>
+            <hr style="margin:20px 0;border:none;border-top:1px solid #ddd;">
+            <strong>Details</strong>
+            <p>Description will appear here</p>
+            <hr style="margin:20px 0;border:none;border-top:1px solid #ddd;">
+            <div style="text-align:left;">
+                <strong>Seller information</strong><br>
+                <span style="color:var(--primary-gold);">Name</span><br>
+                Profile
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// This will automatically go back to the page the user came from
+function goBackOrHome() {
+    if (window.history.length > 1) {
+        // Normal case: user navigated here from another page → go back
+        window.history.back();
+    } else {
+        // Rare case: user opened this page directly (no history) → go to overview
+        window.location.href = "overview.html";
+    }
+}
+
+// Close modal and go back when × is clicked
+document.querySelectorAll('.deal-modal-close, .modal-overlay').forEach(el => {
+    el.addEventListener('click', function(e) {
+        // Only trigger on overlay or close button, not inside modal content
+        if (e.target === this || e.target.classList.contains('deal-modal-close')) {
+            document.getElementById('introModal').style.display = 'none';
+            goBackOrHome();
+        }
+    });
+});
+
+// Also handle ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('introModal').style.display !== 'none') {
+        document.getElementById('introModal').style.display = 'none';
+        goBackOrHome();
+    }
+});
+
+// Open Create Deal (as before)
+document.getElementById('openCreateDeal').onclick = function() {
+    document.getElementById('introModal').style.display = 'none';
+    document.getElementById('mainPage').style.display = 'grid';
+};
+</script>
+</body>
+</html>

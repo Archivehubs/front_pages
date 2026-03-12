@@ -1,0 +1,111 @@
+<!-- moderation-assist.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderation Assist | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar active Moderation Assist -->
+    <aside class="sidebar" id="sidebar">
+        <a href="moderation-assist.html" class="sub-nav-item active">
+            <i class="fas fa-shield-alt"></i>
+            <span class="nav-text">Moderation Assist</span>
+        </a>
+    </aside>
+
+   <main class="main-content">
+    <div class="insight-section">
+        <div class="header">
+            <h3>Moderation Assist</h3>
+            <a href="engagement.html">← Engagement</a>
+        </div>
+        <p>Tools to moderate comments and content. Set criteria to hide certain comments automatically.</p>
+        <button class="primary-btn" onclick="showIntroModal()">Get Started</button>
+        <div class="filter-dropdown">
+            <span class="trigger">Choose Criteria ▼</span>
+            <div class="filter-list">
+                <div class="filter-item" onclick="showCriterionModal('author-no-connections')"><i class="fas fa-users"></i> No connections or followers</div>
+                <div class="filter-item" onclick="showCriterionModal('new-account')"><i class="fas fa-user-plus"></i> New account</div>
+                <div class="filter-item" onclick="showCriterionModal('no-profile')"><i class="fas fa-user"></i> No profile picture</div>
+                <div class="filter-item" onclick="showCriterionModal('repeat-offender')"><i class="fas fa-exclamation-triangle"></i> Repeat offender</div>
+                <div class="filter-item" onclick="showCriterionModal('link-comment')"><i class="fas fa-link"></i> Link in comment</div>
+                <div class="filter-item" onclick="showCriterionModal('image-comment')"><i class="fas fa-image"></i> Image in comment</div>
+                <div class="filter-item" onclick="showCriterionModal('profanity')"><i class="fas fa-ban"></i> Profanity in comments</div>
+                <div class="filter-item" onclick="showCriterionModal('video-comment')"><i class="fas fa-video"></i> Video in comment</div>
+                <div class="filter-item" onclick="showCriterionModal('keywords')"><i class="fas fa-search"></i> Keywords in comments</div>
+            </div>
+        </div>
+        <div class="no-data">No Criteria Set<br>Add criteria to start moderating.</div>
+    </div>
+
+    <!-- Intro Modal -->
+    <div id="intro-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Say hello to Moderation Assist: comment moderation, simplified</h3>
+            <p>Control what comments appear on your Page or profile with a virtual moderator.</p>
+            <p>Easily edit any actions Moderation Assist takes, whenever you want.</p>
+            <p>Reduce your manual workload and focus on what matters to you most.</p>
+            <p>We recommend starting with this: Author does not have any connections or followers.</p>
+            <button class="primary-btn" onclick="showCriterionModal('author-no-connections')">Let’s go</button>
+            <button>Not right now</button>
+        </div>
+    </div>
+
+    <!-- Criterion Review Modal (Generic, populate via JS) -->
+    <div id="criterion-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h4 id="criterion-title">Let’s review this criterion before adding</h4>
+            <p id="criterion-desc">If any one of these criteria is met, the comment will be auto-hidden.</p>
+            <p id="criterion-detail">Author does not have any connections or followers.</p>
+            <button class="primary-btn" onclick="addToAssist()">Add to Moderation Assist</button>
+        </div>
+    </div>
+
+    <!-- Bulk Upload Modal (tied to comments) -->
+    <div id="bulk-upload-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h4>Bulk upload videos</h4>
+            <p>Drag and drop videos or upload from your computer</p>
+            <p>Upload up to 50 videos up to 10GB each</p>
+            <div class="dropzone" style="border: 2px dashed #ccc; padding: 50px; text-align: center;">
+                <i class="fas fa-play-circle" style="font-size: 50px; color: #ccc;"></i>
+                <p>Drag and drop videos here</p>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function showIntroModal() { document.getElementById('intro-modal').style.display = 'flex'; }
+    function showCriterionModal(type) {
+        const modals = {
+            'author-no-connections': { title: 'No connections or followers', desc: 'Accounts without connections or followers are more likely to post low quality content.', detail: 'Author does not have any connections or followers.' },
+            'new-account': { title: 'New account', desc: 'Accounts that were newly created are less likely to be authentic.', detail: 'Author has had their Archivehubs account for one week or less.' },
+            // Add others similarly from PDF...
+            'link-comment': { title: 'Link in comment', desc: 'Limiting links in comments can help prevent spam and keep comments relevant.', detail: 'Comment has a link.' },
+            'profanity': { title: 'Profanity in comments', desc: 'Hiding the most commonly reported offensive words helps keep comments civil.', detail: 'Comment contains commonly reported profanity.' }
+        };
+        const data = modals[type] || modals['author-no-connections'];
+        document.getElementById('criterion-title').textContent = data.title;
+        document.getElementById('criterion-desc').textContent = data.desc;
+        document.getElementById('criterion-detail').textContent = data.detail;
+        document.getElementById('criterion-modal').style.display = 'flex';
+    }
+    function addToAssist() { alert('Added to Moderation Assist!'); document.getElementById('criterion-modal').style.display = 'none'; }
+    // Close modals
+    document.querySelectorAll('.close-modal').forEach(btn => btn.addEventListener('click', () => btn.closest('.modal').style.display = 'none'));
+</script>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Trigger bulk upload modal if needed
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Progress | ENINK Investment LTD - Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: #fff;
+            padding: 20px 24px 16px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 12px;
+            color: #65676b;
+            font-size: 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link i { margin-right: 6px; }
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1c1e21;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 15px;
+            color: #65676b;
+            line-height: 1.5;
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 20px auto 8px;
+        }
+        .main {
+            padding: 24px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 20px 0 16px;
+            color: #1c1e21;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #e4e6eb;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 12px 0 20px;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #ddd;
+            border-radius: 3px;
+        }
+        .progress-text {
+            font-size: 15px;
+            color: #65676b;
+            margin-bottom: 24px;
+        }
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .task {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .task-icon {
+            font-size: 20px;
+            color: #65676b;
+            margin-top: 2px;
+        }
+        .task-content h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1c1e21;
+            margin-bottom: 4px;
+        }
+        .task-progress {
+            font-size: 14px;
+            color: #65676b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <a href="#" class="back-link"><i class="fas fa-arrow-left"></i> Professional Dashboard</a>
+        <h1 class="title">Weekly Progress</h1>
+        <div class="subtitle">
+            Complete this week’s tasks to gain new skills and grow as a creator
+        </div>
+        <div class="icon">
+            <img src="https://via.placeholder.com/80/1877f2/ffffff?text=Progress Icon" alt="Weekly Progress Icon">
+        </div>
+    </div>
+
+    <div class="main">
+        <h2 class="section-title">Tasks</h2>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="progress-text">0% Complete</div>
+
+        <div class="task-list">
+            <div class="task">
+                <div class="task-icon"><i class="fas fa-users"></i></div>
+                <div class="task-content">
+                    <h4>Get 3 new followers</h4>
+                    <div class="task-progress">0/3 followers</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-icon"><i class="fas fa-edit"></i></div>
+                <div class="task-content">
+                    <h4>Create 3 new public posts</h4>
+                    <div class="task-progress">0/3 Complete</div>
+                </div>
+            </div>
+
+            <div class="task">
+                <div class="task-icon"><i class="fas fa-heart"></i></div>
+                <div class="task-content">
+                    <h4>Get 5 interactions on your posts</h4>
+                    <div class="task-progress">0/5 Post interactions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

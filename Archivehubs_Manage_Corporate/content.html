@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar (active Content) -->
+    <aside class="sidebar" id="sidebar">
+        <!-- ... active nav-item for Content -->
+        <a href="content.html" class="nav-item active">
+            <i class="fas fa-edit"></i>
+            <span class="nav-text">Content</span>
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <div class="insight-section">
+            <div class="header">
+                <h3>Content</h3>
+                <a href="home.html">← Professional Dashboard</a>
+            </div>
+            <p>Access your published and scheduled posts and create new content all in one place.</p>
+            <div class="content-library">
+                <div class="tab active" data-target="published">Published</div>
+                <div class="tab" data-target="scheduled">Scheduled</div>
+            </div>
+            <button>Create</button>
+            <div class="table-header">
+                <span>0/50 posts selected</span>
+                <div class="table-controls">
+                    <div class="filter-dropdown">
+                        <span class="trigger">Filter</span>
+                        <div class="filter-list">
+                            <div class="filter-item">All Posts</div>
+                            <div class="filter-item">Videos</div>
+                            <div class="filter-item">Lites</div>
+                            <div class="filter-item">Live</div>
+                            <div class="filter-item">Photos</div>
+                            <div class="filter-item">Links</div>
+                            <div class="filter-item">Text</div>
+                            <div class="filter-item">Stories</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <span class="trigger">Columns</span>
+                        <div class="filter-list">
+                            <div class="filter-item">Views</div>
+                            <div class="filter-item">Reach</div>
+                            <div class="filter-item">Interactions</div>
+                            <div class="filter-item">Net follows</div>
+                            <div class="filter-item">Impressions</div>
+                            <div class="filter-item">Comments</div>
+                            <div class="filter-item">Distributions</div>
+                        </div>
+                    </div>
+                    <div class="date-dropdown">
+                        <span class="trigger">Last 28days: Aug14 – Sep10</span>
+                        <div class="date-list">
+                            <!-- Same as home -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Preview</th>
+                        <th>Views</th>
+                        <th>Reach</th>
+                        <th>Comments</th>
+                        <th>Interactions</th>
+                        <th>Net follows</th>
+                        <th>Impressions</th>
+                        <th>Distributions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="8" class="no-posts">No Published Posts<br>When you published a post, you’ll see it here</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="published" class="tab-content" style="display: block;">
+                <!-- Content here -->
+            </div>
+            <div id="scheduled" class="tab-content" style="display: none;">
+                <p>No Scheduled Posts<br>When you schedule a post, you’ll see it here</p>
+            </div>
+        </div>
+        <!-- Calendar Modal same as home -->
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

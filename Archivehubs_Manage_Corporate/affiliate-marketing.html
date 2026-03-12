@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Marketing Sales | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar active Affiliate -->
+    <aside class="sidebar" id="sidebar">
+        <a href="affiliate-marketing.html" class="sub-nav-item active">
+            <i class="fas fa-share-alt"></i>
+            <span class="nav-text">Affiliate Marketing Sales</span>
+        </a>
+    </aside>
+
+   <main class="main-content">
+    <div class="insight-section">
+        <div class="header">
+            <h3>Affiliate Marketing Sales</h3>
+            <a href="sales-channels.html">← Sales Channels</a>
+        </div>
+        <p>Become an ACAM Certified Member and earn commissions</p>
+        <div class="dropdown date-dropdown">
+            <span class="trigger">Last 28days: Aug14 – Sep10 ▼</span>
+            <div class="date-list">
+                <!-- Same as above -->
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="affiliateChart"></canvas> <!-- Placeholder -->
+        </div>
+        <div class="sub-metric"><span>0</span><span>Digital Assets</span></div>
+        <div class="sub-metric"><span>0</span><span>Service Provision</span></div>
+        <div class="sub-metric"><span>0</span><span>Marketplace</span></div>
+        <div class="sub-metric"><span>0</span><span>Recurrent</span></div>
+        <div class="no-data">No Affiliate Activity<br>Not enough data yet. Set up affiliate links to see metrics here.</div>
+        <button class="primary-btn">Get ACAM Certified</button>
+    </div>
+</main>
+<script>
+    new Chart(document.getElementById('affiliateChart'), {
+        type: 'line',
+        data: { labels: ['Aug 14', 'Aug 21', 'Aug 28', 'Sep 4', 'Sep 10'], datasets: [{ label: 'Affiliate Earnings', data: [0,0,0,0,0], borderColor: '#4caf50' }] },
+        options: { scales: { y: { beginAtZero: true } } }
+    });
+</script>
+    <script src="js/script.js"></script>
+</body>
+</html>

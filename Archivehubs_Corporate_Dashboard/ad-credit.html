@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Credit | Monetization Hub | Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 70px;
+            --sidebar-expanded: 350px;
+            --sidebar-bg: #000;
+            --main-bg: #f5f5f5;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --primary-gold: #ffd700;
+            --border-light: #ddd;
+            --white: #fff;
+            --transition: 0.3s ease;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--main-bg); display:flex; min-height:100vh; overflow-x:hidden; }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-expanded);
+            background: var(--sidebar-bg);
+            color: #b0b3b8;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            padding: 15px 0;
+            transition: width var(--transition);
+            z-index: 1000;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .sidebar.collapsed { width: var(--sidebar-width); }
+        .sidebar.collapsed .nav-text,
+        .sidebar.collapsed .back-link span,
+        .sidebar.collapsed .advertise-btn span { opacity:0; pointer-events:none; }
+        .sidebar.collapsed .collapsible i:last-child { margin-left: auto; }
+        
+        .toggle-btn {
+            background:none; border:none; color:#b0b3b8; font-size:20px; cursor:pointer;
+            padding:8px; border-radius:50%; margin-left:8px;
+        }
+        .toggle-btn:hover { background:#333; color:#fff; }
+        
+        .back-link {
+            display:flex; align-items:center; gap:12px; color:#b0b3b8; text-decoration:none;
+            padding:12px 20px; font-weight:500; font-size:15px; transition:0.3s;
+        }
+        .back-link:hover { color:#fff; }
+        .back-link i { font-size:18px; }
+        
+        .nav-item {
+            display:flex; align-items:center; gap:12px;
+            padding:10px 20px; color:#b0b3b8; text-decoration:none;
+            transition:0.3s; border-radius:0 25px 25px 0; margin:2px 8px;
+        }
+        .nav-item:hover, .nav-item.active {
+            background:var(--primary-gold); color:#000 !important;
+        }
+        .nav-item.active { font-weight:600; }
+        .nav-item i { font-size:18px; width:20px; text-align:center; }
+        .nav-text { font-size:14px; white-space:nowrap; }
+        
+        .category-section {
+            border:1px solid #333; border-radius:8px; margin:16px 8px; overflow:hidden;
+        }
+        .category-title {
+            padding:10px 20px; font-size:12px; font-weight:600; color:#b0b3b8;
+        }
+        .collapsible {
+            cursor:pointer; justify-content:space-between; padding-right:15px !important;
+        }
+        .collapsible i:last-child {
+            transition:transform 0.3s;
+        }
+        .collapsible-content {
+            max-height:0; overflow:hidden; transition:max-height 0.4s ease;
+        }
+        .collapsible-content.open { max-height:500px; }
+        .sub-nav-item {
+            padding-left:56px !important; font-size:13px; color:#b0b3b8;
+        }
+        .advertise-btn {
+            background:#000; color:#ffd700; font-weight:600; text-align:center;
+            padding:12px; margin:12px 20px; border-radius:8px; border:2px solid #ffd700;
+            text-decoration:none; display:block; font-size:14px;
+        }
+        .advertise-btn i { margin-right:8px; }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-expanded);
+            padding:20px; width:100%; transition:margin-left var(--transition);
+        }
+        .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-width); }
+        
+        .insight-section {
+            background:var(--white); border-radius:8px; padding:20px;
+            box-shadow:0 1px 3px rgba(0,0,0,0.1); margin-bottom:24px;
+        }
+        .header {
+            display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;
+        }
+        .header h3 { font-size:18px; color:var(--text-primary); }
+        
+        .metric-grid {
+            display:grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap:12px; margin-top:12px;
+        }
+        .metric-box {
+            background:#f0f2f5; padding:16px; border-radius:8px; text-align:center;
+        }
+        .metric { font-size:28px; font-weight:700; color:var(--text-primary); }
+        .metric-label { font-size:13px; color:var(--text-secondary); margin-top:4px; }
+        .metric-box i { font-size:20px; margin-bottom:8px; display:block; }
+        
+        .primary-btn {
+            background:var(--primary-gold); color:#000; border:none;
+            padding:10px 16px; border-radius:6px; font-weight:600; cursor:pointer;
+            display:inline-flex; align-items:center; gap:6px; font-size:14px;
+        }
+        .primary-btn i { font-size:16px; }
+        .primary-btn:hover { background:#e6c200; }
+        
+        .see-all { text-align:right; margin-top:12px; }
+        .see-all a { color:var(--primary-gold); font-weight:500; text-decoration:none; }
+        
+        .dropdown {
+            background:#f0f2f5; padding:6px 12px; border-radius:6px; cursor:pointer;
+            font-size:14px; display:flex; align-items:center; gap:8px; min-width:140px;
+        }
+        .dropdown-content {
+            display:none; position:absolute; background:#fff; min-width:160px;
+            box-shadow:0 8px 16px rgba(0,0,0,0.2); border-radius:8px; z-index:10;
+            margin-top:5px; right:0;
+        }
+        .dropdown:hover .dropdown-content { display:block; }
+        .dropdown-content a {
+            padding:10px 16px; display:block; color:#1c1e21; text-decoration:none;
+        }
+        .dropdown-content a:hover { background:#f0f2f5; }
+        
+        .footer {
+            text-align:center; padding:20px; color:#65676b; font-size:12px; margin-top:40px;
+        }
+        .footer a { color:#0066cc; text-decoration:none; margin:0 10px; }
+        
+        .messaging-btn {
+            position:fixed; bottom:20px; right:20px; background:#fff;
+            border:1px solid #ccc; border-radius:50px; padding:10px 16px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:100; font-size:14px;
+            display:flex; align-items:center; gap:8px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar { width: var(--sidebar-width); }
+            .sidebar.collapsed { width: var(--sidebar-expanded); }
+            .main-content { margin-left: var(--sidebar-width); }
+            .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-expanded); }
+        }
+        @media (max-width: 768px) {
+            .metric-grid { grid-template-columns: 1fr 1fr; }
+            .header { flex-direction:column; align-items:flex-start; gap:12px; }
+            .header > div { width:100%; display:flex; justify-content:space-between; }
+        }
+        @media (max-width: 576px) {
+            .metric-grid { grid-template-columns: 1fr; }
+            .insight-section { padding:16px; }
+        }
+
+        /* Ad Credit Styles */
+        .redeem-btn {
+            background:var(--primary-gold); color:#000; font-weight:600; font-size:15px;
+            padding:12px 24px; border:none; border-radius:6px; cursor:pointer; transition:0.3s;
+            margin-bottom:24px;
+        }
+        .redeem-btn:hover { background:#e6c200; }
+        
+        .summary-grid {
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:16px; margin-bottom:32px;
+        }
+        .summary-card {
+            background:#f0f2f5; padding:16px; border-radius:6px; text-align:left; border:1px solid var(--border-light);
+        }
+        .summary-title { font-size:14px; color:var(--text-secondary); margin-bottom:6px; }
+        .summary-amount { font-size:24px; font-weight:700; color:var(--text-primary); }
+        .summary-info { font-size:13px; color:var(--text-secondary); margin-top:4px; }
+        
+        .table-controls {
+            display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;
+        }
+        .table-title { font-size:18px; color:var(--text-primary); }
+        .print-btn, .download-btn {
+            background:#f0f2f5; color:var(--text-primary); border:none; padding:8px 16px; border-radius:6px;
+            cursor:pointer; font-weight:500; transition:0.3s;
+        }
+        .download-btn { position:relative; }
+        .download-content {
+            display:none; position:absolute; background:#fff; min-width:160px; box-shadow:0 8px 16px rgba(0,0,0,0.2);
+            z-index:10; border-radius:6px; right:0; top:100%; margin-top:8px;
+        }
+        .download-btn:hover .download-content { display:block; }
+        .download-content a { color:var(--text-primary); padding:10px 16px; text-decoration:none; display:block; }
+        .download-content a:hover { background:#f0f2f5; }
+        
+        .search-input {
+            width:100%; padding:12px 16px; border:1px solid var(--border-light); border-radius:6px;
+            margin-bottom:16px; font-size:14px; color:var(--text-primary); background:#f0f2f5;
+        }
+        
+        table {
+            width:100%; border-collapse:collapse; margin-top:16px;
+        }
+        th, td { padding:12px; text-align:left; border-bottom:1px solid var(--border-light); }
+        th { background:#f0f2f5; font-weight:600; color:var(--text-secondary); font-size:14px; }
+        td { font-size:14px; color:var(--text-primary); }
+        .pagination { text-align:center; margin-top:16px; font-size:14px; color:var(--text-secondary); }
+    </style>
+</head>
+<body>
+
+        <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">  <!-- removed "collapsed" class → open by default -->
+        <div style="display:flex; justify-content:flex-end; padding:0 12px;">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-chevron-left"></i> <!-- left arrow = expanded -->
+            </button>
+        </div>
+
+        <a href="#" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            <span class="nav-text">Corporate Dashboard</span>
+        </a>
+
+        <a href="overview.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">Overview</span>
+        </a>
+
+        <a href="#" class="nav-item" onclick="showARLModal()">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="nav-text">Archivehubs Reference Locator (ARL)</span>
+        </a>
+
+        <a href="transactions.html" class="nav-item">
+            <i class="fas fa-exchange-alt"></i>
+            <span class="nav-text">Transactions</span>
+        </a>
+       
+        <!-- Monetization Hub – Collapsible Dropdown (open by default) -->
+        <div class="nav-item collapsible" 
+            onclick="this.classList.toggle('active'); 
+                    this.nextElementSibling.classList.toggle('open');
+                    this.querySelector('i:last-child').classList.toggle('fa-chevron-down');
+                    this.querySelector('i:last-child').classList.toggle('fa-chevron-up');">
+            <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-text">Monetization Hub</span>
+            </div>
+            <i class="fas fa-chevron-up"></i> <!-- up = open by default -->
+        </div>
+        <div class="collapsible-content open"> <!-- open class = visible -->
+            <a href="earnings.html" class="sub-nav-item nav-item">
+                <i class="fas fa-wallet"></i>
+                <span class="nav-text">Earnings</span>
+            </a>
+            <a href="expenses.html" class="sub-nav-item nav-item">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-text">Expenses and Payments</span>
+            </a>
+            <a href="ad-credit.html" class="sub-nav-item nav-item  active">
+                <i class="fas fa-gift"></i>
+                <span class="nav-text">Ad Credit</span>
+            </a>
+        </div>
+         <a href="insight.html" class="nav-item">
+            <i class="fas fa-chart-bar"></i>
+            <span class="nav-text">Insight</span>
+        </a>
+
+        <a href="deals.html" class="nav-item">
+            <i class="fas fa-handshake"></i>
+            <span class="nav-text">Deals</span>
+        </a>
+
+        <!-- Categories Section -->
+        <div class="category-section">
+            <div class="category-title">Categories</div>
+
+            <a href="#" class="nav-item"><i class="fas fa-building"></i><span class="nav-text">Company Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-sitemap"></i><span class="nav-text">Organization Page</span></a>
+
+            <!-- Educational Institution – Collapsible -->
+            <div class="nav-item collapsible" 
+                onclick="this.classList.toggle('active'); 
+                        this.nextElementSibling.classList.toggle('open');
+                        this.querySelector('i:last-child').classList.toggle('fa-chevron-down');
+                        this.querySelector('i:last-child').classList.toggle('fa-chevron-up');">
+                <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="nav-text">Educational Institution Page</span>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="collapsible-content">
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">Club Files</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">Smart Schools Results</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">School Files</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">STEM Plus Files</span></a>
+            </div>
+
+            <a href="#" class="nav-item"><i class="fas fa-star"></i><span class="nav-text">Showcase Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-users"></i><span class="nav-text">Fans Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-link"></i><span class="nav-text">Affiliate Marketers Page</span></a>
+        </div>
+
+        <a href="#" class="advertise-btn">
+            <i class="fas fa-bullhorn"></i>
+            <span>Advertise</span>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="insight-section">
+            <div class="header">
+                <h3>Ad Credit</h3>
+
+                 <button class="primary-btn" style="margin-bottom:20px;">
+                Redeem Credit
+            </button>
+
+            </div>          
+
+            <p style="margin-bottom:20px;">Last 6 Months of Inactive Credits</p>
+
+            <div class="metric-grid" style="grid-template-columns:1fr 1fr;">
+                <div class="metric-box" style="border:1px solid var(--border-light);">
+                    <div class="metric-label">Summary</div>
+                    <div class="metric">Total Amount Remaining</div>
+                    <div class="metric">₦20,000</div>
+                    <small>Active Credits</small>
+                </div>
+                <div class="metric-box" style="border:1px solid var(--border-light);">
+                    <div class="metric-label">Credits</div>
+                    <div class="metric">Total Amount Used</div>
+                    <div class="metric">₦5,000</div>
+                    <small>Active Credits</small>
+                </div>
+            </div>
+
+            <div class="header" style="margin-top:24px;">
+                <h3>Ad Credit (1)</h3>
+            </div>
+
+            <div class="header">
+                <button class="primary-btn">Print</button>
+                <div class="dropdown">
+                    <span>Download <i class="fas fa-chevron-down"></i></span>
+                    <div class="dropdown-content">
+                        <a href="#">CSV</a>
+                        <a href="#">PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <input type="text" placeholder="Search ad credit by text, property or value" style="width:100%; padding:10px; border:1px solid var(--border-light); border-radius:6px; margin-bottom:20px;">
+
+            <table style="width:100%; border-collapse:collapse;">
+                <thead>
+                    <tr>
+                        <th>Credit Name ˅</th>
+                        <th>Expiration Date ˅</th>
+                        <th>Amount Used ˅</th>
+                        <th>Amount Available ˅</th>
+                        <th>Application Details ˅</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ad Credit</td>
+                        <td>-----</td>
+                        <td>₦5,000</td>
+                        <td>₦20,000</td>
+                        <td>Credit Details Link</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="text-align:center; margin-top:20px;">
+                 <button class="primary-btn">View Ad Credit</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            Get the Archivehubs App &nbsp;&nbsp;&nbsp; General Terms<br>
+            ARCHIVEHUBS: ENINK Investment Limited © 2025 RC 1741345
+        </div>
+    </main>
+
+    <!-- ARL Modal (keep this once in the page or in a shared file) -->
+    <div id="arl-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; justify-content:center; align-items:center;">
+        <div style="background:#fff; padding:24px; border-radius:12px; width:90%; max-width:500px;">
+            <span onclick="this.parentElement.parentElement.style.display='none'" style="float:right; font-size:28px; cursor:pointer;">×</span>
+            <h3>Archivehubs Reference Locator (ARL)</h3>
+            <p>ARL details will be pulled from Planner (APS) here.</p>
+        </div>
+    </div>
+
+  
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+        function collapse() {
+            sidebar.classList.add('collapsed');
+            toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        }
+        function expand() {
+            sidebar.classList.remove('collapsed');
+            toggleBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        }
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.contains('collapsed') ? expand() : collapse();
+        });
+
+        if (window.innerWidth <= 992) {
+            collapse();
+        }
+
+        function showARLModal() {
+            document.getElementById('arl-modal').style.display = 'flex';
+        }
+
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.closest('.modal').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

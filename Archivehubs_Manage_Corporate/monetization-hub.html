@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetization Hub | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar active Monetization Hub -->
+    <aside class="sidebar" id="sidebar">
+        <a href="monetization-hub.html" class="nav-item active">
+            <i class="fas fa-money-bill"></i>
+            <span class="nav-text">Monetization Hub</span>
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <div class="insight-section">
+            <div class="header">
+                <h3>Monetization Hub</h3>
+                <a href="home.html">← Professional Dashboard</a>
+            </div>
+            <h4>Your programs <i class="fas fa-question-circle" onclick="showPopup('programs-popup')"></i></h4>
+            <div class="status-card">
+                <h5>🤝 Partnership ads</h5>
+                <p>View and manage your partner permissions.</p>
+            </div>
+            <h4>Not yet eligible <i class="fas fa-question-circle" onclick="showPopup('eligible-popup')"></i></h4>
+            <p>As you grow your audience, you’ll unlock more ways to make money.</p>
+            <div class="status-card">
+                <h5>💰 Content monetization</h5>
+                <p>Earn money from Archivehubs for all your well-performing, eligible content.</p>
+            </div>
+            <div class="status-card">
+                <h5>🏪 Storefront</h5>
+                <p>Earn money by offering videograms, custom videos from you to fans.</p>
+            </div>
+            <div class="status-card">
+                <h4>Support</h4>
+                <h5>❓ Help Center</h5>
+                <p>Need help? Visit the Archivehubs Help center for more information on earnings, insights and best practices.</p>
+                <button>Visit</button>
+            </div>
+        </div>
+
+        <!-- Popups -->
+        <div id="programs-popup" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <p>These features can only be accessed from the Archivehubs mobile app. To use them, open the Archivehubs app, go to the professional dashboard, and tap on the monetization hub.</p>
+            </div>
+        </div>
+        <div id="eligible-popup" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <p>These features can only be viewed in the Archivehubs mobile app. For more details, open the Archivehubs app, go to the professional dashboard, and tap the monetization hub.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script>
+        function showPopup(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+    </script>
+</body>
+</html>

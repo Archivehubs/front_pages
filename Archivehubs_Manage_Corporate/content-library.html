@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dashboard | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --sidebar-width: 70px; --sidebar-expanded: 280px; --gold: #ffd700; --orange: #ff9800;
+            --bg: #f5f5f5; --card: #fff; --text: #1c1e21; --text-light: #65676b;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); display:flex; min-height:100vh; }        
+        .logo { font-weight:700; font-size:20px; color:#000; }
+        .topbar i { font-size:18px; color:#606770; margin:0 12px; cursor:pointer; }
+        .topbar .menu { margin-left:auto; }
+        .sidebar { width:var(--sidebar-expanded); background:#000; color:#b0b3b8; position:fixed; top:56px; left:0; bottom:0; padding:16px 0; overflow-y:auto; transition:width .3s; z-index:999; }
+        .sidebar.collapsed { width:var(--sidebar-width); }
+        .sidebar .nav-item { display:flex; align-items:center; padding:8px 16px; color:#b0b3b8; text-decoration:none; font-size:13px; margin:0 8px; border-radius:6px; transition:.2s; }
+        .sidebar .nav-item:hover { background:#ffd700; color:#000; }
+        .sidebar .nav-item.active { background:var(--orange); color:#000; }
+        .sidebar .nav-item i { width:24px; text-align:center; font-size:18px; }
+        .sidebar .nav-text { margin-left:8px; font-weight:500; }
+        .sidebar.collapsed .nav-text, .sidebar.collapsed .nav-divider { opacity:0; }
+        .main { margin-left:var(--sidebar-expanded); margin-top:56px; padding:20px; flex:1; transition:margin-left .3s; }
+        .sidebar.collapsed ~ .main { margin-left:var(--sidebar-width); }
+        .card { background:var(--card); border-radius:8px; padding:16px; box-shadow:0 1px 3px rgba(0,0,0,.1); margin-bottom:16px; }
+        .card h3 { font-size:16px; margin-bottom:12px; color:var(--text); }
+        .metric-box { background:#f0f2f5; padding:12px; border-radius:6px; text-align:center; }
+        .metric-value { font-size:20px; font-weight:700; color:var(--text); }
+        .metric-label { font-size:12px; color:var(--text-light); }
+        .chart-container { height:180px; margin:12px 0; }
+        .dropdown-select { background:#f0f2f5; border:none; padding:6px 12px; border-radius:6px; font-size:13px; }
+        .primary-btn { background:#ffd700; color:#000; border:none; padding:8px 16px; border-radius:6px; font-weight:600; cursor:pointer; }
+        .primary-btn:hover { background:#e6c200; }
+        @media (max-width:768px) { .topbar { padding:0 8px; } .sidebar { width:var(--sidebar-width); } .main { margin-left:var(--sidebar-width); } }
+    </style>
+</head>
+<body>
+
+
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <button class="nav-item" style="justify-content:flex-end; background:none; border:none; color:#b0b3b8;" onclick="document.getElementById('sidebar').classList.toggle('collapsed')">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="nav-divider">Manage Corporate Page</div>
+    <a href="#" class="nav-item"><i class="fas fa-building"></i><span class="nav-text">ENINK Investment LTD</span></a>
+    <div class="nav-divider"></div>
+    <a href="index.html" class="nav-item active"><i class="fas fa-tachometer-alt"></i><span class="nav-text">Professional Dashboard</span></a>
+    <a href="insights-overview.html" class="nav-item"><i class="fas fa-chart-line"></i><span class="nav-text">Insights</span></a>
+    <a href="#" class="nav-item"><i class="fas fa-bullhorn"></i><span class="nav-text">Ad Center</span></a>
+    <a href="#" class="nav-item"><i class="fas fa-plus-circle"></i><span class="nav-text">Create Ads</span></a>
+    <a href="#" class="nav-item"><i class="fas fa-rocket"></i><span class="nav-text">Boost Archivehubs Post</span></a>
+    <a href="#" class="nav-item"><i class="fas fa-cog"></i><span class="nav-text">Settings</span></a>
+    <div class="nav-divider">More Tools ˄</div>
+    <div class="dropdown">
+        <a href="#" class="nav-item"><i class="fas fa-bars"></i><span class="nav-text">More Tools</span></a>
+        <div class="dropdown-menu">
+            <p>Manage your page effectively on Archivehubs</p>
+            <a href="#"><i class="fas fa-check-circle"></i> Archivehubs Verified</a>
+            <a href="#"><i class="fas fa-users"></i> Leads Center</a>
+            <a href="#"><i class="fas fa-bullhorn"></i> Archivehubs Channels</a>
+        </div>
+    </div>
+    <a href="#" class="nav-item" style="background:#ffd700; color:#000; margin-top:8px;"><i class="fas fa-bullhorn"></i><span class="nav-text">Advertise</span></a>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+    <div class="card">
+        <h3>Content Library</h3>
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+            <button class="primary-btn">Create</button>
+            <button>Filter</button>
+            <button>Columns</button>
+        </div>
+        <div style="display:flex; gap:8px; font-size:12px;">
+            <a href="#">Published</a> | <a href="#">Scheduled</a>
+        </div>
+        <p style="margin:16px 0; color:#65676b;">No Published Posts<br>When you published a post, you’ll see it here</p>
+    </div>
+</main>
+
+<script>
+    const ctx = document.getElementById('overviewChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: { labels: ['14-Aug','19-Aug','24-Aug','29-Aug','3-Sep','8-Sep'], datasets: [{
+            data: [0,2,4,6,10,15], borderColor: '#673ab7', tension: 0.3, fill: true, backgroundColor: 'rgba(103,58,183,0.1)'
+        }]},
+        options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }
+    });
+</script>
+</body>
+</html>

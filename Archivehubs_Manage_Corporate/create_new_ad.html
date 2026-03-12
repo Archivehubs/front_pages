@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Ad | ENINK Investment LTD - Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            color: #1c1e21;
+            line-height: 1.4;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #ddd;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 0;
+        }
+        .left { padding: 24px; }
+        .right {
+            background: #f8f9fa;
+            border-left: 1px solid #ddd;
+            padding: 20px;
+        }
+
+        /* Form Sections */
+        .section {
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-of-type { border-bottom: none; }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title i { color: #65676b; }
+        .help { font-size: 13px; color: #1877f2; margin-left: auto; }
+
+        /* Goal */
+        .goal-box {
+            background: #f5f6f8;
+            padding: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .goal-btn {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* Ad Creative */
+        .creative-preview {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+        .creative-text {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        .edit-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* Ad Preview */
+        .ad-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .ad-header {
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #65676b;
+        }
+        .ad-body {
+            padding: 12px;
+            font-size: 14px;
+        }
+        .ad-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .ad-footer {
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+        }
+        .ad-cta {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .ad-actions {
+            display: flex;
+            gap: 24px;
+            color: #65676b;
+            font-size: 14px;
+        }
+
+        /* Budget & Audience */
+        .toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 2px;
+            bottom: 2px;
+            background: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background: #1877f2; }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        .budget-slider {
+            margin: 20px 0;
+        }
+        .budget-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #e67e22;
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .warning {
+            background: #fff4e5;
+            border: 1px solid #ffb74d;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        .publish-btn {
+            background: #000;
+            color: #ffd700;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">Create new ad</div>
+
+    <div class="main">
+        <!-- LEFT: Form -->
+        <div class="left">
+
+            <!-- Goal -->
+            <div class="section">
+                <div class="section-title">Goal <span class="help">?</span></div>
+                <div class="goal-box">
+                    <div>
+                        <strong>Automatic</strong><br>
+                        <small>Let Archivehubs select the most relevant goal based on the button label and other settings you choose.</small>
+                    </div>
+                    <button class="goal-btn">Change</button>
+                </div>
+            </div>
+
+            <!-- Ad Creative -->
+            <div class="section">
+                <div class="section-title">Ad creative <span class="help">?</span></div>
+                <button style="float:right; color:#1877f2; background:none; border:none; font-weight:600;">Use a post</button>
+                <div style="clear:both;"></div>
+
+                <div class="creative-preview">
+                    <strong>Description</strong>
+                    <textarea class="creative-text">ENINK Investment Limited is a Business and Developmental Consulting Company base in Abuja, Nigeria. We are into ICT Services, Investments, Educational Supports, Feasibility Reports, Marketing, Sales Promotion, Events, Training and General Contractors.
+
+Our</textarea>
+                    <button class="edit-btn">Edit ▼</button>
+                </div>
+            </div>
+
+            <!-- Special Category, Audience, Duration, Budget -->
+            <div class="section">
+                <div class="section-title">Special Ad Category <span class="help">i</span></div>
+                <div>Is this ad about employment?</div>
+                <div class="toggle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    <small>What we consider an employment ad</small>
+                </div>
+                <div class="warning">
+                    Based on your page category, we recommend selecting Employment as the Special Ad Category to help prevent an ad rejection.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Audience <span class="help">i</span></div>
+                <button style="background:#1877f2; color:white; border:none; padding:8px 16px; border-radius:8px;">Create new</button>
+                <div style="margin:16px 0;">
+                    <strong>Advantage + audience</strong><br>
+                    <small>Automatically show this ad to people most likely to respond. We'll prioritize audiences matching your suggestions before expanding more broadly.</small>
+                </div>
+                <div style="background:#f0f8ff; padding:16px; border-radius:8px;">
+                    <strong>Audience details</strong><br>
+                    Location: Nigeria<br>
+                    Minimum age: 18<br>
+                    Advantage + audience: On
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Duration <span class="help">i</span></div>
+                <div style="background:#e7f3ff; padding:12px; border-radius:8px; margin:16px 0;">
+                    This ad will run continuously on a daily budget<br>
+                    Running an ad continuously can help improve performance by giving it more time to reach people likely to respond. If you prefer, you can set an end date instead.
+                </div>
+                <div class="toggle">
+                    <strong>Run this ad continuously</strong>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+                <div style="color:#65676b; margin:12px 0;">
+                    Your ad will continue to run on a daily budget unless you pause it, which you can do at any time.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Daily Budget <span class="help">i</span></div>
+                <div>Country, currency<br><strong>USD, NGN</strong> <button style="margin-left:16px;">Change</button></div>
+                <div style="color:#65676b; margin:12px 0;">Estimated 1.1K – 3.3K Accounts Center accounts reached per day</div>
+                <div class="budget-amount">₦19,911.00</div>
+                <div class="budget-slider">
+                    <input type="range" min="1492" max="200000" value="19911" style="width:100%;">
+                    <div style="display:flex; justify-content:space-between; font-size:14px; color:#65676b;">
+                        <span>₦1,492.881</span>
+                        <span>₦20,000.00</span>
+                    </div>
+                </div>
+                <div style="background:#fff8e1; padding:12px; border-radius:8px; margin-top:20px;">
+                    Similar businesses typically spend ₦4,971.00 and are able to get 218 thruplay per day.
+                </div>
+            </div>
+
+            <div class="section">
+                <div style="background:#ffebee; padding:16px; border-radius:8px; margin:20px 0;">
+                    <strong>Payment method required</strong><br>
+                    When you publish your ad, you'll be asked to add a payment method to your ad account. This payment method will be charged for any amount spent beyond the value of your ad credit.
+                </div>
+                <button style="width:100%; padding:12px; background:#f0f0f0; border:none; border-radius:8px; margin:12px 0;">Payment method ▼</button>
+
+                <div style="text-align:center; margin:30px 0;">
+                    <a href="#" style="color:#1877f2; margin-right:30px;">Need Help?</a>
+                    <button class="publish-btn">Publish</button>
+                </div>
+                <p style="font-size:13px; color:#65676b; text-align:center; margin-top:20px;">
+                    By clicking Publish, you acknowledge that your use of Archivehubs's ad tools is subject to our <a href="#" style="color:#1877f2;">Terms & conditions</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- RIGHT: Ad Preview -->
+        <div class="right">
+            <div style="text-align:center; margin-bottom:20px;">
+                <strong>Ad preview</strong>
+                <button style="float:right; background:#f0f0f0; border:none; padding:8px 16px; border-radius:8px;">See all previews</button>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="ad-preview">
+                <div class="ad-header">
+                    <div>
+                        <strong>ENINK Investment LTD</strong><br>
+                        <small>Sponsored · <i class="fas fa-globe"></i></small>
+                    </div>
+                    <div>...</div>
+                </div>
+                <div class="ad-body">
+                    ENINK Investment Limited is a Business and Developmental Consulting Company base in Abuja, Nigeria. We are into ICT Services, Investments, Educational Supports, Feasibility Reports, Marketing, Sales Promotion, Events, Training and General Contractors.<br><br>
+                    Our
+                </div>
+                <img src="https://via.placeholder.com/420x200/FFD700/000000?text=ARCHIVEHUBS+BANNER+YOUR+GLOBAL+DIARY" alt="Ad Banner" class="ad-image">
+                <div class="ad-footer">
+                    <div>
+                        <strong>ENINK Investment LTD</strong><br>
+                        <button class="ad-cta">Visit Page</button>
+                    </div>
+                    <div class="ad-actions">
+                        <span>Like</span>
+                        <span>Comment</span>
+                        <span>Repost</span>
+                        <span>Share</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background:#f8f9fa; padding:16px; border-radius:8px; font-size:14px; color:#65676b;">
+                Ad rendering and interaction may vary based on device, format and other factors.
+            </div>
+
+            <div style="margin-top:30px; padding:16px; background:#e7f3ff; border-radius:8px;">
+                <strong>Estimated daily results</strong><br>
+                <strong style="color:#1877f2;">Accounts Center accounts reached</strong><br>
+                <strong style="font-size:20px;">1.1K - 3.3K</strong>
+            </div>
+
+            <div style="margin-top:20px; padding:16px; background:#f8f9fa; border-radius:8px;">
+                <strong>Payment summary</strong><br>
+                Your ad runs continuously on an average daily budget.<br><br>
+                <strong>Budget</strong><br>
+                ₦1,911.00 NGN<br>
+                <strong>Daily total budget</strong><br>
+                ₦1,911.00 NGN<br><br>
+                <small>We use data about you and your ad account to provide you with ads billing and spending options. <a href="#" style="color:#1877f2;">Learn more</a></small>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

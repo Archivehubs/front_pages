@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | ENINK Investment LTD - Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 70px;
+            --sidebar-expanded: 320px;
+            --sidebar-bg: #000;
+            --gold: #ffd700;
+            --text-light: #b0b3b8;
+            --transition: 0.3s ease;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background:#f0f2f5; display:flex; min-height:100vh; }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-expanded);
+            background: var(--sidebar-bg);
+            color: white;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            padding: 20px 0;
+            transition: width var(--transition);
+            z-index: 1000;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar.collapsed { width: var(--sidebar-width); }
+        .sidebar.collapsed .nav-text,
+        .sidebar.collapsed .page-title,
+        .sidebar.collapsed .more-tools-header { opacity:0; pointer-events:none; }
+
+        .toggle-btn {
+            align-self: flex-end;
+            background:none; border:none; color:#b0b3b8;
+            font-size:20px; cursor:pointer; padding:8px; margin-right:12px;
+            border-radius:50%; transition:0.3s;
+        }
+        .toggle-btn:hover { background:#333; color:white; }
+
+        .page-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 0 20px 12px 20px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 16px;
+        }
+
+        .page-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 16px;
+        }
+        .page-avatar {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--gold);
+        }
+        .page-name { font-size: 15px; font-weight: 600; }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: var(--gold);
+            color: #000 !important;
+            font-weight: 600;
+        }
+        .nav-item i { font-size: 18px; width: 24px; text-align: center; }
+
+        .collapsible {
+            justify-content: space-between;
+            padding-right: 16px !important;
+        }
+        .collapsible i:last-child {
+            transition: transform 0.3s;
+            font-size: 16px;
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .collapsible-content.open { max-height: 600px; }
+        .sub-nav-item {
+            padding-left: 58px !important;
+            font-size: 13.8px;
+        }
+
+        .more-tools-header {
+            color: #b0b3b8;
+            font-size: 13px;
+            padding: 16px 20px 8px;
+            border-top: 1px solid #333;
+            margin-top: 12px;
+        }
+
+        .advertise-btn {
+            background: var(--gold);
+            color: #000;
+            font-weight: 700;
+            text-align: center;
+            padding: 16px;
+            margin: 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: var(--sidebar-expanded);
+            padding: 20px;
+            flex: 1;
+            transition: margin-left var(--transition);
+        }
+        .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-width); }
+
+        .cover {
+            height: 280px;
+            background: #1877f2 url('https://via.placeholder.com/1200x400/1877f2/ffffff?text=BANNER') center/cover no-repeat;
+            border-radius: 12px;
+            position: relative;
+            margin-bottom: 80px;
+        }
+        .edit-cover {
+            position: absolute;
+            bottom: 16px; right: 16px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            margin: -80px 0 20px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .profile-pic {
+            width: 168px; height: 168px;
+            border-radius: 50%;
+            border: 5px solid white;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            color: #666;
+        }
+        .profile-info h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1c1e21;
+        }
+        .followers { color: #65676b; font-size: 15px; }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-dashboard { background:#000; color:var(--gold); }
+        .btn-edit { background:#e4e6eb; color:#1c1e21; }
+        .btn-advertise { background:#e4e6eb; color:#1c1e21; }
+
+        .tabs {
+            display: flex;
+            gap: 32px;
+            border-bottom: 1px solid #ddd;
+            padding: 0 20px 0;
+            margin: 32px 0 20px;
+        }
+        .tab {
+            padding: 14px 0;
+            font-size: 17px;
+            color: #65676b;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab.active {
+            color: #000;
+            font-weight: 700;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 16px;
+        }
+        .progress { height: 8px; background:#e4e6eb; border-radius:4px; overflow:hidden; margin:12px 0; }
+        .progress-fill { height:100%; background:#42b72a; width:78%; }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .photos-grid img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .create-post {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .create-post textarea {
+            width: 100%;
+            border: none;
+            resize: none;
+            font-size: 20px;
+            padding: 12px 0;
+        }
+        .post-tools {
+            display: flex;
+            gap: 24px;
+            padding-top: 12px;
+            border-top: 1px solid #ddd;
+            margin-top: 12px;
+        }
+        .post-tools a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #65676b;
+            font-weight: 600;
+        }
+
+        .post {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .post-header img { width:48px; height:48px; border-radius:50%; }
+        .post-meta { font-size:14px; color:#65676b; }
+        .post-image { width:100%; border-radius:12px; margin:12px 0; }
+        .post-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #65676b;
+            font-size: 14px;
+            margin: 12px 0;
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #ddd;
+            color: #65676b;
+            font-weight: 600;
+        }
+        .post-actions button {
+            background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:6px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 60px 0 20px;
+            color: #65676b;
+            font-size: 14px;
+        }
+        .footer a { color: #1877f2; text-decoration: none; margin: 0 12px; }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">       
+        <div class="sidebar-header">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+
+        <div class="page-title">Manage Corporate Page</div>
+
+        <div class="page-info">
+            <div class="page-avatar"><i class="fas fa-user"></i></div>
+            <div class="page-name">ENINK Investment LTD</div>
+        </div>
+
+        <a href="index_2.html" class="nav-item">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="nav-text">Professional Dashboard</span>
+        </a>
+
+        <div class="nav-item collapsible" onclick="toggleCollapse(this)">
+            <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-text">Insights</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="collapsible-content">
+            <a href="insights-views.html" class="sub-nav-item nav-item"><span class="nav-text">Views</span></a>
+            <a href="insights-earnings.html" class="sub-nav-item nav-item"><span class="nav-text">Earnings</span></a>
+            <a href="insights-interactions.html" class="sub-nav-item nav-item"><span class="nav-text">Interactions</span></a>
+            <a href="insights-audience.html" class="sub-nav-item nav-item"><span class="nav-text">Audience</span></a>
+        </div>
+
+        <a href="ad-center.html" class="nav-item"><i class="fas fa-bullhorn"></i><span class="nav-text">Ad Center</span></a>
+        <a href="create_new_ad.html" class="nav-item"><i class="fas fa-plus-circle"></i><span class="nav-text">Create Ads</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-rocket"></i><span class="nav-text">Boost Archivehubs Post</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-cog"></i><span class="nav-text">Settings</span></a>
+
+        <div class="more-tools-header">More Tools</div>
+        <div class="nav-item collapsible" onclick="toggleCollapse(this)">
+            <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                <i class="fas fa-tools"></i>
+                <span class="nav-text">More Tools</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="collapsible-content open">
+            <a href="#" class="sub-nav-item nav-item"><i class="fas fa-check-circle"></i><span class="nav-text">Archivehubs Verified</span></a>
+            <a href="#" class="sub-nav-item nav-item"><i class="fas fa-users"></i><span class="nav-text">Leads Center</span></a>
+            <a href="#" class="sub-nav-item nav-item"><i class="fas fa-bullhorn"></i><span class="nav-text">Archivehubs Channels</span></a>
+        </div>
+
+        <a href="#" class="advertise-btn"><i class="fas fa-bullhorn"></i> Advertise</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- Cover Photo -->
+        <div class="cover">
+            <div class="edit-cover"><i class="fas fa-camera"></i> Edit Cover Photo</div>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-pic"><i class="fas fa-user"></i></div>
+            <div>
+                <h1>ENINK Investment LTD</h1>
+                <div class="followers">589 Followers · 0 Following</div>
+                <div class="action-buttons">
+                    <a href="#" class="btn btn-dashboard"><i class="fas fa-tachometer-alt"></i> Professional Dashboard</a>
+                    <a href="#" class="btn btn-edit"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="#" class="btn btn-advertise"><i class="fas fa-bullhorn"></i> Advertise</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active">Posts</div>
+            <div class="tab">About</div>
+            <div class="tab">Channels</div>
+            <div class="tab">Lite</div>
+            <div class="tab">Videos</div>
+            <div class="tab">Photos</div>
+            <div class="tab">Followers</div>
+            <div class="tab">Reviews</div>
+            <div class="tab">Public Opinion</div>
+            <div class="tab">More</div>
+        </div>
+
+        <!-- Page Health Card -->
+        <div class="card">
+            <strong>How healthy is your page?</strong><br>
+            Complete these actions to keep improving ENINK Investment.<br><br>
+            <strong>Page health: Good</strong> (Note: Rating Bad, Fair, Good, and Excellent)<br>
+            <div class="progress"><div class="progress-fill"></div></div>
+            Compared to similar pages with high engagement<br><br>
+            <button style="background:#ffd700; color:#000; border:none; padding:12px 24px; border-radius:8px; font-weight:600; cursor:pointer;">
+                Write a Welcome Post
+            </button>
+        </div>
+
+        <!-- Intro Card -->
+        <div class="card">
+            <strong>Intro</strong><br><br>
+            ENINK Investment Limited is a Business and Developmental Consulting Company base in Abuja, Nigeria. We are into ICT Services, Investments, Educational Supports, Feasibility Reports, Marketing, Sales Promotion, Events, Training and General Contractors.<br><br>
+            <button style="background:#f0f2f5; border:none; padding:8px 20px; border-radius:8px; margin-bottom:16px;">Edit Bio</button><br>
+            <div style="line-height:2; color:#333;">
+                Page · Business Consultant<br>
+                Company Address<br>
+                Mobile Line<br>
+                Email Address<br><br>
+                <button style="background:#000; color:#ffd700; padding:12px 24px; border:none; border-radius:8px; font-weight:600;">Promote Website</button><br><br>
+                Not yet rated (0 Reviews)
+            </div>
+        </div>
+
+        <!-- Photos -->
+        <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <strong>Photos</strong>
+                <a href="#" style="color:#1877f2; font-weight:600;">See all Photos</a>
+            </div>
+            <div class="photos-grid">
+                <img src="https://via.placeholder.com/300/8B4513/FFFFFF?text=E" alt="E">
+                <img src="https://via.placeholder.com/300/000000/FFD700?text=A" alt="A">
+                <img src="https://via.placeholder.com/300/D4AF37/000000?text=CERTIFICATE" alt="Certificate">
+            </div>
+        </div>
+
+        <!-- Create Post -->
+        <div class="create-post">
+            <textarea placeholder="What's on your mind?" rows="3"></textarea>
+            <div class="post-tools">
+                <a href="#"><i class="fas fa-video" style="color:red;"></i> Live Video</a>
+                <a href="#"><i class="fas fa-image" style="color:green;"></i> Photo/Video</a>
+                <a href="#"><i class="fas fa-pen" style="color:#1877f2;"></i> Lite</a>
+            </div>
+        </div>
+
+        <!-- Featured Section -->
+        <div class="card" style="text-align:center; color:#65676b;">
+            <strong>Featured</strong>   <a href="#" style="float:right; color:#1877f2;">Manage</a><br><br>
+            People won’t see this unless you pin something
+        </div>
+
+        <!-- Sample Post -->
+        <div class="post">
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                <strong>Featured</strong>
+                <div style="display:flex; gap:20px; color:#65676b;">
+                    <span><i class="fas fa-filter"></i> Filters</span>
+                    <span><i class="fas fa-cog"></i> Manage Posts</span>
+                </div>
+            </div>
+
+            <div class="post-header">
+                <img src="https://via.placeholder.com/48/orange/white?text=E" alt="Profile">
+                <div>
+                    <strong>ENINK Investment LTD</strong> updated their Profile Picture<br>
+                    <span class="post-meta">March 11</span>
+                </div>
+            </div>
+
+            <img src="https://via.placeholder.com/800x500/orange/white?text=Team+Photo" class="post-image" alt="Team">
+
+            <div class="post-stats">
+                <span>1k Likes</span>
+                <span>389 Comments · 55 Reposts · 100 Shares</span>
+            </div>
+
+            <div class="post-actions">
+                <button><i class="far fa-thumbs-up"></i> Like</button>
+                <button><i class="far fa-comment"></i> Comment</button>
+                <button><i class="fas fa-retweet"></i> Repost</button>
+                <button><i class="fas fa-share"></i> Share</button>
+            </div>
+
+            <div style="margin-top:16px; padding-top:16px; border-top:1px solid #ddd; text-align:center;">
+                <strong>No insights to show</strong>   
+                <button style="background:#000; color:#ffd700; border:none; padding:8px 16px; border-radius:8px; font-weight:600;">Create ad</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <a href="#">Get the Archivehubs App</a>   <a href="#">General Terms</a><br><br>
+            ARCHIVEHUBS: ENINK Investment Limited © 2025 RC 1741345
+            <img src="https://via.placeholder.com/80x20/ffd700/000?text=ENINK" alt="ENINK" style="margin-left:12px; vertical-align:middle;">
+        </div>
+    </main>
+
+    <script>
+        function toggleCollapse(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('i:last-child');
+            content.classList.toggle('open');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '<i class="fas fa-chevron-right"></i>' : '<i class="fas fa-chevron-left"></i>';
+        });
+    </script>
+</body>
+</html>

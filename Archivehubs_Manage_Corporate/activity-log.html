@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Log | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar active Activity Log -->
+    <aside class="sidebar" id="sidebar">
+        <a href="activity-log.html" class="sub-nav-item active">
+            <i class="fas fa-history"></i>
+            <span class="nav-text">Activity Log</span>
+        </a>
+    </aside>
+
+   <main class="main-content">
+        <div class="insight-section">
+            <div class="header">
+                <h3>Activity Log</h3>
+                <a href="engagement.html">← Engagement</a>
+            </div>
+            <p>View moderation actions taken by Moderation Assist and page Admins.</p>
+            <div class="table-header">
+                <div class="dropdown date-dropdown">
+                    <span class="trigger">All time ▼</span>
+                    <div class="date-list">
+                        <div class="date-item">Yesterday</div>
+                        <div class="date-item">Last 7days</div>
+                        <div class="date-item">Last 14days</div>
+                        <div class="date-item">Last 28days</div>
+                        <div class="date-item">Last 60days</div>
+                        <div class="date-item">This month</div>
+                        <div class="date-item">This quarter</div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <span class="trigger">All activity ▼</span>
+                    <div class="date-list">
+                        <div class="date-item">Hidden by Moderation Assist</div>
+                        <div class="date-item">Hidden by Admins</div>
+                        <div class="date-item">Unhidden by Admins</div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <span class="trigger">All criteria ▼</span>
+                    <div class="filter-list">
+                        <!-- Criteria list from Moderation Assist -->
+                        <div class="filter-item">No connections or followers</div>
+                        <!-- ... -->
+                    </div>
+                </div>
+                <input type="text" placeholder="Search Commenter" style="padding: 5px; border: 1px solid var(--border-color); border-radius: 4px;">
+            </div>
+            <div class="no-data">
+                No Admin Activity<br>
+                There’s no activity within the filters you chose. Try changing your search filters and try again.
+            </div>
+            <!-- Table for logs if data present -->
+            <table class="table" style="display: none;">
+                <thead><tr><th>Action</th><th>Commenter</th><th>Date</th><th>Criteria</th></tr></thead>
+                <tbody><!-- Dynamic --></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

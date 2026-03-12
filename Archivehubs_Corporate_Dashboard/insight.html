@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insight | Corporate Dashboard | Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-expanded: 350px;
+            --sidebar-collapsed: 70px;
+            --sidebar-bg: #000;
+            --main-bg: #f5f5f5;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --primary-gold: #ffd700;
+            --border: #ddd;
+            --white: #fff;
+            --transition: 0.3s ease;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background:var(--main-bg); display:flex; min-height:100vh; }
+        
+        /* Sidebar - Expanded by Default */
+        .sidebar {
+            width: var(--sidebar-expanded);
+            background: var(--sidebar-bg);
+            color: #b0b3b8;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            padding: 16px 0;
+            transition: width var(--transition);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar.collapsed { width: var(--sidebar-collapsed); }
+        .sidebar.collapsed .nav-text, .sidebar.collapsed .back-link span { opacity:0; pointer-events:none; }
+
+        .toggle-btn {
+            background:none; border:none; color:#b0b3b8; font-size:20px; cursor:pointer;
+            padding:8px; border-radius:50%; margin-left:8px;
+        }
+        .toggle-btn:hover { background:#333; color:#fff; }
+
+        .back-link {
+            display:flex; align-items:center; gap:12px; color:#b0b3b8; text-decoration:none;
+            padding:14px 20px; font-weight:500; font-size:15px;
+        }
+        .back-link:hover { color:#fff; }
+
+        .nav-item {
+            display:flex; align-items:center; gap:14px;
+            padding:11px 20px; color:#b0b3b8; text-decoration:none;
+            transition: all 0.3s ease; border-radius:0 30px 30px 0; margin:3px 10px;
+        }
+        .nav-item:hover, .nav-item.active { background:var(--primary-gold); color:#000 !important; font-weight:600; }
+        .nav-item i { font-size:18px; width:24px; text-align:center; }
+
+        .collapsible {
+            cursor:pointer; justify-content:space-between; padding:11px 20px !important;
+            margin:3px 10px; border-radius:0 30px 30px 0;
+        }
+        .collapsible i:last-child { transition:transform 0.3s; }
+        .collapsible-content { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+        .collapsible-content.open { max-height:800px; }
+        .sub-nav-item {
+            padding:10px 20px 10px 68px !important;
+            font-size:13.5px; border-radius:0 25px 25px 0; margin:2px 10px;
+        }
+
+        .advertise-btn {
+            background:#000; color:#ffd700; font-weight:700; text-align:center;
+            padding:16px; margin:20px; border-radius:8px; border:3px solid #ffd700;
+            text-decoration:none; display:block; font-size:15px;
+        }
+        .advertise-btn:hover { background:#ffd700; color:#000; }
+
+        .main-content {
+            margin-left: var(--sidebar-expanded);
+            padding:32px;
+            width:100%;
+            transition: margin-left var(--transition);
+        }
+        .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-collapsed); }
+
+        .insight-section {
+            background:var(--white); border-radius:12px; padding:28px;
+            box-shadow:0 2px 12px rgba(0,0,0,0.08); margin-bottom:24px;
+        }
+
+        .page-title {
+            font-size:26px; font-weight:700; color:var(--text-primary);
+            margin-bottom:32px; display:flex; align-items:center; gap:12px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:20px; margin-bottom:40px;
+        }
+        .stat-card {
+            background:#fafafa; border:1px solid #eee; border-radius:10px; padding:20px;
+            text-align:center; position:relative;
+        }
+        .stat-value { font-size:36px; font-weight:700; color:var(--text-primary); margin:8px 0; }
+        .stat-label { font-size:14px; color:var(--text-secondary); }
+        .chat-icon { position:absolute; top:16px; right:16px; color:#ccc; font-size:20px; }
+
+        .your-page-header {
+            display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;
+            padding-bottom:12px; border-bottom:1px solid #eee;
+        }
+        .your-page-title { font-size:18px; font-weight:600; color:var(--text-primary); }
+        .boost-btn {
+            background:#fff2e8; color:#e67e22; padding:8px 16px; border-radius:6px; font-weight:600; font-size:13px;
+            border:none; cursor:pointer; display:flex; align-items:center; gap:6px;
+        }
+        .create-listing-btn {
+            background:#ffd700; color:#000; padding:8px 16px; border-radius:6px; font-weight:600;
+            font-size:13px; border:none; cursor:pointer; margin-left:8px;
+        }
+
+        .metrics-grid {
+            display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; margin-top:20px;
+        }
+        .metric-box {
+            background:#fafafa; border:1px solid #eee; border-radius:8px; padding:16px; text-align:center;
+        }
+        .metric-value { font-size:28px; font-weight:700; color:var(--text-primary); }
+        .metric-label { font-size:13px; color:var(--text-secondary); margin-top:4px; }
+
+        .see-all-link { text-align:center; margin-top:20px; }
+        .see-all-link a { color:var(--primary-gold); font-weight:600; text-decoration:none; }
+
+        /* Page Listings Section */
+        .listings-header {
+            display:flex; justify-content:space-between; align-items:center; margin:40px 0 20px;
+        }
+        .listings-title { font-size:20px; font-weight:600; color:var(--text-primary); }
+        .period-select {
+            padding:8px 16px; border:1px solid #ddd; border-radius:6px; background:#fff;
+            font-size:14px; cursor:pointer;
+        }
+
+        .listings-grid {
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;
+        }
+        .listing-card {
+            background:#fafafa; border:1px solid #eee; border-radius:10px; padding:20px;
+            text-align:center; display:flex; flex-direction:column; align-items:center; gap:10px;
+        }
+        .listing-icon { font-size:32px; color:#999; }
+        .listing-value { font-size:28px; font-weight:700; color:var(--text-primary); }
+        .listing-label { font-size:13.5px; color:var(--text-secondary); }
+
+        .see-more-insights { text-align:center; margin:32px 0 20px; }
+        .see-more-insights a { color:var(--primary-gold); font-weight:600; font-size:15px; text-decoration:none; }
+
+        .footer {
+            text-align:center; padding:32px 0; color:#65676b; font-size:13px; margin-top:60px;
+        }
+        .footer a { color:#0066cc; text-decoration:none; margin:0 12px; }
+
+        @media (max-width: 992px) {
+            .sidebar { width: var(--sidebar-collapsed); }
+            .main-content { margin-left: var(--sidebar-collapsed); }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .metrics-grid, .listings-grid { grid-template-columns: 1fr; }
+            .your-page-header { flex-direction:column; gap:12px; align-items:flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+        <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">  <!-- removed "collapsed" class → open by default -->
+        <div style="display:flex; justify-content:flex-end; padding:0 12px;">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-chevron-left"></i> <!-- left arrow = expanded -->
+            </button>
+        </div>
+
+        <a href="#" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            <span class="nav-text">Corporate Dashboard</span>
+        </a>
+
+        <a href="overview.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">Overview</span>
+        </a>
+
+        <a href="#" class="nav-item" onclick="showARLModal()">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="nav-text">Archivehubs Reference Locator (ARL)</span>
+        </a>
+
+        <a href="transactions.html" class="nav-item">
+            <i class="fas fa-exchange-alt"></i>
+            <span class="nav-text">Transactions</span>
+        </a>
+       
+        <!-- Monetization Hub – Collapsible Dropdown (open by default) -->
+        <div class="nav-item collapsible" 
+            onclick="this.classList.toggle('active'); 
+                    this.nextElementSibling.classList.toggle('open');
+                    this.querySelector('i:last-child').classList.toggle('fa-chevron-down');
+                    this.querySelector('i:last-child').classList.toggle('fa-chevron-up');">
+            <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-text">Monetization Hub</span>
+            </div>
+            <i class="fas fa-chevron-up"></i> <!-- up = open by default -->
+        </div>
+        <div class="collapsible-content open"> <!-- open class = visible -->
+            <a href="earnings.html" class="sub-nav-item nav-item">
+                <i class="fas fa-wallet"></i>
+                <span class="nav-text">Earnings</span>
+            </a>
+            <a href="expenses.html" class="sub-nav-item nav-item">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-text">Expenses and Payments</span>
+            </a>
+            <a href="ad-credit.html" class="sub-nav-item nav-item">
+                <i class="fas fa-gift"></i>
+                <span class="nav-text">Ad Credit</span>
+            </a>
+        </div>
+         <a href="insight.html" class="nav-item  active">
+            <i class="fas fa-chart-bar"></i>
+            <span class="nav-text">Insight</span>
+        </a>
+
+        <a href="deals.html" class="nav-item">
+            <i class="fas fa-handshake"></i>
+            <span class="nav-text">Deals</span>
+        </a>
+
+        <!-- Categories Section -->
+        <div class="category-section">
+            <div class="category-title">Categories</div>
+
+            <a href="#" class="nav-item"><i class="fas fa-building"></i><span class="nav-text">Company Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-sitemap"></i><span class="nav-text">Organization Page</span></a>
+
+            <!-- Educational Institution – Collapsible -->
+            <div class="nav-item collapsible" 
+                onclick="this.classList.toggle('active'); 
+                        this.nextElementSibling.classList.toggle('open');
+                        this.querySelector('i:last-child').classList.toggle('fa-chevron-down');
+                        this.querySelector('i:last-child').classList.toggle('fa-chevron-up');">
+                <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="nav-text">Educational Institution Page</span>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="collapsible-content">
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">Club Files</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">Smart Schools Results</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">School Files</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">STEM Plus Files</span></a>
+            </div>
+
+            <a href="#" class="nav-item"><i class="fas fa-star"></i><span class="nav-text">Showcase Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-users"></i><span class="nav-text">Fans Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-link"></i><span class="nav-text">Affiliate Marketers Page</span></a>
+        </div>
+
+        <a href="#" class="advertise-btn">
+            <i class="fas fa-bullhorn"></i>
+            <span>Advertise</span>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="insight-section">
+            <!-- <div class="page-title">
+                <img src="https://via.placeholder.com/36x36/ffd700/000000?text=A" alt="Logo" style="border-radius:8px;">
+                Archivehubs <span style="color:var(--primary-gold); margin-left:8px; font-weight:600;">Insight</span>
+            </div> -->
+
+            <!-- Page Listings -->
+            <div class="listings-header">
+                <div class="listings-title">Page Insight</div>
+                <select class="period-select">
+                    <option>Last 7 Days</option>
+                    <option>Last 14 Days</option>
+                    <option>Last 30 Days</option>
+                </select>
+            </div>
+
+            <div class="listings-grid">
+                <div class="listing-card">
+                    <i class="fas fa-exclamation-triangle listing-icon"></i>
+                    <div class="listing-value">0</div>
+                    <div class="listing-label">Click on Page</div>
+                </div>
+                <div class="listing-card">
+                    <i class="far fa-bookmark listing-icon"></i>
+                    <div class="listing-value">0</div>
+                    <div class="listing-label">Listing Saves</div>
+                </div>
+                <div class="listing-card">
+                    <i class="fas fa-box-open listing-icon"></i>
+                    <div class="listing-value">0</div>
+                    <div class="listing-label">Shares</div>
+                </div>
+                <div class="listing-card">
+                    <i class="fas fa-tasks listing-icon"></i>
+                    <div class="listing-value">0</div>
+                    <div class="listing-label">Page Followers</div>
+                </div>
+                <div class="listing-card">
+                    <i class="far fa-file-alt listing-icon"></i>
+                    <div class="listing-value">0</div>
+                    <div class="listing-label">Draft</div>
+                </div>
+                <div class="listing-card">
+                    <i class="fas fa-trash-alt listing-icon"></i>
+                    <div class="listing-value">0</div>
+                    <div class="listing-label">To Delete & Relist</div>
+                </div>
+                <div class="listing-card">
+                    <i class="fas fa-sync listing-icon"></i>
+                    <div class="listing-value">0</div>
+                    <div class="listing-label">To Renew</div>
+                </div>
+                <div class="listing-card">
+                    <i class="fas fa-handshake listing-icon"></i>
+                    <div class="listing-value">0</div>
+                    <div class="listing-label">Deals</div>
+                </div>
+            </div>
+
+            <div class="see-more-insights">
+                <a href="#">See more Insights</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            Get the Archivehubs App &nbsp;&nbsp;&nbsp; General Terms<br>
+            ARCHIVEHUBS: ENINK Investment Limited © 2025 RC 1741345
+        </div>
+    </main>
+
+    <!-- ARL Modal (keep this once in the page or in a shared file) -->
+    <div id="arl-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; justify-content:center; align-items:center;">
+        <div style="background:#fff; padding:24px; border-radius:12px; width:90%; max-width:500px;">
+            <span onclick="this.parentElement.parentElement.style.display='none'" style="float:right; font-size:28px; cursor:pointer;">×</span>
+            <h3>Archivehubs Reference Locator (ARL)</h3>
+            <p>ARL details will be pulled from Planner (APS) here.</p>
+        </div>
+    </div>
+
+       <script>
+        // Sidebar toggle (works on all pages)
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            toggleBtn.innerHTML = sidebar.classList.contains('collapsed')
+                ? '<i class="fas fa-chevron-right"></i>'
+                : '<i class="fas fa-chevron-left"></i>';
+        });
+
+        // Auto-collapse on mobile (≤992px)
+        function checkWidth() {
+            if (window.innerWidth <= 992) {
+                sidebar.classList.add('collapsed');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            } else {
+                sidebar.classList.remove('collapsed');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            }
+        }
+        window.addEventListener('resize', checkWidth);
+        checkWidth();
+
+        // ARL Modal function (available globally)
+        function showARLModal() {
+            document.getElementById('arl-modal').style.display = 'flex';
+        }
+
+        // Optional: Close modal when clicking outside
+        document.getElementById('arl-modal').addEventListener('click', function(e) {
+            if (e.target === this) this.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

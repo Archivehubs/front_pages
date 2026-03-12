@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses and Payments | Monetization Hub | Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-expanded: 350px;
+            --sidebar-collapsed: 70px;
+            --sidebar-bg: #000;
+            --main-bg: #f5f5f5;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --primary-gold: #ffd700;
+            --border: #ddd;
+            --white: #fff;
+            --transition: 0.3s ease;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background:var(--main-bg); display:flex; min-height:100vh; }
+        
+        /* Sidebar - Expanded by Default */
+        .sidebar {
+            width: var(--sidebar-expanded);
+            background: var(--sidebar-bg);
+            color: #b0b3b8;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            padding: 16px 0;
+            transition: width var(--transition);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar.collapsed { width: var(--sidebar-collapsed); }
+        .sidebar.collapsed .nav-text, .sidebar.collapsed .back-link span { opacity:0; pointer-events:none; }
+
+        .toggle-btn {
+            background:none; border:none; color:#b0b3b8; font-size:20px; cursor:pointer;
+            padding:8px; border-radius:50%; margin-left:8px;
+        }
+        .toggle-btn:hover { background:#333; color:#fff; }
+
+        .back-link {
+            display:flex; align-items:center; gap:12px; color:#b0b3b8; text-decoration:none;
+            padding:14px 20px; font-weight:500; font-size:15px;
+        }
+        .back-link:hover { color:#fff; }
+
+        .nav-item {
+            display:flex; align-items:center; gap:14px;
+            padding:11px 20px; color:#b0b3b8; text-decoration:none;
+            transition: all 0.3s ease; border-radius:0 30px 30px 0; margin:3px 10px;
+        }
+        .nav-item:hover, .nav-item.active { background:var(--primary-gold); color:#000 !important; font-weight:600; }
+        .nav-item i { font-size:18px; width:24px; text-align:center; }
+
+        .collapsible {
+            cursor:pointer; justify-content:space-between; padding:11px 20px !important;
+            margin:3px 10px; border-radius:0 30px 30px 0;
+        }
+        .collapsible i:last-child { transition:transform 0.3s; }
+        .collapsible-content { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+        .collapsible-content.open { max-height:600px; }
+        .sub-nav-item {
+            padding:10px 20px 10px 68px !important;
+            font-size:13.5px; border-radius:0 25px 25px 0; margin:2px 10px;
+        }
+
+        .advertise-btn {
+            background:#000; color:#ffd700; font-weight:700; text-align:center;
+            padding:16px; margin:20px; border-radius:8px; border:3px solid #ffd700;
+            text-decoration:none; display:block; font-size:15px;
+        }
+        .advertise-btn:hover { background:#ffd700; color:#000; }
+
+        .main-content {
+            margin-left: var(--sidebar-expanded);
+            padding:28px;
+            width:100%;
+            transition: margin-left var(--transition);
+        }
+        .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-collapsed); }
+
+        .insight-section {
+            background:var(--white); border-radius:12px; padding:28px;
+            box-shadow:0 2px 12px rgba(0,0,0,0.08);
+        }
+        .page-title {
+            font-size:26px; font-weight:700; color:var(--text-primary);
+            margin-bottom:24px; display:flex; align-items:center; gap:12px;
+        }
+
+        /* Top Tabs */
+        .tab-row {
+            display:flex; gap:40px; border-bottom:2px solid #eee; padding-bottom:12px; margin-bottom:28px;
+        }
+        .tab {
+            font-size:16px; font-weight:600; color:var(--text-secondary);
+            cursor:pointer; position:relative; padding-bottom:8px;
+        }
+        .tab.active { color:var(--primary-gold); }
+        .tab.active::after {
+            content:''; position:absolute; bottom:-14px; left:0; width:100%; height:4px;
+            background:var(--primary-gold); border-radius:2px;
+        }
+
+        /* Overview Cards - Always Visible */
+        .overview-cards {
+            display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:36px;
+        }
+        .card-group {
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:18px;
+        }
+        .balance-card {
+            background:#fff; padding:28px; border-radius:12px;
+            border:1px solid var(--primary-gold); box-shadow:0 3px 10px rgba(0,0,0,0.06);
+        }
+        .balance-label { font-size:14.5px; color:var(--text-secondary); margin-bottom:10px; }
+        .balance-amount { font-size:34px; font-weight:700; color:var(--text-primary); margin:10px 0; }
+        .balance-info { font-size:13.5px; color:var(--text-secondary); line-height:1.5; }
+        .pay-btn {
+            background:#000; color:#ffd700; border:none; padding:16px;
+            border-radius:8px; font-weight:700; font-size:16px; margin-top:20px;
+            cursor:pointer; width:100%; transition:0.3s;
+        }
+        .pay-btn:hover { background:var(--primary-gold); color:#000; }
+        .manage-link { color:var(--primary-gold); font-weight:500; text-align:center; margin-top:12px; cursor:pointer; }
+
+        /* Sub Tabs */
+        .sub-tabs {
+            display:flex; gap:10px; background:#f8f9fa; padding:8px; border-radius:12px; margin-bottom:28px; width:max-content;
+        }
+        .sub-tab {
+            padding:12px 24px; border-radius:10px; font-weight:500; cursor:pointer; font-size:14.5px;
+        }
+        .sub-tab.active {
+            background:var(--primary-gold); color:#000; font-weight:600;
+        }
+
+        /* Section Controls */
+        .section-controls {
+            display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;
+        }
+        .section-title { font-size:17px; font-weight:600; color:var(--text-primary); }
+        .btn-print, .btn-download {
+            background:#f0f2f5; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:500;
+        }
+        .btn-download { position:relative; }
+        .dropdown-content {
+            display:none; position:absolute; right:0; top:100%; background:#fff;
+            min-width:140px; box-shadow:0 8px 20px rgba(0,0,0,0.15); border-radius:8px; margin-top:6px;
+        }
+        .btn-download:hover .dropdown-content { display:block; }
+        .dropdown-content a { padding:12px 16px; display:block; color:#333; text-decoration:none; }
+        .dropdown-content a:hover { background:#f0f2f5; }
+
+        .search-input {
+            width:100%; padding:14px 16px 14px 48px; border:1px solid var(--border); border-radius:10px;
+            font-size:14.5px; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E") no-repeat 16px center;
+            margin-bottom:20px;
+        }
+
+        table {
+            width:100%; border-collapse:collapse; font-size:14px;
+        }
+        th, td { padding:16px 12px; text-align:left; border-bottom:1px solid #eee; }
+        th { background:#f8f9fa; font-weight:600; color:#555; font-size:13.5px; }
+        th i { margin-left:6px; color:#aaa; }
+        tr:hover { background:#fbfbfb; }
+        .status-pending { color:#e67e22; font-weight:600; }
+        .status-completed { color:#27ae60; font-weight:600; }
+
+        .footer-note {
+            margin-top:28px; padding:16px; background:#fff8e1; border-radius:10px;
+            font-size:13.5px; color:#856404; text-align:center;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar { width: var(--sidebar-collapsed); }
+            .main-content { margin-left: var(--sidebar-collapsed); }
+            .overview-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+         <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">  <!-- removed "collapsed" class → open by default -->
+        <div style="display:flex; justify-content:flex-end; padding:0 12px;">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-chevron-left"></i> <!-- left arrow = expanded -->
+            </button>
+        </div>
+
+        <a href="#" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            <span class="nav-text">Corporate Dashboard</span>
+        </a>
+
+        <a href="overview.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">Overview</span>
+        </a>
+
+        <a href="#" class="nav-item" onclick="showARLModal()">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="nav-text">Archivehubs Reference Locator (ARL)</span>
+        </a>
+
+        <a href="transactions.html" class="nav-item">
+            <i class="fas fa-exchange-alt"></i>
+            <span class="nav-text">Transactions</span>
+        </a>
+       
+        <!-- Monetization Hub – Collapsible Dropdown (open by default) -->
+        <div class="nav-item collapsible" 
+            onclick="this.classList.toggle('active'); 
+                    this.nextElementSibling.classList.toggle('open');
+                    this.querySelector('i:last-child').classList.toggle('fa-chevron-down');
+                    this.querySelector('i:last-child').classList.toggle('fa-chevron-up');">
+            <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-text">Monetization Hub</span>
+            </div>
+            <i class="fas fa-chevron-up"></i> <!-- up = open by default -->
+        </div>
+        <div class="collapsible-content open"> <!-- open class = visible -->
+            <a href="earnings.html" class="sub-nav-item nav-item">
+                <i class="fas fa-wallet"></i>
+                <span class="nav-text">Earnings</span>
+            </a>
+            <a href="expenses.html" class="sub-nav-item nav-item  active">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-text">Expenses and Payments</span>
+            </a>
+            <a href="ad-credit.html" class="sub-nav-item nav-item">
+                <i class="fas fa-gift"></i>
+                <span class="nav-text">Ad Credit</span>
+            </a>
+        </div>
+         <a href="insight.html" class="nav-item">
+            <i class="fas fa-chart-bar"></i>
+            <span class="nav-text">Insight</span>
+        </a>
+
+        <a href="deals.html" class="nav-item">
+            <i class="fas fa-handshake"></i>
+            <span class="nav-text">Deals</span>
+        </a>
+
+        <!-- Categories Section -->
+        <div class="category-section">
+            <div class="category-title">Categories</div>
+
+            <a href="#" class="nav-item"><i class="fas fa-building"></i><span class="nav-text">Company Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-sitemap"></i><span class="nav-text">Organization Page</span></a>
+
+            <!-- Educational Institution – Collapsible -->
+            <div class="nav-item collapsible" 
+                onclick="this.classList.toggle('active'); 
+                        this.nextElementSibling.classList.toggle('open');
+                        this.querySelector('i:last-child').classList.toggle('fa-chevron-down');
+                        this.querySelector('i:last-child').classList.toggle('fa-chevron-up');">
+                <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="nav-text">Educational Institution Page</span>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="collapsible-content">
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">Club Files</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">Smart Schools Results</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">School Files</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">STEM Plus Files</span></a>
+            </div>
+
+            <a href="#" class="nav-item"><i class="fas fa-star"></i><span class="nav-text">Showcase Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-users"></i><span class="nav-text">Fans Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-link"></i><span class="nav-text">Affiliate Marketers Page</span></a>
+        </div>
+
+        <a href="#" class="advertise-btn">
+            <i class="fas fa-bullhorn"></i>
+            <span>Advertise</span>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="insight-section">
+            <div class="page-title">
+                <img src="https://via.placeholder.com/36x36/ffd700/000000?text=A" alt="Logo" style="border-radius:8px;">
+                Archivehubs <span style="color:var(--primary-gold); margin-left:8px; font-weight:600;">Expenses and Payments</span>
+            </div>
+
+            <!-- Top Tabs -->
+            <div class="tab-row">
+                <div class="tab active">Overview</div>
+                <div class="tab">History</div>
+            </div>
+
+            <!-- Always Visible Overview Cards -->
+            <div class="overview-cards">
+                <div class="card-group">
+                    <div class="balance-card">
+                        <div class="balance-label">Total Amount Due</div>
+                        <div class="balance-amount">₦8.5m</div>
+                        <div class="balance-info">Pending Payments</div>
+                        <div class="balance-info">₦6.2m + ₦2.3m overdue</div>
+                        <button class="pay-btn">Pay Now</button>
+                        <div class="manage-link">Manage Payment Methods</div>
+                    </div>
+                </div>
+                <div class="card-group">
+                    <div class="balance-card">
+                        <div class="balance-label">Payments Being Processed</div>
+                        <div class="balance-amount">₦3.2m</div>
+                        <div class="balance-info">12 Payments</div>
+                    </div>
+                    <div class="balance-card">
+                        <div class="balance-label">Scheduled Payments</div>
+                        <div class="balance-amount">₦1.8m</div>
+                        <div class="balance-info">8 Payments</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub Tabs -->
+            <div class="sub-tabs">
+                <div class="sub-tab active" data-sub="payment-due">Payment Due</div>
+                <div class="sub-tab" data-sub="available-payments">Available Payments</div>
+                <div class="sub-tab" data-sub="transactions">Transactions</div>               
+            </div>
+
+            <!-- Payment Due (Default View) -->
+            <div id="payment-due" class="tab-content" style="display:block;">
+                <div class="section-controls">
+                    <div class="section-title">Payment Due (3)</div>
+                    <div style="display:flex; gap:12px;">
+                        <div class="btn-print">Print</div>
+                        <div class="btn-download">Download ▼
+                            <div class="dropdown-content">
+                                <a href="#">CSV</a>
+                                <a href="#">PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" class="search-input" placeholder="Search payments by text, property or value">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Due Date</th>
+                            <th>Invoice ID</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Currency</th>
+                            <th>Amount Due</th>
+                            <th>Period</th>
+                            <th>Service Provider</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>18 Oct 2025</td>
+                            <td>AHSPI25-001</td>
+                            <td>Ad Spend</td>
+                            <td><span class="status-pending">Pending</span></td>
+                            <td>₦ Naira</td>
+                            <td>₦5.2m</td>
+                            <td>Sep 2025</td>
+                            <td>Archivehubs</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="footer-note">View Paid Invoices on the Transactions Tab</div>
+            </div>
+
+
+            <div id="available-payments" class="tab-content" style="display:none;">
+                <div class="section-controls">
+                    <div class="section-title">Available Payments (12)</div>
+                    <div style="display:flex; gap:12px;">
+                        <div class="btn-print">Print</div>
+                        <div class="btn-download">Download ▼
+                            <div class="dropdown-content">
+                                <a href="#">CSV</a>
+                                <a href="#">PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" class="search-input" placeholder="Search payments by text, property or value">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction Date ↓</th>
+                            <th>Invoice ID ↓</th>
+                            <th>Method ↓</th>
+                            <th>Type ↓</th>
+                            <th>Currency ↓</th>
+                            <th>Amount ↓</th>
+                            <th>Period ↓</th>
+                            <th>Service Provider ↓</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sep 18, 2025</td>
+                            <td>AHSPI25-0000</td>
+                            <td>Account endx 234</td>
+                            <td>Earnings</td>
+                            <td>Naira</td>
+                            <td>3m</td>
+                            <td>Aug, 2025</td>
+                            <td>Archivehubs</td>
+                        </tr>
+                        <tr>
+                            <td>Aug 18, 2025</td>
+                            <td>AHSPI25-0000</td>
+                            <td>Account endx 234</td>
+                            <td>Earnings</td>
+                            <td>Naira</td>
+                            <td>8m</td>
+                            <td>Aug, 2025</td>
+                            <td>Archivehubs</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="footer-note">These payments are available for withdrawal or use</div>
+            </div>
+
+
+            <div id="transactions" class="tab-content" style="display:none;">
+                <div class="section-controls">
+                    <div class="section-title">All Transactions</div>
+                    <div style="display:flex; gap:12px;">
+                        <button class="btn-print">Print</button>
+                        <button style="background:#000; color:#fff; padding:8px 16px; border:none; border-radius:6px;">Export</button>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:16px; display:flex; gap:8px; flex-wrap:wrap;">
+                    <button style="padding:8px 16px; background:#ffd700; color:#000; border:none; border-radius:6px; font-weight:600;">All</button>
+                    <button style="padding:8px 16px; background:#f0f0f0; border:none; border-radius:6px;">Digital Assets</button>
+                    <button style="padding:8px 16px; background:#f0f0f0; border:none; border-radius:6px;">MarketPlace</button>
+                    <button style="padding:8px 16px; background:#f0f0f0; border:none; border-radius:6px;">Recurring</button>
+                    <button style="padding:8px 16px; background:#f0f0f0; border:none; border-radius:6px;">Service</button>
+                </div>
+
+                <input type="text" class="search-input" placeholder="Search Transactions" style="margin-bottom:16px;">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date ↓</th>
+                            <th>Recipient</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Transaction Value</th>
+                            <th>Bonus</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>c2025-06-21</td>
+                            <td>Name</td>
+                            <td>Certificate Sales</td>
+                            <td>Digital Assets</td>
+                            <td>N3,000</td>
+                            <td>N2,100</td>
+                            <td>0.00</td>
+                            <td style="color:#27ae60; font-weight:600;">Completed</td>
+                        </tr>
+                        <tr>
+                            <td>c2025-06-28</td>
+                            <td>Name</td>
+                            <td>Verifications</td>
+                            <td>Recurring</td>
+                            <td>N5,000</td>
+                            <td>N150</td>
+                            <td>0.00</td>
+                            <td style="color:#e67e22; font-weight:600;">Pending</td>
+                        </tr>
+                        <tr>
+                            <td>c2025-07-05</td>
+                            <td>Name</td>
+                            <td>Vehicle Sales</td>
+                            <td>Marketplace</td>
+                            <td>N2.5m</td>
+                            <td>N1.75m</td>
+                            <td>0.00</td>
+                            <td style="color:#e74c3c; font-weight:600;">Cancelled</td>
+                        </tr>
+                        <tr>
+                            <td>c2025-07-15</td>
+                            <td>Name</td>
+                            <td>Delivery Service</td>
+                            <td>Service</td>
+                            <td>N3,500</td>
+                            <td>N2,450</td>
+                            <td>0.00</td>
+                            <td style="color:#27ae60; font-weight:600;">Completed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div id="earnings-due" class="tab-content" style="display:none;">
+                <div class="section-controls">
+                    <div class="section-title">Earnings Due (2)</div>
+                    <div style="display:flex; gap:12px;">
+                        <div class="btn-print">Print</div>
+                        <div class="btn-download">Download ▼
+                            <div class="dropdown-content">
+                                <a href="#">CSV</a>
+                                <a href="#">PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" class="search-input" placeholder="Search earnings by text, property or value">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction Date ↓</th>
+                            <th>Invoice ID ↓</th>
+                            <th>Method ↓</th>
+                            <th>Type ↓</th>
+                            <th>Currency ↓</th>
+                            <th>Amount ↓</th>
+                            <th>Period ↓</th>
+                            <th>Service Provider ↓</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sep 18, 2025</td>
+                            <td>AHSPI25-0000</td>
+                            <td>Account endx 234</td>
+                            <td>Earnings</td>
+                            <td>Naira</td>
+                            <td>3m</td>
+                            <td>Aug, 2025</td>
+                            <td>Archivehubs</td>
+                        </tr>
+                        <tr>
+                            <td>Aug 18, 2025</td>
+                            <td>AHSPI25-0000</td>
+                            <td>Account endx 234</td>
+                            <td>Earnings</td>
+                            <td>Naira</td>
+                            <td>8m</td>
+                            <td>Aug, 2025</td>
+                            <td>Archivehubs</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="footer-note" style="background:#e3f2fd; color:#1565c0;">
+                    Note: You have this Display below by clicking on Earnings Due
+                </div>
+            </div>
+
+
+<!-- <div id="ad-credits" class="tab-content" style="display:none;">
+    <div class="section-controls">
+        <div class="section-title">Ad Credit (1)</div>
+        <div style="display:flex; gap:12px;">
+            <div class="btn-print">Print</div>
+            <div class="btn-download">Download ▼
+                <div class="dropdown-content">
+                    <a href="#">CSV</a>
+                    <a href="#">PDF</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="text" class="search-input" placeholder="Search ad credit by text, property or value">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Credit Name ↓</th>
+                <th>Expiration Date ↓</th>
+                <th>Amount Used ↓</th>
+                <th>Amount Available ↓</th>
+                <th>Application Details ↓</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ad Credit</td>
+                <td>-----</td>
+                <td>₦5,000</td>
+                <td>₦20,000</td>
+                <td><a href="#" style="color:var(--primary-gold); text-decoration:underline;">Credit Details Link</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+        </div>
+        <div style="text-align:center; margin-top:20px;">
+                 <button class="primary-btn">View Payments</button>
+        </div>
+    </main>
+
+    <!-- ARL Modal (keep this once in the page or in a shared file) -->
+    <div id="arl-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; justify-content:center; align-items:center;">
+        <div style="background:#fff; padding:24px; border-radius:12px; width:90%; max-width:500px;">
+            <span onclick="this.parentElement.parentElement.style.display='none'" style="float:right; font-size:28px; cursor:pointer;">×</span>
+            <h3>Archivehubs Reference Locator (ARL)</h3>
+            <p>ARL details will be pulled from Planner (APS) here.</p>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar toggle (works on all pages)
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            toggleBtn.innerHTML = sidebar.classList.contains('collapsed')
+                ? '<i class="fas fa-chevron-right"></i>'
+                : '<i class="fas fa-chevron-left"></i>';
+        });
+
+        // Auto-collapse on mobile (≤992px)
+        function checkWidth() {
+            if (window.innerWidth <= 992) {
+                sidebar.classList.add('collapsed');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            } else {
+                sidebar.classList.remove('collapsed');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            }
+        }
+        window.addEventListener('resize', checkWidth);
+        checkWidth();
+
+        // ARL Modal function (available globally)
+        function showARLModal() {
+            document.getElementById('arl-modal').style.display = 'flex';
+        }
+
+        // Optional: Close modal when clicking outside
+        document.getElementById('arl-modal').addEventListener('click', function(e) {
+            if (e.target === this) this.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

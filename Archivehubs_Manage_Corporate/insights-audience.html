@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights - Audience | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/manage_coporate.css">
+    
+</head>
+<body>
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+
+        <div class="nav-divider">Manage Corporate Page</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-building"></i>
+            <span class="nav-text">ENINK Investment LTD</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="nav-text">Professional Dashboard</span>
+        </a>
+
+        <a href="insights-views.html" class="nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span class="nav-text">Insights</span>
+        </a>
+        <a href="insights-views.html" class="sub-nav-item">
+            <i class="fas fa-eye"></i>
+            <span class="nav-text">Views</span>
+        </a>
+        <a href="insights-earnings.html" class="sub-nav-item">
+            <i class="fas fa-dollar-sign"></i>
+            <span class="nav-text">Earnings</span>
+        </a>
+        <a href="insights-interactions.html" class="sub-nav-item">
+            <i class="fas fa-comment-dots"></i>
+            <span class="nav-text">Interactions</span>
+        </a>
+        <a href="insights-audience.html" class="sub-nav-item active">
+            <i class="fas fa-users"></i>
+            <span class="nav-text">Audience</span>
+        </a>
+
+        <a href="ad-center.html" class="nav-item">
+            <i class="fas fa-bullhorn"></i>
+            <span class="nav-text">Ad Center</span>
+        </a>
+        <a href="ad-center-all-ads.html" class="sub-nav-item">
+            <i class="fas fa-list"></i>
+            <span class="nav-text">All ads</span>
+        </a>
+        <a href="ad-center-credits.html" class="sub-nav-item">
+            <i class="fas fa-credit-card"></i>
+            <span class="nav-text">Ad Credits</span>
+        </a>
+
+        <a href="#" class="nav-item">
+            <i class="fas fa-plus-circle"></i>
+            <span class="nav-text">Create Ads</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-rocket"></i>
+            <span class="nav-text">Boost Archivehubs Post</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span class="nav-text">Settings</span>
+        </a>
+
+        <div class="nav-divider">More Tools</div>
+
+        <div class="dropdown" id="moreToolsDropdown">
+            <a href="#" class="dropdown-toggle">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-bars"></i>
+                    <span class="nav-text">More Tools</span>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            <div class="dropdown-menu">
+                <p style="padding:10px 16px 6px 40px; font-size:12px; color:var(--text-secondary);">
+                    Manage your page effectively on Archivehubs
+                </p>
+                <a href="#"><i class="fas fa-check-circle"></i> Archivehubs Verified</a>
+                <a href="#"><i class="fas fa-users"></i> Leads Center</a>
+                <a href="#"><i class="fas fa-bullhorn"></i> Archivehubs Channels</a>
+            </div>
+        </div>
+
+        <a href="#" class="nav-item">
+            <i class="fas fa-bullhorn"></i>
+            <span class="nav-text">Advertise</span>
+        </a>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT - VIEWS ==================== -->
+    <main class="main-content">
+       <div class="insight-card">
+            <div class="card-header">
+                <h3>Audience</h3>
+                <select class="dropdown-select"><option>Last 28days: Aug14 – Sep10</option></select>
+            </div>
+            <div class="metric-large">10 Total followers</div>
+            <div class="metric-change">+11.1% from previous 28days</div>
+            <div class="chart-container"><canvas id="audienceChart"></canvas></div>
+
+            <div class="sub-metric"><span class="value">1</span><span class="label">Net follows (i)</span></div>
+            <div class="sub-metric"><span class="value">0</span><span class="label">Unfollows (i)</span></div>
+
+            <div class="section-title">Net follows by content type (i)</div>
+            <div class="not-available"><strong>Lifetime</strong>Insights not available<br>There may not be enough data on your content yet. Check back again later</div>
+
+            <div class="section-title">Age & gender (i)</div>
+            <div class="not-available"><strong>Lifetime</strong>Insights not available<br>There may not be enough data on your content yet. Check back again later</div>
+
+            <div class="section-title">Cities (i)</div>
+            <div class="not-available"><strong>Lifetime</strong>Insights not available<br>There may not be enough data on your content yet. Check back again later</div>
+
+            <div class="section-title">Countries (i)</div>
+            <div class="not-available"><strong>Lifetime</strong>Insights not available<br>There may not be enough data on your content yet. Check back again later</div>
+        </div>
+    </main>
+
+    <script>
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const moreToolsDropdown = document.getElementById('moreToolsDropdown');
+
+        function collapse() {
+            sidebar.classList.add('collapsed');
+            toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        }
+
+        function expand() {
+            sidebar.classList.remove('collapsed');
+            toggleBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.contains('collapsed') ? expand() : collapse();
+        });
+
+        // Dropdown Toggle
+        moreToolsDropdown.addEventListener('click', (e) => {
+            e.preventDefault();
+            moreToolsDropdown.classList.toggle('open');
+        });
+
+        // Charts
+        const chartConfig = {
+            type: 'line',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, ticks: { stepSize: 2 } },
+                    x: { grid: { display: false } }
+                }
+            }
+        };
+
+    new Chart(document.getElementById('audienceChart'), {
+        type: 'line',
+        data: { labels, datasets: [{ data: [0,2,4,6,8,10], borderColor: '#673ab7', tension: 0.3, fill: true, backgroundColor: 'rgba(103,58,183,0.1)' }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+    });
+
+     
+    </script>
+</body>
+</html>

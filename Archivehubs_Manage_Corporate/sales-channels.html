@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Channels | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar active Sales Channels -->
+    <aside class="sidebar" id="sidebar">
+        <a href="sales-channels.html" class="nav-item active">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="nav-text">Sales Channels</span>
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <div class="insight-section">
+            <div class="header">
+                <h3>Sales Channels</h3>
+                <a href="home.html">← Professional Dashboard</a>
+            </div>
+            <p>Earn more ROI with Archivehubs Sales Channels</p>
+            <div class="dropdown date-dropdown">
+                <span class="trigger">Last 28days: Aug14 – Sep10 ▼</span>
+                <div class="date-list">
+                    <div class="date-item">Today</div>
+                    <div class="date-item">Last 7days: Aug 14 – Aug 21</div>
+                    <!-- ... other dates as in home.html -->
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="salesChart"></canvas> <!-- Placeholder for line chart -->
+            </div>
+            <div class="sub-metric"><span>0</span><span>Digital Assets</span></div>
+            <div class="sub-metric"><span>0</span><span>Service Center</span></div>
+            <div class="sub-metric"><span>0</span><span>Open Market</span></div>
+            <div class="sub-metric"><span>0</span><span>Publishing</span></div>
+            <div class="sub-metric"><span>0</span><span>Property Sales</span></div>
+            <div class="sub-metric"><span>0</span><span>Vehicle Sales</span></div>
+            <div class="no-data">No Sales Activity<br>Not enough data yet. Create sales content to see metrics here.</div>
+        </div>
+    </main>
+    <script>
+        // Sample chart for Sales Library
+        new Chart(document.getElementById('salesChart'), {
+            type: 'line',
+            data: { labels: ['Aug 14', 'Aug 21', 'Aug 28', 'Sep 4', 'Sep 10'], datasets: [{ label: 'Sales', data: [0,0,0,0,0], borderColor: '#ff9800' }] },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+    </script>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

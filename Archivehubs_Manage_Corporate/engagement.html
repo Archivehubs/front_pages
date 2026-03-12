@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engagement - Comments | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar active Engagement > Comments manager -->
+    <aside class="sidebar" id="sidebar">
+        <a href="engagement.html" class="nav-item active">
+            <i class="fas fa-handshake"></i>
+            <span class="nav-text">Engagement</span>
+        </a>
+        <a href="engagement-comments.html" class="sub-nav-item active">
+            <i class="fas fa-comments"></i>
+            <span class="nav-text">Comments manager</span>
+        </a>
+        <!-- Other subs -->
+    </aside>
+
+    <main class="main-content">
+        <div class="insight-section">
+            <div class="header">
+                <h3>Engagement</h3>
+                <a href="home.html">← Professional Dashboard</a>
+            </div>
+            <div class="content-library">
+                <div class="tab active" data-target="comments-tab">Comments</div>
+                <a href="engagement-mentions.html"><div class="tab">Mentions</div></a>
+            </div>
+            <div class="filter-dropdown">
+                <span class="trigger">Filter ▼</span>
+                <div class="filter-list">
+                    <div class="filter-item">All</div>
+                    <div class="filter-item">Recommended</div>
+                    <div class="filter-item">Sent with Stars</div>
+                    <div class="filter-item">Subscribers</div>
+                    <div class="filter-item">Top fans</div>
+                    <div class="filter-item">Groups</div>
+                </div>
+            </div>
+            <div class="filter-dropdown">
+                <span class="trigger">You have not responded ▼</span>
+                <div class="filter-list">
+                    <div class="filter-item">All Comments</div>
+                    <div class="filter-item">You have not responded</div>
+                    <div class="filter-item">You have responded</div>
+                </div>
+            </div>
+            <p>You're all caught up!<br>Start new conversations by creating a post.</p>
+            <button class="primary-btn" onclick="showCreatePost()">Create Post ▼</button>
+            <div id="comments-tab" class="tab-content">
+                <!-- Comments list, empty -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script>
+        function showCreatePost() {
+            // Show modal for create post
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h4>Create Post</h4>
+                    <div class="content-library">
+                        <div class="tab active">Post</div>
+                        <div class="tab">Story</div>
+                        <div class="tab">Lite</div>
+                        <div class="tab">Bulk upload videos</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.style.display = 'flex';
+            // Handle close
+            modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
+        }
+    </script>
+</body>
+</html>

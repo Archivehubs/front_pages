@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dashboard | ENINK Investment LTD - Archivehubs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-expanded: 320px;
+            --sidebar-collapsed: 70px;
+            --black: #000;
+            --gold: #ffd700;
+            --light-gray: #f0f2f5;
+            --text: #1c1e21;
+            --text-light: #65676b;
+            --border: #ddd;
+            --transition: 0.3s ease;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background:#f5f6f8; display:flex; min-height:100vh; }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sidebar-expanded);
+            background: var(--black);
+            color: white;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            padding: 20px 0;
+            transition: width var(--transition);
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .sidebar.collapsed { width: var(--sidebar-collapsed); }
+        .sidebar.collapsed .nav-text,
+        .sidebar.collapsed .page-title,
+        .sidebar.collapsed .more-tools { opacity:0; pointer-events:none; }
+
+        .toggle-btn {
+            background:none; border:none; color:#b0b3b8;
+            font-size:20px; cursor:pointer; padding:8px; margin:0 12px 20px auto;
+            border-radius:50%; display:block;
+        }
+        .toggle-btn:hover { background:#333; color:white; }
+
+        .page-title { font-size:18px; font-weight:600; padding:0 20px 12px; border-bottom:1px solid #333; margin-bottom:16px; }
+        .page-info {
+            display:flex; align-items:center; gap:12px;
+            padding:16px 20px; border-bottom:1px solid #333; margin-bottom:16px;
+        }
+        .page-avatar { width:48px; height:48px; border-radius:50%; background:#333; display:grid; place-items:center; font-size:20px; color:var(--gold); }
+        .page-name { font-size:15px; font-weight:600; }
+
+        .nav-item {
+            display:flex; align-items:center; gap:14px;
+            padding:12px 20px; color:#b0b3b8;
+            text-decoration:none; font-size:14.5px;
+            transition:0.3s; cursor:pointer;
+        }
+        .nav-item:hover, .nav-item.active {
+            background:var(--gold); color:#000; font-weight:600;
+        }
+        .nav-item i { font-size:18px; width:24px; text-align:center; }
+
+        .collapsible {
+            justify-content:space-between; padding-right:16px !important;
+        }
+        .collapsible i:last-child { transition:transform 0.3s; }
+        .collapsible-content { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+        .collapsible-content.open { max-height:1000px; }
+        .sub-nav { padding-left:58px !important; font-size:13.8px; }
+
+        .more-tools { color:#b0b3b8; font-size:13px; padding:16px 20px 8px; border-top:1px solid #333; margin-top:12px; }
+        .advertise-btn {
+            background:var(--gold); color:#000; font-weight:700;
+            text-align:center; padding:16px; margin:20px;
+            border-radius:8px; font-size:15px; text-decoration:none; display:block;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: var(--sidebar-expanded);
+            padding: 20px;
+            flex: 1;
+            transition: margin-left var(--transition);
+        }
+        .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-collapsed); }
+
+        .dashboard-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+        }
+        .back-btn { color: var(--text); font-weight: 600; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+
+        .card {
+            background: white; border-radius: 12px; padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 16px;
+        }
+        .card-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 16px; font-size: 18px; font-weight: 600;
+        }
+        .see-all { color: #1877f2; font-size: 14px; font-weight: 600; }
+
+        .status-box {
+            background: #e7f3ff; padding: 16px; border-radius: 8px; margin-bottom: 20px;
+        }
+        .status-title { font-weight: 600; margin-bottom: 8px; }
+        .status-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 0;
+            border-bottom: 1px solid #ddd; font-size: 15px;
+        }
+        .status-item:last-child { border-bottom: none; }
+
+        .progress-section {
+            background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .progress-bar { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; margin: 12px 0; }
+        .progress-fill { height: 100%; background: #ddd; width: 0%; }
+
+        .insights-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;
+            margin: 16px 0;
+        }
+        .insight-item {
+            background: #f9f9f9; padding: 16px; border-radius: 8px; text-align: center;
+            border: 2px solid transparent;
+        }
+        .insight-item.highlight { border-color: orange; }
+        .insight-value { font-size: 24px; font-weight: 700; }
+        .insight-label { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+
+        .content-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;
+        }
+        .metric-card {
+            background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center;
+        }
+        .metric-icon { font-size: 32px; margin-bottom: 12px; }
+        .metric-value { font-size: 28px; font-weight: 700; }
+        .metric-label { font-size: 13px; color: var(--text-light); }
+
+        .monetization-card .metric-value { color: green; }
+
+        .footer {
+            text-align: center; padding: 60px 0 20px; color: var(--text-light); font-size: 13px;
+        }
+        .footer a { color: #1877f2; margin: 0 10px; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <!-- <button class="toggle-btn" id="toggleBtn">Left Arrow</button> -->
+        <div class="sidebar-header">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+
+        <div class="page-title">Manage Corporate Page</div>
+
+        <div class="page-info">
+            <div class="page-avatar"><i class="fas fa-user"></i></div>
+            <div class="page-name">ENINK Investment LTD</div>
+        </div>
+
+        <a href="index.html" class="nav-item active">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="nav-text">Professional Dashboard</span>
+        </a>
+
+        <div class="nav-item collapsible" onclick="toggleCollapse(this)">
+            <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-text">Insights</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="collapsible-content">
+            <a href="insights-views.html" class="sub-nav nav-item"><span class="nav-text">Views</span></a>
+            <a href="insights-earnings.html" class="sub-nav nav-item"><span class="nav-text">Earnings</span></a>
+            <a href="insights-interactions.html" class="sub-nav nav-item"><span class="nav-text">Interactions</span></a>
+            <a href="insights-audience.html" class="sub-nav nav-item"><span class="nav-text">Audience</span></a>
+        </div>
+
+        <a href="#" class="nav-item"><i class="fas fa-bullhorn"></i><span class="nav-text">Ad Center</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-plus-circle"></i><span class="nav-text">Create Ads</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-rocket"></i><span class="nav-text">Boost Archivehubs Post</span></a>
+        <a href="#" class="nav-item"><i class="fas fa-cog"></i><span class="nav-text">Settings</span></a>
+
+        <div class="more-tools">More Tools</div>
+        <a href="#" class="sub-nav nav-item"><i class="fas fa-check-circle"></i><span class="nav-text">Archivehubs Verified</span></a>
+        <a href="#" class="sub-nav nav-item"><i class="fas fa-users"></i><span class="nav-text">Leads Center</span></a>
+        <a href="#" class="sub-nav nav-item"><i class="fas fa-bullhorn"></i><span class="nav-text">Archivehubs Channels</span></a>
+
+        <a href="#" class="advertise-btn"><i class="fas fa-bullhorn"></i> Advertise</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="dashboard-header">
+            <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i> Professional Dashboard</a>
+        </div>
+
+        <!-- Page Status -->
+        <div class="card status-box">
+            <div class="status-title">Page Status</div>
+            <h3><i class="fas fa-check-circle" style="color:green;"></i> ENINK Investment LTD</h3>
+            <p>Page has no issues. <a href="#">Learn more</a></p>
+
+            <div class="status-item"><i class="fas fa-users"></i> Page Access<br><small>Invite people to help manage your page and control who can access it.</small></div>
+            <div class="status-item"><i class="fas fa-share-alt"></i> Linked Accounts<br><small>Engage with your community across Archivehubs and other social media platforms like WhatsApp</small></div>
+            <div class="status-item"><i class="fas fa-star"></i> Page Recommendation<br><small>Review your page recommendation status</small></div>
+            <div class="status-item"><i class="fas fa-cog"></i> Page Setup<br><small>Set up your page for success</small></div>
+            <div class="status-item"><i class="fas fa-book"></i> New Page Guide<br><small>Learn how to use your page and get answers to frequently asked questions.</small></div>
+        </div>
+
+        <!-- Weekly Progress -->
+        <div class="card progress-section">
+            <div class="card-header">Weekly Progress <span class="see-all"><a href="weekly-progress.html">See all</a></span></div>
+            <p>Gain new skills, build your audience and grow as a creator each week.</p>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <p><strong>0% Complete</strong></p>
+        </div>
+
+        <!-- Insights -->
+        <div class="card">
+            <div class="card-header">
+                Insights <span>Last 28days: Aug14 – Sep10</span> <span class="see-all">See all</span>
+            </div>
+            <p>Learn how your Page is performing</p>
+            <div class="insights-grid">
+                <div class="insight-item highlight">
+                    <div class="insight-value">14 ↑ 100%</div>
+                    <div class="insight-label">Views</div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-value">0 - 0%</div>
+                    <div class="insight-label">Interactions</div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-value">1 ↑ 100%</div>
+                    <div class="insight-label">Net follows</div>
+                </div>
+            </div>
+            <img src="https://via.placeholder.com/600x200?text=Views+Graph+(Rising+Trend)" style="width:100%; border-radius:8px; margin-top:16px;">
+        </div>
+
+        <!-- Content, Monetization, Engagement, Sales Channels, Affiliate -->
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-header">Content <span class="see-all">See all</span></div>
+                <p>Access your published and scheduled posts and create new content all in one place.</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+                    <div class="metric-card"><div class="metric-icon">Refresh Arrow</div><div class="metric-value">28</div><div class="metric-label">Views</div></div>
+                    <div class="metric-card"><div class="metric-icon">Chat Bubble</div><div class="metric-value">1</div><div class="metric-label">Interactions</div></div>
+                    <div class="metric-card"><div class="metric-icon">Users</div><div class="metric-value">0</div><div class="metric-label">Net follows</div></div>
+                </div>
+            </div>
+
+            <div class="card monetization-card">
+                <div class="card-header">Monetization Hub <span class="see-all">See all</span></div>
+                <p>Find new programs to make money</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+                    <div class="metric-card"><div class="metric-icon">Money Bag</div><div class="metric-value">₦0.00</div><div class="metric-label">Approximate Earning</div></div>
+                    <div class="metric-card"><div class="metric-icon">Handshake</div><div class="metric-value">--</div><div class="metric-label">Partnership Ads</div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Engagement <span class="see-all">See all</span></div>
+                <p>Manage comments, mentions, and tags and discover new ways to connect with your fans.</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+                    <div class="metric-card"><div class="metric-icon">Chat Bubble</div><div class="metric-value">0</div><div class="metric-label">Engagement</div></div>
+                    <div class="metric-card"><div class="metric-icon">Comment</div><div class="metric-value">0</div><div class="metric-label">Recent Comments</div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sales Channels <span class="see-all">See all</span></div>
+                <p>Earn more ROI with Archivehubs Sales Channels</p>
+                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px;">
+                    <div class="metric-card"><div class="metric-icon">Digital Assets</div><div class="metric-value">0</div></div>
+                    <div class="metric-card"><div class="metric-icon">Service Center</div><div class="metric-value">0</div></div>
+                    <div class="metric-card"><div class="metric-icon">Shopping Bag</div><div class="metric-value">0</div><div class="metric-label">Open Market</div></div>
+                    <div class="metric-card"><div class="metric-icon">Books</div><div class="metric-value">0</div><div class="metric-label">Publishing</div></div>
+                    <div class="metric-card"><div class="metric-icon">Home</div><div class="metric-value">0</div><div class="metric-label">Property Sales</div></div>
+                    <div class="metric-card"><div class="metric-icon">Car</div><div class="metric-value">0</div><div class="metric-label">Vehicle Sales</div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Affiliate Marketing Sales <span class="see-all">See all</span></div>
+                <p>Become an ACAM Certified Member and earn commissions</p>
+                <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:16px;">
+                    <div class="metric-card"><div class="metric-icon">Digital Assets</div><div class="metric-value">0</div></div>
+                    <div class="metric-card"><div class="metric-icon">Service Provision</div><div class="metric-value">0</div></div>
+                    <div class="metric-card"><div class="metric-icon">Shopping Bag</div><div class="metric-value">0</div><div class="metric-label">Marketplace</div></div>
+                    <div class="metric-card"><div class="metric-icon">Cycle</div><div class="metric-value">0</div><div class="metric-label">Recurrent</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="#">Get the Archivehubs App</a> • <a href="#">General Terms</a><br><br>
+            ARCHIVEHUBS: ENINK Investment Limited © 2025 RC 1741345
+            <img src="https://via.placeholder.com/80x20/ffd700/000?text=ENINK" alt="ENINK" style="margin-left:10px; vertical-align:middle;">
+        </div>
+    </main>
+
+    <script>
+        function toggleCollapse(el) {
+            const content = el.nextElementSibling;
+            const icon = el.querySelector('i:last-child');
+            content.classList.toggle('open');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '<i class="fas fa-chevron-right"></i>' : '<i class="fas fa-chevron-left"></i>';
+        });
+    </script>
+</body>
+</html>

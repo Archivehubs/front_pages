@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions | Corporate Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 70px;
+            --sidebar-expanded: 350px;
+            --sidebar-bg: #000;
+            --main-bg: #f5f5f5;
+            --text-primary: #1c1e21;
+            --text-secondary: #65676b;
+            --primary-gold: #ffd700;
+            --border-light: #ddd;
+            --white: #fff;
+            --transition: 0.3s ease;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--main-bg); display:flex; min-height:100vh; overflow-x:hidden; }
+        
+        /* Sidebar - EXACT SAME AS OVERVIEW */
+        .sidebar {
+            width: var(--sidebar-expanded);
+            background: var(--sidebar-bg);
+            color: #b0b3b8;
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            padding: 15px 0;
+            transition: width var(--transition);
+            z-index: 1000;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .sidebar.collapsed { width: var(--sidebar-width); }
+        .sidebar.collapsed .nav-text,
+        .sidebar.collapsed .back-link span,
+        .sidebar.collapsed .advertise-btn span { opacity:0; pointer-events:none; }
+        .sidebar.collapsed .collapsible i:last-child { margin-left: auto; }
+        
+        .toggle-btn {
+            background:none; border:none; color:#b0b3b8; font-size:20px; cursor:pointer;
+            padding:8px; border-radius:50%; margin-left:8px;
+        }
+        .toggle-btn:hover { background:#333; color:#fff; }
+        
+        .back-link {
+            display:flex; align-items:center; gap:12px; color:#b0b3b8; text-decoration:none;
+            padding:12px 20px; font-weight:500; font-size:15px; transition:0.3s;
+        }
+        .back-link:hover { color:#fff; }
+        .back-link i { font-size:18px; }
+        
+        .nav-item {
+            display:flex; align-items:center; gap:12px;
+            padding:10px 20px; color:#b0b3b8; text-decoration:none;
+            transition:0.3s; border-radius:0 25px 25px 0; margin:2px 8px;
+        }
+        .nav-item:hover, .nav-item.active {
+            background:var(--primary-gold); color:#000 !important;
+        }
+        .nav-item.active { font-weight:600; }
+        .nav-item i { font-size:18px; width:20px; text-align:center; }
+        .nav-text { font-size:14px; white-space:nowrap; }
+        
+        .category-section {
+            border:1px solid #333; border-radius:8px; margin:16px 8px; overflow:hidden;
+        }
+        .category-title {
+            padding:10px 20px; font-size:12px; font-weight:600; color:#b0b3b8;
+        }
+        .collapsible {
+            cursor:pointer; justify-content:space-between; padding-right:15px !important;
+        }
+        .collapsible i:last-child {
+            transition:transform 0.3s;
+        }
+        .collapsible-content {
+            max-height:0; overflow:hidden; transition:max-height 0.4s ease;
+        }
+        .collapsible-content.open { max-height:500px; }
+        .sub-nav-item {
+            padding-left:56px !important; font-size:13px; color:#b0b3b8;
+        }
+        .advertise-btn {
+            background:#000; color:#ffd700; font-weight:600; text-align:center;
+            padding:12px; margin:12px 20px; border-radius:8px; border:2px solid #ffd700;
+            text-decoration:none; display:block; font-size:14px;
+        }
+        .advertise-btn i { margin-right:8px; }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-expanded);
+            padding:20px; width:100%; transition:margin-left var(--transition);
+        }
+        .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-width); }
+        
+        .insight-section {
+            background:var(--white); border-radius:8px; padding:20px;
+            box-shadow:0 1px 3px rgba(0,0,0,0.1); margin-bottom:24px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display:flex; gap:30px; border-bottom:2px solid #eee; margin-bottom:20px; padding:0 10px;
+        }
+        .tab {
+            padding:12px 0; font-size:15px; font-weight:600; color:var(--text-secondary);
+            cursor:pointer; position:relative; transition:0.3s;
+        }
+        .tab.active {
+            color:var(--primary-gold);
+        }
+        .tab.active::after {
+            content:''; position:absolute; bottom:-2px; left:0; width:100%; height:3px;
+            background:var(--primary-gold); border-radius:2px;
+        }
+
+        /* Search */
+        .search-bar {
+            width:100%; padding:14px 16px; border:1px solid var(--border-light);
+            border-radius:8px; font-size:15px; background:#f9f9f9; margin-bottom:20px;
+        }
+
+        /* Table Header */
+        .table-header {
+            display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;
+        }
+        .table-title { font-size:18px; font-weight:600; color:var(--text-primary); }
+        .export-btn {
+            background:#000; color:#fff; border:none; padding:10px 20px;
+            border-radius:6px; font-weight:600; cursor:pointer; font-size:14px;
+        }
+
+        /* Table */
+        table {
+            width:100%; border-collapse:collapse; font-size:14px;
+        }
+        th, td {
+            padding:12px; text-align:left; border-bottom:1px solid var(--border-light);
+        }
+        th { background:#f0f2f5; font-weight:600; }
+        tr:hover { background:#fbfbfb; }
+        .status-completed { color:#27ae60; font-weight:600; }
+        .status-pending { color:#e67e22; font-weight:600; }
+        .status-cancelled { color:#e74c3c; font-weight:600; }
+
+        .footer-note {
+            text-align:center; color:#e74c3c; font-size:13px; margin-top:30px; font-style:italic;
+        }
+
+        .messaging-btn {
+            position:fixed; bottom:20px; right:20px; background:#fff;
+            border:1px solid #ccc; border-radius:50px; padding:10px 16px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:100; font-size:14px;
+            display:flex; align-items:center; gap:8px;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar { width: var(--sidebar-width); }
+            .sidebar.collapsed { width: var(--sidebar-expanded); }
+            .main-content { margin-left: var(--sidebar-width); }
+            .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-expanded); }
+        }
+    </style>
+</head>
+<body>
+
+       <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">  <!-- removed "collapsed" class → open by default -->
+        <div style="display:flex; justify-content:flex-end; padding:0 12px;">
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-chevron-left"></i> <!-- left arrow = expanded -->
+            </button>
+        </div>
+
+        <a href="#" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            <span class="nav-text">Corporate Dashboard</span>
+        </a>
+
+        <a href="overview.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">Overview</span>
+        </a>
+
+        <a href="#" class="nav-item" onclick="showARLModal()">
+            <i class="fas fa-map-marker-alt"></i>
+            <span class="nav-text">Archivehubs Reference Locator (ARL)</span>
+        </a>
+
+        <a href="transactions.html" class="nav-item">
+            <i class="fas fa-exchange-alt"></i>
+            <span class="nav-text">Transactions</span>
+        </a>
+       
+        <!-- Monetization Hub – Collapsible Dropdown (open by default) -->
+        <div class="nav-item collapsible active" 
+            onclick="this.classList.toggle('active'); 
+                    this.nextElementSibling.classList.toggle('open');
+                    this.querySelector('i:last-child').classList.toggle('fa-chevron-down');
+                    this.querySelector('i:last-child').classList.toggle('fa-chevron-up');">
+            <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                <i class="fas fa-money-bill-wave"></i>
+                <span class="nav-text">Monetization Hub</span>
+            </div>
+            <i class="fas fa-chevron-up"></i> <!-- up = open by default -->
+        </div>
+        <div class="collapsible-content open"> <!-- open class = visible -->
+            <a href="earnings.html" class="sub-nav-item nav-item">
+                <i class="fas fa-wallet"></i>
+                <span class="nav-text">Earnings</span>
+            </a>
+            <a href="expenses.html" class="sub-nav-item nav-item">
+                <i class="fas fa-credit-card"></i>
+                <span class="nav-text">Expenses and Payments</span>
+            </a>
+            <a href="ad-credit.html" class="sub-nav-item nav-item">
+                <i class="fas fa-gift"></i>
+                <span class="nav-text">Ad Credit</span>
+            </a>
+        </div>
+         <a href="insight.html" class="nav-item">
+            <i class="fas fa-chart-bar"></i>
+            <span class="nav-text">Insight</span>
+        </a>
+
+        <a href="deals.html" class="nav-item">
+            <i class="fas fa-handshake"></i>
+            <span class="nav-text">Deals</span>
+        </a>
+
+        <!-- Categories Section -->
+        <div class="category-section">
+            <div class="category-title">Categories</div>
+
+            <a href="#" class="nav-item"><i class="fas fa-building"></i><span class="nav-text">Company Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-sitemap"></i><span class="nav-text">Organization Page</span></a>
+
+            <!-- Educational Institution – Collapsible -->
+            <div class="nav-item collapsible" 
+                onclick="this.classList.toggle('active'); 
+                        this.nextElementSibling.classList.toggle('open');
+                        this.querySelector('i:last-child').classList.toggle('fa-chevron-down');
+                        this.querySelector('i:last-child').classList.toggle('fa-chevron-up');">
+                <div style="display:flex; align-items:center; gap:14px; width:100%;">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="nav-text">Educational Institution Page</span>
+                </div>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="collapsible-content">
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">Club Files</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">Smart Schools Results</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">School Files</span></a>
+                <a href="#" class="sub-nav-item nav-item"><span class="nav-text">STEM Plus Files</span></a>
+            </div>
+
+            <a href="#" class="nav-item"><i class="fas fa-star"></i><span class="nav-text">Showcase Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-users"></i><span class="nav-text">Fans Page</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-link"></i><span class="nav-text">Affiliate Marketers Page</span></a>
+        </div>
+
+        <a href="#" class="advertise-btn">
+            <i class="fas fa-bullhorn"></i>
+            <span>Advertise</span>
+        </a>
+    </aside>
+
+    <!-- MAIN CONTENT - EXACTLY AS YOU REQUESTED -->
+    <main class="main-content">
+        <div class="insight-section">
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active" data-tab="all">All</div>
+                <div class="tab" data-tab="digital">Digital Assets</div>
+                <div class="tab" data-tab="marketplace">MarketPlace</div>
+                <div class="tab" data-tab="recurring">Recurring</div>
+                <div class="tab" data-tab="service">Service</div>
+            </div>
+
+            <!-- Search -->
+            <input type="text" class="search-bar" placeholder="Search Transactions">
+
+            <!-- All Transactions -->
+            <div id="all">
+                <div class="table-header">
+                    <h3 class="table-title">All Transactions</h3>
+                    <button class="export-btn">Export</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Recipient</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Transaction Value</th>
+                            <th>Bonus</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>c2025-06-21</td>
+                            <td>Name</td>
+                            <td>Certificate Sales</td>
+                            <td>Digital Assets</td>
+                            <td>N3,000</td>
+                            <td>N2,100</td>
+                            <td>0.00</td>
+                            <td><span class="status-completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>c2025-06-28</td>
+                            <td>Name</td>
+                            <td>Verifications</td>
+                            <td>Recurring</td>
+                            <td>N5,000</td>
+                            <td>N150</td>
+                            <td>0.00</td>
+                            <td><span class="status-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>c2025-07-05</td>
+                            <td>Name</td>
+                            <td>Vehicle Sales</td>
+                            <td>Marketplace</td>
+                            <td>N2.5m</td>
+                            <td>N1.75m</td>
+                            <td>0.00</td>
+                            <td><span class="status-cancelled">Cancelled</span></td>
+                        </tr>
+                        <tr>
+                            <td>c2025-07-15</td>
+                            <td>Name</td>
+                            <td>Delivery Service</td>
+                            <td>Service</td>
+                            <td>N3,500</td>
+                            <td>N2,450</td>
+                            <td>0.00</td>
+                            <td><span class="status-completed">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Other Tabs (Hidden by Default) -->
+            <div id="digital" style="display:none;">
+                <div class="table-header">
+                    <h3 class="table-title">Digital Assets Transactions</h3>
+                    <button class="export-btn">Export</button>
+                </div>
+                <table>
+                    <thead><tr><th>Date</th><th>Recipient</th><th>Description</th><th>Amount</th><th>Value</th><th>Bonus</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>c2025-06-21</td><td>Name</td><td>Certificate Sales</td><td>N3,000</td><td>N2,100</td><td>0.00</td><td><span class="status-completed">Completed</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="marketplace" style="display:none;">
+                <div class="table-header">
+                    <h3 class="table-title">MarketPlace Transactions</h3>
+                    <button class="export-btn">Export</button>
+                </div>
+                 <table>
+                    <thead><tr><th>Date</th><th>Item</th><th>Buyer</th><th>Amount</th><th>Value</th><th>Bonus</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>c2025-07-05</td><td>Vehicle Sales</td><td>Name</td><td>N2.5m</td><td>N1.75m</td><td>0.00</td><td><span class="status-cancelled">Cancelled</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="recurring" style="display:none;">
+                <div class="table-header">
+                    <h3 class="table-title">Recurring Transactions</h3>
+                    <button class="export-btn">Export</button>
+                </div>
+                 <table>
+                    <thead><tr><th>Date</th><th>Service</th><th>Recipient</th><th>Amount</th><th>Value</th><th>Bonus</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>c2025-06-28</td><td>Verifications</td><td>Name</td><td>N5,000</td><td>N150</td><td>0.00</td><td><span class="status-pending">Pending</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="service" style="display:none;">
+                <div class="table-header">
+                    <h3 class="table-title">Service Transactions</h3>
+                    <button class="export-btn">Export</button>
+                </div>
+                <table>
+                    <thead><tr><th>Date</th><th>Service</th><th>Client</th><th>Amount</th><th>Value</th><th>Bonus</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr><td>c2025-07-15</td><td>Delivery Service</td><td>Name</td><td>N3,500</td><td>N2,450</td><td>0.00</td><td><span class="status-completed">Completed</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Messaging Button -->
+    <button class="messaging-btn">
+        <i class="fas fa-user-circle"></i> Messaging
+        <i class="fas fa-ellipsis-h"></i>
+        <i class="fas fa-pencil-alt"></i>
+        <span style="background:#e74c3c; color:white; border-radius:50%; width:18px; height:18px; font-size:10px; display:inline-block;">Up Arrow</span>
+    </button>
+
+    <!-- ARL Modal -->
+    <div id="arl-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; justify-content:center; align-items:center;">
+        <div style="background:#fff; padding:24px; border-radius:12px; width:90%; max-width:500px;">
+            <span onclick="this.parentElement.parentElement.style.display='none'" style="float:right; font-size:28px; cursor:pointer;">×</span>
+            <h3>Archivehubs Reference Locator (ARL)</h3>
+            <p>ARL details will be pulled from Planner (APS) here.</p>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            toggleBtn.innerHTML = sidebar.classList.contains('collapsed') 
+                ? '<i class="fas fa-chevron-right"></i>' 
+                : '<i class="fas fa-chevron-left"></i>';
+        });
+        function checkWidth() {
+            if (window.innerWidth <= 992) {
+                sidebar.classList.add('collapsed');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            } else {
+                sidebar.classList.remove('collapsed');
+                toggleBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            }
+        }
+        window.addEventListener('resize', checkWidth);
+        checkWidth();
+
+        // Tab Switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.querySelectorAll('#all, #digital, #marketplace, #recurring, #service').forEach(c => c.style.display = 'none');
+                document.getElementById(tab.dataset.tab).style.display = 'block';
+            });
+        });
+
+        function showARLModal() {
+            document.getElementById('arl-modal').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

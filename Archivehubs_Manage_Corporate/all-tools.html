@@ -1,0 +1,58 @@
+<!-- all-tools.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tools | ENINK Investment LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar active All Tools -->
+    <aside class="sidebar" id="sidebar">
+        <a href="all-tools.html" class="nav-item active">
+            <i class="fas fa-tools"></i>
+            <span class="nav-text">All Tools</span>
+        </a>
+        <a href="inspirational-hub.html" class="sub-nav-item">
+            <i class="fas fa-lightbulb"></i>
+            <span class="nav-text">Inspirational Hub</span>
+        </a>
+        <a href="ab-tests.html" class="sub-nav-item">
+            <i class="fas fa-flask"></i>
+            <span class="nav-text">A/B Tests</span>
+        </a>
+        <a href="collaborations.html" class="sub-nav-item">
+            <i class="fas fa-users"></i>
+            <span class="nav-text">Collaborations</span>
+        </a>
+    </aside>
+
+    <main class="main-content">
+        <div class="insight-section">
+            <div class="header">
+                <h3>All Tools</h3>
+                <a href="home.html">← Professional Dashboard</a>
+            </div>
+            <p>List of all tools for page management.</p>
+            <div class="content-library"> <!-- Tabs for tools -->
+                <div class="tab active" data-target="content-library">Content Library</div>
+                <a href="ab-tests.html"><div class="tab">A/B Tests</div></a>
+                <a href="collaborations.html"><div class="tab">Collaborations</div></a>
+                <a href="inspirational-hub.html"><div class="tab">Inspirational Hub</div></a>
+                <!-- Other tools: Events, Moderation Assist (link to moderation-assist.html) -->
+            </div>
+            <div id="content-library" class="tab-content" style="display: block;">
+                <p>Schedule new posts and edit or remove posts you’ve already published.</p>
+                <button>Create Post</button>
+                <div class="no-data">No Content Yet<br>Start scheduling to see your library.</div>
+            </div>
+            <!-- Other tab contents hidden -->
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
