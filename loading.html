@@ -14,16 +14,28 @@
             margin: 0;
             overflow: hidden;
             flex-direction: column;
+            padding: 20px;
         }
-
+        
+        .logo-container {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+        
         .progress-container {
-            width: 200px;
+            width: 300px;
             height: 4px;
             background-color: #f3f3f3;
             border-radius: 10px;
             overflow: hidden;
+            margin: 20px 0;
         }
-
+        
         .progress-bar {
             width: 0%;
             height: 100%;
@@ -31,34 +43,83 @@
             border-radius: 10px;
             animation: load 4s linear forwards;
         }
-
+        
         @keyframes load {
             0% { width: 0%; }
             100% { width: 100%; }
         }
+        
+        .loading-text {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #666;
+            text-align: center;
+        }
+        
+        /* Default logo (you can replace this with your actual logo) */
+        .default-logo {
+            width: 120px;
+            height: 120px;
+            background-color: #ffc107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        /* Add dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+            }
+            
+            .loading-text {
+                color: #e4e6eb;
+            }
+            
+            .progress-container {
+                background-color: #3a3b3c;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="logo-container">       
+       <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+    </div>
+    
     <div class="progress-container">
         <div class="progress-bar"></div>
     </div>
+    
+    <div class="loading-text">Loading your experience...</div>
 
     <script>
         const BASE_URL = 'https://api.archivehubs.com';
+        
         window.onload = async function() {
-            const response = await fetch(`${BASE_URL}/user`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-            });
-
-            if (response.ok){
-                setTimeout(function() {
-                    window.location.href = 'home.html';
-                }, 4000); // 4000 milliseconds = 4 seconds
-            } else {
+            try {
+                const response = await fetch(`${BASE_URL}/user`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                });
+                
+                if (response.ok) {
+                    setTimeout(function() {
+                        window.location.href = 'home.html';
+                    }, 4000);
+                } else {
+                    window.location.href = 'sign-in_account.html';
+                }
+            } catch (error) {
+                console.error('Error:', error);
                 window.location.href = 'sign-in_account.html';
             }
         }

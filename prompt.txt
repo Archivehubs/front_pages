@@ -1,0 +1,142 @@
+===\Desktop\sandbox\front_pages\index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiveHubs - Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .boarding-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .logo-container {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ffc107;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .welcome-text {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="boarding-container">
+        <div class="logo-container">
+            <img src="images/Logo.jpg" alt="ArchiveHubs Logo">
+        </div>
+        <div class="loader"></div>
+        <div class="welcome-text">Welcome to ArchiveHubs</div>
+        <p style="font-style: italic;">Your Global Diary</p>
+    </div>
+
+    <script>
+        // Redirect to create-account.html after 5 seconds
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 5000);
+    </script>
+</body>
+</html>
+
+
+
+
+====\Desktop\sandbox\front_pages\loading.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f6fa;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #ffc107;
+            border-radius: 10px;
+            animation: load 4s linear forwards;
+        }
+
+        @keyframes load {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+
+    <script>
+        const BASE_URL = 'https://api.archivehubs.com';
+        window.onload = async function() {
+            const response = await fetch(`${BASE_URL}/user`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+            });
+
+            if (response.ok){
+                setTimeout(function() {
+                    window.location.href = 'home.html';
+                }, 4000); // 4000 milliseconds = 4 seconds
+            } else {
+                window.location.href = 'sign-in_account.html';
+            }
+        }
+    </script>
+</body>
+</html>
