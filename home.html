@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home | ArchiveHubs</title>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/message.css">
         <!-- <link rel="stylesheet" href="css/insight-analysis.css">
         <link rel="stylesheet" href="css/general-terms.css"> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -902,231 +903,275 @@
           </nav>
 
               <!-- Messaging Box -->
-              <div class="messageWidget-container">
+<!-- ===== LINKEDIN-STYLE MESSAGING SYSTEM ===== -->
+<div class="messaging-container">
+    <!-- Main Messaging Panel (Left) -->
+    <div class="messaging-panel" id="messagingPanel">
+        <!-- Panel Header -->
+        <div class="messaging-header">
+            <div class="messaging-header-left">
+                <img src="images/profile.jpg" alt="Your profile" class="messaging-profile-img">
+                <span class="messaging-title">Messaging</span>
+            </div>
+            <div class="messaging-header-actions">
+                <div class="header-action-wrapper">
+                    <button class="header-action-btn" id="messagingMenuBtn">
+                        <span class="material-symbols-outlined">more_horiz</span>
+                    </button>
+                    <!-- Three-dot dropdown menu -->
+                    <div class="messaging-dropdown hidden" id="messagingDropdown">
+                        <button class="dropdown-item" id="manageConversationsBtn">
+                            <span class="material-symbols-outlined"></span>
+                            <span>Manage conversations</span>
+                        </button>
+                        <button class="dropdown-item" id="messagingSettingsBtn">
+                            <span class="material-symbols-outlined"></span>
+                            <span>Messaging settings</span>
+                        </button>
+                        <button class="dropdown-item" id="awayMessageBtn">
+                            <span class="material-symbols-outlined"></span>
+                            <span>Set away message</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="header-action-btn" id="newMessageBtn">
+                    <span class="material-symbols-outlined">edit_square</span>
+                </button>
+                <button class="header-action-btn" id="toggleMessagingBtn">
+                    <span class="material-symbols-outlined" id="toggleMessagingIcon">expand_more</span>
+                </button>
+            </div>
+        </div>
 
+        <!-- Search Bar -->
+        <div class="messaging-search">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" id="messagingSearchInput" placeholder="Search messages">
+        </div>
+
+        <!-- Message Tabs (Focused/Others) -->
+        <div class="messaging-tabs">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="focused" id="focusedTab">Focused</button>
+                <button class="tab-btn" data-tab="others" id="othersTab">Others</button>
+            </div>
+            <div class="tabs-content">
+                <div class="tab-pane active" id="focusedChats">
+                    <!-- Focused chats will be loaded dynamically -->
+                </div>
+                <div class="tab-pane" id="otherChats">
+                    <!-- Other chats will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW MESSAGE PANEL (Opens beside main panel) -->
+    <div class="new-message-panel hidden" id="newMessagePanel">
+        <div class="new-message-header">
+            <h3>New message</h3>
+            <button class="close-new-message" id="closeNewMessageBtn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
         
-                <div class="chatThread-container hidden" id="chatThread-container">
-                    <div class="chatThread-header">
-                        <img src="Images/profile.jpg" alt="Contact Profile Picture" id="threadContactPicture">
-                        <span class="threadContactName" id="threadContactName"></span>
+        <div class="new-message-search">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" id="newMessageSearchInput" placeholder="Type a name or multiple names">
+        </div>
         
-                        <div class="chatThread-headerBtns">
-                            <div class="chatThread-headerDropdown">
-                                <button class="control" id="chatHeader-dropdownInitializer">
-                                <span class="material-symbols-outlined">more_horiz</span>
-                                </button>
-                                <div class="chatHeader-dropdownMenu hidden" id="chatHeader-dropdownMenu">
-                                    <button class="chatDropdown-item"><span>Move to others</span></button>
-                                    <button class="chatDropdown-item"><span>Label as jobs</span></button>
-                                    <button class="chatDropdown-item"><span>Mark as Unread</span></button>
-                                    <button class="chatDropdown-item"><span>Star</span></button>
-                                    <button class="chatDropdown-item"><span>Mute</span></button>
-                                    <button class="chatDropdown-item"><span>Archive</span></button>
-                                    <button class="chatDropdown-item"><span>Report/Block</span></button>
-                                    <button class="chatDropdown-item"><span>Delete Conversation</span></button>
-                                    <button class="chatDropdown-item"><span>Manage Settings</span></button>
-                                </div>
-                            </div>
-        
-                            <button class="control">
-                                <span class="material-symbols-outlined"><span class="material-symbols-outlined">
-                                    close_fullscreen
-                                    </span></span>
-                            </button>
-        
-                            <button id="backToChatList-btn" class="control">
-                                <span class="material-symbols-outlined">close</span>
-                            </button>
-                            
-                        </div>
-                        
+        <div class="suggested-section">
+            <h4>Suggested</h4>
+            <div class="suggested-contacts-list" id="suggestedContactsList">
+                <!-- Contacts will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAT THREAD VIEW (Opens when clicking a chat) -->
+    <div class="chat-thread-container hidden" id="chatThreadContainer">
+        <div class="chat-thread-header">
+            <button class="back-to-inbox-btn" id="backToInboxThreadBtn">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <img src="images/profile.jpg" alt="Contact" class="thread-contact-img" id="threadContactImg">
+            <div class="thread-contact-details">
+                <span class="thread-contact-name" id="threadContactName"></span>
+                <span class="thread-contact-title" id="threadContactTitle"></span>
+            </div>
+            <div class="thread-actions">
+                <div class="thread-actions-wrapper">
+                    <button class="thread-action-btn" id="threadMoreBtn">
+                        <span class="material-symbols-outlined">more_horiz</span>
+                    </button>
+                    <!-- Thread more dropdown -->
+                    <div class="thread-dropdown hidden" id="threadDropdown">
+                        <button class="dropdown-item" id="archiveThreadBtn">
+                            <span class="material-symbols-outlined">archive</span>
+                            <span>Archive</span>
+                        </button>
+                        <button class="dropdown-item" id="deleteThreadBtn">
+                            <span class="material-symbols-outlined">delete</span>
+                            <span>Delete</span>
+                        </button>
+                        <button class="dropdown-item" id="blockThreadBtn">
+                            <span class="material-symbols-outlined">block</span>
+                            <span>Block</span>
+                        </button>
+                        <button class="dropdown-item" id="reportThreadBtn">
+                            <span class="material-symbols-outlined">report</span>
+                            <span>Report</span>
+                        </button>
                     </div>
-        
-                    <div class="chatThread-messages" id="chatThread-messages">
-                        <div class="no-messages-yet">
-                           Start a conversation! 
-                        </div>
-                    </div>
-        
-                    <div class="chatThread-composer">
-                        <div class="messageInput" id="messageInput" contenteditable="true"></div>
-                        <div class="chatComposer-menus">
-                            <div class="chatComposer-menuItem">
-                                <button class="menuItem-btn" id="attachImage-btn">
-                                    <span class="material-symbols-outlined">image</span>
-                                </button>
-                                <button class="menuItem-btn" id="attachFile-btn">
-                                    <span class="material-symbols-outlined">attach_file</span>
-                                </button>
-                                <button class="menuItem-btn" id="attachGif-btn">
-                                    <span class="material-symbols-outlined">gif_box</span>
-                                </button>
-                                <div class="emojiWrapper">
-                                    <button class="menuItem-btn" id="emoji-btn">
-                                        <span class="material-symbols-outlined">insert_emoticon</span>
-                                    </button>
-                                    <div class="emojiPicker hidden" id="emojiPicker">
-                                        <div class="emojiGrid">
-                                            <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
-                                            <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
-                                            <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
-                                            <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
-                                            <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
+                </div>
+                <button class="thread-action-btn" id="closeThreadBtn">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be loaded dynamically -->
+        </div>
+
+        <div class="chat-composer">
+            <div class="composer-input-area">
+                <div class="message-input" id="messageInput" contenteditable="true" data-placeholder="Write a message..."></div>
+            </div>
+            <div class="composer-actions">
+                <div class="composer-attachments">
+                    <button class="attach-btn" id="attachImageBtn" title="Add image">
+                        <span class="material-symbols-outlined">image</span>
+                    </button>
+                    <button class="attach-btn" id="attachFileBtn" title="Attach file">
+                        <span class="material-symbols-outlined">attach_file</span>
+                    </button>
+                    <button class="attach-btn" id="attachGifBtn" title="Add GIF">
+                        <span class="material-symbols-outlined">gif_box</span>
+                    </button>
+                    <div class="emoji-wrapper">
+                        <button class="attach-btn" id="emojiBtn" title="Add emoji">
+                            <span class="material-symbols-outlined">insert_emoticon</span>
+                        </button>
+                        <div class="emoji-picker hidden" id="emojiPicker">
+                            <div class="emoji-grid">
+                                <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
+                                <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
+                                <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
+                                <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
+                                <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
+                                            <button>🎉</button> <button>✨</button> <button>🔥</button> <button>✅</button> <button>❌</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-        
-                            <input type="file" id="attachmentInput" class="hidden">
-        
-                            <button id="sendMessage-btn">
+                            <input type="file" id="attachmentInput" class="hidden" multiple>
+                            <button class="send-message-btn" id="sendMessageBtn" disabled>
                                 <span class="material-symbols-outlined">send</span>
                             </button>
                         </div>
                     </div>
                 </div>
-        
-                <div class="messageList-panel">
-                
-                    <div class="messageWidget-wrapper">
-                    <div class="messageWidget">
-                    <img src="Images/profile.jpg" alt="User Profile Picture">
-                    <p>Messaging</p>
-                    <div class="messageWidget-controlsWrapper">
-                        <div class="messageWidget-controls">
-                            <button class="control" id="menuControl"><span class="material-symbols-outlined">more_horiz</span></button>
-                            <button class="control"><span class="material-symbols-outlined">edit_square</span></button>
-                            <button class="control" id="toggleWidget-btn"><span class="material-symbols-outlined" id="arrowIcon">keyboard_control_key</span></button>
-                        </div>
-                    </div>
-                </div>
-                <!--3 dot menu-->
-                <div class="manageConversations-menuItems hidden" id="manageConversations-menuItems">
-                    <button class="subControl" id="manageConversations">Manage Conversations</button>
-                    <button class="subControl" id="messageSettings">Message Settings</button>
-                    <button class="subControl" id="awayMessage">Set Away Message</button>
-                </div>
-                </div>
-        
-                <div class="messageWidget-extended">
-        
-                    <div class="searchWrapper">
-                        <span class="material-symbols-outlined">search</span>
-                        <input type="search" id="searchBar" placeholder="Search messages">
-                    </div>
-        
-                    <div class="messageType-menu">
-                        <div class="messageNavigation">
-                            <button class="active" data-tab="focused" id="focusedTab">Focused</button>
-                            <button data-tab="others" id="othersTab">Others</button>
-                        </div>
-        
-                        <div class="messageType-content">
-                            <div class="chatList active" id="focusedChats">
-                                <!--chat items-->
-                            </div>
-        
-                            <div class="chatList" id="otherChats">
-                                <!--chat items-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                </div>
-        
-        
             </div>
+
+
         
-            <!--set an away message-->
-            <div class="modal hidden" id="awayModal">
-                <div class="awayModal-content" id="awayModal-content">
-                    <div class="awayModal-contentContainer">
-                        <div class="awayModal-contentHeader" id="awayModal-contentHeader">
-                            <p><img id="premium-img" src="Images/premium.png" alt="Diamond">PREMIUM</p>
-                            <button class="cancel-btn" id="awayModal-cancelBtn">&times;</button>
-                        </div>
-                    </div>
-                    <div class="awayModal-contentContainer">
-                        <div class="awayModal-content1" id="awayModal-content1">
-                            <h3>Set an away message</h3>
-                            <p>With Premium, you can set away messages to inform your 
-                                connections to expect a delayed response to their messages.
-                            </p>
-                            <div id="awayModal-content11">
-                                <img src="Images/circle.png" alt="Name&others use premium">
-                                <span>Name and other members use premium</span>
-                            </div>
-                        </div>
-                    </div>
+           <!-- AWAY MESSAGE MODAL -->
+<div class="messaging-modal hidden" id="awayMessageModal">
+    <div class="modal-content away-modal-content">
+        <div class="modal-header">
+            <div class="modal-header-left">
+                <span class="premium-badge">
+                    <img id="premium-img" src="Images/premium.png" alt="Diamond" class="premium-icon">
+                    PREMIUM
+                </span>
+            </div>
+            <button class="modal-close-btn" id="awayModalCloseBtn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
         
-                    <div class="awayModal-contentContainer">
-                        <div class="awayModal-content2" id="awayModal-content2">
-                            <div id="awayModal-content21">
-                                <div class="date">
-                                    <label for="startDate">Start Date</label>
-                                    <input type="date" id="startDate">
-                                </div>
-                                <div><img id="line-img" src="Images/line.png" alt="Long hyphen"></div>
-                                <div class="date">
-                                    <label for="startDate">End Date</label>
-                                    <input type="date" id="endDate">
-                                </div>
-                            </div>
-                            <div id="awayModal-content22">
-                                <label for="awayMessenger">Message</label>
-                                <div id="awayMessenger" contenteditable="true"></div>
-                            </div>
-                            <div id="wordCounter" style="text-align: right; font-size: 0.9em; color: gray; margin-top: 0;">
-                                0/300
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="awayModal-contentContainer">
-                        <div class="awayModal-content3" id="awayModal-content3">
-                            <p>1-month free with 24/7 support. Cancel anytime. <br>
-                                We'll remind you 7 days before your trial ends.
-                            </p>
-                            <button id="tryPremium-btn">Try Premium for NGN0.00</button>
-                        </div>
-                    </div>
-        
-                    <div class="awayModal-content4"><button id="awayMessage-btn">Set Message</button></div> 
+        <div class="modal-body">
+            <h3>Set an away message</h3>
+            <p class="modal-description">With Premium, you can set away messages to inform your connections to expect a delayed response to their messages.</p>
+            
+            <div class="premium-users-indicator">
+                <img src="Images/circle.png" alt="Users" class="users-icon">
+                <span>Name and other members use premium</span>
+            </div>
+            
+            <div class="date-range-picker">
+                <div class="date-field">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" class="date-input">
+                </div>
+                <div class="date-separator-img">
+                    <img id="line-img" src="Images/line.png" alt="to" class="separator-img">
+                </div>
+                <div class="date-field">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" class="date-input">
                 </div>
             </div>
-        
-            <!--Messaging settings-->
-            <div class="modal hidden" id="messageSetting-modal">
-                <div class="messageSetting-modalContent">
-                    <div class="options">
-                        <div class="messageSetting-modalHeader">
-                            <h3>Messaging Setting</h3>
-                            <button class="cancel-btn" id="cancelMessage-settingBtn">&times;</button>
-                        </div>
-                    </div>
-                    <div class="options">
-                        <p>
-                            <span>Always Open New Messages</span> 
-                            <label class="toggleSwitch">
-                                <input type="checkbox" id="openNew-message">
-                                <span class="slider"></span>
-                            </label>
-                        </p>
-                    </div>
-                    <div class="options">
-                        <p>
-                            <span>Play Sound for New Messages</span>
-                            <label class="toggleSwitch">
-                                <input type="checkbox" id="playMessage-sound">
-                                <span class="slider"></span>
-                            </label>
-                        </p>
-                    </div>
-                    <div class="options"><p><span>Focused Inbox Settings</span> <button class="messageSetters" id="FocusedInbox-btn">Update Settings</button></p></div>
-                    <div class="options"><p><span>Active Status Settings</span> <button class="messageSetters" id="ActiveStatus-btn">Update Settings</button></p></div>
-                </div>
+            
+            <div class="message-field">
+                <label for="awayMessageText">Message</label>
+                <div class="away-message-input" id="awayMessageText" contenteditable="true" data-placeholder="Write your away message..."></div>
+                <div class="word-counter" id="wordCounter">0/300</div>
             </div>
+            
+            <div class="premium-offer">
+                <p>1-month free with 24/7 support. Cancel anytime.<br>We'll remind you 7 days before your trial ends.</p>
+                <button class="premium-offer-btn" id="tryPremiumBtn">Try Premium for NGN0.00</button>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button class="set-message-btn" id="setAwayMessageBtn">Set Message</button>
+        </div>
+    </div>
+</div>
+
+<!-- MESSAGING SETTINGS MODAL -->
+<div class="messaging-modal hidden" id="messagingSettingsModal">
+    <div class="modal-content settings-modal-content">
+        <div class="modal-header">
+            <h3>Messaging Settings</h3>
+            <button class="modal-close-btn" id="settingsModalCloseBtn">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="settings-option">
+                <span>Always Open New Messages</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="alwaysOpenMessages">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            
+            <div class="settings-option">
+                <span>Play Sound for New Messages</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="playMessageSound">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            
+            <div class="settings-action">
+                <span>Focused Inbox Settings</span>
+                <button class="settings-action-btn" id="focusedInboxBtn">Update Settings</button>
+            </div>
+            
+            <div class="settings-action">
+                <span>Active Status Settings</span>
+                <button class="settings-action-btn" id="activeStatusBtn">Update Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </main>
 
     <!-- Share Modal (first post) -->
@@ -1338,6 +1383,7 @@
       
 
 <script src="js/script.js"></script>
+<script src="js/message.js"></script>
 
 
   <script>
