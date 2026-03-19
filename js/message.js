@@ -1,163 +1,171 @@
 document.addEventListener('DOMContentLoaded', function() {
     // ========== DATA ==========
-    // Mock data based on screenshot
     const contactsData = {
         suggested: [
-            { id: 's1', name: 'Matthew Katung', title: 'Sales Operation Manager Afex Nigeria', avatar: 'images/profile.jpg', lastActive: '2h ago' },
-            { id: 's2', name: 'Abdulkarim Shuaibu', title: 'Professional VIP Driver | 15+ Years Experience', avatar: 'images/profile.jpg', lastActive: '1d ago' },
-            { id: 's3', name: 'Samson Amu', title: 'Director, Transformation - Global business process', avatar: 'images/profile.jpg', lastActive: '3h ago' },
-            { id: 's4', name: 'Wilfred Eseoghene Praise', title: 'Results-Driven Social Media Manager and SEO Expert', avatar: 'images/profile.jpg', lastActive: '5h ago' },
-            { id: 's5', name: 'Gokop Goteng', title: 'Senior Lecturer/Associate Professor of IoT', avatar: 'images/profile.jpg', lastActive: '1d ago' },
-            { id: 's6', name: 'Gloria Peter', title: 'M365 Support Engineer | Exchange Engineer', avatar: 'images/profile.jpg', lastActive: '2h ago' },
-            { id: 's7', name: 'Paras Mayur', title: 'Helped 50+ accounts reach 1,000,000 impressions', avatar: 'images/profile.jpg', lastActive: '4h ago' },
-            { id: 's8', name: 'Stellamaris Nwafor', title: 'Software Engineer | JavaScript | TypeScript', avatar: 'images/profile.jpg', lastActive: '6h ago' }
+            { id: 's1', name: 'John Omofaye', title: 'Software Engineer | Java | Python | Spring Boot | Django', avatar: 'images/profile.jpg' },
+            { id: 's2', name: 'Akwasi Emmanuel', title: 'Full Stack Developer | React | Node.js | MongoDB', avatar: 'images/profile.jpg' },
+            { id: 's3', name: 'Jenrade Lawal', title: 'Product Manager | CSPO | Agile Specialist', avatar: 'images/profile.jpg' },
+            { id: 's4', name: 'Bada Adetoyin', title: 'UI/UX Designer | Figma | Adobe XD', avatar: 'images/profile.jpg' },
+            { id: 's5', name: 'John Oche', title: 'Software Engineer | Java | Python | Spring Boot | Django', avatar: 'images/profile.jpg' },
+            { id: 's6', name: 'Esther Oluseye', title: 'Senior .NET Full Stack Developer', avatar: 'images/profile.jpg' },
+            { id: 's7', name: 'Melissa Torres', title: 'LinkedIn Offer | Find your next job', avatar: 'images/profile.jpg' },
+            { id: 's8', name: 'Samson Amu', title: 'Director, Transformation', avatar: 'images/profile.jpg' },
+            { id: 's9', name: 'Matthew Katung', title: 'Sales Operation Manager Afex Nigeria', avatar: 'images/profile.jpg' },
+            { id: 's10', name: 'Abdulkarim Shuaibu', title: 'Professional VIP Driver', avatar: 'images/profile.jpg' }
         ],
         recent: [
-            { id: 'r1', name: 'Esther Oluseye', title: 'Senior .NET Full Stack Developer', avatar: 'images/profile.jpg', lastMessage: 'I\'m a financial consultant...', time: '2h ago', unread: true },
-            { id: 'r2', name: 'Melissa Torres', title: 'LinkedIn Offer | Find your next job', avatar: 'images/profile.jpg', lastMessage: 'LinkedIn Offer | Find your next job on LinkedIn', time: '5h ago', unread: false },
-            { id: 'r3', name: 'Samson Amu', title: 'Director, Transformation', avatar: 'images/profile.jpg', lastMessage: 'You\'re welcome', time: '1d ago', unread: false },
-            { id: 'r4', name: 'Matthew Katung', title: 'Sales Operation Manager', avatar: 'images/profile.jpg', lastMessage: 'Thank you', time: '2d ago', unread: false },
-            { id: 'r5', name: 'Abdulkarim Shuaibu', title: 'Professional VIP Driver', avatar: 'images/profile.jpg', lastMessage: 'Thank you', time: '2d ago', unread: false },
-            { id: 'r6', name: 'Jared D. Clark', title: 'Sales Professional', avatar: 'images/profile.jpg', lastMessage: 'Hey, just circling back...', time: '3d ago', unread: true },
-            { id: 'r7', name: 'Marc-Andre Dar...', title: 'Business Development', avatar: 'images/profile.jpg', lastMessage: 'Glad to pass the friend request...', time: '4d ago', unread: false },
-            { id: 'r8', name: 'Henry Atherton, III', title: 'Executive', avatar: 'images/profile.jpg', lastMessage: 'Good morning, I bring you...', time: '5d ago', unread: false },
-            { id: 'r9', name: 'Del Nelson', title: 'Consultant', avatar: 'images/profile.jpg', lastMessage: 'Hi Del, nice to meet you', time: '1w ago', unread: false }
+            { id: 'r1', name: 'John Omofaye', title: 'Software Engineer', avatar: 'images/profile.jpg', lastMessage: 'John: Hi, I\'d like to introduce you to DRUPRR...', time: 'Dec 30, 2022' },
+            { id: 'r2', name: 'Akwasi Emmanuel', title: 'Full Stack Developer', avatar: 'images/profile.jpg', lastMessage: 'Akwasi: Hi, I\'d like to introduce you to DRUPRR...', time: 'Dec 30, 2022' },
+            { id: 'r3', name: 'Jenrade Lawal', title: 'Product Manager', avatar: 'images/profile.jpg', lastMessage: 'Jenrade: Hi, I\'d like to introduce you to DRUPRR...', time: 'Dec 30, 2022' },
+            { id: 'r4', name: 'Bada Adetoyin', title: 'UI/UX Designer', avatar: 'images/profile.jpg', lastMessage: 'Bada: Hi, I\'d like to introduce you to DRUPRR...', time: 'Dec 28, 2022' }
         ],
         messages: {
             'r1': [
-                { sender: 'Esther Oluseye', content: [{ type: 'text', value: 'I\'m a financial consultant. I help people plan for their future.' }], time: '2025-03-12T10:30:00', isSent: false },
-                { sender: 'You', content: [{ type: 'text', value: 'That sounds interesting! How long have you been consulting?' }], time: '2025-03-12T10:32:00', isSent: true },
-                { sender: 'Esther Oluseye', content: [{ type: 'text', value: 'Over 8 years now. Specializing in retirement planning and investments.' }], time: '2025-03-12T10:35:00', isSent: false }
-            ],
-            'r2': [
-                { sender: 'Melissa Torres', content: [{ type: 'text', value: 'LinkedIn Offer | Find your next job on LinkedIn Premium' }], time: '2025-03-12T09:15:00', isSent: false }
-            ],
-            'r3': [
-                { sender: 'Samson Amu', content: [{ type: 'text', value: 'Thanks for connecting!' }], time: '2025-03-11T16:20:00', isSent: false },
-                { sender: 'You', content: [{ type: 'text', value: 'You\'re welcome! Great to connect.' }], time: '2025-03-11T16:25:00', isSent: true }
-            ],
-            'r4': [
-                { sender: 'Matthew Katung', content: [{ type: 'text', value: 'Thanks for the connection request.' }], time: '2025-03-10T14:10:00', isSent: false },
-                { sender: 'You', content: [{ type: 'text', value: 'Thank you for accepting!' }], time: '2025-03-10T14:15:00', isSent: true }
+                { sender: 'John Omofaye', content: [{ type: 'text', value: 'Hi, I\'d like to introduce you to DRUPRR: It\'s a platform that helps developers showcase their work.' }], time: '2022-12-30T10:30:00', isSent: false },
+                { sender: 'You', content: [{ type: 'text', value: 'Thanks for the introduction! I\'ll check it out.' }], time: '2022-12-30T10:32:00', isSent: true }
             ]
         }
     };
 
     // ========== DOM ELEMENTS ==========
-    // Main elements
-    const messagingPanel = document.getElementById('messagingPanel');
-    const newMessagePanel = document.getElementById('newMessagePanel');
-    const chatThreadContainer = document.getElementById('chatThreadContainer');
-    
-    // Header buttons
-    const messagingMenuBtn = document.getElementById('messagingMenuBtn');
-    const messagingDropdown = document.getElementById('messagingDropdown');
-    const newMessageBtn = document.getElementById('newMessageBtn');
-    const toggleMessagingBtn = document.getElementById('toggleMessagingBtn');
-    const toggleMessagingIcon = document.getElementById('toggleMessagingIcon');
-    
-    // New message panel elements
-    const closeNewMessageBtn = document.getElementById('closeNewMessageBtn');
-    const newMessageSearchInput = document.getElementById('newMessageSearchInput');
-    const suggestedContactsList = document.getElementById('suggestedContactsList');
-    
-    // Inbox elements
-    const messagingSearchInput = document.getElementById('messagingSearchInput');
-    
-    // Tabs
-    const focusedTab = document.getElementById('focusedTab');
-    const othersTab = document.getElementById('othersTab');
-    const focusedChats = document.getElementById('focusedChats');
-    const otherChats = document.getElementById('otherChats');
-    
-    // Thread elements
-    const backToInboxThreadBtn = document.getElementById('backToInboxThreadBtn');
-    const threadContactImg = document.getElementById('threadContactImg');
-    const threadContactName = document.getElementById('threadContactName');
-    const threadContactTitle = document.getElementById('threadContactTitle');
-    const threadMoreBtn = document.getElementById('threadMoreBtn');
-    const threadDropdown = document.getElementById('threadDropdown');
-    const closeThreadBtn = document.getElementById('closeThreadBtn');
-    const chatMessages = document.getElementById('chatMessages');
-    
-    // Composer elements
-    const messageInput = document.getElementById('messageInput');
-    const attachImageBtn = document.getElementById('attachImageBtn');
-    const attachFileBtn = document.getElementById('attachFileBtn');
-    const attachGifBtn = document.getElementById('attachGifBtn');
-    const emojiBtn = document.getElementById('emojiBtn');
-    const emojiPicker = document.getElementById('emojiPicker');
-    const attachmentInput = document.getElementById('attachmentInput');
-    const sendMessageBtn = document.getElementById('sendMessageBtn');
-    
-    // Modals
-    const awayMessageModal = document.getElementById('awayMessageModal');
+    const messagingPanel         = document.getElementById('messagingPanel');
+    const newMessagePanel        = document.getElementById('newMessagePanel');
+    const chatThreadContainer    = document.getElementById('chatThreadContainer');
+
+    const messagingMenuBtn       = document.getElementById('messagingMenuBtn');
+    const messagingDropdown      = document.getElementById('messagingDropdown');
+    const newMessageBtn          = document.getElementById('newMessageBtn');
+    const toggleMessagingBtn     = document.getElementById('toggleMessagingBtn');
+    const toggleMessagingIcon    = document.getElementById('toggleMessagingIcon');
+
+    const closeNewMessageBtn     = document.getElementById('closeNewMessageBtn');
+    const recipientSearchInput   = document.getElementById('recipientSearchInput');
+    const recipientContainer     = document.getElementById('recipientContainer');
+    const selectedContacts       = document.getElementById('selectedContacts');
+    const contactSuggestions     = document.getElementById('contactSuggestions');
+    const suggestionsList        = document.getElementById('suggestionsList');
+    const messageComposeArea     = document.getElementById('messageComposeArea');
+    const initialSuggestedSection = document.getElementById('initialSuggestedSection');
+    const suggestedContactsList  = document.getElementById('suggestedContactsList');
+    const composeMessageTextarea = document.getElementById('composeMessageTextarea');
+    const composeSendBtn         = document.getElementById('composeSendBtn');
+
+    const focusedTab             = document.getElementById('focusedTab');
+    const othersTab              = document.getElementById('othersTab');
+    const focusedChats           = document.getElementById('focusedChats');
+    const otherChats             = document.getElementById('otherChats');
+    const messagingSearchInput   = document.getElementById('messagingSearchInput');
+
+    const backToInboxThreadBtn   = document.getElementById('backToInboxThreadBtn');
+    const closeThreadBtn         = document.getElementById('closeThreadBtn');
+    const threadContactImg       = document.getElementById('threadContactImg');
+    const threadContactName      = document.getElementById('threadContactName');
+    const threadContactTitle     = document.getElementById('threadContactTitle');
+    const threadMoreBtn          = document.getElementById('threadMoreBtn');
+    const threadDropdown         = document.getElementById('threadDropdown');
+    const chatMessages           = document.getElementById('chatMessages');
+
+    const messageInput           = document.getElementById('messageInput');
+    const emojiBtn               = document.getElementById('emojiBtn');
+    const emojiPicker            = document.getElementById('emojiPicker');
+    const attachmentInput        = document.getElementById('attachmentInput');
+    const sendMessageBtn         = document.getElementById('sendMessageBtn');
+
+    const composeEmojiBtn        = document.getElementById('composeEmojiBtn');
+    const composeEmojiPicker     = document.getElementById('composeEmojiPicker');
+    const composeAttachmentInput = document.getElementById('composeAttachmentInput');
+
+    const awayMessageModal       = document.getElementById('awayMessageModal');
     const messagingSettingsModal = document.getElementById('messagingSettingsModal');
-    const awayModalCloseBtn = document.getElementById('awayModalCloseBtn');
-    const settingsModalCloseBtn = document.getElementById('settingsModalCloseBtn');
+    const awayModalCloseBtn      = document.getElementById('awayModalCloseBtn');
+    const settingsModalCloseBtn  = document.getElementById('settingsModalCloseBtn');
     const manageConversationsBtn = document.getElementById('manageConversationsBtn');
-    const messagingSettingsBtn = document.getElementById('messagingSettingsBtn');
-    const awayMessageBtn = document.getElementById('awayMessageBtn');
-    const setAwayMessageBtn = document.getElementById('setAwayMessageBtn');
-    const tryPremiumBtn = document.getElementById('tryPremiumBtn');
-    const awayMessageText = document.getElementById('awayMessageText');
-    const wordCounter = document.getElementById('wordCounter');
-    
-    // State variables
-    let isPanelCollapsed = false;
-    let currentChatId = null;
-    let pendingAttachments = [];
+    const messagingSettingsBtn   = document.getElementById('messagingSettingsBtn');
+    const awayMessageBtn         = document.getElementById('awayMessageBtn');
+    const setAwayMessageBtn      = document.getElementById('setAwayMessageBtn');
+    const tryPremiumBtn          = document.getElementById('tryPremiumBtn');
+    const awayMessageText        = document.getElementById('awayMessageText');
+    const wordCounter            = document.getElementById('wordCounter');
+
+    // ========== STATE ==========
+    let isPanelCollapsed        = false;
+    let currentChatId           = null;
+    let pendingAttachments      = [];
+    let composePendingAttachments = [];
+    let selectedRecipients      = [];
 
     // ========== INITIALIZATION ==========
     function initializeMessaging() {
         renderSuggestedContacts();
         renderFocusedChats();
         renderOtherChats();
+        renderSuggestionsList();
         setupEventListeners();
     }
 
-    // ========== RENDERING FUNCTIONS ==========
+    // ========== RENDER — SUGGESTED CONTACTS (initial panel list) ==========
     function renderSuggestedContacts() {
         if (!suggestedContactsList) return;
-        
+
         suggestedContactsList.innerHTML = '';
-        contactsData.suggested.forEach(contact => {
-            const contactEl = document.createElement('div');
-            contactEl.className = 'suggested-contact-item';
-            contactEl.dataset.contactId = contact.id;
-            contactEl.innerHTML = `
+        contactsData.suggested.slice(0, 8).forEach(contact => {
+            const el = document.createElement('div');
+            el.className = 'suggested-contact-item';
+            el.innerHTML = `
                 <img src="${contact.avatar}" alt="${contact.name}" class="suggested-contact-avatar">
                 <div class="suggested-contact-info">
                     <div class="suggested-contact-name">${contact.name}</div>
                     <div class="suggested-contact-title">${contact.title}</div>
                 </div>
             `;
-            contactEl.addEventListener('click', () => {
-                openChatThread(contact);
-                closeNewMessagePanel();
-            });
-            suggestedContactsList.appendChild(contactEl);
+            el.addEventListener('click', () => addRecipient(contact));
+            suggestedContactsList.appendChild(el);
         });
     }
 
+    // ========== RENDER — DROPDOWN SUGGESTIONS LIST ==========
+    function renderSuggestionsList() {
+        if (!suggestionsList) return;
+
+        suggestionsList.innerHTML = '';
+        contactsData.suggested.forEach(contact => {
+            const el = document.createElement('div');
+            el.className = 'suggestion-item';
+            el.innerHTML = `
+                <div class="suggestion-info">
+                    <img src="${contact.avatar}" alt="${contact.name}" class="suggestion-avatar">
+                    <div class="suggestion-details">
+                        <div class="suggestion-name">${contact.name}</div>
+                        <div class="suggestion-title">${contact.title}</div>
+                    </div>
+                </div>
+                <button class="add-contact-btn">+</button>
+            `;
+
+            const addBtn = el.querySelector('.add-contact-btn');
+            addBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                addRecipient(contact);
+            });
+
+            el.addEventListener('click', (e) => {
+                if (!e.target.closest('.add-contact-btn')) addRecipient(contact);
+            });
+
+            suggestionsList.appendChild(el);
+        });
+    }
+
+    // ========== RENDER — INBOX CHAT LISTS ==========
     function renderFocusedChats() {
         if (!focusedChats) return;
-        
         focusedChats.innerHTML = '';
-        contactsData.recent.slice(0, 5).forEach(chat => {
-            const chatEl = createChatItem(chat);
-            focusedChats.appendChild(chatEl);
-        });
+        contactsData.recent.forEach(chat => focusedChats.appendChild(createChatItem(chat)));
     }
 
     function renderOtherChats() {
         if (!otherChats) return;
-        
-        otherChats.innerHTML = '';
-        contactsData.recent.slice(5).forEach(chat => {
-            const chatEl = createChatItem(chat);
-            otherChats.appendChild(chatEl);
-        });
+        otherChats.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-secondary);">No other conversations</div>';
     }
 
     function createChatItem(chat) {
@@ -174,482 +182,430 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="chat-item-preview">${chat.lastMessage}</div>
             </div>
         `;
-        div.addEventListener('click', () => {
-            openChatThread(chat);
-        });
+        div.addEventListener('click', () => openChatThread(chat));
         return div;
     }
 
+    // ========== RENDER — CHAT THREAD MESSAGES ==========
     function renderChatThread(contact) {
         if (!chatMessages || !contact) return;
-        
-        threadContactImg.src = contact.avatar || 'images/profile.jpg';
-        threadContactName.textContent = contact.name;
+
+        threadContactImg.src      = contact.avatar || 'images/profile.jpg';
+        threadContactName.textContent  = contact.name;
         threadContactTitle.textContent = contact.title || '';
-        
+
         const messages = contactsData.messages[contact.id] || [];
         chatMessages.innerHTML = '';
-        
+
         if (messages.length === 0) {
-            chatMessages.innerHTML = '<div class="no-messages-yet">Start a conversation!</div>';
+            chatMessages.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px;">No messages yet. Start a conversation!</div>';
             return;
         }
-        
-        let lastDate = '';
+
         messages.forEach(msg => {
-            const msgDate = new Date(msg.time).toLocaleDateString();
-            
-            // Add date separator if new day
-            if (msgDate !== lastDate) {
-                const dateSeparator = document.createElement('div');
-                dateSeparator.className = 'date-separator';
-                dateSeparator.textContent = new Date(msg.time).toLocaleDateString('en-US', { 
-                    weekday: 'long', 
-                    month: 'long', 
-                    day: 'numeric' 
-                });
-                chatMessages.appendChild(dateSeparator);
-                lastDate = msgDate;
-            }
-            
             const messageEl = document.createElement('div');
             messageEl.className = `message-bubble ${msg.isSent ? 'sent' : 'received'}`;
-            
+
             let contentHtml = '';
             msg.content.forEach(item => {
-                if (item.type === 'text') {
-                    contentHtml += `<p>${item.value}</p>`;
-                } else if (item.type === 'image') {
-                    contentHtml += `<img src="${item.value.url}" alt="Image" class="message-image" style="max-width: 200px; border-radius: 8px; margin: 4px 0;">`;
-                }
+                if (item.type === 'text') contentHtml += `<p>${item.value}</p>`;
             });
-            
-            const msgTime = new Date(msg.time).toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit' 
-            });
-            
+
+            const msgTime = new Date(msg.time).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
             messageEl.innerHTML = `
                 <div class="message-bubble-content">
                     ${contentHtml}
                     <span class="message-time">${msgTime}</span>
                 </div>
             `;
-            
             chatMessages.appendChild(messageEl);
         });
-        
-        // Scroll to bottom
+
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // ========== PANEL MANAGEMENT FUNCTIONS ==========
+    // ========== RECIPIENT MANAGEMENT ==========
+    function addRecipient(contact) {
+        if (selectedRecipients.some(r => r.id === contact.id)) return;
+
+        selectedRecipients.push(contact);
+        renderSelectedContacts();
+
+        // Clear search + hide dropdown immediately after pick
+        if (recipientSearchInput) {
+            recipientSearchInput.value = '';
+            recipientSearchInput.focus();
+        }
+        contactSuggestions.classList.add('hidden');
+
+        syncComposeUI();
+
+        // Auto-focus textarea so user can start typing right away
+        if (composeMessageTextarea) {
+            setTimeout(() => composeMessageTextarea.focus(), 50);
+        }
+    }
+
+    function removeRecipient(contactId) {
+        selectedRecipients = selectedRecipients.filter(r => r.id !== contactId);
+        renderSelectedContacts();
+        syncComposeUI();
+    }
+
+    function renderSelectedContacts() {
+        if (!selectedContacts) return;
+
+        selectedContacts.innerHTML = '';
+        selectedRecipients.forEach(contact => {
+            const pill = document.createElement('span');
+            pill.className = 'contact-pill';
+            pill.innerHTML = `
+                <span class="pill-name">${contact.name}</span>
+                <button class="remove-contact" data-contact-id="${contact.id}">✖</button>
+            `;
+            selectedContacts.appendChild(pill);
+        });
+
+        selectedContacts.querySelectorAll('.remove-contact').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                removeRecipient(btn.dataset.contactId);
+            });
+        });
+    }
+
+    // Single source of truth for compose panel visibility state
+    function syncComposeUI() {
+        const hasRecipients = selectedRecipients.length > 0;
+
+        if (hasRecipients) {
+            messageComposeArea.classList.remove('hidden');
+            initialSuggestedSection.classList.add('hidden');
+        } else {
+            messageComposeArea.classList.add('hidden');
+            initialSuggestedSection.classList.remove('hidden');
+        }
+
+        updateComposeSendButton();
+    }
+
+    // ========== PANEL MANAGEMENT ==========
     function openNewMessagePanel() {
         newMessagePanel.classList.remove('hidden');
-        // Ensure other panels are in correct state
-        if (chatThreadContainer) chatThreadContainer.classList.add('hidden');
-        // Focus the search input
-        setTimeout(() => {
-            if (newMessageSearchInput) newMessageSearchInput.focus();
-        }, 100);
+        chatThreadContainer.classList.add('hidden');
+
+        // Full reset
+        selectedRecipients = [];
+        composePendingAttachments = [];
+        renderSelectedContacts();
+
+        if (recipientSearchInput)   recipientSearchInput.value = '';
+        if (composeMessageTextarea) composeMessageTextarea.value = '';
+
+        // Initial state: show suggested list, hide compose area and dropdown
+        initialSuggestedSection.classList.remove('hidden');
+        messageComposeArea.classList.add('hidden');
+        contactSuggestions.classList.add('hidden');
+
+        updateComposeSendButton();
+
+        setTimeout(() => { if (recipientSearchInput) recipientSearchInput.focus(); }, 100);
     }
 
     function closeNewMessagePanel() {
         newMessagePanel.classList.add('hidden');
-        if (newMessageSearchInput) newMessageSearchInput.value = '';
     }
 
     function openChatThread(contact) {
-        // Update thread with contact info
-        threadContactImg.src = contact.avatar || 'images/profile.jpg';
-        threadContactName.textContent = contact.name;
-        threadContactTitle.textContent = contact.title || '';
-        
-        // Show thread, hide other panels
+        threadContactImg.src           = contact.avatar;
+        threadContactName.textContent  = contact.name;
+        threadContactTitle.textContent = contact.title;
+
         chatThreadContainer.classList.remove('hidden');
         newMessagePanel.classList.add('hidden');
-        messagingPanel.classList.remove('hidden'); // Keep main panel visible
         currentChatId = contact.id;
-        
-        // Load messages
+
         renderChatThread(contact);
     }
 
     function backToInbox() {
         chatThreadContainer.classList.add('hidden');
         currentChatId = null;
-        if (messageInput) {
-            messageInput.innerHTML = '';
-        }
+        if (messageInput) messageInput.innerHTML = '';
         pendingAttachments = [];
         updateSendButtonState();
     }
 
-    // ========== MESSAGING FUNCTIONS ==========
-    function sendMessage() {
-        if (!currentChatId) return;
-        
-        // Get text content
-        let messageText = '';
-        const textNodes = [];
-        if (messageInput) {
-            messageInput.childNodes.forEach(node => {
-                if (node.nodeType === 3) { // Text node
-                    textNodes.push(node.textContent);
-                }
-            });
-        }
-        messageText = textNodes.join('').trim();
-        
-        // Prepare content array
-        const content = [];
-        if (messageText) {
-            content.push({ type: 'text', value: messageText });
-        }
-        pendingAttachments.forEach(att => {
-            content.push(att);
+    // ========== COMPOSE FUNCTIONS ==========
+    function sendComposeMessage() {
+        if (selectedRecipients.length === 0) return;
+        const message = composeMessageTextarea.value.trim();
+        if (!message) return;
+
+        const recipientNames = selectedRecipients.map(r => r.name).join(', ');
+        alert(`Message sent to: ${recipientNames}\n\nMessage: ${message}`);
+
+        closeNewMessagePanel();
+    }
+
+    function updateComposeSendButton() {
+        if (!composeSendBtn || !composeMessageTextarea) return;
+        const hasRecipients = selectedRecipients.length > 0;
+        const hasMessage    = composeMessageTextarea.value.trim().length > 0;
+        composeSendBtn.disabled = !(hasRecipients && hasMessage);
+    }
+
+    // ========== SEARCH ==========
+    function filterContactSuggestions(query) {
+        const items = document.querySelectorAll('#suggestionsList .suggestion-item');
+        query = query.toLowerCase().trim();
+
+        items.forEach(item => {
+            const name  = item.querySelector('.suggestion-name')?.textContent.toLowerCase()  || '';
+            const title = item.querySelector('.suggestion-title')?.textContent.toLowerCase() || '';
+            item.style.display = (name.includes(query) || title.includes(query)) ? 'flex' : 'none';
         });
-        
-        if (content.length === 0) return;
-        
-        // Create new message
-        const newMessage = {
-            sender: 'You',
-            content: content,
-            time: new Date().toISOString(),
-            isSent: true
-        };
-        
-        // Add to data
-        if (!contactsData.messages[currentChatId]) {
-            contactsData.messages[currentChatId] = [];
-        }
-        contactsData.messages[currentChatId].push(newMessage);
-        
-        // Update UI
-        const currentContact = {
-            id: currentChatId,
-            name: threadContactName.textContent,
-            title: threadContactTitle.textContent,
-            avatar: threadContactImg.src
-        };
-        renderChatThread(currentContact);
-        
-        // Clear input
-        if (messageInput) {
-            messageInput.innerHTML = '';
-        }
-        pendingAttachments = [];
-        updateSendButtonState();
     }
 
-    function handleAttachment(file) {
-        if (!file) return;
-        
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            let attachmentData;
-            let previewElement;
-            
-            if (file.type.startsWith('image/')) {
-                attachmentData = { 
-                    type: 'image', 
-                    value: { 
-                        url: e.target.result, 
-                        name: file.name,
-                        size: file.size 
-                    } 
-                };
-                
-                previewElement = document.createElement('img');
-                previewElement.src = e.target.result;
-                previewElement.classList.add('input-image-preview');
-            } else {
-                attachmentData = { 
-                    type: 'file', 
-                    value: { 
-                        url: e.target.result, 
-                        name: file.name,
-                        size: file.size,
-                        type: file.type
-                    } 
-                };
-                
-                previewElement = document.createElement('span');
-                previewElement.innerHTML = `
-                    <span class="material-symbols-outlined" style="font-size: 16px;">description</span>
-                    ${file.name.length > 15 ? file.name.substring(0, 12) + '...' : file.name}
-                `;
-            }
-            
-            // Create preview container
-            const previewContainer = document.createElement('span');
-            previewContainer.className = 'attachment-preview-container';
-            previewContainer.dataset.filename = file.name;
-            
-            const removeBtn = document.createElement('span');
-            removeBtn.className = 'attachment-remove-btn';
-            removeBtn.innerHTML = '&times;';
-            removeBtn.onclick = (e) => {
-                e.stopPropagation();
-                const container = e.target.closest('.attachment-preview-container');
-                const filename = container.dataset.filename;
-                container.remove();
-                pendingAttachments = pendingAttachments.filter(att => 
-                    att.value.name !== filename
-                );
-                updateSendButtonState();
-            };
-            
-            previewContainer.appendChild(previewElement);
-            previewContainer.appendChild(removeBtn);
-            
-            // Insert at cursor position or at end
-            if (messageInput) {
-                const selection = window.getSelection();
-                if (selection.rangeCount > 0 && messageInput.contains(selection.anchorNode)) {
-                    const range = selection.getRangeAt(0);
-                    range.deleteContents();
-                    range.insertNode(previewContainer);
-                    range.collapse(false);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                } else {
-                    messageInput.appendChild(document.createTextNode(' '));
-                    messageInput.appendChild(previewContainer);
-                }
-            }
-            
-            pendingAttachments.push(attachmentData);
-            updateSendButtonState();
-        };
-        
-        reader.readAsDataURL(file);
+    function searchMessages(query) {
+        const items = document.querySelectorAll('.chat-item');
+        query = query.toLowerCase().trim();
+
+        items.forEach(item => {
+            const name    = item.querySelector('.chat-item-name')?.textContent.toLowerCase()    || '';
+            const preview = item.querySelector('.chat-item-preview')?.textContent.toLowerCase() || '';
+            item.style.display = (name.includes(query) || preview.includes(query)) ? 'flex' : 'none';
+        });
     }
 
-    function insertEmoji(emoji) {
-        if (!messageInput) return;
-        
-        const selection = window.getSelection();
-        const range = selection.getRangeAt(0);
-        
-        // Check if cursor is in messageInput
-        if (messageInput.contains(selection.anchorNode)) {
-            const emojiNode = document.createTextNode(emoji);
-            range.deleteContents();
-            range.insertNode(emojiNode);
-            range.setStartAfter(emojiNode);
-            range.setEndAfter(emojiNode);
-            selection.removeAllRanges();
-            selection.addRange(range);
-        } else {
-            // If cursor is elsewhere, append to end
-            messageInput.appendChild(document.createTextNode(emoji));
-        }
-        
-        updateSendButtonState();
-    }
-
+    // ========== CHAT COMPOSER ==========
     function updateSendButtonState() {
         if (!sendMessageBtn || !messageInput) return;
-        const hasText = messageInput.textContent.trim().length > 0;
+        const hasText        = messageInput.textContent.trim().length > 0;
         const hasAttachments = pendingAttachments.length > 0;
         sendMessageBtn.disabled = !(hasText || hasAttachments);
     }
 
-    // ========== SEARCH FUNCTIONS ==========
-    function searchMessages(query) {
-        const items = document.querySelectorAll('.chat-item');
-        query = query.toLowerCase().trim();
-        
-        items.forEach(item => {
-            const name = item.querySelector('.chat-item-name')?.textContent.toLowerCase() || '';
-            const preview = item.querySelector('.chat-item-preview')?.textContent.toLowerCase() || '';
-            const matches = name.includes(query) || preview.includes(query);
-            item.style.display = matches ? 'flex' : 'none';
-        });
-    }
+    function insertEmoji(emoji, targetInput) {
+        if (!targetInput) return;
 
-    function searchSuggestedContacts(query) {
-        const items = document.querySelectorAll('.suggested-contact-item');
-        query = query.toLowerCase().trim();
-        
-        items.forEach(item => {
-            const name = item.querySelector('.suggested-contact-name')?.textContent.toLowerCase() || '';
-            const title = item.querySelector('.suggested-contact-title')?.textContent.toLowerCase() || '';
-            const matches = name.includes(query) || title.includes(query);
-            item.style.display = matches ? 'flex' : 'none';
-        });
-    }
-
-    // ========== DROPDOWN MANAGEMENT ==========
-    function closeAllDropdowns() {
-        if (messagingDropdown) messagingDropdown.classList.add('hidden');
-        if (threadDropdown) threadDropdown.classList.add('hidden');
-        if (emojiPicker) emojiPicker.classList.add('hidden');
+        if (targetInput.isContentEditable) {
+            const selection = window.getSelection();
+            if (targetInput.contains(selection.anchorNode)) {
+                const range = selection.getRangeAt(0);
+                const emojiNode = document.createTextNode(emoji);
+                range.deleteContents();
+                range.insertNode(emojiNode);
+                range.setStartAfter(emojiNode);
+                range.setEndAfter(emojiNode);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            } else {
+                targetInput.appendChild(document.createTextNode(emoji));
+            }
+            updateSendButtonState();
+        } else {
+            // textarea
+            const start = targetInput.selectionStart;
+            const end   = targetInput.selectionEnd;
+            targetInput.value = targetInput.value.slice(0, start) + emoji + targetInput.value.slice(end);
+            targetInput.selectionStart = targetInput.selectionEnd = start + emoji.length;
+            updateComposeSendButton();
+        }
     }
 
     // ========== MODAL FUNCTIONS ==========
     function openAwayMessageModal() {
-        if (awayMessageModal) awayMessageModal.classList.remove('hidden');
+        awayMessageModal.classList.remove('hidden');
         closeAllDropdowns();
     }
 
     function openMessagingSettingsModal() {
-        if (messagingSettingsModal) messagingSettingsModal.classList.remove('hidden');
+        messagingSettingsModal.classList.remove('hidden');
         closeAllDropdowns();
     }
 
     function closeAllModals() {
-        if (awayMessageModal) awayMessageModal.classList.add('hidden');
-        if (messagingSettingsModal) messagingSettingsModal.classList.add('hidden');
+        awayMessageModal.classList.add('hidden');
+        messagingSettingsModal.classList.add('hidden');
+    }
+
+    function closeAllDropdowns() {
+        messagingDropdown?.classList.add('hidden');
+        threadDropdown?.classList.add('hidden');
+        emojiPicker?.classList.add('hidden');
+        composeEmojiPicker?.classList.add('hidden');
     }
 
     // ========== EVENT LISTENERS ==========
     function setupEventListeners() {
-        // Header buttons
-        if (messagingMenuBtn) {
-            messagingMenuBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (messagingDropdown) messagingDropdown.classList.toggle('hidden');
-            });
+
+        // ── New message button ──────────────────────────────────────────────
+        if (newMessageBtn) newMessageBtn.addEventListener('click', openNewMessagePanel);
+
+        // ── Close new message panel ─────────────────────────────────────────
+        if (closeNewMessageBtn) closeNewMessageBtn.addEventListener('click', closeNewMessagePanel);
+
+        // ── Recipient container click → focus input ─────────────────────────
+        if (recipientContainer) {
+            recipientContainer.addEventListener('click', () => recipientSearchInput.focus());
         }
 
-        if (newMessageBtn) {
-            newMessageBtn.addEventListener('click', openNewMessagePanel);
-        }
-        
-        if (toggleMessagingBtn) {
-            toggleMessagingBtn.addEventListener('click', () => {
-                isPanelCollapsed = !isPanelCollapsed;
-                if (messagingPanel) messagingPanel.classList.toggle('collapsed', isPanelCollapsed);
-                if (toggleMessagingIcon) {
-                    toggleMessagingIcon.textContent = isPanelCollapsed ? 'expand_less' : 'expand_more';
+        // ── Recipient search input ──────────────────────────────────────────
+        if (recipientSearchInput) {
+            recipientSearchInput.addEventListener('focus', () => {
+                renderSuggestionsList();
+                filterContactSuggestions(recipientSearchInput.value);
+                contactSuggestions.classList.remove('hidden');
+            });
+
+            recipientSearchInput.addEventListener('input', (e) => {
+                filterContactSuggestions(e.target.value);
+                contactSuggestions.classList.remove('hidden');
+            });
+
+            recipientSearchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    contactSuggestions.classList.add('hidden');
+                }
+                // Backspace on empty input removes last recipient pill
+                if (e.key === 'Backspace' && recipientSearchInput.value === '' && selectedRecipients.length > 0) {
+                    removeRecipient(selectedRecipients[selectedRecipients.length - 1].id);
                 }
             });
         }
 
-        // New message panel navigation
-        if (closeNewMessageBtn) {
-            closeNewMessageBtn.addEventListener('click', closeNewMessagePanel);
+        // ── Compose textarea ────────────────────────────────────────────────
+        if (composeMessageTextarea) {
+            composeMessageTextarea.addEventListener('input', updateComposeSendButton);
+            composeMessageTextarea.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey && !composeSendBtn.disabled) {
+                    e.preventDefault();
+                    sendComposeMessage();
+                }
+            });
         }
 
-        // Thread navigation
-        if (backToInboxThreadBtn) {
-            backToInboxThreadBtn.addEventListener('click', backToInbox);
-        }
-        
-        if (closeThreadBtn) {
-            closeThreadBtn.addEventListener('click', backToInbox);
+        // ── Compose send button ─────────────────────────────────────────────
+        if (composeSendBtn) composeSendBtn.addEventListener('click', sendComposeMessage);
+
+        // ── Thread navigation ───────────────────────────────────────────────
+        if (backToInboxThreadBtn) backToInboxThreadBtn.addEventListener('click', backToInbox);
+        if (closeThreadBtn)       closeThreadBtn.addEventListener('click', backToInbox);
+
+        // ── Header buttons ──────────────────────────────────────────────────
+        if (messagingMenuBtn) {
+            messagingMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                messagingDropdown.classList.toggle('hidden');
+            });
         }
 
-        // Thread actions
+        if (toggleMessagingBtn) {
+            toggleMessagingBtn.addEventListener('click', () => {
+                isPanelCollapsed = !isPanelCollapsed;
+                messagingPanel.classList.toggle('collapsed', isPanelCollapsed);
+                toggleMessagingIcon.textContent = isPanelCollapsed ? 'expand_less' : 'expand_more';
+            });
+        }
+
+        // ── Thread more button ──────────────────────────────────────────────
         if (threadMoreBtn) {
             threadMoreBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (threadDropdown) threadDropdown.classList.toggle('hidden');
+                threadDropdown.classList.toggle('hidden');
             });
         }
 
-        // Search
+        // ── Inbox search ────────────────────────────────────────────────────
         if (messagingSearchInput) {
-            messagingSearchInput.addEventListener('input', (e) => {
-                searchMessages(e.target.value);
-            });
+            messagingSearchInput.addEventListener('input', (e) => searchMessages(e.target.value));
         }
 
-        if (newMessageSearchInput) {
-            newMessageSearchInput.addEventListener('input', (e) => {
-                searchSuggestedContacts(e.target.value);
-            });
-        }
-
-        // Tabs
+        // ── Tabs ────────────────────────────────────────────────────────────
         if (focusedTab) {
             focusedTab.addEventListener('click', () => {
                 focusedTab.classList.add('active');
-                if (othersTab) othersTab.classList.remove('active');
-                if (focusedChats) focusedChats.classList.add('active');
-                if (otherChats) otherChats.classList.remove('active');
+                othersTab.classList.remove('active');
+                focusedChats.classList.add('active');
+                otherChats.classList.remove('active');
             });
         }
 
         if (othersTab) {
             othersTab.addEventListener('click', () => {
                 othersTab.classList.add('active');
-                if (focusedTab) focusedTab.classList.remove('active');
-                if (otherChats) otherChats.classList.add('active');
-                if (focusedChats) focusedChats.classList.remove('active');
+                focusedTab.classList.remove('active');
+                otherChats.classList.add('active');
+                focusedChats.classList.remove('active');
             });
         }
 
-        // Composer
+        // ── Chat thread composer ────────────────────────────────────────────
         if (messageInput) {
             messageInput.addEventListener('input', updateSendButtonState);
             messageInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    sendMessage();
+                    // Wire up real send logic here when needed
                 }
             });
         }
 
         if (sendMessageBtn) {
-            sendMessageBtn.addEventListener('click', sendMessage);
-        }
-
-        // Attachments
-        if (attachImageBtn) {
-            attachImageBtn.addEventListener('click', () => {
-                if (attachmentInput) {
-                    attachmentInput.accept = 'image/*';
-                    attachmentInput.click();
-                }
+            sendMessageBtn.addEventListener('click', () => {
+                alert('Message sent! (Demo)');
             });
         }
 
-        if (attachFileBtn) {
-            attachFileBtn.addEventListener('click', () => {
-                if (attachmentInput) {
-                    attachmentInput.accept = '.pdf,.doc,.docx,.txt,.xlsx,.zip';
-                    attachmentInput.click();
-                }
-            });
-        }
-
-        if (attachmentInput) {
-            attachmentInput.addEventListener('change', (e) => {
-                const files = Array.from(e.target.files);
-                files.forEach(file => handleAttachment(file));
-                attachmentInput.value = '';
-            });
-        }
-
-        // Emoji
+        // ── Thread emoji picker ─────────────────────────────────────────────
         if (emojiBtn && emojiPicker) {
             emojiBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 emojiPicker.classList.toggle('hidden');
-                
-                // Position emoji picker
+
                 if (!emojiPicker.classList.contains('hidden')) {
                     const rect = emojiBtn.getBoundingClientRect();
                     emojiPicker.style.position = 'fixed';
-                    emojiPicker.style.bottom = (window.innerHeight - rect.top + 10) + 'px';
-                    emojiPicker.style.left = rect.left + 'px';
+                    emojiPicker.style.bottom   = (window.innerHeight - rect.top + 10) + 'px';
+                    emojiPicker.style.left      = rect.left + 'px';
                 }
             });
 
             emojiPicker.addEventListener('click', (e) => {
                 const btn = e.target.closest('button');
                 if (btn) {
-                    insertEmoji(btn.textContent);
+                    insertEmoji(btn.textContent, messageInput);
                     emojiPicker.classList.add('hidden');
                 }
             });
         }
 
-        // Dropdown menu items
+        // ── Compose emoji picker ────────────────────────────────────────────
+        if (composeEmojiBtn && composeEmojiPicker) {
+            composeEmojiBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                composeEmojiPicker.classList.toggle('hidden');
+
+                if (!composeEmojiPicker.classList.contains('hidden')) {
+                    const rect = composeEmojiBtn.getBoundingClientRect();
+                    composeEmojiPicker.style.position = 'fixed';
+                    composeEmojiPicker.style.bottom   = (window.innerHeight - rect.top + 10) + 'px';
+                    composeEmojiPicker.style.left      = rect.left + 'px';
+                }
+            });
+
+            composeEmojiPicker.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (btn) {
+                    insertEmoji(btn.textContent, composeMessageTextarea);
+                    composeEmojiPicker.classList.add('hidden');
+                }
+            });
+        }
+
+        // ── Dropdown menu items ─────────────────────────────────────────────
         if (manageConversationsBtn) {
             manageConversationsBtn.addEventListener('click', () => {
                 alert('Manage conversations feature coming soon!');
@@ -657,22 +613,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        if (messagingSettingsBtn) {
-            messagingSettingsBtn.addEventListener('click', openMessagingSettingsModal);
-        }
+        if (messagingSettingsBtn) messagingSettingsBtn.addEventListener('click', openMessagingSettingsModal);
+        if (awayMessageBtn)       awayMessageBtn.addEventListener('click', openAwayMessageModal);
 
-        if (awayMessageBtn) {
-            awayMessageBtn.addEventListener('click', openAwayMessageModal);
-        }
-
-        // Modal close buttons
-        if (awayModalCloseBtn) {
-            awayModalCloseBtn.addEventListener('click', closeAllModals);
-        }
-
-        if (settingsModalCloseBtn) {
-            settingsModalCloseBtn.addEventListener('click', closeAllModals);
-        }
+        // ── Modal close buttons ─────────────────────────────────────────────
+        if (awayModalCloseBtn)    awayModalCloseBtn.addEventListener('click', closeAllModals);
+        if (settingsModalCloseBtn) settingsModalCloseBtn.addEventListener('click', closeAllModals);
 
         if (setAwayMessageBtn) {
             setAwayMessageBtn.addEventListener('click', () => {
@@ -687,16 +633,16 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Word counter
+        // ── Word counter (away message modal) ──────────────────────────────
         if (awayMessageText && wordCounter) {
             awayMessageText.addEventListener('input', () => {
-                const text = awayMessageText.textContent || '';
+                const text  = awayMessageText.textContent || '';
                 const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
                 wordCounter.textContent = `${Math.min(words, 300)}/300`;
             });
         }
 
-        // Archive thread
+        // ── Thread dropdown actions ─────────────────────────────────────────
         const archiveThreadBtn = document.getElementById('archiveThreadBtn');
         if (archiveThreadBtn) {
             archiveThreadBtn.addEventListener('click', () => {
@@ -732,7 +678,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Settings toggles
+        // ── Settings toggles ────────────────────────────────────────────────
         const alwaysOpenMessages = document.getElementById('alwaysOpenMessages');
         if (alwaysOpenMessages) {
             alwaysOpenMessages.addEventListener('change', (e) => {
@@ -761,46 +707,55 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Close dropdowns when clicking outside
+        // ── Global click — close dropdowns & suggestions when clicking outside ──
         document.addEventListener('click', (e) => {
-            if (messagingMenuBtn && messagingDropdown && 
-                !messagingMenuBtn.contains(e.target) && 
+            // Messaging header dropdown
+            if (messagingMenuBtn && messagingDropdown &&
+                !messagingMenuBtn.contains(e.target) &&
                 !messagingDropdown.contains(e.target)) {
                 messagingDropdown.classList.add('hidden');
             }
-            if (threadMoreBtn && threadDropdown && 
-                !threadMoreBtn.contains(e.target) && 
+
+            // Thread dropdown
+            if (threadMoreBtn && threadDropdown &&
+                !threadMoreBtn.contains(e.target) &&
                 !threadDropdown.contains(e.target)) {
                 threadDropdown.classList.add('hidden');
             }
-            if (emojiBtn && emojiPicker && 
-                !emojiBtn.contains(e.target) && 
+
+            // Thread emoji picker
+            if (emojiBtn && emojiPicker &&
+                !emojiBtn.contains(e.target) &&
                 !emojiPicker.contains(e.target)) {
                 emojiPicker.classList.add('hidden');
             }
+
+            // Compose emoji picker
+            if (composeEmojiBtn && composeEmojiPicker &&
+                !composeEmojiBtn.contains(e.target) &&
+                !composeEmojiPicker.contains(e.target)) {
+                composeEmojiPicker.classList.add('hidden');
+            }
+
+            // Recipient suggestions dropdown
+            if (recipientSearchInput && contactSuggestions &&
+                !recipientContainer?.contains(e.target) &&
+                !contactSuggestions.contains(e.target)) {
+                contactSuggestions.classList.add('hidden');
+            }
         });
 
-        // Close modals with Escape key
+        // ── Global keydown — Escape closes everything ───────────────────────
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeAllModals();
                 closeAllDropdowns();
+                contactSuggestions?.classList.add('hidden');
                 if (newMessagePanel && !newMessagePanel.classList.contains('hidden')) {
                     closeNewMessagePanel();
                 }
             }
         });
-
-        // Click outside new message panel to close (optional)
-        if (newMessagePanel) {
-            document.addEventListener('click', (e) => {
-                if (!newMessagePanel.classList.contains('hidden') && 
-                    !newMessagePanel.contains(e.target) && 
-                    newMessageBtn && !newMessageBtn.contains(e.target)) {
-                    closeNewMessagePanel();
-                }
-            });
-        }
     }
 
     // ========== START ==========

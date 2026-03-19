@@ -903,7 +903,7 @@
           </nav>
 
               <!-- Messaging Box -->
-<!-- ===== LINKEDIN-STYLE MESSAGING SYSTEM ===== -->
+<!-- ===== COMPLETE LINKEDIN-STYLE MESSAGING SYSTEM ===== -->
 <div class="messaging-container">
     <!-- Main Messaging Panel (Left) -->
     <div class="messaging-panel" id="messagingPanel">
@@ -921,15 +921,15 @@
                     <!-- Three-dot dropdown menu -->
                     <div class="messaging-dropdown hidden" id="messagingDropdown">
                         <button class="dropdown-item" id="manageConversationsBtn">
-                            <span class="material-symbols-outlined"></span>
+                            <span class="material-symbols-outlined">manage_search</span>
                             <span>Manage conversations</span>
                         </button>
                         <button class="dropdown-item" id="messagingSettingsBtn">
-                            <span class="material-symbols-outlined"></span>
+                            <span class="material-symbols-outlined">settings</span>
                             <span>Messaging settings</span>
                         </button>
                         <button class="dropdown-item" id="awayMessageBtn">
-                            <span class="material-symbols-outlined"></span>
+                            <span class="material-symbols-outlined">event_busy</span>
                             <span>Set away message</span>
                         </button>
                     </div>
@@ -956,12 +956,8 @@
                 <button class="tab-btn" data-tab="others" id="othersTab">Others</button>
             </div>
             <div class="tabs-content">
-                <div class="tab-pane active" id="focusedChats">
-                    <!-- Focused chats will be loaded dynamically -->
-                </div>
-                <div class="tab-pane" id="otherChats">
-                    <!-- Other chats will be loaded dynamically -->
-                </div>
+                <div class="tab-pane active" id="focusedChats"></div>
+                <div class="tab-pane" id="otherChats"></div>
             </div>
         </div>
     </div>
@@ -975,16 +971,72 @@
             </button>
         </div>
         
-        <div class="new-message-search">
-            <span class="material-symbols-outlined search-icon">search</span>
-            <input type="text" id="newMessageSearchInput" placeholder="Type a name or multiple names">
+        <!-- Recipient Selection Area -->
+        <div class="recipient-area">
+            <div class="recipient-input-container" id="recipientContainer">
+                <div class="selected-contacts" id="selectedContacts"></div>
+                <input type="text" 
+                       id="recipientSearchInput" 
+                       class="recipient-search-input" 
+                       placeholder="Type a name or multiple names"
+                       autocomplete="off">
+            </div>
+            
+            <!-- Contact Suggestions Dropdown -->
+            <div class="contact-suggestions hidden" id="contactSuggestions">
+                <div class="suggestions-header">Suggested</div>
+                <div class="suggestions-list" id="suggestionsList"></div>
+            </div>
         </div>
         
-        <div class="suggested-section">
-            <h4>Suggested</h4>
-            <div class="suggested-contacts-list" id="suggestedContactsList">
-                <!-- Contacts will be loaded dynamically -->
+        <!-- Message Compose Area (Appears when recipient area is focused) -->
+        <div class="message-compose-area hidden" id="messageComposeArea">
+            <div class="compose-message-input-container">
+                <textarea class="compose-message-textarea" 
+                          id="composeMessageTextarea" 
+                          placeholder="Write a message..."
+                          rows="4"></textarea>
             </div>
+            
+            <!-- Compose Actions -->
+            <div class="compose-actions">
+                <div class="compose-attachments">
+                    <button class="compose-attach-btn" id="composeAttachImageBtn" title="Add image">
+                        <span class="material-symbols-outlined">image</span>
+                    </button>
+                    <button class="compose-attach-btn" id="composeAttachFileBtn" title="Attach file">
+                        <span class="material-symbols-outlined">attach_file</span>
+                    </button>
+                    <button class="compose-attach-btn" id="composeAttachGifBtn" title="Add GIF">
+                        <span class="material-symbols-outlined">gif_box</span>
+                    </button>
+                    <div class="compose-emoji-wrapper">
+                        <button class="compose-attach-btn" id="composeEmojiBtn" title="Add emoji">
+                            <span class="material-symbols-outlined">insert_emoticon</span>
+                        </button>
+                        <div class="compose-emoji-picker hidden" id="composeEmojiPicker">
+                            <div class="emoji-grid">
+                                <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
+                                <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
+                                <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
+                                <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
+                                <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
+                                <button>🎉</button> <button>✨</button> <button>🔥</button> <button>✅</button> <button>❌</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="file" id="composeAttachmentInput" class="hidden" multiple>
+                <button class="compose-send-btn" id="composeSendBtn" disabled>
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Suggested Section (Initial view) -->
+        <div class="suggested-section" id="initialSuggestedSection">
+            <h4>Suggested</h4>
+            <div class="suggested-contacts-list" id="suggestedContactsList"></div>
         </div>
     </div>
 
@@ -1004,7 +1056,6 @@
                     <button class="thread-action-btn" id="threadMoreBtn">
                         <span class="material-symbols-outlined">more_horiz</span>
                     </button>
-                    <!-- Thread more dropdown -->
                     <div class="thread-dropdown hidden" id="threadDropdown">
                         <button class="dropdown-item" id="archiveThreadBtn">
                             <span class="material-symbols-outlined">archive</span>
@@ -1030,9 +1081,7 @@
             </div>
         </div>
 
-        <div class="chat-messages" id="chatMessages">
-            <!-- Messages will be loaded dynamically -->
-        </div>
+        <div class="chat-messages" id="chatMessages"></div>
 
         <div class="chat-composer">
             <div class="composer-input-area">
@@ -1060,29 +1109,27 @@
                                 <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
                                 <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
                                 <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
-                                            <button>🎉</button> <button>✨</button> <button>🔥</button> <button>✅</button> <button>❌</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <button>🎉</button> <button>✨</button> <button>🔥</button> <button>✅</button> <button>❌</button>
                             </div>
-                            <input type="file" id="attachmentInput" class="hidden" multiple>
-                            <button class="send-message-btn" id="sendMessageBtn" disabled>
-                                <span class="material-symbols-outlined">send</span>
-                            </button>
                         </div>
                     </div>
                 </div>
+                <input type="file" id="attachmentInput" class="hidden" multiple>
+                <button class="send-message-btn" id="sendMessageBtn" disabled>
+                    <span class="material-symbols-outlined">send</span>
+                </button>
             </div>
+        </div>
+    </div>
+</div>
 
-
-        
-           <!-- AWAY MESSAGE MODAL -->
+<!-- AWAY MESSAGE MODAL -->
 <div class="messaging-modal hidden" id="awayMessageModal">
     <div class="modal-content away-modal-content">
         <div class="modal-header">
             <div class="modal-header-left">
                 <span class="premium-badge">
-                    <img id="premium-img" src="Images/premium.png" alt="Diamond" class="premium-icon">
+                    <img id="premium-img" src="images/premium.png" alt="Diamond" class="premium-icon">
                     PREMIUM
                 </span>
             </div>
@@ -1096,7 +1143,7 @@
             <p class="modal-description">With Premium, you can set away messages to inform your connections to expect a delayed response to their messages.</p>
             
             <div class="premium-users-indicator">
-                <img src="Images/circle.png" alt="Users" class="users-icon">
+                <img src="images/circle.png" alt="Users" class="users-icon">
                 <span>Name and other members use premium</span>
             </div>
             
@@ -1106,7 +1153,7 @@
                     <input type="date" id="startDate" class="date-input">
                 </div>
                 <div class="date-separator-img">
-                    <img id="line-img" src="Images/line.png" alt="to" class="separator-img">
+                    <img src="images/line.png" alt="to" class="separator-img">
                 </div>
                 <div class="date-field">
                     <label for="endDate">End Date</label>
