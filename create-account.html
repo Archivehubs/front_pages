@@ -197,6 +197,53 @@
             color: #000;
         }
 
+        /* Toast Notification Styles */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: #4CAF50;
+            color: white;
+            padding: 16px 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 16px;
+            font-weight: 500;
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 90%;
+            text-align: center;
+            border: 2px solid #45a049;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.success {
+            background: #4CAF50;
+            border-color: #45a049;
+        }
+
+        .toast .close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .toast .close-btn:hover {
+            opacity: 1;
+        }
+
     
     /* Account Type Selection Styles */
     .account-type-container {
@@ -292,6 +339,7 @@
         background: #b0b3b8;
         cursor: not-allowed;
     }
+
 </style>
 </head>
 <body>
@@ -572,6 +620,11 @@
         </div>
     </div>
 </div>
+<!-- Toast Notification HTML -->
+<div id="toast" class="toast success">
+    <span id="toastMessage"></span>
+    <button id="toastCloseBtn" class="close-btn">&times;</button>
+</div>
 <script>
 function togglePassword(inputId, icon) {
     const input = document.getElementById(inputId);
@@ -715,6 +768,33 @@ function togglePassword(inputId, icon) {
             });
         }
 
+        // Toast Notification Functions
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.className = `toast ${type}`;
+            
+            // Show the toast
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                hideToast();
+            }, 5000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('show');
+        }
+
+        // Close toast on button click
+        document.getElementById('toastCloseBtn').addEventListener('click', hideToast);
+
         // Enable/disable next button based on terms checkbox
         const termsCheckbox = document.getElementById('termsCheckbox');
         const nextBtn = document.getElementById('nextBtn');
@@ -776,10 +856,14 @@ function togglePassword(inputId, icon) {
                 if (!response.ok) {
                     console.log(data)
                     throw new Error(data.message || data.error || 'Failed to create account');
+                } else if (response.status === 500) {
+                    throw new Error(data?.message || 'Server error occurred. Please try again later.');
                 }
 
                 userId = data.userId;
                 isFailure = false;
+
+                showToast("A verification email has been sent to your inbox. Please verify your email to complete registration.");
 
             } catch (error) {
                 isFailure = true;
@@ -1207,5 +1291,6 @@ function togglePassword(inputId, icon) {
         showPart(currentPart);
     });
 </script>
+
 </body>
 </html>
