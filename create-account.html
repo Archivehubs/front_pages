@@ -1054,6 +1054,10 @@ function togglePassword(inputId, icon) {
                 errorEl.textContent = 'Please specify your sector';
                 return;
             }
+            
+            // Show loading
+            this.disabled = true;
+            document.getElementById('corporateSpinner').style.display = 'inline-block';
 
              // signup user
             const isFailure = await signUpUser(errorEl, "business");
@@ -1065,9 +1069,6 @@ function togglePassword(inputId, icon) {
                 return;
             }
 
-            // Show loading
-            this.disabled = true;
-            document.getElementById('corporateSpinner').style.display = 'inline-block';
 
             try {
                 const finalAccountType = accountType === 'others' ? accountTypeOther : accountType;
@@ -1234,6 +1235,9 @@ function togglePassword(inputId, icon) {
                 }
             }
 
+            // Show loading
+            this.disabled = true;
+            document.getElementById('individualSpinner').style.display = 'inline-block';
             // signup user
             const isFailure = await signUpUser(errorEl, "individual");
 
@@ -1244,9 +1248,6 @@ function togglePassword(inputId, icon) {
                 return;
             }
 
-            // Show loading
-            this.disabled = true;
-            document.getElementById('individualSpinner').style.display = 'inline-block';
 
             try {
                 const finalStatus = status === 'others' ? statusOther : status;
