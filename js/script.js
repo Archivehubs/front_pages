@@ -1,3 +1,7 @@
+/* \front_pages\js\script.js  */
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize like functionality
     initializeLikeButtons();

@@ -1,0 +1,88 @@
+/* ── Light Theme (Default) ─────────────────────────────────────── */
+:root {
+  /* Brand */
+  --accent-color:           #f7d000;
+  --accent-hover:           #e5c000;
+  --accent-light:           #fff9e6;
+  --color-dark:             #1c1e21;
+
+  /* Backgrounds */
+  --bg-primary:             #ffffff;
+  --bg-secondary:           #f0f2f5;
+  --bg-hover:               #f0f2f5;
+  --card-bg:                #ffffff;
+
+  /* Text */
+  --text-primary:           #1c1e21;
+  --text-secondary:         #65676b;
+
+  /* Border */
+  --border-color:           #e4e6eb;
+
+  /* Shadows */
+  --shadow:                 0 1px 2px  rgba(0, 0, 0, 0.10);
+  --shadow-md:              0 2px 8px  rgba(0, 0, 0, 0.10);
+  --shadow-hover:           0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* Border Radius */
+  --radius-sm:              6px;
+  --radius-md:              10px;
+  --radius-lg:              16px;
+  --radius-full:            9999px;
+
+  /* Layout */
+  --nav-height:             60px;
+  --sidebar-left-w:         275px;
+  --sidebar-right-w:        300px;
+  --content-max-w:          1200px;
+
+  /* ── Backward-Compatibility Aliases ──────────────────────────── */
+  /* These keep old references in HTML/JS working without changes.  */
+  --hover-bg:               #f0f2f5;         /* = --bg-hover        */
+  --primary-color:          #f7d000;         /* = --accent-color    */
+  --primary-color-light:    rgba(247,208,0,0.10);
+  --primary-yellow:         #f7d000;         /* message.css compat  */
+  --primary-yellow-hover:   #e5c000;
+  --primary-yellow-light:   #fff9e6;
+
+  /* Previously undefined — now fixed */
+  --accent-color-dark:      #c9a800;
+  --background-primary:     #ffffff;         /* = --bg-primary      */
+  --background-secondary:   #f0f2f5;         /* = --bg-secondary    */
+  --text-color:             #1c1e21;         /* = --text-primary    */
+}
+
+/* ── Dark Theme ─────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --accent-color:           #f7d000;
+  --accent-hover:           #e5c000;
+  --accent-light:           #332e00;
+  --color-dark:             #e4e6eb;
+
+  --bg-primary:             #242526;
+  --bg-secondary:           #18191a;
+  --bg-hover:               #3a3b3c;
+  --card-bg:                #242526;
+
+  --text-primary:           #e4e6eb;
+  --text-secondary:         #b0b3b8;
+
+  --border-color:           #3e4042;
+
+  --shadow:                 0 1px 2px  rgba(0, 0, 0, 0.30);
+  --shadow-md:              0 2px 8px  rgba(0, 0, 0, 0.30);
+  --shadow-hover:           0 4px 12px rgba(0, 0, 0, 0.40);
+
+  /* Aliases — dark */
+  --hover-bg:               #3a3b3c;
+  --primary-color:          #f7d000;
+  --primary-color-light:    rgba(247,208,0,0.10);
+  --primary-yellow:         #f7d000;
+  --primary-yellow-hover:   #e5c000;
+  --primary-yellow-light:   #332e00;
+
+  --accent-color-dark:      #e5c000;
+  --background-primary:     #242526;
+  --background-secondary:   #18191a;
+  --text-color:             #e4e6eb;
+}

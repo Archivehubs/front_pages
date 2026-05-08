@@ -4,14 +4,34 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home | ArchiveHubs</title>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/message.css">
-        <!-- <link rel="stylesheet" href="css/insight-analysis.css">
-        <link rel="stylesheet" href="css/general-terms.css"> -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <!-- Google Fonts -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+
+        <!-- Tailwind CDN (utilities + responsiveness) -->
+        <script>
+        tailwind.config = {
+            theme: {
+            extend: {
+                colors: {
+                brand:  '#f7d000',
+                dark:   '#1c1e21',
+                muted:  '#65676b',
+                }
+            }
+            }
+        }
+        </script>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Design system — MUST be first -->
+        <link rel="stylesheet" href="/css/tokens.css">
+        <!-- Main stylesheet — replaces style.css + message.css -->
+        <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
 
