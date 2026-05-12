@@ -1,32 +1,12 @@
 /**
- * ARCHIVEHUBS — Create Post Modal Module
+ * ARCHIVEHUBS — Create Post Modal Module (COMPLETELY FIXED)
  * /js/modules/createPost.js
- *
- * Handles all create-post modal functionality:
- *   - Open / close (triggered from home.html post input)
- *   - Contenteditable editor + placeholder
- *   - Background color picker (quick + full)
- *   - Text color picker
- *   - Font size picker
- *   - Bold / Italic formatting
- *   - Multi-file upload (photo, video, GIF) + previews + delete
- *   - Emoji picker
- *   - Location tag (add / remove)
- *   - Tag people modal (search, multi-select, chips)
- *   - Audience selector modal
- *   - Post button state management
- *   - Discard confirmation on close
- *
- * Usage: import and call CreatePost.init() once in main.js
- *
- * API hook: replace CreatePost._submitPost() body when ready.
  */
 
 const CreatePost = (() => {
   'use strict';
 
   /* ── Data ─────────────────────────────────────────────────── */
-
   const BG_COLORS = [
     { color: '#ffffff', label: 'White',  border: true },
     { color: '#000000', label: 'Black' },
@@ -73,7 +53,6 @@ const CreatePost = (() => {
     { value: 'Custom',               icon: 'manage_accounts',  title: 'Custom',                desc: 'Include and exclude connections' },
   ];
 
-  // Placeholder people — replace with API call in Phase 5
   const PEOPLE = [
     { id: 1, name: 'Sarah Johnson',    role: 'Software Engineer at Tech Corp',    initial: 'S' },
     { id: 2, name: 'Michael Chen',     role: 'Product Manager at ArchiveHubs',    initial: 'M' },
@@ -91,25 +70,22 @@ const CreatePost = (() => {
   ];
 
   /* ── State ────────────────────────────────────────────────── */
-
   let state = {
-    selectedBg:       null,   // color string or gradient
+    selectedBg:       null,
     selectedTextColor: null,
     selectedFontSize:  '18px',
     selectedAudience:  'Connections',
-    selectedPeople:    [],    // array of person ids
-    mediaFiles:        [],    // array of { url, type, name }
+    selectedPeople:    [],
+    mediaFiles:        [],
+    mediaPreviews:     [],
     hasLocation:       false,
     locationText:      '',
     isOpen:            false,
   };
 
-  /* ── DOM references (populated in init) ───────────────────── */
-
   let el = {};
 
   /* ── Init ─────────────────────────────────────────────────── */
-
   function init() {
     _cacheElements();
     if (!el.overlay) {
@@ -125,29 +101,22 @@ const CreatePost = (() => {
   }
 
   /* ── DOM cache ─────────────────────────────────────────────── */
-
   function _cacheElements() {
-    el.overlay         = document.getElementById('createPostModal');
+    el.overlay = document.getElementById('createPostModal');
     if (!el.overlay) return;
 
     el.backdrop        = el.overlay.querySelector('.cp-backdrop');
     el.modal           = el.overlay.querySelector('.cp-modal');
     el.closeBtn        = el.overlay.querySelector('#cpCloseBtn');
     el.backBtn         = el.overlay.querySelector('#cpBackBtn');
-
-    // User row
     el.audienceBtn     = el.overlay.querySelector('#cpAudienceBtn');
     el.audienceIcon    = el.overlay.querySelector('#cpAudienceIcon');
     el.audienceLabel   = el.overlay.querySelector('#cpAudienceLabel');
-
-    // Editor
     el.content         = el.overlay.querySelector('#cpContent');
     el.editor          = el.overlay.querySelector('#cpEditor');
     el.mediaGrid       = el.overlay.querySelector('#cpMediaGrid');
     el.locationTag     = el.overlay.querySelector('#cpLocationTag');
     el.peopleTags      = el.overlay.querySelector('#cpPeopleTags');
-
-    // Format bar
     el.bgColorBtn      = el.overlay.querySelector('#cpBgColorBtn');
     el.bgPopup         = el.overlay.querySelector('#cpBgPopup');
     el.bgColorGrid     = el.overlay.querySelector('#cpBgColorGrid');
@@ -160,8 +129,6 @@ const CreatePost = (() => {
     el.sizePopup       = el.overlay.querySelector('#cpSizePopup');
     el.boldBtn         = el.overlay.querySelector('#cpBoldBtn');
     el.italicBtn       = el.overlay.querySelector('#cpItalicBtn');
-
-    // Add-to-post bar
     el.photoInput      = el.overlay.querySelector('#cpPhotoInput');
     el.gifInput        = el.overlay.querySelector('#cpGifInput');
     el.photoBtn        = el.overlay.querySelector('#cpPhotoBtn');
@@ -171,24 +138,16 @@ const CreatePost = (() => {
     el.locationBtn     = el.overlay.querySelector('#cpLocationBtn');
     el.emojiPicker     = el.overlay.querySelector('#cpEmojiPicker');
     el.emojiGrid       = el.overlay.querySelector('#cpEmojiGrid');
-
-    // Footer
     el.postBtn         = el.overlay.querySelector('#cpPostBtn');
-
-    // Full color picker
     el.fullColor       = el.overlay.querySelector('#cpFullColor');
     el.fullColorBack   = el.overlay.querySelector('#cpFullColorBack');
     el.fullColorBody   = el.overlay.querySelector('#cpFullColorBody');
-
-    // Audience nested modal
     el.audienceModal   = el.overlay.querySelector('#cpAudienceModal');
     el.audienceOptions = el.overlay.querySelector('#cpAudienceOptions');
     el.audienceCancel  = el.overlay.querySelector('#cpAudienceCancel');
     el.audienceDone    = el.overlay.querySelector('#cpAudienceDone');
     el.audienceBack    = el.overlay.querySelector('#cpAudienceBack');
     el.setDefault      = el.overlay.querySelector('#cpSetDefault');
-
-    // Tag people nested modal
     el.tagModal        = el.overlay.querySelector('#cpTagModal');
     el.tagList         = el.overlay.querySelector('#cpTagList');
     el.tagSearch       = el.overlay.querySelector('#cpTagSearch');
@@ -198,18 +157,11 @@ const CreatePost = (() => {
   }
 
   /* ── Build helpers ─────────────────────────────────────────── */
-
   function _buildColorGrids() {
-    // Background quick swatches
     if (el.bgColorGrid) {
       el.bgColorGrid.innerHTML = '';
-      BG_COLORS.forEach(c => {
-        const s = _makeBgSwatch(c);
-        el.bgColorGrid.appendChild(s);
-      });
+      BG_COLORS.forEach(c => el.bgColorGrid.appendChild(_makeBgSwatch(c)));
     }
-
-    // Text color circles
     if (el.textColorGrid) {
       el.textColorGrid.innerHTML = '';
       TEXT_COLORS.forEach(hex => {
@@ -238,30 +190,21 @@ const CreatePost = (() => {
   function _buildFullColorPicker() {
     if (!el.fullColorBody) return;
     el.fullColorBody.innerHTML = '';
-
-    // Solid section
     const solidSection = _colorSection('Solid', BG_COLORS);
-    el.fullColorBody.appendChild(solidSection);
-
-    // Gradient section
     const gradSection = _colorSection('Gradient', BG_GRADIENTS);
+    el.fullColorBody.appendChild(solidSection);
     el.fullColorBody.appendChild(gradSection);
   }
 
   function _colorSection(title, items) {
     const sec = document.createElement('div');
     sec.className = 'cp-color-section';
-
     const h = document.createElement('h3');
     h.textContent = title;
     sec.appendChild(h);
-
     const grid = document.createElement('div');
     grid.className = 'cp-color-grid';
-    items.forEach(c => {
-      const s = _makeBgSwatch(c);
-      grid.appendChild(s);
-    });
+    items.forEach(c => grid.appendChild(_makeBgSwatch(c)));
     sec.appendChild(grid);
     return sec;
   }
@@ -279,8 +222,7 @@ const CreatePost = (() => {
           <span class="cp-audience-option-title">${opt.title}</span>
           <span class="cp-audience-option-desc">${opt.desc}</span>
         </div>
-        <input type="radio" name="cpAudience" value="${opt.value}"
-          ${opt.value === state.selectedAudience ? 'checked' : ''}>
+        <input type="radio" name="cpAudience" value="${opt.value}" ${opt.value === state.selectedAudience ? 'checked' : ''}>
       `;
       div.addEventListener('click', () => _selectAudienceOption(opt, div));
       el.audienceOptions.appendChild(div);
@@ -322,10 +264,7 @@ const CreatePost = (() => {
   function _buildTagList(filter = '') {
     if (!el.tagList) return;
     el.tagList.innerHTML = '';
-    const filtered = PEOPLE.filter(p =>
-      p.name.toLowerCase().includes(filter.toLowerCase())
-    );
-
+    const filtered = PEOPLE.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
     filtered.forEach(p => {
       const isSelected = state.selectedPeople.includes(p.id);
       const div = document.createElement('div');
@@ -337,206 +276,83 @@ const CreatePost = (() => {
           <span class="cp-tag-person-name">${p.name}</span>
           <span class="cp-tag-person-role">${p.role}</span>
         </div>
-        <span class="cp-tag-check material-symbols-outlined">
-          ${isSelected ? 'check' : ''}
-        </span>
+        <span class="cp-tag-check material-symbols-outlined">${isSelected ? 'check' : ''}</span>
       `;
       div.addEventListener('click', () => _togglePersonTag(p.id, div));
       el.tagList.appendChild(div);
     });
-
     if (!filtered.length) {
       el.tagList.innerHTML = `<p style="padding:16px;color:var(--text-secondary);font-size:13px;">No people found.</p>`;
     }
   }
 
   /* ── Event listeners ───────────────────────────────────────── */
-
   function _attachEventListeners() {
-
-    /* ── Open / Close ─────────────────────── */
-    // Close on backdrop click
     el.backdrop.addEventListener('click', _handleClose);
     el.closeBtn.addEventListener('click', _handleClose);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && state.isOpen) _handleClose(); });
 
-    // Escape key
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && state.isOpen) _handleClose();
-    });
-
-    /* ── Editor ───────────────────────────── */
     el.editor.addEventListener('input', () => {
       el.editor.classList.toggle('show-placeholder', el.editor.textContent.trim() === '');
       _updatePostBtn();
     });
+    el.editor.addEventListener('focus', () => el.editor.classList.toggle('show-placeholder', el.editor.textContent.trim() === ''));
 
-    el.editor.addEventListener('focus', () =>
-      el.editor.classList.toggle('show-placeholder', el.editor.textContent.trim() === ''));
-
-    /* ── Format bar ───────────────────────── */
-    // Background color popup
-    el.bgColorBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      _togglePopup(el.bgPopup);
-      _closeAllExcept(el.bgPopup);
-    });
-
-    // "More" button → full color picker
-    el.moreColorsBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      _togglePopup(el.bgPopup, false);
-      _togglePopup(el.fullColor, true);
-    });
-
+    el.bgColorBtn.addEventListener('click', e => { e.stopPropagation(); _togglePopup(el.bgPopup); _closeAllExcept(el.bgPopup); });
+    el.moreColorsBtn.addEventListener('click', e => { e.stopPropagation(); _togglePopup(el.bgPopup, false); _togglePopup(el.fullColor, true); });
     el.fullColorBack.addEventListener('click', () => _togglePopup(el.fullColor, false));
+    el.textColorBtn.addEventListener('click', e => { e.stopPropagation(); _togglePopup(el.textPopup); _closeAllExcept(el.textPopup); });
+    el.fontSizeBtn.addEventListener('click', e => { e.stopPropagation(); _togglePopup(el.sizePopup); _closeAllExcept(el.sizePopup); });
+    el.boldBtn.addEventListener('click', () => { el.editor.focus(); document.execCommand('bold', false, null); el.boldBtn.classList.toggle('active'); });
+    el.italicBtn.addEventListener('click', () => { el.editor.focus(); document.execCommand('italic', false, null); el.italicBtn.classList.toggle('active'); });
 
-    // Text color popup
-    el.textColorBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      _togglePopup(el.textPopup);
-      _closeAllExcept(el.textPopup);
-    });
-
-    // Font size popup
-    el.fontSizeBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      _togglePopup(el.sizePopup);
-      _closeAllExcept(el.sizePopup);
-    });
-
-    // Bold / Italic
-    el.boldBtn.addEventListener('click', () => {
-      el.editor.focus();
-      document.execCommand('bold', false, null);
-      el.boldBtn.classList.toggle('active');
-    });
-
-    el.italicBtn.addEventListener('click', () => {
-      el.editor.focus();
-      document.execCommand('italic', false, null);
-      el.italicBtn.classList.toggle('active');
-    });
-
-    /* ── Add-to-post bar ──────────────────── */
-    // Photo / video upload
-    el.photoBtn.addEventListener('click', () => {
-      el.photoInput.accept = 'image/*,video/*';
-      el.photoInput.click();
-    });
-
+    el.photoBtn.addEventListener('click', () => { el.photoInput.accept = 'image/*,video/*'; el.photoInput.click(); });
     el.photoInput.addEventListener('change', e => {
-      Array.from(e.target.files).forEach(file => {
-        const reader = new FileReader();
-        const type   = file.type.startsWith('video') ? 'video' : 'image';
-        reader.onload = ev => _addMediaItem(ev.target.result, type, file.name);
-        reader.readAsDataURL(file);
-      });
+      Array.from(e.target.files).forEach(file => _addMediaItem(file));
       e.target.value = '';
     });
-
-    // GIF upload
-    el.gifBtn.addEventListener('click', () => {
-      el.gifInput.accept = 'image/gif';
-      el.gifInput.click();
-    });
-
+    el.gifBtn.addEventListener('click', () => { el.gifInput.accept = 'image/gif'; el.gifInput.click(); });
     el.gifInput.addEventListener('change', e => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => _addMediaItem(ev.target.result, 'image', file.name);
-      reader.readAsDataURL(file);
+      if (e.target.files[0]) _addMediaItem(e.target.files[0]);
       e.target.value = '';
     });
 
-    // Emoji picker
-    el.emojiBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      _togglePopup(el.emojiPicker);
-      _closeAllExcept(el.emojiPicker);
-    });
+    el.emojiBtn.addEventListener('click', e => { e.stopPropagation(); _togglePopup(el.emojiPicker); _closeAllExcept(el.emojiPicker); });
+    el.locationBtn.addEventListener('click', () => { if (!state.hasLocation) _addLocation('Lagos, Nigeria'); });
+    el.tagBtn.addEventListener('click', () => _openTagModal());
 
-    // Location
-    el.locationBtn.addEventListener('click', () => {
-      if (!state.hasLocation) {
-        _addLocation('Lagos, Nigeria'); // Will come from Geolocation API or user input in Phase 5
-      }
-    });
-
-    // Tag people
-    el.tagBtn.addEventListener('click', () => {
-      _openTagModal();
-    });
-
-    /* ── Tag modal ───────────────────────── */
     el.tagSearch.addEventListener('input', e => _buildTagList(e.target.value));
+    el.tagCancel.addEventListener('click', () => { state.selectedPeople = [..._savedPeople]; _closeNestedModal(el.tagModal); });
+    el.tagBack.addEventListener('click', () => { state.selectedPeople = [..._savedPeople]; _closeNestedModal(el.tagModal); });
+    el.tagDone.addEventListener('click', () => { _savedPeople = [...state.selectedPeople]; _renderPeopleTags(); _closeNestedModal(el.tagModal); _updatePostBtn(); });
 
-    el.tagCancel.addEventListener('click', () => {
-      state.selectedPeople = _getSavedPeopleCopy();
-      _closeNestedModal(el.tagModal);
-    });
-
-    el.tagBack.addEventListener('click', () => {
-      state.selectedPeople = _getSavedPeopleCopy();
-      _closeNestedModal(el.tagModal);
-    });
-
-    el.tagDone.addEventListener('click', () => {
-      _savedPeople = [...state.selectedPeople];
-      _renderPeopleTags();
-      _closeNestedModal(el.tagModal);
-      _updatePostBtn();
-    });
-
-    /* ── Audience modal ───────────────────── */
     el.audienceBtn.addEventListener('click', () => _openAudienceModal());
     el.audienceCancel.addEventListener('click', () => _closeNestedModal(el.audienceModal));
     el.audienceBack.addEventListener('click', () => _closeNestedModal(el.audienceModal));
-
     el.audienceDone.addEventListener('click', () => {
       const radio = el.audienceModal.querySelector('input[name="cpAudience"]:checked');
       if (radio) {
         const opt = AUDIENCE_OPTIONS.find(o => o.value === radio.value);
         if (opt) _applyAudience(opt);
       }
-      if (el.setDefault.checked) {
-        localStorage.setItem('cp_defaultAudience', state.selectedAudience);
-      }
+      if (el.setDefault.checked) localStorage.setItem('cp_defaultAudience', state.selectedAudience);
       _closeNestedModal(el.audienceModal);
     });
 
-    /* ── Post button ─────────────────────── */
     el.postBtn.addEventListener('click', _submitPost);
-
-    /* ── Close all popups on outside click ─ */
-    document.addEventListener('click', () => {
-      _closeAllPopups();
-    });
-
+    document.addEventListener('click', () => _closeAllPopups());
     el.overlay.addEventListener('click', e => e.stopPropagation());
   }
 
-  /* ── State for saved people (cancel support) ─────────────── */
-
   let _savedPeople = [];
 
-  function _getSavedPeopleCopy() { return [..._savedPeople]; }
-
   /* ── Actions ───────────────────────────────────────────────── */
-
   function _applyBg(color, swatchEl) {
     state.selectedBg = color;
     const isGradient = color.includes('gradient');
     el.content.style.background = isGradient ? '' : color;
     el.content.style.backgroundImage = isGradient ? color : '';
-    el.content.style.borderRadius = '8px';
-    el.content.style.padding = '12px 16px';
-
-    // Highlight selected swatch across all grids
-    el.overlay.querySelectorAll('.cp-bg-swatch').forEach(s => {
-      s.classList.toggle('selected', s.dataset.color === color);
-    });
-
+    el.overlay.querySelectorAll('.cp-bg-swatch').forEach(s => s.classList.toggle('selected', s.dataset.color === color));
     _togglePopup(el.bgPopup, false);
     _togglePopup(el.fullColor, false);
   }
@@ -545,18 +361,13 @@ const CreatePost = (() => {
     state.selectedTextColor = hex;
     el.editor.style.color = hex;
     el.textColorIcon.style.color = hex;
-
-    el.overlay.querySelectorAll('.cp-text-swatch').forEach(s => {
-      s.classList.toggle('selected', s.style.background === hex);
-    });
-
+    el.overlay.querySelectorAll('.cp-text-swatch').forEach(s => s.classList.toggle('selected', s.style.background === hex));
     _togglePopup(el.textPopup, false);
   }
 
   function _applyFontSize(size, btnEl) {
     state.selectedFontSize = size;
     el.editor.style.fontSize = size;
-
     el.sizePopup.querySelectorAll('.cp-size-option').forEach(b => b.classList.remove('active'));
     btnEl.classList.add('active');
   }
@@ -574,19 +385,23 @@ const CreatePost = (() => {
     el.audienceLabel.textContent = opt.title;
   }
 
-  function _addMediaItem(url, type, name) {
-    state.mediaFiles.push({ url, type, name });
-    _renderMediaGrid();
-    _updatePostBtn();
+  function _addMediaItem(file) {
+    state.mediaFiles.push(file);
+    const reader = new FileReader();
+    const type = file.type.startsWith('video') ? 'video' : 'image';
+    reader.onload = ev => {
+      state.mediaPreviews.push({ url: ev.target.result, type, name: file.name });
+      _renderMediaGrid();
+      _updatePostBtn();
+    };
+    reader.readAsDataURL(file);
   }
 
   function _renderMediaGrid() {
     el.mediaGrid.innerHTML = '';
-
-    state.mediaFiles.forEach((file, index) => {
+    state.mediaPreviews.forEach((file, index) => {
       const wrapper = document.createElement('div');
       wrapper.className = 'cp-media-item';
-
       if (file.type === 'video') {
         const vid = document.createElement('video');
         vid.src = file.url;
@@ -598,32 +413,24 @@ const CreatePost = (() => {
         img.alt = file.name;
         wrapper.appendChild(img);
       }
-
       const removeBtn = document.createElement('button');
       removeBtn.className = 'cp-remove-media';
       removeBtn.innerHTML = '&times;';
-      removeBtn.title = 'Remove';
       removeBtn.addEventListener('click', e => {
         e.stopPropagation();
         state.mediaFiles.splice(index, 1);
+        state.mediaPreviews.splice(index, 1);
         _renderMediaGrid();
         _updatePostBtn();
       });
-
       wrapper.appendChild(removeBtn);
       el.mediaGrid.appendChild(wrapper);
     });
-
-    // Add "+" tile if there's at least one item and fewer than 10
     if (state.mediaFiles.length > 0 && state.mediaFiles.length < 10) {
       const addTile = document.createElement('div');
       addTile.className = 'cp-media-add-tile';
       addTile.innerHTML = '<span class="material-symbols-outlined">add</span>';
-      addTile.title = 'Add more media';
-      addTile.addEventListener('click', () => {
-        el.photoInput.accept = 'image/*,video/*';
-        el.photoInput.click();
-      });
+      addTile.addEventListener('click', () => el.photoBtn.click());
       el.mediaGrid.appendChild(addTile);
     }
   }
@@ -632,21 +439,15 @@ const CreatePost = (() => {
     state.hasLocation = true;
     state.locationText = locationText;
     el.locationTag.innerHTML = '';
-
     const chip = document.createElement('div');
     chip.className = 'cp-location-chip';
-    chip.innerHTML = `
-      <span class="material-symbols-outlined">location_on</span>
-      <span>${locationText}</span>
-      <span class="cp-remove-chip material-symbols-outlined" id="cpRemoveLocation">close</span>
-    `;
+    chip.innerHTML = `<span class="material-symbols-outlined">location_on</span><span>${locationText}</span><span class="cp-remove-chip material-symbols-outlined" id="cpRemoveLocation">close</span>`;
     chip.querySelector('#cpRemoveLocation').addEventListener('click', () => {
-      state.hasLocation  = false;
+      state.hasLocation = false;
       state.locationText = '';
       el.locationTag.innerHTML = '';
       _updatePostBtn();
     });
-
     el.locationTag.appendChild(chip);
     _updatePostBtn();
   }
@@ -669,56 +470,29 @@ const CreatePost = (() => {
     state.selectedPeople.forEach(id => {
       const person = PEOPLE.find(p => p.id === id);
       if (!person) return;
-
       const chip = document.createElement('div');
       chip.className = 'cp-tag-chip';
-      chip.innerHTML = `
-        <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent-color)">sell</span>
-        <span>${person.name}</span>
-        <span class="cp-remove-chip material-symbols-outlined" data-id="${id}">close</span>
-      `;
+      chip.innerHTML = `<span class="material-symbols-outlined" style="font-size:14px;color:var(--accent-color)">sell</span><span>${person.name}</span><span class="cp-remove-chip material-symbols-outlined" data-id="${id}">close</span>`;
       chip.querySelector('.cp-remove-chip').addEventListener('click', () => {
         state.selectedPeople = state.selectedPeople.filter(i => i !== id);
         _savedPeople = [...state.selectedPeople];
         _renderPeopleTags();
         _updatePostBtn();
       });
-
       el.peopleTags.appendChild(chip);
     });
   }
 
-  /* ── Nested modals ─────────────────────────────────────────── */
-
-  function _openAudienceModal() {
-    _buildAudienceOptions();
-    el.audienceDone.disabled = true;
-    _openNestedModal(el.audienceModal);
-  }
-
-  function _openTagModal() {
-    _savedPeople = [...state.selectedPeople];
-    _buildTagList();
-    el.tagSearch.value = '';
-    _openNestedModal(el.tagModal);
-  }
-
-  function _openNestedModal(modal) {
-    modal.classList.remove('hidden');
-    modal.classList.add('cp-nested-modal');
-  }
-
-  function _closeNestedModal(modal) {
-    modal.classList.add('hidden');
-  }
-
-  /* ── Utility ───────────────────────────────────────────────── */
+  function _openAudienceModal() { _buildAudienceOptions(); el.audienceDone.disabled = true; _openNestedModal(el.audienceModal); }
+  function _openTagModal() { _savedPeople = [...state.selectedPeople]; _buildTagList(); el.tagSearch.value = ''; _openNestedModal(el.tagModal); }
+  function _openNestedModal(modal) { modal.classList.remove('hidden'); }
+  function _closeNestedModal(modal) { modal.classList.add('hidden'); }
 
   function _updatePostBtn() {
-    const hasText   = el.editor.textContent.trim().length > 0;
-    const hasMedia  = state.mediaFiles.length > 0;
-    const hasTags   = state.selectedPeople.length > 0;
-    const hasLoc    = state.hasLocation;
+    const hasText = el.editor.textContent.trim().length > 0;
+    const hasMedia = state.mediaFiles.length > 0;
+    const hasTags = state.selectedPeople.length > 0;
+    const hasLoc = state.hasLocation;
     el.postBtn.disabled = !(hasText || hasMedia || hasTags || hasLoc);
   }
 
@@ -729,9 +503,7 @@ const CreatePost = (() => {
   }
 
   function _closeAllPopups() {
-    [el.bgPopup, el.textPopup, el.sizePopup, el.emojiPicker].forEach(p => {
-      if (p) p.classList.add('hidden');
-    });
+    [el.bgPopup, el.textPopup, el.sizePopup, el.emojiPicker].forEach(p => p?.classList.add('hidden'));
   }
 
   function _closeAllExcept(keepOpen) {
@@ -760,28 +532,23 @@ const CreatePost = (() => {
   }
 
   function _hasContent() {
-    return (
-      el.editor.textContent.trim().length > 0 ||
-      state.mediaFiles.length > 0 ||
-      state.selectedPeople.length > 0 ||
-      state.hasLocation
-    );
+    return (el.editor.textContent.trim().length > 0 || state.mediaFiles.length > 0 || state.selectedPeople.length > 0 || state.hasLocation);
   }
 
   function _resetState() {
     state = {
-      selectedBg:        null,
+      selectedBg: null,
       selectedTextColor: null,
-      selectedFontSize:  '18px',
-      selectedAudience:  'Connections',
-      selectedPeople:    [],
-      mediaFiles:        [],
-      hasLocation:       false,
-      locationText:      '',
-      isOpen:            false,
+      selectedFontSize: '18px',
+      selectedAudience: 'Connections',
+      selectedPeople: [],
+      mediaFiles: [],
+      mediaPreviews: [],
+      hasLocation: false,
+      locationText: '',
+      isOpen: false,
     };
     _savedPeople = [];
-
     el.editor.innerHTML = '';
     el.editor.style.cssText = '';
     el.editor.classList.add('show-placeholder');
@@ -793,34 +560,20 @@ const CreatePost = (() => {
     el.audienceIcon.textContent = 'groups';
     el.audienceLabel.textContent = 'Connections';
     el.postBtn.disabled = true;
-
-    // Reset active format buttons
     el.boldBtn.classList.remove('active');
     el.italicBtn.classList.remove('active');
-
-    // Reset swatch selections
     el.overlay.querySelectorAll('.cp-bg-swatch, .cp-text-swatch').forEach(s => s.classList.remove('selected'));
-
-    // Reset size options
     if (el.sizePopup) {
-      el.sizePopup.querySelectorAll('.cp-size-option').forEach(b => {
-        b.classList.toggle('active', b.dataset.size === '18px');
-      });
+      el.sizePopup.querySelectorAll('.cp-size-option').forEach(b => b.classList.toggle('active', b.dataset.size === '18px'));
     }
   }
-
-  /* ── Open / Close ──────────────────────────────────────────── */
 
   function open() {
     if (!el.overlay) return;
     el.overlay.classList.remove('hidden');
     state.isOpen = true;
     document.body.style.overflow = 'hidden';
-
-    // Focus editor after animation
-    setTimeout(() => el.editor && el.editor.focus(), 280);
-
-    // Load saved default audience
+    setTimeout(() => el.editor?.focus(), 280);
     const saved = localStorage.getItem('cp_defaultAudience');
     if (saved) {
       const opt = AUDIENCE_OPTIONS.find(o => o.value === saved);
@@ -848,59 +601,136 @@ const CreatePost = (() => {
     }
   }
 
-  /* ── Submit ────────────────────────────────────────────────── */
-
-  function _submitPost() {
+  /* ── MAIN SUBMIT FUNCTION - COMPLETELY REWRITTEN ────────────────── */
+  async function _submitPost() {
     if (el.postBtn.disabled) return;
 
-    const payload = {
-      text:      el.editor.innerHTML,
-      audience:  state.selectedAudience,
-      media:     state.mediaFiles.map(f => ({ url: f.url, type: f.type, name: f.name })),
-      people:    state.selectedPeople,
-      location:  state.hasLocation ? state.locationText : null,
-      bg:        state.selectedBg,
-      textColor: state.selectedTextColor,
-      fontSize:  state.selectedFontSize,
-      timestamp: new Date().toISOString(),
-    };
+    const originalText = el.postBtn.textContent;
+    el.postBtn.disabled = true;
+    el.postBtn.textContent = 'Posting...';
 
-    console.log('[CreatePost] Submitting payload:', payload);
+    try {
+      // Get text content from the editor
+      const textContent = el.editor.innerText.trim();
+      
+      // Validate
+      if (!textContent && state.mediaFiles.length === 0) {
+        _showToast('Please add some text or media to your post', 'error');
+        return;
+      }
 
-    /**
-     * ── API HOOK (Phase 5) ──────────────────────────────────
-     * Replace this block with:
-     *
-     * fetch('/api/posts', {
-     *   method: 'POST',
-     *   headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
-     *   body: JSON.stringify(payload),
-     * })
-     * .then(res => res.json())
-     * .then(data => {
-     *   Feed.prependPost(data.post);  // from feed.js
-     *   close();
-     * })
-     * .catch(err => console.error('Post failed:', err));
-     * ──────────────────────────────────────────────────────── */
+      if (textContent.length > 300) {
+        _showToast('Post text cannot exceed 300 characters', 'error');
+        return;
+      }
+      
+      // Extract hashtags from text
+      const tagRegex = /#(\w+)/g;
+      const tags = [];
+      let match;
+      while ((match = tagRegex.exec(textContent)) !== null) {
+        tags.push(match[1]);
+      }
 
-    // Temporary: just close and show success toast
-    close();
-    _showToast('Post shared!');
+      // Default tag if none found - IMPORTANT: Backend requires at least one tag
+      if (tags.length === 0) {
+        tags.push('general');
+      }
+
+      // Create FormData - EXACTLY like the working console test
+      const formData = new FormData();
+      formData.append('textContent', textContent);
+      
+      for (let i = 0; i < tags.length; i++) {
+        formData.append('tags[]', tags[i]); 
+      }
+
+      // Append media files
+      for (let i = 0; i < state.mediaFiles.length; i++) {
+        formData.append('media', state.mediaFiles[i]);
+      }
+
+      // DEBUG - Log everything to verify
+      console.log('========== CREATE POST DEBUG ==========');
+      console.log('textContent:', textContent);
+      console.log('tags array:', tags);
+      console.log('media count:', state.mediaFiles.length);
+      console.log('FormData entries:');
+      for (let pair of formData.entries()) {
+        const value = pair[1] instanceof File ? `[File: ${pair[1].name}]` : pair[1];
+        console.log(`  ${pair[0]}: ${value}`);
+      }
+      console.log('========================================');
+
+      // Make the request - using the same URL that worked in console test
+      const response = await fetch('http://localhost:3000/post/create', {
+        method: 'POST',
+        credentials: 'include',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error('Server error response:', result);
+        const errorMsg = result.errors?.[0]?.msg || result.message || 'Failed to create post';
+        throw new Error(errorMsg);
+      }
+
+      console.log('Post created successfully:', result);
+      _showToast('Post shared successfully!');
+      
+      // Close modal and reset
+      close();
+      
+      // Refresh the feed
+      setTimeout(() => {
+        // Dispatch a custom event that feed module can listen to
+        window.dispatchEvent(new CustomEvent('postCreated', { detail: result.post }));
+        // Also try to reload feed if Feed module exists
+        if (window.Feed && typeof window.Feed.loadFeed === 'function') {
+          window.Feed.loadFeed(true);
+        }
+      }, 500);
+
+    } catch (error) {
+      console.error('Create post error:', error);
+      _showToast(error.message || 'Failed to create post. Please try again.', 'error');
+    } finally {
+      el.postBtn.disabled = false;
+      el.postBtn.textContent = originalText;
+    }
   }
 
-  function _showToast(message) {
-    const t = document.createElement('div');
-    t.className = 'story-success-message';
-    t.textContent = message;
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 3200);
+  function _showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast-message ${type}`;
+    toast.textContent = message;
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: ${type === 'error' ? '#ef4444' : '#22c55e'};
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 100000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      animation: fadeInUp 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
   }
 
   /* ── Public API ────────────────────────────────────────────── */
-
   return { init, open, close };
-
 })();
 
 export default CreatePost;
