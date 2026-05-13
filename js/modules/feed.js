@@ -1,47 +1,36 @@
 /**
- * ARCHIVEHUBS — Feed Module
+ * ARCHIVEHUBS — Feed Module (Backend Integrated)
  * /js/modules/feed.js
  *
  * Responsibilities:
- *   - Like / unlike posts (animated count)
- *   - Comment modal (open, close, render, add, filter, sort)
- *   - Repost popup + "Repost with thoughts" modal
+ *   - Fetch and display posts from backend
+ *   - Like / unlike posts
+ *   - Comment modal with real API
+ *   - Repost functionality
  *   - Share modal
- *   - Post metrics formatting
- *
- * Replaces:
- *   - initializeLikeButtons / handleLikeClick / likePost / unlikePost
- *   - animateLikeCount / updateLikeCount in script.js
- *   - All comment functions in script.js
- *   - Repost inline <script> blocks in home.html
- *   - Share inline <script> block in home.html
- *
- * API hooks marked with: // ── API HOOK ──
+ *   - Infinite scroll / pagination
  */
+
+import API from '../api.js';
 
 const Feed = (() => {
   'use strict';
 
-  /* ── Hardcoded comment data (Phase 4 → moves to api.js) ────── */
-  const COMMENTS_BY_POST = {
-    1: [
-      { id: 1,  author: 'Alex Rodriguez', avatar: 'images/profile.jpg', text: "Really interesting! I've been working on similar AI implementations.", time: '2 hours ago',  likes: 12 },
-      { id: 2,  author: 'Maria Garcia',   avatar: 'images/profile.jpg', text: 'Great insights! AI is definitely transforming how we approach development.', time: '1 hour ago',   likes: 8  },
-      { id: 3,  author: 'David Kim',      avatar: 'images/profile.jpg', text: 'The possibilities are endless with machine learning.', time: '45 minutes ago', likes: 15 },
-      { id: 4,  author: 'Sarah Wilson',   avatar: 'images/profile.jpg', text: 'What framework are you using for this implementation?', time: '30 minutes ago', likes: 6  },
-      { id: 5,  author: 'Mike Johnson',   avatar: 'images/profile.jpg', text: 'This reminds me of a project I worked on last year.', time: '15 minutes ago', likes: 4  },
-    ],
-    2: [
-      { id: 6,  author: 'Jennifer Lee',   avatar: 'images/profile.jpg', text: 'This platform looks amazing! Can\'t wait to try it out.', time: '3 hours ago',  likes: 18 },
-      { id: 7,  author: 'Robert Chen',    avatar: 'images/profile.jpg', text: 'Finally, a solution for digital asset management!', time: '2 hours ago',  likes: 14 },
-      { id: 8,  author: 'Amanda Foster',  avatar: 'images/profile.jpg', text: 'The interface looks so clean and professional.', time: '1 hour ago',   likes: 9  },
-      { id: 9,  author: 'Carlos Mendez',  avatar: 'images/profile.jpg', text: 'How does this compare to other solutions in the market?', time: '45 minutes ago', likes: 7  },
-      { id: 10, author: 'Lisa Thompson',  avatar: 'images/profile.jpg', text: 'This is going to revolutionise how we handle archives!', time: '20 minutes ago', likes: 11 },
-    ],
+  /* ── State ─────────────────────────────────────────────────── */
+  let state = {
+    posts: [],
+    isLoading: false,
+    hasMore: true,
+    paginate: 0,
+    currentPostId: null,
+    currentComments: [],
+    commentSort: 'relevant'
   };
 
-  /* ── Utilities ─────────────────────────────────────────────── */
+  /* ── DOM Elements ──────────────────────────────────────────── */
+  let elements = {};
 
+  /* ── Utilities ─────────────────────────────────────────────── */
   function _qs(selector, scope = document) {
     return scope.querySelector(selector);
   }
@@ -53,52 +42,268 @@ const Feed = (() => {
   function _animateCount(el, start, end, duration = 300) {
     const t0 = performance.now();
     function step(t) {
-      const p   = Math.min((t - t0) / duration, 1);
+      const p = Math.min((t - t0) / duration, 1);
       const val = Math.round(start + (end - start) * (1 - Math.pow(1 - p, 2)));
-      el.textContent = val;
+      el.textContent = _formatNumber(val);
       if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
 
-  /* ── Likes ─────────────────────────────────────────────────── */
+  function _formatNumber(num) {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num.toString();
+  }
 
-  function _initLikes() {
-    _qsa('.like-btn').forEach(btn => {
-      const postId = btn.dataset.postId;
+  function _formatTime(timestamp) {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diff = Math.floor((now - date) / 1000); // seconds
+    
+    if (diff < 60) return 'just now';
+    if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+    if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
+    return date.toLocaleDateString();
+  }
 
-      // ── API HOOK (Phase 5) ───────────────────────────────────
-      // Replace localStorage read with: GET /api/posts/:id/liked
-      const isLiked = localStorage.getItem(`post_${postId}_liked`) === 'true';
-      if (isLiked) _setLiked(btn, true);
+  function _showToast(message, type = 'success') {
+    const existing = document.querySelector('.feed-toast');
+    if (existing) existing.remove();
 
-      btn.addEventListener('click', () => _handleLike(btn));
+    const toast = document.createElement('div');
+    toast.className = `feed-toast ${type}`;
+    toast.textContent = message;
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: ${type === 'error' ? '#ef4444' : '#22c55e'};
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 100000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  /* ── Render Posts ──────────────────────────────────────────── */
+  function _renderPost(post) {
+    const postId = post.id;
+    const likeCount = post.likeCount || 0;
+    const commentCount = post.commentCount || 0;
+    const mediaUrls = post.mediaUrls || [];
+    const createdAt = post.createdAt?.low || post.createdAt;
+    
+    // Get author info (simplified - you'll need to fetch author details)
+    const authorName = post.authorName || 'User';
+    const authorAvatar = post.authorAvatar || 'images/profile.jpg';
+    const authorRole = post.authorRole || 'Member';
+    
+    const mediaHtml = mediaUrls.map(url => {
+      const isVideo = url.match(/\.(mp4|webm|mov)$/i);
+      if (isVideo) {
+        return `<video src="${url}" class="post-image" controls></video>`;
+      }
+      return `<img src="${url}" alt="Post image" class="post-image">`;
+    }).join('');
+    
+    const tagsHtml = post.tags ? post.tags.map(tag => `#${tag}`).join(' ') : '';
+    
+    return `
+      <div class="post" data-post-id="${postId}" data-post-author="${post.authorId}">
+        <div class="post-header">
+          <div class="post-author-info">
+            <a href="Archivehubs-Individual_Page/Individual_Bio_profile.html">
+              <img src="${authorAvatar}" alt="Profile" class="post-profile-pic">
+            </a>
+            <div class="post-author-details">
+              <h4 class="post-author-name">${_escapeHtml(authorName)}</h4>
+              <p class="post-meta">${_escapeHtml(authorRole)} • ${_formatTime(createdAt)}</p>
+            </div>
+          </div>
+          <button class="more-options post-menu-btn" data-post-id="${postId}">
+            <i class="fas fa-ellipsis-h"></i>
+          </button>
+        </div>
+
+        <div class="post-content">
+          <p class="post-text">${_escapeHtml(post.textContent)} ${tagsHtml}</p>
+          ${mediaHtml}
+        </div>
+
+        <div class="post-metrics">
+          <span class="metric">
+            <i class="fas fa-thumbs-up"></i>
+            <span class="metric-count" data-likes="${likeCount}">${_formatNumber(likeCount)}</span>
+          </span>
+          <span class="metric">
+            <span class="metric-count comment-trigger" data-comments="${commentCount}">${_formatNumber(commentCount)} comments</span>
+          </span>
+        </div>
+
+        <div class="post-actions">
+          <button class="action-btn like-btn" data-post-id="${postId}" data-liked="false">
+            <i class="far fa-thumbs-up"></i>
+            <span>Like</span>
+          </button>
+          <button class="action-btn comment-action-btn" data-post-id="${postId}">
+            <i class="far fa-comment"></i>
+            <span>Comment</span>
+          </button>
+          <div class="repostWrapper" style="position:relative;display:inline-block;">
+            <button class="action-btn repost-btn" data-post-id="${postId}">
+              <i class="fas fa-retweet"></i>
+              <span>Repost</span>
+            </button>
+            <div class="repost-expanded" id="repost-expanded-${postId}" style="display:none; position:absolute; left:0; top:40px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 12px 28px rgba(0,0,0,.2); width:320px; z-index:10000;">
+              <button class="thoughtRepost-btn repost-option-btn" data-post-id="${postId}" style="display:block;width:100%;text-align:left;background:transparent;border:0;cursor:pointer;padding:12px 14px;">
+                <span class="material-symbols-outlined" style="vertical-align:middle;margin-right:10px;">edit_square</span>
+                <strong>Repost with your thoughts</strong>
+                <p style="margin:4px 0 0 30px;font-size:12px;color:#6b7280">Create a new post with thoughts</p>
+              </button>
+              <hr style="margin:0">
+              <button class="plainRepost-btn repost-option-btn" data-post-id="${postId}" style="display:block;width:100%;text-align:left;background:transparent;border:0;cursor:pointer;padding:12px 14px;">
+                <span class="material-symbols-outlined" style="vertical-align:middle;margin-right:10px;">repeat</span>
+                <strong>Repost</strong>
+                <p style="margin:4px 0 0 30px;font-size:12px;color:#6b7280">Instantly bring this post to others feeds</p>
+              </button>
+            </div>
+          </div>
+          <button class="action-btn share-btn" data-post-id="${postId}">
+            <i class="far fa-paper-plane"></i>
+            <span>Share</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  function _escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
     });
   }
 
-  function _handleLike(btn) {
-    const postId     = btn.dataset.postId;
-    const isLiked    = btn.classList.contains('liked');
-    const countEl    = btn.closest('.post')?.querySelector('.metric-count[data-likes]');
+  /* ── Load Feed from Backend ────────────────────────────────── */
+  async function loadFeed(revalidate = false) {
+    if (state.isLoading) return;
+    if (!revalidate && !state.hasMore) return;
+
+    state.isLoading = true;
+    _showLoadingIndicator();
+
+    try {
+      const response = await fetch(`http://localhost:3000/feed?paginate=${state.paginate}&revalidate=${revalidate}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      const newPosts = data.posts || [];
+
+      if (revalidate) {
+        state.posts = newPosts;
+        state.paginate = 1;
+      } else {
+        state.posts = [...state.posts, ...newPosts];
+        state.paginate++;
+      }
+
+      state.hasMore = newPosts.length > 0;
+      _renderFeed();
+
+    } catch (error) {
+      console.error('Failed to load feed:', error);
+      _showToast('Failed to load feed. Please refresh.', 'error');
+    } finally {
+      state.isLoading = false;
+      _hideLoadingIndicator();
+    }
+  }
+
+  function _renderFeed() {
+    const postsContainer = document.querySelector('.posts-section');
+    if (!postsContainer) return;
+
+    if (state.posts.length === 0) {
+      postsContainer.innerHTML = '<div class="empty-feed">No posts yet. Follow more people or create your first post!</div>';
+      return;
+    }
+
+    postsContainer.innerHTML = state.posts.map(post => _renderPost(post)).join('');
+    
+    // Re-initialize event listeners for new posts
+    _initPostEventListeners();
+  }
+
+  function _showLoadingIndicator() {
+    const container = document.querySelector('.posts-section');
+    if (container && !document.querySelector('.feed-loader')) {
+      const loader = document.createElement('div');
+      loader.className = 'feed-loader';
+      loader.innerHTML = '<div class="spinner"></div><span>Loading more posts...</span>';
+      container.appendChild(loader);
+    }
+  }
+
+  function _hideLoadingIndicator() {
+    const loader = document.querySelector('.feed-loader');
+    if (loader) loader.remove();
+  }
+
+  /* ── Like / Unlike ─────────────────────────────────────────── */
+  async function _handleLike(btn) {
+    const postId = btn.dataset.postId;
+    const isLiked = btn.classList.contains('liked');
+    const post = btn.closest('.post');
+    const countEl = post?.querySelector('.metric-count[data-likes]');
     if (!countEl) return;
 
     const current = parseInt(countEl.dataset.likes) || 0;
-    const next    = isLiked ? Math.max(0, current - 1) : current + 1;
+    const next = isLiked ? Math.max(0, current - 1) : current + 1;
 
+    // Optimistic update
     _setLiked(btn, !isLiked);
     countEl.dataset.likes = next;
-    countEl.classList.add('updating');
     _animateCount(countEl, current, next);
-    setTimeout(() => countEl.classList.remove('updating'), 320);
 
-    // ── API HOOK (Phase 5) ───────────────────────────────────
-    // Replace localStorage with:
-    // fetch(`/api/posts/${postId}/like`, { method: isLiked ? 'DELETE' : 'POST' })
-    //   .catch(err => { _setLiked(btn, isLiked); countEl.dataset.likes = current; }); // rollback on error
-    if (isLiked) {
-      localStorage.removeItem(`post_${postId}_liked`);
-    } else {
-      localStorage.setItem(`post_${postId}_liked`, 'true');
+    try {
+      if (isLiked) {
+        await API.feed.unlike(postId);
+      } else {
+        await API.feed.toggleLike(postId);
+      }
+    } catch (error) {
+      // Rollback on error
+      console.error('Like/unlike failed:', error);
+      _setLiked(btn, isLiked);
+      countEl.dataset.likes = current;
+      _animateCount(countEl, next, current);
+      _showToast('Action failed. Please try again.', 'error');
     }
   }
 
@@ -113,158 +318,131 @@ const Feed = (() => {
   }
 
   /* ── Comment Modal ─────────────────────────────────────────── */
-
-  let _activePostId = null;
-
-  function _initComments() {
-    const modal      = document.getElementById('commentModal');
-    const closeBtn   = _qs('.close-modal-btn', modal);
-    const filterBtns = _qsa('.filter-btn', modal);
-    const postCmtBtn = _qs('.post-comment-btn', modal);
-    const cmtInput   = _qs('.comment-input', modal);
-
+  async function _openCommentModal(postId) {
+    state.currentPostId = postId;
+    const modal = document.getElementById('commentModal');
     if (!modal) return;
 
-    // Open via comment count trigger
-    _qsa('.comment-trigger').forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const post = trigger.closest('.post');
-        if (post) _openCommentModal(post);
-      });
-    });
-
-    // Open via Comment action button
-    _qsa('.post-actions .action-btn').forEach(btn => {
-      const icon = btn.querySelector('i');
-      if (icon && (icon.classList.contains('fa-comment'))) {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const post = btn.closest('.post');
-          if (post) _openCommentModal(post);
-        });
-      }
-    });
-
-    // Close
-    closeBtn?.addEventListener('click', _closeCommentModal);
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) _closeCommentModal();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        _closeCommentModal();
-      }
-    });
-
-    // Filter tabs
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        _filterComments(btn.dataset.filter);
-      });
-    });
-
-    // Post comment
-    postCmtBtn?.addEventListener('click', _addNewComment);
-
-    cmtInput?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        _addNewComment();
-      }
-    });
-  }
-
-  function _openCommentModal(post) {
-    const modal     = document.getElementById('commentModal');
-    if (!modal) return;
-
-    _activePostId = parseInt(post.dataset.postId) || 1;
-
-    // Populate preview
-    const preview    = _qs('.post-preview', modal);
-    const postHeader = _qs('.post-header', post);
-    const postContent= _qs('.post-content', post);
-
-    if (preview && postHeader && postContent) {
-      preview.innerHTML = `
-        <div class="post-header">${postHeader.innerHTML}</div>
-        <div class="post-content">${postContent.innerHTML}</div>
-      `;
-    }
-
-    // Load comments
-    _loadComments(_activePostId);
-
-    // Show modal
+    // Show loading state
+    const container = _qs('.comments-container', modal);
+    if (container) container.innerHTML = '<div class="loading-comments">Loading comments...</div>';
+    
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // Focus input
-    setTimeout(() => _qs('.comment-input', modal)?.focus(), 120);
+    // Load comments from API
+    await _loadComments(postId);
   }
 
-  function _closeCommentModal() {
-    const modal = document.getElementById('commentModal');
-    if (!modal) return;
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    const input = _qs('.comment-input', modal);
-    if (input) input.value = '';
-    _activePostId = null;
+  async function _loadComments(postId, sort = state.commentSort) {
+    try {
+      // Note: You'll need to implement a get comments endpoint
+      // For now, using a placeholder - you'll need to add this to your backend
+      const response = await fetch(`http://localhost:3000/post/${postId}/comments?sort=${sort}`, {
+        method: 'GET',
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        state.currentComments = data.comments || [];
+      } else {
+        state.currentComments = [];
+      }
+    } catch (error) {
+      console.error('Failed to load comments:', error);
+      state.currentComments = [];
+    }
+    
+    _renderComments();
   }
 
-  function _loadComments(postId) {
+ function _renderComments() {
     const container = _qs('.comments-container');
     if (!container) return;
 
-    // ── API HOOK (Phase 5) ──────────────────────────────────
-    // fetch(`/api/posts/${postId}/comments`)
-    //   .then(r => r.json())
-    //   .then(data => _renderComments(container, data.comments));
+    if (state.currentComments.length === 0) {
+      container.innerHTML = '<div class="no-comments">No comments yet. Be the first to comment!</div>';
+      return;
+    }
 
-    const data = COMMENTS_BY_POST[postId] || COMMENTS_BY_POST[1];
-    _renderComments(container, data);
-  }
-
-  function _renderComments(container, comments) {
-    container.innerHTML = comments.map(c => `
-      <div class="comment-item" data-comment-id="${c.id}">
-        <img src="${c.avatar}" alt="${c.author}" class="comment-avatar">
+    container.innerHTML = state.currentComments.map(comment => {
+      // 1. Handle the author name (it's inside the author object)
+      const authorName = comment.author?.name || 'Unknown User';
+      // 2. Handle the avatar
+      const avatar = comment.author?.profilePic || 'images/profile.jpg';
+      
+      return `
+      <div class="comment-item" data-comment-id="${comment.id}">
+        <img src="${avatar}" alt="${_escapeHtml(authorName)}" class="comment-avatar">
         <div class="comment-content">
-          <div class="comment-author">${c.author}</div>
-          <div class="comment-text">${c.text}</div>
+          <div class="comment-author">${_escapeHtml(authorName)}</div>
+          <div class="comment-text">${_escapeHtml(comment.text)}</div>
           <div class="comment-actions">
-            <button class="comment-action like-comment" data-likes="${c.likes}">Like (${c.likes})</button>
+            <button class="comment-action like-comment" data-comment-id="${comment.id}" data-likes="${comment.likes || 0}">Like (${comment.likes || 0})</button>
             <button class="comment-action reply-btn">Reply</button>
-            <span class="comment-time">${c.time}</span>
+            <span class="comment-time">${_formatTime(comment.createdAt)}</span>
           </div>
         </div>
       </div>
-    `).join('');
+    `}).join('');
 
     _bindCommentActions(container);
   }
 
+  async function _addComment() {
+    const input = _qs('.comment-input');
+    if (!input) return;
+    
+    const text = input.value.trim();
+    if (!text) return;
+
+    try {
+      const response = await fetch('http://localhost:3000/post/comment', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId: state.currentPostId, comment: text })
+      });
+
+      if (response.ok) {
+        input.value = '';
+        await _loadComments(state.currentPostId);
+        _updateCommentCount(state.currentComments.length + 1);
+        _showToast('Comment added!');
+      } else {
+        throw new Error('Failed to add comment');
+      }
+    } catch (error) {
+      console.error('Add comment failed:', error);
+      _showToast('Failed to add comment', 'error');
+    }
+  }
+
+  function _updateCommentCount(count) {
+    const post = document.querySelector(`.post[data-post-id="${state.currentPostId}"]`);
+    const trigger = post?.querySelector('.comment-trigger');
+    if (trigger) {
+      trigger.textContent = `${_formatNumber(count)} comments`;
+      trigger.dataset.comments = count;
+    }
+  }
+
   function _bindCommentActions(container) {
     container.querySelectorAll('.like-comment').forEach(btn => {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', async function() {
+        const commentId = this.dataset.commentId;
         const current = parseInt(this.dataset.likes);
-        const isLiked = this.classList.contains('liked');
-        const next    = isLiked ? current - 1 : current + 1;
-        this.classList.toggle('liked', !isLiked);
-        this.dataset.likes = next;
-        this.textContent   = `Like (${next})`;
+        // You'll need to implement comment like endpoint
+        this.dataset.likes = current + 1;
+        this.textContent = `Like (${current + 1})`;
       });
     });
 
     container.querySelectorAll('.reply-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function() {
         const author = this.closest('.comment-item')?.querySelector('.comment-author')?.textContent;
-        const input  = _qs('.comment-input');
+        const input = _qs('.comment-input');
         if (input && author) {
           input.value = `@${author} `;
           input.focus();
@@ -273,208 +451,219 @@ const Feed = (() => {
     });
   }
 
-  function _addNewComment() {
-    const input = _qs('.comment-input');
-    if (!input) return;
-
-    const text = input.value.trim();
-    if (!text) return;
-
-    const container = _qs('.comments-container');
-    if (!container) return;
-
-    // ── API HOOK (Phase 5) ──────────────────────────────────
-    // fetch(`/api/posts/${_activePostId}/comments`, { method:'POST', body: JSON.stringify({ text }) })
-    //   .then(r => r.json())
-    //   .then(data => _prependComment(container, data.comment));
-
-    const comment = {
-      id:     Date.now(),
-      author: 'You',
-      avatar: 'images/profile.jpg',
-      text,
-      time:   'Just now',
-      likes:  0,
-    };
-
-    const div = document.createElement('div');
-    div.className = 'comment-item';
-    div.dataset.commentId = comment.id;
-    div.innerHTML = `
-      <img src="${comment.avatar}" alt="${comment.author}" class="comment-avatar">
-      <div class="comment-content">
-        <div class="comment-author">${comment.author}</div>
-        <div class="comment-text">${comment.text}</div>
-        <div class="comment-actions">
-          <button class="comment-action like-comment" data-likes="0">Like (0)</button>
-          <button class="comment-action reply-btn">Reply</button>
-          <span class="comment-time">${comment.time}</span>
-        </div>
-      </div>
-    `;
-    container.insertAdjacentElement('afterbegin', div);
-    _bindCommentActions(div);
-    input.value = '';
-
-    // Update count on original post card
-    _updateCommentCount(container.querySelectorAll('.comment-item').length);
-  }
-
-  function _updateCommentCount(count) {
-    if (!_activePostId) return;
-    const post    = document.querySelector(`.post[data-post-id="${_activePostId}"]`);
-    const trigger = post?.querySelector('.comment-trigger');
-    if (trigger) {
-      trigger.textContent         = `${count} comments`;
-      trigger.dataset.comments    = count;
+  function _closeCommentModal() {
+    const modal = document.getElementById('commentModal');
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      const input = _qs('.comment-input', modal);
+      if (input) input.value = '';
+      state.currentPostId = null;
     }
-  }
-
-  function _filterComments(type) {
-    const container = _qs('.comments-container');
-    if (!container) return;
-
-    if (type === 'all') { _loadComments(_activePostId); return; }
-
-    const items = Array.from(container.querySelectorAll('.comment-item'));
-
-    items.sort((a, b) => {
-      if (type === 'relevant') {
-        const la = parseInt(a.querySelector('.like-comment')?.dataset.likes || 0);
-        const lb = parseInt(b.querySelector('.like-comment')?.dataset.likes || 0);
-        return lb - la;
-      }
-      if (type === 'newest') return -1; // reverse
-      return 0;
-    });
-
-    items.forEach(item => container.appendChild(item));
   }
 
   /* ── Repost ─────────────────────────────────────────────────── */
+  async function _handleRepost(postId, thoughts = null) {
+    try {
+      await API.feed.repost(postId, thoughts);
+      _showToast(thoughts ? 'Reposted with thoughts!' : 'Post reposted!');
+    } catch (error) {
+      console.error('Repost failed:', error);
+      _showToast('Failed to repost', 'error');
+    }
+  }
 
-  function _initReposts() {
-    // Wire up each repost button that has a local popup (data-post-id based)
+  async function _handleRepostWithThoughts(postId) {
+    const thoughts = prompt('Add your thoughts (optional):');
+    if (thoughts !== null) {
+      await _handleRepost(postId, thoughts);
+    }
+  }
+
+  /* ── Share ──────────────────────────────────────────────────── */
+  function _handleShare(postId) {
+    const url = `${window.location.origin}/post/${postId}`;
+    navigator.clipboard.writeText(url).then(() => {
+      _showToast('Link copied to clipboard!');
+    }).catch(() => {
+      _showToast('Share link: ' + url);
+    });
+  }
+
+  /* ── Delete Post ────────────────────────────────────────────── */
+  async function _handleDeletePost(postId) {
+    if (!confirm('Are you sure you want to delete this post?')) return;
+    
+    try {
+      await API.feed.deletePost(postId);
+      // Remove post from DOM
+      const post = document.querySelector(`.post[data-post-id="${postId}"]`);
+      if (post) post.remove();
+      // Remove from state
+      state.posts = state.posts.filter(p => p.id !== postId);
+      _showToast('Post deleted');
+    } catch (error) {
+      console.error('Delete failed:', error);
+      _showToast('Failed to delete post', 'error');
+    }
+  }
+
+  /* ── Event Listeners ───────────────────────────────────────── */
+  function _initPostEventListeners() {
+    // Like buttons
+    _qsa('.like-btn').forEach(btn => {
+      btn.removeEventListener('click', () => _handleLike(btn));
+      btn.addEventListener('click', () => _handleLike(btn));
+    });
+
+    // Comment buttons
+    _qsa('.comment-action-btn, .comment-trigger').forEach(btn => {
+      btn.removeEventListener('click', () => _openCommentModal(btn.dataset.postId || btn.closest('.post')?.dataset.postId));
+      btn.addEventListener('click', () => {
+        const postId = btn.dataset.postId || btn.closest('.post')?.dataset.postId;
+        if (postId) _openCommentModal(postId);
+      });
+    });
+
+    // Repost buttons
     _qsa('.repost-btn').forEach(btn => {
-      const post    = btn.closest('.post');
-      if (!post) return;
-      const postId  = post.dataset.postId;
-      const popup   = document.getElementById(`repost-expanded-${postId}`);
-      if (!popup) return;
-
+      const postId = btn.dataset.postId;
+      const popup = document.getElementById(`repost-expanded-${postId}`);
+      
+      btn.removeEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (popup) popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+      });
+      
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-      });
-
-      // Plain repost option
-      const plainBtn = document.getElementById(`plainRepost-${postId}`);
-      plainBtn?.addEventListener('click', () => {
-        popup.style.display = 'none';
-        _showToast('Post reposted to your feed.');
-        // ── API HOOK: POST /api/posts/:id/repost
-      });
-
-      // Repost with thoughts option
-      const thoughtBtn = document.getElementById(`thoughtRepost-btn-${postId}`);
-      thoughtBtn?.addEventListener('click', () => {
-        popup.style.display = 'none';
-        _openRepostThoughtsModal(postId, post);
+        if (popup) popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
       });
     });
 
-    // Close all repost popups on outside click
-    document.addEventListener('mousedown', () => {
+    // Plain repost
+    _qsa('.plainRepost-btn').forEach(btn => {
+      btn.removeEventListener('click', () => _handleRepost(btn.dataset.postId));
+      btn.addEventListener('click', () => {
+        _handleRepost(btn.dataset.postId);
+        const popup = document.getElementById(`repost-expanded-${btn.dataset.postId}`);
+        if (popup) popup.style.display = 'none';
+      });
+    });
+
+    // Repost with thoughts
+    _qsa('.thoughtRepost-btn').forEach(btn => {
+      btn.removeEventListener('click', () => _handleRepostWithThoughts(btn.dataset.postId));
+      btn.addEventListener('click', () => {
+        _handleRepostWithThoughts(btn.dataset.postId);
+        const popup = document.getElementById(`repost-expanded-${btn.dataset.postId}`);
+        if (popup) popup.style.display = 'none';
+      });
+    });
+
+    // Share buttons
+    _qsa('.share-btn').forEach(btn => {
+      btn.removeEventListener('click', () => _handleShare(btn.dataset.postId));
+      btn.addEventListener('click', () => _handleShare(btn.dataset.postId));
+    });
+
+    // Post menu (delete, edit)
+    _qsa('.post-menu-btn').forEach(btn => {
+      btn.removeEventListener('click', (e) => {
+        e.stopPropagation();
+        const postId = btn.dataset.postId;
+        if (confirm('Delete this post?')) _handleDeletePost(postId);
+      });
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const postId = btn.dataset.postId;
+        if (confirm('Delete this post?')) _handleDeletePost(postId);
+      });
+    });
+  }
+
+  /* ── Infinite Scroll ───────────────────────────────────────── */
+  function _initInfiniteScroll() {
+    const handleScroll = () => {
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const bottomPosition = document.body.offsetHeight - 500;
+      
+      if (scrollPosition >= bottomPosition && !state.isLoading && state.hasMore) {
+        loadFeed(false);
+      }
+    };
+    
+    window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
+  }
+
+  /* ── Refresh Feed (after new post) ─────────────────────────── */
+  function refresh(revalidate = true) {
+    state.paginate = revalidate ? 0 : state.paginate;
+    loadFeed(revalidate);
+  }
+
+  /* ── Init ──────────────────────────────────────────────────── */
+  function init() {
+    // Set up comment modal listeners
+    const modal = document.getElementById('commentModal');
+    if (modal) {
+      const closeBtn = _qs('.close-modal-btn', modal);
+      const postBtn = _qs('.post-comment-btn', modal);
+      const filterBtns = _qsa('.filter-btn', modal);
+      
+      closeBtn?.addEventListener('click', _closeCommentModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) _closeCommentModal();
+      });
+      postBtn?.addEventListener('click', _addComment);
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.commentSort = btn.dataset.filter;
+          if (state.currentPostId) {
+            await _loadComments(state.currentPostId);
+          }
+        });
+      });
+      
+      const commentInput = _qs('.comment-input', modal);
+      commentInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          _addComment();
+        }
+      });
+    }
+    
+    // Close repost popups on outside click
+    document.addEventListener('click', () => {
       _qsa('.repost-expanded').forEach(p => { p.style.display = 'none'; });
     });
-
-    // Repost-with-thoughts modal controls
-    _qsa('[id^="repostThoughtsModal"]').forEach(modal => {
-      const id         = modal.id.replace('repostThoughtsModal', '');
-      const closeBtn   = document.getElementById(`repostThoughtsClose${id}`);
-      const cancelBtn  = document.getElementById(`repostThoughtsCancel${id}`);
-      const postBtn    = document.getElementById(`repostThoughtsPost${id}`);
-      const overlay    = document.getElementById(`repostThoughtsOverlay${id}`);
-
-      const close = () => { modal.style.display = 'none'; document.body.style.overflow = ''; };
-
-      closeBtn?.addEventListener('click', close);
-      cancelBtn?.addEventListener('click', close);
-      overlay?.addEventListener('click', close);
-      postBtn?.addEventListener('click', () => {
-        close();
-        _showToast('Reposted with your thoughts.');
-        // ── API HOOK: POST /api/posts/:id/repost { thoughts: textarea.value }
-      });
+    
+    // Load initial feed
+    loadFeed(true);
+    
+    // Setup infinite scroll
+    _initInfiniteScroll();
+    
+    // Listen for new posts from CreatePost module
+    window.addEventListener('postCreated', () => {
+      refresh(true);
     });
-  }
-
-  function _openRepostThoughtsModal(postId, originalPost) {
-    const modal   = document.getElementById(`repostThoughtsModal${postId}`);
-    const preview = document.getElementById(`repostOriginalPreview${postId}`);
-    if (!modal) return;
-
-    if (preview && originalPost) {
-      const clone = originalPost.cloneNode(true);
-      clone.querySelectorAll('.post-actions, .repost-expanded').forEach(el => el.remove());
-      preview.innerHTML = '';
-      preview.appendChild(clone);
-    }
-
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  }
-
-  /* ── Share modal ───────────────────────────────────────────── */
-
-  function _initShare() {
-    _qsa('[id^="share-btn-"]').forEach(btn => {
-      const postId = btn.id.replace('share-btn-', '');
-      const modal  = document.getElementById(`shareModal${postId}`);
-      if (!modal) return;
-
-      const overlay  = document.getElementById(`shareOverlay${postId}`);
-      const closeBtn = document.getElementById(`shareClose${postId}`);
-      const shareNow = document.getElementById(`shareNow${postId}`);
-
-      const open  = () => { modal.style.display = 'block'; document.body.style.overflow = 'hidden'; };
-      const close = () => { modal.style.display = 'none';  document.body.style.overflow = ''; };
-
-      btn.addEventListener('click', (e) => { e.preventDefault(); open(); });
-      overlay?.addEventListener('click', close);
-      closeBtn?.addEventListener('click', close);
-      shareNow?.addEventListener('click', () => { close(); _showToast('Post shared!'); });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.style.display === 'block') close();
-      });
-    });
-  }
-
-  /* ── Toast utility ─────────────────────────────────────────── */
-
-  function _showToast(msg) {
-    const existing = document.querySelector('.story-success-message');
-    if (existing) existing.remove();
-
-    const t = document.createElement('div');
-    t.className   = 'story-success-message';
-    t.textContent = msg;
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 3200);
   }
 
   /* ── Public API ────────────────────────────────────────────── */
-
-  function init() {
-    _initLikes();
-    _initComments();
-    _initReposts();
-    _initShare();
-  }
-
-  return { init };
+  return { 
+    init, 
+    refresh, 
+    loadFeed,
+    getPosts: () => state.posts 
+  };
 
 })();
 

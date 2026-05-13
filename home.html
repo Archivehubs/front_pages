@@ -245,56 +245,56 @@
           </div>
           </section>
 
-          <!-- Middle Section -->
-          <section class="middle-section">
-            <!-- Post Creation Area -->
-            <div class="create-post">
-              <div style="margin-bottom: 10px; padding: 15px;" >
-                <span style="background: black; color: #f7d000; margin-bottom: 30px; padding: 2px; border-radius: 10px;">ArchivehubsChat</span>
+        <!-- Middle Section -->
+        <section class="middle-section">
+          <!-- Post Creation Area -->
+          <div class="create-post">
+            <div style="margin-bottom: 10px; padding: 15px;">
+              <span style="background: black; color: #f7d000; margin-bottom: 30px; padding: 2px; border-radius: 10px;">ArchivehubsChat</span>
+            </div>
+            <div class="post-input-container">
+              <a href="Archivehubs-Individual_Page/Individual_Bio_profile.html">
+                <img src="images/profile.jpg" alt="User Profile" class="user-profile-pic">
+              </a>
+              <div class="post-input-wrapper" onclick="CreatePost.open()" style="cursor:pointer">
+                <input type="text" placeholder="Start a post" class="post-input" readonly>
               </div>
-              <div class="post-input-container">
-                <a href="Archivehubs-Individual_Page/Individual_Bio_profile.html"><img src="images/profile.jpg" alt="User Profile" class="user-profile-pic"></a>
-                <div class="post-input-wrapper" onclick="CreatePost.open()" style="cursor:pointer">
-                    <input type="text" placeholder="Start a post" class="post-input" readonly>
-                </div>
-              </div>
-              
-              <!-- Post Actions -->
-              <div class="post-actions">
+            </div>
+            
+            <!-- Post Actions -->
+            <div class="post-actions">
               <a href="./Archivehubs-Video/video2-live.html">
                 <button class="action-btn">
                   <i class="fas fa-video"></i>
                   <span>Live Video</span>
                 </button>
               </a>
-                <a href="./Archivehubs-Media/media.html">
-                  <button class="action-btn">
-                    <i class="fas fa-image"></i>
-                    <span>Media</span>
-                  </button>
-                </a>
-                <a href="./Archivehubs-Games/gamespage.html">
-                  <button class="action-btn">
+              <a href="./Archivehubs-Media/media.html">
+                <button class="action-btn">
+                  <i class="fas fa-image"></i>
+                  <span>Media</span>
+                </button>
+              </a>
+              <a href="./Archivehubs-Games/gamespage.html">
+                <button class="action-btn">
                   <i class="fas fa-gamepad"></i>
                   <span>Game</span>
                 </button>
-                </a>
-                <button class="action-btn">
-                  <i class="fas fa-robot"></i>
-                  <span>AI</span>
-                </button>
-              </div>
+              </a>
+              <button class="action-btn">
+                <i class="fas fa-robot"></i>
+                <span>AI</span>
+              </button>
             </div>
-            
+          </div>
 
-                  <!-- After create-post div -->
+          <!-- Stories Section -->
           <div class="stories-section">
             <div class="stories-container">
-
               <!-- Create Story Card -->
               <div class="story-card create-story">
                 <div class="story-content">
-                <div class="create-story-top" onclick="CreateStory.open()">
+                  <div class="create-story-top" onclick="CreateStory.open()">
                     <img src="images/profile.jpg" alt="Your Profile" class="story-avatar">
                     <label for="story-upload" class="create-story-plus">
                       <i class="fas fa-plus"></i>
@@ -304,177 +304,16 @@
                   </div>
                 </div>
               </div>
-              <!-- Story Cards - 6 cards as shown in mockup -->
-              <div class="story-card">
-                <div class="story-content">
-                  <img src="images/profile.jpg" alt="User" class="story-avatar">
-                  <span class="story-username">John Doe</span>
-                </div>
-              </div>
-              <!-- Repeat story-card div 5 more times for other stories -->
-              <div class="story-card">
-                <div class="story-content">
-                  <img src="images/profile.jpg" alt="User" class="story-avatar">
-                  <span class="story-username">John Doe</span>
-                </div>
-              </div>
-              <div class="story-card">
-                <div class="story-content">
-                  <img src="images/profile.jpg" alt="User" class="story-avatar">
-                  <span class="story-username">John Doe</span>
-                </div>
-              </div>
-              <div class="story-card">
-                <div class="story-content">
-                  <img src="images/profile.jpg" alt="User" class="story-avatar">
-                  <span class="story-username">John Doe</span>
-                </div>
-              </div>
-              <div class="story-card">
-                <div class="story-content">
-                  <img src="images/profile.jpg" alt="User" class="story-avatar">
-                  <span class="story-username">John Doe</span>
-                </div>
-              </div>
-              <div class="story-card">
-                <div class="story-content">
-                  <img src="images/profile.jpg" alt="User" class="story-avatar">
-                  <span class="story-username">John Doe</span>
-                </div>
-              </div>
-              <div class="story-card">
-                <div class="story-content">
-                  <img src="images/profile.jpg" alt="User" class="story-avatar">
-                  <span class="story-username">John Doe</span>
-                </div>
-              </div>
-              <!-- ... more story cards ... -->
+              <!-- Story cards will be dynamically loaded by Stories module -->
             </div>
           </div>
 
-          <!-- Posts Section -->
+          <!-- Posts Section - This will be populated dynamically by Feed module -->
           <div class="posts-section">
-            <div class="post" data-post-id="1">
-              <!-- Post Header -->
-              <div class="post-header">
-                <div class="post-author-info">
-                    <a href="Archivehubs-Individual_Page/Individual_Bio_profile.html"><img src="images/profile.jpg" alt="Profile" class="post-profile-pic"></a>
-                    <div class="post-author-details">
-                        <h4 class="post-author-name">Sarah Johnson</h4>
-                        <p class="post-meta">Software Engineer at Tech Corp • 2h ago</p>
-                    </div>
-                </div>
-              </div>
-
-              <!-- Post Content -->
-              <div class="post-content">
-                <p class="post-text">
-                  Just finished implementing a new feature using AI! Really excited about how machine learning 
-                  is transforming the way we build software. What are your thoughts on AI in modern development? 
-                  #Programming #AI #Innovation
-                </p>
-                <!-- Optional: Add post image if needed -->
-                <img src="images/post-example.jpg" alt="Post Image" class="post-image">
-              </div>
-
-              <!-- Post Metrics -->
-              <div class="post-metrics">
-                <span class="metric">
-                  <i class="fas fa-thumbs-up"></i>
-                  <span class="metric-count" data-likes="142">142</span>
-                </span>
-                <span class="metric">
-                  <span class="metric-count comment-trigger" data-comments="28">28 comments</span>
-                </span>
-              </div>
-
-              <!-- Post Actions -->
-              <div class="post-actions">
-                <button class="action-btn like-btn" data-post-id="1" data-liked="false">
-                  <i class="far fa-thumbs-up"></i>
-                  <span>Like</span>
-                </button>
-                <button class="action-btn">
-                  <i class="far fa-comment"></i>
-                  <span>Comment</span>
-                </button>
-                <div class="repostWrapper" style="position:relative;display:inline-block;">
-                  <button class="action-btn repost-btn" id="repost-btn-1">
-                    <i class="fas fa-retweet"></i>
-                    <span>Repost</span>
-                  </button>
-                  <!--repost option-->
-                  <div class="repost-expanded" id="repost-expanded-1" style="display:none; position:absolute; left:0; top:40px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 12px 28px rgba(0,0,0,.2); width:320px; z-index:10000; overflow:hidden;">
-                    <button id="thoughtRepost-btn-1" class="thoughtRepost-btn repost-option-btn" style="display:block;width:100%;text-align:left;background:transparent;border:0;cursor:pointer;padding:12px 14px;">
-                      <span class="material-symbols-outlined" style="vertical-align:middle;margin-right:10px;font-size:20px;color:#111827">edit_square</span> <strong style="font-weight:600;color:#111827">Repost with your thoughts</strong>
-                      <p style="margin:4px 0 0 30px;font-size:12px;color:#6b7280">Create a new post with thoughts</p>
-                    </button>
-                    <hr style="margin:0;border:0;border-top:1px solid #e5e7eb">
-                    <button id="plainRepost-1" class="repost-option-btn" style="display:block;width:100%;text-align:left;background:transparent;border:0;cursor:pointer;padding:12px 14px;">
-                      <span class="material-symbols-outlined" style="vertical-align:middle;margin-right:10px;font-size:20px;color:#111827">repeat</span> <strong style="font-weight:600;color:#111827">Repost</strong>
-                      <p style="margin:4px 0 0 30px;font-size:12px;color:#6b7280">Instantly bring this post to others feeds</p>
-                    </button>
-                  </div>
-                </div>
-                <button class="action-btn" id="share-btn-1">
-                  <i class="far fa-paper-plane"></i>
-                  <span>Share</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Second Post -->
-            <div class="post" data-post-id="2">
-              <!-- Post Header -->
-              <div class="post-header">
-                <div class="post-author-info">
-                    <a href="Archivehubs-Individual_Page/Individual Bio Page Profile/index.html"><img src="images/profile.jpg" alt="Profile" class="post-profile-pic"></a>
-                    <div class="post-author-details">
-                        <h4 class="post-author-name">Michael Chen</h4>
-                        <p class="post-meta">Product Manager at ArchiveHubs • 4h ago</p>
-                    </div>
-                </div>
-              </div>
-
-              <!-- Post Content -->
-              <div class="post-content">
-                <p class="post-text">
-                  Excited to announce our new ArchiveHubs platform! We're revolutionizing how businesses 
-                  manage their digital assets and archives. Looking forward to your feedback! 🚀
-                  #ArchiveHubs #DigitalAssets #Innovation
-                </p>
-              </div>
-
-              <!-- Post Metrics -->
-              <div class="post-metrics">
-                <span class="metric">
-                  <i class="fas fa-thumbs-up"></i>
-                  <span class="metric-count" data-likes="89">89</span>
-                </span>
-                <span class="metric">
-                  <span class="metric-count comment-trigger" data-comments="15">15 comments</span>
-                </span>
-              </div>
-
-              <!-- Post Actions -->
-              <div class="post-actions">
-                <button class="action-btn like-btn" data-post-id="2" data-liked="false">
-                  <i class="far fa-thumbs-up"></i>
-                  <span>Like</span>
-                </button>
-                <button class="action-btn">
-                  <i class="far fa-comment"></i>
-                  <span>Comment</span>
-                </button>
-                <button class="action-btn repost-btn">
-                  <i class="fas fa-retweet"></i>
-                  <span>Repost</span>
-                </button>
-                <button class="action-btn">
-                  <i class="far fa-paper-plane"></i>
-                  <span>Share</span>
-                </button>
-              </div>
+            <!-- Loading indicator -->
+            <div class="feed-loading" style="text-align: center; padding: 40px;">
+              <div class="spinner"></div>
+              <p>Loading posts...</p>
             </div>
           </div>
 
@@ -509,274 +348,7 @@
               </div>
             </div>
           </div>
-
-          <!-- Add this after the posts-section -->
-          <div class="connections-section">
-            <div class="connections-header">
-                <h3>Connections you may want</h3>
-                <button class="see-all-btn">See All</button>
-            </div>
-            
-            <div class="connections-container">
-                <!-- Connection Cards -->
-                <div class="connection-card">
-                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                    <div class="connection-info">
-                        <h4>David Chen</h4>
-                        <p>Software Engineer at Google</p>
-                    </div>
-                    <div class="connection-actions">
-                      <button class="connect-btn">Connect</button>
-                      <button class="decline-btn">Decline</button>
-                    </div>
-                </div>
-
-                <div class="connection-card">
-                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                    <div class="connection-info">
-                        <h4>Sarah Williams</h4>
-                        <p>Data Scientist at Microsoft</p>
-                    </div>
-                    <div class="connection-actions">
-                      <button class="connect-btn">Connect</button>
-                      <button class="decline-btn">Decline</button>
-                    </div>
-                </div>
-
-                <div class="connection-card">
-                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                    <div class="connection-info">
-                        <h4>Michael Rodriguez</h4>
-                        <p>AI Researcher at OpenAI</p>
-                    </div>
-                    <div class="connection-actions">
-                      <button class="connect-btn">Connect</button>
-                      <button class="decline-btn">Decline</button>
-                    </div>
-                </div>
-
-                <div class="connection-card">
-                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                    <div class="connection-info">
-                        <h4>Michael Rodriguez</h4>
-                        <p>AI Researcher at OpenAI</p>
-                    </div>
-                    <div class="connection-actions">
-                      <button class="connect-btn">Connect</button>
-                      <button class="decline-btn">Decline</button>
-                    </div>
-                </div>
-
-                <div class="connection-card">
-                    <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                    <div class="connection-info">
-                        <h4>Michael Rodriguez</h4>
-                        <p>AI Researcher at OpenAI</p>
-                    </div>
-                    <div class="connection-actions">
-                      <button class="connect-btn">Connect</button>
-                      <button class="decline-btn">Decline</button>
-                    </div>
-                </div>
-
-                <!-- Add more connection cards as needed -->
-            </div>
-          </div>
-
-          <!-- Posts Section -->
-                <div class="posts-section">
-                  <div class="post" data-post-id="1">
-                    <!-- Post Header -->
-                    <div class="post-header">
-                      <div class="post-author-info">
-                          <img src="images/profile.jpg" alt="Profile" class="post-profile-pic">
-                          <div class="post-author-details">
-                              <h4 class="post-author-name">Michael Rodriguez</h4>
-                              <p class="post-meta">Software Engineer at Meta • 30min ago</p>
-                          </div>
-                      </div>
-                    </div>
-
-                    <!-- Post Content -->
-                    <div class="post-content">
-                      <p class="post-text">
-                        Rebuilding the next generation of technology with the new META Virtual Reality Devices. Can't wait for what the future holds #Innovation #Programming #MachineLearning
-                      </p>
-                      <!-- Optional: Add post image if needed -->
-                      <img src="images/post-example2.jpg" alt="Post Image" class="post-image">
-                    </div>
-
-                    <!-- Post Metrics -->
-                    <div class="post-metrics">
-                      <span class="metric">
-                        <i class="fas fa-thumbs-up"></i>
-                        <span class="metric-count" data-likes="3000">3k</span>
-                      </span>
-                      <span class="metric">
-                        <span class="metric-count">400 comments</span>
-                      </span>
-                    </div>
-
-                    <!-- Post Actions -->
-                    <div class="post-actions">
-                      <button class="action-btn like-btn" data-post-id="1" data-liked="false">
-                        <i class="far fa-thumbs-up"></i>
-                        <span>Like</span>
-                      </button>
-                      <button class="action-btn">
-                        <i class="far fa-comment"></i>
-                        <span>Comment</span>
-                      </button>
-                      <button class="action-btn repost-btn">
-                        <i class="fas fa-retweet"></i>
-                        <span>Repost</span>
-                      </button>
-                      <button class="action-btn">
-                        <i class="far fa-paper-plane"></i>
-                        <span>Share</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Add this after the posts-section -->
-                <div class="connections-section">
-                  <div class="connections-header">
-                      <h3>Connections Requests</h3>
-                      <button class="see-all-btn">See All</button>
-                  </div>
-                  
-                  <div class="connections-container">
-                      <!-- Connection Cards -->
-                      <div class="connection-card">
-                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                          <div class="connection-info">
-                              <h4>David Chen</h4>
-                              <p>Software Engineer at Google</p>
-                          </div>
-                          <div class="connection-actions">
-                            <button class="connect-btn">Connect</button>
-                            <button class="decline-btn">Decline</button>
-                          </div>
-                      </div>
-          
-                      <div class="connection-card">
-                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                          <div class="connection-info">
-                              <h4>Sarah Williams</h4>
-                              <p>Data Scientist at Microsoft</p>
-                          </div>
-                          <div class="connection-actions">
-                            <button class="connect-btn">Connect</button>
-                            <button class="decline-btn">Decline</button>
-                          </div>
-                      </div>
-          
-                      <div class="connection-card">
-                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                          <div class="connection-info">
-                              <h4>Michael Rodriguez</h4>
-                              <p>AI Researcher at OpenAI</p>
-                          </div>
-                          <div class="connection-actions">
-                            <button class="connect-btn">Connect</button>
-                            <button class="decline-btn">Decline</button>
-                          </div>
-                      </div>
-          
-                      <div class="connection-card">
-                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                          <div class="connection-info">
-                              <h4>Michael Rodriguez</h4>
-                              <p>AI Researcher at OpenAI</p>
-                          </div>
-                          <div class="connection-actions">
-                            <button class="connect-btn">Connect</button>
-                            <button class="decline-btn">Decline</button>
-                          </div>
-                      </div>
-          
-                      <div class="connection-card">
-                          <img src="images/profile.jpg" alt="Profile" class="connection-avatar">
-                          <div class="connection-info">
-                              <h4>Michael Rodriguez</h4>
-                              <p>AI Researcher at OpenAI</p>
-                          </div>
-                          <div class="connection-actions">
-                            <button class="connect-btn">Connect</button>
-                            <button class="decline-btn">Decline</button>
-                          </div>
-                      </div>
-          
-                      <!-- Add more connection cards as needed -->
-                  </div>
-                </div>
-
-                            <!-- Business Page Post Section -->
-                <div class="business-post-section">
-                  <!-- Post Header -->
-                  <div class="post-header">
-                      <div class="post-author-info">
-                          <img src="images/profile.jpg" alt="Tesla" class="post-profile-pic">
-                          <div class="post-author-details">
-                              <h4 class="post-author-name">Tesla Motors</h4>
-                              <p class="post-meta">
-                                  Sponsored • <i class="fas fa-globe-americas"></i>
-                              </p>
-                          </div>
-                      </div>
-                      <button class="more-options">
-                          <i class="fas fa-ellipsis-h"></i>
-                      </button>
-                  </div>
-
-                  <!-- Post Content -->
-                  <div class="post-content">
-                      <p>Introducing the next generation of electric vehicles. Experience the future of sustainable transportation. 
-                        #Tesla #Innovation #Sustainability</p>
-                      <img src="images/tesla-post.jpg" alt="Tesla Car" class="post-image">
-                  </div>
-
-                  <!-- Post Metrics -->
-                  <div class="post-metrics">
-                      <div class="metrics-left">
-                          <span class="metric">
-                              <i class="fas fa-thumbs-up"></i>
-                              <span class="metric-count">15.4K</span>
-                          </span>
-                      </div>
-                      <div class="metrics-right">
-                          <span class="metric">2.8K comments</span>
-                          <span class="metric-dot">•</span>
-                          <span class="metric">4.2K shares</span>
-                          <span class="metric-dot">•</span>
-                          <span class="metric">1.6K reposts</span>
-                      </div>
-                  </div>
-
-                  <!-- Post Actions -->
-                  <div class="post-actions">
-                      <button class="action-btn">
-                          <i class="far fa-thumbs-up"></i>
-                          <span>Like</span>
-                      </button>
-                      <button class="action-btn">
-                          <i class="far fa-comment"></i>
-                          <span>Comment</span>
-                      </button>
-                      <button class="action-btn repost-btn">
-                        <i class="fas fa-retweet"></i>
-                        <span>Repost</span>
-                    </button>
-                      <button class="action-btn">
-                          <i class="fas fa-paper-plane"></i>
-                          <span>Share</span>
-                      </button>
-                  </div>
-                </div>
-
-          </section>
-
+        </section>
                   <!-- Right Sidebar -->
             <div class="right-sidebar">
               <!-- Network Section -->

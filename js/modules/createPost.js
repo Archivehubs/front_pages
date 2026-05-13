@@ -1,8 +1,3 @@
-/**
- * ARCHIVEHUBS — Create Post Modal Module (COMPLETELY FIXED)
- * /js/modules/createPost.js
- */
-
 const CreatePost = (() => {
   'use strict';
 

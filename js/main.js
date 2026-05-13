@@ -1,17 +1,6 @@
 /**
  * ARCHIVEHUBS — Main Entry Point
  * /js/main.js
- *
- * Single DOMContentLoaded listener for home.html.
- * All feature modules are imported and initialised here.
- *
- * HTML: replace ALL existing <script> tags at bottom of home.html with:
- *   <script type="module" src="js/main.js"></script>
- *
- * Remove these old tags entirely:
- *   <script src="js/script.js"></script>
- *   <script src="js/message.js"></script>
- *   + all inline <script> blocks in home.html
  */
 
 import Auth        from './modules/auth.js';
@@ -24,10 +13,9 @@ import CreatePost  from './modules/createPost.js';
 import CreateStory from './modules/createStory.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ── Initialise all modules ─────────────────────────────── */
+  // Initialize all modules
   Auth.init();
-  Feed.init();
+  Feed.init();      // This will now fetch real posts
   Stories.init();
   Search.init();
   Connections.init();
@@ -35,13 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   CreatePost.init();
   CreateStory.init();
 
-  /* ── Expose modal openers globally ──────────────────────────
-     Required because home.html uses onclick="CreatePost.open()"
-     and onclick="CreateStory.open()" on static HTML elements.
-     Once all onclick attrs are replaced with event listeners
-     these window assignments can be removed.
-  ─────────────────────────────────────────────────────────── */
-  window.CreatePost  = CreatePost;
+  // Expose globally for onclick handlers
+  window.CreatePost = CreatePost;
   window.CreateStory = CreateStory;
-
+  window.Feed = Feed;  // Add this for refresh access
 });
