@@ -1236,17 +1236,42 @@ input:checked + .toggle-slider::before    { transform: translateX(22px); }
 
 /* ── 3.10 Account Popup ───────────────────────────────────────── */
 
+.account-dropdown-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .account-popup {
   position: absolute;
-  top: 60px; right: 40px;
+  top: calc(100% + 10px);
+  right: 0;
+
   width: 340px;
   background: var(--bg-primary);
   border-radius: var(--radius-lg);
   box-shadow: 0 4px 24px rgba(0,0,0,0.13);
   z-index: 2000;
-  padding: 0;
+
   overflow: hidden;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
 }
+
+.account-popup.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
 
 .account-popup-userinfo {
   display: flex;

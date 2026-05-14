@@ -28,3 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.CreateStory = CreateStory;
   window.Feed = Feed;  // Add this for refresh access
 });
+
+
+// Account-popup logic
+
+const accountBtn = document.getElementById('accountPopup');
+const accountPanel = document.getElementById('accountPopupPanel');
+
+if (accountBtn && accountPanel) {
+
+  accountBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    accountPanel.classList.toggle('active');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!accountPanel.contains(e.target)) {
+      accountPanel.classList.remove('active');
+    }
+  });
+
+  accountPanel.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+}
