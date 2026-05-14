@@ -464,9 +464,12 @@ const Messaging = (() => {
     const panel      = _g('messagingPanel');
 
     toggleBtn?.addEventListener('click', () => {
-      panel?.classList.toggle('collapsed');
+     panel?.classList.toggle('expanded');
+
       if (toggleIcon) {
-        toggleIcon.textContent = panel?.classList.contains('collapsed') ? 'expand_less' : 'expand_more';
+        toggleIcon.textContent = panel?.classList.contains('expanded')
+          ? 'expand_more'
+          : 'expand_less';
       }
     });
   }

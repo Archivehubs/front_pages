@@ -1615,7 +1615,8 @@ input:checked + .toggle-slider::before    { transform: translateX(22px); }
 }
 
 .messaging-panel {
-  width: 360px; height: 480px;
+  width: 360px;
+  height: 68px; /* collapsed by default */
   background: var(--bg-primary);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   box-shadow: var(--shadow-hover);
@@ -1626,7 +1627,9 @@ input:checked + .toggle-slider::before    { transform: translateX(22px); }
   border: 1px solid var(--border-color);
 }
 
-.messaging-panel.collapsed { height: 68px; }
+.messaging-panel.expanded {
+  height: 480px;
+}
 
 .messaging-header {
   display: flex;
