@@ -49,7 +49,7 @@
               
       <div class="nav-middle">
           <a href="home.html" class="nav-link active">
-              <i class="fas fa-home"></i>
+              <i class="fa-solid fa-home"></i>
               <span>Home</span>
           </a>
           <a href="./Archivehubs-Connections/myconnections.html" class="nav-link">
@@ -474,7 +474,7 @@
             <!-- Mobile Bottom Navigation -->
           <nav class="mobile-nav">
             <a href="#" class="mobile-nav-link active">
-                <i class="fas fa-home"></i>
+                <i class="fa-solid fa-home"></i>
             </a>
             <a href="business.html" class="mobile-nav-link">
                 <i class="fas fa-user-friends"></i>
@@ -491,225 +491,225 @@
           </nav>
 
               <!-- Messaging Box -->
-<!-- ===== COMPLETE LINKEDIN-STYLE MESSAGING SYSTEM ===== -->
-<div class="messaging-container">
-    <!-- Main Messaging Panel (Left) -->
-    <div class="messaging-panel" id="messagingPanel">
-        <!-- Panel Header -->
-        <div class="messaging-header">
-            <div class="messaging-header-left">
-                <img src="images/profile.jpg" alt="Your profile" class="messaging-profile-img">
-                <span class="messaging-title">Messaging</span>
-            </div>
-            <div class="messaging-header-actions">
-                <div class="header-action-wrapper">
-                    <button class="header-action-btn" id="messagingMenuBtn">
-                        <span class="material-symbols-outlined">more_horiz</span>
-                    </button>
-                    <!-- Three-dot dropdown menu -->
-                    <div class="messaging-dropdown hidden" id="messagingDropdown">
-                        <button class="dropdown-item" id="manageConversationsBtn">
-                            <span class="material-symbols-outlined">manage_search</span>
-                            <span>Manage conversations</span>
-                        </button>
-                        <button class="dropdown-item" id="messagingSettingsBtn">
-                            <span class="material-symbols-outlined">settings</span>
-                            <span>Messaging settings</span>
-                        </button>
-                        <button class="dropdown-item" id="awayMessageBtn">
-                            <span class="material-symbols-outlined">event_busy</span>
-                            <span>Set away message</span>
-                        </button>
-                    </div>
-                </div>
-                <button class="header-action-btn" id="newMessageBtn">
-                    <span class="material-symbols-outlined">edit_square</span>
-                </button>
-                <button class="header-action-btn" id="toggleMessagingBtn">
-                    <span class="material-symbols-outlined" id="toggleMessagingIcon">expand_more</span>
-                </button>
-            </div>
-        </div>
+          <!-- ===== COMPLETE LINKEDIN-STYLE MESSAGING SYSTEM ===== -->
+          <div class="messaging-container">
+              <!-- Main Messaging Panel (Left) -->
+              <div class="messaging-panel" id="messagingPanel">
+                  <!-- Panel Header -->
+                  <div class="messaging-header">
+                      <div class="messaging-header-left">
+                          <img src="images/profile.jpg" alt="Your profile" class="messaging-profile-img">
+                          <span class="messaging-title">Messaging</span>
+                      </div>
+                      <div class="messaging-header-actions">
+                          <div class="header-action-wrapper">
+                              <button class="header-action-btn" id="messagingMenuBtn">
+                                  <span class="material-symbols-outlined">more_horiz</span>
+                              </button>
+                              <!-- Three-dot dropdown menu -->
+                              <div class="messaging-dropdown hidden" id="messagingDropdown">
+                                  <button class="dropdown-item" id="manageConversationsBtn">
+                                      <span class="material-symbols-outlined">manage_search</span>
+                                      <span>Manage conversations</span>
+                                  </button>
+                                  <button class="dropdown-item" id="messagingSettingsBtn">
+                                      <span class="material-symbols-outlined">settings</span>
+                                      <span>Messaging settings</span>
+                                  </button>
+                                  <button class="dropdown-item" id="awayMessageBtn">
+                                      <span class="material-symbols-outlined">event_busy</span>
+                                      <span>Set away message</span>
+                                  </button>
+                              </div>
+                          </div>
+                          <button class="header-action-btn" id="newMessageBtn">
+                              <span class="material-symbols-outlined">edit_square</span>
+                          </button>
+                          <button class="header-action-btn" id="toggleMessagingBtn">
+                              <span class="material-symbols-outlined" id="toggleMessagingIcon">expand_more</span>
+                          </button>
+                      </div>
+                  </div>
 
-        <!-- Search Bar -->
-        <div class="messaging-search">
-            <span class="material-symbols-outlined search-icon">search</span>
-            <input type="text" id="messagingSearchInput" placeholder="Search messages">
-        </div>
+                  <!-- Search Bar -->
+                  <div class="messaging-search">
+                      <span class="material-symbols-outlined search-icon">search</span>
+                      <input type="text" id="messagingSearchInput" placeholder="Search messages">
+                  </div>
 
-        <!-- Message Tabs (Focused/Others) -->
-        <div class="messaging-tabs">
-            <div class="tabs-header">
-                <button class="tab-btn active" data-tab="focused" id="focusedTab">Focused</button>
-                <button class="tab-btn" data-tab="others" id="othersTab">Others</button>
-            </div>
-            <div class="tabs-content">
-                <div class="tab-pane active" id="focusedChats"></div>
-                <div class="tab-pane" id="otherChats"></div>
-            </div>
-        </div>
-    </div>
+                  <!-- Message Tabs (Focused/Others) -->
+                  <div class="messaging-tabs">
+                      <div class="tabs-header">
+                          <button class="tab-btn active" data-tab="focused" id="focusedTab">Focused</button>
+                          <button class="tab-btn" data-tab="others" id="othersTab">Others</button>
+                      </div>
+                      <div class="tabs-content">
+                          <div class="tab-pane active" id="focusedChats"></div>
+                          <div class="tab-pane" id="otherChats"></div>
+                      </div>
+                  </div>
+              </div>
 
-    <!-- NEW MESSAGE PANEL (Opens beside main panel) -->
-    <div class="new-message-panel hidden" id="newMessagePanel">
-        <div class="new-message-header">
-            <h3>New message</h3>
-            <button class="close-new-message" id="closeNewMessageBtn">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </div>
-        
-        <!-- Recipient Selection Area -->
-        <div class="recipient-area">
-            <div class="recipient-input-container" id="recipientContainer">
-                <div class="selected-contacts" id="selectedContacts"></div>
-                <input type="text" 
-                       id="recipientSearchInput" 
-                       class="recipient-search-input" 
-                       placeholder="Type a name or multiple names"
-                       autocomplete="off">
-            </div>
-            
-            <!-- Contact Suggestions Dropdown -->
-            <div class="contact-suggestions hidden" id="contactSuggestions">
-                <div class="suggestions-header">Suggested</div>
-                <div class="suggestions-list" id="suggestionsList"></div>
-            </div>
-        </div>
-        
-        <!-- Message Compose Area (Appears when recipient area is focused) -->
-        <div class="message-compose-area hidden" id="messageComposeArea">
-            <div class="compose-message-input-container">
-                <textarea class="compose-message-textarea" 
-                          id="composeMessageTextarea" 
-                          placeholder="Write a message..."
-                          rows="4"></textarea>
-            </div>
-            
-            <!-- Compose Actions -->
-            <div class="compose-actions">
-                <div class="compose-attachments">
-                    <button class="compose-attach-btn" id="composeAttachImageBtn" title="Add image">
-                        <span class="material-symbols-outlined">image</span>
-                    </button>
-                    <button class="compose-attach-btn" id="composeAttachFileBtn" title="Attach file">
-                        <span class="material-symbols-outlined">attach_file</span>
-                    </button>
-                    <button class="compose-attach-btn" id="composeAttachGifBtn" title="Add GIF">
-                        <span class="material-symbols-outlined">gif_box</span>
-                    </button>
-                    <div class="compose-emoji-wrapper">
-                        <button class="compose-attach-btn" id="composeEmojiBtn" title="Add emoji">
-                            <span class="material-symbols-outlined">insert_emoticon</span>
-                        </button>
-                        <div class="compose-emoji-picker hidden" id="composeEmojiPicker">
-                            <div class="emoji-grid">
-                                <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
-                                <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
-                                <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
-                                <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
-                                <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
-                                <button>🎉</button> <button>✨</button> <button>🔥</button> <button>✅</button> <button>❌</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <input type="file" id="composeAttachmentInput" class="hidden" multiple>
-                <button class="compose-send-btn" id="composeSendBtn" disabled>
-                    <span class="material-symbols-outlined">send</span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Suggested Section (Initial view) -->
-        <div class="suggested-section" id="initialSuggestedSection">
-            <h4>Suggested</h4>
-            <div class="suggested-contacts-list" id="suggestedContactsList"></div>
-        </div>
-    </div>
+              <!-- NEW MESSAGE PANEL (Opens beside main panel) -->
+              <div class="new-message-panel hidden" id="newMessagePanel">
+                  <div class="new-message-header">
+                      <h3>New message</h3>
+                      <button class="close-new-message" id="closeNewMessageBtn">
+                          <span class="material-symbols-outlined">close</span>
+                      </button>
+                  </div>
+                  
+                  <!-- Recipient Selection Area -->
+                  <div class="recipient-area">
+                      <div class="recipient-input-container" id="recipientContainer">
+                          <div class="selected-contacts" id="selectedContacts"></div>
+                          <input type="text" 
+                                id="recipientSearchInput" 
+                                class="recipient-search-input" 
+                                placeholder="Type a name or multiple names"
+                                autocomplete="off">
+                      </div>
+                      
+                      <!-- Contact Suggestions Dropdown -->
+                      <div class="contact-suggestions hidden" id="contactSuggestions">
+                          <div class="suggestions-header">Suggested</div>
+                          <div class="suggestions-list" id="suggestionsList"></div>
+                      </div>
+                  </div>
+                  
+                  <!-- Message Compose Area (Appears when recipient area is focused) -->
+                  <div class="message-compose-area hidden" id="messageComposeArea">
+                      <div class="compose-message-input-container">
+                          <textarea class="compose-message-textarea" 
+                                    id="composeMessageTextarea" 
+                                    placeholder="Write a message..."
+                                    rows="4"></textarea>
+                      </div>
+                      
+                      <!-- Compose Actions -->
+                      <div class="compose-actions">
+                          <div class="compose-attachments">
+                              <button class="compose-attach-btn" id="composeAttachImageBtn" title="Add image">
+                                  <span class="material-symbols-outlined">image</span>
+                              </button>
+                              <button class="compose-attach-btn" id="composeAttachFileBtn" title="Attach file">
+                                  <span class="material-symbols-outlined">attach_file</span>
+                              </button>
+                              <button class="compose-attach-btn" id="composeAttachGifBtn" title="Add GIF">
+                                  <span class="material-symbols-outlined">gif_box</span>
+                              </button>
+                              <div class="compose-emoji-wrapper">
+                                  <button class="compose-attach-btn" id="composeEmojiBtn" title="Add emoji">
+                                      <span class="material-symbols-outlined">insert_emoticon</span>
+                                  </button>
+                                  <div class="compose-emoji-picker hidden" id="composeEmojiPicker">
+                                      <div class="emoji-grid">
+                                          <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
+                                          <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
+                                          <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
+                                          <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
+                                          <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
+                                          <button>🎉</button> <button>✨</button> <button>🔥</button> <button>✅</button> <button>❌</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <input type="file" id="composeAttachmentInput" class="hidden" multiple>
+                          <button class="compose-send-btn" id="composeSendBtn" disabled>
+                              <span class="material-symbols-outlined">send</span>
+                          </button>
+                      </div>
+                  </div>
+                  
+                  <!-- Suggested Section (Initial view) -->
+                  <div class="suggested-section" id="initialSuggestedSection">
+                      <h4>Suggested</h4>
+                      <div class="suggested-contacts-list" id="suggestedContactsList"></div>
+                  </div>
+              </div>
 
-    <!-- CHAT THREAD VIEW (Opens when clicking a chat) -->
-    <div class="chat-thread-container hidden" id="chatThreadContainer">
-        <div class="chat-thread-header">
-            <button class="back-to-inbox-btn" id="backToInboxThreadBtn">
-                <span class="material-symbols-outlined">arrow_back</span>
-            </button>
-            <img src="images/profile.jpg" alt="Contact" class="thread-contact-img" id="threadContactImg">
-            <div class="thread-contact-details">
-                <span class="thread-contact-name" id="threadContactName"></span>
-                <span class="thread-contact-title" id="threadContactTitle"></span>
-            </div>
-            <div class="thread-actions">
-                <div class="thread-actions-wrapper">
-                    <button class="thread-action-btn" id="threadMoreBtn">
-                        <span class="material-symbols-outlined">more_horiz</span>
-                    </button>
-                    <div class="thread-dropdown hidden" id="threadDropdown">
-                        <button class="dropdown-item" id="archiveThreadBtn">
-                            <span class="material-symbols-outlined">archive</span>
-                            <span>Archive</span>
-                        </button>
-                        <button class="dropdown-item" id="deleteThreadBtn">
-                            <span class="material-symbols-outlined">delete</span>
-                            <span>Delete</span>
-                        </button>
-                        <button class="dropdown-item" id="blockThreadBtn">
-                            <span class="material-symbols-outlined">block</span>
-                            <span>Block</span>
-                        </button>
-                        <button class="dropdown-item" id="reportThreadBtn">
-                            <span class="material-symbols-outlined">report</span>
-                            <span>Report</span>
-                        </button>
-                    </div>
-                </div>
-                <button class="thread-action-btn" id="closeThreadBtn">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-            </div>
-        </div>
+              <!-- CHAT THREAD VIEW (Opens when clicking a chat) -->
+              <div class="chat-thread-container hidden" id="chatThreadContainer">
+                  <div class="chat-thread-header">
+                      <button class="back-to-inbox-btn" id="backToInboxThreadBtn">
+                          <span class="material-symbols-outlined">arrow_back</span>
+                      </button>
+                      <img src="images/profile.jpg" alt="Contact" class="thread-contact-img" id="threadContactImg">
+                      <div class="thread-contact-details">
+                          <span class="thread-contact-name" id="threadContactName"></span>
+                          <span class="thread-contact-title" id="threadContactTitle"></span>
+                      </div>
+                      <div class="thread-actions">
+                          <div class="thread-actions-wrapper">
+                              <button class="thread-action-btn" id="threadMoreBtn">
+                                  <span class="material-symbols-outlined">more_horiz</span>
+                              </button>
+                              <div class="thread-dropdown hidden" id="threadDropdown">
+                                  <button class="dropdown-item" id="archiveThreadBtn">
+                                      <span class="material-symbols-outlined">archive</span>
+                                      <span>Archive</span>
+                                  </button>
+                                  <button class="dropdown-item" id="deleteThreadBtn">
+                                      <span class="material-symbols-outlined">delete</span>
+                                      <span>Delete</span>
+                                  </button>
+                                  <button class="dropdown-item" id="blockThreadBtn">
+                                      <span class="material-symbols-outlined">block</span>
+                                      <span>Block</span>
+                                  </button>
+                                  <button class="dropdown-item" id="reportThreadBtn">
+                                      <span class="material-symbols-outlined">report</span>
+                                      <span>Report</span>
+                                  </button>
+                              </div>
+                          </div>
+                          <button class="thread-action-btn" id="closeThreadBtn">
+                              <span class="material-symbols-outlined">close</span>
+                          </button>
+                      </div>
+                  </div>
 
-        <div class="chat-messages" id="chatMessages"></div>
+                  <div class="chat-messages" id="chatMessages"></div>
 
-        <div class="chat-composer">
-            <div class="composer-input-area">
-                <div class="message-input" id="messageInput" contenteditable="true" data-placeholder="Write a message..."></div>
-            </div>
-            <div class="composer-actions">
-                <div class="composer-attachments">
-                    <button class="attach-btn" id="attachImageBtn" title="Add image">
-                        <span class="material-symbols-outlined">image</span>
-                    </button>
-                    <button class="attach-btn" id="attachFileBtn" title="Attach file">
-                        <span class="material-symbols-outlined">attach_file</span>
-                    </button>
-                    <button class="attach-btn" id="attachGifBtn" title="Add GIF">
-                        <span class="material-symbols-outlined">gif_box</span>
-                    </button>
-                    <div class="emoji-wrapper">
-                        <button class="attach-btn" id="emojiBtn" title="Add emoji">
-                            <span class="material-symbols-outlined">insert_emoticon</span>
-                        </button>
-                        <div class="emoji-picker hidden" id="emojiPicker">
-                            <div class="emoji-grid">
-                                <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
-                                <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
-                                <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
-                                <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
-                                <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
-                                <button>🎉</button> <button>✨</button> <button>🔥</button> <button>✅</button> <button>❌</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <input type="file" id="attachmentInput" class="hidden" multiple>
-                <button class="send-message-btn" id="sendMessageBtn" disabled>
-                    <span class="material-symbols-outlined">send</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+                  <div class="chat-composer">
+                      <div class="composer-input-area">
+                          <div class="message-input" id="messageInput" contenteditable="true" data-placeholder="Write a message..."></div>
+                      </div>
+                      <div class="composer-actions">
+                          <div class="composer-attachments">
+                              <button class="attach-btn" id="attachImageBtn" title="Add image">
+                                  <span class="material-symbols-outlined">image</span>
+                              </button>
+                              <button class="attach-btn" id="attachFileBtn" title="Attach file">
+                                  <span class="material-symbols-outlined">attach_file</span>
+                              </button>
+                              <button class="attach-btn" id="attachGifBtn" title="Add GIF">
+                                  <span class="material-symbols-outlined">gif_box</span>
+                              </button>
+                              <div class="emoji-wrapper">
+                                  <button class="attach-btn" id="emojiBtn" title="Add emoji">
+                                      <span class="material-symbols-outlined">insert_emoticon</span>
+                                  </button>
+                                  <div class="emoji-picker hidden" id="emojiPicker">
+                                      <div class="emoji-grid">
+                                          <button>😊</button> <button>😂</button> <button>😍</button> <button>🤣</button> <button>😢</button>
+                                          <button>😎</button> <button>😡</button> <button>😴</button> <button>😅</button> <button>😇</button>
+                                          <button>❤️</button> <button>💛</button> <button>💚</button> <button>💙</button> <button>💜</button>
+                                          <button>🖤</button> <button>🤍</button> <button>🤎</button> <button>💔</button> <button>💖</button>
+                                          <button>👍</button> <button>👎</button> <button>👏</button> <button>🙏</button> <button>👌</button>
+                                          <button>🎉</button> <button>✨</button> <button>🔥</button> <button>✅</button> <button>❌</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <input type="file" id="attachmentInput" class="hidden" multiple>
+                          <button class="send-message-btn" id="sendMessageBtn" disabled>
+                              <span class="material-symbols-outlined">send</span>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
 <!-- AWAY MESSAGE MODAL -->
 <div class="messaging-modal hidden" id="awayMessageModal">
